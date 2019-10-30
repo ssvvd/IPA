@@ -1,0 +1,24 @@
+<h2>Machines</h2>
+
+<table datatable [dtOptions]="dtOptions" class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>MachineType</th>
+      <th>MachineName</th>
+      <th>SpindleSpeed</th>
+      <th>Power</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let mach of listmachines">
+          <td>{{ mach.MachineID }}</td>
+          <td>{{ mach.MachineType }}</td>
+          <td>{{ mach.MachineName }}</td>
+          <td>{{ mach.SpindleSpeed }}</td>
+          <td>{{ mach.Power }}</td>
+          <td><button class="btn btn-primary button-blue btn-sm" (click)="MachineSelected(mach.MachineID)">Edit</button></td>
+      </tr>
+  </tbody>
+</table>
