@@ -12,7 +12,11 @@ import { MachineListComponent } from './components/machines/machinelist/machinel
 import { MachinetabComponent } from './components/machines/machinetab/machinetab.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component';
+import { SubMenuComponent } from './components/header/sub-menu/sub-menu.component';
+import { MainContentComponent } from './components/body-area/main-content/main-content.component';
+import { LeftSideBarComponent } from './components/body-area/left-side-bar/left-side-bar.component';
+import { BodyAreaComponent } from './components/body-area/body-area.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
     MachinetabComponent,
     HeaderComponent,
     FooterComponent,
-    MainMenuComponent
+    GlobalMenuComponent,
+    SubMenuComponent,
+    MainContentComponent,
+    LeftSideBarComponent,
+    BodyAreaComponent
   ],
   imports: [
     BrowserModule,
