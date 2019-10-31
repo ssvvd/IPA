@@ -14,9 +14,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component';
 import { SubMenuComponent } from './components/header/sub-menu/sub-menu.component';
-import { MainContentComponent } from './components/body-area/main-content/main-content.component';
-import { LeftSideBarComponent } from './components/body-area/left-side-bar/left-side-bar.component';
 import { BodyAreaComponent } from './components/body-area/body-area.component';
+import { MachinesComponent } from './components/body-area/machines/machines.component';
+import { MaterialsComponent } from './components/body-area/materials/materials.component';
+import { MachiningOperationComponent } from './components/body-area/machining-operation/machining-operation.component';
+import { OperationDataComponent } from './components/body-area/operation-data/operation-data.component';
+import { ResultsComponent } from './components/body-area/results/results.component';
 
 @NgModule({
   declarations: [
@@ -28,9 +31,12 @@ import { BodyAreaComponent } from './components/body-area/body-area.component';
     FooterComponent,
     GlobalMenuComponent,
     SubMenuComponent,
-    MainContentComponent,
-    LeftSideBarComponent,
-    BodyAreaComponent
+    BodyAreaComponent,
+    MachinesComponent,
+    MaterialsComponent,
+    MachiningOperationComponent,
+    OperationDataComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,
