@@ -9,6 +9,8 @@ import { Machinespindle } from './machinespindle';
 })
 export class MachinedetailedComponent implements OnInit {
 
+  x: number = 1;
+
   @Input() MachineID: number;
   machSpindleMain: Machinespindle;
   machSpindleTool: Machinespindle;
