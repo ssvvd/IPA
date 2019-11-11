@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MachineService } from '../../../services/machine.service'
-import { Machinespindle } from './machinespindle';
+import { Machinespindle1 } from './machinespindle1';
 
 @Component({
   selector: 'app-machinedetailed',
@@ -12,9 +12,9 @@ export class MachinedetailedComponent implements OnInit {
   x: number = 1;
 
   @Input() MachineID: number;
-  machSpindleMain: Machinespindle;
-  machSpindleTool: Machinespindle;
-  arrMachineSpindle: Machinespindle[];
+  machSpindleMain: Machinespindle1;
+  machSpindleTool: Machinespindle1;
+  arrMachineSpindle: Machinespindle1[];
   constructor(private serv: MachineService) {
   }
 

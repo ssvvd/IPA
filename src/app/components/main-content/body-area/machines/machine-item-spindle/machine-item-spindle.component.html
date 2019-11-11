@@ -1,0 +1,9 @@
+
+<form>
+    <p class="desc-machine-bold">{{DescSpindle}}</p>
+    <div class="form-group w-25 p-3">
+        <label class="desc-machine-bold">{{spindle?.SpindleType}}</label>
+        <label class="desc-machine" for="txtMaxCutFeedSpeed">Spindle Speed</label>
+        <input type="text" class="form-control" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
+    </div>
+</form>

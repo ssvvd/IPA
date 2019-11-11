@@ -1,0 +1,19 @@
+<p>Machine Header</p>
+
+<form ng-app="ITA" ng-controller="MachineItemHeaderComponent">
+    <div class="form-group row col-12">
+        <div class="col-4">
+            <img src="{{imgNameMachine}}" class="ImgMachineType">
+        </div>
+        <div class="form-group col-8">           
+                <label class="desc-machine-bold">{{machHeader?.MachineName}}</label>                                
+                <label class="desc-machine">{{machHeader?.MachineType}}</label>                       
+                <div class="form-group row">                                                      
+                    <label class="desc-machine" for="txtCostPerHour">Cost Per Hour</label>                                         
+                    <input type="text" class="form-control" id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour" >                                                                       
+                </div>            
+        </div>
+    </div>
+</form>
+
+    

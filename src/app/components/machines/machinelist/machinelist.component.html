@@ -12,13 +12,17 @@
     </tr>
   </thead>
   <tbody>
+    <!-- <ul *ngFor="let mach of listmachines">
+      <li {{ mach.MachineID }}> </li>
+    </ul> -->
+
       <tr *ngFor="let mach of listmachines">
           <td>{{ mach.MachineID }}</td>
           <td>{{ mach.MachineType }}</td>
           <td>{{ mach.MachineName }}</td>
           <td>{{ mach.SpindleSpeed }}</td>
           <td>{{ mach.Power }}</td>
-          <td><button class="btn btn-primary button-blue btn-sm" (click)="MachineSelected(mach.MachineID)">Edit</button></td>
+          <td><button class="btn btn-sveta" (click)="MachineSelected(mach.MachineID)">Edit</button></td>
       </tr>
   </tbody>
 </table>

@@ -14,15 +14,22 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component';
 import { SubMenuComponent } from './components/header/sub-menu/sub-menu.component';
-import { BodyAreaComponent } from './components/body-area/body-area.component';
-import { MachinesComponent } from './components/body-area/machines/machines.component';
-import { MaterialsComponent } from './components/body-area/materials/materials.component';
-import { MachiningOperationComponent } from './components/body-area/machining-operation/machining-operation.component';
-import { OperationDataComponent } from './components/body-area/operation-data/operation-data.component';
-import { ResultsComponent } from './components/body-area/results/results.component';
+import { MachinesComponent } from './components/main-content/body-area/machines/machines.component';
+import { MaterialsComponent } from './components/main-content/body-area/materials/materials.component';
+import { MachiningOperationComponent } from './components/main-content/body-area/machining-operation/machining-operation.component';
+import { OperationDataComponent } from './components/main-content/body-area/operation-data/operation-data.component' //./components/main-content/body-area/operation-data/operation-data.component';
+import { ResultsComponent } from './components/main-content/body-area/results/results.component';
+import { MainContentComponent } from './components/main-content/main-content.component';
+import { MachinesListComponent } from './components/main-content/body-area/machines/machines-list/machines-list.component';
+import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
+import { MainMenuComponent } from './components/main-content/main-menu/main-menu.component';
+import { MachineItemHeaderComponent } from './components/main-content/body-area/machines/machine-item-header/machine-item-header.component';
+import { MachineItemSpindleComponent } from './components/main-content/body-area/machines/machine-item-spindle/machine-item-spindle.component';
+import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
+   
     AppComponent,
     MachinedetailedComponent,
     MachineListComponent,
@@ -31,14 +38,21 @@ import { ResultsComponent } from './components/body-area/results/results.compone
     FooterComponent,
     GlobalMenuComponent,
     SubMenuComponent,
-    BodyAreaComponent,
     MachinesComponent,
     MaterialsComponent,
     MachiningOperationComponent,
     OperationDataComponent,
-    ResultsComponent
+    ResultsComponent,
+    MainContentComponent,
+    MachinesListComponent,
+    MachineItemComponent,
+    MachinesComponent,
+    MainMenuComponent,
+    MachineItemHeaderComponent,
+    MachineItemSpindleComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

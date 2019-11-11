@@ -1,0 +1,9 @@
+
+<app-machine-item-header [MachineID]=14></app-machine-item-header>
+
+<div *ngFor="let spindle of arrMachineSpindle" >
+        <p>Spindle</p><span>{{spindle.SpindleType}}</span>                                                                    
+        <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
+</div>
+
+   
