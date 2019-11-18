@@ -17,10 +17,18 @@ export class MachineService {
   }
   public  getmachinedetailed(id:number)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-detailed/' + id)
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-detailed/' + id);
   }
   public  getmachineheader(id:number)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-header/' + id)
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-header/' + id);
+  }
+  public  getmachineadaptationtype()
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-type');
+  }
+   public  getmachineadaptationsize()
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-size');
   }
 }

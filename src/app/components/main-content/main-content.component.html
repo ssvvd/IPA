@@ -1,9 +1,8 @@
+<div>
+    <app-main-menu></app-main-menu>
+</div>
+<div>
+    <router-outlet></router-outlet>
+</div>
 
-<app-main-menu (TabSelect)='TabChanged($event)'></app-main-menu>
-
-<app-machines  *ngIf="activetab=='machines'"></app-machines>
-<app-materials           *ngIf="activetab=='material'"></app-materials> 
-<app-operation-data      *ngIf="activetab=='operationdata'"></app-operation-data>
-<app-machining-operation *ngIf="activetab=='machiningoperation'"></app-machining-operation>
-<app-results             *ngIf="activetab=='results'" ></app-results>  
 

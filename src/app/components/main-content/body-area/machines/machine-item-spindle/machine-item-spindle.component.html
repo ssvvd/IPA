@@ -1,9 +1,140 @@
 
 <form>
-    <p class="desc-machine-bold">{{DescSpindle}}</p>
-    <div class="form-group w-25 p-3">
-        <label class="desc-machine-bold">{{spindle?.SpindleType}}</label>
-        <label class="desc-machine" for="txtMaxCutFeedSpeed">Spindle Speed</label>
-        <input type="text" class="form-control" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
+   <div class="container-fluid">
+       <div class="form-group row">
+           <label  class="col-sm-6 col-form-label desc-machine-bold">{{DescSpindle}}</label>
+        </div>   
+    <!-- <p class="desc-machine-bold">{{DescSpindle}}</p> -->
+    <div class="row">
+        <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left border-bottom p-2">                                            
+                 <div class="form-group row">
+                    <label for="txtSpindleSpeed" class="col-sm-6 col-form-label">Spindle Speed (rpm)</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="txtPower" class="col-sm-6 col-form-label">Power (Kw)</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="txtTorque" class="col-sm-6 col-form-label">Torque (Nm)</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control form-control-sm" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
+                    </div>
+                </div>                         
+        </div>
+        <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left border-bottom p-2">
+            <div class="form-group row">
+                <label for="txtMaxCutFeedSpeed" class="col-sm-6 col-form-label">Maximum cutting feed speed (m/min)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
+                </div>
+            </div> 
+            <div class="form-group row">
+                <label for="txtMaxRapidFeedSpeed" class="col-sm-6 col-form-label">Maximum rapid feed speed (m/min)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
+                </div>
+            </div>
+              <div class="form-group row">
+                <label for="txtAdaptationType" class="col-sm-6 col-form-label" >Adaptation Type</label>
+                <div class="col-sm-4">
+                      <select class="form-control form-control-sm" [(ngModel)]="curAdapType" (change)="changeadaptype($event.target.value)" >
+                        <option  *ngFor="let adaptype of arrAdapType" >{{adaptype?.AdaptationType}}</option>
+                    </select>                    
+                </div>
+            </div>  
+             <div class="form-group row">
+                <label for="txtAdaptationSize" class="col-sm-6 col-form-label" >Adaptation Size</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm">
+                        <option *ngFor="let adapsize of arrAdapSizeFilter">{{adapsize?.AdaptationSize}}</option>
+                    </select>                                
+                </div>
+            </div>  
+             <div class="form-group row">
+                <label for="txtClampingType" class="col-sm-6 col-form-label">Clamping Type</label>
+                <div class="col-sm-4">
+                    <select class="form-control form-control-sm">
+                        <option value='VICE'>VICE</option>
+                        <option value='VACUME'>VACUME</option>
+                        <option value='TOMB STONE'>TOMB STONE</option>
+                        <option value='FIXTURE'>FIXTURE</option>
+                    </select>                                
+                </div>
+            </div>
+             <div class="form-group row">
+                <label for="txtEmultionPressure" class="col-sm-6 col-form-label">Emultion Pressure (bar)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
+                </div>
+            </div>
+             <div class="form-group row">
+                <label for="txtEmultionFlowRate" class="col-sm-6 col-form-label">Emultion Flow Rate (L/min)</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
+                </div>
+            </div>  
+        </div>
+        <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border pl-2 border-bottom p-2">
+              <div class="form-group row">
+                <label  class="col-4 col-sm-4 col-form-label"></label>
+                <div class="col-2 col-sm-4 col-lg-2 col-xl-2">
+                    <label>External</label>
+                </div>
+                <div class="col-2 col-sm-4 col-lg-2 col-xl-2">
+                    <label>Internal</label>
+                </div>
+            </div> 
+             <div class="form-group row">
+                <label for="txtMQL" class="col-4 col-sm-4 col-form-label">MQL</label>
+                <div class="col-2 col-sm-4 col-lg-2 col-xl-2 ">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="optMQLExt" name="optMQL" [checked]="spindle.ExtMQL">
+                        <label class="custom-control-label" for="optMQLExt"></label>
+                    </div>
+                </div>
+                <div  class="col-2 col-sm-4 col-lg-2 col-xl-2">                    
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="optMQLInt" name="optMQL" [checked]="spindle.IntMQL">
+                        <label class="custom-control-label" for="optMQLInt"></label> 
+                    </div>
+                </div>        
+            </div> 
+            <div class="form-group row">
+                <label for="txtAirBlast" class="col-4 col-sm-4 col-form-label">Air Blast</label>
+                <div class="col-2 col-sm-4 col-lg-2 col-xl-2">
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="optAirBlastExt" name="AirBlast" [checked]="spindle.ExtAirBlast">
+                        <label class="custom-control-label" for="optAirBlastExt"></label>
+                    </div>
+                </div>
+                <div  class="col-2 col-sm-4 col-lg-2 col-xl-2">                    
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input" id="optAirBlastInt" name="AirBlast" [checked]="spindle.IntAirBlast">
+                        <label class="custom-control-label" for="optAirBlastInt"></label> 
+                    </div>
+                </div>        
+            </div> 
+             <div class="form-group row">
+                <label for="txtEmultion" class="col-4 col-sm-4 col-form-label">Emultion</label>
+                <div class="col-2 col-sm-4 col-lg-2 col-xl-2">
+                    <div class="custom-control custom-checkbox custom-control-inline ">
+                        <input type="checkbox" class="custom-control-input" id="chkEmultionExt" name="Emultion" [checked]="spindle.ExtEmultion">
+                        <label class="custom-control-label" for="chkEmultionExt"></label>
+                    </div>
+                </div>
+                <div  class="col-2 col-sm-4 col-lg-2 col-xl-2">                    
+                    <div class="custom-control custom-checkbox custom-control-inline">
+                        <input type="checkbox" class="custom-control-input"  id="chkEmultionInt" name="Emultion" [checked]="spindle.IntEmultion">
+                        <label class="custom-control-label" for="chkEmultionInt"></label> 
+                    </div>
+                </div>        
+            </div> 
+        </div>
     </div>
+       </div>
 </form>

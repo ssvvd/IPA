@@ -8,7 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 
 import { MachinedetailedComponent } from './components/machines/machinedetailed/machinedetailed.component';
-import { MachineListComponent } from './components/machines/machinelist/machinelist.component';
 import { MachinetabComponent } from './components/machines/machinetab/machinetab.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -26,13 +25,15 @@ import { MainMenuComponent } from './components/main-content/main-menu/main-menu
 import { MachineItemHeaderComponent } from './components/main-content/body-area/machines/machine-item-header/machine-item-header.component';
 import { MachineItemSpindleComponent } from './components/main-content/body-area/machines/machine-item-spindle/machine-item-spindle.component';
 import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } from '@angular/forms';
+import { MachineItemSpindleChartComponent } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.component';
+
 
 @NgModule({
   declarations: [
    
     AppComponent,
     MachinedetailedComponent,
-    MachineListComponent,
+    MachinesListComponent,
     MachinetabComponent,
     HeaderComponent,
     FooterComponent,
@@ -49,7 +50,9 @@ import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } fro
     MachinesComponent,
     MainMenuComponent,
     MachineItemHeaderComponent,
-    MachineItemSpindleComponent
+    MachineItemSpindleComponent,
+    MachineItemSpindleChartComponent
+   
   ],
   imports: [
     FormsModule,
@@ -57,7 +60,7 @@ import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } fro
     AppRoutingModule,
     HttpClientModule,
     DataTablesModule
-      
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

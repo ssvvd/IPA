@@ -6,10 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./machines.component.scss']
 })
 export class MachinesComponent implements OnInit {
-
-  constructor() { }
-
+  activetab:string;
+  CurMachineID:string;
+  
+  constructor() {
+    this.activetab ="machinelist";
+   }
+  
   ngOnInit() {
+    
   }
 
+  CurMachineSelected(MachineID) {
+    //alert(MachineID);
+    this.CurMachineID = MachineID;  
+    this.activetab = 'machineitem'  
+  }
 }

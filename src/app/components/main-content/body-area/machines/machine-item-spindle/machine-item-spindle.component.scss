@@ -5,11 +5,11 @@
 
 .desc-machine-bold
 {
-    color: #1E4F95;
+    color:var(--btn-bg-select-color);
     font-weight:bold;
 }
 
 .desc-machine
 {
-    color: #1E4F95;  
+    color: var(--btn-bg-select-color);  
 }

@@ -21,11 +21,17 @@ export class MachineItemComponent implements OnInit {
   }
 
   ngOnInit() {
-  
-    this.serv.getmachinedetailed(this.MachineID).subscribe((res: any) => {
-      this.arrMachineSpindle = JSON.parse(res);      
-      this.machSpindleMain = this.arrMachineSpindle[0]; 
-    });          
+    //alert(this.MachineID);
+             
+     this.serv.getmachineheader(this.MachineID).subscribe((res: any) => {  
+       //alert(JSON.parse(res)[0]);               
+      this.machHeader =JSON.parse(res)[0];   
+      //alert(this.machHeader) ;   
+      this.serv.getmachinedetailed(this.MachineID).subscribe((res: any) => {
+        this.arrMachineSpindle = JSON.parse(res);      
+        this.machSpindleMain = this.arrMachineSpindle[0]; 
+      });   
+    });         
   }
 }
 

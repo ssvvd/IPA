@@ -1,9 +1,124 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bootstrap";
 
+:root {
+  --btn-bg-select-color: #204f96;
+  --btn-bg-gray-color: #757677;
+}
 
-.btn-primary 
+.btn-select
 {
-  background-color: #68889E;
-  color:#FFF;
-  border-color: #2F3E48;
+    background-color: var(--btn-bg-select-color);
+    color:#FFF;
+    border-color:var(--btn-bg-select-color);   
+}
+
+.btn-select:hover
+{
+    background-color:var(--btn-bg-select-color);
+    color:#FFF;
+    border-color: var(--btn-bg-select-color);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #E0E0E0!important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #E0E0E0!important;
+}
+
+.btn-select:active
+{
+    background-color: var(--btn-bg-select-color);
+    color:#FFF;
+    border-color: var(--btn-bg-select-color);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #E0E0E0!important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px  #E0E0E0!important;
+}
+ 
+input:not(:placeholder-shown) {
+   background-color:  #F1F1F1!important;
+   border-radius: 0px;
+   font-size: $font-size-sm; 
+}
+
+input:placeholder-shown {
+   background-color:  #F1F1F1!important;
+   border-radius: 0px;    
+   font-size: $font-size-sm; 
+}
+
+input:focus
+{  
+  background-color:  #F1F1F1!important;
+   border-radius: 0px;
+   font-size: $font-size-sm; 
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px #E0E0E0!important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px #E0E0E0 !important;  
+}
+
+label,span,p,input,select
+{
+  font-family: 'Oswald',Calibri, Arial;   
+}
+
+button{
+  border-radius: 0!important;
+}
+
+select{
+  border-radius: 0!important; 
+   font-size: 0.9rem!important; 
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px #E0E0E0!important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px #E0E0E0 !important;  
+}
+
+.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+    background-color:var(--btn-bg-select-color);
+}
+
+html {
+  font-size: 0.8rem;
+  font-weight:normal;
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.0rem;
+    font-weight:normal;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.0rem;
+    font-weight:normal;
+  }
+}
+
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.0rem;
+    font-weight:normal;
+  }
+}
+
+.icon-favorite{
+height: 35px;
+}
+
+.form-group 
+{
+  padding: 0!important;
+  margin:0!important;
+}
+
+.row
+{
+  padding: 0!important;
+  margin:0!important;
+}
+
+p
+{
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  margin-top:0!important;
+  margin-bottom:0!important;
 }

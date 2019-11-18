@@ -1,1 +1,41 @@
-<p>machines-list works!</p>
+
+
+<table datatable table-striped [dtOptions]="dtOptions" class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>MachineType</th>
+      <th>MachineName</th>
+      <th>SpindleSpeed</th>
+      <th>Power</th>
+      <th></th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- <ul *ngFor="let mach of listmachines">
+      <li {{ mach.MachineID }}> </li>
+    </ul> -->
+
+      <tr *ngFor="let mach of listmachines">
+          <td>{{ mach.MachineID }}</td>
+          <td>{{ mach.MachineType }}</td>
+          <td>{{ mach.MachineName }}</td>
+          <td>{{ mach.SpindleSpeed }}</td>
+          <td>{{ mach.Power }}</td>
+          <td>                    
+            <a data-toggle="tooltip" title="View Machine Detailed">
+                <img src="{{environment.ImgView}}" (click)="MachineSelected(mach.MachineID)" class="icon-favorite">
+            </a> 
+          </td>
+        <td>
+            <a data-toggle="tooltip" title="Add To My Machine" href="#">
+                <img src="{{environment.ImgAddToFavorite}}"  class="icon-favorite">
+            </a>
+          </td>
+          <td><button class="btn btn-select"  [routerLink]="['/material']" >Select</button></td>
+         
+      </tr>
+  </tbody>
+</table>

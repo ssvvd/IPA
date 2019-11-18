@@ -1,18 +1,40 @@
-<p>Machine Header</p>
 
 <form ng-app="ITA" ng-controller="MachineItemHeaderComponent">
-    <div class="form-group row col-12">
-        <div class="col-4">
-            <img src="{{imgNameMachine}}" class="ImgMachineType">
+    <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12" >
+        <div class="p-2">
+            <img src="{{imgNameMachine}}" class="img-machine-type">
         </div>
-        <div class="form-group col-8">           
-                <label class="desc-machine-bold">{{machHeader?.MachineName}}</label>                                
-                <label class="desc-machine">{{machHeader?.MachineType}}</label>                       
-                <div class="form-group row">                                                      
-                    <label class="desc-machine" for="txtCostPerHour">Cost Per Hour</label>                                         
-                    <input type="text" class="form-control" id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour" >                                                                       
-                </div>            
-        </div>
+        <div class="form-group col-6">                      
+                <label class="col-form-label desc-machine-bold">{{machHeader?.MachineName}}</label>                                                     
+                <label class="col-form-label desc-machine">{{machHeader?.MachineType}}</label>             
+                            
+                <div class="form-group"> 
+                    <div class="row">
+                        <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
+                        <div class="pl-2">                                                               
+                            <input class="form-control form-control-sm col-6 inputtext" *ngIf="machHeader&&machHeader.CostPerHour" type="text"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour"> 
+                            
+                        </div>                           
+                    </div>
+                </div>                
+                <div class="form-group"> 
+                     <div class="row"> 
+                        <div class="pr-2">                     
+                            <a>
+                                <img src="{{environment.ImgAddToFavorite}}" class="icon-favorite">
+                            </a> 
+                        </div>
+                        <div  class="pr-2">                                                                 
+                            <a>
+                                <img src="{{environment.ImgDefault}}" class="icon-favorite">
+                            </a>                                              
+                        </div>                                            
+                        <div  class="pr-2">
+                            <button class="btn btn-select"  [routerLink]="['/material']">Select</button>                                       
+                        </div>
+                     </div>
+                </div>                        
+        </div>                                              
     </div>
 </form>
 

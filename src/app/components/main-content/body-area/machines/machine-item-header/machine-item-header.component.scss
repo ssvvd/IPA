@@ -1,15 +1,9 @@
-.ImgMachineType{
-    height: 100px;
-    padding:5px;    
+.img-machine-type{
+    width: 100%;    
     }
 
 .desc-machine-bold
 {
-    color: #1E4F95;
+    color: var(--btn-bg-select-color);
     font-weight:bold;
-}
-
-.desc-machine
-{
-    color: #1E4F95;  
 }

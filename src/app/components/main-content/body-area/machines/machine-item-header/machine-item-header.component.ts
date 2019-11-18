@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Machineheader } from 'src/app/models/machines/machineheader';
-import { MachineService } from 'src/app/services/machine.service' ;
 import { environment } from 'src/environments/environment';
+import { Routes } from '@angular/router';
 
 @Component({
   selector: 'app-machine-item-header',
@@ -10,20 +10,34 @@ import { environment } from 'src/environments/environment';
 })
 
 export class MachineItemHeaderComponent implements OnInit {
-  @Input() MachineID: number;
+ 
+  environment = environment;
 
-  machHeader:Machineheader;
-  imgNameMachine:string;  
-  constructor(private serv: MachineService) { }
+  @Input() machHeader:Machineheader;
+  
+  imgNameMachine:string; 
+
+  constructor() { 
+
+  }
 
   ngOnInit() {
-    this.serv.getmachineheader(this.MachineID).subscribe((res: any) => {          
-      this.machHeader =JSON.parse(res)[0];    
+  // alert(this.machHeader);
+  //     this.imgNameMachine =environment.ImagePath +"no-image.svg";
+  //     if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
+  //     if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
+  //     if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg";       
+      
+  }
+   ngAfterContentInit(){
+      this.imgNameMachine =environment.ImagePath +"no-image.svg";
       if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
       if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-      if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg"; 
-
-    });
-  }  
-
-}
+      if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg";       
+      
+   }   
+   }
+//    machineFunc(){
+    
+// }
+ 

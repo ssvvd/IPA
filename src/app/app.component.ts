@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +9,9 @@ import { HttpClient } from '@angular/common/http'
 })
 export class AppComponent {
   title = 'IscarToolAdvisor';
-  CurMachineID: number;
   
-  constructor() {
-    
+  constructor(router:Router) {
+    router.navigate(['/machines']); 
   }
-
- 
-  // CurMachineSelected(MachineID) {
-  //   this.CurMachineID = MachineID
-  //   this.activetab = 'machinedetailed'
-  // }
 }
 

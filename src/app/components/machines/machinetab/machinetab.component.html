@@ -2,5 +2,5 @@
 <button (click)="setactivetab('machinelist')">Machine List</button>
 <button (click)="setactivetab('machinedetailed')">Machine Detailed</button>
 
-<app-machinelist   *ngIf="activetab =='machinelist'" (MachineSelect)='CurMachineSelected($event)'></app-machinelist>
+<!-- <app-machinelist   *ngIf="activetab =='machinelist'" (MachineSelect)='CurMachineSelected($event)'></app-machinelist> -->
 <app-machinedetailed [MachineID]=CurMachineID *ngIf="activetab=='machinedetailed'"></app-machinedetailed> 
