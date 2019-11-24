@@ -22,22 +22,11 @@ export class MachineItemHeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-  // alert(this.machHeader);
-  //     this.imgNameMachine =environment.ImagePath +"no-image.svg";
-  //     if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
-  //     if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-  //     if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg";       
-      
+    this.imgNameMachine =environment.ImagePath +"no-image.svg";
+    if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
+    if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
+    if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg";              
   }
-   ngAfterContentInit(){
-      this.imgNameMachine =environment.ImagePath +"no-image.svg";
-      if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
-      if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-      if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg";       
-      
-   }   
-   }
-//    machineFunc(){
-    
-// }
+}
+
  

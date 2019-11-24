@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import * as $ from "jquery";
 
 import { MachinedetailedComponent } from './components/machines/machinedetailed/machinedetailed.component';
 import { MachinetabComponent } from './components/machines/machinetab/machinetab.component';
@@ -13,7 +14,6 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component';
 import { SubMenuComponent } from './components/header/sub-menu/sub-menu.component';
-import { MachinesComponent } from './components/main-content/body-area/machines/machines.component';
 import { MaterialsComponent } from './components/main-content/body-area/materials/materials.component';
 import { MachiningOperationComponent } from './components/main-content/body-area/machining-operation/machining-operation.component';
 import { OperationDataComponent } from './components/main-content/body-area/operation-data/operation-data.component' //./components/main-content/body-area/operation-data/operation-data.component';
@@ -26,6 +26,7 @@ import { MachineItemHeaderComponent } from './components/main-content/body-area/
 import { MachineItemSpindleComponent } from './components/main-content/body-area/machines/machine-item-spindle/machine-item-spindle.component';
 import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } from '@angular/forms';
 import { MachineItemSpindleChartComponent } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.component';
+import { MachinesTestComponent } from './components/main-content/body-area/machines/machines-test/machines-test.component';
 
 
 @NgModule({
@@ -39,7 +40,6 @@ import { MachineItemSpindleChartComponent } from './components/main-content/body
     FooterComponent,
     GlobalMenuComponent,
     SubMenuComponent,
-    MachinesComponent,
     MaterialsComponent,
     MachiningOperationComponent,
     OperationDataComponent,
@@ -47,11 +47,11 @@ import { MachineItemSpindleChartComponent } from './components/main-content/body
     MainContentComponent,
     MachinesListComponent,
     MachineItemComponent,
-    MachinesComponent,
     MainMenuComponent,
     MachineItemHeaderComponent,
     MachineItemSpindleComponent,
-    MachineItemSpindleChartComponent
+    MachineItemSpindleChartComponent,
+    MachinesTestComponent
    
   ],
   imports: [

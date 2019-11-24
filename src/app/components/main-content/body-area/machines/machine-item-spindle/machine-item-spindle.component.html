@@ -1,26 +1,25 @@
 
-<form>
-   <div class="container-fluid">
-       <div class="form-group row">
-           <label  class="col-sm-6 col-form-label desc-machine-bold">{{DescSpindle}}</label>
+
+   <div class="container-fluid pl-0" >
+       <div class="form-group row" >
+           <label  class="col-form-label desc-machine-bold pl-4">{{DescSpindle}}</label>
         </div>   
-    <!-- <p class="desc-machine-bold">{{DescSpindle}}</p> -->
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left border-bottom p-2">                                            
                  <div class="form-group row">
-                    <label for="txtSpindleSpeed" class="col-sm-6 col-form-label">Spindle Speed (rpm)</label>
+                    <label for="txtSpindleSpeed" class="col-sm-7 col-form-label">Spindle Speed (rpm)</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="txtPower" class="col-sm-6 col-form-label">Power (Kw)</label>
+                    <label for="txtPower" class="col-sm-7 col-form-label">Power (Kw)</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="txtTorque" class="col-sm-6 col-form-label">Torque (Nm)</label>
+                    <label for="txtTorque" class="col-sm-7 col-form-label">Torque (Nm)</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control form-control-sm" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
                     </div>
@@ -28,27 +27,27 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left border-bottom p-2">
             <div class="form-group row">
-                <label for="txtMaxCutFeedSpeed" class="col-sm-6 col-form-label">Maximum cutting feed speed (m/min)</label>
+                <label for="txtMaxCutFeedSpeed" class="col-sm-7 col-form-label">Maximum cutting feed speed (m/min)</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control form-control-sm" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
                 </div>
             </div> 
             <div class="form-group row">
-                <label for="txtMaxRapidFeedSpeed" class="col-sm-6 col-form-label">Maximum rapid feed speed (m/min)</label>
+                <label for="txtMaxRapidFeedSpeed" class="col-sm-7 col-form-label">Maximum rapid feed speed (m/min)</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control form-control-sm" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
                 </div>
             </div>
               <div class="form-group row">
-                <label for="txtAdaptationType" class="col-sm-6 col-form-label" >Adaptation Type</label>
+                <label for="txtAdaptationType" class="col-sm-7 col-form-label" >Adaptation Type</label>
                 <div class="col-sm-4">
-                      <select class="form-control form-control-sm" [(ngModel)]="curAdapType" (change)="changeadaptype($event.target.value)" >
-                        <option  *ngFor="let adaptype of arrAdapType" >{{adaptype?.AdaptationType}}</option>
+                      <select class="form-control form-control-sm" name="slcApatType" [ngModel]="curAdapType" (change)="changeadaptype($event.target.value)" >
+                        <option  *ngFor="let adaptype of arrAdapType"  >{{adaptype?.AdaptationType}}</option>
                     </select>                    
                 </div>
             </div>  
              <div class="form-group row">
-                <label for="txtAdaptationSize" class="col-sm-6 col-form-label" >Adaptation Size</label>
+                <label for="txtAdaptationSize" class="col-sm-7 col-form-label" >Adaptation Size</label>
                 <div class="col-sm-4">
                     <select class="form-control form-control-sm">
                         <option *ngFor="let adapsize of arrAdapSizeFilter">{{adapsize?.AdaptationSize}}</option>
@@ -56,7 +55,7 @@
                 </div>
             </div>  
              <div class="form-group row">
-                <label for="txtClampingType" class="col-sm-6 col-form-label">Clamping Type</label>
+                <label for="txtClampingType" class="col-sm-7 col-form-label">Clamping Type</label>
                 <div class="col-sm-4">
                     <select class="form-control form-control-sm">
                         <option value='VICE'>VICE</option>
@@ -67,13 +66,13 @@
                 </div>
             </div>
              <div class="form-group row">
-                <label for="txtEmultionPressure" class="col-sm-6 col-form-label">Emultion Pressure (bar)</label>
+                <label for="txtEmultionPressure" class="col-sm-7 col-form-label">Emultion Pressure (bar)</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
                 </div>
             </div>
              <div class="form-group row">
-                <label for="txtEmultionFlowRate" class="col-sm-6 col-form-label">Emultion Flow Rate (L/min)</label>
+                <label for="txtEmultionFlowRate" class="col-sm-7 col-form-label">Emultion Flow Rate (L/min)</label>
                 <div class="col-sm-4">
                     <input type="text" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
                 </div>
@@ -137,4 +136,6 @@
         </div>
     </div>
        </div>
-</form>
+
+<app-item-machine-spindle-chart [spindle]=spindle [typeChart]='torque'></app-item-machine-spindle-chart>
+<app-item-machine-spindle-chart [spindle]=spindle [typeChart]='power'></app-item-machine-spindle-chart>

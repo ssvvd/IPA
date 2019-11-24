@@ -1,39 +1,41 @@
 
 <form ng-app="ITA" ng-controller="MachineItemHeaderComponent">
-    <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12" >
-        <div class="p-2">
+    <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12">
+        <div class="pt-4 pr-3">
             <img src="{{imgNameMachine}}" class="img-machine-type">
         </div>
-        <div class="form-group col-6">                      
-                <label class="col-form-label desc-machine-bold">{{machHeader?.MachineName}}</label>                                                     
+        <div class="pt-4 pr-3 pl-4 col-6 col-md-12 col-sm-12 col-xl-4 col-lg-4" >   
+            <div class="form-group">
+                <label class="col-form-label desc-machine-bold">{{machHeader?.MachineName}}</label>
+            </div>              
+            <div>
                 <label class="col-form-label desc-machine">{{machHeader?.MachineType}}</label>             
-                            
-                <div class="form-group"> 
-                    <div class="row">
-                        <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
-                        <div class="pl-2">                                                               
-                            <input class="form-control form-control-sm col-6 inputtext" *ngIf="machHeader&&machHeader.CostPerHour" type="text"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour"> 
-                            
-                        </div>                           
+            </div>           
+            <div class="form-group"> 
+                <div class="row">
+                    <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
+                    <div class="pl-3">                                                               
+                        <input class="form-control form-control-sm col-6 inputtext" *ngIf="machHeader&&machHeader.CostPerHour" type="text"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+                    </div>                           
+                </div>
+            </div>                
+            <div class="form-group"> 
+                <div class="row"> 
+                    <div class="pr-3">                     
+                        <a>
+                            <img src="{{environment.ImgAddToFavorite}}" class="icon-favorite">
+                        </a> 
                     </div>
-                </div>                
-                <div class="form-group"> 
-                     <div class="row"> 
-                        <div class="pr-2">                     
-                            <a>
-                                <img src="{{environment.ImgAddToFavorite}}" class="icon-favorite">
-                            </a> 
-                        </div>
-                        <div  class="pr-2">                                                                 
-                            <a>
-                                <img src="{{environment.ImgDefault}}" class="icon-favorite">
-                            </a>                                              
-                        </div>                                            
-                        <div  class="pr-2">
-                            <button class="btn btn-select"  [routerLink]="['/material']">Select</button>                                       
-                        </div>
-                     </div>
-                </div>                        
+                    <div  class="pr-3">                                                                 
+                        <a>
+                            <img src="{{environment.ImgDefault}}" class="icon-favorite">
+                        </a>                                              
+                    </div>                                            
+                    <div  class="pr-3">
+                        <button class="btn btn-select"  [routerLink]="['/materials']">Select</button>                                       
+                    </div>
+                    </div>
+            </div>                        
         </div>                                              
     </div>
 </form>

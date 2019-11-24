@@ -33,17 +33,18 @@ export class MachineItemSpindleComponent implements OnInit
     this.serv.getmachineadaptationtype().subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
         this.curAdapType=this.arrAdapType.find(e=> e == this.spindle.AdaptationType );    
-                 
+        //alert(this.spindle.AdaptationType);
+        this.curAdapType= this.spindle.AdaptationType;        
       }); 
       this.serv.getmachineadaptationsize().subscribe((res: any) => {
         this.arrAdapSize = JSON.parse(res); 
-        this.curAdapSize=this.arrAdapSize.find(e=> e.AdaptationType == this.spindle.AdaptationType && e.AdaptationSize === this.spindle.AdaptationSize);       
-        this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.spindle.AdaptationType);
+        this.curAdapSize=this.arrAdapSize.find(e=> e.AdaptationType == this.spindle.AdaptationType && e.AdaptationSize === this.spindle.AdaptationSize);                      
+        this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.spindle.AdaptationType);       
+        
       });   
       
       this.spindle.EmultionPressure =25;
       this.spindle.EmultionFlowRate =40;
-
   }
   
   changeadaptype(adapttype:string)

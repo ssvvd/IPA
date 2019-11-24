@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap";
+//@import "~datatables.net-bs4/css/dataTables.bootstrap4.css";
 
 :root {
   --btn-bg-select-color: #204f96;
@@ -53,9 +54,9 @@ input:focus
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px #E0E0E0 !important;  
 }
 
-label,span,p,input,select
+label,span,p,input,select,table
 {
-  font-family: 'Oswald',Calibri, Arial;   
+  font-family: 'Oswald',Calibri,Arial;   
 }
 
 button{
@@ -80,21 +81,21 @@ html {
 
 @include media-breakpoint-up(sm) {
   html {
-    font-size: 1.0rem;
+    font-size: 0.8rem;
     font-weight:normal;
   }
 }
 
 @include media-breakpoint-up(md) {
   html {
-    font-size: 1.0rem;
+    font-size: 0.8rem;
     font-weight:normal;
   }
 }
 
 @include media-breakpoint-up(lg) {
   html {
-    font-size: 1.0rem;
+    font-size: 0.8rem;
     font-weight:normal;
   }
 }

@@ -1,10 +1,9 @@
 
-<div>
-    <app-machine-item-header [machHeader]=machHeader></app-machine-item-header>
+<div class="container-fluid">
+    <app-machine-item-header *ngIf="this.machHeader!=undefind" [machHeader]="machHeader"></app-machine-item-header>
 
-    <div *ngFor="let spindle of arrMachineSpindle" class="p-2">                                                                            
+    <div *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
         <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
-    </div>
-   
+    </div>   
 <div>
    
