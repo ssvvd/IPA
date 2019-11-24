@@ -17,19 +17,6 @@ const routes: Routes = [
 	{path:"results",component:ResultsComponent},
 	];
 
-/* const routes: Routes = [
-  {path:"machines",component:MachinesComponent,
-   children: [    
-      {path: 'machinelist', component: MachinesListComponent},
-      {path: 'machineitem', component: MachineItemComponent}
-    ]
-  },
-  {path:"material",component:MaterialsComponent},
-  {path:"machining-operation",component:MachiningOperationComponent},
-  {path:"operation-data",component:OperationDataComponent},
-  {path:"results",component:ResultsComponent},
-]; */
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
