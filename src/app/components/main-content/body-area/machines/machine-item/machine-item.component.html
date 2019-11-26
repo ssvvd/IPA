@@ -35,12 +35,12 @@
                         <button class="btn btn-select"  (click)="SelectMachine" [routerLink]="['/materials']">Select</button>                                       
                     </div>
                 </div>
-            </div>                        
+            </div>                         
         </div>                                              
     </div>
     <!-- <app-machine-item-header *ngIf="this.machHeader!=undefind" [machHeader]="machHeader"></app-machine-item-header> -->
 
-   <div *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
+   <div     *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
         <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
     </div>
 <div>
