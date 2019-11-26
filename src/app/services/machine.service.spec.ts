@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MachineService } from './services/machine.service';
+import { MachineService } from './machine.service';
 
 describe('MachineService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

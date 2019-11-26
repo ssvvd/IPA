@@ -51,8 +51,4 @@ export class MachineItemSpindleComponent implements OnInit
     this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == adapttype);    
   }
 
-  onMachineSelect()
-  {
-    
-  }
 }
