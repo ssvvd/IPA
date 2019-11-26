@@ -1,6 +1,5 @@
 import { Component, OnInit ,Output,Input,EventEmitter} from '@angular/core';
 import { environment } from 'src/environments/environment';
-//import { MaterialsComponent } from 'src/app/components/main-content/body-area/materials/materials.component';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
 export class MainTab {
@@ -54,20 +53,20 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit()
   {    
-    this.Tabs.push (new MainTab(1,"Machine","/machines", environment.ImagePath + "icon_Machinel.svg"));
-    this.Tabs[0].IsSelected=true;
+    this.Tabs.push (new MainTab(1,"Machine","/machines", environment.ImagePath + "icon_Machinel.svg"));    
     this.Tabs.push (new MainTab(2,"Material","/materials",environment.ImagePath + "icon_Material.svg"));
     this.Tabs.push (new MainTab(3,"Machining Operation","/machining-operation",environment.ImagePath + "icon_MachiningOp.svg"));
     this.Tabs.push (new MainTab(4,"Operational Data","/operation-data",environment.ImagePath +  "icon_OpData.svg"));
     this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg")); 
+    this.Tabs[0].IsSelected=true;
   }
  
    TabSelected(RouteName:string) {       
-    this.Tabs.forEach( (obj) => {     
+    this.Tabs.forEach( (obj) => {           
       if(obj.RouteName==RouteName)         
           obj.IsSelected=true;      
       else
        obj.IsSelected=false;
     });
-  }  
+   }  
 }

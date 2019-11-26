@@ -21,7 +21,7 @@ export class MachinesListComponent implements OnInit
   listmachines_sorted:Machineheader [];
     
   environment = environment;
-  @Output() MachineSelect = new EventEmitter();
+  //@Output() MachineSelect = new EventEmitter();
   MachineIDSelected = 0;
     
   constructor(private serv: MachineService,private ser_state:StateManagerService) 

@@ -32,8 +32,7 @@ export class MachineItemSpindleComponent implements OnInit
     if(this.spindle.SpindleType=="T")  this.DescSpindle="Tool Spindle";
     this.serv.getmachineadaptationtype().subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
-        this.curAdapType=this.arrAdapType.find(e=> e == this.spindle.AdaptationType );    
-        //alert(this.spindle.AdaptationType);
+        this.curAdapType=this.arrAdapType.find(e=> e == this.spindle.AdaptationType );            
         this.curAdapType= this.spindle.AdaptationType;        
       }); 
       this.serv.getmachineadaptationsize().subscribe((res: any) => {
@@ -43,12 +42,17 @@ export class MachineItemSpindleComponent implements OnInit
         
       });   
       
-      this.spindle.EmultionPressure =25;
+      this.spindle.EmultionPressure =25;//TODO:
       this.spindle.EmultionFlowRate =40;
   }
   
   changeadaptype(adapttype:string)
   {    
     this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == adapttype);    
+  }
+
+  onMachineSelect()
+  {
+    
   }
 }

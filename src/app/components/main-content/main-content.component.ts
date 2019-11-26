@@ -21,6 +21,10 @@ export class MainContentComponent implements OnInit {
     //this.activetab="machine";   
   }
   
+  onSelectMachine(a)
+  {
+     alert(a);
+  }
   /* TabChanged(tabname:string) {   
     //this.activetab = tabname;       
   } */

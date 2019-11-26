@@ -1,9 +1,47 @@
 
 <div class="container-fluid">
-    <app-machine-item-header *ngIf="this.machHeader!=undefind" [machHeader]="machHeader"></app-machine-item-header>
+     <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12">
+        <div class="pt-4 pr-3 col-10 col-sm-7 col-md-5 col-lg-2 col-xl-2">
+            <img src="{{imgNameMachine}}" class="img-machine-type">
+        </div>
+        <div class="pt-4 pr-3 pl-4 col-6 col-md-12 col-sm-12 col-xl-4 col-lg-4">   
+            <div class="form-group">
+                <label class="col-form-label desc-machine-bold">{{machHeader?.MachineName}}</label>
+            </div>              
+            <div>
+                <label class="col-form-label desc-machine">{{machHeader?.MachineType}}</label>             
+            </div>           
+            <div class="form-group"> 
+                <div class="row">
+                    <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
+                    <div class="pl-3">                                                               
+                        <input class="form-control form-control-sm col-6 inputtext" *ngIf="machHeader&&machHeader.CostPerHour" type="text"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+                    </div>                           
+                </div>
+            </div>                
+            <div class="form-group"> 
+                <div class="row"> 
+                    <div class="pr-3">                     
+                        <a>
+                            <img src="{{environment.ImgAddToFavorite}}" class="icon-favorite">
+                        </a> 
+                    </div>
+                    <div class="pr-3">                                                                 
+                        <a>
+                            <img src="{{environment.ImgDefault}}" class="icon-favorite">
+                        </a>                                              
+                    </div>                                            
+                    <div class="pr-3">
+                        <button class="btn btn-select"  (click)="SelectMachine" [routerLink]="['/materials']">Select</button>                                       
+                    </div>
+                </div>
+            </div>                        
+        </div>                                              
+    </div>
+    <!-- <app-machine-item-header *ngIf="this.machHeader!=undefind" [machHeader]="machHeader"></app-machine-item-header> -->
 
-    <div *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
+   <div *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
         <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
-    </div>   
+    </div>
 <div>
    

@@ -1,9 +1,9 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
-//import 'chart.js';
 import { MachineItemSpindleChartModule } from 'src/app/components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.module';
 //import * as CanvasJS from 'canvasjs';
-import {Chart} from 'chart.js';
+//import {Chart} from 'chart.js';
+import 'chart.js';
 
 export class ChartData
 {
@@ -31,7 +31,8 @@ export class ChartData
 export class MachineItemSpindleChartComponent implements OnInit {
 
   @Input() spindle:Machinespindle; 
-  @Input() typeChart:string;  
+  @Input() typeChart:string; 
+
   chartdata:ChartData;
   chartLabels: Array<any>;
   public chartDatasets: Array<any>;
@@ -42,6 +43,8 @@ export class MachineItemSpindleChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+    this.CreateChart();
     //todo:
     this.typeChart='torque';
     this.chartdata=new ChartData();    
@@ -86,7 +89,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   chart.render();  */
   }
   
-   /* CreateChart()
+   CreateChart()
   {
     this.chartType = 'line';
     this.chartDatasets= [
@@ -112,7 +115,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
       responsive: true
     };
  
- }  */
+ }  
      public chartClicked(e: any): void { }
      public chartHovered(e: any): void { }
   

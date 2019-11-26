@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StatemanagerService } from './statemanager.service';
+import { StateManagerService } from './statemanager.service';
 
-describe('StatemanagerService', () => {
+describe('StateManagerService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: StatemanagerService = TestBed.get(StatemanagerService);
+    const service: StateManagerService = TestBed.get(StateManagerService);
     expect(service).toBeTruthy();
   });
 });
