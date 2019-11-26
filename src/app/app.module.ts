@@ -8,8 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import * as $ from "jquery";
 
-import { MachinedetailedComponent } from './components/machines/machinedetailed/machinedetailed.component';
-import { MachinetabComponent } from './components/machines/machinetab/machinetab.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component';
@@ -32,10 +30,8 @@ import { MachinesTestComponent } from './components/main-content/body-area/machi
 @NgModule({
   declarations: [
    
-    AppComponent,
-    MachinedetailedComponent,
-    MachinesListComponent,
-    MachinetabComponent,
+    AppComponent,   
+    MachinesListComponent, 
     HeaderComponent,
     FooterComponent,
     GlobalMenuComponent,
