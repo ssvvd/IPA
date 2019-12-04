@@ -31,10 +31,10 @@ export class StateManagerService {
     return this.lstMachineHeader;
   }
 
-  SetMachineSelected(m:Machineheader)
+ /*  SetMachineHeaderCur(m:Machineheader)
   {   
     this.MachineSelected=m;    
-  }  
+  }   */
   GetMachineSelected() :Machineheader
   {
     return this.MachineSelected;    

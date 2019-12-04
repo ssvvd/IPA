@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MachineService } from 'src/app/services/machine.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { Machineheader } from 'src/app/models/machines/machineheader';
@@ -12,12 +12,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./machine-item.component.scss']
 })
 export class MachineItemComponent implements OnInit {
-  
-  //message:string;
-
-  @Input() MachineID: number;  
-  @Output() MachineSelect = new EventEmitter<{desc: string}>();
-
+ 
+  MachineID: number; 
   machSpindleMain: Machinespindle;
   machSpindleTool: Machinespindle;
   arrMachineSpindle: Machinespindle[];
@@ -26,7 +22,7 @@ export class MachineItemComponent implements OnInit {
   environment = environment;  
 
   constructor(private srv_machine: MachineService, private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
-  {
+  {  
       this.router.params.subscribe(params => {
       this.MachineID = parseInt(params["id"]);
     })
@@ -44,15 +40,11 @@ export class MachineItemComponent implements OnInit {
         if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
         if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
       });   
-    }); 
-     //this.srv_statemanage.currentMessage.subscribe(message => this.message = message);
-     //this.srv_statemanage.current_machine_selected.subscribe(mach => this.machHeader = mach);
+    });     
   }
 
   OnSelectMachine()
-  {     
-    this.srv_statemanage.SetMachineSelected(this.machHeader);
-    this.MachineSelect.emit({ desc: this.machHeader.MachineName});    
-    this.srv_statemanage.change_machine(this.machHeader);
+  {   
+    this.srv_statemanage.change_machine(this.machHeader);     
   } 
 }

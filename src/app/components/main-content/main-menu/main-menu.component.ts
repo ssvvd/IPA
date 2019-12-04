@@ -1,4 +1,4 @@
-import { Component, OnInit ,Output,Input,EventEmitter} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
@@ -26,8 +26,8 @@ export class MainTab {
 })
 
 export class MainMenuComponent implements OnInit {
-  
-  @Input () RouteSelected :string;
+
+  //@Input () RouteSelected :string;
   
   Tabs:MainTab[]=[];
   constructor(private router: Router,private srv_statemanage:StateManagerService) { 
@@ -58,10 +58,7 @@ export class MainMenuComponent implements OnInit {
     this.Tabs.push (new MainTab(3,"Machining Operation","/machining-operation",environment.ImagePath + "icon_MachiningOp.svg"));
     this.Tabs.push (new MainTab(4,"Operational Data","/operation-data",environment.ImagePath +  "icon_OpData.svg"));
     this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg")); 
-    this.Tabs[0].IsSelected=true;
-
-    //this.srv_statemanage.currentMessage.subscribe(message => this.message = message);
-     //this.srv_statemanage.current_machine_selected.subscribe(mach => this.message = mach.MachineName);
+    this.Tabs[0].IsSelected=true;    
      this.srv_statemanage.current_machine_selected.subscribe(mach => this.Tabs.filter(x=>x.TabID==1)[0].SelectedItemDesc = mach.MachineName);
   }
  

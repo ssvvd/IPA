@@ -1,4 +1,4 @@
-import { Component, OnInit,Output,EventEmitter,Directive,Input,QueryList, ViewChildren} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { MachineService } from 'src/app/services/machine.service' ;
@@ -27,10 +27,8 @@ export class MachinesListComponent implements OnInit
    
   ngOnInit() {     
       this.srv_machine.getmachines().subscribe((res:any)=>{
-      this.listmachines=JSON.parse(res );
-      //alert(this.listmachines.length); 
+      this.listmachines=JSON.parse(res ); 
       this.listmachines_sorted=this.listmachines;  
-      //alert(this.listmachines_sorted.length);
       this.listmachines_sorted.forEach((m) => {        
           m.IsSelected=false;       
           m.DescSelect="Select";

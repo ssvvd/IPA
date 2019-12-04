@@ -12,8 +12,7 @@ import { MachineFilter } from 'src/app/models/machines/machinefilter';
 export class MachinesFilterComponent implements OnInit {
   
   @Output() MachineFilterChanged = new EventEmitter<{filter: MachineFilter}>();
-  @Output() MachineFilterspeedChanged = new EventEmitter<{speedmin: number}>();
-
+ 
   machFilter:MachineFilter;
 
   options_speed: Options = {
