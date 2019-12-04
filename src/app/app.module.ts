@@ -20,16 +20,15 @@ import { MainContentComponent } from './components/main-content/main-content.com
 import { MachinesListComponent } from './components/main-content/body-area/machines/machines-list/machines-list.component';
 import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
 import { MainMenuComponent } from './components/main-content/main-menu/main-menu.component';
-//import { MachineItemHeaderComponent } from './components/main-content/body-area/machines/machine-item-header/machine-item-header.component';
 import { MachineItemSpindleComponent } from './components/main-content/body-area/machines/machine-item-spindle/machine-item-spindle.component';
 import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } from '@angular/forms';
 import { MachineItemSpindleChartComponent } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.component';
-import { MachinesTestComponent } from './components/main-content/body-area/machines/machines-test/machines-test.component';
-
+import { MachineItemSpindleChartModule } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.module';
+import { Ng5SliderModule } from 'ng5-slider';
+import { MachinesFilterComponent } from './components/main-content/body-area/machines/machines-filter/machines-filter.component';
 
 @NgModule({
-  declarations: [
-   
+  declarations: [   
     AppComponent,   
     MachinesListComponent, 
     HeaderComponent,
@@ -43,20 +42,19 @@ import { MachinesTestComponent } from './components/main-content/body-area/machi
     MainContentComponent,
     MachinesListComponent,
     MachineItemComponent,
-    MainMenuComponent,
-    //MachineItemHeaderComponent,
+    MainMenuComponent,    
     MachineItemSpindleComponent,
     MachineItemSpindleChartComponent,
-    MachinesTestComponent
-   
+    MachinesFilterComponent    
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    DataTablesModule
-    
+    DataTablesModule,
+    MachineItemSpindleChartModule ,
+    Ng5SliderModule   
   ],
   providers: [],
   bootstrap: [AppComponent]

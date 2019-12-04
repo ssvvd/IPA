@@ -1,15 +1,16 @@
 import { Component, OnInit ,Output,Input,EventEmitter} from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { StateManagerService } from 'src/app/services/statemanager.service' ;
 
 export class MainTab {
   TabID:number;
-  Description: string;
-  SelectedItemDesc: string;
-  ImageURL:string;
-  RouteName:string;
+  Description: string ="";
+  SelectedItemDesc: string ="         ";
+  ImageURL:string="";
+  RouteName:string="";
   IsSelected:boolean=false;
-
+  
   constructor(public pTabID: number, public pDescription: string,public pRouteName:string, public pImageURL:string) { 
     this.TabID =pTabID;
     this.Description =pDescription;
@@ -25,13 +26,12 @@ export class MainTab {
 })
 
 export class MainMenuComponent implements OnInit {
-
-  //@Output() TabSelect = new EventEmitter();
+  
   @Input () RouteSelected :string;
-
+  
   Tabs:MainTab[]=[];
-
-  constructor(private router: Router) { 
+  constructor(private router: Router,private srv_statemanage:StateManagerService) { 
+    
     this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationStart) {              
                 this.TabSelected(event.url);       
@@ -59,6 +59,10 @@ export class MainMenuComponent implements OnInit {
     this.Tabs.push (new MainTab(4,"Operational Data","/operation-data",environment.ImagePath +  "icon_OpData.svg"));
     this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg")); 
     this.Tabs[0].IsSelected=true;
+
+    //this.srv_statemanage.currentMessage.subscribe(message => this.message = message);
+     //this.srv_statemanage.current_machine_selected.subscribe(mach => this.message = mach.MachineName);
+     this.srv_statemanage.current_machine_selected.subscribe(mach => this.Tabs.filter(x=>x.TabID==1)[0].SelectedItemDesc = mach.MachineName);
   }
  
    TabSelected(RouteName:string) {       
@@ -68,5 +72,5 @@ export class MainMenuComponent implements OnInit {
       else
        obj.IsSelected=false;
     });
-   }  
+   }    
 }

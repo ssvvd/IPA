@@ -9,19 +9,19 @@
                  <div class="form-group row">
                     <label for="txtSpindleSpeed" class="col-sm-7 col-form-label">Spindle Speed (rpm)</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
+                        <input type="number" class="form-control form-control-sm" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="txtPower" class="col-sm-7 col-form-label">Power (Kw)</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
+                        <input type="number" class="form-control form-control-sm" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="txtTorque" class="col-sm-7 col-form-label">Torque (Nm)</label>
                     <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-sm" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
+                        <input type="number" class="form-control form-control-sm" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
                     </div>
                 </div>                         
         </div>
@@ -29,13 +29,13 @@
             <div class="form-group row">
                 <label for="txtMaxCutFeedSpeed" class="col-sm-7 col-form-label">Maximum cutting feed speed (m/min)</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control form-control-sm" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
+                    <input type="number" class="form-control form-control-sm" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
                 </div>
             </div> 
             <div class="form-group row">
                 <label for="txtMaxRapidFeedSpeed" class="col-sm-7 col-form-label">Maximum rapid feed speed (m/min)</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control form-control-sm" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
+                    <input type="number" class="form-control form-control-sm" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
                 </div>
             </div>
               <div class="form-group row">
@@ -68,13 +68,13 @@
              <div class="form-group row">
                 <label for="txtEmultionPressure" class="col-sm-7 col-form-label">Emultion Pressure (bar)</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
+                    <input type="number" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
                 </div>
             </div>
              <div class="form-group row">
                 <label for="txtEmultionFlowRate" class="col-sm-7 col-form-label">Emultion Flow Rate (L/min)</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
+                    <input type="number" class="form-control form-control-sm" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
                 </div>
             </div>  
         </div>
@@ -92,14 +92,14 @@
                 <label for="txtMQL" class="col-4 col-sm-4 col-form-label">MQL</label>
                 <div class="col-2 col-sm-4 col-lg-2 col-xl-2 ">
                     <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="optMQLExt" name="optMQL" [checked]="spindle.ExtMQL">
-                        <label class="custom-control-label" for="optMQLExt"></label>
+                        <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLExt' + spindle.RecordID"  name="optMQL" [checked]="spindle.ExtMQL">
+                        <label class="custom-control-label" [attr.for]="'optMQLExt' + spindle.RecordID"></label>
                     </div>
                 </div>
                 <div  class="col-2 col-sm-4 col-lg-2 col-xl-2">                    
                     <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="optMQLInt" name="optMQL" [checked]="spindle.IntMQL">
-                        <label class="custom-control-label" for="optMQLInt"></label> 
+                        <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLInt' + spindle.RecordID"  name="optMQL" [checked]="spindle.IntMQL">
+                        <label class="custom-control-label"  [attr.for]="'optMQLInt' + spindle.RecordID"></label> 
                     </div>
                 </div>        
             </div> 
@@ -107,14 +107,14 @@
                 <label for="txtAirBlast" class="col-4 col-sm-4 col-form-label">Air Blast</label>
                 <div class="col-2 col-sm-4 col-lg-2 col-xl-2">
                     <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="optAirBlastExt" name="AirBlast" [checked]="spindle.ExtAirBlast">
-                        <label class="custom-control-label" for="optAirBlastExt"></label>
+                        <input type="checkbox" class="custom-control-input"  [attr.id]="'optAirBlastExt'+spindle.RecordID"  name="AirBlast" [checked]="spindle.ExtAirBlast">
+                        <label class="custom-control-label" [attr.for]="'optAirBlastExt' + spindle.RecordID"></label>
                     </div>
                 </div>
                 <div  class="col-2 col-sm-4 col-lg-2 col-xl-2">                    
                     <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input" id="optAirBlastInt" name="AirBlast" [checked]="spindle.IntAirBlast">
-                        <label class="custom-control-label" for="optAirBlastInt"></label> 
+                        <input type="checkbox" class="custom-control-input" [attr.id]="'optAirBlastInt' + spindle.RecordID"  name="AirBlast" [checked]="spindle.IntAirBlast">
+                        <label class="custom-control-label" [attr.for]="'optAirBlastInt' + spindle.RecordID"></label> 
                     </div>
                 </div>        
             </div> 
@@ -122,14 +122,14 @@
                 <label for="txtEmultion" class="col-4 col-sm-4 col-form-label">Emultion</label>
                 <div class="col-2 col-sm-4 col-lg-2 col-xl-2">
                     <div class="custom-control custom-checkbox custom-control-inline ">
-                        <input type="checkbox" class="custom-control-input" id="chkEmultionExt" name="Emultion" [checked]="spindle.ExtEmultion">
-                        <label class="custom-control-label" for="chkEmultionExt"></label>
+                        <input type="checkbox" class="custom-control-input" name="Emultion" [attr.id]="'chkEmultionExt' + spindle.RecordID"  [checked]="spindle.ExtEmultion">
+                        <label class="custom-control-label" [attr.for]="'chkEmultionExt' + spindle.RecordID"></label>
                     </div>
                 </div>
                 <div  class="col-2 col-sm-4 col-lg-2 col-xl-2">                    
                     <div class="custom-control custom-checkbox custom-control-inline">
-                        <input type="checkbox" class="custom-control-input"  id="chkEmultionInt" name="Emultion" [checked]="spindle.IntEmultion">
-                        <label class="custom-control-label" for="chkEmultionInt"></label> 
+                        <input type="checkbox" class="custom-control-input"  name="Emultion" [attr.id]="'chkEmultionInt' + spindle.RecordID"  [checked]="spindle.IntEmultion">
+                        <label class="custom-control-label"  [attr.for]="'chkEmultionInt' + spindle.RecordID"></label> 
                     </div>
                 </div>        
             </div> 
@@ -137,5 +137,11 @@
     </div>
 </div>
 
-<app-item-machine-spindle-chart [spindle]=spindle [typeChart]='torque'></app-item-machine-spindle-chart>
-<app-item-machine-spindle-chart [spindle]=spindle [typeChart]='power'></app-item-machine-spindle-chart>
+<div class="form-group row ml-0 pl-0">
+    <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6" >
+        <app-item-machine-spindle-chart [spindle]=spindle [typeChart]="'torque'">torque</app-item-machine-spindle-chart>
+    </div>
+    <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6">
+        <app-item-machine-spindle-chart [spindle]=spindle [typeChart]="'power'">power</app-item-machine-spindle-chart>
+    </div>
+</div>

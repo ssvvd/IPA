@@ -14,6 +14,12 @@
     border-color:var(--btn-bg-select-color);   
 }
 
+.btn-select-selected
+{
+    background-color: #597cb0;
+    color:#FFF;
+    border-color:var(--btn-bg-select-color);   
+}
 .btn-select:hover
 {
     background-color:var(--btn-bg-select-color);
@@ -100,7 +106,7 @@ html {
   }
 }
 
-.icon-favorite{
+.icon-grid{
 height: 35px;
 }
 
@@ -122,4 +128,10 @@ p
   padding-bottom: 0!important;
   margin-top:0!important;
   margin-bottom:0!important;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }

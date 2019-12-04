@@ -1,5 +1,6 @@
 import { Component, OnInit, Input,Output,EventEmitter } from '@angular/core';
 import { MachineService } from 'src/app/services/machine.service' ;
+import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { Routes,ActivatedRoute} from '@angular/router';
@@ -12,34 +13,46 @@ import { environment } from 'src/environments/environment';
 })
 export class MachineItemComponent implements OnInit {
   
+  //message:string;
+
   @Input() MachineID: number;  
-  //@Output() MachineSelect = new EventEmitter();
+  @Output() MachineSelect = new EventEmitter<{desc: string}>();
 
   machSpindleMain: Machinespindle;
   machSpindleTool: Machinespindle;
   arrMachineSpindle: Machinespindle[];
   machHeader:Machineheader;
   imgNameMachine:string; 
-  environment = environment;   
-  constructor(private serv: MachineService, private router: ActivatedRoute ) {
+  environment = environment;  
+
+  constructor(private srv_machine: MachineService, private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
+  {
       this.router.params.subscribe(params => {
       this.MachineID = parseInt(params["id"]);
     })
   }
 
-  ngOnInit() {          
-      this.serv.getmachineheader(this.MachineID).subscribe((res: any) => {                   
+  ngOnInit() {                
+        this.srv_machine.getmachineheader(this.MachineID).subscribe((res: any) => {                   
         this.machHeader =JSON.parse(res)[0];          
-        this.serv.getmachinedetailed(this.MachineID).subscribe((res: any) => {
+        this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
         this.arrMachineSpindle = JSON.parse(res);      
         this.machSpindleMain = this.arrMachineSpindle[0]; 
 
         this.imgNameMachine =environment.ImagePath +"no-image.svg";        
         if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
         if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-        if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"Machining Center.svg";                      
+        if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
       });   
     }); 
-     
+     //this.srv_statemanage.currentMessage.subscribe(message => this.message = message);
+     //this.srv_statemanage.current_machine_selected.subscribe(mach => this.machHeader = mach);
   }
+
+  OnSelectMachine()
+  {     
+    this.srv_statemanage.SetMachineSelected(this.machHeader);
+    this.MachineSelect.emit({ desc: this.machHeader.MachineName});    
+    this.srv_statemanage.change_machine(this.machHeader);
+  } 
 }
