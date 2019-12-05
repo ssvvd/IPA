@@ -59,7 +59,7 @@ export class MainMenuComponent implements OnInit {
     this.Tabs.push (new MainTab(4,"Operational Data","/operation-data",environment.ImagePath +  "icon_OpData.svg"));
     this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg")); 
     this.Tabs[0].IsSelected=true;    
-     this.srv_statemanage.current_machine_selected.subscribe(mach => this.Tabs.filter(x=>x.TabID==1)[0].SelectedItemDesc = mach.MachineName);
+     this.srv_statemanage.CurrentMachineSelected.subscribe(mach => this.Tabs.filter(x=>x.TabID==1)[0].SelectedItemDesc = mach.MachineName);
   }
  
    TabSelected(RouteName:string) {       

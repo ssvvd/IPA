@@ -1,7 +1,7 @@
 import { Component, OnInit ,Output,EventEmitter} from '@angular/core';
 import { Options,ChangeContext } from 'ng5-slider';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
-
+import { StateManagerService } from 'src/app/services/statemanager.service' ;
 
 @Component({
   selector: 'app-machines-filter',
@@ -36,9 +36,18 @@ export class MachinesFilterComponent implements OnInit {
     showTicks: true
   };
 
-  constructor() { }
+  constructor(private srv_statemanage:StateManagerService) { }
  
   ngOnInit() {
+    this.InitFilterSliders();
+    let statefilter:MachineFilter;
+    statefilter=this.srv_statemanage.GetMachineFilter();
+    if (typeof(statefilter) !== 'undefined' && statefilter !== null )     
+        this.machFilter=this.srv_statemanage.GetMachineFilter();                   
+  }
+  
+  InitFilterSliders()
+  {
     this.machFilter=new MachineFilter;
     this.machFilter.IsMachiningCenter =true;
     this.machFilter.IsLathe =true;
@@ -53,8 +62,8 @@ export class MachinesFilterComponent implements OnInit {
     
     this.machFilter.TorqueMin = 0;
     this.machFilter.TorqueMax = 12000; 
-    }
-  
+  }
+
   FilterChange(event: ChangeContext ) {      
     this.MachineFilterChanged.emit({ filter: this.machFilter});   
   }
