@@ -16,8 +16,8 @@ export interface IAdaptationSize
 
 export class MachineItemSpindleComponent implements OnInit 
 {  
-  @Input() spindle:Machinespindle; 
-  
+  @Input() spindle:Machinespindle;   
+
   DescSpindle:string;
   arrAdapType:string[];
   arrAdapSize:IAdaptationSize[]=[];
@@ -50,5 +50,19 @@ export class MachineItemSpindleComponent implements OnInit
   {    
     this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == adapttype);    
   }
-
+  
+  onSpindleSpeedChanged($event)
+  {      
+    this.spindle.SpindleSpeed =$event.value;
+  }
+   onPowerChanged($event)
+  {    
+    //alert(1);  
+    this.spindle.Power =$event.value;
+  }
+  onTorqueChanged($event)
+  {   
+    //alert(2);    
+    this.spindle.Torque =$event.value;
+  }
 }

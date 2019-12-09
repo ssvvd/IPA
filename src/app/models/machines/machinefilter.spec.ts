@@ -1,7 +1,7 @@
-import { Machinefilter } from './machinefilter';
+import { MachineFilter } from './machinefilter';
 
 describe('Machinefilter', () => {
   it('should create an instance', () => {
-    expect(new Machinefilter()).toBeTruthy();
+    expect(new MachineFilter()).toBeTruthy();
   });
 });

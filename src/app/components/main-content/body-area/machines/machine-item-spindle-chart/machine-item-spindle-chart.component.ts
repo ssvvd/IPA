@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input} from '@angular/core';
+import { Component, OnInit ,Input, Output,EventEmitter,OnChanges, SimpleChanges, SimpleChange} from '@angular/core';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import 'chart.js';
 
@@ -30,6 +30,14 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() spindle:Machinespindle; 
   @Input() typeChart:string; 
 
+  @Input() SpindleSpeed:number;
+  @Input() Power:number;
+  @Input() Torque:number;
+
+  @Output() N1Changed = new EventEmitter<{value: number}>();  
+  @Output() T1Changed = new EventEmitter<{value: number}>();
+  @Output() P1Changed = new EventEmitter<{value: number}>();
+
   chartdata:ChartData;
   chartLabels: Array<any>;
   public chartDatasets: Array<any>;
@@ -40,10 +48,6 @@ export class MachineItemSpindleChartComponent implements OnInit {
   public chartOptions: any;
   
   constructor() { }
-
-   test_event(value) {
-    alert(this.chartdata.PoinX_1);
-  }
 
   ngOnInit() {
    
@@ -102,4 +106,33 @@ export class MachineItemSpindleChartComponent implements OnInit {
  }  
      public chartClicked(e: any): void { }
      public chartHovered(e: any): void { }  
+
+     OnChangePoinX_1()
+     { 
+       this.N1Changed.emit({ value: this.chartdata.PoinX_1});
+     }
+
+     OnChangePoinY_1()
+     { 
+       //alert('111 ' + this.typeChart);
+       if(this.typeChart="power")                 
+          this.P1Changed.emit({ value: this.chartdata.PoinY_1});        
+       else                 
+          this.T1Changed.emit({ value: this.chartdata.PoinY_1});        
+     }
+
+     ngOnChanges(changes: SimpleChanges) {
+        if (typeof this.chartdata!== 'undefined') 
+          for (let property in changes) {
+              if (property === 'SpindleSpeed') {
+                this.chartdata.PoinX_1 = changes[property].currentValue;
+                this.CreateChart();            
+              } 
+              if (property === 'Power' || property === 'Torque') {              
+                this.chartdata.PoinY_1 = changes[property].currentValue;
+                this.CreateChart();              
+              }
+              
+          }
+    }
 }
