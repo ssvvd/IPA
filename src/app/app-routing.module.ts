@@ -9,7 +9,7 @@ import { MachinesListComponent } from './components/main-content/body-area/machi
 import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
 
 const routes: Routes = [
-	{path:"machines",component:MachinesListComponent},
+	{path:"machines",component:MachinesListComponent},	
 	{path:"machine-item/:id", component: MachineItemComponent},
 	{path:"materials",component:MaterialsComponent},
 	{path:"machining-operation",component:MachiningOperationComponent},

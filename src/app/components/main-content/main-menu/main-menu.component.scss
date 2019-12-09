@@ -10,6 +10,14 @@
     font-family:'Oswald';
 }
 
+.desc-main-menu-selected
+{
+    color: var(--btn-bg-select-color);
+    font-weight:normal;
+    font-family:'Oswald';
+}
+
+
 .div-tab-menu
 {
     text-align: left;
@@ -18,9 +26,7 @@
     padding-bottom:8px;
     border-left:1px solid #E0E0E0;
     border-top:1px solid #E0E0E0;
-    background-color:#e7e8e9;
-
-;  
+    background-color:#e7e8e9;  
     cursor: pointer;
 }
 

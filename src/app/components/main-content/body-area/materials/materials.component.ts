@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StateManagerService} from 'src/app/services/statemanager.service' ;
 
 @Component({
   selector: 'app-materials',
@@ -7,9 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MaterialsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private statemng:StateManagerService ) {}
 
   ngOnInit() {
+    //alert(this.statemng.GetMachineHeaderCur().CostPerHour);    
   }
-
 }

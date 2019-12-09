@@ -1,39 +1,51 @@
 
-<div class="container-fluid pt-4">
-<table class="table table-stripe row-border hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>MachineType</th>
-      <th>MachineName</th>
-      <th>SpindleSpeed</th>
-      <th>Power</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>   
-      <tr *ngFor="let mach of listmachines">
-        <th scope="row">{{mach.MachineID}}</th>         
-          <td>{{mach.MachineType}}</td>
-          <td>{{mach.MachineName}}</td>
-          <td>{{mach.SpindleSpeed}}</td>
-          <td>{{mach.Power}}</td>
-          <td>                    
-            <a data-toggle="tooltip" title="View Machine Detailed">
-                <img src="{{environment.ImgView}}" [routerLink]="'/machine-item/' + mach.MachineID" class="icon-favorite">
-            </a> 
-          </td>
-        <td>
-            <a data-toggle="tooltip" title="Add To My Machine" href="#">
-                <img src="{{environment.ImgAddToFavorite}}"  class="icon-favorite">
-            </a>
-          </td>
-          <td><button class="btn btn-select"  [routerLink]="'/materials'">Select</button></td>
-         
-      </tr>
-  </tbody>
-</table>
+<div class="container-fluid pt-4 ">
+<div class="form-group row">
+  <div class="col-2 pl-0 pr-0 pt-3">
+    <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"></app-machines-filter>
+  </div>
+  <div class="col-10">
+    <table    datatable [dtOptions]="dtOptions"  id="tblmachine" class="table table-stripe row-border hover" >
+      <thead>
+        <tr>
+          <th class="d-none">ID</th>
+          <th>MachineType</th>
+          <th>MachineName</th>
+          <th>SpindleSpeed</th>
+          <th>Power</th>
+          <th>Torque</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>   
+          <tr *ngFor="let mach of listmachines_sorted" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
+            <th scope="row" class="d-none">{{mach.MachineID}}</th>         
+              <td>{{mach.MachineType}}</td>
+              <td>{{mach.MachineName}}</td>
+              <td>{{mach.SpindleSpeed}}</td>
+              <td>{{mach.Power}}</td>
+              <td>{{mach.Torque}}</td>
+              <td>                    
+                <a data-toggle="tooltip" title="View Machine Detailed">
+                    <img src="{{environment.ImgView}}"(click)="OnViewMachine(mach)" [routerLink]="'/machine-item/' + mach.MachineID" class="icon-grid">
+                </a> 
+              </td>
+              <td>
+                <a data-toggle="tooltip" title="Add To My Machine" href="#">
+                    <img src="{{environment.ImgAddToFavorite}}"  class="icon-grid">
+                </a>
+              </td>
+              <td>
+                <div>
+                <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMachine(mach)" [routerLink]="'/materials'">{{mach.DescSelect}}</button>
+                </div>
+              </td>         
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 </div>
 

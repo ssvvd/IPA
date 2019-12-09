@@ -1,5 +1,4 @@
-import { Component, OnInit ,Output,EventEmitter} from '@angular/core';
-import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-content',
@@ -9,24 +8,13 @@ import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '
 
 export class MainContentComponent implements OnInit { 
  
-  @Output() ChangedRoute = new EventEmitter();
-  activeroute:string;
-  activetab: string="activetab";
-
   constructor() { 
   
   }
   
   ngOnInit() {
-    //this.activetab="machine";   
+     
   }
   
-  onSelectMachine(a)
-  {
-     alert(a);
-  }
-  /* TabChanged(tabname:string) {   
-    //this.activetab = tabname;       
-  } */
 
 }
