@@ -25,6 +25,8 @@ import { MachineItemSpindleComponent } from './components/main-content/body-area
 import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } from '@angular/forms';
 import { MachineItemSpindleChartComponent } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.component';
 import { MachinesTestComponent } from './components/main-content/body-area/machines/machines-test/machines-test.component';
+import { MatFilterComponent } from './components/main-content/body-area/materials/mat-filter/mat-filter.component';
+import { MatResultsComponent } from './components/main-content/body-area/materials/mat-results/mat-results.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { MachinesTestComponent } from './components/main-content/body-area/machi
     //MachineItemHeaderComponent,
     MachineItemSpindleComponent,
     MachineItemSpindleChartComponent,
-    MachinesTestComponent
+    MachinesTestComponent,
+    MatFilterComponent,
+    MatResultsComponent
    
   ],
   imports: [
