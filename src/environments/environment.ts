@@ -10,7 +10,10 @@ export const environment = {
   ImagePath:"assets/img/",
   ImgAddToFavorite:"assets/img/AddToFavoritIcon.svg" ,
   ImgDefault:"assets/img/SetDiffult_Icon.svg" ,
-  ImgView:"assets/img/View_Icon.svg" 
+  ImgView:"assets/img/View_Icon.svg",
+  ImgSetDefault:"assets/img/SetDiffult_Icon.svg",
+  ImgViewTable:"assets/img/AlternativeIcon.svg",
+  ImgEditParams:"assets/img/icon_edit_ITA.svg"
 };
 
 

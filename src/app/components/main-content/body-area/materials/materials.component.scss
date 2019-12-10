@@ -1,0 +1,33 @@
+.square {
+    width: 35px;
+    height: 30px;
+    float: left;
+    margin-right:5px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+
+  .square[title*="P"]{
+    background-color: #82aade;
+    }
+
+   .square[title*="M"]{
+    background-color: #fff184;
+    }
+
+    .square[title*="K"]{
+     background-color: #eb8888;
+    }
+
+    .square[title*="N"]{
+     background-color: #9bd599;
+    }
+
+    .square[title*="S"]{
+     background-color: #ffd685;
+     }
+
+   .square[title*="H"]{
+     background-color: #b2b2b2;
+       }

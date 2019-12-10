@@ -1,0 +1,46 @@
+
+        <table    datatable [dtOptions]="dtOptions"  id="tblmaterial" class="table table-stripe row-border hover" >
+          <thead>
+            <tr>
+              <th class="d-none">ID</th>
+              <th>Group</th>
+              <th>Description</th>
+              <th>Condition</th>
+              <th>Hardness</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>   
+              <tr *ngFor="let material of materialsResult">
+                <th scope="row" class="d-none">{{material.id}}</th>         
+                  <td><div class="square" [title]="material.group"><h4>{{material.group}}</h4></div></td>
+                  <td>{{material.description}}</td>
+                  <td>{{material.Condition}}</td>
+                  <td><img src="{{environment.ImgEditParams}}" class="icon-edit">{{material.Hardness}}</td>
+                  <td>
+                    <a data-toggle="tooltip" title="Add to favorits">
+                         <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
+                     </a>
+                  </td>
+                  <td>                    
+                    <a data-toggle="tooltip" title="Set as default">
+                        <img src="{{environment.ImgSetDefault}}" class="icon-grid">
+                    </a> 
+                  </td>
+                  <td>
+                    <a data-toggle="tooltip" title="View Table" href="#">
+                        <img src="{{environment.ImgViewTable}}"  class="icon-grid">
+                    </a>
+                  </td>
+                  <td>
+                    <div>
+                    <button [className]="'col-12 btn btn-select'">Select</button>
+                    </div>
+                  </td>         
+              </tr>
+          </tbody>
+        </table>
+     

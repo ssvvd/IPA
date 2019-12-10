@@ -29,6 +29,9 @@ import { MatResultsComponent } from './components/main-content/body-area/materia
 import { MachineItemSpindleChartModule } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.module';
 import { Ng5SliderModule } from 'ng5-slider';
 import { MachinesFilterComponent } from './components/main-content/body-area/machines/machines-filter/machines-filter.component';
+import { MatMainTableComponent } from './components/main-content/body-area/materials/mat-main-table/mat-main-table.component';
+import { MatDetailsComponent } from './components/main-content/body-area/materials/mat-details/mat-details.component';
+import { MatStandardTableComponent } from './components/main-content/body-area/materials/mat-standard-table/mat-standard-table.component';
 
 @NgModule({
   declarations: [   
@@ -50,7 +53,10 @@ import { MachinesFilterComponent } from './components/main-content/body-area/mac
     MachineItemSpindleChartComponent,
     MatFilterComponent,
     MatResultsComponent,
-    MachinesFilterComponent    
+    MachinesFilterComponent,
+    MatMainTableComponent,
+    MatDetailsComponent,
+    MatStandardTableComponent 
   ],
   imports: [
     FormsModule,

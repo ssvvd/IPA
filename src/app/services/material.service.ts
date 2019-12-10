@@ -14,6 +14,10 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'materials/' + lang);
   }
+  public  getmaterialsbygrp(lang:string , grp:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'materials/' + lang + '/' + grp);
+  }
   public  getmaterialdesignation(matdes:string)
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-designation/' + matdes);
