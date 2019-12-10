@@ -27,7 +27,7 @@ export class MachinesListComponent implements OnInit
    
   ngOnInit() {     
       this.dtOptions = {
-      pagingType: 'full_numbers',
+        pagingType: 'full_numbers',
        "searching": false,
        "lengthChange": false ,
        "paging":false,          
@@ -47,9 +47,7 @@ export class MachinesListComponent implements OnInit
           this.UpdateStateSelectedMachine(-1);
        else
           this.UpdateStateSelectedMachine(this.srv_statemanage.GetMachineSelected().MachineID);              
-    })
-
-    
+    })    
   }  
   
   OnViewMachine(mach:Machineheader)

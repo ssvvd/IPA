@@ -30,11 +30,11 @@
                 <label for="txtPoint1" class="col-sm col-form-label">Point 1</label>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
                     <input type="number" class="form-control form-control-sm" id="txtX1" name="txtX1" [ngModel]="chartdata.PoinX_1"
-                     (ngModelChange)="chartdata.PoinX_1=$event ;CreateChart()">                     
+                     (ngModelChange)="chartdata.PoinX_1=$event ; OnChangePoinX_1(); CreateChart();">                     
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="number" class="form-control form-control-sm" id="txtY1" name="txtY1" [ngModel]="chartdata.PoinY_1" 
-                     (ngModelChange)="chartdata.PoinY_1=$event ;CreateChart()"> 
+                    <input type="number" class="form-control form-control-sm"  [attr.id]="'txtY1'+typeChart"  name="txtY1" [ngModel]="chartdata.PoinY_1" 
+                     (ngModelChange)="chartdata.PoinY_1=$event ;OnChangePoinY_1();CreateChart()"> 
                 </div>
             </div>       
           

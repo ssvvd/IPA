@@ -3,6 +3,7 @@ export class Machinespindle {
     public MachineID : string;
     public SpindleType:string;
     public SpindleSpeed:number;
+    public Power:number;
     public Torque:number;
     public N1:number;
     public T1:number;
