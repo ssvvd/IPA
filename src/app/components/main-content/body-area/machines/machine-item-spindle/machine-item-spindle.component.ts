@@ -17,7 +17,7 @@ export interface IAdaptationSize
 export class MachineItemSpindleComponent implements OnInit 
 {  
   @Input() spindle:Machinespindle;   
-
+  
   DescSpindle:string;
   arrAdapType:string[];
   arrAdapSize:IAdaptationSize[]=[];

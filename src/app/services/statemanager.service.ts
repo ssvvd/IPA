@@ -17,16 +17,22 @@ export class StateManagerService {
   private arrMachineSpindle: Machinespindle[];    
   private MachineFilter:MachineFilter;
   
-  private obsMachineSelected = new BehaviorSubject(new Machineheader);
+  //private obsMachineSelected = new BehaviorSubject(new Machineheader);
+  //CurrentMachineSelected = this.obsMachineSelected.asObservable(); 
+  
+   private obsMachineSelected = new BehaviorSubject<string[]>([]);;
   CurrentMachineSelected = this.obsMachineSelected.asObservable(); 
   
+
   SelectMachine(mach: Machineheader) {
-    this.MachineSelected=mach;
-    this.obsMachineSelected.next(mach);
+    this.MachineSelected=mach;   
+    let desc:string;
+    desc=mach.SpindleSpeed.toString() + " KW " + mach.Torque.toString() + " t/min";    
+    this.obsMachineSelected.next([mach.MachineName,desc]);
   }
 
   ViewMachine(mach: Machineheader) { 
-    this.obsMachineSelected.next(mach);
+    this.obsMachineSelected.next([mach.MachineName,mach.SpindleSpeed.toString()]);
   }
   
   SetMachineFilter(f:MachineFilter)
@@ -38,6 +44,7 @@ export class StateManagerService {
   {
     return this.MachineFilter;
   }
+
   SetlstMachineSpindle(lst_m:Machineheader[])
   {
     this.lstMachineHeader =lst_m;
@@ -48,14 +55,11 @@ export class StateManagerService {
     return this.lstMachineHeader;
   }
 
- /*  SetMachineHeaderCur(m:Machineheader)
-  {   
-    this.MachineSelected=m;    
-  }   */
   GetMachineSelected() :Machineheader
   {
     return this.MachineSelected;    
   }
+
   SetMachineSpindleCur(m:Machinespindle)
   {
     this.MachineSpindleSelected=m;

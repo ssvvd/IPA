@@ -5,6 +5,7 @@ import { MachineService } from 'src/app/services/machine.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { environment } from 'src/environments/environment';
 import * as $ from 'jquery';
+import { DataTableDirective } from 'angular-datatables';
 
 @Component({
   selector: 'app-machines-list',
@@ -20,7 +21,9 @@ export class MachinesListComponent implements OnInit
   MachineFilter:MachineFilter;  
   environment = environment;
   MachineIDSelected = 0;
-  
+
+  datatableElement: DataTableDirective;
+
   constructor(private srv_machine: MachineService,private srv_statemanage:StateManagerService) 
   {                 
   }  
@@ -87,6 +90,11 @@ export class MachinesListComponent implements OnInit
      else
         this.UpdateStateSelectedMachine(this.srv_statemanage.GetMachineSelected().MachineID);           
   }
+  
+  onMachineFilterClear()
+  {
+    this.listmachines_sorted=this.listmachines;
+  }
 
   ApplyFilter(filter:MachineFilter)
   {
@@ -96,8 +104,9 @@ export class MachinesListComponent implements OnInit
            m.Torque >= filter.TorqueMin && m.Torque <= filter.TorqueMax &&
            ((!filter.IsMachiningCenter && m.MachineType!="Machining center") || filter.IsMachiningCenter) && 
            ((!filter.IsLathe && m.MachineType!="Lathe") || filter.IsLathe) &&
-           ((!filter.IsMultiTask && m.MachineType!="Multi task") || filter.IsMultiTask));  
-        
+           ((!filter.IsMultiTask && m.MachineType!="Multi task") || filter.IsMultiTask)   
+           && (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase())>-1        
+          ));         
   }
 }
 

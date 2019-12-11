@@ -57,7 +57,7 @@
              <div class="form-group row">
                 <label for="txtClampingType" class="col-sm-7 col-form-label">Clamping Type</label>
                 <div class="col-sm-4">
-                    <select class="form-control form-control-sm">
+                    <select class="form-control form-control-sm" [ngModel]="spindle.ClampingType" >
                         <option value='VICE'>VICE</option>
                         <option value='VACUME'>VACUME</option>
                         <option value='TOMB STONE'>TOMB STONE</option>

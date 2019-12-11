@@ -34,6 +34,8 @@ export class MachineItemComponent implements OnInit {
         this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
         this.arrMachineSpindle = JSON.parse(res);      
         this.machSpindleMain = this.arrMachineSpindle[0]; 
+        this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
+        this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
 
         this.imgNameMachine =environment.ImagePath +"no-image.svg";        
         if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
@@ -44,7 +46,7 @@ export class MachineItemComponent implements OnInit {
   }
 
   OnSelectMachine()
-  {   
-    this.srv_statemanage.SelectMachine(this.machHeader);     
+  {         
+    this.srv_statemanage.SelectMachine(this.machHeader);         
   } 
 }

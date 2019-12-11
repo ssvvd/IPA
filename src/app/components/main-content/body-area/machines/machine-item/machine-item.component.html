@@ -1,10 +1,11 @@
 
-<div class="container-fluid">
+<div class="container-fluid">    
      <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12">
         <div class="pt-4 pr-3">
             <img src="{{imgNameMachine}}" class="img-machine-type">
         </div>
-        <div class="pl-3 pt-4 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-4 col-lg-4">   
+        <div class="pl-3 pt-4 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-4 col-lg-4"> 
+            <!-- <div class="pl-3 pt-4 pr-0 pl-0">  -->    
             <div class="form-group">
                 <label class="col-form-label desc-machine-bold">{{machHeader?.MachineName}}</label>
             </div>              
@@ -15,8 +16,15 @@
                 <div class="row">
                     <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
                     <div class="pl-3">                                                               
-                        <input class="form-control form-control-sm col-6 inputtext" *ngIf="machHeader&&machHeader.CostPerHour" type="number"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
-                    </div>                           
+                        <input class="form-control form-control-sm" *ngIf="machHeader&&machHeader.CostPerHour" type="number"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+                    </div>                    
+                    <div class="ml-2">
+                        <select class="form-control form-control-sm" *ngIf="machHeader&&machHeader.Currency" [(ngModel)]="machHeader.Currency">
+                            <option value='$'>$</option>
+                            <option value='Euro'>Euro</option>
+                            <option value='Ruble'>Ruble</option>                            
+                        </select>                                            
+                    </div>                          
                 </div>
                 <div class="row"> 
                     <div class="pr-3">                     

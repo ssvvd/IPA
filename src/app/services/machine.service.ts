@@ -31,4 +31,5 @@ export class MachineService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-size');
   }
+  
 }
