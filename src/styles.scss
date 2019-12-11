@@ -5,6 +5,7 @@
 :root {
   --btn-bg-select-color: #204f96;
   --btn-bg-gray-color: #757677;
+  --family-font:'Oswald',Calibri,Arial;
 }
 
 .btn-select
@@ -12,19 +13,21 @@
     background-color: var(--btn-bg-select-color);
     color:#FFF;
     border-color:var(--btn-bg-select-color);   
+    min-width:100px;
 }
 
 .btn-select-selected
 {
     background-color: #597cb0;
     color:#FFF;
-    border-color:var(--btn-bg-select-color);   
+    border-color:var(--btn-bg-select-color);  
+    min-width:100px; 
 }
 .btn-select:hover
 {
     background-color:var(--btn-bg-select-color);
     color:#FFF;
-    border-color: var(--btn-bg-select-color);
+    border-color: var(--btn-bg-select-color);    
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #E0E0E0!important;
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px #E0E0E0!important;
 }
@@ -60,9 +63,9 @@ input:focus
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px #E0E0E0 !important;  
 }
 
-label,span,p,input,select,table
+label,span,p,input,select,table,button,a,li
 {
-  font-family: 'Oswald',Calibri,Arial;   
+  font-family: var(--family-font);   
 }
 
 button{
@@ -108,6 +111,7 @@ html {
 
 .icon-grid{
 height: 35px;
+cursor: pointer;
 }
 
 .form-group 

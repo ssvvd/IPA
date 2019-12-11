@@ -72,7 +72,7 @@ export class MachinesListComponent implements OnInit
           m.DescSelect="Select";
           }
     });
-  }
+  } 
 
   OnSelectMachine(mach:Machineheader)
   {   

@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false  ,
-  API_HOST: 'http://localhost:17586/',
-  //API_HOST: 'http://www.iscar.com/ITA_API/',
+  //API_HOST: 'http://localhost:17586/',
+  API_HOST: 'http://www.iscar.com/ITA_API/',
   IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
   ImgAddToFavorite:"assets/img/AddToFavoritIcon.svg" ,
@@ -16,7 +16,7 @@ export const environment = {
   ImgEditParams:"assets/img/icon_edit_ITA.svg"
 };
 
-
+    
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

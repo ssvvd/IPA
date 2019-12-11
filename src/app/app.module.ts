@@ -56,7 +56,7 @@ import { MatStandardTableComponent } from './components/main-content/body-area/m
     MachinesFilterComponent,
     MatMainTableComponent,
     MatDetailsComponent,
-    MatStandardTableComponent 
+    MatStandardTableComponent
   ],
   imports: [
     FormsModule,

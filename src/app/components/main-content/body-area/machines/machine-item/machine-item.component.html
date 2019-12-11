@@ -1,7 +1,15 @@
 
-<div class="container-fluid">    
-     <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12">
-        <div class="pt-4 pr-3">
+<div class="container-fluid ml-0 pl-0 mt-0 pt-0"> 
+<div class="mt-3 ml-0 pl-0 mt-0 pt-0">
+     <nav class="ml-0 pl-0 mt-0 pt-0" aria-label="breadcrumb">
+        <ol class="breadcrumb mt-3 ml-0 pl-0 bg-white" >
+            <li class="breadcrumb-item text-secondary" ><a routerLink="/machines">All</a></li>
+            <li class="breadcrumb-item active text-secondary"  aria-current="page">{{machHeader?.MachineName}}</li> 
+        </ol>
+      </nav>
+</div>   
+     <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12 pt-0 mt-0">
+        <div class="pt-0 pr-3">
             <img src="{{imgNameMachine}}" class="img-machine-type">
         </div>
         <div class="pl-3 pt-4 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-4 col-lg-4"> 
@@ -13,8 +21,8 @@
                 <label class="col-form-label desc-machine">{{machHeader?.MachineType}}</label>             
             </div>           
             <div class="form-group"> 
-                <div class="row">
-                    <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
+                <div class="row form-line">
+                    <label class="col-form-label desc-machine desc-cpa" for="txtCostPerHour" >Cost Per Hour</label> 
                     <div class="pl-3">                                                               
                         <input class="form-control form-control-sm" *ngIf="machHeader&&machHeader.CostPerHour" type="number"  id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
                     </div>                    
