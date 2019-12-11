@@ -8,6 +8,13 @@ margin-left:-20px;
     white-space: nowrap;
 }
 
+td {
+     font-size: 15px;
+     }
+
+ th {
+     font-size: 18px;
+     }
 .table td:nth-child(2), .table th:nth-child(2){
     width: 5%;
 }

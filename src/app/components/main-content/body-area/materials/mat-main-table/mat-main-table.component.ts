@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MaterialService } from 'src/app/services/material.service'
 import { environment } from 'src/environments/environment';
@@ -11,8 +11,9 @@ import { environment } from 'src/environments/environment';
 export class MatMainTableComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
-  materialsResult:clsMaterial[]=[]
+  materialsResult:clsMaterial[]=[];
   environment = environment;
+  @Input() selectedCategory: string ;
 
   constructor(private serv: MaterialService) { }
 
@@ -35,8 +36,12 @@ export class MatMainTableComponent implements OnInit {
   }
 
   fillMainTable(){
-    this.serv.getmaterialsbygrp('EN','P').subscribe((res:any)=>{
+    this.serv.getmaterialsbygrp('EN',this.selectedCategory).subscribe((res:any)=>{
       this.materialsResult=JSON.parse(res);})
+  }
+
+  ngOnChanges(changes:SimpleChanges) {
+    this.fillMainTable();
   }
   
 }

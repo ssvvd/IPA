@@ -3,3 +3,14 @@
   .list-group-item {
     padding: 5px; /* adjust here */
 }
+
+.list-group-item:focus {
+  background: #e7e8e9; /* adjust here */
+}
+
+button:focus {outline:0;}
+
+.list-group-item.active  {
+color:#495057;
+background-color:#e7e8e9 ;
+  }

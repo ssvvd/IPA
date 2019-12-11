@@ -10,6 +10,12 @@ export class MaterialsComponent implements OnInit {
 
   constructor(private statemng:StateManagerService ) {}
 
+  selectedCateg: string;
+
+  receiveCategory(category:string) {
+    this.selectedCateg = category;
+  }
+
   ngOnInit() {
     //alert(this.statemng.GetMachineHeaderCur().CostPerHour);    
   }

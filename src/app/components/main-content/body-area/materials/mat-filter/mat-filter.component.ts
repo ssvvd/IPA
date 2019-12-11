@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { sidetab } from 'src/app/models/materials/sidetab';
 import { MaterialService } from 'src/app/services/material.service'
 
@@ -11,6 +11,9 @@ export class MatFilterComponent implements OnInit {
 
   Tabs:sidetab[]=[];
   matStandard:string[]=[];
+  curSelectedCategory:string;
+
+  @Output() categEvent = new EventEmitter<string>();
 
   constructor(private serv: MaterialService) { }
 
@@ -18,7 +21,8 @@ export class MatFilterComponent implements OnInit {
 
     this.fillStandard();
     this.filTabs();
-    
+    this.curSelectedCategory = 'P';
+    this.categClick(this.curSelectedCategory);
   }
   
   filTabs(){
@@ -34,5 +38,10 @@ export class MatFilterComponent implements OnInit {
   fillStandard(){
     this.serv.getmaterialstandard().subscribe((res:any)=>{
       this.matStandard=JSON.parse(res);})
+  }
+
+  categClick(categ: string) {
+    this.categEvent.emit(categ)
+    this.curSelectedCategory = categ;
   }
 }
