@@ -5,7 +5,7 @@
   <hr>
   <ul class="list-group list-group-flush"> 
       <li *ngFor="let tab of Tabs" class="list-group-item list-group-item-action border-0 d-flex align-items-center" >
-        <div class="square" [ngStyle]="{background: tab.color}"><h3>{{tab.TapLetter}}</h3></div>
+        <div class="square" [title]="tab.TapLetter"><h3>{{tab.TapLetter}}</h3></div>
         <div class="align-items-center">{{tab.Description}}</div>
     </li>
     </ul>
