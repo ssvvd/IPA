@@ -1,1 +1,11 @@
-<p>mat-details works!</p>
+
+      <div class="divst">
+            <h4 class="tableTitle">Standard Conversion Chart</h4>
+              <table    datatable [dtOptions]="dtOptions"  id="tblmaterialDetails" class="table table-stripe row-border hover" >
+                    <tr *ngFor="let row of detailsResult;">
+                  <td *ngFor="let field of row">
+                    {{field}}
+                  </td>
+              </table>
+           
+            </div>
