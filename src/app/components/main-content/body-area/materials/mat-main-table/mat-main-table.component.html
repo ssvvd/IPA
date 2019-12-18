@@ -33,9 +33,9 @@
                     </a> 
                   </td>
                   <td>
-                    <a data-toggle="tooltip" title="View Table" href="#">
-                        <img src="{{environment.ImgViewTable}}"  class="icon-grid">
-                    </a>
+
+                        <img src="{{environment.ImgViewTable}}" (click)="matDetailClick(material.id)"  class="icon-grid">
+
                   </td>
                   <td>
                     <div>

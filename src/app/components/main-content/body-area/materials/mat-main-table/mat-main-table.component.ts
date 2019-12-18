@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter  } from '@angular/core';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MaterialService } from 'src/app/services/material.service'
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,7 @@ export class MatMainTableComponent implements OnInit {
   materialsResult:clsMaterial[]=[];
   environment = environment;
   @Input() selectedCategory: string ;
+  @Output() matDetailSelectedEv = new EventEmitter<string>();
 
   constructor(private serv: MaterialService) { }
 
@@ -42,6 +43,10 @@ export class MatMainTableComponent implements OnInit {
 
   ngOnChanges(changes:SimpleChanges) {
     this.fillMainTable();
+  }
+
+  matDetailClick(material: string) {
+    this.matDetailSelectedEv.emit(material);
   }
   
 }

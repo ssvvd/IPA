@@ -12,8 +12,10 @@ export class MatFilterComponent implements OnInit {
   Tabs:sidetab[]=[];
   matStandard:string[]=[];
   curSelectedCategory:string;
+  standardSelected:String;
 
   @Output() categEvent = new EventEmitter<string>();
+  @Output() standardEvent = new EventEmitter<string>();
 
   constructor(private serv: MaterialService) { }
 
@@ -22,6 +24,7 @@ export class MatFilterComponent implements OnInit {
     this.fillStandard();
     this.filTabs();
     this.curSelectedCategory = 'P';
+    this.standardSelected = '';
     this.categClick(this.curSelectedCategory);
   }
   
@@ -44,4 +47,10 @@ export class MatFilterComponent implements OnInit {
     this.categEvent.emit(categ)
     this.curSelectedCategory = categ;
   }
+
+  onStandardChange(standardValue:string) {
+    console.log(standardValue);
+    this.standardEvent.emit(standardValue);
+    this.standardSelected = standardValue;
+}
 }

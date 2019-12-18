@@ -11,7 +11,7 @@
   </div>
     <hr>
   <div >
-    <select class="form-control form-control-sm">
+    <select class="form-control form-control-sm" (change)="onStandardChange($event.target.value)">
       <option value="">Standard Conversion</option>
         <option *ngFor="let standard of matStandard" [value]="standard.GWCCNT">{{standard.GWCCNT}}</option>
     </select>                                

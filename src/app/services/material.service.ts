@@ -34,4 +34,8 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details/' + GWFN + '/' + GWCCNT);
   }
+  public  getmaterialsdetailsStnd(grp:string , GWCCNT:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details-stnd/' + grp + '/' + GWCCNT);
+  }
 }

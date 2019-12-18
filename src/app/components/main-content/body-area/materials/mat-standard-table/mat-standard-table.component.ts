@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input,SimpleChanges } from '@angular/core';
+import { MaterialService } from 'src/app/services/material.service';
 
 @Component({
   selector: 'app-mat-standard-table',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MatStandardTableComponent implements OnInit {
 
-  constructor() { }
+  dtResult:any;
+  headers:any;
+  @Input() selectedCateg: string ;
+  @Input() selectedStandard: string ;
+
+  constructor(private serv: MaterialService) { }
 
   ngOnInit() {
+    this.fillTable();
+  }
+
+  fillTable(){
+    this.serv.getmaterialsdetailsStnd(this.selectedCateg,this.selectedStandard).subscribe((res:any)=>{
+      this.dtResult =JSON.parse(res);
+      this.headers = Object.keys(this.dtResult[0]);
+    });
+      
+  }
+
+  ngOnChanges(changes:SimpleChanges) {
+    this.fillTable();
   }
 
 }

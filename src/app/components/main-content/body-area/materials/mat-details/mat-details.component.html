@@ -1,11 +1,15 @@
 
       <div class="divst">
             <h4 class="tableTitle">Standard Conversion Chart</h4>
-              <table    datatable [dtOptions]="dtOptions"  id="tblmaterialDetails" class="table table-stripe row-border hover" >
-                    <tr *ngFor="let row of detailsResult;">
-                  <td *ngFor="let field of row">
-                    {{field}}
-                  </td>
+              <table    datatable id="tblmaterialDetails" class="table table-stripe row-border hover" >
+                    <thead>
+                            <tr><th *ngFor="let col of headers">{{col}}</th></tr>
+                         </thead>
+                         <tbody>
+                            <tr *ngFor="let obj of detailsResult">
+                               <td *ngFor="let col of headers"> {{obj[col]}} </td>
+                            </tr>
+                         </tbody>
               </table>
            
             </div>
