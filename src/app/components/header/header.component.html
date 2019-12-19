@@ -1,18 +1,18 @@
     <!-- logo -->
-     <ng-template #content>
+     <ng-template #content let-modal>
       <div class="p-0 m-0">   
             <div class="form-group" >
                 <div class="border p-2 m-0"> 
-                    <a href="#" title=""><img src="assets/img/Help_Icon.svg" class="logoImg"></a>
+                    <a href="#" ><img src="assets/img/Help_Icon.svg" class="logoImg"></a>
                 </div>
                 <div class="border p-2 m-0"> 
-                    <a href="#" title=""><img src="assets/img/icon_Favorite.svg" class="logoImg"></a>
+                    <a href="#" ><img src="assets/img/icon_Favorite.svg" class="logoImg"></a>
                 </div>
                 <div class="border p-2 m-0">
-                    <a href="#" title=""><img src="assets/img/Calculators_Icon.svg" class="logoImg"></a>
+                    <a href="#" ><img src="assets/img/Calculators_Icon.svg" class="logoImg"></a>
                 </div>
                   <div class="border p-2 m-0">
-                    <a href="#" title=""><img src="assets/img/ecat_Icon.svg" class="logoImg"></a>
+                    <a href="#" ><img src="assets/img/ecat_Icon.svg" class="logoImg"></a>
                 </div>    
             </div>      
       </div>        
@@ -25,7 +25,7 @@
           </a>
         </div>
         <div class="justify-content-end float-right">          
-            <button type="button" class="btn btn-primary" (click)="showModal(content)">Open menu pop-up</button>                    
+            <button type="button" class="btn btn-primary"  (click)="showModal(content)">Open menu pop-up</button>                    
         </div>     
     </div>
 
