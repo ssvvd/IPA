@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false  ,
-  //API_HOST: 'http://localhost:17586/',
-  API_HOST: 'http://www.iscar.com/ITA_API/',
+  API_HOST: 'http://localhost:17586/',
+  //API_HOST: 'http://www.iscar.com/ITA_API/',
   IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
+  ImageApplicationsPath:"assets/img/Applications/",
   ImgAddToFavorite:"assets/img/AddToFavoritIcon.svg" ,
   ImgDefault:"assets/img/SetDiffult_Icon.svg" ,
   ImgView:"assets/img/View_Icon.svg",

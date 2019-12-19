@@ -61,16 +61,11 @@ export class MachinesListComponent implements OnInit
   UpdateStateSelectedMachine(MachineID:number)
   {
      this.listmachines_sorted.forEach((m) => {
-        if(MachineID==m.MachineID)
-          {
-           m.IsSelected=true;
-           m.DescSelect="Selected";
-          }
-        else
-          {
-          m.IsSelected=false;       
-          m.DescSelect="Select";
-          }
+       m.DescSelect="Select";
+       if(MachineID==m.MachineID)          
+           m.IsSelected=true;                    
+        else          
+          m.IsSelected=false;                           
     });
   } 
 

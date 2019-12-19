@@ -47,6 +47,7 @@ export class MachineItemComponent implements OnInit {
 
   OnSelectMachine()
   {         
-    this.srv_statemanage.SelectMachine(this.machHeader);         
+    this.srv_statemanage.SelectMachine(this.machHeader);      
+    this.srv_statemanage.SetlstMachineSpindle(this.arrMachineSpindle);        
   } 
 }

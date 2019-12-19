@@ -33,7 +33,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() SpindleSpeed:number;
   @Input() Power:number;
   @Input() Torque:number;
-
+  
   @Output() N1Changed = new EventEmitter<{value: number}>();  
   @Output() T1Changed = new EventEmitter<{value: number}>();
   @Output() P1Changed = new EventEmitter<{value: number}>();

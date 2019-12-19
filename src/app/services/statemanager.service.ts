@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
+import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
+
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -17,12 +19,13 @@ export class StateManagerService {
   private arrMachineSpindle: Machinespindle[];    
   private MachineFilter:MachineFilter;
   
-  //private obsMachineSelected = new BehaviorSubject(new Machineheader);
-  //CurrentMachineSelected = this.obsMachineSelected.asObservable(); 
+  private obsMachineSelected = new BehaviorSubject<string[]>([]);;
+  CurrentMachineSelected = this.obsMachineSelected.asObservable();   
   
-   private obsMachineSelected = new BehaviorSubject<string[]>([]);;
-  CurrentMachineSelected = this.obsMachineSelected.asObservable(); 
-  
+  private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);;
+  CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable(); 
+
+  SecondaryAppSelected:SecondaryApp;
 
   SelectMachine(mach: Machineheader) {
     this.MachineSelected=mach;   
@@ -45,9 +48,9 @@ export class StateManagerService {
     return this.MachineFilter;
   }
 
-  SetlstMachineSpindle(lst_m:Machineheader[])
+  SetlstMachineSpindle(lst_m:Machinespindle[])
   {
-    this.lstMachineHeader =lst_m;
+    this.arrMachineSpindle =lst_m;
   }
 
   GetlstMachineSpindle() : Machineheader[]
@@ -67,6 +70,17 @@ export class StateManagerService {
   SetMachineSpindlers(m: Machinespindle[])
   {
     this.arrMachineSpindle=m;
+  }
+
+  SetSecondaryApp(ma:MainApp, sa:SecondaryApp)
+  {
+    this.SecondaryAppSelected=sa;
+     this.obsSecondaryAppSelected.next([ma.MenuName, sa.MenuName]);
+  }
+
+  GetSecondaryApp() :SecondaryApp
+  {
+    return this.SecondaryAppSelected;
   }
 }
  

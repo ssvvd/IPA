@@ -1,1 +1,58 @@
-<p>machining-operation works!</p>
+<div class="container-fluid pt-4  ml-0 pl-0 pr-0 mr-0">
+<div class="pt-2 ">
+ <ul class="nav nav-fill border-top">               
+    <li (click)="onSelectMainApp(mainapp)"  class="nav-item" *ngFor="let mainapp of arrMainApps" >
+        <div class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID,
+                    'div-app':mainapp.MenuID!=SelectedMainAppID}"> 
+            <div>                                          
+                <img src="{{mainapp.MenuImage}}" class="img-main-menu cursor-pointer pt-4 pl-4 pr-4">                                                                                        
+            </div>
+            <div>
+                <div class="form-group mb-0 pb-0 cursor-pointer" >                    
+                    <label  class="desc-label-big-bold cursor-pointer">{{mainapp.MenuName}}</label>                    
+                 </div>                                                              
+            </div>
+        </div>
+    </li>          
+</ul>
+</div>
+<div class="pt-4">
+<ul class="nav nav-fill  border-top">               
+    <li  (click)="onFilterSecApp(secapp)" class="nav-item" *ngFor="let secapp of arrSelectedSecApp1">
+        <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':secapp.MenuID==SelectedSecAppID,
+                    'div-app':secapp.MenuID!=SelectedSecAppID}"> 
+            <div>                                          
+                <img src="{{secapp.MenuImage}}" class="img-main-menu cursor-pointer pt-4 pl-4 pr-4">                                                                                        
+            </div>
+            <div>
+                <div class="form-group mb-0 pb-0 cursor-pointer" >                    
+                    <label  class="desc-label-big-bold cursor-pointer">{{secapp.MenuName}}</label>                    
+                 </div>                                                              
+            </div>
+            <div *ngIf="secapp.ApplicationITAID!='0'">
+               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp)" [routerLink]="['/operation-data']">Select</button>                                       
+            </div> 
+        </div>
+    </li>          
+</ul>
+</div>
+<div class="pt-4 ">
+<ul class="nav nav-fill border-top">               
+    <li  class="nav-item" *ngFor="let secapp of arrSelectedSecApp2">
+        <div class="form-group cursor-pointer" > 
+            <div>                                          
+                <img src="{{secapp.MenuImage}}" class="img-main-menu cursor-pointer pt-4 pl-4 pr-4">                                                                                        
+            </div>
+            <div>
+                <div class="form-group mb-0 pb-0 cursor-pointer">                    
+                    <label  class="desc-label-big-bold cursor-pointer">{{secapp.MenuName}}</label>                    
+                 </div>                                                              
+            </div>
+            <div  *ngIf="secapp.ApplicationITAID!='0'">
+               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp)" [routerLink]="['/operation-data']">Select</button>                                       
+            </div> 
+        </div>
+    </li>          
+</ul> 
+</div>
+</div>
