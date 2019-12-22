@@ -33,7 +33,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() SpindleSpeed:number;
   @Input() Power:number;
   @Input() Torque:number;
-
+  
   @Output() N1Changed = new EventEmitter<{value: number}>();  
   @Output() T1Changed = new EventEmitter<{value: number}>();
   @Output() P1Changed = new EventEmitter<{value: number}>();
@@ -50,7 +50,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-   
+    //alert(this.typeChart);
     this.chartdata=new ChartData();    
     this.chartdata.PoinX_1 =this.spindle.N1;
     this.chartdata.PoinX_2 =this.spindle.N2;
@@ -113,9 +113,8 @@ export class MachineItemSpindleChartComponent implements OnInit {
      }
 
      OnChangePoinY_1()
-     { 
-       //alert('111 ' + this.typeChart);
-       if(this.typeChart="power")                 
+     {        
+       if(this.typeChart=="power")                 
           this.P1Changed.emit({ value: this.chartdata.PoinY_1});        
        else                 
           this.T1Changed.emit({ value: this.chartdata.PoinY_1});        

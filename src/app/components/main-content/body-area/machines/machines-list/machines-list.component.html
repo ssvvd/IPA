@@ -1,11 +1,18 @@
 
-<div class="container-fluid pt-4 ">
-<div class="form-group row">
-  <div class="col-2 pl-0 pr-0 pt-3">
-    <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"></app-machines-filter>
+<div class="container-fluid pt-4  ml-0 pl-0">
+<div class="form-group row  ml-0 pl-0">
+  <div class="col-2  ml-0 pl-0 pr-0 pt-3">
+    <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"  (MachineFilterClear)="onMachineFilterClear($event)"></app-machines-filter>
   </div>
-  <div class="col-10">
-    <table    datatable [dtOptions]="dtOptions"  id="tblmachine" class="table table-stripe row-border hover" >
+  <div class="col-10 mt-2">
+    <div class="form-group">
+      <nav aria-label="breadcrumb" style="background-color:white">
+        <ol class="breadcrumb" style="background-color:white">
+          <li class="breadcrumb-item active"><a href="#">All</a></li>
+         <!--  <li class="breadcrumb-item active" aria-current="page"></li> -->
+        </ol>
+      </nav>
+    <table    datatable [dtOptions]="dtOptions"  id="tblmachine" class="table table-stripe row-border hover">
       <thead>
         <tr>
           <th class="d-none">ID</th>
@@ -29,11 +36,11 @@
               <td>{{mach.Torque}}</td>
               <td>                    
                 <a data-toggle="tooltip" title="View Machine Detailed">
-                    <img src="{{environment.ImgView}}"(click)="OnViewMachine(mach)" [routerLink]="'/machine-item/' + mach.MachineID" class="icon-grid">
+                    <img src="{{environment.ImgView}}"(click)="OnViewMachine(mach)"  [routerLink]="'/machine-item/' + mach.MachineID" class="icon-grid">
                 </a> 
               </td>
               <td>
-                <a data-toggle="tooltip" title="Add To My Machine" href="#">
+                <a data-toggle="tooltip" title="Add To My Machine" class="cursor-pointer">
                     <img src="{{environment.ImgAddToFavorite}}"  class="icon-grid">
                 </a>
               </td>
@@ -45,6 +52,7 @@
           </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
 </div>

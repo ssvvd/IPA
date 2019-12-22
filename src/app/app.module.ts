@@ -31,6 +31,7 @@ import { MachinesFilterComponent } from './components/main-content/body-area/mac
 import { MatMainTableComponent } from './components/main-content/body-area/materials/mat-main-table/mat-main-table.component';
 import { MatDetailsComponent } from './components/main-content/body-area/materials/mat-details/mat-details.component';
 import { MatStandardTableComponent } from './components/main-content/body-area/materials/mat-standard-table/mat-standard-table.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [   
@@ -54,7 +55,7 @@ import { MatStandardTableComponent } from './components/main-content/body-area/m
     MachinesFilterComponent,
     MatMainTableComponent,
     MatDetailsComponent,
-    MatStandardTableComponent 
+    MatStandardTableComponent
   ],
   imports: [
     FormsModule,
@@ -63,7 +64,8 @@ import { MatStandardTableComponent } from './components/main-content/body-area/m
     HttpClientModule,
     DataTablesModule,
     MachineItemSpindleChartModule ,
-    Ng5SliderModule   
+    Ng5SliderModule ,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

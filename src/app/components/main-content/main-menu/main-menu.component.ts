@@ -6,7 +6,8 @@ import { StateManagerService } from 'src/app/services/statemanager.service' ;
 export class MainTab {
   TabID:number;
   Description: string ="";
-  SelectedItemDesc: string ="         ";
+  SelectedItemDesc: string ="";
+  SelectedItemDesc1: string ="";
   ImageURL:string="";
   RouteName:string="";
   IsSelected:boolean=false;
@@ -58,11 +59,24 @@ export class MainMenuComponent implements OnInit {
     this.Tabs.push (new MainTab(3,"Machining Operation","/machining-operation",environment.ImagePath + "icon_MachiningOp.svg"));
     this.Tabs.push (new MainTab(4,"Operational Data","/operation-data",environment.ImagePath +  "icon_OpData.svg"));
     this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg")); 
-    this.Tabs[0].IsSelected=true;    
-     this.srv_statemanage.CurrentMachineSelected.subscribe(mach => this.Tabs.filter(x=>x.TabID==1)[0].SelectedItemDesc = mach.MachineName);
+    this.Tabs[0].IsSelected=true;       
+    this.srv_statemanage.CurrentMachineSelected.subscribe(arr => this.SelectedMachine(arr));
+    this.srv_statemanage.CurrentSecAppSelected.subscribe(arr => this.SelectedSecApp(arr));
   }
- 
-   TabSelected(RouteName:string) {       
+
+  SelectedMachine(arr:string[])
+  {    
+    this.Tabs[0].SelectedItemDesc = arr[0]; 
+    this.Tabs[0].SelectedItemDesc1 = arr[1];
+  }
+  
+  SelectedSecApp(arr:string[])
+  {    
+    this.Tabs[2].SelectedItemDesc = arr[0]; 
+    this.Tabs[2].SelectedItemDesc1 = arr[1];
+  }
+
+  TabSelected(RouteName:string) {       
     this.Tabs.forEach( (obj) => {           
       if(obj.RouteName==RouteName)         
           obj.IsSelected=true;      

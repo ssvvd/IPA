@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
+import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
+
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -17,16 +19,23 @@ export class StateManagerService {
   private arrMachineSpindle: Machinespindle[];    
   private MachineFilter:MachineFilter;
   
-  private obsMachineSelected = new BehaviorSubject(new Machineheader);
-  CurrentMachineSelected = this.obsMachineSelected.asObservable(); 
+  private obsMachineSelected = new BehaviorSubject<string[]>([]);;
+  CurrentMachineSelected = this.obsMachineSelected.asObservable();   
   
+  private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);;
+  CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable(); 
+
+  SecondaryAppSelected:SecondaryApp;
+
   SelectMachine(mach: Machineheader) {
-    this.MachineSelected=mach;
-    this.obsMachineSelected.next(mach);
+    this.MachineSelected=mach;   
+    let desc:string;
+    desc=mach.SpindleSpeed.toString() + " KW " + mach.Torque.toString() + " t/min";    
+    this.obsMachineSelected.next([mach.MachineName,desc]);
   }
 
   ViewMachine(mach: Machineheader) { 
-    this.obsMachineSelected.next(mach);
+    this.obsMachineSelected.next([mach.MachineName,mach.SpindleSpeed.toString()]);
   }
   
   SetMachineFilter(f:MachineFilter)
@@ -38,9 +47,10 @@ export class StateManagerService {
   {
     return this.MachineFilter;
   }
-  SetlstMachineSpindle(lst_m:Machineheader[])
+
+  SetlstMachineSpindle(lst_m:Machinespindle[])
   {
-    this.lstMachineHeader =lst_m;
+    this.arrMachineSpindle =lst_m;
   }
 
   GetlstMachineSpindle() : Machineheader[]
@@ -48,14 +58,11 @@ export class StateManagerService {
     return this.lstMachineHeader;
   }
 
- /*  SetMachineHeaderCur(m:Machineheader)
-  {   
-    this.MachineSelected=m;    
-  }   */
   GetMachineSelected() :Machineheader
   {
     return this.MachineSelected;    
   }
+
   SetMachineSpindleCur(m:Machinespindle)
   {
     this.MachineSpindleSelected=m;
@@ -63,6 +70,17 @@ export class StateManagerService {
   SetMachineSpindlers(m: Machinespindle[])
   {
     this.arrMachineSpindle=m;
+  }
+
+  SetSecondaryApp(ma:MainApp, sa:SecondaryApp)
+  {
+    this.SecondaryAppSelected=sa;
+     this.obsSecondaryAppSelected.next([ma.MenuName, sa.MenuName]);
+  }
+
+  GetSecondaryApp() :SecondaryApp
+  {
+    return this.SecondaryAppSelected;
   }
 }
  

@@ -1,4 +1,10 @@
-<div class="container-fluid p-0">    
+<div class="container-fluid p-0">
+    <div class="form-group row">
+        <input class="form-control mb-3" [(ngModel)]="machFilter.SearchText" (keyup)="FilterChange()" type="text" placeholder="Search" aria-label="Search">    
+    </div>
+    <div class="form-group row">
+        <button type="button" class="btn btn-reset mb-3" (click)="ClearFilter()">Reset</button>
+    </div>
     <div class="form-group row">
         <div class="col-4 pl-0">
             <img src="assets/img/MachiningCenter.svg" class="img-machine-type"> 
@@ -13,19 +19,19 @@
    
     <div class="form-group row">
         <div class="col-4  pt-2">
-             <div class="custom-control custom-checkbox">
+             <div class="custom-control custom-checkbox change-chb">
                 <input type="checkbox" class="custom-control-input" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "FilterChange()"  [(ngModel)]="machFilter.IsMachiningCenter">
                 <label class="custom-control-label" for="chkMachiningCenter"></label>
              </div>
         </div>
         <div class="col-4 pt-2">
-            <div class="custom-control custom-checkbox">
+            <div class="custom-control custom-checkbox change-chb">
                 <input type="checkbox" class="custom-control-input" id="chkLathe" name="chkLathe" (change)= "FilterChange()" [(ngModel)]="machFilter.IsLathe">
                 <label class="custom-control-label" for="chkLathe"></label>
             </div>
         </div>
          <div class="col-4 pt-2">
-             <div class="custom-control custom-checkbox">
+             <div class="custom-control custom-checkbox change-chb">
                 <input type="checkbox" class="custom-control-input" id="chkMultiTask" name="chkMultiTask" (change)= "FilterChange()" [(ngModel)]="machFilter.IsMultiTask">
                 <label class="custom-control-label" for="chkMultiTask"></label>
              </div>

@@ -12,7 +12,7 @@ import { StateManagerService } from 'src/app/services/statemanager.service' ;
 export class MachinesFilterComponent implements OnInit {
   
   @Output() MachineFilterChanged = new EventEmitter<{filter: MachineFilter}>();
- 
+  @Output() MachineFilterClear = new EventEmitter();
   machFilter:MachineFilter;
 
   options_speed: Options = {
@@ -64,7 +64,13 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.TorqueMax = 12000; 
   }
 
-  FilterChange(event: ChangeContext ) {      
+  FilterChange(event: ChangeContext ) {          
     this.MachineFilterChanged.emit({ filter: this.machFilter});   
   }
+
+  ClearFilter ()
+  {
+    this.MachineFilterClear.emit();
+  }
+
 }

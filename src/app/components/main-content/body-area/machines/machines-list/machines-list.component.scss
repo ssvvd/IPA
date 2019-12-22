@@ -1,11 +1,7 @@
-/* #tblmachine tbody tr.selected {
-    color: white;
-    background-color: #eeeeee;
-} */
 
 .tr-selected
 {
-    background-color: #e0e5ed;    
+    background-color: var(--row-selected);    
 }
 .tr-not-selected
 {
