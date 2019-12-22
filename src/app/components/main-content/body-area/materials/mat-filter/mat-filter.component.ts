@@ -46,11 +46,17 @@ export class MatFilterComponent implements OnInit {
   categClick(categ: string) {
     this.categEvent.emit(categ)
     this.curSelectedCategory = categ;
+    this.standardSelected = '';
   }
 
   onStandardChange(standardValue:string) {
     console.log(standardValue);
-    this.standardEvent.emit(standardValue);
+    if (standardValue == ''){
+      this.categClick(this.curSelectedCategory);
+    }
+    else{
+      this.standardEvent.emit(standardValue);
+    }
     this.standardSelected = standardValue;
 }
 }

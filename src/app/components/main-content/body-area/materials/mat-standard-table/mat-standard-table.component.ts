@@ -4,7 +4,7 @@ import { MaterialService } from 'src/app/services/material.service';
 @Component({
   selector: 'app-mat-standard-table',
   templateUrl: './mat-standard-table.component.html',
-  styleUrls: ['./mat-standard-table.component.scss']
+  styleUrls: ['./mat-standard-table.component.scss','../materials.component.scss']
 })
 export class MatStandardTableComponent implements OnInit {
 
