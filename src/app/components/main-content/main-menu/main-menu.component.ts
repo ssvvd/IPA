@@ -61,6 +61,7 @@ export class MainMenuComponent implements OnInit {
     this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg")); 
     this.Tabs[0].IsSelected=true;       
     this.srv_statemanage.CurrentMachineSelected.subscribe(arr => this.SelectedMachine(arr));
+    this.srv_statemanage.CurrentMaterialSelected.subscribe(arr => this.SelectedMaterial(arr));
     this.srv_statemanage.CurrentSecAppSelected.subscribe(arr => this.SelectedSecApp(arr));
   }
 
@@ -70,6 +71,11 @@ export class MainMenuComponent implements OnInit {
     this.Tabs[0].SelectedItemDesc1 = arr[1];
   }
   
+  SelectedMaterial(arr:string[])
+  {    
+    this.Tabs[1].SelectedItemDesc = arr[0]; 
+  }
+
   SelectedSecApp(arr:string[])
   {    
     this.Tabs[2].SelectedItemDesc = arr[0]; 

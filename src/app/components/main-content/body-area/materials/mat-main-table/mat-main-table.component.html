@@ -2,8 +2,8 @@
       <div class="divst">
       <h4 class="tableTitle">Material Results</h4>
         <table    datatable [dtOptions]="dtOptions"  id="tblmaterial" class="table table-stripe row-border hover" >
-          <thead>
-            <tr>
+          <thead >
+            <tr class="tr-not-selected">
               <th class="d-none">ID</th>
               <th>Group</th>
               <th>Description</th>
@@ -16,7 +16,7 @@
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResult">
+              <tr *ngFor="let material of materialsResult" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{material.id}}</th>         
                   <td><div class="square" [title]="material.group"><h4>{{material.group}}</h4></div></td>
                   <td>{{material.description}}</td>
@@ -39,7 +39,7 @@
                   </td>
                   <td>
                     <div>
-                    <button [className]="'col-12 btn btn-select'">Select</button>
+                    <button [className]="(material.group == selectedMaterial)? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/machining-operation'">Select</button>
                     </div>
                   </td>         
               </tr>

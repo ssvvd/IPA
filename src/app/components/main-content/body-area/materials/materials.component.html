@@ -5,7 +5,17 @@
         <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)"></app-mat-filter>
       </div>
       <div [ngSwitch]="curComponent" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <br><br><br>
+        <br>
+          <div class="mt-3 ml-0 pl-0 mt-0 pt-0">
+              <nav class="ml-0 pl-0 mt-0 pt-0" aria-label="breadcrumb">
+                 <ol class="breadcrumb mt-3 ml-0 pl-0 bg-white" >
+                     <li (click)="receiveCategory(this.selectedCateg)" class="breadcrumb-item" ><a href="javascript:void(0)">{{this.selectedCateg}}</a></li>
+                     <li *ngFor="let crumb of this.breadCrumb" class="breadcrumb-item active"  aria-current="page">
+                        {{crumb}}
+                     </li>
+                 </ol>
+               </nav>
+         </div> 
         <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)"></app-mat-main-table>
         <app-mat-details *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
         <app-mat-standard-table *ngSwitchCase="3" [selectedCateg]="selectedCateg" [selectedStandard]="selectedSatnd"></app-mat-standard-table>

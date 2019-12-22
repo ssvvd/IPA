@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { sidetab } from 'src/app/models/materials/sidetab';
 import { MaterialService } from 'src/app/services/material.service'
+import { StateManagerService } from 'src/app/services/statemanager.service' ;
 
 @Component({
   selector: 'app-mat-filter',
@@ -17,7 +18,7 @@ export class MatFilterComponent implements OnInit {
   @Output() categEvent = new EventEmitter<string>();
   @Output() standardEvent = new EventEmitter<string>();
 
-  constructor(private serv: MaterialService) { }
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
 
   ngOnInit() {
 
@@ -26,6 +27,7 @@ export class MatFilterComponent implements OnInit {
     this.curSelectedCategory = 'P';
     this.standardSelected = '';
     this.categClick(this.curSelectedCategory);
+    this.srv_statemanage.CurrentMaterialSelected.subscribe(arr => this.SelectedMaterial(arr));
   }
   
   filTabs(){
@@ -58,5 +60,11 @@ export class MatFilterComponent implements OnInit {
       this.standardEvent.emit(standardValue);
     }
     this.standardSelected = standardValue;
+}
+
+SelectedMaterial(arr:string[])
+{    
+  let cat = arr[0].substring(0,1);
+  this.categClick(cat);
 }
 }

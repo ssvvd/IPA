@@ -14,20 +14,30 @@ export class MaterialsComponent implements OnInit {
   selectedMatDeials:String;
   curComponent:string;
   selectedSatnd:string;
+  breadCrumb:string[]=[];
 
   receiveCategory(category:string) {
     this.selectedCateg = category;
     this.curComponent = "1";
+    this.breadCrumb = [];
+    if (this.statemng.GetMaterialSelected()!= null){
+      var selMat = this.statemng.GetMaterialSelected().group;
+      if (selMat.includes(category))
+      this.breadCrumb = [selMat];
+    }
+  
   }
 
   receiveMatDeials(material:string) {
     this.selectedMatDeials = material;
     this.curComponent = "2";
+    this.breadCrumb = [this.selectedCateg + material,'Standard Conversion Chart'];
   }
   
   receiveStandard(standard:string) {
     this.selectedSatnd = standard;
     this.curComponent = "3";
+    this.breadCrumb = [standard];
   }
 
   ngOnInit() {
