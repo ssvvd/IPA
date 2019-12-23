@@ -26,4 +26,16 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-standard');
   }
+  public  getmaterialsdetails(GWFN:number)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details/' + GWFN);
+  }
+  public  getmaterialsdetailsSpec(GWCCNT:string , GWFN:number)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details/' + GWFN + '/' + GWCCNT);
+  }
+  public  getmaterialsdetailsStnd(grp:string , GWCCNT:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details-stnd/' + grp + '/' + GWCCNT);
+  }
 }

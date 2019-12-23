@@ -3,15 +3,15 @@
     <input class="form-control mr-sm-2" type="text" placeholder="Search">
   </div>
   <hr>
-  <ul class="list-group list-group-flush"> 
-      <li *ngFor="let tab of Tabs" class="list-group-item list-group-item-action border-0 d-flex align-items-center" >
+  <div class="list-group list-group-flush" > 
+      <button type="button" *ngFor="let tab of Tabs" [ngClass]="{'active': curSelectedCategory == tab.TapLetter}" class="list-group-item list-group-item-action border-0 d-flex align-items-center" (click)="categClick(tab.TapLetter)" >
         <div class="square" [title]="tab.TapLetter"><h3>{{tab.TapLetter}}</h3></div>
         <div class="align-items-center">{{tab.Description}}</div>
-    </li>
-    </ul>
+      </button>
+  </div>
     <hr>
   <div >
-    <select class="form-control form-control-sm">
+    <select class="form-control form-control-sm" [(ngModel)]="standardSelected" (change)="onStandardChange($event.target.value)">
       <option value="">Standard Conversion</option>
         <option *ngFor="let standard of matStandard" [value]="standard.GWCCNT">{{standard.GWCCNT}}</option>
     </select>                                

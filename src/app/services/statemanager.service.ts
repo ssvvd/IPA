@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
+import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 
 import { BehaviorSubject } from 'rxjs';
@@ -22,6 +23,10 @@ export class StateManagerService {
   private obsMachineSelected = new BehaviorSubject<string[]>([]);;
   CurrentMachineSelected = this.obsMachineSelected.asObservable();   
   
+  private materialSelected:clsMaterial;
+  private obsMaterialSelected = new BehaviorSubject<string[]>([]);;
+  CurrentMaterialSelected = this.obsMaterialSelected.asObservable();   
+
   private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);;
   CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable(); 
 
@@ -82,5 +87,18 @@ export class StateManagerService {
   {
     return this.SecondaryAppSelected;
   }
+
+  SelectMaterial(mat: clsMaterial) {
+    this.materialSelected=mat;   
+    let desc:string;
+    desc=mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ;    
+    this.obsMaterialSelected.next([desc]);
+  }
+
+  GetMaterialSelected() :clsMaterial
+  {
+    return this.materialSelected;    
+  }
+
 }
  

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { sidetab } from 'src/app/models/materials/sidetab';
 import { MaterialService } from 'src/app/services/material.service'
+import { StateManagerService } from 'src/app/services/statemanager.service' ;
 
 @Component({
   selector: 'app-mat-filter',
@@ -11,14 +12,22 @@ export class MatFilterComponent implements OnInit {
 
   Tabs:sidetab[]=[];
   matStandard:string[]=[];
+  curSelectedCategory:string;
+  standardSelected:String;
 
-  constructor(private serv: MaterialService) { }
+  @Output() categEvent = new EventEmitter<string>();
+  @Output() standardEvent = new EventEmitter<string>();
+
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
 
   ngOnInit() {
 
     this.fillStandard();
     this.filTabs();
-    
+    this.curSelectedCategory = 'P';
+    this.standardSelected = '';
+    this.categClick(this.curSelectedCategory);
+    this.srv_statemanage.CurrentMaterialSelected.subscribe(arr => this.SelectedMaterial(arr));
   }
   
   filTabs(){
@@ -35,4 +44,27 @@ export class MatFilterComponent implements OnInit {
     this.serv.getmaterialstandard().subscribe((res:any)=>{
       this.matStandard=JSON.parse(res);})
   }
+
+  categClick(categ: string) {
+    this.categEvent.emit(categ)
+    this.curSelectedCategory = categ;
+    this.standardSelected = '';
+  }
+
+  onStandardChange(standardValue:string) {
+    console.log(standardValue);
+    if (standardValue == ''){
+      this.categClick(this.curSelectedCategory);
+    }
+    else{
+      this.standardEvent.emit(standardValue);
+    }
+    this.standardSelected = standardValue;
+}
+
+SelectedMaterial(arr:string[])
+{    
+  let cat = arr[0].substring(0,1);
+  this.categClick(cat);
+}
 }
