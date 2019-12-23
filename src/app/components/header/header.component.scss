@@ -1,3 +1,33 @@
 .logoImg{
 height: 40px;
+cursor:pointer;
+}
+
+::ng-deep .myCustomModalClass .modal-dialog { 
+     max-width: 55px;
+     width: 55px;
+}
+
+.div-image-menu
+{
+ background-color: var(--background-color-menu);
+}
+
+.div-image-menu :hover 
+{ 
+ background-color: white;
+}
+
+.menu-not-visible
+{
+    display:none; 
+    background-color:var(--background-color-menu);
+}
+
+.menu-visible
+{
+    display:block;
+    z-index: 90000;
+    position: fixed;
+    background-color: var(--background-color-menu);
 }

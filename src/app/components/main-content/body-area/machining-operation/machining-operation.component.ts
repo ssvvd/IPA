@@ -70,9 +70,7 @@ export class MachiningOperationComponent implements OnInit {
       {       
       this.SelectedSecApp=obj; 
       this.SelectedSecAppID=obj.MenuID;          
-      }
-    //else
-    
+      }       
     this.ApplyFilter2(obj.MenuID);
    }
 
