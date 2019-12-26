@@ -14,7 +14,7 @@ const routes: Routes = [
 	{path:"materials",component:MaterialsComponent},
 	{path:"machining-operation",component:MachiningOperationComponent},
 	{path:"operation-data",component:OperationDataComponent},
-	{path:"results",component:ResultsComponent},
+	{path:"results",component:ResultsComponent}
 	];
 
 @NgModule({

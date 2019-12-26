@@ -3,6 +3,8 @@ import { clsMaterial } from 'src/app/models/materials/material'
 import { MaterialService } from 'src/app/services/material.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { environment } from 'src/environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {PpSetDefaultComponent} from 'src/app/components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 
 @Component({
   selector: 'app-mat-main-table',
@@ -20,7 +22,7 @@ export class MatMainTableComponent implements OnInit {
   @Input() filterSearchTextInput: string;
   @Output() matDetailSelectedEv = new EventEmitter<string>();
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal) { }
 
   ngOnInit() {
     this.dtOptions = {
@@ -94,5 +96,9 @@ export class MatMainTableComponent implements OnInit {
   setAsDefault(){
     let a =0;
   }
-
+  open() {
+    const modalRef = this.modalService.open(PpSetDefaultComponent, { centered: true });
+/*     modalRef.componentInstance.my_modal_title = 'I your title';
+    modalRef.componentInstance.my_modal_content = 'I am your content'; */
+  }
 }
