@@ -13,9 +13,11 @@ export class MatMainTableComponent implements OnInit {
 
   dtOptions: DataTables.Settings = {};
   materialsResult:clsMaterial[]=[];
+  materialsResultFilterd:clsMaterial[]=[];
   selectedMaterial:string;
   environment = environment;
   @Input() selectedCategory: string ;
+  @Input() filterSearchTextInput: string;
   @Output() matDetailSelectedEv = new EventEmitter<string>();
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
@@ -42,7 +44,8 @@ export class MatMainTableComponent implements OnInit {
   fillMainTable(){
     this.serv.getmaterialsbygrp('EN',this.selectedCategory).subscribe((res:any)=>{
       this.materialsResult=JSON.parse(res);
-    
+      this.materialsResultFilterd = this.materialsResult;
+      this.filterTable();
       if (this.srv_statemanage.GetMaterialSelected()== null)
           this.selectedMaterial = "";
        else
@@ -51,9 +54,28 @@ export class MatMainTableComponent implements OnInit {
   }
 
   ngOnChanges(changes:SimpleChanges) {
-    this.fillMainTable();
+    if (changes.selectedCategory){
+      this.fillMainTable();
+    }
+    if (changes.filterSearchTextInput){
+      this.filterTable();
+    }
+        
+
   }
 
+  filterTable(){
+    var searchText = this.filterSearchTextInput;
+    if (searchText == null || searchText == '')
+        this.materialsResultFilterd = this.materialsResult;
+    else
+         this.materialsResultFilterd = this.materialsResult.filter(_ => 
+          (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
+          (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
+          (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
+          (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
+          ); 
+  }
   matDetailClick(material: string) {
     this.matDetailSelectedEv.emit(material);
   }
@@ -64,5 +86,13 @@ export class MatMainTableComponent implements OnInit {
     this.srv_statemanage.SelectMaterial(mat);
 
   }
+
+  addToFavorites(){
+    let a =0;
+  }
   
+  setAsDefault(){
+    let a =0;
+  }
+
 }

@@ -32,6 +32,10 @@ import { MatMainTableComponent } from './components/main-content/body-area/mater
 import { MatDetailsComponent } from './components/main-content/body-area/materials/mat-details/mat-details.component';
 import { MatStandardTableComponent } from './components/main-content/body-area/materials/mat-standard-table/mat-standard-table.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { PpAddFavoritComponent } from './components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
+import { PpRequestMaterialComponent } from './components/main-content/body-area/materials/pp-request-material/pp-request-material.component';
+import { PpEditParamsComponent } from './components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
+import { PpSetDefaultComponent } from './components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 
 @NgModule({
   declarations: [   
@@ -55,7 +59,11 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MachinesFilterComponent,
     MatMainTableComponent,
     MatDetailsComponent,
-    MatStandardTableComponent
+    MatStandardTableComponent,
+    PpAddFavoritComponent,
+    PpRequestMaterialComponent,
+    PpEditParamsComponent,
+    PpSetDefaultComponent
   ],
   imports: [
     FormsModule,
@@ -66,6 +74,12 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MachineItemSpindleChartModule ,
     Ng5SliderModule ,
     NgbModule
+  ],
+  entryComponents:[
+    PpAddFavoritComponent,
+    PpRequestMaterialComponent,
+    PpEditParamsComponent,
+    PpSetDefaultComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 <br><br>
 <div class="md-form mt-0">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <input class="form-control mb-3" [(ngModel)]="searchText" (keyup)="FilterChange()" type="text" placeholder="Search" aria-label="Search">  
   </div>
   <hr>
   <div class="list-group list-group-flush" > 

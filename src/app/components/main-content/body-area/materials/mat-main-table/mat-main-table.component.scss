@@ -50,3 +50,21 @@ td {
 .table td:nth-child(9), .table th:nth-child(9){
     width: 11%;
 }
+
+@mixin name {
+    
+}
+
+a:visited img {
+    display: none !important;
+    visibility: hidden !important;
+    border: 1px solid red; 
+  }
+
+/* .imgFavorites{
+    background: url(environment.ImgAddToFavorite) center center no-repeat;
+} */
+
+/* .imgFavorites:visited{
+    background: url("http://placekitten.com/100/100?image=1") center center no-repeat;
+} */
