@@ -15,6 +15,7 @@ export class MaterialsComponent implements OnInit {
   curComponent:string;
   selectedSatnd:string;
   breadCrumb:string[]=[];
+  searchText:String
 
   receiveCategory(category:string) {
     this.selectedCateg = category;
@@ -39,6 +40,14 @@ export class MaterialsComponent implements OnInit {
     this.curComponent = "3";
     this.breadCrumb = [standard];
   }
+
+  receiveSearchText(srch:string) {
+    this.searchText = srch;
+  }
+
+/*   reciveClearSearch() {
+    this.searchText = "";
+  } */
 
   ngOnInit() {
     this.curComponent = "1";

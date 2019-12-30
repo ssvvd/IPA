@@ -3,7 +3,7 @@
       <h4 class="tableTitle">Material Results</h4>
         <table    datatable [dtOptions]="dtOptions"  id="tblmaterial" class="table table-stripe row-border hover" >
           <thead >
-            <tr class="tr-not-selected">
+            <tr >
               <th class="d-none">ID</th>
               <th>Group</th>
               <th>Description</th>
@@ -16,21 +16,19 @@
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResult" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
+              <tr *ngFor="let material of materialsResultFilterd" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{material.id}}</th>         
                   <td><div class="square" [title]="material.group"><h4>{{material.group}}</h4></div></td>
                   <td>{{material.description}}</td>
                   <td>{{material.Condition}}</td>
                   <td><img src="{{environment.ImgEditParams}}" class="icon-edit">{{material.Hardness}}</td>
                   <td>
-                    <a data-toggle="tooltip" title="Add to favorits">
+                    <a data-toggle="tooltip" title="Add to favorits" href="javascript:void(0)" (click)="addToFavorites()" class="imgFavorites">
                          <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
                      </a>
                   </td>
                   <td>                    
-                    <a data-toggle="tooltip" title="Set as default">
-                        <img src="{{environment.ImgSetDefault}}" class="icon-grid">
-                    </a> 
+                        <img src="{{environment.ImgSetDefault}}" (click)="open()" class="icon-grid">
                   </td>
                   <td>
 
@@ -47,3 +45,6 @@
         </table>
      
       </div>
+
+      <app-pp-add-favorit></app-pp-add-favorit>
+      <app-pp-edit-params></app-pp-edit-params>

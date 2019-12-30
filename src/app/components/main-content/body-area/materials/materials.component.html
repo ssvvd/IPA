@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row">
       <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)"></app-mat-filter>
+        <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)"></app-mat-filter>
       </div>
       <div [ngSwitch]="curComponent" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
         <br>
@@ -16,7 +16,7 @@
                  </ol>
                </nav>
          </div> 
-        <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)"></app-mat-main-table>
+        <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)" [filterSearchTextInput]="searchText"></app-mat-main-table>
         <app-mat-details *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
         <app-mat-standard-table *ngSwitchCase="3" [selectedCateg]="selectedCateg" [selectedStandard]="selectedSatnd"></app-mat-standard-table>
       </div>

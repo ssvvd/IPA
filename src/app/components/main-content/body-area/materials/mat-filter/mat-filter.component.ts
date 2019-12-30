@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ChangeContext } from 'ng5-slider';
 import { sidetab } from 'src/app/models/materials/sidetab';
 import { MaterialService } from 'src/app/services/material.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
@@ -14,9 +15,12 @@ export class MatFilterComponent implements OnInit {
   matStandard:string[]=[];
   curSelectedCategory:string;
   standardSelected:String;
+  searchText:String;
 
   @Output() categEvent = new EventEmitter<string>();
   @Output() standardEvent = new EventEmitter<string>();
+  @Output() MaterialSearchChanged = new EventEmitter<String>();
+  // @Output() MaterialSearchClear = new EventEmitter();
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
 
@@ -67,4 +71,12 @@ SelectedMaterial(arr:string[])
   let cat = arr[0].substring(0,1);
   this.categClick(cat);
 }
+
+FilterChange(event: ChangeContext ) {      
+/*   if (this.searchText == '')
+      this.MaterialSearchClear.emit();
+  else */
+      this.MaterialSearchChanged.emit(this.searchText);   
+}
+
 }
