@@ -1,6 +1,6 @@
 <div class="container-fluid pt-4  ml-0 pl-0 pr-0 mr-0">
-<div class="pt-2 ">
- <ul class="nav nav-fill border-top">               
+<div class="pt-2 pb-2 border-top border-bottom">
+ <ul class="nav nav-fill ">               
     <li (click)="onSelectMainApp(mainapp)"  class="nav-item" *ngFor="let mainapp of arrMainApps" >
         <div class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID,
                     'div-app':mainapp.MenuID!=SelectedMainAppID}"> 
@@ -16,11 +16,11 @@
     </li>          
 </ul>
 </div>
-<div class="pt-4">
-<ul class="nav nav-fill  border-top">               
+<div class="border-bottom" *ngIf="arrSelectedSecApp1?.length >0">
+<ul class="nav nav-fill  pt-2 pb-2">               
     <li  (click)="onFilterSecApp(secapp)" class="nav-item" *ngFor="let secapp of arrSelectedSecApp1">
-        <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':secapp.MenuID==SelectedSecAppID,
-                    'div-app':secapp.MenuID!=SelectedSecAppID}"> 
+        <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1,
+                    'div-app':secapp.MenuID!=SelectedMenuID1}"> 
             <div>                                          
                 <img src="{{secapp.MenuImage}}" class="img-main-menu cursor-pointer pt-4 pl-4 pr-4">                                                                                        
             </div>
@@ -30,18 +30,19 @@
                  </div>                                                              
             </div>
             <div *ngIf="secapp.ApplicationITAID!='0'">
-               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp)" [routerLink]="['/operation-data']">Select</button>                                       
+               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="['/operation-data']">Select</button>                                       
             </div> 
         </div>
     </li>          
 </ul>
 </div>
-<div class="pt-4 ">
-<ul class="nav nav-fill border-top">               
-    <li  class="nav-item" *ngFor="let secapp of arrSelectedSecApp2">
-        <div class="form-group cursor-pointer" > 
+<div class="border-bottom" *ngIf="arrSelectedSecApp2?.length >0">
+<ul class="nav nav-fill pt-2 pb-2">               
+    <li   (click)="onFilterSecApp1(secapp)" class="nav-item" *ngFor="let secapp of arrSelectedSecApp2">
+        <div class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2,
+                    'div-app':secapp.MenuID!=SelectedMenuID2}" > 
             <div>                                          
-                <img src="{{secapp.MenuImage}}" class="img-main-menu cursor-pointer pt-4 pl-4 pr-4">                                                                                        
+                <img src="{{secapp.MenuImage}}" class="img-main-menu cursor-pointer pt-4 pl-4 pr-4 m-4">                                                                                        
             </div>
             <div>
                 <div class="form-group mb-0 pb-0 cursor-pointer">                    
@@ -49,7 +50,7 @@
                  </div>                                                              
             </div>
             <div  *ngIf="secapp.ApplicationITAID!='0'">
-               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp)" [routerLink]="['/operation-data']">Select</button>                                       
+               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp,2)" [routerLink]="['/operation-data']">Select</button>                                       
             </div> 
         </div>
     </li>          

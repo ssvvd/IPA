@@ -41,9 +41,9 @@ export class MachinesFilterComponent implements OnInit {
   ngOnInit() {
     this.InitFilterSliders();
     let statefilter:MachineFilter;
-    statefilter=this.srv_statemanage.GetMachineFilter();
+    statefilter=this.srv_statemanage.SelectMachineFilter;
     if (typeof(statefilter) !== 'undefined' && statefilter !== null )     
-        this.machFilter=this.srv_statemanage.GetMachineFilter();                   
+        this.machFilter=statefilter;                   
   }
   
   InitFilterSliders()

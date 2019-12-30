@@ -9,10 +9,10 @@ export class ApplicationsService {
 
   private API_ROUTE = 'api/applications/';
   constructor(private httpClient: HttpClient) 
-  {}
+  {} 
 
   public  getmenu(lang:string,usergroup:string)
-  {        
+  {            
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmenu/' + lang + '/' + usergroup);
   }
 }

@@ -40,16 +40,16 @@ export class MachinesListComponent implements OnInit
       this.listmachines=JSON.parse(res); 
       this.listmachines_sorted=this.listmachines; 
       let stfilter:MachineFilter;
-      stfilter=this.srv_statemanage.GetMachineFilter();
+      stfilter=this.srv_statemanage.SelectMachineFilter;
       if (typeof(stfilter)!== 'undefined' && stfilter !== null ) 
       {
         this.MachineFilter=stfilter;
-        this.ApplyFilter(this.MachineFilter);
+        this.ApplyFilter(stfilter);
       }
-       if (this.srv_statemanage.GetMachineSelected()== null)
+       if (this.srv_statemanage.SelectedMachine== null)
           this.UpdateStateSelectedMachine(-1);
        else
-          this.UpdateStateSelectedMachine(this.srv_statemanage.GetMachineSelected().MachineID);              
+          this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);              
     })    
   }  
   
@@ -72,18 +72,18 @@ export class MachinesListComponent implements OnInit
   OnSelectMachine(mach:Machineheader)
   {   
     this.UpdateStateSelectedMachine(mach.MachineID)   ;       
-    this.srv_statemanage.SelectMachine(mach);
-    this.srv_statemanage.SetMachineFilter (this.MachineFilter);
+    this.srv_statemanage.SelectedMachine=mach;
+    this.srv_statemanage.SelectMachineFilter= this.MachineFilter;
   }
 
-  onMachineFilterChanged($event)
+  onMachineFilterChanged($event)   
   {
     this.MachineFilter =$event.filter; 
     this.ApplyFilter($event.filter); 
-     if (this.srv_statemanage.GetMachineSelected()== null)
+     if (this.srv_statemanage.SelectedMachine== null)
         this.UpdateStateSelectedMachine(-1);
      else
-        this.UpdateStateSelectedMachine(this.srv_statemanage.GetMachineSelected().MachineID);           
+        this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);           
   }
   
   onMachineFilterClear()
@@ -101,7 +101,8 @@ export class MachinesListComponent implements OnInit
            ((!filter.IsLathe && m.MachineType!="Lathe") || filter.IsLathe) &&
            ((!filter.IsMultiTask && m.MachineType!="Multi task") || filter.IsMultiTask)   
            && (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase())>-1        
-          ));         
+          ));  
+          this.srv_statemanage.SelectMachineFilter= filter;       
   }
 }
 

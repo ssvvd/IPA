@@ -1,5 +1,5 @@
 .logoImg{
-height: 40px;
+height: 60px;
 cursor:pointer;
 }
 
@@ -30,4 +30,22 @@ cursor:pointer;
     z-index: 90000;
     position: fixed;
     background-color: var(--background-color-menu);
+}
+
+.dropdown-toggle::after {
+    display:none;
+}
+
+.menuitem
+{
+    border-top: 1px solid var(--border-color-gray); 
+    background-color: var(--background-color-menu);
+    cursor: pointer;
+}
+
+.menuitem :hover
+{
+    // border-bottom: 1px solid var(--border-color-gray);
+    background-color: white;
+    cursor: pointer;
 }
