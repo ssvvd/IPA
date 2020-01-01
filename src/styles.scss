@@ -101,6 +101,10 @@ select{
     background-color:var(--btn-bg-select-color);
 }
 
+.custom-radio .custom-control-input:checked~.custom-control-label::before {
+    background-color:var(--btn-bg-select-color);
+}
+  
 html {
   font-size: 0.8rem;
   font-weight:normal;

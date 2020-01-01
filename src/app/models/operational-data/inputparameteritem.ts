@@ -7,11 +7,11 @@
 } 
 export class InputParameterItem {
     public name:string;
-    public type:parametertype;
+    public type:string;
     public value:object;
-    public valuedefault:object;
-    public valuemin:object;
-    public valuemax:object;
+    public valuedefault:string;
+    public valuemin:string;
+    public valuemax:string;
 
     constructor()
     {

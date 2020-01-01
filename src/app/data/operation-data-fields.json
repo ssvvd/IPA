@@ -1,6 +1,6 @@
 [{
   "secapp": 760,   
-  "fileds":[           
+  "fields":[           
         {
           "fieldid":"DepthOfShoulder_ap",
           "isrequire":"true",
@@ -22,12 +22,12 @@
           "defaultvalue_inch":40,
           "image":"inpt_Length59.jpg"
         }
-]
+    ]
 }
 ,
 {
   "secapp": 770,   
-  "fileds":[           
+  "fields":[           
         {
           "fieldid":"DepthOfShoulder_ap",
           "isrequire":"true",
@@ -49,7 +49,7 @@
           "defaultvalue_inch":40,
           "image":"inpt_Length59.jpg"
         }
-]
+    ]
 }
       
 ]

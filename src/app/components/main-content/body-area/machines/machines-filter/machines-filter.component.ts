@@ -19,21 +19,21 @@ export class MachinesFilterComponent implements OnInit {
     floor: 0,
     ceil: 19000,
     step: 1000,
-    showTicks: true
+    showTicks: false
   };
 
   options_power: Options = {
     floor: 0,
     ceil: 200,
     step: 10,
-    showTicks: true
+    showTicks: false
   };
 
   options_torque: Options = {
     floor: 0,
     ceil: 12000,
     step: 1000,
-    showTicks: true
+    showTicks: false
   };
 
   constructor(private srv_statemanage:StateManagerService) { }
@@ -54,8 +54,8 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMultiTask =true;
     
     //todo:
-    this.machFilter.SpeedMin = 1000; 
-    this.machFilter.SpeedMax = 18000;
+    this.machFilter.SpeedMin = 0; 
+    this.machFilter.SpeedMax = 19000;
     
     this.machFilter.PowerMin = 0;
     this.machFilter.PowerMax = 200;  

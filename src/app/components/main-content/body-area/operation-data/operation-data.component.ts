@@ -15,29 +15,39 @@ export class OperationDataComponent implements OnInit {
   Ipl:InputParameterlist =new InputParameterlist;
   SecApp:string;
   SecAppName:string;
-
+  opendetails:boolean =false;
   constructor(private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) { }
   
   ngOnInit() {
     this.srv_DataLayer.getinputparameters().subscribe((data: any)=> {
-      for (const d of JSON.parse(data)) {                            
+      for (const d of JSON.parse(data)) {                                       
             this.Ipl.items.push({
               name:d.name,
-              value: d.value,
+              value:  d.valuedefault==null?'':d.valuedefault,
               type:d.type,
-              valuedefault: d.valuedefault,              
+              valuedefault: d.valuedefault==null?'':d.valuedefault,              
               valuemin:d.valuemin ,
               valuemax: d.valuemax       
-          })                        
-    }
-        //alert(this.InputParamList.items.length);
-        //alert(this.InputParamList.GetItem('SecondaryApplication'));
-        //this.SecApp=this.InputParamList.GetItem('SecondaryApplication').valuedefault.toString();
-        this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
-        this.SecAppName = this.srv_StMng.SecAppSelected.MenuName;
+          })                                   
+      }
+       if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
+        {
+          this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
+          this.SecAppName = this.srv_StMng.SecAppSelected.MenuName;
+        }    
   }
 )
 
 };
 
+GetResult()
+{
+     //let v:object;
+     //v=this.Ipl.GetItem('WidthOfShoulder_ae').value;
+}
+
+open()
+{
+  this.opendetails=true;
+}
 }
