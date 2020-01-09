@@ -21,19 +21,17 @@
                   <td><div class="square" [title]="material.group"><h4>{{material.group}}</h4></div></td>
                   <td>{{material.description}}</td>
                   <td>{{material.Condition}}</td>
-                  <td><img src="{{environment.ImgEditParams}}" class="icon-edit">{{material.Hardness}}</td>
+                  <td><img src="{{environment.ImgEditParams}}" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness}}</td>
                   <td>
-                    <a data-toggle="tooltip" title="Add to favorits" href="javascript:void(0)" (click)="addToFavorites()" class="imgFavorites">
-                         <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
-                     </a>
+
+                    <img src="{{environment.ImgView}}" (click)="matDetailClick(material)"  class="icon-grid">
+
+              </td>
+                  <td>
+                         <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" class="icon-grid">
                   </td>
                   <td>                    
-                        <img src="{{environment.ImgSetDefault}}" (click)="open()" class="icon-grid">
-                  </td>
-                  <td>
-
-                        <img src="{{environment.ImgViewTable}}" (click)="matDetailClick(material.id)"  class="icon-grid">
-
+                        <img src="{{environment.ImgSetDefault}}" (click)="openSetDefaultModal(material)" alt="Set as default" class="icon-grid">
                   </td>
                   <td>
                     <div>
@@ -45,6 +43,3 @@
         </table>
      
       </div>
-
-      <app-pp-add-favorit></app-pp-add-favorit>
-      <app-pp-edit-params></app-pp-edit-params>

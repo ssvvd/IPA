@@ -68,8 +68,10 @@ export class MatFilterComponent implements OnInit {
 
 SelectedMaterial(arr:string[])
 {    
-  let cat = arr[0].substring(0,1);
-  this.categClick(cat);
+  if (arr[0]){
+    let cat = arr[0].substring(0,1);
+    this.categClick(cat);
+  }
 }
 
 FilterChange(event: ChangeContext ) {      

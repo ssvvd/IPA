@@ -22,9 +22,27 @@
      background-color: var(--bg-mat-H);
        }
 
-    .table td, .table th{
+     .table td, .table th{
         border-right: 2px solid #dee2e6;
         border-top: none;
-        cursor: pointer;
+        outline: none;
+    } 
+
+    .table td:not([data-value*="________"]):hover{
+      background-color: var(--bg-hover) !important; 
+      cursor: pointer;
     }
 
+    .table th:hover{
+      background-color: var(--bg-hover) !important; 
+      cursor: pointer;
+    }
+    // .td-hover:hover{
+    //   background-color: black !important; 
+    // }
+    
+      // .table td:nth-of-type(1){
+      //   background-color: #b5c4da;
+      // } 
+          
+    

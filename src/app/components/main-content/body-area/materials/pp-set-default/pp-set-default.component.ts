@@ -8,6 +8,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class PpSetDefaultComponent implements OnInit {
 
+  @Input() modal_group;
+  
   constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {

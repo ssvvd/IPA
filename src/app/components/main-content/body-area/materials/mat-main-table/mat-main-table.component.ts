@@ -5,6 +5,9 @@ import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PpSetDefaultComponent} from 'src/app/components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
+import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
+import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
+import {PpRequestMaterialComponent} from 'src/app/components/main-content/body-area/materials/pp-request-material/pp-request-material.component';
 
 @Component({
   selector: 'app-mat-main-table',
@@ -20,7 +23,7 @@ export class MatMainTableComponent implements OnInit {
   environment = environment;
   @Input() selectedCategory: string ;
   @Input() filterSearchTextInput: string;
-  @Output() matDetailSelectedEv = new EventEmitter<string>();
+  @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal) { }
 
@@ -78,7 +81,7 @@ export class MatMainTableComponent implements OnInit {
           (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
           ); 
   }
-  matDetailClick(material: string) {
+  matDetailClick(material: clsMaterial) {
     this.matDetailSelectedEv.emit(material);
   }
 
@@ -96,9 +99,26 @@ export class MatMainTableComponent implements OnInit {
   setAsDefault(){
     let a =0;
   }
-  open() {
+  openSetDefaultModal(mat:clsMaterial) {
     const modalRef = this.modalService.open(PpSetDefaultComponent, { centered: true });
+    modalRef.componentInstance.modal_group = mat.group;
 /*     modalRef.componentInstance.my_modal_title = 'I your title';
     modalRef.componentInstance.my_modal_content = 'I am your content'; */
+  }
+
+  openAddToFavM(mat:clsMaterial) {
+    const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
+    modalRef.componentInstance.modal_group = mat.group;
+  }
+
+  openEditParamsM(mat:clsMaterial) {
+    const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true });
+    modalRef.componentInstance.modal_mat_id = mat.id;
+    modalRef.componentInstance.modal_group = mat.group;
+    modalRef.componentInstance.modal_hardness = mat.Hardness.replace(" HB","");
+  }
+
+  openRequestMatM() {
+    const modalRef = this.modalService.open(PpRequestMaterialComponent, { centered: true });
   }
 }

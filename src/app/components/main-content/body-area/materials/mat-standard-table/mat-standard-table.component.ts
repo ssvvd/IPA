@@ -13,6 +13,8 @@ export class MatStandardTableComponent implements OnInit {
   dtResult:any;
   headers:any;
   selectedMaterial:clsMaterial;
+  selectedMatOrGrp:String;
+  getMaterial: string;
   @Input() selectedCateg: string ;
   @Input() selectedStandard: string ;
 
@@ -26,6 +28,20 @@ export class MatStandardTableComponent implements OnInit {
     this.serv.getmaterialsdetailsStnd(this.selectedCateg,this.selectedStandard).subscribe((res:any)=>{
       this.dtResult =JSON.parse(res);
       this.headers = Object.keys(this.dtResult[0]);
+      this.selectedMaterial = this.srv_statemanage.GetMaterialSelected();
+      if (this.selectedMaterial== null){
+        this.selectedMatOrGrp = "";
+      }
+      else {
+        if (this.selectedMaterial.material && this.selectedMaterial.material != ""){
+          this.selectedMatOrGrp = this.selectedMaterial.material;
+        }     
+          else
+          {
+            this.selectedMatOrGrp = this.selectedMaterial.group;
+          }
+          
+        }
     });
       
   }
@@ -34,9 +50,9 @@ export class MatStandardTableComponent implements OnInit {
     this.fillTable();
   }
 
-  OnSelectMaterial(selCol:string)
+  OnSelectMaterial(selCol:string,mat:string)
   {   
-    this.selectedMaterial= new clsMaterial(this.mySplit(selCol,0),this.mySplit(selCol,1))
+    this.selectedMaterial= new clsMaterial(this.mySplit(selCol,0),this.mySplit(selCol,1),mat);
     this.srv_statemanage.SelectMaterial(this.selectedMaterial);
 
   }
