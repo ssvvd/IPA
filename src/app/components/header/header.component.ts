@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
-    
+       
   } 
 
   //showModal(content) {    
