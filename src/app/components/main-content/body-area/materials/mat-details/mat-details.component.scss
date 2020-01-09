@@ -6,3 +6,8 @@ table.dataTable{
 thead{
     background:var(--bg-blue-header);
 }
+
+.table td:not([data-value*="________"]):hover{
+    background-color: var(--bg-hover) !important; 
+    cursor: pointer !important;
+  }

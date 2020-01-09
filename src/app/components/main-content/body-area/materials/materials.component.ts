@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { clsMaterial } from 'src/app/models/materials/material'
 
 @Component({
   selector: 'app-materials',
@@ -11,7 +12,7 @@ export class MaterialsComponent implements OnInit {
   constructor(private statemng:StateManagerService ) {}
 
   selectedCateg: string;
-  selectedMatDeials:String;
+  selectedMatDeials:clsMaterial;
   curComponent:string;
   selectedSatnd:string;
   breadCrumb:string[]=[];
@@ -24,21 +25,29 @@ export class MaterialsComponent implements OnInit {
     if (this.statemng.GetMaterialSelected()!= null){
       var selMat = this.statemng.GetMaterialSelected().group;
       if (selMat.includes(category))
-      this.breadCrumb = [selMat];
+        this.breadCrumb = [selMat];
     }
   
   }
 
-  receiveMatDeials(material:string) {
+  receiveMatDeials(material:clsMaterial) {
     this.selectedMatDeials = material;
     this.curComponent = "2";
-    this.breadCrumb = [this.selectedCateg + material,'Standard Conversion Chart'];
+    this.breadCrumb = [material.group,'Standard Conversion Chart'];
   }
   
   receiveStandard(standard:string) {
     this.selectedSatnd = standard;
     this.curComponent = "3";
-    this.breadCrumb = [standard];
+/*     if (this.statemng.GetMaterialSelected()!= null){
+      var selMat = this.statemng.GetMaterialSelected().group;
+      if (selMat.includes(this.selectedCateg))
+      this.breadCrumb = [selMat,standard];
+    }
+    else{ */
+      this.breadCrumb = [standard];
+    // }
+    
   }
 
   receiveSearchText(srch:string) {

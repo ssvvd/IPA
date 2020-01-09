@@ -7,7 +7,12 @@
                          </thead>
                          <tbody>
                             <tr *ngFor="let obj of detailsResult">
-                               <td *ngFor="let col of headers"> {{obj[col]}} </td>
+                               <td *ngFor="let col of headers" attr.data-value={{obj[col]}} 
+                               (click)="obj[col].indexOf('________ ') == -1 && OnSelectMaterial(obj[col])" 
+                               [routerLink]="(obj[col] + '').indexOf('________ ') == -1 ? ['/machining-operation'] : []"
+                               [ngClass]="{'td-selected' : obj[col] == this.selectedMatOrGrp}"
+                               > {{obj[col]}} 
+                               </td>
                             </tr>
                          </tbody>
               </table>

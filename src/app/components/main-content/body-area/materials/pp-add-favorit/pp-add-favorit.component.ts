@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-pp-add-favorit',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PpAddFavoritComponent implements OnInit {
 
-  constructor() { }
+  @Input() modal_group;
+
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }

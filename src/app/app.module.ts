@@ -63,7 +63,7 @@ import { PpSetDefaultComponent } from './components/main-content/body-area/mater
     PpAddFavoritComponent,
     PpRequestMaterialComponent,
     PpEditParamsComponent,
-    PpSetDefaultComponent
+    PpSetDefaultComponent,
   ],
   imports: [
     FormsModule,

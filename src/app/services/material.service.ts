@@ -38,4 +38,12 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details-stnd/' + grp + '/' + GWCCNT);
   }
+  public  getmaterialhardness()
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-hardness-conv');
+  }
+  public  getmaterialimits(mat:number)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-hardness-limit/' + mat);
+  }
 }

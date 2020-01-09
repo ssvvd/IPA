@@ -91,7 +91,13 @@ export class StateManagerService {
   SelectMaterial(mat: clsMaterial) {
     this.materialSelected=mat;   
     let desc:string;
-    desc=mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ;    
+    if (mat.material && mat.material != ''){
+      desc=mat.group.toString() + " - " + mat.material ; 
+    }
+    else{
+      desc=mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+    }
+       
     this.obsMaterialSelected.next([desc]);
   }
 
