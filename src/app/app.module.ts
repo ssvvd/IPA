@@ -66,11 +66,8 @@ import { Optimizetool59Component } from './components/main-content/body-area/ope
     PpRequestMaterialComponent,
     PpEditParamsComponent,
     PpSetDefaultComponent,
-<<<<<<< HEAD
-=======
     Appdetails59Component,
     Optimizetool59Component
->>>>>>> fae32cef9525238d0edd6a97c60093cc06fec543
   ],
   imports: [
     FormsModule,
