@@ -13,79 +13,93 @@ import { BehaviorSubject } from 'rxjs';
 
 export class StateManagerService { 
 
-  private MachineSelected:Machineheader;
-
   private lstMachineHeader:Machineheader[];
-  private MachineSpindleSelected:Machinespindle;  
-  private arrMachineSpindle: Machinespindle[];    
-  private MachineFilter:MachineFilter;
+  //private MachineSpindleSelected:Machinespindle;  
   
-  private obsMachineSelected = new BehaviorSubject<string[]>([]);;
+  private mMachineFilter:MachineFilter;
+  private mSelectedMachine:Machineheader;
+  private marrMachineSpindle:Machinespindle[];
+
+  private obsMachineSelected = new BehaviorSubject<string[]>([]);
   CurrentMachineSelected = this.obsMachineSelected.asObservable();   
   
   private materialSelected:clsMaterial;
-  private obsMaterialSelected = new BehaviorSubject<string[]>([]);;
+  private obsMaterialSelected = new BehaviorSubject<string[]>([]);
   CurrentMaterialSelected = this.obsMaterialSelected.asObservable();   
 
-  private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);;
+  private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);
   CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable(); 
 
-  SecondaryAppSelected:SecondaryApp;
-
-  SelectMachine(mach: Machineheader) {
-    this.MachineSelected=mach;   
+  private mSecondaryAppSelected:SecondaryApp;
+  private mMainAppSelected:MainApp;
+    
+  get SelectedMachine():Machineheader {
+    return this.mSelectedMachine;
+  }
+  set SelectedMachine(m:Machineheader) {
+    this.mSelectedMachine=m;   
     let desc:string;
-    desc=mach.SpindleSpeed.toString() + " KW " + mach.Torque.toString() + " t/min";    
-    this.obsMachineSelected.next([mach.MachineName,desc]);
+    desc=m.SpindleSpeed.toString() + " KW " + m.Torque.toString() + " t/min";    
+    this.obsMachineSelected.next([m.MachineName,desc]);
   }
 
   ViewMachine(mach: Machineheader) { 
     this.obsMachineSelected.next([mach.MachineName,mach.SpindleSpeed.toString()]);
   }
   
-  SetMachineFilter(f:MachineFilter)
-  {
-    this.MachineFilter=f;
+  get SelectMachineFilter():MachineFilter {
+    return this.mMachineFilter;
+  }
+  set SelectMachineFilter(mf:MachineFilter) {
+    this.mMachineFilter = mf;
   }
   
-   GetMachineFilter() :MachineFilter
-  {
-    return this.MachineFilter;
+  get arrMachineSpindle():Machinespindle[] {
+    return this.marrMachineSpindle;
+  }
+  set arrMachineSpindle(mf:Machinespindle[]) {
+    this.marrMachineSpindle = mf;
   }
 
-  SetlstMachineSpindle(lst_m:Machinespindle[])
-  {
-    this.arrMachineSpindle =lst_m;
-  }
-
-  GetlstMachineSpindle() : Machineheader[]
-  {
-    return this.lstMachineHeader;
-  }
-
-  GetMachineSelected() :Machineheader
-  {
-    return this.MachineSelected;    
-  }
-
-  SetMachineSpindleCur(m:Machinespindle)
+ /*  SetMachineSpindleCur(m:Machinespindle)
   {
     this.MachineSpindleSelected=m;
   }
+
   SetMachineSpindlers(m: Machinespindle[])
   {
     this.arrMachineSpindle=m;
+  } */
+  
+  get SecAppSelected():SecondaryApp {
+    return this.mSecondaryAppSelected;
+  }
+  set SecAppSelected(sa:SecondaryApp) {
+    this.mSecondaryAppSelected = sa;   
+    this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, sa.MenuName]);
   }
 
-  SetSecondaryApp(ma:MainApp, sa:SecondaryApp)
-  {
-    this.SecondaryAppSelected=sa;
-     this.obsSecondaryAppSelected.next([ma.MenuName, sa.MenuName]);
+  get MainAppSelected():MainApp {
+    return this.mMainAppSelected;
+  }
+  set MainAppSelected(ma:MainApp) {
+    this.mMainAppSelected = ma;
   }
 
-  GetSecondaryApp() :SecondaryApp
-  {
-    return this.SecondaryAppSelected;
+  private mMenuIDLevel1:string;
+  get MenuIDLevel1():string {
+    return this.mMenuIDLevel1;
+  }
+  set MenuIDLevel1(id:string) {
+    this.mMenuIDLevel1 = id;
+  }
+  
+  private mMenuIDLevel2:string;
+  get MenuIDLevel2():string {
+    return this.mMenuIDLevel2;
+  }
+  set MenuIDLevel2(id:string) {
+    this.mMenuIDLevel2 = id;
   }
 
   SelectMaterial(mat: clsMaterial) {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -8,6 +8,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  
+  
+  tableElement: ElementRef ;
 
   environment = environment;
   menuisshown:boolean=false;
@@ -15,11 +18,12 @@ export class HeaderComponent implements OnInit {
   constructor(private modalService: NgbModal) { }
 
   ngOnInit() {
+    
   } 
 
-  showModal(content) {    
-    this.modalService.open(content,{windowClass:"myCustomModalClass"}); 
-  }
+  //showModal(content) {    
+  //  this.modalService.open(content,{windowClass:"myCustomModalClass"}); 
+  //}
 
   showmenu()
   {

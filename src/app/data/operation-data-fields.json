@@ -1,0 +1,55 @@
+[{
+  "secapp": 760,   
+  "fields":[           
+        {
+          "fieldid":"DepthOfShoulder_ap",
+          "isrequire":"true",
+          "defaultvalue":20,
+          "defaultvalue_inch":1,
+          "image":"inpt_Depth59.jpg"       
+        },
+        {
+          "fieldid":"WidthOfShoulder_ae",
+          "isrequire":"true",
+          "defaultvalue":50,
+          "defaultvalue_inch":2,
+          "image":"inpt_Width59.jpg"
+        },
+        {
+          "fieldid":"LengthOfShoulder_L",
+          "isrequire":"true",
+          "defaultvalue":1000,
+          "defaultvalue_inch":40,
+          "image":"inpt_Length59.jpg"
+        }
+    ]
+}
+,
+{
+  "secapp": 770,   
+  "fields":[           
+        {
+          "fieldid":"DepthOfShoulder_ap",
+          "isrequire":"true",
+          "defaultvalue":20,
+          "defaultvalue_inch":1,
+          "image":"inpt_Depth59.jpg"       
+        },
+        {
+          "fieldid":"WidthOfShoulder_ae",
+          "isrequire":"true",
+          "defaultvalue":50,
+          "defaultvalue_inch":2,
+          "image":"inpt_Width59.jpg"
+        },
+        {
+          "fieldid":"LengthOfShoulder_L",
+          "isrequire":"true",
+          "defaultvalue":1000,
+          "defaultvalue_inch":40,
+          "image":"inpt_Length59.jpg"
+        }
+    ]
+}
+      
+]

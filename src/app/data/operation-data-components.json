@@ -1,0 +1,40 @@
+[{
+  "secapp": 760,
+   "components": [
+      {
+        "name": "optimizetool59",
+        "type": "optimizetool"       
+      },
+      {
+        "name": "appdetails59",
+        "type": "appdetails"
+      }
+   ]
+} ,
+{
+  "secapp": 770,
+   "components": [
+      {
+        "name": "optimizetool59",
+        "type": "optimizetool"       
+      },
+      {
+        "name": "appdetails59",
+        "type": "appdetails"
+      }
+   ]
+} ,
+{
+  "secapp": 57,
+   "components": [
+      {
+        "name": "optimizetool57",
+        "type": "optimizetool"       
+      },
+      {
+        "name": "appdetails59",
+        "type": "appdetails"
+      }
+   ]
+}     
+]

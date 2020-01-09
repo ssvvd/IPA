@@ -41,40 +41,40 @@
               <div class="form-group row">
                 <label for="txtPoint2" class="col-sm col-form-label">Point 2</label>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="text" class="form-control form-control-sm" id="txtX2" name="txtX2" [ngModel]="chartdata.PoinX_2" 
+                    <input type="number" class="form-control form-control-sm" [attr.id]="'txtX2' + typeChart" name="txtX2" [ngModel]="chartdata.PoinX_2" 
                     (ngModelChange)="chartdata.PoinX_2=$event ;CreateChart()"> 
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="text" class="form-control form-control-sm" id="txtY2" name="txtY2" [ngModel]="chartdata.PoinY_2" 
+                    <input type="number" class="form-control form-control-sm" [attr.id]="'txtY2' + typeChart" name="txtY2" [ngModel]="chartdata.PoinY_2" 
                     (ngModelChange)="chartdata.PoinY_2=$event ;CreateChart()"> 
                 </div>
             </div>  
                <div class="form-group row">
                 <label for="txtPoint3" class="col-sm col-form-label">Point 3</label>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="text" class="form-control form-control-sm" id="txtX3" name="txtX3" [ngModel]="chartdata.PoinX_3" 
+                    <input type="number" class="form-control form-control-sm" [attr.id]="'txtX3' + typeChart" name="txtX3" [ngModel]="chartdata.PoinX_3" 
                     (ngModelChange)="chartdata.PoinX_3=$event ;CreateChart()"> 
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="text" class="form-control form-control-sm" id="txtY3" name="txtY3" [(ngModel)]="chartdata.PoinY_3" 
+                    <input type="number" class="form-control form-control-sm" [attr.id]="'txtY3' + typeChart" name="txtY3" [(ngModel)]="chartdata.PoinY_3" 
                     (ngModelChange)="chartdata.PoinY_3=$event ;CreateChart()">
                 </div>
             </div>  
             <div class="form-group row">
                 <label for="txtPoint3" class="col-sm col-form-label">Point 4</label>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="text" class="form-control form-control-sm" id="txtX4" name="txtX4" [(ngModel)]="chartdata.PoinX_4" 
+                    <input type="number" class="form-control form-control-sm" [attr.id]="'txtX4' + typeChart" name="txtX4" [(ngModel)]="chartdata.PoinX_4" 
                     (ngModelChange)="chartdata.PoinX_4=$event ;CreateChart()">
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4">
-                    <input type="text" class="form-control form-control-sm" id="txtY4" name="txtY4" [(ngModel)]="chartdata.PoinY_4" 
-                    (ngModelChange)="chartdata.PoinX_4=$event ;CreateChart()">
+                    <input type="number" class="form-control form-control-sm" [attr.id]="'txtY4' + typeChart" name="txtY4" [(ngModel)]="chartdata.PoinY_4" 
+                    (ngModelChange)="chartdata.PoinY_4=$event ;CreateChart()">
                 </div>
             </div> 
             <div class="form-group row">
               <div class="pr-3 col-4"> </div>
               <div class="pr-3 col-8">
-                  <button class="btn btn-select btn-block" (click)="CreateChart()" >Calculate</button>                                       
+                  <button class="btn btn-select btn-block" (click)="CreateChart()">Calculate</button>                                       
               </div>
             </div>
         </div>

@@ -1,0 +1,105 @@
+<form name="myForm">
+<div class="container" >
+   <div class="pt-4">
+        <div class="form-group row">
+            <label for="txtDepthOfShoulder_ap" class="col-form-label">Depth (D)</label>
+            <div class="col-sm-4">
+                <input type="number" ng-model="txtDepthOfShoulder_ap"  class="form-control form-control-sm" id="txtDepthOfShoulder_ap" name="txtDepthOfShoulder_ap" 
+                                    [(ngModel)]="this.Ipl.GetItem('DepthOfShoulder_ap').value" > 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="txtDepthOfShoulder_ap" class="col-form-label">Width (W)</label>
+            <div class="col-sm-4">
+                <input type="number" required class="form-control form-control-sm" id="txtWidthOfShoulder_ae" name="txtWidthOfShoulder_ae" 
+                                    [(ngModel)]="this.Ipl.GetItem('WidthOfShoulder_ae').value" > 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="txtLengthOfShoulder_L" class="col-form-label">Length (L)</label>
+            <div class="col-sm-4">
+                <input type="number"required class="form-control form-control-sm" id="txtLengthOfShoulder_L" name="txtLengthOfShoulder_L" 
+                                    [(ngModel)]="this.Ipl.GetItem('LengthOfShoulder_L').value" > 
+            </div>
+        </div>
+   </div>   
+    <div class="pt-4">
+        <div class="form-group"> 
+            <label class="col-form-label">Overhang</label>
+            <div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="optShort" name="Overhang" checked>
+                    <label class="custom-control-label" for="optShort">Short</label>
+                </div>            
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="optLong" name="Overhang">
+                    <label class="custom-control-label" for="optLong">Long</label>
+                </div>            
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" class="custom-control-input" id="optVeryLong" name="Overhang">
+                    <label class="custom-control-label" for="optVeryLong">Very long</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pt-4">
+     <div class="form-group"> 
+        <label class="col-form-label">Clamping</label>
+        <div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optStable" name="Clamping" checked>
+                <label class="custom-control-label" for="optStable">Stable</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optNormal" name="Clamping">
+                <label class="custom-control-label" for="optNormal">Normal</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optUnstable" name="Clamping">
+                <label class="custom-control-label" for="optUnstable">Unstable</label>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="pt-4">
+     <div class="form-group"> 
+        <label class="col-form-label">Part Shape</label>
+        <div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="PartShape1" name="PartShape" checked>
+                <label class="custom-control-label" for="PartShape1">Normal</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="PartShape2" name="PartShape">
+                <label class="custom-control-label" for="PartShape2">Thin wall</label>
+            </div>                        
+        </div>
+    </div>
+    </div>
+    <div class="pt-4">     
+     <div class="form-group"> 
+        <label class="col-form-label">Type of cut</label>
+        <div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optRegular" name="TypeOfCut" checked>
+                <label class="custom-control-label" for="optRegular">Regular</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optInterrupted" name="TypeOfCut">
+                <label class="custom-control-label" for="optInterrupted">Interrupted</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optHeavilyinterrupted" name="TypeOfCut">
+                <label class="custom-control-label" for="optHeavilyinterrupted">Heavily interrupted</label>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+  <input name="myInput" ng-model="myInput" required>
+</form>
+
+<p>The input's valid state is:</p>
+<h1>{{myForm.myInput.$valid}}</h1>

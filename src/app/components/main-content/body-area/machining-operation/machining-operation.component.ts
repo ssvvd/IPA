@@ -22,6 +22,9 @@ export class MachiningOperationComponent implements OnInit {
 
   SelectedSecApp:SecondaryApp;
   SelectedSecAppID:string="";
+    
+  SelectedMenuID1:string="";
+  SelectedMenuID2:string="";
 
   constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService) { }
   
@@ -48,9 +51,28 @@ export class MachiningOperationComponent implements OnInit {
               ParentMenuID:d.ParentMenuID ,
               ApplicationITAID: d.ApplicationITAID       
           })
-        }
-          ;
-      }                   
+        };
+      }
+       let ma:MainApp =this.srv_statemanage.MainAppSelected;
+       if (ma!= null)
+         {
+           this.SelectedMainApp=ma;     
+           this.SelectedMainAppID=ma.MenuID;
+           this.ApplyFilter1(ma.MenuID);
+         }
+       let sa:SecondaryApp=this.srv_statemanage.SecAppSelected;  
+       if(sa!=null)
+        {          
+          if(this.arrSelectedSecApp1.filter(e=>e.MenuID==sa.MenuID).length==0)          
+              this.ApplyFilter2(sa.ParentMenuID);                  
+          else
+          {
+            this.SelectedSecApp = sa;
+            this.SelectedSecAppID = sa.ApplicationITAID;
+          }
+        }        
+        this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
+        this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;        
     });
   }
   
@@ -66,25 +88,37 @@ export class MachiningOperationComponent implements OnInit {
   
    onFilterSecApp (obj:SecondaryApp)
    {
+     this.SelectedMenuID1 =obj.MenuID;
+     this.srv_statemanage.MenuIDLevel1 =obj.MenuID;
      if(obj.ApplicationITAID=="0")
       {       
       this.SelectedSecApp=obj; 
-      this.SelectedSecAppID=obj.MenuID;          
+      this.SelectedSecAppID=obj.MenuID;            
       }       
     this.ApplyFilter2(obj.MenuID);
+   }
+   
+   onFilterSecApp1(obj:SecondaryApp)
+   {
+      this.SelectedMenuID2 =obj.MenuID;
+      this.srv_statemanage.MenuIDLevel2 =obj.MenuID;
    }
 
   ApplyFilter1(ParentMenuID:string)
   {
-    this.arrSelectedSecApp1=this.arrSecApps.filter(m => m.ParentMenuID ==ParentMenuID);         
+    this.arrSelectedSecApp1=this.arrSecApps.filter(m => m.ParentMenuID ==ParentMenuID);        
   }
+
   ApplyFilter2(ParentMenuID:string)
   {
     this.arrSelectedSecApp2=this.arrSecApps.filter(m => m.ParentMenuID ==ParentMenuID);         
   }
 
-  OnSelectSecApp(sa:SecondaryApp)
+  OnSelectSecApp(sa:SecondaryApp,l:number)
   {
-    this.srv_statemanage.SetSecondaryApp(this.SelectedMainApp, sa); 
+    this.srv_statemanage.MainAppSelected=this.SelectedMainApp;
+    this.srv_statemanage.SecAppSelected=sa; 
+    if(l==1) this.srv_statemanage.MenuIDLevel1=sa.MenuID;
+    if(l==2) this.srv_statemanage.MenuIDLevel2=sa.MenuID;
   }
 }

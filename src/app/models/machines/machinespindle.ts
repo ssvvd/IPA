@@ -1,5 +1,5 @@
 export class Machinespindle {
-
+    public RecordID:string;
     public MachineID : string;
     public SpindleType:string;
     public SpindleSpeed:number;
