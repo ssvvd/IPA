@@ -2,6 +2,7 @@ import { Component, OnInit ,Output,EventEmitter} from '@angular/core';
 import { Options,ChangeContext } from 'ng5-slider';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-machines-filter',
@@ -14,7 +15,7 @@ export class MachinesFilterComponent implements OnInit {
   @Output() MachineFilterChanged = new EventEmitter<{filter: MachineFilter}>();
   @Output() MachineFilterClear = new EventEmitter();
   machFilter:MachineFilter;
-
+  environment=environment;
   options_speed: Options = {
     floor: 0,
     ceil: 19000,

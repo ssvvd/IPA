@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { HostListener } from '@angular/core'
 
 @Component({
   selector: 'app-operation-data',
@@ -12,38 +13,61 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 
 export class OperationDataComponent implements OnInit {
   
-  Ipl:InputParameterlist =new InputParameterlist;
   SecApp:string;
+  Ipl:InputParameterlist =new InputParameterlist;
+ 
   SecAppName:string;
   opendetails:boolean =false;
+  showistoodata:boolean=true;
   constructor(private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) { }
   
   ngOnInit() {
-    this.srv_DataLayer.getinputparameters().subscribe((data: any)=> {
-      for (const d of JSON.parse(data)) {                                       
-            this.Ipl.items.push({
-              name:d.name,
-              value:  d.valuedefault==null?'':d.valuedefault,
-              type:d.type,
-              valuedefault: d.valuedefault==null?'':d.valuedefault,              
-              valuemin:d.valuemin ,
-              valuemax: d.valuemax       
-          })                                   
-      }
-       if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
+    this.showistoodata=true;
+    if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
         {
           this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
           this.SecAppName = this.srv_StMng.SecAppSelected.MenuName;
-        }    
-  }
-)
+        } 
 
+   if (this.srv_StMng.IPL!= null)
+      this.Ipl=this.srv_StMng.IPL;
+   else
+      this.srv_DataLayer.getinputparameters(this.SecApp,'M').subscribe((data: any)=> {
+        for (const d of JSON.parse(data)) {                                       
+              this.Ipl.items.push({
+                name:d.name,
+                value:  d.valuedefault==null?'':d.valuedefault,
+                type:d.type,
+                valuedefault: d.valuedefault==null?'':d.valuedefault,              
+                valuemin:d.valuemin ,
+                valuemax: d.valuemax ,
+                image:d.image      
+            })                                   
+        }
+          
+    }
+)
 };
 
-GetResult()
+@HostListener('window:resize', ['$event'])
+onResize(event) {  
+  if(event.target.innerWidth<900)
+    this.showistoodata=false;  
+  else
+    this.showistoodata=true;
+}
+
+showtooldata()
 {
-     //let v:object;
-     //v=this.Ipl.GetItem('WidthOfShoulder_ae').value;
+  this.showistoodata =!this.showistoodata;
+}
+
+GetResult()
+{    
+  this.srv_StMng.IPL=this.Ipl;
+  let v:object;
+  v=this.Ipl.GetItem('WidthOfShoulder_ae').value;
+  v=this.Ipl.GetItem('Clamping').value;
 }
 
 open()

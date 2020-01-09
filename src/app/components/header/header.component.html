@@ -1,6 +1,5 @@
     <!-- logo -->  
-      
-    <div class="container-fluid pt-2 pl-0 pr-0" >
+    <div class="container-fluid pt-2 pl-0 pr-0" >    
         <div class="float-left">
           <a href="#">
                 <img src="{{environment.IscarLogo}}"  class="logoImg">
@@ -14,86 +13,42 @@
                     </a> 
                 </div>
                 <div class="form-group">
-                <div class="row" [ngClass]="{'menu-visible':menuisshown,'menu-not-visible':!menuisshown}">
-                   <!--  <div class="shadow bg-white rounded" >
-                        <ul class="list-group list-group-flush" id="test" > 
-                            <li class="list-group-item div-image-menu p-0 m-0">                         
-                                <div class="row p-0 m-0">                                            
-                                    <a><img src="assets/img/machining_power_b.svg"  class="logoImg  p-2"></a>                                            
-                                    <label class="col-form-label" >Machining Calculator</label>                                                   
-                                </div>                         
-                            </li>
-                            <li class="list-group-item div-image-menu p-0 m-0">                        
-                                <div class="row p-0 m-0">                                            
-                                    <a><img src="assets/img/machining_power_b.svg"  class="logoImg  p-2"></a>                                            
-                                    <label class="col-form-label" >Machining Support</label>                                                   
-                                </div>                         
-                            </li>
-                            <li class="list-group-item div-image-menu p-0 m-0">
-                                    <div class="row p-0 m-0">                                            
-                                    <a><img src="assets/img/productive_b.svg"  class="logoImg  p-2"></a>                                            
-                                    <label class="col-form-label" >Productive Geometries</label>                                                   
-                                </div>                                                                                                                                 
-                            </li>
-                            <li class="list-group-item div-image-menu p-0 m-0">
-                                    <div class="row p-0 m-0">                                            
-                                    <a><img src="assets/img/grade_optimizer_b.svg"  class="logoImg  p-2"></a>                                            
-                                    <label class="col-form-label" >Grade Optimizer</label>                                                   
-                                </div>                                                                                                                                 
-                            </li>                     
-                        </ul>         
-                    </div>  -->   
+                <div class="row" [ngClass]="{'menu-visible':menuisshown,'menu-not-visible':!menuisshown}">            
                     <div class="shadow bg-white" >                       
                         <ul class="list-group list-group-flush"> 
                             <li class="list-group-item div-image-menu p-0 m-0">                         
-                                <a><img src="assets/img/Help_Icon.svg" (click)="menuisshown=false;openhelp()" class="logoImg p-2"></a>                         
+                                <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="logoImg p-2"></a>                         
                             </li>
                             <li class="list-group-item div-image-menu p-0 m-0">                        
-                                <a><img src="assets/img/icon_Favorite.svg" (click)="menuisshown=false;openfavorite()" class="logoImg p-2"></a>                        
+                                <a><img [src]="environment.ImagePath+'icon_Favorite.svg'" (click)="menuisshown=false;openfavorite()" class="logoImg p-2"></a>                        
                             </li>                           
                             <li class="list-group-item div-image-menu p-0 m-0">   
                                 <div class="dropdown">                        
                                 <div class="btn-group"  ngbDropdown role="group" placement="bottom-right" id="test">                                
-                                    <div ngbDropdownToggle id="calc"><img src="assets/img/Calculators_Icon.svg"  class="logoImg  p-2"></div>
-                                    <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="calc">
-                                        <div  ngbDropdownItem  class="dropdown-item menuitem">
-                                            <div class="form-group p-0 m-0"> 
-                                                <div class="row p-0 m-0">                                            
-                                                    <a><img src="assets/img/machining_power_b.svg"  class="logoImg  p-2"></a>                                            
-                                                    <label class="col-form-label" >Machining Calculator</label>                                                   
-                                                </div>
-                                            </div>
+                                    <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="logoImg p-2"></div>
+                                    <div class="dropdown-menu calc-table" ngbDropdownMenu aria-labelledby="calc">
+                                        <div  ngbDropdownItem  class="row col-12 dropdown-item menuitem">                                                                                                                                   
+                                                    <a><img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3"></a>                                                                                                                                                                                                    
+                                                    <label class="col-form-label" >Machining Calculators</label>                                                                                              
                                         </div>
-                                        <div class ="menuitem" ngbDropdownItem>
-                                            <div class="form-group p-0 m-0"> 
-                                                <div class="row">                                            
-                                                    <img src="assets/img/machining_power_b.svg"  class="logoImg  p-2">                                           
-                                                    <label class="col-form-label" >Machining Support</label>       
-                                                </div>
-                                            </div>
+                                        <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                         
+                                                    <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3">                                           
+                                                    <label class="col-form-label" >Machining Support</label>                                                   
                                         </div>
-                                        <div class ="menuitem" ngbDropdownItem>
-                                            <div class="form-group p-0 m-0"> 
-                                                <div class="row">                                           
-                                                    <img src="assets/img/productive_b.svg"  class="logoImg  p-2">                                      
-                                                    <label class="col-form-label" >Productive Geometries</label>       
-                                                </div>
-                                            </div>
+                                        <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                    
+                                                    <img [src]="environment.ImagePath+'productive_b.svg'"  class="logoImg  p-3">                                      
+                                                    <label class="col-form-label" >Productive Geometries</label>                                                   
                                         </div>
-                                        <div class ="menuitem" ngbDropdownItem>
-                                            <div class="form-group p-0 m-0"> 
-                                                <div class="row">                                           
-                                                    <img src="assets/img/grade_optimizer_b.svg"  class="logoImg  p-2">                                      
-                                                    <label class="col-form-label" >Grade Optimizer</label>       
-                                                </div>
-                                            </div>
+                                        <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                  
+                                                    <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="logoImg  p-3">                                      
+                                                    <label class="col-form-label" >Grade Optimizer</label>                                                
                                         </div>
                                     </div>
                                 </div>
                                 </div>                            
                             </li>                   
-                            <li class="list-group-item div-image-menu p-0 m-0">                         
-                                <a><img src="assets/img/ecat_Icon.svg" (click)="menuisshown=false;opencatalog()" class="logoImg p-2"></a>                       
+                            <li class="list-group-item div-image-menu p-0 m-0">                                                 
+                                <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="logoImg p-2"></a>                       
                             </li>
                         </ul>
                  </div> 
@@ -102,7 +57,6 @@
             </div>
         </div>     
     </div>
-
 
    
 

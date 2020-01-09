@@ -1,25 +1,31 @@
 
-<!-- <label class="col-form-label">{{InputParamList.GetItem('SecondaryApplication')?.valuedefault}}</label> -->
-<div class="container-fluid ml-0 pl-0 mt-0 pt-4"> 
-<div class="form-group">
-    <div class="form-group row">
-        <div class="pl-2">
-            <label  class="col-form-label">Operation Data</label>
+<div class="container-fluid ml-0 pl-0 mt-0 pt-4 pr-0">   
+     <div class="form-group row col-12 pr-0">
+        <!-- <div  [ngClass]="showistoodata ? 'col-3 border-right border-left' : 'div-tooldata-closed border-right border-left'"> -->
+            <div  [ngClass]="showistoodata ? 'col-3 border-right border-left' : 'col-1 border-right border-left'">
+             <div class="form-group " >                     
+                <a   [ngClass]="showistoodata ?'cursor-pointer float-right':'pl-4 cursor-pointer float-center'" (click)="showtooldata()">                        
+                    <i  [ngClass]="showistoodata ? 'fas fa-chevron-left icon-open' : 'fas fa-chevron-right icon-open'"></i>
+                </a>                            
+                <div>                    
+                    <label [ngClass]="showistoodata ? 'desc-label-big-bold text-nowrap':'desc-label-big-bold text-nowrap vertical-text'">Tool Data</label>                    
+                </div>
+                <div>
+                    <app-optimizetool59></app-optimizetool59>
+                </div>
+            </div>            
         </div>
-        <div class="pl-2"> 
-            <button class="btn btn-select btn-block" (click)="GetResult()" [routerLink]="['/results']">Get Result</button>                                       
+        <div [ngClass]="showistoodata ? 'col-9 pl-2 m-0 pr-0':'col-11 pl-2 m-0 pr-0'">
+            <div class="form-group p-0 m-0 ">
+                <div class="form-group row col-12 p-0 m-0">                    
+                    <label  class="desc-label-big-bold col-form-label col-10">Operation Data</label>                      
+                    <button class="btn btn-select float-right col-2" (click)="GetResult()" [routerLink]="['/results']">Get Result</button>                                                           
+                 </div>
+                <div >
+                    <app-appdetails59   [Ipl]=Ipl></app-appdetails59>
+                </div>
+            </div>
         </div>
-    </div>
-    <div>
-        <label class="col-form-label">{{SecApp}}</label>
-    </div>
-    <div>
-        <label class="col-form-label">{{SecAppName}}</label>
-    </div>
-   <!--  <div >
-        <button class="btn btn-select btn-block" (click)="open()">open component</button>                                       
-    </div> -->
-</div>
-
-<!-- <app-appdetails59 *ngIf="opendetails"  [Ipl]=Ipl></app-appdetails59>
-</div> -->
+         
+     </div>
+</div> 

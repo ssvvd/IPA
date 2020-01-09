@@ -13,8 +13,8 @@ export class DatalayerService {
 
   }
 
-   public  getinputparameters()
+   public  getinputparameters(secapp:string,units:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters');
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters/' + secapp + '/' + units);
   }
 }

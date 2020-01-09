@@ -58,32 +58,32 @@
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px var(--border-color-gray)!important;
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px  var(--border-color-gray)!important;
 }
- 
+
 input:not(:placeholder-shown) {
    background-color:  #F1F1F1!important;
-   border-radius: 0px;
-   font-size: $font-size-sm; 
+   border-radius: 0px!important;
+   font-size: $font-size-sm!important; 
 }
 
 input:placeholder-shown {
    background-color:  #F1F1F1!important;
-   border-radius: 0px;    
-   font-size: $font-size-sm; 
+   border-radius: 0px!important;    
+   font-size: $font-size-sm!important;
 }
 
 input:focus
 {  
   background-color:  #F1F1F1!important;
-   border-radius: 0px;
-   font-size: $font-size-sm; 
-  outline: 0;
+   border-radius: 0px!important;
+   font-size: $font-size-sm!important; 
+  outline: 0!important;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px var(--border-color-gray)!important;
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px var(--border-color-gray) !important;  
 }
 
 label,span,p,input,select,table,button,a,li
 {
-  font-family: var(--family-font);   
+  font-family: var(--family-font)!important;  
 }
 
 button{
@@ -98,11 +98,11 @@ select{
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {
-    background-color:var(--btn-bg-select-color);
+    background-color:var(--btn-bg-select-color)!important;
 }
 
 .custom-radio .custom-control-input:checked~.custom-control-label::before {
-    background-color:var(--btn-bg-select-color);
+    background-color:var(--btn-bg-select-color)!important;
 }
   
 html {

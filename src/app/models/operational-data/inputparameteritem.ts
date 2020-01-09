@@ -12,7 +12,8 @@ export class InputParameterItem {
     public valuedefault:string;
     public valuemin:string;
     public valuemax:string;
-
+    public image:string;
+    
     constructor()
     {
         

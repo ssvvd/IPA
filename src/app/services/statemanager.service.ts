@@ -4,6 +4,7 @@ import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
+import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -13,9 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class StateManagerService { 
 
-  private lstMachineHeader:Machineheader[];
-  //private MachineSpindleSelected:Machinespindle;  
-  
+  private lstMachineHeader:Machineheader[]; 
   private mMachineFilter:MachineFilter;
   private mSelectedMachine:Machineheader;
   private marrMachineSpindle:Machinespindle[];
@@ -29,17 +28,29 @@ export class StateManagerService {
 
   private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);
   CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable(); 
+ 
+  private obsOperationDataEnable = new BehaviorSubject<boolean>(false);
+  OperationDataEnable = this.obsOperationDataEnable.asObservable();   
 
   private mSecondaryAppSelected:SecondaryApp;
-  private mMainAppSelected:MainApp;
-    
+  private mMainAppSelected:MainApp; 
+
+  CheckTabOperationalDataEnable()
+  {   
+    if(typeof(this.SelectedMachine) !== 'undefined' && typeof(this.SecAppSelected) !== 'undefined' && typeof(this.GetMaterialSelected()) !== 'undefined' && this.SelectedMachine!=null && this.SecAppSelected!=null && this.GetMaterialSelected()!=null)   
+        this.obsOperationDataEnable.next(true);    
+    else     
+        this.obsOperationDataEnable.next(false);  
+  }
+
   get SelectedMachine():Machineheader {
     return this.mSelectedMachine;
   }
   set SelectedMachine(m:Machineheader) {
     this.mSelectedMachine=m;   
     let desc:string;
-    desc=m.SpindleSpeed.toString() + " KW " + m.Torque.toString() + " t/min";    
+    desc=m.SpindleSpeed.toString() + " KW " + m.Torque.toString() + " t/min"; 
+    this.CheckTabOperationalDataEnable();   
     this.obsMachineSelected.next([m.MachineName,desc]);
   }
 
@@ -76,6 +87,7 @@ export class StateManagerService {
   }
   set SecAppSelected(sa:SecondaryApp) {
     this.mSecondaryAppSelected = sa;   
+    this.CheckTabOperationalDataEnable();   
     this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, sa.MenuName]);
   }
 
@@ -101,6 +113,15 @@ export class StateManagerService {
   set MenuIDLevel2(id:string) {
     this.mMenuIDLevel2 = id;
   }
+  
+   private mIPL:InputParameterlist;
+   get IPL():InputParameterlist {
+    return this.mIPL;
+    }
+  set IPL(ipl:InputParameterlist) {
+    this.CheckTabOperationalDataEnable();   
+    this.mIPL = ipl;
+   }
 
   SelectMaterial(mat: clsMaterial) {
     this.materialSelected=mat;   

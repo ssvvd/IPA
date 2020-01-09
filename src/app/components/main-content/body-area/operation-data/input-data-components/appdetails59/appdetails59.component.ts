@@ -1,6 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-appdetails59',
@@ -10,14 +11,24 @@ import { InputParameterlist } from 'src/app/models/operational-data/inputparamet
 export class Appdetails59Component implements OnInit {
 
   @Input() Ipl:InputParameterlist;
-  //DepthOfShoulder_ap:string;
+  ImageName:string='';
+  InFocus:boolean=false;
+  environment=environment;
+ 
   constructor() { }
 
-  ngOnInit() {    
-    //if(typeof(this.Ipl)!== 'undefined' && this.Ipl !== null)
-    //{
-      //this.DepthOfShoulder_ap =this.Ipl.GetItem('DepthOfShoulder_ap').valuedefault;
-    //}
+  ngOnInit() {        
+  }
+ 
+  onfocusfield(field:string)
+  {
+    this.InFocus=true;
+    this.ImageName= environment.ImageInputPath + this.Ipl.GetItem(field).image;
   }
 
+  onfocusoutfield()
+  {
+    this.InFocus=false;
+    this.ImageName="";
+  }
 }
