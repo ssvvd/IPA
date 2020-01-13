@@ -5,6 +5,7 @@ import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+import { InputParamItemChanged} from 'src/app/models/operational-data/inputparameteritem';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -71,16 +72,6 @@ export class StateManagerService {
   set arrMachineSpindle(mf:Machinespindle[]) {
     this.marrMachineSpindle = mf;
   }
-
- /*  SetMachineSpindleCur(m:Machinespindle)
-  {
-    this.MachineSpindleSelected=m;
-  }
-
-  SetMachineSpindlers(m: Machinespindle[])
-  {
-    this.arrMachineSpindle=m;
-  } */
   
   get SecAppSelected():SecondaryApp {
     return this.mSecondaryAppSelected;
@@ -121,6 +112,14 @@ export class StateManagerService {
   set IPL(ipl:InputParameterlist) {
     this.CheckTabOperationalDataEnable();   
     this.mIPL = ipl;
+   }
+
+   private mIPLChanged:string;
+   get IPLChanged():string {
+    return this.mIPLChanged;
+    }
+  set IPLChanged(ipl:string) {  
+    this.mIPLChanged = ipl;
    }
 
   SelectMaterial(mat: clsMaterial) {

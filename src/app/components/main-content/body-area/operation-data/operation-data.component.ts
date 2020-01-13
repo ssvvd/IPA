@@ -1,9 +1,9 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,HostListener } from '@angular/core';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
-import { HostListener } from '@angular/core'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-operation-data',
@@ -19,7 +19,11 @@ export class OperationDataComponent implements OnInit {
   SecAppName:string;
   opendetails:boolean =false;
   showistoodata:boolean=true;
-  constructor(private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) { }
+  router:Router;
+  constructor(router:Router,private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) 
+  {
+    this.router=router;
+   }
   
   ngOnInit() {
     this.showistoodata=true;
@@ -41,7 +45,8 @@ export class OperationDataComponent implements OnInit {
                 valuedefault: d.valuedefault==null?'':d.valuedefault,              
                 valuemin:d.valuemin ,
                 valuemax: d.valuemax ,
-                image:d.image      
+                image:d.image ,
+                required:d.required     
             })                                   
         }
           
@@ -49,29 +54,40 @@ export class OperationDataComponent implements OnInit {
 )
 };
 
-@HostListener('window:resize', ['$event'])
-onResize(event) {  
-  if(event.target.innerWidth<900)
-    this.showistoodata=false;  
-  else
-    this.showistoodata=true;
-}
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {  
+    if(event.target.innerWidth<900)
+      this.showistoodata=false;  
+    else
+      this.showistoodata=true;
+  }
 
-showtooldata()
-{
-  this.showistoodata =!this.showistoodata;
-}
+  showtooldata()
+  {
+    this.showistoodata =!this.showistoodata;
+  }
 
-GetResult()
-{    
-  this.srv_StMng.IPL=this.Ipl;
-  let v:object;
-  v=this.Ipl.GetItem('WidthOfShoulder_ae').value;
-  v=this.Ipl.GetItem('Clamping').value;
-}
+  GetResult()
+  {            
+    this.Ipl.GetItem('MainApplication').value = this.srv_StMng.MainAppSelected.MainApp;
+    this.Ipl.GetItem('SecondaryApplication').value = this.srv_StMng.SecAppSelected.ApplicationITAID;
+    
+    this.srv_StMng.IPL=this.Ipl; 
+    let listparams: { name: string, value: string }[]=[];
+    let JSONParams:string;
+    if (this.Ipl.items.filter(x=> x.value==null && x.required).length==0)
+      {
+      this.Ipl.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {        
+        listparams.push(
+        {
+          "name": p.name,
+          "value": p.value
+        })
+      });
 
-open()
-{
-  this.opendetails=true;
-}
+      JSONParams = JSON.stringify(listparams); 
+      this.srv_StMng.IPLChanged=JSONParams;      
+      this.router.navigate(['/results']);
+      }    
+  }    
 }

@@ -59,8 +59,6 @@
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px var(--border-color-gray)!important;
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 2px  var(--border-color-gray)!important;
 }
-<<<<<<< HEAD
-=======
  
 .btn-select-cancel
 {
@@ -69,7 +67,6 @@
     border-color:var(--btn-bg-gray-color);   
     min-width:100px;
 }
->>>>>>> 78a4c35c15761f656dcf0d5fae6f27039cf01d43
 
 input:not(:placeholder-shown) {
    background-color:  #F1F1F1!important;
@@ -81,6 +78,12 @@ input:placeholder-shown {
    background-color:  #F1F1F1!important;
    border-radius: 0px!important;    
    font-size: $font-size-sm!important;
+}
+
+.input-empty{
+  border-color: red;
+   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px red!important;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px red !important; 
 }
 
 input:focus
@@ -174,10 +177,14 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.tr-selected
+tr.tr-selected {
+  background-color: var(--row-selected) !important;
+}
+/* .tr-selected
 {
     background-color: var(--row-selected);    
-}
+} */
+  
 .tr-not-selected
 {
     background-color:var(--bg-gray);
@@ -210,4 +217,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .breadcrumb-item + .breadcrumb-item::before {
   content: ">";
+}
+
+.asterisk-red
+{
+    color:red;
 }

@@ -1,5 +1,6 @@
 export class MainApp {
     MenuID:string;
+    MainApp:string;
     MenuName:string;
     MenuImage:string;
 }
