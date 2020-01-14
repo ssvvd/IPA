@@ -1,45 +1,33 @@
+<div class="editPrmModal">
 <div class="modal-header">
     <h4 class="modal-title">Edit Parameters - {{modal_group}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.close('A')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
    <div class="modal-body"> 
     <div class="row"> 
-            <div class="radio radio-inline">
-                <input type="radio" name="radio1" id="rdHB" value="HB" (click)="onRadioButtonClick('HB')" checked>
-                <label  for="rdHB">
-                    HB
-                </label>
-            </div>
-            <div class="radio radio-inline">
-                <input type="radio" name="radio1" id="rdHV" value="HV" (click)="onRadioButtonClick('HV')">
-                <label for="rdHV">
-                    HV
-                </label>
-            </div>
-            <div class="radio radio-inline">
-                <input type="radio" name="radio1" id="rdHRC" value="HRC" (click)="onRadioButtonClick('HRC')">
-                <label for="rdHRC">
-                    HRC
-                </label>
-            </div>
-            <div class="radio radio-inline">
-                <input type="radio" name="radio1" id="rdNmm2" value="N/mm2" (click)="onRadioButtonClick('NMM')">
-                <label for="rdNmm2">
-                    N/mm2
+            <div class="radio radio-inline" *ngFor="let item of radioList">
+                <input type="radio" id="rb{{item}}" name="radio1" value="{{item}}" [(ngModel)]="curRadioChecked" (click)="onRadioButtonClick(item)" >
+                <label  for="rb{{item}}">
+                    {{item}}
                 </label>
             </div>
   </div> 
   <div class="customSilder">
 
-    <ng5-slider #paramSlider [(value)]="value" [options]="options">
+    <ng5-slider #paramSlider [(value)]="value" [options]="options" (valueChange)="onUserChangeEnd($event)" (userChangeEnd)="onUserChangeEnd($event)">
     </ng5-slider>
-    <input type="number" [(ngModel)]="value" ng5sliderlabel class="ng5-slider-span ng5-slider-bubble ng5-slider-model-value sliderTextBox" [style.left.px]="leftPosition">
+
+        <input type="number" [ngModel]="value" (ngModelChange)="onSearchChange($event)" [ngClass]="(dangMsg != '')? 'is-invalid' : ''" ng5sliderlabel class="form-control input-lg form-control-lg col-sm-2 ng5-slider-span ng5-slider-bubble ng5-slider-model-value sliderTextBox" [style.left.px]="leftPosition">
+
+    
   </div>
+  <h5 class="text-danger">{{dangMsg}}</h5>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Reset</button>
-    <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Cancel</button>
-    <button type="button" class="btn btn-select" (click)="activeModal.close('Close click')">Set</button>
+    <button type="button" class="btn btn-select-cancel" (click)="reset()">Reset</button>
+    <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">Cancel</button>
+    <button type="button" class="btn btn-select" (click)="set()">Set</button>
   </div>
+</div>

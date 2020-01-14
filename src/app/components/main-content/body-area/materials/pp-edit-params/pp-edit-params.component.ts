@@ -4,6 +4,8 @@ import { Options, ChangeContext } from 'ng5-slider';
 import { HardnessLimit } from 'src/app/models/materials/hardness-limit';
 import { HardnessConversion } from 'src/app/models/materials/hardness-conversion';
 import { MaterialService } from 'src/app/services/material.service';
+import { Subject } from 'rxjs';
+import {debounceTime, distinctUntilChanged} from "rxjs/internal/operators";
 
 @Component({
   selector: 'app-pp-edit-params',
@@ -15,12 +17,16 @@ export class PpEditParamsComponent implements OnInit, DoCheck{
   @Input() modal_mat_id;
   @Input() modal_hardness;
   @Input() modal_group;
-  curRadioChecked: string = 'HB';
+  @Input() origin_hardness;
+  dangMsg:string = '';
+  curRadioChecked: string ;
+  radioList:string[] = ['HB','HV','HRC','N/mm2'];
   value: number;
+  valueChanged: Subject<number> = new Subject<number>();
   minValue: number;
   maxValue: number;
   finishOnInit:boolean = false;
-  leftPosition: string ;
+  leftPosition: number ;
   options: Options = {
     floor: 1,
     ceil: 1000,
@@ -33,13 +39,51 @@ export class PpEditParamsComponent implements OnInit, DoCheck{
 
 
   constructor(public activeModal: NgbActiveModal, private elem: ElementRef,private cdr: ChangeDetectorRef,private serv: MaterialService) { 
+
+    this.valueChanged
+   .pipe(debounceTime(300),distinctUntilChanged())
+   .subscribe(model => {
+    
+       // api call
+
+      //    else
+      if (model || model == 0){
+        this.value = +model; 
+          let b:number = this.value;
+  
+          if (+model < this.options.floor)
+            b = this.options.floor
+         else if (+model> this.options.ceil)
+            b = this.options.ceil 
+  
+          this.onSearchChange(b);
+      }
+      else{
+        this.dangMsg = '    ';
+      }
+
+
+   });
+
     setInterval(() => {
-      this.cdr.detectChanges()
+      if (!this.cdr['destroyed']) {
+        this.cdr.detectChanges()
+    }
+     
     }, 1);
+  }
+
+  onSearchChange(v:number): void {  
+    // if (v.toString().length > 1)
+    //   this.value = v;
+    console.log(v);
+     this.valueChanged.next(v);
+    
   }
 
      ngOnInit() {
 
+      this.curRadioChecked = 'HB';
       this.value = this.modal_hardness;
 
       this.serv.getmaterialhardness().subscribe((res:any)=>{
@@ -61,18 +105,44 @@ export class PpEditParamsComponent implements OnInit, DoCheck{
     if (this.finishOnInit){
       let leftPositionSlider =  window.getComputedStyle(this.elem.nativeElement.querySelectorAll('.ng5-slider-pointer-min').item(0)).getPropertyValue('left');
       // console.log(leftPositionSlider);
-      this.leftPosition = leftPositionSlider.replace('px','');
+      this.leftPosition = +leftPositionSlider.replace('px','') - 22;
     }
       //  this.cdr.detectChanges();
     }
 
 
 
-  onUserChange(changeContext: ChangeContext): void {
-      // check show message
+    onUserChangeEnd(changeContext: ChangeContext): void {
+      console.log('onUserChangeEnd');
+      let curHBValue: number = this.value;
+      let msg: string = 'At this hardness level, please change to material group ';
+      if (this.curRadioChecked != 'HB'){
+        curHBValue = this.findHardness(this.curRadioChecked,this.value,'HB')
+      }
+
+      if (curHBValue >= this.hardnessLimit.min1 && curHBValue <= this.hardnessLimit.max1)
+        this.dangMsg = msg + this.hardnessLimit.grp1
+      else if (curHBValue >= this.hardnessLimit.min2 && curHBValue <= this.hardnessLimit.max2)
+        this.dangMsg = msg + this.hardnessLimit.grp2
+      else if (curHBValue >= this.hardnessLimit.min3 && curHBValue <= this.hardnessLimit.max3)
+        this.dangMsg = msg + this.hardnessLimit.grp3
+      else if (curHBValue >= this.hardnessLimit.min4 && curHBValue <= this.hardnessLimit.max4)
+        this.dangMsg = msg + this.hardnessLimit.grp4
+      else
+        this.dangMsg = '';
+
+
   }
 
   onRadioButtonClick(type:string){
+
+    this.findLimits(type);
+    this.value = this.findHardness(this.curRadioChecked,this.value,type);
+    this.curRadioChecked = type;
+  
+  }
+
+  findLimits(type:string){
     let min: number;
     let max: number;
 
@@ -89,12 +159,7 @@ export class PpEditParamsComponent implements OnInit, DoCheck{
     newOptions.floor = min;
     newOptions.ceil = max;
     this.options = newOptions;
-
-    this.value = this.findHardness(this.curRadioChecked,this.value,type);
-    this.curRadioChecked = type;
-  
   }
-
   findHardness(prevType:string,prevValue:number,curType:string):number{
     let newValue: number;
     let hc:HardnessConversion;
@@ -134,7 +199,27 @@ export class PpEditParamsComponent implements OnInit, DoCheck{
   }
 
 
-  onSearchChange(searchValue: string): void {  
-    console.log(searchValue);
+
+
+  reset(){
+    this.curRadioChecked = 'HB';
+    this.findLimits(this.curRadioChecked);
+    this.value = this.origin_hardness;
+    this.dangMsg = '';
   }
+
+  set(){
+    if (this.dangMsg == ''){
+      let curHBValue: number = this.value;
+      if (this.curRadioChecked != 'HB'){
+        curHBValue = this.findHardness(this.curRadioChecked,this.value,'HB')
+      }
+      this.activeModal.close(curHBValue);
+
+
+    }
+  }
+
+
+
 }

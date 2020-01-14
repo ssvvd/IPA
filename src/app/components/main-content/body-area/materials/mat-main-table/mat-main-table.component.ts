@@ -46,6 +46,9 @@ export class MatMainTableComponent implements OnInit {
 
   }
 
+  // initHardness(mat:clsMaterial){
+  //   mat.HardnessOrigin = mat.Hardness;
+  // }
   fillMainTable(){
     this.serv.getmaterialsbygrp('EN',this.selectedCategory).subscribe((res:any)=>{
       this.materialsResult=JSON.parse(res);
@@ -112,10 +115,21 @@ export class MatMainTableComponent implements OnInit {
   }
 
   openEditParamsM(mat:clsMaterial) {
+    if (!mat.HardnessOrigin)
+      mat.HardnessOrigin = mat.Hardness;
     const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true });
     modalRef.componentInstance.modal_mat_id = mat.id;
     modalRef.componentInstance.modal_group = mat.group;
+    modalRef.componentInstance.origin_hardness = mat.HardnessOrigin.replace(" HB","");
     modalRef.componentInstance.modal_hardness = mat.Hardness.replace(" HB","");
+    modalRef.result.then((result) => {
+      if (result) {
+      console.log(result);
+        if(result != 'A'){
+          mat.Hardness = result + ' HB';
+        }
+      }
+      }, () => console.log('Rejected!'));
   }
 
   openRequestMatM() {
