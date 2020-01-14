@@ -38,6 +38,7 @@ export class MachiningOperationComponent implements OnInit {
             this.arrMainApps.push({
               MenuID: d.MenuID,
               MenuName: d.MenuName,
+              MainApp:d.MainApp,
               MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png"              
           })
         }
@@ -116,9 +117,11 @@ export class MachiningOperationComponent implements OnInit {
 
   OnSelectSecApp(sa:SecondaryApp,l:number)
   {
+    this.srv_statemanage.IPL=null;
     this.srv_statemanage.MainAppSelected=this.SelectedMainApp;
     this.srv_statemanage.SecAppSelected=sa; 
     if(l==1) this.srv_statemanage.MenuIDLevel1=sa.MenuID;
     if(l==2) this.srv_statemanage.MenuIDLevel2=sa.MenuID;
+    
   }
 }

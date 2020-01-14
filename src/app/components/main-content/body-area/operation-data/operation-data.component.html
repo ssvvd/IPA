@@ -1,7 +1,6 @@
 
 <div class="container-fluid ml-0 pl-0 mt-0 pt-4 pr-0">   
-     <div class="form-group row col-12 pr-0">
-        <!-- <div  [ngClass]="showistoodata ? 'col-3 border-right border-left' : 'div-tooldata-closed border-right border-left'"> -->
+     <div class="form-group row col-12 pr-0">       
             <div  [ngClass]="showistoodata ? 'col-3 border-right border-left' : 'col-1 border-right border-left'">
              <div class="form-group " >                     
                 <a   [ngClass]="showistoodata ?'cursor-pointer float-right':'pl-4 cursor-pointer float-center'" (click)="showtooldata()">                        
@@ -19,7 +18,7 @@
             <div class="form-group p-0 m-0 ">
                 <div class="form-group row col-12 p-0 m-0">                    
                     <label  class="desc-label-big-bold col-form-label col-10">Operation Data</label>                      
-                    <button class="btn btn-select float-right col-2" (click)="GetResult()" [routerLink]="['/results']">Get Result</button>                                                           
+                    <button class="btn btn-select float-right col-2" (click)="GetResult()" >Get Result</button>                                                           
                  </div>
                 <div >
                     <app-appdetails59   [Ipl]=Ipl></app-appdetails59>

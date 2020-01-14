@@ -8,15 +8,21 @@
 export class InputParameterItem {
     public name:string;
     public type:string;
-    public value:object;
+    public value:string;
     public valuedefault:string;
     public valuemin:string;
     public valuemax:string;
     public image:string;
+    public required;
     
     constructor()
     {
         
     }
+}
+
+export class InputParamItemChanged {
+  name:number;
+  value: string;
 }
 

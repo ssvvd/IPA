@@ -97,17 +97,19 @@ export class MainMenuComponent implements OnInit {
 
  TabSelected(RouteName:string) {       
     this.Tabs.forEach( (obj) => { 
+       if(obj.RouteName==RouteName)   
+        {      
+          obj.IsSelected=true;      
+          obj.isDisabled =false;
+        }
+      else
+          obj.IsSelected=false;
       if(obj.RouteName=="/machines"){
         if(RouteName.indexOf('machine-item')>-1){
           obj.IsSelected=true; 
-        }else{
-          obj.IsSelected=false; 
-        }        
-      }          
-      else if(obj.RouteName==RouteName)         
-          obj.IsSelected=true;      
-      else
-       obj.IsSelected=false;
+          obj.isDisabled =false;
+        }
+      }               
     });
    }    
   

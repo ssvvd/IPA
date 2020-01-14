@@ -15,7 +15,7 @@ export class InputParameterlist
       return this.items.find(e=> e.name ==name);
    }
 
-    SetValue(name:string,value:object)
+    SetValue(name:string,value:string)
     {
         this.items.find(e=> e.name ==name).value=value;
     }  
