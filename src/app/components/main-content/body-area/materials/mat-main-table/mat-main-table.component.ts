@@ -131,8 +131,4 @@ export class MatMainTableComponent implements OnInit {
       }
       }, () => console.log('Rejected!'));
   }
-
-  openRequestMatM() {
-    const modalRef = this.modalService.open(PpRequestMaterialComponent, { centered: true });
-  }
 }

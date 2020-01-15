@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
-import { clsMaterial } from 'src/app/models/materials/material'
+import { clsMaterial } from 'src/app/models/materials/material';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PpRequestMaterialComponent } from './pp-request-material/pp-request-material.component';
 
 @Component({
   selector: 'app-materials',
@@ -9,7 +11,7 @@ import { clsMaterial } from 'src/app/models/materials/material'
 })
 export class MaterialsComponent implements OnInit {
 
-  constructor(private statemng:StateManagerService ) {}
+  constructor(private statemng:StateManagerService,private modalService: NgbModal ) {}
 
   selectedCateg: string;
   selectedMatDeials:clsMaterial;
@@ -61,5 +63,9 @@ export class MaterialsComponent implements OnInit {
   ngOnInit() {
     this.curComponent = "1";
     //alert(this.statemng.GetMachineHeaderCur().CostPerHour);    
+  }
+
+  openRequestMatM() {
+    const modalRef = this.modalService.open(PpRequestMaterialComponent, { centered: true,windowClass:"customModalClass" });
   }
 }

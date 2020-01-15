@@ -21,7 +21,8 @@ import { MachinesListComponent } from './components/main-content/body-area/machi
 import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
 import { MainMenuComponent } from './components/main-content/main-menu/main-menu.component';
 import { MachineItemSpindleComponent } from './components/main-content/body-area/machines/machine-item-spindle/machine-item-spindle.component';
-import { FormsModule } from '@angular/forms'; import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 import { MachineItemSpindleChartComponent } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.component';
 import { MatFilterComponent } from './components/main-content/body-area/materials/mat-filter/mat-filter.component';
 
@@ -77,7 +78,8 @@ import { Optimizetool59Component } from './components/main-content/body-area/ope
     DataTablesModule,
     MachineItemSpindleChartModule ,
     Ng5SliderModule ,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   entryComponents:[
     PpAddFavoritComponent,

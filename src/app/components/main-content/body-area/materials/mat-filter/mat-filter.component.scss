@@ -4,12 +4,16 @@
 }
 
 .list-group-item:focus {
-  background: #e7e8e9; /* adjust here */
+  background: var(--bg-hover) !important ; /* adjust here */
 }
 
 button:focus {outline:0;}
 
 .list-group-item.active  {
 color:#495057;
-background-color:#e7e8e9 ;
+background-color:var(--row-selected) !important ;
   }
+
+.list-group-item:hover {
+    background-color: var(--bg-hover) !important ;
+}
