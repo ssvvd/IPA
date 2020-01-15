@@ -90,11 +90,33 @@
     .customSilder .ng5-slider .ng5-slider-bubble {
         top:15px;
     }
+
+    .customSilder .ng5-slider .ng5-slider-pointer {
+      background-color: #676767;
+    }
+    .customSilder .ng5-slider .ng5-slider-pointer.ng5-slider-active:after {
+      background-color: var(--btn-bg-select-color);
+    }
+    .ng5-slider .ng5-slider-selection {
+      background-color: #676767;
+    }
   }
 
   .sliderTextBox{
     position: relative;
+    font-size: medium !important;
+    text-align: center;
   }
+
+  .editPrmModal{
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .form-control.is-invalid{
+    background-image: none;
+    padding-right: 1rem;
+}
 
 //   .sliderTB {
 //       top:60px;

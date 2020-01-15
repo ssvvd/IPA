@@ -17,6 +17,7 @@ export const environment = {
   ImgSetDefault:"assets/img/SetDiffult_Icon.svg",
   ImgViewTable:"assets/img/AlternativeIcon.svg",
   ImgEditParams:"assets/img/icon_edit_ITA.svg",
+  ImgStock:"assets/img/icon_stock.svg",
   ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx"
 };
 

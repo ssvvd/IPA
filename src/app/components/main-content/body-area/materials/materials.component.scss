@@ -40,3 +40,7 @@
     .divst{
       background: var(--bg-gray);
     }
+
+    ::ng-deep .customModalClass .modal-dialog { 
+      max-width: 705px;
+ }

@@ -1,1 +1,87 @@
-<p>pp-request-material works!</p>
+<div class="modal-header">
+    <h4 class="modal-title">Request a new material</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="modal-body">
+    <div class="form-group row">
+      <label for="email" class="col-sm-3 col-form-label col-form-label-lg">Email (or Login Now) *</label>
+      <div class="col-sm-9">
+        <input type="text" formControlName="email" class="form-control form-control-lg" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+        <label for="desc" class="col-sm-3 col-form-label col-form-label-lg">Description *</label>
+        <div class="col-sm-9">
+          <input type="text" formControlName="desc" class="form-control form-control-lg" id="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+          <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
+            <div *ngIf="f.desc.errors.required">Description is required</div>
+        </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="grp" class="col-sm-3 col-form-label col-form-label-lg">Group</label>
+        <div class="col-sm-9">
+          <!-- <input type="text" class="form-control form-control-lg" id="grp" > -->
+          <select class="custom-select custom-select-lg" formControlName="grp">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="stndrd" class="col-sm-3 col-form-label col-form-label-lg">Standard</label>
+        <div class="col-sm-9">
+          <select class="custom-select custom-select-lg" formControlName="stndrd">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="cond" class="col-sm-3 col-form-label col-form-label-lg">Condition</label>
+        <div class="col-sm-9">
+            <select class="custom-select custom-select-lg" formControlName="cond">
+                <option selected>Choose...</option>
+                <option>...</option>
+              </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="hardness" class="col-sm-3 col-form-label col-form-label-lg">Hardness</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control form-control-lg" formControlName="hardness" >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="manf" class="col-sm-3 col-form-label col-form-label-lg">Manufacture/Other</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control form-control-lg" formControlName="manf" >
+        </div>
+      </div>
+  </div>
+  <hr>
+  <div class="modal-footer">
+    <div  *ngIf="subAndValid; else elseBlock" class="paragraphs">
+        <div class="row">
+          <div class="span4">
+            <img style="float:left" src="{{environment.ImgStock}}"/>
+            <div class="content-heading"><h3>Request sent and will be handled. Follow your email.</h3></div>
+          </div>
+        </div>
+      </div>
+        <!-- <div *ngIf="subAndValid; else elseBlock">
+        <img src={{environment.ImgStock}}><h4>Request sent and will be handled. Follow your email.</h4>
+      </div> -->
+      <ng-template  #elseBlock>
+        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Cancel</button>
+        <button type="button" class="btn btn-select" (click)="onSubmit()">Send</button>
+      </ng-template>
+  </div>
+</form>
