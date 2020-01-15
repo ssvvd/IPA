@@ -25,11 +25,13 @@ export class MachiningOperationComponent implements OnInit {
     
   SelectedMenuID1:string="";
   SelectedMenuID2:string="";
-
+  isToOperationData:boolean=false;
   constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService) { }
   
   ngOnInit() {
-  
+
+    this.isToOperationData =this.srv_statemanage.CheckToOperationData();
+
     this.srv_app.getmenu('en','user')
     .subscribe((data: any)=> {
       for (const d of JSON.parse(data)) {                     
@@ -76,7 +78,8 @@ export class MachiningOperationComponent implements OnInit {
         this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;        
     });
   }
-  
+
+
   onSelectMainApp(obj:MainApp) { 
     this.arrSelectedSecApp1=[];
     this.arrSelectedSecApp2=[];

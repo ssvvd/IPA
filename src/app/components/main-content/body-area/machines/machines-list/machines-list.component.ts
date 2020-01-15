@@ -175,7 +175,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   OnViewMachine(mach: Machineheader) {
     this.srv_statemanage.ViewMachine(mach);
-    document.getElementById('example').classList.remove('ordering')
+    //document.getElementById('example').classList.remove('ordering')
   }
 
   UpdateStateSelectedMachine(MachineID: number) {

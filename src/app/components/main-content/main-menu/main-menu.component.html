@@ -1,6 +1,8 @@
 <div class="mt-3">
  <ul class="nav nav-fill" >                  
-        <li *ngFor="let tab of Tabs"  [className]="tab.IsSelected? 'nav-item div-tab-menu-selected' :tab.isDisabled?'nav-item div-tab-menu-disabled':'nav-item div-tab-menu'"  [routerLink]="tab.isDisabled? null:tab.RouteName">  
+        <li *ngFor="let tab of Tabs"  
+        [className]="tab.IsSelected? 
+                                    tab.TabID=='5'? 'nav-item div-tab-menu-selected-last': 'nav-item div-tab-menu-selected':tab.isDisabled? tab.TabID=='5'?'nav-item div-tab-menu-disabled-last' :'nav-item div-tab-menu-disabled':'nav-item div-tab-menu'"  [routerLink]="tab.isDisabled? null:tab.RouteName">  
         <div class="form-group row"> 
             <div>                                          
                 <img [src]="tab.isDisabled ? tab.ImageDisableURL : tab.ImageURL" class="img-main-menu">                                                                                                  

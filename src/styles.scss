@@ -32,7 +32,8 @@
     background-color: var(--btn-bg-select-color);
     color:#FFF;
     border-color:var(--btn-bg-select-color);   
-    min-width:100px;
+    min-width:150px;
+    max-width: 150px;
 }
 
 .btn-select-selected
@@ -40,7 +41,8 @@
     background-color: #597cb0;
     color:#FFF;
     border-color:var(--btn-bg-select-color);  
-    min-width:100px; 
+    min-width:150px;
+    max-width: 150px; 
 }
 .btn-select:hover
 {
