@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false  ,
-  //API_HOST: 'http://localhost:17586/',
-  API_HOST: 'http://www.iscar.com/ITA_API/',
+  API_HOST: 'http://localhost:17586/',
+  //API_HOST: 'http://www.iscar.com/ITA_API/',
   //API_HOST: 'http://intranet.imc.co.il/ITA_API/',
   IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
