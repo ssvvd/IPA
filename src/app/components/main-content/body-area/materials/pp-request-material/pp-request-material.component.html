@@ -7,7 +7,7 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="modal-body">
     <div class="form-group row">
-      <label for="email" class="col-sm-3 col-form-label col-form-label-lg">Email (or Login Now) *</label>
+      <label for="email" class="col-sm-3 col-form-label col-form-label-lg">Email (or <a href="#">Login</a> Now) *</label>
       <div class="col-sm-9">
         <input type="text" formControlName="email" class="form-control form-control-lg" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -28,10 +28,12 @@
       <div class="form-group row">
         <label for="grp" class="col-sm-3 col-form-label col-form-label-lg">Group</label>
         <div class="col-sm-9">
-          <!-- <input type="text" class="form-control form-control-lg" id="grp" > -->
           <select class="custom-select custom-select-lg" formControlName="grp">
-            <option selected>Choose...</option>
-            <option>...</option>
+            <option selected value="">Choose</option>
+            <option *ngFor="let grp of materialsResult" 
+                [value]="grp.group" >
+             {{grp.group}}: {{grp.description}}
+          </option>
           </select>
         </div>
       </div>
@@ -39,8 +41,11 @@
         <label for="stndrd" class="col-sm-3 col-form-label col-form-label-lg">Standard</label>
         <div class="col-sm-9">
           <select class="custom-select custom-select-lg" formControlName="stndrd">
-            <option selected>Choose...</option>
-            <option>...</option>
+            <option selected value="">Standard Conversion</option>
+            <option *ngFor="let st of matStandard" 
+                [value]="st.GWCCNT" >
+             {{st.GWCCNT}}
+          </option>
           </select>
         </div>
       </div>
@@ -48,15 +53,18 @@
         <label for="cond" class="col-sm-3 col-form-label col-form-label-lg">Condition</label>
         <div class="col-sm-9">
             <select class="custom-select custom-select-lg" formControlName="cond">
-                <option selected>Choose...</option>
-                <option>...</option>
+                <option selected value="">Choose</option>
+                <option *ngFor="let cond of ddlCondition" 
+                    [value]="cond.Condition" >
+                 {{cond.Condition}}
+              </option>
               </select>
         </div>
       </div>
       <div class="form-group row">
         <label for="hardness" class="col-sm-3 col-form-label col-form-label-lg">Hardness</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control form-control-lg" formControlName="hardness" >
+          <app-hardness-slider ></app-hardness-slider>
         </div>
       </div>
       <div class="form-group row">
@@ -68,17 +76,14 @@
   </div>
   <hr>
   <div class="modal-footer">
-    <div  *ngIf="subAndValid; else elseBlock" class="paragraphs">
-        <div class="row">
-          <div class="span4">
-            <img style="float:left" src="{{environment.ImgStock}}"/>
-            <div class="content-heading"><h3>Request sent and will be handled. Follow your email.</h3></div>
-          </div>
-        </div>
+    <div class="w-100" *ngIf="subAndValid; else elseBlock">
+        <!-- <div class="row">
+          <div class="span4"> -->
+            <img src="{{environment.ImgStock}}" class="icon-grid"/>
+            <h4>Request sent and will be handled. Follow your email.</h4>
+          <!-- </div>
+        </div> -->
       </div>
-        <!-- <div *ngIf="subAndValid; else elseBlock">
-        <img src={{environment.ImgStock}}><h4>Request sent and will be handled. Follow your email.</h4>
-      </div> -->
       <ng-template  #elseBlock>
         <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Cancel</button>
         <button type="button" class="btn btn-select" (click)="onSubmit()">Send</button>

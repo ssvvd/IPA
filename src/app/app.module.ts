@@ -39,6 +39,7 @@ import { PpEditParamsComponent } from './components/main-content/body-area/mater
 import { PpSetDefaultComponent } from './components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 import { Appdetails59Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails59/appdetails59.component';
 import { Optimizetool59Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool59/optimizetool59.component';
+import { HardnessSliderComponent } from './components/main-content/body-area/materials/hardness-slider/hardness-slider.component';
 
 @NgModule({
   declarations: [   
@@ -68,7 +69,8 @@ import { Optimizetool59Component } from './components/main-content/body-area/ope
     PpEditParamsComponent,
     PpSetDefaultComponent,
     Appdetails59Component,
-    Optimizetool59Component
+    Optimizetool59Component,
+    HardnessSliderComponent
   ],
   imports: [
     FormsModule,
