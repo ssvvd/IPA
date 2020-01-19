@@ -63,13 +63,15 @@
   </div>
 </div>
 </div> -->
-<div class="container-fluid pt-4  ml-0 pl-0">
-  <div class="form-group row  ml-0 pl-0">
-    <div class="col-2  ml-0 pl-0 pr-0 pt-3">
+<div class="container-fluid pt-4 m-0 pl-0 pr-0" >
+  <div class="form-group row ml-0 pl-0" >
+    <div class="col-2 ml-0 pl-0 pr-0 pt-3">
+      <div class="pr-4">
       <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"
         (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
+      </div>
     </div>
-    <div class="col-10 mt-2">
+    <div class="col-10 mt-2 pr-0 mr-0" >
       <div class="form-group">
         <nav aria-label="breadcrumb" style="background-color:white">
           <ol class="breadcrumb" style="background-color:white">
@@ -128,7 +130,7 @@
                   </a>
                 </td>
                 <td>
-                  <div>
+                  <div class="float-right">
                     <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
                       (click)="OnSelectMachine(mach)" [routerLink]="'/materials'">{{mach.DescSelect}}</button>
                   </div>

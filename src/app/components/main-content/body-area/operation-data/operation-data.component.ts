@@ -74,7 +74,7 @@ export class OperationDataComponent implements OnInit {
     
     this.srv_StMng.IPL=this.Ipl; 
     let listparams: { name: string, value: string }[]=[];
-    let JSONParams:string;
+    let JSONParams:string;   
     if (this.Ipl.items.filter(x=> x.value==null && x.required).length==0)
       {
       this.Ipl.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {        
@@ -84,7 +84,13 @@ export class OperationDataComponent implements OnInit {
           "value": p.value
         })
       });
-
+      
+       /* this.srv_DataLayer.setinputparameters(listparams).subscribe(
+        res => console.log( res),
+        err => console.log(err),
+        () => alert('sss')
+      );   */
+  
       JSONParams = JSON.stringify(listparams); 
       this.srv_StMng.IPLChanged=JSONParams;      
       this.router.navigate(['/results']);

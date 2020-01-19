@@ -7,7 +7,8 @@
             <li class="breadcrumb-item active text-secondary"  aria-current="page">{{machHeader?.MachineName}}</li> 
         </ol>
       </nav>
-</div>   
+</div>  
+    <div class="row"> 
      <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12 pt-0 mt-0">
         <div class="pt-0 pr-3">
             <img src="{{imgNameMachine}}" class="img-machine-type">
@@ -56,6 +57,7 @@
     </div>   
    <div   *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
         <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
+    </div>
     </div>
 <div>
    

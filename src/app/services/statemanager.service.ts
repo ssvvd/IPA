@@ -44,6 +44,14 @@ export class StateManagerService {
         this.obsOperationDataEnable.next(false);  
   }
 
+  public CheckToOperationData():boolean
+  {   
+    if(typeof(this.SelectedMachine) !== 'undefined'  && typeof(this.GetMaterialSelected()) !== 'undefined' && this.SelectedMachine!=null && this.GetMaterialSelected()!=null)   
+        return true;    
+    else     
+        return false;
+  }
+
   get SelectedMachine():Machineheader {
     return this.mSelectedMachine;
   }
