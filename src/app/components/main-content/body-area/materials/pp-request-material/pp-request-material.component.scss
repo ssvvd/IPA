@@ -14,11 +14,22 @@
 
   option {
     background-color: #F1F1F1;
+    font-size: 1.25rem;
 }
 
 select{
     background-color: #F1F1F1;
     height: calc(1.5em + 1.4rem + 2px);
+    font-size: 1.25rem !important;
+}
+
+.icon-grid{
+    float:left;
+    padding-right:10px;
+}
+
+:host ::ng-deep app-hardness-slider .customSilder {
+  margin-top:-20px;
 }
 //   .form-control{
 //     font-size: medium;
