@@ -70,6 +70,7 @@ export class MainMenuComponent implements OnInit {
     this.srv_statemanage.CurrentMachineSelected.subscribe(arr => this.SelectedMachine(arr));
     this.srv_statemanage.CurrentMaterialSelected.subscribe(arr => this.SelectedMaterial(arr));
     this.srv_statemanage.CurrentSecAppSelected.subscribe(arr => this.SelectedSecApp(arr));
+    
     this.srv_statemanage.OperationDataEnable.subscribe(x=>this.OperationDataEnable(x));
   }
 

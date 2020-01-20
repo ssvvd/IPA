@@ -20,10 +20,16 @@ export class ResultsComponent implements OnInit {
   GetResult() 
   {
     //alert(this.srv_StMng.IPLChanged);
-    this.srv_DataLayer.setinputparameters1(this.srv_StMng.IPLChanged).subscribe(
+    /*  this.srv_DataLayer.setinputparameters1(this.srv_StMng.IPLChanged).subscribe(
         res => console.log('ok' +res),
         err => console.log( err),
         () => console.log('yay')
-      );   
+      );  */
+
+      /*  this.srv_DataLayer.setinputparameters1('sample string 1').subscribe(
+        res => console.log('ok' +res),
+        err => console.log( err),
+        () => console.log('yay')
+      );  */  
   }
 }

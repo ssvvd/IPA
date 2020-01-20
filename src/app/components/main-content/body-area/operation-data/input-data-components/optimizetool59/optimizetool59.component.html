@@ -1,1 +1,71 @@
 
+<div class="container" class="p-0 m-0 pt-4">
+    <div class="row">
+    <div class="col-5 pl-0">
+    <div class="form-group row pl-0" >
+        <div class="pr-4 col-9 pl-0">
+            <label for="txtIsSolidHeader" class="form-check-label">Solid Heads</label>
+        </div>
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkbIsSolidHead"  name="chkbIsSolidHead" 
+                [checked]="Ipl.GetItem('TD_ItemTypeSolidHead').value=='1'" (change)="change('TD_ItemTypeSolidHead')">
+                <label class="custom-control-label" for="chkbIsSolidHead"></label>
+            </div>
+        </div>        
+    </div>
+    <div class="form-group row pl-0 pt-2" >
+        <div class="pr-4 col-9 pl-0">
+            <label for="txtIsSolidHeader" class="form-check-label">Solid Tools</label>
+        </div>
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkbIsSolid"  name="chkbIsSolid" 
+                 [checked]="Ipl.GetItem('TD_ItemTypeSolid').value=='1'" (change)="change('TD_ItemTypeSolid')">
+                <label class="custom-control-label" for="chkbIsSolid"></label>
+            </div>
+        </div>        
+    </div>
+    </div>
+ <div class="col-7">
+    <div class="form-group row" >
+        <div class="pr-4 col-8">
+            <label for="chkbIsIndHead" class="form-check-label">Indexable Heads</label>
+        </div>
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkbIsIndHead"  name="chkbIsIndHead" 
+                [checked]="Ipl.GetItem('TD_ItemTypeTAHead').value=='1'" (change)="change('TD_ItemTypeTAHead')">
+                <label class="custom-control-label" for="chkbIsIndHead"></label>
+            </div>
+        </div>        
+    </div>
+    <div class="form-group row pt-2" >
+        <div class="pr-4 col-8">
+            <label for="chkbIsIndTool" class="form-check-label">Indexable Tools</label>
+        </div>
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkbIsIndTool"  name="chkbIsIndTool" 
+                [checked]="Ipl.GetItem('TD_ItemTypeTA').value=='1'" (change)="change('TD_ItemTypeTA')">
+                <label class="custom-control-label" for="chkbIsIndTool"></label>
+            </div>
+        </div>        
+    </div>
+    </div>
+    </div>
+ <div class="pl-0 pt-4 ">
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="optHightFeed" name="TypeFeed"   (change)="changeTypeFeed()" [(ngModel)]="TypeFeed" value="HightFeed">
+            <label class="custom-control-label" for="optHightFeed">Hight Feed</label>
+        </div>            
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="optBothFeed" name="TypeFeed"  (change)="changeTypeFeed()" [(ngModel)]="TypeFeed" value="BothFeed">
+            <label class="custom-control-label" for="optBothFeed">Both Feed</label>
+        </div>            
+        <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" class="custom-control-input" id="optNormalFeed" name="TypeFeed"  (change)="changeTypeFeed()" [(ngModel)]="TypeFeed"  value="NormalFeed">
+            <label class="custom-control-label" for="optNormalFeed">Normal Feed</label>
+        </div>
+    </div>
+</div>

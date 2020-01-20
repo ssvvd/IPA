@@ -20,6 +20,7 @@ export class OperationDataComponent implements OnInit {
   opendetails:boolean =false;
   showistoodata:boolean=true;
   router:Router;
+  isLoaded:boolean=false;
   constructor(router:Router,private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) 
   {
     this.router=router;
@@ -34,7 +35,10 @@ export class OperationDataComponent implements OnInit {
         } 
 
    if (this.srv_StMng.IPL!= null)
-      this.Ipl=this.srv_StMng.IPL;
+    {
+     this.Ipl=this.srv_StMng.IPL;
+     this.isLoaded=true;  
+    }
    else
       this.srv_DataLayer.getinputparameters(this.SecApp,'M').subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                                       
@@ -47,9 +51,10 @@ export class OperationDataComponent implements OnInit {
                 valuemax: d.valuemax ,
                 image:d.image ,
                 required:d.required     
-            })                                   
+            })                            
+              // alert(this.isLoaded);                                  
         }
-          
+        this.isLoaded=true;  
     }
 )
 };
@@ -84,13 +89,19 @@ export class OperationDataComponent implements OnInit {
           "value": p.value
         })
       });
-      
-       /* this.srv_DataLayer.setinputparameters(listparams).subscribe(
+       
+      /*   this.srv_DataLayer.setinputparameters(listparams).subscribe(
         res => console.log( res),
         err => console.log(err),
         () => alert('sss')
-      );   */
-  
+      );    */ 
+
+       this.srv_DataLayer.test().subscribe(
+        res => console.log( res),
+        err => console.log(err),
+        () => alert('sss')
+      );  
+ 
       JSONParams = JSON.stringify(listparams); 
       this.srv_StMng.IPLChanged=JSONParams;      
       this.router.navigate(['/results']);
