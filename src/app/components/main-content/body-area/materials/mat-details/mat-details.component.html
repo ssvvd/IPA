@@ -9,7 +9,7 @@
                             <tr *ngFor="let obj of detailsResult">
                                <td *ngFor="let col of headers" attr.data-value={{obj[col]}} 
                                (click)="obj[col].indexOf('________ ') == -1 && OnSelectMaterial(obj[col])" 
-                               [routerLink]="(obj[col] + '').indexOf('________ ') == -1 ? ['/machining-operation'] : []"
+                               [routerLink]="(obj[col] + '').indexOf('________ ') == -1 ? ['/home/machining-operation'] : []"
                                [ngClass]="{'td-selected' : obj[col] == this.selectedMatOrGrp}"
                                > {{obj[col]}} 
                                </td>
