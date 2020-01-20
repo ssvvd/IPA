@@ -10,7 +10,7 @@
                     <label [ngClass]="showistoodata ? 'desc-label-big-bold text-nowrap':'desc-label-big-bold text-nowrap vertical-text'">Tool Data</label>                    
                 </div>
                 <div>
-                    <app-optimizetool59></app-optimizetool59>
+                    <app-optimizetool59 *ngIf = "isLoaded&&showistoodata" [Ipl]=Ipl></app-optimizetool59>
                 </div>
             </div>            
         </div>
@@ -25,7 +25,7 @@
                     </div>
                  </div>
                 <div >
-                    <app-appdetails59   [Ipl]=Ipl></app-appdetails59>
+                    <app-appdetails59 *ngIf = "isLoaded"  [Ipl]=Ipl></app-appdetails59>
                 </div>
             </div>
         </div>
