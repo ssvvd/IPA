@@ -60,11 +60,11 @@ export class MainMenuComponent implements OnInit {
 
   ngOnInit()
   {    
-    this.Tabs.push (new MainTab(1,"Machine","/machines", environment.ImagePath + "icon_Machinel.svg","",false));    
-    this.Tabs.push (new MainTab(2,"Material","/materials",environment.ImagePath + "icon_Material.svg","",false));
-    this.Tabs.push (new MainTab(3,"Machining Operation","/machining-operation",environment.ImagePath + "icon_MachiningOp.svg","",false));
-    this.Tabs.push (new MainTab(4,"Operational Data","/operation-data",environment.ImagePath +  "icon_OpData.svg",environment.ImagePath +  "icon_OpData_dis.svg",true));
-    this.Tabs.push (new MainTab(5,"Results","/results",environment.ImagePath + "icon_Resaults.svg",environment.ImagePath + "icon_Resaults_dis.svg",true)); 
+    this.Tabs.push (new MainTab(1,"Machine","/home/machines", environment.ImagePath + "icon_Machinel.svg","",false));    
+    this.Tabs.push (new MainTab(2,"Material","/home/materials",environment.ImagePath + "icon_Material.svg","",false));
+    this.Tabs.push (new MainTab(3,"Machining Operation","/home/machining-operation",environment.ImagePath + "icon_MachiningOp.svg","",false));
+    this.Tabs.push (new MainTab(4,"Operational Data","/home/operation-data",environment.ImagePath +  "icon_OpData.svg",environment.ImagePath +  "icon_OpData_dis.svg",true));
+    this.Tabs.push (new MainTab(5,"Results","/home/results",environment.ImagePath + "icon_Resaults.svg",environment.ImagePath + "icon_Resaults_dis.svg",true)); 
 
     this.Tabs[0].IsSelected=true;       
     this.srv_statemanage.CurrentMachineSelected.subscribe(arr => this.SelectedMachine(arr));
@@ -105,7 +105,7 @@ export class MainMenuComponent implements OnInit {
         }
       else
           obj.IsSelected=false;
-      if(obj.RouteName=="/machines"){
+      if(obj.RouteName=="/home/machines"){
         if(RouteName.indexOf('machine-item')>-1){
           obj.IsSelected=true; 
           obj.isDisabled =false;

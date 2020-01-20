@@ -116,7 +116,7 @@
                 <td>
                   <a data-toggle="tooltip" title="View Machine Detailed">
                     <img src="{{environment.ImgView}}" (click)="OnViewMachine(mach)"
-                      [routerLink]="'/machine-item/' + mach.MachineID" class="icon-grid">
+                      [routerLink]="'/home/machine-item/' + mach.MachineID" class="icon-grid">
                   </a>
                 </td>
                 <td>
@@ -132,7 +132,7 @@
                 <td>
                   <div class="float-right">
                     <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
-                      (click)="OnSelectMachine(mach)" [routerLink]="'/materials'">{{mach.DescSelect}}</button>
+                      (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect}}</button>
                   </div>
                 </td>
               </tr>
