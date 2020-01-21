@@ -127,4 +127,6 @@ export class MachiningOperationComponent implements OnInit {
     if(l==2) this.srv_statemanage.MenuIDLevel2=sa.MenuID;
     
   }
+
+  ToOperationData(){}
 }
