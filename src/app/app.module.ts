@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+
 import * as $ from "jquery";
 
 import { HeaderComponent } from './components/header/header.component';

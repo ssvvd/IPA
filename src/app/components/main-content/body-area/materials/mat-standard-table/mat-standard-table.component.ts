@@ -2,6 +2,7 @@ import { Component, OnInit,Input,SimpleChanges } from '@angular/core';
 import { MaterialService } from 'src/app/services/material.service';
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { clsMaterial } from 'src/app/models/materials/material'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mat-standard-table',
@@ -15,6 +16,7 @@ export class MatStandardTableComponent implements OnInit {
   selectedMaterial:clsMaterial;
   selectedMatOrGrp:String;
   getMaterial: string;
+  environment=environment;
   @Input() selectedCateg: string ;
   @Input() selectedStandard: string ;
 
@@ -52,6 +54,7 @@ export class MatStandardTableComponent implements OnInit {
 
   OnSelectMaterial(selCol:string,mat:string)
   {   
+    
     this.selectedMaterial= new clsMaterial(this.mySplit(selCol,0),this.mySplit(selCol,1),mat);
     this.srv_statemanage.SelectMaterial(this.selectedMaterial);
 

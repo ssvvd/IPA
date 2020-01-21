@@ -1,39 +1,39 @@
 
       <div class="divst">
       <h4 class="tableTitle">Material Results</h4>
-        <table    datatable [dtOptions]="dtOptions"  id="tblmaterial" class="table table-stripe row-border hover" >
+        <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
           <thead >
-            <tr >
+            <tr id="dtOptionsMat">
               <th class="d-none">ID</th>
               <th>Group</th>
               <th>Description</th>
               <th>Condition</th>
               <th>Hardness</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
+              <th class="no-sort"></th>
+              <th class="no-sort" *ngIf="environment.internal"></th>
+              <th class="no-sort" *ngIf="environment.internal"></th>
+              <th class="no-sort" *ngIf="environment.internal"></th>
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResultFilterd" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
+              <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{material.id}}</th>         
                   <td><div class="square" [title]="material.group"><h4>{{material.group}}</h4></div></td>
                   <td>{{material.description}}</td>
                   <td>{{material.Condition}}</td>
-                  <td><img src="{{environment.ImgEditParams}}" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness}}</td>
+                  <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness}}</td>
                   <td>
 
                     <img src="{{environment.ImgView}}" (click)="matDetailClick(material)"  class="icon-grid">
 
               </td>
-                  <td>
+                  <td *ngIf="environment.internal">
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" class="icon-grid">
                   </td>
-                  <td>                    
+                  <td *ngIf="environment.internal">                    
                         <img src="{{environment.ImgSetDefault}}" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid">
                   </td>
-                  <td>
+                  <td *ngIf="environment.internal">
                     <div>
                     <button [className]="(material.group == selectedMaterial)? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
                     </div>

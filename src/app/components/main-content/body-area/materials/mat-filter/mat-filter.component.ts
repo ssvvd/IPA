@@ -3,6 +3,7 @@ import { ChangeContext } from 'ng5-slider';
 import { sidetab } from 'src/app/models/materials/sidetab';
 import { MaterialService } from 'src/app/services/material.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mat-filter',
@@ -16,6 +17,7 @@ export class MatFilterComponent implements OnInit {
   curSelectedCategory:string;
   standardSelected:String;
   searchText:String;
+  environment=environment;
 
   @Output() categEvent = new EventEmitter<string>();
   @Output() standardEvent = new EventEmitter<string>();

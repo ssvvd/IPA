@@ -3,6 +3,8 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsMaterial } from 'src/app/models/materials/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PpRequestMaterialComponent } from './pp-request-material/pp-request-material.component';
+import { Location } from '@angular/common';
+// import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-materials',
@@ -11,15 +13,21 @@ import { PpRequestMaterialComponent } from './pp-request-material/pp-request-mat
 })
 export class MaterialsComponent implements OnInit {
 
-  constructor(private statemng:StateManagerService,private modalService: NgbModal ) {}
-
+  internal:boolean;
   selectedCateg: string;
   selectedMatDeials:clsMaterial;
   curComponent:string;
   selectedSatnd:string;
   breadCrumb:string[]=[];
   searchText:String
+  // environment = environment;
 
+  constructor(private statemng:StateManagerService,private modalService: NgbModal,location: Location ) {
+    // if(location.path().toLowerCase() == '/materials'){
+    //   environment.internal = false;
+    // }
+  }
+  
   receiveCategory(category:string) {
     this.selectedCateg = category;
     this.curComponent = "1";
