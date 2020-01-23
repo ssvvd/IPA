@@ -37,6 +37,9 @@
         padding-left: 5px;
         padding-top: 8px;
     }
+    .square h4{
+      margin-bottom: 0px;
+    }
     .divst{
       background: var(--bg-gray);
     }
@@ -44,3 +47,29 @@
     ::ng-deep .customModalClass .modal-dialog { 
       max-width: 705px;
  }
+
+ .table thead th[title*="P"]{
+  background-color: var(--bg-mat-P);
+  }
+
+ .table thead th[title*="M"]{
+  background-color: var(--bg-mat-M);
+  }
+
+  .table thead th[title*="K"]{
+   background-color: var(--bg-mat-K);
+  }
+
+  .table thead th[title*="N"]{
+   background-color: var(--bg-mat-N);
+  }
+
+  .table thead th[title*="S"]{
+   background-color: var(--bg-mat-S);
+   }
+
+ .table thead th[title*="H"]{
+   background-color: var(--bg-mat-H);
+     }
+
+

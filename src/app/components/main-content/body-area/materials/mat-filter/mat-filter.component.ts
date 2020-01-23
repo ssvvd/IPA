@@ -42,7 +42,7 @@ export class MatFilterComponent implements OnInit {
     this.Tabs.push (new sidetab(3,"K","Cast Iron")); 
     this.Tabs.push (new sidetab(4,"N","Non-Femous Metals")); 
     this.Tabs.push (new sidetab(5,"S","Superalloys and Titanium")); 
-    this.Tabs.push (new sidetab(6,"H","Extra Material")); 
+    this.Tabs.push (new sidetab(6,"H","Hard Material")); 
     this.Tabs[0].IsSelected=true;
   }
 

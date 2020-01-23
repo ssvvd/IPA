@@ -5,7 +5,7 @@
   <hr>
   <div class="list-group list-group-flush" > 
       <button type="button" *ngFor="let tab of Tabs" [ngClass]="{'active': curSelectedCategory == tab.TapLetter}" class="list-group-item list-group-item-action border-0 d-flex align-items-center" (click)="categClick(tab.TapLetter)" >
-        <div class="square" [title]="tab.TapLetter"><h3>{{tab.TapLetter}}</h3></div>
+        <div class="square" [title]="tab.TapLetter"><h4>{{tab.TapLetter}}</h4></div>
         <div class="align-items-center">{{tab.Description}}</div>
       </button>
   </div>

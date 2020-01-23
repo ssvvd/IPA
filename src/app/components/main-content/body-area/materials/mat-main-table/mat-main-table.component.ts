@@ -169,14 +169,14 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   }
   openSetDefaultModal(mat:clsMaterial) {
     const modalRef = this.modalService.open(PpSetDefaultComponent, { centered: true });
-    modalRef.componentInstance.modal_group = mat.group;
+    modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
 /*     modalRef.componentInstance.my_modal_title = 'I your title';
     modalRef.componentInstance.my_modal_content = 'I am your content'; */
   }
 
   openAddToFavM(mat:clsMaterial) {
     const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
-    modalRef.componentInstance.modal_group = mat.group;
+    modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
   }
 
   openEditParamsM(mat:clsMaterial) {
@@ -191,7 +191,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       if (result) {
       console.log(result);
         if(result != 'A'){
-          mat.Hardness = result + ' HB';
+          mat.Hardness = result;
         }
       }
       }, () => console.log('Rejected!'));

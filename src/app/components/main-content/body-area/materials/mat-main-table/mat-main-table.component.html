@@ -18,10 +18,10 @@
           <tbody>   
               <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{material.id}}</th>         
-                  <td><div class="square" [title]="material.group"><h4>{{material.group}}</h4></div></td>
+                  <td><div class="square" [title]="selectedCategory"><h4>{{material.group}}</h4></div></td>
                   <td>{{material.description}}</td>
                   <td>{{material.Condition}}</td>
-                  <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness}}</td>
+                  <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness}} HB</td>
                   <td>
 
                     <img src="{{environment.ImgView}}" (click)="matDetailClick(material)"  class="icon-grid">
