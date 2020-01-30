@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  internal: true ,
   production: false  ,
   //API_HOST: 'http://localhost:17586/',
   //API_HOST: 'http://www.iscar.com/ITA_API/',

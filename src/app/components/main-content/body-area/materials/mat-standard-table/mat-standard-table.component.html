@@ -15,18 +15,18 @@
 
             <div class="divst">
                <h4 class="tableTitle">{{this.selectedStandard}}</h4>
-               <table datatable id="tblmaterialDetails" class="table table-stripe row-border hover" >
+               <table datatable id="tblmaterialDetails" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
                   <thead>                                                                           
                      <tr>
-                        <th *ngFor="let col of headers" title={{mySplit(col,0)}} (click)="OnSelectMaterial(col,'')"
-                           [routerLink]="'/home/machining-operation'">{{mySplit(col,0)}}</th>
+                        <th *ngFor="let col of headers" title={{selectedCateg}} (click)="environment.internal ? OnSelectMaterial(col,'') : false"
+                           [routerLink]="environment.internal ? '/home/machining-operation' : []">{{mySplit(col,0)}}</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let obj of dtResult">
                         <!-- <div>{{obj}}</div> -->
-                        <td *ngFor="let col of headers" (click)="obj[col].indexOf('________ ') == -1 && OnSelectMaterial(col,obj[col])"
-                           [routerLink]="obj[col].indexOf('________ ') == -1 ? ['/home/machining-operation'] : []"  attr.data-value={{obj[col]}}
+                        <td *ngFor="let col of headers"  (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(col,obj[col]) : false"
+                           [routerLink]="(environment.internal && obj[col].indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"  attr.data-value={{obj[col]}}
                            [ngClass]="{'td-selected' : mySplit(col,0) == this.selectedMatOrGrp || (obj[col] == this.selectedMatOrGrp && mySplit(col,0) == this.selectedMaterial.group)}">
                            {{obj[col]}} </td>             
                      </tr>

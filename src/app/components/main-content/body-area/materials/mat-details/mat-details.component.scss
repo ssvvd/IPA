@@ -11,3 +11,9 @@ thead{
     background-color: var(--bg-hover) !important; 
     cursor: pointer !important;
   }
+
+  .table td, .table th{
+    border-right: 2px solid #dee2e6;
+    border-top: none;
+    outline: none;
+} 
