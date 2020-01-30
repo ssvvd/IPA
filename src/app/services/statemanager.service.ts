@@ -6,7 +6,6 @@ import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { InputParamItemChanged} from 'src/app/models/operational-data/inputparameteritem';
-
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -134,10 +133,10 @@ export class StateManagerService {
     this.materialSelected=mat;   
     let desc:string;
     if (mat.material && mat.material != ''){
-      desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+      desc=mat.group.toString() + " - " + mat.material ; 
     }
     else{
-      desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+      desc=mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
     }
        
     this.obsMaterialSelected.next([desc]);
