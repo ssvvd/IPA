@@ -58,7 +58,7 @@ export class StateManagerService {
   set SelectedMachine(m:Machineheader) {
     this.mSelectedMachine=m;   
     let desc:string;
-    desc=m.SpindleSpeed.toString() + " KW " + m.Torque.toString() + " t/min"; 
+    desc=m.SpindleSpeed.toString() + " rpm /" + m.Power.toString() + " Kw"; 
     this.CheckTabOperationalDataEnable();   
     this.obsMachineSelected.next([m.MachineName,desc]);
   }

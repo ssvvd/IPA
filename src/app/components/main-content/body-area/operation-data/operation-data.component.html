@@ -1,8 +1,8 @@
 
 <div class="container-fluid ml-0 pl-0 mt-0 pt-4 pr-0">   
-     <div class="form-group row col-12 pr-0">       
-            <div  [ngClass]="showistoodata ? 'col-3 border-right border-left' : 'col-1 border-right border-left'">
-             <div class="form-group " >                     
+     <div class="form-group row col-12">       
+        <div  [ngClass]="showistoodata ? 'col-3 border-right border-left  pt-2' : 'col-1 border-right border-left  pt-2'">
+             <div class="form-group">                     
                 <a  [ngClass]="showistoodata ?'cursor-pointer float-right':'pl-4 cursor-pointer float-center'" (click)="showtooldata()">                        
                     <i  [ngClass]="showistoodata ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
                 </a>                            
@@ -10,13 +10,16 @@
                     <label [ngClass]="showistoodata ? 'desc-label-big-bold text-nowrap':'desc-label-big-bold text-nowrap vertical-text'">Tool Data</label>                    
                 </div>
                 <div>
-                    <app-optimizetool59 *ngIf = "isLoaded&&showistoodata" [Ipl]=Ipl></app-optimizetool59>
+                    <app-optimizetool [parentSubject]="parentSubject" *ngIf = "isLoaded&&showistoodata" [Ipl]=Ipl></app-optimizetool>
+                </div>
+                <div class="pt-4">
+                    <app-optimizetool59 *ngIf = "isLoaded&&showistoodata&&SecApp==760" [Ipl]=Ipl></app-optimizetool59>
                 </div>
             </div>            
         </div>
-        <div [ngClass]="showistoodata ? 'col-9 pl-2 m-0 pr-0':'col-11 pl-2 m-0 pr-0'">
-            <div class="form-group p-0 m-0 ">
-                <div class="form-group row col-12 p-0 m-0"> 
+        <div [ngClass]="showistoodata ? 'col-9 pl-2 pr-0':'col-11 pl-2 pr-0'">
+            <div class="form-group">
+                <div class="form-group row col-12"> 
                     <div  class= "float-left pl-3">                                       
                         <label  class="float-left desc-label-big-bold col-form-label">Operation Data</label> 
                     </div>

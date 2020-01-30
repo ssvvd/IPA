@@ -1,5 +1,5 @@
 
-<div class="container" class="p-0 m-0">
+<div class="container" class="p-0 m-0" >
     <div class="form-group row">
         <div class="col-6" >
             <div class="pt-2" >   
@@ -34,8 +34,48 @@
                     </div>
                 </div>
             </div>     
-          
-                <div class="form-group row">
+                <div class="pt-4">               
+                <div class="form-group">                   
+                        <div class="pl-0">
+                            <label>Operation Type - Indexable</label>
+                        </div>                           
+                         <div class="ml-0">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optLight" name="OperationType" checked  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType').value" value="Light">
+                                <label class="custom-control-label" for="optLight">Light</label>
+                            </div>            
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optMedium" name="OperationType"  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType').value" value="Medium">
+                                <label class="custom-control-label" for="optMedium">Medium</label>
+                            </div>            
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optHeavy" name="OperationType" [(ngModel)]="Ipl&&Ipl.GetItem('OperationType').value" value="Heavy">
+                                <label class="custom-control-label" for="optHeavy">Heavy</label>
+                            </div>
+                        </div>                      
+               </div>
+                </div>
+            <div  class="pt-4"> 
+                 <div class="form-group">            
+                    
+                         <div class="pl-0">
+                            <label>Operation Type - Solid</label>
+                        </div>                           
+                         <div class="ml-0">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optFinishing" name="OperationType4Solid" checked  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType4Solid').value" value="Finishing">
+                                <label class="custom-control-label" for="optFinishing">Finishing</label>
+                            </div>            
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input " id="optGeneral" name="OperationType4Solid"  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType4Solid').value" value="General">
+                                <label class="custom-control-label" for="optGeneral">General</label>
+                            </div>                                        
+                        </div>  
+                    </div>
+                
+                
+        </div> 
+              <!--   <div class="form-group row">
                
                         <label for="txtRampDownAngle" class="col-form-label col-5 pl-0 ml-0">Ramp angle (RD)</label>
                         
@@ -44,9 +84,9 @@
                         <input type="number"  class="form-control" id="txtRampDownAngle" name="txtRampDownAngle" 
                                             [(ngModel)]="Ipl&&Ipl.GetItem('HRampDownAngle').value" (focus)="onfocusfield('HRampDownAngle')" (focusout)="onfocusoutfield()"> 
                     </div>
-                </div>
+                </div> -->
          
-            <div class="pt-2">
+          <!--   <div class="pt-2">
                 <div class="form-group">
                     <label  class="col-form-label col-5 pl-0 ml-0">Corner radius (R)</label>
                     <div class="form-group row">
@@ -66,8 +106,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-             <div class="pt-2">
+            </div> -->
+            <!--  <div class="pt-2">
                 <div class="form-group">
                     <label  class="col-form-label col-5 pl-0 ml-0">Chamfer (C)</label>
                     <div class="form-group row">
@@ -87,13 +127,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="pt-4">
-                <div class="form-group row">  
-                    <div class="col-5 pl-0">
+                <div class="form-group">  
+                    <div class="pl-0">
                         <label>Overhang</label>
                     </div>
-                    <div class="pl-4 ml-0 ">
+                    <div class="ml-0 ">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optShort" name="Overhang" checked  [(ngModel)]="Ipl&&Ipl.GetItem('OverHang').value" value="Short">
                             <label class="custom-control-label" for="optShort">Short</label>
@@ -109,12 +149,12 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-2">
-                <div class="form-group row"> 
-                    <div class="col-5 pl-0">
+            <div class="pt-4">
+                <div class="form-group"> 
+                    <div class="pl-0">
                         <label>Clamping</label>
                     </div>
-                    <div class="pl-4 ml-0">
+                    <div class="ml-0">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optStable"  [(ngModel)]="Ipl&&Ipl.GetItem('Clamping').value" value="Stable" name="Clamping" checked>
                             <label class="custom-control-label" for="optStable">Stable</label>
@@ -130,12 +170,12 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-2">
-            <div class="form-group row"> 
-                <div class="col-5 pl-0">
+            <div class="pt-4">
+            <div class="form-group"> 
+                <div class="pl-0">
                     <label>Part Shape</label>
                 </div>
-                    <div class="pl-4 ml-0">
+                    <div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="PartShape1" name="PartShape" checked [(ngModel)]="Ipl&&Ipl.GetItem('PartShape').value" value="Normal">
                             <label class="custom-control-label" for="PartShape1">Normal</label>
@@ -147,12 +187,12 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-2">     
-                <div class="form-group row">
-                    <div class="col-5 pl-0"> 
+            <div class="pt-4">     
+                <div class="form-group">
+                    <div class="pl-0"> 
                         <label>Type of cut</label>
                     </div>
-                    <div class="pl-4 ml-0">
+                    <div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optRegular" name="TypeOfCut" checked  [(ngModel)]="Ipl&&Ipl.GetItem('TypeOfCut').value" value="Regular">
                             <label class="custom-control-label" for="optRegular">Regular</label>
@@ -167,9 +207,10 @@
                         </div>
                     </div>   
                 </div>
-            </div>   
+            </div>
+         
         </div>
-        <div class="col-6 pt-4 pr-0 mr-0">
+        <div class="col-6 pt-3 pr-0 mr-0" >
             <div *ngIf="ImageName!=''" class="p-0 m-0 border div-input-image">
                 <img src="{{ImageName}}" class="input-image">   
             </div>

@@ -38,9 +38,13 @@ import { PpRequestMaterialComponent } from './components/main-content/body-area/
 import { PpEditParamsComponent } from './components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
 import { PpSetDefaultComponent } from './components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 import { Appdetails59Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails59/appdetails59.component';
-import { Optimizetool59Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool59/optimizetool59.component';
+import { OptimizetoolComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool/optimizetool.component';
 import { HardnessSliderComponent } from './components/main-content/body-area/materials/hardness-slider/hardness-slider.component';
 import { HomeComponent } from './components/home/home.component';
+import { Optimizetool59Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool59/optimizetool59.component';
+import { OptimizetoolFilterComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-filter/optimizetool-filter.component';
+import { NgxSpinnerModule } from "ngx-spinner"; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [   
@@ -70,9 +74,11 @@ import { HomeComponent } from './components/home/home.component';
     PpEditParamsComponent,
     PpSetDefaultComponent,
     Appdetails59Component,
-    Optimizetool59Component,
+    OptimizetoolComponent,
     HardnessSliderComponent,
-    HomeComponent
+    HomeComponent,
+    Optimizetool59Component,
+    OptimizetoolFilterComponent
   ],
   imports: [
     FormsModule,
@@ -83,7 +89,9 @@ import { HomeComponent } from './components/home/home.component';
     MachineItemSpindleChartModule ,
     Ng5SliderModule ,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule
   ],
   entryComponents:[
     PpAddFavoritComponent,

@@ -32,4 +32,5 @@ export class Machinespindle {
    
     public EmultionPressure:number;
     public EmultionFlowRate:number;
+    public FaceContact:boolean;
 }

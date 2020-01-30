@@ -21,7 +21,7 @@ export class MachineItemComponent implements OnInit {
   imgNameMachine:string; 
   environment = environment;  
 
-  constructor(private srv_machine: MachineService, private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
+  constructor(private srv_machine: MachineService, private router: ActivatedRoute , private srv_StMng:StateManagerService) 
   {  
       this.router.params.subscribe(params => {
       this.MachineID = parseInt(params["id"]);
@@ -47,7 +47,7 @@ export class MachineItemComponent implements OnInit {
 
   OnSelectMachine()
   {         
-    this.srv_statemanage.SelectedMachine=this.machHeader;
-    this.srv_statemanage.arrMachineSpindle=this.arrMachineSpindle;        
+    this.srv_StMng.SelectedMachine=this.machHeader;
+    this.srv_StMng.arrMachineSpindle=this.arrMachineSpindle;        
   } 
 }

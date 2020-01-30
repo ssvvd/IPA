@@ -24,10 +24,10 @@
                 <div class="row  pl-0">
                     <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
                     <div class="pl-4 ml-4">                                                               
-                        <input type="number" class="form-control form-control-sm" *ngIf="machHeader&&machHeader.CostPerHour"   id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+                        <input type="number" class="form-control" *ngIf="machHeader&&machHeader.CostPerHour"   id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
                     </div>                    
                     <div class="col-sm-2"> 
-                        <select class="selectpicker form-control form-control-sm"  *ngIf="machHeader&&machHeader.Currency" [(ngModel)]="machHeader.Currency">
+                        <select class="selectpicker form-control"  *ngIf="machHeader&&machHeader.Currency" [(ngModel)]="machHeader.Currency">
                             <option value='$'>$</option>
                             <option value='Euro'>Euro</option>
                             <option value='Ruble'>Ruble</option>                            
