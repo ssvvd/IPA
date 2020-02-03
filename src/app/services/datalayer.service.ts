@@ -44,9 +44,9 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-list/' + par);
   }
 
-  public  td_tools_list(par:string)
+  public  td_tool_list(par:string)
   {           
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-list/' + par);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-tool-list/' + par);
   }
 
    public  setinputparameters1() {

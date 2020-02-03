@@ -1,9 +1,12 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-0 pl-2" >
     <div class="form-group row">
         <input class="form-control mb-3" [(ngModel)]="machFilter.SearchText" (keyup)="FilterChange($event)" type="text" placeholder="Search" aria-label="Search">    
     </div>
+    <div class="pt-2">
+        <h3 class="desc-label-big-bold ">Filter</h3>
+    </div>
     <div class="form-group row">
-        <button type="button" class="btn btn-reset mb-3" (click)="ClearFilter()">Reset</button>
+        <button type="button" class="btn btn-reset mb-3 pl-0 ml-0" (click)="ClearFilter()">Reset</button>
     </div>
     <div class="form-group row">
         <div class="col-4 pl-2">
@@ -17,7 +20,7 @@
         </div>
     </div>
    
-    <div class="form-group row">
+    <div class="form-group row" >
         <div class="col-4  pt-2">
              <div class="custom-control custom-checkbox change-chb">
                 <input type="checkbox" class="custom-control-input" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "FilterChange($event)"  [(ngModel)]="machFilter.IsMachiningCenter">
@@ -39,31 +42,31 @@
     </div>
     <div class="form-group row">
         <div class="col-4">
-             <label class="col-form-label">Machining Center</label>
+             <label>Machining Center</label>
         </div>
         <div class="col-4">
-            <label class="col-form-label">Lathe</label>
+            <label>Lathe</label>
         </div>
          <div class="col-4">
-             <label class="col-form-label">Multi Task Machine</label>
+             <label>Multi Task Machine</label>
         </div>
     </div>
 </div>
-<div class="form-group"> 
-    <div class="pt-4 pr-4 mt-2">    
-        <label class="col-form-label pt-4">Rotating Speed(rpm)</label>    
+<div class="form-group "> 
+    <div class="pt-4 pr-0 mt-0 pl-2">    
+        <label class="pt-0 pb-0">Rotating Speed(rpm)</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider [(value)]="machFilter.SpeedMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.SpeedMax" [options]="options_speed"></ng5-slider>
         </div>
     </div>  
-     <div class="pt-4 pr-4 mt-2">    
-        <label class="col-form-label pt-4">Power(Kw)</label>    
+     <div class="pt-4 pr-0 mt-0 pl-2">    
+        <label class="pt-4">Power(Kw)</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider [(value)]="machFilter.PowerMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.PowerMax" [options]="options_power"></ng5-slider>
         </div>
     </div>     
-     <div  class="pt-4 pr-4 mt-2">    
-        <label class="col-form-label pt-4">Torque(Nm)</label>    
+     <div  class="pt-4 pr-0 mt-0 pl-2">    
+        <label class="pt-4">Torque(Nm)</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider [(value)]="machFilter.TorqueMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.TorqueMax" [options]="options_torque"></ng5-slider>
         </div>

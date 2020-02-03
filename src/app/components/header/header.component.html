@@ -14,8 +14,8 @@
                 </div>
                 <div class="form-group">
                 <div class="row" [ngClass]="{'menu-visible':menuisshown,'menu-not-visible':!menuisshown}">            
-                    <div class="shadow bg-white" >                       
-                        <ul class="list-group list-group-flush"> 
+                <div class="shadow bg-white">                       
+                    <ul class="list-group list-group-flush"> 
                             <li class="list-group-item div-image-menu p-0 m-0">                         
                                 <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="logoImg p-2"></a>                         
                             </li>
@@ -28,20 +28,20 @@
                                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="logoImg p-2"></div>
                                     <div class="dropdown-menu calc-table" ngbDropdownMenu aria-labelledby="calc">
                                         <div  ngbDropdownItem  class="row col-12 dropdown-item menuitem">                                                                                                                                   
-                                                    <a><img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3"></a>                                                                                                                                                                                                    
-                                                    <label class="col-form-label" >Machining Calculators</label>                                                                                              
+                                            <a><img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3"></a>                                                                                                                                                                                                    
+                                            <label class="col-form-label" >Machining Calculators</label>                                                                                              
                                         </div>
                                         <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                         
-                                                    <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3">                                           
-                                                    <label class="col-form-label" >Machining Support</label>                                                   
+                                            <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3">                                           
+                                            <label class="col-form-label" >Machining Support</label>                                                   
                                         </div>
                                         <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                    
-                                                    <img [src]="environment.ImagePath+'productive_b.svg'"  class="logoImg  p-3">                                      
-                                                    <label class="col-form-label" >Productive Geometries</label>                                                   
+                                            <img [src]="environment.ImagePath+'productive_b.svg'"  class="logoImg  p-3">                                      
+                                            <label class="col-form-label" >Productive Geometries</label>                                                   
                                         </div>
                                         <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                  
-                                                    <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="logoImg  p-3">                                      
-                                                    <label class="col-form-label" >Grade Optimizer</label>                                                
+                                            <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="logoImg  p-3">                                      
+                                            <label class="col-form-label" >Grade Optimizer</label>                                                
                                         </div>
                                     </div>
                                 </div>

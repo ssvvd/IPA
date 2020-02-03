@@ -1,13 +1,18 @@
 <div class="container" class="p-0 m-0 pt-0 pr-2" >
     
         <div class="form-group row col-12  d-flex justify-content-between" >   
-            <div class="col-3 pl-0 ml-0 pt-4">       
+            <div class="col-4 pl-0 ml-0 pt-4">       
                 <label>{{labeldescription}}</label>
             </div>                   
                 <!-- <label class="form-control-sm text-truncate">{{decs_brandname}}></label> -->
-                 <div class="col-8 pl-0 ml-0 pt-4 text-truncate">
-                    {{select_items}}
-                </div>
+            <div class="col-6 pl-0 ml-0 pt-4 text-truncate">
+                {{select_items}}
+            </div>
+             <div *ngIf="select_items!=''" class="col-1  pt-4">
+                <a (click)="remove_select()">
+                    <i class="fa fa-remove icon-remove cursor-pointer"></i>
+                </a> 
+            </div>
             
             <div class="col-1  pt-4">
                 <a (click)="showdetail()">
@@ -15,15 +20,17 @@
                 </a> 
             </div>           
        </div>
-        <div *ngIf="isshowdetail" class="form-group pl-0 ml-0">
-            <input   class="form-control" type="text" placeholder="Search" aria-label="Search" (keyup)="ApplySearch($event.target.value)">    
+        <div *ngIf="isshowdetail" class="form-group pl-0 ml-0">            
+            <input   class="form-control" type="text" placeholder="Search" aria-label="Search"  (keyup)="ApplySearch($event.target.value)">    
             	<div class="list-group">
-                    <div   *ngFor="let itm of arrDataF" >                         
-                        <div *ngIf="show_all || (itm.RecordID<= max_row_show)">   
-                            <input type="checkbox" class="custom-control-input" name="chk" (change)="checkItem()" [(ngModel)]="itm.Checked" value="Value1" [attr.id]="'chk' + itm.RecordID" />
-                            <label class="list-group-item form-control form-control-sm" [attr.for]="'chk' + itm.RecordID">{{itm.Designation}}</label>
-                        </div>                        
-                    </div>                   
+                    <div   *ngFor="let itm of arrDataF" >                                                 
+                        <div *ngIf="show_all || (itm.RecordID<= max_row_show) || str_search!=''">                            
+                             <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="cursor-pointer" [attr.id]="'chk' + funcname + itm.RecordID" [(ngModel)]="itm.Checked" (change)="checkItem()" [attr.name]="'chk' + funcname + itm.RecordID"  class="custom-control-input" >
+                                <label  class="custom-control-label cursor-pointer" [attr.for]="'chk' + funcname + itm.RecordID">{{itm.Designation}}</label>
+                            </div>
+                        </div>   
+                        </div>                                                                           
                 </div>
                 <div *ngIf="show_more && str_search==''">
                     <button class="btn" (click)="getmore()">{{desc_show_more}}</button>
@@ -31,4 +38,10 @@
         </div>
     
 </div>
-
+<ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+  bdOpacity ="0.05"
+  size="medium"
+  color="#676767"
+  type="ball-circus">    
+  <p style="color:#676767"></p> 
+</ngx-spinner>  

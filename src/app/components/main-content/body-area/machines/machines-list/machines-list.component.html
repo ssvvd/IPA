@@ -1,103 +1,43 @@
 
-<!-- <div class="container-fluid pt-4  ml-0 pl-0">
-<div class="form-group row  ml-0 pl-0">
-  <div class="col-2  ml-0 pl-0 pr-0 pt-3">
-    <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"  (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
-  </div>
-  <div class="col-10 mt-2">    
-    <div class="form-group">
-      <nav aria-label="breadcrumb" style="background-color:white">
-        <ol class="breadcrumb" style="background-color:white">
-          <li class="breadcrumb-item active"><a href="#">All</a></li>        
-        </ol>
-      </nav>
-      <div class="divcontainer">
-        <table    datatable [dtOptions]="dtOptions"  id="tblmachine" class="table table-stripe row-border hover">
-          <thead>
-            <tr>
-              <th class="d-none">ID</th>
-              <th><h5>MachineType</h5></th>
-              <th><h5>MachineName</h5></th>
-              <th><h5>SpindleSpeed</h5></th>
-              <th><h5>Power</h5></th>
-              <th><h5>Torque</h5></th>
-              <th></th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>   
-              <tr *ngFor="let mach of listmachines_sorted" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
-                <th scope="row" class="d-none">{{mach.MachineID}}</th>         
-                  <td>{{mach.MachineType}}</td>
-                  <td>{{mach.MachineName}}</td>
-                  <td>{{mach.SpindleSpeed}}</td>
-                  <td>{{mach.Power}}</td>
-                  <td>{{mach.Torque}}</td>
-                  <td>                    
-                    <a data-toggle="tooltip" title="View Machine Detailed">
-                        <img src="{{environment.ImgView}}"(click)="OnViewMachine(mach)"  [routerLink]="'/machine-item/' + mach.MachineID" class="icon-grid">
-                    </a> 
-                  </td>
-                  <td>
-                    <a data-toggle="tooltip" title="Add To My Machine" class="cursor-pointer">
-                        <img src="{{environment.ImgAddToFavorite}}"  class="icon-grid">
-                    </a>
-                  </td>
-                  <td>
-                    <a data-toggle="tooltip" title="Default Machine" class="cursor-pointer">
-                        <img src="{{environment.ImgSetDefault}}"  class="icon-grid">
-                    </a>
-                  </td>
-                  <td>
-                    <div>
-                    <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMachine(mach)" [routerLink]="'/materials'">{{mach.DescSelect}}</button>
-                    </div>
-                  </td>         
-              </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>
-</div> -->
-<div class="container-fluid pt-4 m-0 pl-0 pr-0" >
-  <div class="form-group row ml-0 pl-0" >
-    <div class="col-2 ml-0 pl-0 pr-0 pt-3">
-      <div class="pr-4">
+
+<div class="container-fluid pt-0 m-0 pl-0 pr-0 border-left border-right" >  
+  <div class="form-group row ml-0 pl-0" >    
+    <div class="col-2 ml-0 pl-2 pr-0 pt-3">
+      <div class="pr-0" >
       <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"
         (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
       </div>
     </div>
     <div class="col-10 mt-2 pr-0 mr-0" >
-      <div class="form-group">
+      <div class="form-group border-left">
         <nav aria-label="breadcrumb" style="background-color:white">
           <ol class="breadcrumb" style="background-color:white">
             <li class="breadcrumb-item active"><a href="#">All</a></li>
           </ol>
         </nav>
         <div class="divcontainer">
+          <div class="pb-2 pt-2">
+            <h3 class="desc-label-big-bold pb-2 pl-2">Machine Results</h3>
+          </div>
           <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"
             class="table table-stripe row-border hover">
             <thead>
               <tr id="dtOptions">
                 <th class="d-none">ID</th>
                 <th class="no-sort">
-                  <h5>MachineType</h5>
+                  <label>Machine Type</label>
                 </th>
                 <th>
-                  <h5>MachineName</h5>
+                  <label>Machine Name</label>
                 </th>
                 <th>
-                  <h5>SpindleSpeed</h5>
+                  <label>Spindle Speed</label>
                 </th>
                 <th>
-                  <h5>Power</h5>
+                  <label>Power</label>
                 </th>
                 <th>
-                  <h5>Torque</h5>
+                  <label>Torque</label>
                 </th>
                 <th></th>
                 <th></th>

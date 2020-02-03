@@ -1,63 +1,66 @@
 
-<div class="container-fluid ml-0 pl-0 mt-0 pt-0"> 
-<div class="mt-3 ml-0 pl-0 mt-0 pt-0">
-     <nav class="ml-0 pl-0 mt-0 pt-0" aria-label="breadcrumb">
-        <ol class="breadcrumb mt-3 ml-0 pl-0 bg-white" >
+<div class="container-fluid m-0 p-0 border-left border-right" > 
+<div class="mt-0 ml-0 pl-0 mt-0 pt-2" >
+     <nav class="ml-0 pl-0 mt-0 pl-4 pt-0" aria-label="breadcrumb">
+        <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
             <li class="breadcrumb-item text-secondary" ><a routerLink="/home/machines">All</a></li>
             <li class="breadcrumb-item active text-secondary"  aria-current="page">{{machHeader?.MachineName}}</li> 
         </ol>
       </nav>
 </div>  
-    <div class="row"> 
-     <div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12 pt-0 mt-0">
-        <div class="pt-0 pr-3">
-            <img src="{{imgNameMachine}}" class="img-machine-type">
-        </div>
-        <div class="pl-3 pt-0 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-4 col-lg-4">              
-            <div class="form-group">
-                <label class="col-form-label desc-label-big-bold">{{machHeader?.MachineName}}</label>
-            </div>              
-            <div>
-                <label class="col-form-label desc-machine">{{machHeader?.MachineType}}</label>             
-            </div>           
-            <div class="form-group"> 
-                <div class="row  pl-0">
-                    <label class="col-form-label desc-machine" for="txtCostPerHour" >Cost Per Hour</label> 
-                    <div class="pl-4 ml-4">                                                               
-                        <input type="number" class="form-control" *ngIf="machHeader&&machHeader.CostPerHour"   id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+
+<div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12 pt-0 mt-0">
+    <div class="pt-0 pr-3 pl-4">
+        <img src="{{imgNameMachine}}" class="img-machine-type">
+    </div>
+    <div class="pl-3 pt-0 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-8 col-lg-8">
+            <div class="p-0 m-0">           
+                <label class="col-form-label desc-label-big-bold">{{machHeader?.MachineName}}</label>                      
+            </div>
+             <div class="form-group">                 
+                <div class="col-3 p-0 m-0">    
+                    <label class="desc-machine">{{machHeader?.MachineType}}</label>                                 
+                </div>
+                <div class="row pl-0 ml-0">
+                    <div class="col-3 p-0 m-0">    
+                        <label class="desc-machine" for="txtCostPerHour">Cost Per Hour</label>           
                     </div>                    
-                    <div class="col-sm-2"> 
-                        <select class="selectpicker form-control"  *ngIf="machHeader&&machHeader.Currency" [(ngModel)]="machHeader.Currency">
+                    <div class="col-1 p-0 m-0">                                                               
+                        <input type="number" class="form-control" *ngIf="machHeader&&machHeader.CostPerHour" id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+                    </div>
+                     <div class="pl-4"> 
+                        <select class="form-control-sm"  *ngIf="machHeader&&machHeader.Currency" [(ngModel)]="machHeader.Currency">
                             <option value='$'>$</option>
                             <option value='Euro'>Euro</option>
                             <option value='Ruble'>Ruble</option>                            
                         </select>                                            
-                    </div>  
+                    </div>                    
                 </div>
-                <div class="row "> 
-                    <div class="pr-4 pt-2">                     
-                        <a>
-                            <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
-                        </a> 
+                <div class="form-group row">
+                    <div class="row col-3 pt-2">                     
+                        <div class="pt-2 pr-4">                     
+                            <a>
+                                <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
+                            </a> 
+                        </div>
+                        <div class="pr-4 pt-2">                                                                 
+                            <a>
+                                <img src="{{environment.ImgDefault}}" class="icon-grid">
+                            </a>                                              
+                        </div>
                     </div>
-                    <div class="pr-4 pt-2">                                                                 
-                        <a>
-                            <img src="{{environment.ImgDefault}}" class="icon-grid">
-                        </a>                                              
+                    <div class="pt-2">                        
+                        <button class="btn btn-select"  (click)="OnSelectMachine()" [routerLink]="['/home/materials']">Select</button>                                                              
                     </div>                                            
-                    <div class="pr-4 pt-2">
-                        <button class="btn btn-select"  (click)="OnSelectMachine()" [routerLink]="['/home/materials']">Select</button>                                       
-                    </div>
-                </div>
-            </div>                
-            <div class="form-group"> 
-                
-            </div>                         
-        </div>                                              
-    </div>   
-   <div   *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
-        <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
-    </div>
-    </div>
-<div>
+                </div>           
+            <div class="form-group">
+            </div>
+        </div>                           
+                              
+    </div>                                              
+</div>   
+<div  *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
+    <app-machine-item-spindle [spindle]=spindle ></app-machine-item-spindle>
+</div>
+
    

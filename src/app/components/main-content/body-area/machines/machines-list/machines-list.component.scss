@@ -1,16 +1,28 @@
 td:first-child { display:none; }
 th:first-child { display:none; }
+
+/* td
+{
+    background: var(--bg-gray); 
+}
+tr
+{
+    background: var(--bg-gray);
+} */
+
 table.dataTable{
-    border-collapse: collapse !important;
+    /* border-collapse: collapse !important; */
+    background: var(--bg-gray);
 }
 .divcontainer{
       background: var(--bg-gray);
 }
-    td {
-     font-size: 15px;
-     }
 
- th {
-     font-size: 18px;
-     }
+td {
+    font-size: 14px;
+    }
+
+th {
+    font-size: 18px;
+    }
     

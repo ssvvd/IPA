@@ -24,20 +24,44 @@ export class OptimizetoolComponent implements OnInit {
  
 
   TypeFeed:string ="BothFeed";
-  isshow_brandname:boolean =false;
-  arrBrandName:ToolOptimizeItem[]=[];
-  decs_brandname:string=''; 
-  isLoad:boolean =false;
 
+  //isshow_brandname:boolean =false;
+
+  arrBrandName:ToolOptimizeItem[]=[];
+  arrToolDesignation:ToolOptimizeItem[]=[];
+
+  parBrandName:string='All';
+  parToolDesignation:string='All';
+
+  isLoad:boolean =false;
+  
   constructor(private srv_DataLayer:DatalayerService) { }
   
+  GetSelectedBrandName() : string
+  {
+    let strItems:string='';
+    this.arrBrandName.forEach (p=>{strItems = strItems +p.Value + ",";});  
+    if(strItems=='') strItems ="All";
+    return strItems;
+  }
+
+  GetSelectedToolDesignation() : string
+  {
+    let strItems:string='';
+    this.arrToolDesignation.forEach (p=>{strItems = strItems +p.Value + ",";});
+    if(strItems=='') strItems ="All";    
+    return strItems;
+  }
+
   ngOnInit() { 
-     this.parentSubject.subscribe(event => {
-       let strItems:string='';
-       this.arrBrandName.forEach (p=>{strItems = strItems +p.Value + ",";});       
-       this.Ipl.GetItem('TD_BrandName').value=strItems;       
+    this.parentSubject.subscribe(event => {              
+    this.Ipl.GetItem('TD_BrandName').value= this.GetSelectedBrandName() ;
+    this.Ipl.GetItem('TD_ToolDesignation').value= this.GetSelectedToolDesignation();     
     });
     
+    this.parBrandName="M/1/1/760/";
+    this.parToolDesignation="All/0/999/All/1/1/760/M/All/";
+
     if(this.Ipl.GetItem('TD_FASTFEED').value=='1' && this.Ipl.GetItem('TD_REGULAR').value=='1')        
       this.TypeFeed="BothFeed";     
     else             
@@ -48,8 +72,35 @@ export class OptimizetoolComponent implements OnInit {
     this.isLoad =true;
   }
   
+  onSelectedItems($event) {          
+    switch($event.funcname)
+        { 
+          case "brandname": { 
+              this.arrBrandName = $event.items;
+              this.Ipl.GetItem('TD_BrandName').value=this.get_strselectedvalue(this.arrBrandName);
+              break; 
+          } 
+          case"tool":  { 
+              this.arrToolDesignation = $event.items;
+              this.Ipl.GetItem('TD_ToolDesignation').value=this.get_strselectedvalue(this.arrToolDesignation);
+              break; 
+          } 
+          default: {               
+              break; 
+          } 
+        }           
+        this.parToolDesignation=this.GetSelectedBrandName()+ "/0/999/All/1/1/760/M/All/"  ;
+        //alert(this.parToolDesignation);
+   }
+
    onSelectedBrandNamesChanged($event) {    
-    this.arrBrandName = $event.items;         
+    this.arrBrandName = $event.items; 
+     
+    this.parToolDesignation="";      
+   }
+  
+   onSelectedToolDesignationChanged($event) {    
+    this.arrToolDesignation = $event.items;         
    }
 
   change(field:string)
@@ -65,5 +116,13 @@ export class OptimizetoolComponent implements OnInit {
     if(this.TypeFeed=="BothFeed")  {this.Ipl.GetItem('TD_FASTFEED').value='True'; this.Ipl.GetItem('TD_REGULAR').value='True'};
     if(this.TypeFeed=="HightFeed")  {this.Ipl.GetItem('TD_FASTFEED').value='True'; this.Ipl.GetItem('TD_REGULAR').value='False'};
     if(this.TypeFeed=="NormalFeed")  {this.Ipl.GetItem('TD_FASTFEED').value='False'; this.Ipl.GetItem('TD_REGULAR').value='True'};
-  }    
+  } 
+  
+  get_strselectedvalue(arr :ToolOptimizeItem[]):string
+  {
+    let str:string ='';     
+    arr.forEach(pp=>{str = str +pp.Designation + ",";} );
+    return str;
+    //str =str.substring (0,this.select_items.length-1);
+  }
 }

@@ -1,22 +1,24 @@
-.img-main-menu{
+.img-main-menu
+{
     height: 40px;
     margin-left:5px;
     margin-right:5px;
-    }   
+}
+
 .desc-main-menu
 {
     color: var(--btn-bg-select-color);
     font-weight:bold;
-    font-size:1.3rem;
-    font-family: 'Oswald',Calibri,Arial;
+    font-size:18px;
+    font-family: var(--family-font-h);
 }
 
 .desc-main-menu-disabled
 {
     color: var(--btn-bg-gray-color);
     font-weight:bold;
-    font-size:1.3rem;
-    font-family: 'Oswald',Calibri,Arial;
+    font-size:18px;
+    font-family: var(--family-font-h);
 }
 
 .desc-main-menu-selected
@@ -24,7 +26,7 @@
     color: var(--btn-bg-select-color);
     font-weight:normal;
     font-size:0.9rem;
-    font-family: 'Oswald',Calibri,Arial;
+    font-family: var(--family-font);
 }
 
 

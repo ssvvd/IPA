@@ -59,17 +59,18 @@
     </div>
  <div class="pl-0 pt-4 ">
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="optHightFeed" name="TypeFeed"   (change)="changeTypeFeed()" [(ngModel)]="TypeFeed" value="HightFeed">
+            <input type="radio" class="custom-control-input" id="optHightFeed" name="TypeFeed"   (change)="changeTypeFeed()" checked="TypeFeed=='HightFeed'" value="HightFeed">
             <label class="custom-control-label" for="optHightFeed">Hight Feed</label>
         </div>                              
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="optNormalFeed" name="TypeFeed"  (change)="changeTypeFeed()" [(ngModel)]="TypeFeed"  value="NormalFeed">
+            <input type="radio" class="custom-control-input" id="optNormalFeed" name="TypeFeed"  (change)="changeTypeFeed()" checked="TypeFeed=='NormalFeed'"  value="NormalFeed">
             <label class="custom-control-label" for="optNormalFeed">Normal Feed</label>
         </div>
         <div class="custom-control custom-radio custom-control-inline">
-            <input type="radio" class="custom-control-input" id="optBothFeed" name="TypeFeed"  (change)="changeTypeFeed()" [(ngModel)]="TypeFeed" value="BothFeed">
+            <input type="radio" class="custom-control-input" id="optBothFeed" name="TypeFeed"  (change)="changeTypeFeed()" checked="TypeFeed=='BothFeed'"  value="'BothFeed'">
             <label class="custom-control-label" for="optBothFeed">Both Feed</label>
         </div>  
     </div>
-    <app-optimizetool-filter (selectitems)="onSelectedBrandNamesChanged($event)"  [selitems]="arrBrandName" *ngIf="isLoad" [labeldescription]="'Brand Name'" [field]="'BrandName'" [funcname]="'brandname'" [funcpar]="'M/1/1/760'" [selitems]="arrBrandName"></app-optimizetool-filter>      
+    <app-optimizetool-filter id="app_brandname" (selectitems)="onSelectedItems($event)"  [selitems]="arrBrandName" *ngIf="isLoad" [labeldescription]="'Brand Name'" [field]="'BrandName'" [funcname]="'brandname'" [funcpar]="parBrandName"></app-optimizetool-filter> 
+    <app-optimizetool-filter id="app_tooldesignation"  (selectitems)="onSelectedItems($event)"  [selitems]="arrToolDesignation" *ngIf="isLoad" [labeldescription]="'Tool Designation'" [field]="'Designation'" [funcname]="'tool'" [funcpar]="parToolDesignation"></app-optimizetool-filter>         
 </div>
