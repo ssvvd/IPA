@@ -1,29 +1,29 @@
 
-<div class="container-fluid">
+<div class="border-left border-right">
     <div class="row">
-      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+      <div class="col col-20">
         <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)"></app-mat-filter>
       </div>
-      <div [ngSwitch]="curComponent" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-        <br>
+      <div [ngSwitch]="curComponent" class="col col-80 pl-2 border-left">
         <div class="row">
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pl-1">
               <nav  aria-label="breadcrumb">
                  <ol class="breadcrumb mt-3 mb-0 ml-0 pl-0 bg-white" >
-                     <li (click)="receiveCategory(this.selectedCateg)" class="breadcrumb-item h4" ><a href="javascript:void(0)">{{this.selectedCateg}}</a></li>
-                     <li *ngFor="let crumb of this.breadCrumb" class="breadcrumb-item active h4"  aria-current="page">
+                     <li (click)="receiveCategory(this.selectedCateg)" class="breadcrumb-item" ><a href="javascript:void(0)">{{this.selectedCateg}}</a></li>
+                     <li *ngFor="let crumb of this.breadCrumb" class="breadcrumb-item active"  aria-current="page">
                         {{crumb}}
                      </li>
                  </ol>
                </nav>
          </div> 
-         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-4 pr-0">
-          <button type="button" class="btn btn-link btn-lg float-right" (click)="openRequestMatM()">Can't find the right material?</button>
+         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-4 pr-0 pt-2">
+          <button type="button" class="btn btn-link float-right" (click)="openRequestMatM()">Can't find the right material?</button>
          </div>
         </div>
-        <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)" [filterSearchTextInput]="searchText"></app-mat-main-table>
+        <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)"></app-mat-main-table>
         <app-mat-details *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
         <app-mat-standard-table *ngSwitchCase="3" [selectedCateg]="selectedCateg" [selectedStandard]="selectedSatnd"></app-mat-standard-table>
+        <app-mat-search *ngSwitchCase="4"  [filterSearchTextInput]="searchText"></app-mat-search>
       </div>
     </div>
   </div>

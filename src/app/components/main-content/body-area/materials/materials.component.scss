@@ -6,6 +6,7 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    color:white;
   }
 
   .square[title*="P"]{
@@ -14,6 +15,7 @@
 
    .square[title*="M"]{
     background-color: var(--bg-mat-M);
+    color:black;
     }
 
     .square[title*="K"]{
@@ -45,11 +47,12 @@
     }
 
     ::ng-deep .customModalClass .modal-dialog { 
-      max-width: 705px;
+      max-width: 684px;
  }
 
  .table thead th[title*="P"]{
   background-color: var(--bg-mat-P);
+  color:white;
   }
 
  .table thead th[title*="M"]{
@@ -58,18 +61,46 @@
 
   .table thead th[title*="K"]{
    background-color: var(--bg-mat-K);
+   color:white;
   }
 
   .table thead th[title*="N"]{
    background-color: var(--bg-mat-N);
+   color:white;
   }
 
   .table thead th[title*="S"]{
    background-color: var(--bg-mat-S);
+   color:white;
    }
 
  .table thead th[title*="H"]{
    background-color: var(--bg-mat-H);
+   color:white;
      }
 
 
+     .col-20 {
+      flex: 0 0 20%;
+      max-width: 20%;
+  }
+  .col-80 {
+      flex: 0 0 80%;
+      max-width: 80%;
+  }
+
+
+  .icon-edit{
+    width:25px;
+    padding-right:5px;
+    cursor: pointer;
+    // margin-left:-20px;
+    }
+    
+    .table td, .table th{
+        white-space: nowrap;
+    }
+    
+    table.dataTable {
+        border-collapse: collapse !important;
+    }

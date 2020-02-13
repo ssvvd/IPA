@@ -7,6 +7,7 @@ export class clsMaterial {
     material:string;
     HardnessOrigin:string;
     Category:string;
+    Standard:string;
 
     constructor(public grp: string,public desc: string,public mat: string,public cat: string) { 
         this.group =grp;

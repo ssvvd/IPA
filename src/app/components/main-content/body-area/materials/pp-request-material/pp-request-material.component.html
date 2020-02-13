@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">Request a new material</h4>
+    <h4 class="modal-title desc-label-big-bold">Request a new material</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -7,9 +7,9 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="modal-body">
     <div class="form-group row">
-      <label for="email" class="col-sm-3 col-form-label col-form-label-lg">Email <label *ngIf="environment.internal">(or <a href="#">Login</a> Now) </label>*</label>
+      <label for="email" class="col-sm-3 ">Email<label *ngIf="environment.internal">&nbsp;(or <a href="#">Login</a> Now)</label> <label class="text-danger">&nbsp;*</label></label>
       <div class="col-sm-9">
-        <input type="text" formControlName="email" class="form-control form-control-lg" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <input type="text" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
             <div *ngIf="f.email.errors.required">Email is required</div>
             <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
@@ -17,18 +17,18 @@
       </div>
     </div>
     <div class="form-group row">
-        <label for="desc" class="col-sm-3 col-form-label col-form-label-lg">Description *</label>
+        <label for="desc" class="col-sm-3 ">Description<label class="text-danger">&nbsp;*</label></label>
         <div class="col-sm-9">
-          <input type="text" formControlName="desc" class="form-control form-control-lg" id="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
+          <input type="text" formControlName="desc" class="form-control" id="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
           <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
             <div *ngIf="f.desc.errors.required">Description is required</div>
         </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="grp" class="col-sm-3 col-form-label col-form-label-lg">Group</label>
+        <label for="grp" class="col-sm-3 ">Group</label>
         <div class="col-sm-9">
-          <select class="custom-select custom-select-lg" formControlName="grp">
+          <select class="custom-select" formControlName="grp">
             <option selected value="">Choose</option>
             <option *ngFor="let grp of materialsResult" 
                 [value]="grp.group" >
@@ -38,9 +38,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="stndrd" class="col-sm-3 col-form-label col-form-label-lg">Standard</label>
+        <label for="stndrd" class="col-sm-3 ">Standard</label>
         <div class="col-sm-9">
-          <select class="custom-select custom-select-lg" formControlName="stndrd">
+          <select class="custom-select" formControlName="stndrd">
             <option selected value="">Standard Conversion</option>
             <option *ngFor="let st of matStandard" 
                 [value]="st.GWCCNT" >
@@ -50,9 +50,9 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="cond" class="col-sm-3 col-form-label col-form-label-lg">Condition</label>
+        <label for="cond" class="col-sm-3 ">Condition</label>
         <div class="col-sm-9">
-            <select class="custom-select custom-select-lg" formControlName="cond">
+            <select class="custom-select" formControlName="cond">
                 <option selected value="">Choose</option>
                 <option *ngFor="let cond of ddlCondition" 
                     [value]="cond.Condition" >
@@ -62,15 +62,15 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="hardness" class="col-sm-3 col-form-label col-form-label-lg">Hardness</label>
+        <label for="hardness" class="col-sm-3 ">Hardness</label>
         <div class="col-sm-9">
           <app-hardness-slider ></app-hardness-slider>
         </div>
       </div>
       <div class="form-group row">
-        <label for="manf" class="col-sm-3 col-form-label col-form-label-lg">Manufacture/Other</label>
+        <label for="manf" class="col-sm-3 ">Manufacture/Other</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control form-control-lg" formControlName="manf" >
+          <input type="text" class="form-control" formControlName="manf" >
         </div>
       </div>
   </div>
@@ -80,7 +80,7 @@
         <!-- <div class="row">
           <div class="span4"> -->
             <img src="{{environment.ImgStock}}" class="icon-grid"/>
-            <h4>Request sent and will be handled. Follow your email.</h4>
+            <h4 class="desc-label-big-bold m-1 text-dark">Request sent and will be handled. Follow your email.</h4>
           <!-- </div>
         </div> -->
       </div>

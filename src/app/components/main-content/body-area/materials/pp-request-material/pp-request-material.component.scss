@@ -8,19 +8,19 @@
     margin-left: -15px !important;
   }
 
-  .form-control-lg {
-      height: calc(1.5em + 0.8rem + 2px);
-  }
+  // .form-control-lg {
+  //     height: calc(1.5em + 0.8rem + 2px);
+  // }
 
   option {
     background-color: #F1F1F1;
-    font-size: 1.25rem;
+    // font-size: 1.25rem;
 }
 
 select{
     background-color: #F1F1F1;
-    height: calc(1.5em + 1.4rem + 2px);
-    font-size: 1.25rem !important;
+    // height: calc(1.5em + 1.4rem + 2px);
+    // font-size: 1.25rem !important;
 }
 
 .icon-grid{
@@ -32,6 +32,14 @@ select{
   margin-top:-20px;
   margin-left:20px;
   margin-right:20px;
+}
+
+.custom-select {
+  font-size: 14px;
+}
+
+.col-sm-3 {
+  padding-top:7px;
 }
 //   .form-control{
 //     font-size: medium;

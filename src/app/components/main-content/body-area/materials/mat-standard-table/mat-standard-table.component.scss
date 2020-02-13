@@ -8,6 +8,16 @@
       background-color: var(--bg-hover) !important; 
       cursor: pointer;
     }
+
+    .table td, .table th{
+      border-right: 2px solid #dee2e6;
+      border-top:none;
+    }
+
+    .table td{
+      background-color: var(--bg-gray);
+  }
+
     // .td-hover:hover{
     //   background-color: black !important; 
     // }

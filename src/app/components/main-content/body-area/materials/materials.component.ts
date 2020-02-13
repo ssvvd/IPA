@@ -29,14 +29,16 @@ export class MaterialsComponent implements OnInit {
   }
   
   receiveCategory(category:string) {
-    this.selectedCateg = category;
-    this.curComponent = "1";
-    this.breadCrumb = [];
-    if (this.statemng.GetMaterialSelected()!= null){
-      var selMat = this.statemng.GetMaterialSelected();
-      var selCateg = selMat.Category;
-      if (selCateg.includes(category))
-        this.breadCrumb = [selMat.group];
+    if (category != "All"){
+      this.selectedCateg = category;
+      this.curComponent = "1";
+      this.breadCrumb = [];
+      if (this.statemng.GetMaterialSelected()!= null){
+        var selMat = this.statemng.GetMaterialSelected();
+        var selCateg = selMat.Category;
+        if (selCateg.includes(category))
+          this.breadCrumb = [selMat.group];
+      }
     }
   
   }
@@ -63,6 +65,16 @@ export class MaterialsComponent implements OnInit {
 
   receiveSearchText(srch:string) {
     this.searchText = srch;
+    if (srch.trim() == ''){
+      this.curComponent = "1";
+      this.selectedCateg = "P";
+    }
+    else{
+      this.curComponent = "4";
+      this.selectedCateg = "All";
+      this.breadCrumb = [];
+    }
+    
   }
 
 /*   reciveClearSearch() {

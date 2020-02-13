@@ -7,12 +7,12 @@
   --btn-bg-gray-color: #757677;
   --bg-gray: #f6f6f7;
   --bg-blue-header: #82aade;
-  --bg-mat-P:#82aade;
-  --bg-mat-M:#fff184;
-  --bg-mat-K:#eb8888;
-  --bg-mat-N:#9bd599;
-  --bg-mat-S:#ffd685;
-  --bg-mat-H:#b2b2b2;
+  --bg-mat-P:#00C;
+  --bg-mat-M:#ffff00;
+  --bg-mat-K:#C00;
+  --bg-mat-N:#009946;
+  --bg-mat-S:#ffa500;
+  --bg-mat-H:#888;
   --bg-hover:#ebedf2;
   --family-font-h: 'Oswald',Calibri,Arial;
   --family-font: 'Roboto',Calibri,Arial;
@@ -201,7 +201,7 @@ tr.tr-selected {
   
 .tr-not-selected
 {
-    background-color:var(--bg-gray);
+    background-color:var(--bg-gray) !important;
 }
 
 .tr-not-selected:hover
@@ -240,4 +240,26 @@ tr.tr-selected {
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.table thead th {
+border-bottom: 2px solid #dee2e6 !important;
+padding: 0.5rem !important;
+}
+
+label {
+  margin:0px !important;
+}
+
+.table th, .table td {
+  padding: 0.5rem !important;
+  vertical-align: middle !important;
+}
+
+.table th {
+  border-top: none !important; 
+}
+
+table.dataTable.no-footer{
+  border-bottom: 2px solid #dee2e6;
 }

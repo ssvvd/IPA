@@ -1,20 +1,20 @@
-<br><br>
+<br>
 <div class="md-form mt-0">
     <input class="form-control mb-3" [(ngModel)]="searchText" (keyup)="FilterChange($event)" type="text" placeholder="Search" aria-label="Search">  
   </div>
   <hr>
   <div class="list-group list-group-flush" > 
       <button type="button" *ngFor="let tab of Tabs" [ngClass]="{'active': curSelectedCategory == tab.TapLetter}" class="list-group-item list-group-item-action border-0 d-flex align-items-center" (click)="categClick(tab.TapLetter)" >
-        <div class="square" [title]="tab.TapLetter"><h4>{{tab.TapLetter}}</h4></div>
+        <div class="square" [title]="tab.TapLetter"><label class="bold font-weight-bold m-1">{{tab.TapLetter}}</label></div>
         <div class="align-items-center">{{tab.Description}}</div>
       </button>
   </div>
     <hr>
   <div >
-    <select class="form-control form-control-sm" [(ngModel)]="standardSelected" (change)="onStandardChange($event.target.value)">
+    <select [disabled]="selectDisabled" class="form-control form-control-sm bg-light" [(ngModel)]="standardSelected" (change)="onStandardChange($event.target.value)">
       <option value="">Standard Conversion</option>
         <option *ngFor="let standard of matStandard" [value]="standard.GWCCNT">{{standard.GWCCNT}}</option>
     </select>                                
 </div>
   <hr>
-<h4 *ngIf="environment.internal">My Material</h4>
+  <div *ngIf="environment.internal" class="bg-light"><label class="bold font-weight-bold bg-light m-1">My Materials</label></div>

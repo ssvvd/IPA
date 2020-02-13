@@ -5,17 +5,16 @@ import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
-import {PpSetDefaultComponent} from 'src/app/components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
 import { Subject, Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-mat-main-table',
-  templateUrl: './mat-main-table.component.html',
-  styleUrls: ['./mat-main-table.component.scss','../materials.component.scss']
+  selector: 'app-mat-search',
+  templateUrl: './mat-search.component.html',
+  styleUrls: ['./mat-search.component.scss','../materials.component.scss']
 })
-export class MatMainTableComponent implements OnInit, OnDestroy {
+export class MatSearchComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
@@ -29,14 +28,12 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   allSubsMat$: Subscription;
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
-  @Input() selectedCategory: string ;
   @Input() filterSearchTextInput: string;
-  @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal) { }
 
   ngOnInit() {
-    let myColumns1 = [ 5, 6,7,8];
+    let myColumns1 = [6,7];
     let myColumns2 = [];
 
     this.dtOptionsMat = {
@@ -47,7 +44,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
        "autoWidth":false,
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false}],
        "language": {
-        "emptyTable": "",
+        "emptyTable": "No data available in table",
         "zeroRecords": "",
         "infoEmpty": ""
       } 
@@ -57,40 +54,21 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   }
 
 
-  // initHardness(mat:clsMaterial){
-  //   mat.HardnessOrigin = mat.Hardness;
-  // }
-  // ngAfterContentInit(){
-  //   this.isDtInitializedFunc();
-  // }
-
-
   fillMainTable(){
-    this.allSubsMat$ = this.serv.getmaterialsbygrp('EN',this.selectedCategory)
+    this.allSubsMat$ = this.serv.searchmaterial(this.filterSearchTextInput)
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
       this.materialsResultSorted = this.materialsResult;
       this.materialsResultFilterd = this.materialsResult;
-      // this.filterTable();
       if (this.srv_statemanage.GetMaterialSelected()== null)
           this.selectedMaterial = "";
        else
-          this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
+          this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().material;
           
        this.isDtInitializedFunc();
 
 
     });
-
-    // this.serv.getmaterialsbygrp('EN',this.selectedCategory).subscribe((res:any)=>{
-    //   this.materialsResult=JSON.parse(res);
-    //   this.materialsResultFilterd = this.materialsResult;
-    //   this.filterTable();
-    //   if (this.srv_statemanage.GetMaterialSelected()== null)
-    //       this.selectedMaterial = "";
-    //    else
-    //       this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
-    // })
   }
 
   isDtInitializedFunc(){
@@ -107,59 +85,32 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes:SimpleChanges) {
-    if (changes.selectedCategory){
       this.fillMainTable();
-    }
-    // else{
-    //   if (changes.filterSearchTextInput){
-    //     this.filterTable();
-    //  }
-    // }
-        
-
   }
 
   ngOnDestroy() {
     this.allSubsMat$.unsubscribe();
   }
 
-  filterTable(){
-    var searchText = this.filterSearchTextInput;
-    if (searchText == null || searchText == ''){
-      this.materialsResultSorted = this.materialsResult;
-    }
+  // filterTable(){
+  //   var searchText = this.filterSearchTextInput;
+  //   if (searchText == null || searchText == ''){
+  //     this.materialsResultSorted = this.materialsResult;
+  //   }
         
-    else
-         this.materialsResultSorted = this.materialsResult.filter(_ => 
-          (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-          (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-          (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-          (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
-          ); 
+  //   else
+  //        this.materialsResultSorted = this.materialsResult.filter(_ => 
+  //         (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
+  //         (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
+  //         (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
+  //         (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
+  //         ); 
 
-          // this.isDtInitializedFunc();
-          // if(this.dtElement.dtInstance){
-          //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          //     dtInstance.destroy();
-          //     this.dtTriggerMat.next();
-          //   });
-          // }
-
-
-          // if(this.firstInt)
-          // this.isDtInitializedFunc();
-
-          // if (!this.firstInt)
-          // this.firstInt = true;
-
-  }
-  matDetailClick(material: clsMaterial) {
-    this.matDetailSelectedEv.emit(material);
-  }
+  // }
 
   OnSelectMaterial(mat:clsMaterial)
   {   
-    this.selectedMaterial = mat.group;
+    this.selectedMaterial = mat.material;
     this.srv_statemanage.SelectMaterial(mat);
 
   }
@@ -171,16 +122,10 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   setAsDefault(){
     let a =0;
   }
-  openSetDefaultModal(mat:clsMaterial) {
-    const modalRef = this.modalService.open(PpSetDefaultComponent, { centered: true });
-    modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
-/*     modalRef.componentInstance.my_modal_title = 'I your title';
-    modalRef.componentInstance.my_modal_content = 'I am your content'; */
-  }
 
   openAddToFavM(mat:clsMaterial) {
     const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
-    modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
+    modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
   }
 
   openEditParamsM(mat:clsMaterial) {
@@ -200,5 +145,6 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       }
       }, () => console.log('Rejected!'));
   }
+
 
 }
