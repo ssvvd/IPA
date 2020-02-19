@@ -63,7 +63,6 @@
 
  .table thead th[title*="P"]{
   background-color: var(--bg-mat-P) !important;
-  color:white !important;
   }
 
  .table thead th[title*="M"]{
@@ -72,24 +71,40 @@
 
   .table thead th[title*="K"]{
    background-color: var(--bg-mat-K) !important;
-   color:white !important;
   }
 
   .table thead th[title*="N"]{
    background-color: var(--bg-mat-N);
-   color:white !important;
   }
 
   .table thead th[title*="S"]{
    background-color: var(--bg-mat-S) !important;
-   color:white !important;
    }
 
  .table thead th[title*="H"]{
    background-color: var(--bg-mat-H) !important;
-   color:white !important;
      }
 
+
+     .table thead th[title*="P"] label{
+      color:white !important;
+      }
+
+      .table thead th[title*="K"] label{
+       color:white !important;
+      }
+    
+      .table thead th[title*="N"] label{
+       color:white !important;
+      }
+    
+      .table thead th[title*="S"] label{
+       color:white !important;
+       }
+    
+     .table thead th[title*="H"] label{
+       color:white !important;
+         }
 
      .col-20 {
       flex: 0 0 20%;

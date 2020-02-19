@@ -23,7 +23,7 @@
                   <thead>                                                                           
                      <tr>
                         <th *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" title={{selectedCateg}} (click)="environment.internal ? OnSelectMaterial(col,'') : false"
-                           [routerLink]="environment.internal ? '/home/machining-operation' : []">{{mySplit(col,0)}}</th>
+                           [routerLink]="environment.internal ? '/home/machining-operation' : []"><label>{{mySplit(col,0)}}</label></th>
                      </tr>
                   </thead>
                   <tbody>

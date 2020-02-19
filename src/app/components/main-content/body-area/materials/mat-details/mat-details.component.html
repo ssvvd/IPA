@@ -7,7 +7,7 @@
             </div>
               <table    datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
                     <thead>
-                            <tr id="dtOptionsMat"><th  *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" title={{selectedMaterial.Category}}>{{col}}</th></tr>
+                            <tr id="dtOptionsMat"><th  *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" title={{selectedMaterial.Category}}><label>{{col}}</label></th></tr>
                          </thead>
                          <tbody>
                             <tr  *ngFor="let obj of detailsResult;" >
