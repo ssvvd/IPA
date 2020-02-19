@@ -8,6 +8,7 @@ import { DataTableDirective } from 'angular-datatables';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
 import { Subject, Subscription } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner"; 
 
 @Component({
   selector: 'app-mat-search',
@@ -18,7 +19,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
-  dtOptionsMat: DataTables.Settings = {};
+  dtOptionsMat: any = {};
   materialsResult:clsMaterial[]=[];
   materialsResultFilterd:clsMaterial[]=[];
   materialsResultSorted:clsMaterial[]=[];
@@ -30,7 +31,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   firstInt:boolean = false;
   @Input() filterSearchTextInput: string;
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal) { }
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
     let myColumns1 = [6,7];
@@ -42,11 +43,12 @@ export class MatSearchComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false}],
+       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: 8, type: 'num' }, { "iDataSort": 8, "aTargets": [ 5 ] }],
        "language": {
         "emptyTable": "No data available in table",
         "zeroRecords": "",
-        "infoEmpty": ""
+        "infoEmpty": "",
+        "info": ""
       } 
             
       }; 
@@ -55,6 +57,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
 
 
   fillMainTable(){
+    this.SpinnerService.show();
     this.allSubsMat$ = this.serv.searchmaterial(this.filterSearchTextInput)
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
@@ -66,9 +69,10 @@ export class MatSearchComponent implements OnInit, OnDestroy {
           this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().material;
           
        this.isDtInitializedFunc();
-
+       this.SpinnerService.hide();
 
     });
+ 
   }
 
   isDtInitializedFunc(){
@@ -134,13 +138,21 @@ export class MatSearchComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true });
     modalRef.componentInstance.modal_mat_id = mat.id;
     modalRef.componentInstance.modal_group = mat.Category + mat.group;
-    modalRef.componentInstance.origin_hardness = mat.HardnessOrigin.replace(" HB","");
-    modalRef.componentInstance.modal_hardness = mat.Hardness.replace(" HB","");
+    modalRef.componentInstance.origin_hardness = mat.HardnessOrigin;
+    modalRef.componentInstance.modal_hardness = mat.Hardness;
+    modalRef.componentInstance.unit_hardness = mat.HardnessUnits?mat.HardnessUnits:"HB";
     modalRef.result.then((result) => {
       if (result) {
       console.log(result);
         if(result != 'A'){
-          mat.Hardness = result;
+          let spletter = result.split(",");
+          mat.Hardness = spletter[0];
+          mat.HardnessUnits = spletter[1];
+          mat.HardnessHBValue = spletter[2];
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.dtTriggerMat.next();
+          });
         }
       }
       }, () => console.log('Rejected!'));

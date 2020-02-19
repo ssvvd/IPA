@@ -19,7 +19,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
-  dtOptionsMat: DataTables.Settings = {};
+  dtOptionsMat: any = {};
   materialsResult:clsMaterial[]=[];
   materialsResultFilterd:clsMaterial[]=[];
   materialsResultSorted:clsMaterial[]=[];
@@ -36,7 +36,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal) { }
 
   ngOnInit() {
-    let myColumns1 = [ 5, 6,7,8];
+    let myColumns1 = [5,6,7,8];
     let myColumns2 = [];
 
     this.dtOptionsMat = {
@@ -45,11 +45,12 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false}],
+       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: 9, type: 'num' }, { "iDataSort": 9, "aTargets": [ 4 ] }],
        "language": {
         "emptyTable": "",
         "zeroRecords": "",
-        "infoEmpty": ""
+        "infoEmpty": "",
+        "info": ""
       } 
             
       }; 
@@ -133,8 +134,9 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
          this.materialsResultSorted = this.materialsResult.filter(_ => 
           (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
           (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-          (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-          (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
+          (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1)
+          //  ||
+          // (_.Hardness.indexOf(searchText.toUpperCase())>-1)
           ); 
 
           // this.isDtInitializedFunc();
@@ -189,13 +191,21 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true });
     modalRef.componentInstance.modal_mat_id = mat.id;
     modalRef.componentInstance.modal_group = mat.Category + mat.group;
-    modalRef.componentInstance.origin_hardness = mat.HardnessOrigin.replace(" HB","");
-    modalRef.componentInstance.modal_hardness = mat.Hardness.replace(" HB","");
+    modalRef.componentInstance.origin_hardness = mat.HardnessOrigin;
+    modalRef.componentInstance.modal_hardness = mat.Hardness;
+    modalRef.componentInstance.unit_hardness = mat.HardnessUnits?mat.HardnessUnits:"HB";
     modalRef.result.then((result) => {
       if (result) {
       console.log(result);
         if(result != 'A'){
-          mat.Hardness = result;
+          let spletter = result.split(",");
+          mat.Hardness = spletter[0];
+          mat.HardnessUnits = spletter[1];
+          mat.HardnessHBValue = spletter[2];
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.dtTriggerMat.next();
+          });
         }
       }
       }, () => console.log('Rejected!'));

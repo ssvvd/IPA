@@ -21,3 +21,7 @@ thead{
 .table td{
     background-color: var(--bg-gray);
 }
+
+.table td, .table th{
+    width: 12.5%;
+}

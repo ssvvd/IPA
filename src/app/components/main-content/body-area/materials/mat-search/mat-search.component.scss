@@ -37,19 +37,19 @@ a:visited img {
 }
 
 .table td:nth-child(3), .table th:nth-child(3){
-    width: 42%;
+    width: 21%;
 }
 
 .table td:nth-child(4), .table th:nth-child(4){
-    width: 8%;
+    width: 15%;
 }
 
 .table td:nth-child(5), .table th:nth-child(5){
-    width: 10%;
+    width: 17%;
 }
 
 .table td:nth-child(6), .table th:nth-child(6){
-    width: 10%;
+    width: 17%;
 }
 
 .table td:nth-child(7), .table th:nth-child(7){
@@ -62,25 +62,25 @@ a:visited img {
 
 
 .categLabel[title*="P"]{
-    color: var(--bg-mat-P);
+    color: var(--bg-mat-P) !important;
     }
 
    .categLabel[title*="M"]{
-    color: var(--bg-mat-M);
+    color: #ffe01b !important;
     }
 
     .categLabel[title*="K"]{
-     color: var(--bg-mat-K);
+     color: var(--bg-mat-K) !important;
     }
 
     .categLabel[title*="N"]{
-     color: var(--bg-mat-N);
+     color: var(--bg-mat-N) !important;
     }
 
     .categLabel[title*="S"]{
-     color: var(--bg-mat-S);
+     color: var(--bg-mat-S) !important;
      }
 
    .categLabel[title*="H"]{
-     color: var(--bg-mat-H);
+     color: var(--bg-mat-H) !important;
        }

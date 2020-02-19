@@ -25,7 +25,7 @@ export class PpRequestMaterialComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal,private formBuilder: FormBuilder,private serv: MaterialService) { }
 
   ngOnInit() {
-    this.slider.setInetialParameters(0,225,225);
+    this.slider.setInetialParameters(0,225,225,'HB');
     this.registerForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       desc: ['', Validators.required],    
@@ -70,7 +70,7 @@ export class PpRequestMaterialComponent implements OnInit {
         return;
     }
     this.subAndValid = true;
-    let cur_hb_hardness = this.slider.getCurValue();//if not zero then the value is avilable.
+    let cur_hb_hardness = this.slider.getCurValue();//if not empty then the value is avilable seperated by commas.
     // display form values on success
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
   }

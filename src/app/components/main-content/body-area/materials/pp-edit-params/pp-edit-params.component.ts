@@ -14,13 +14,14 @@ export class PpEditParamsComponent implements OnInit{
   @Input() modal_hardness;
   @Input() modal_group;
   @Input() origin_hardness;
-  cur_hb_hardness: number;
+  @Input() unit_hardness;
+  cur_hb_hardness: string;
 
   constructor(public activeModal: NgbActiveModal) {
   }
 
      ngOnInit() {
-      this.slider.setInetialParameters(this.modal_mat_id,this.modal_hardness,this.origin_hardness);
+      this.slider.setInetialParameters(this.modal_mat_id,this.modal_hardness,this.origin_hardness,this.unit_hardness);
      }
 
   reset(){
@@ -30,7 +31,7 @@ export class PpEditParamsComponent implements OnInit{
   set(){
     this.cur_hb_hardness = this.slider.getCurValue();
 
-    if (this.cur_hb_hardness != 0){
+    if (this.cur_hb_hardness != ""){
       this.activeModal.close(this.cur_hb_hardness);
     }
   }

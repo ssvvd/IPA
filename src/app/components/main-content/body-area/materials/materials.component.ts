@@ -37,7 +37,7 @@ export class MaterialsComponent implements OnInit {
         var selMat = this.statemng.GetMaterialSelected();
         var selCateg = selMat.Category;
         if (selCateg.includes(category))
-          this.breadCrumb = [selMat.group];
+          this.breadCrumb = ['Group No. ' + selMat.group];
       }
     }
   

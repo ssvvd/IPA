@@ -1,19 +1,20 @@
 
       <div class="divst">
         <div class="pt-2">
-          <h3 class="desc-label-big-bold mb-0 pl-2">Material Results</h3>
+          <h3 class="siteTitle mb-0 pl-2">Material Results</h3>
         </div>
         <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
           <thead >
             <tr id="dtOptionsMat">
+              <th><label>ISO<span class="sort-icon ml-1"></span></label></th>
               <th><label>Group<span class="sort-icon ml-1"></span></label></th>
-              <th><label>No.<span class="sort-icon ml-1"></span></label></th>
               <th><label>Material Name<span class="sort-icon ml-1"></span></label></th>
               <th><label>Standard<span class="sort-icon ml-1"></span></label></th>
               <th><label>Condition<span class="sort-icon ml-1"></span></label></th>
               <th><label>Hardness<span class="sort-icon ml-1"></span></label></th>
               <th class="no-sort" *ngIf="environment.internal"></th>
               <th class="no-sort" *ngIf="environment.internal"></th>
+              <th class="d-none"></th>
             </tr>
           </thead>
           <tbody>   
@@ -23,7 +24,7 @@
                   <td>{{material.material}}</td>
                   <td>{{material.Standard}}</td>
                   <td>{{material.Condition}}</td>
-                  <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness}} HB</td>
+                  <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' }}</td>
                   <td *ngIf="environment.internal">
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to my materials" class="icon-grid">
                   </td>
@@ -31,9 +32,19 @@
                     <div>
                     <button [className]="(material.material == selectedMaterial)? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
                     </div>
-                  </td>         
+                  </td>  
+                  <td class="d-none">{{material.Hardness}}</td>        
               </tr>
           </tbody>
         </table>
      
       </div>
+
+
+      <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+      bdOpacity ="0.05"
+      size="medium"
+      color="#676767"
+      type="ball-circus">    
+      <p style="color:#676767">Please wait while ITA is processing your request. </p> 
+    </ngx-spinner>   

@@ -10,14 +10,12 @@
               <nav  aria-label="breadcrumb">
                  <ol class="breadcrumb mt-3 mb-0 ml-0 pl-0 bg-white" >
                      <li (click)="receiveCategory(this.selectedCateg)" class="breadcrumb-item" ><a href="javascript:void(0)">{{this.selectedCateg}}</a></li>
-                     <li *ngFor="let crumb of this.breadCrumb" class="breadcrumb-item active"  aria-current="page">
-                        {{crumb}}
-                     </li>
+                     <li *ngFor="let crumb of this.breadCrumb" class="breadcrumb-item active"  aria-current="page">{{crumb}}</li>
                  </ol>
                </nav>
          </div> 
          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-4 pr-0 pt-2">
-          <button type="button" class="btn btn-link float-right" (click)="openRequestMatM()">Can't find the right material?</button>
+          <button type="button" class="btn btn-link float-right sileLinks" (click)="openRequestMatM()">Can't find the right material?</button>
          </div>
         </div>
         <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)"></app-mat-main-table>

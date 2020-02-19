@@ -6,32 +6,39 @@
     justify-content: center;
     display: flex;
     align-items: center;
-    color:white;
+    color:white !important;
   }
 
+  .square label{
+    color:white !important;
+  }
+
+  .square[title*="M"] label{
+    color:black !important;
+  }
   .square[title*="P"]{
-    background-color: var(--bg-mat-P);
+    background-color: var(--bg-mat-P) !important;
     }
 
    .square[title*="M"]{
-    background-color: var(--bg-mat-M);
-    color:black;
+    background-color: var(--bg-mat-M) !important;
+    
     }
 
     .square[title*="K"]{
-     background-color: var(--bg-mat-K);
+     background-color: var(--bg-mat-K) !important;
     }
 
     .square[title*="N"]{
-     background-color: var(--bg-mat-N);
+     background-color: var(--bg-mat-N) !important;
     }
 
     .square[title*="S"]{
-     background-color: var(--bg-mat-S);
+     background-color: var(--bg-mat-S) !important;
      }
 
    .square[title*="H"]{
-     background-color: var(--bg-mat-H);
+     background-color: var(--bg-mat-H) !important;
        }
 
        .tableTitle{
@@ -48,35 +55,39 @@
 
     ::ng-deep .customModalClass .modal-dialog { 
       max-width: 684px;
+
  }
+ ::ng-deep .customModalClass .modal-backdrop.fade{
+  transition: none !important;
+}
 
  .table thead th[title*="P"]{
-  background-color: var(--bg-mat-P);
-  color:white;
+  background-color: var(--bg-mat-P) !important;
+  color:white !important;
   }
 
  .table thead th[title*="M"]{
-  background-color: var(--bg-mat-M);
+  background-color: var(--bg-mat-M) !important;
   }
 
   .table thead th[title*="K"]{
-   background-color: var(--bg-mat-K);
-   color:white;
+   background-color: var(--bg-mat-K) !important;
+   color:white !important;
   }
 
   .table thead th[title*="N"]{
    background-color: var(--bg-mat-N);
-   color:white;
+   color:white !important;
   }
 
   .table thead th[title*="S"]{
-   background-color: var(--bg-mat-S);
-   color:white;
+   background-color: var(--bg-mat-S) !important;
+   color:white !important;
    }
 
  .table thead th[title*="H"]{
-   background-color: var(--bg-mat-H);
-   color:white;
+   background-color: var(--bg-mat-H) !important;
+   color:white !important;
      }
 
 
@@ -97,9 +108,9 @@
     // margin-left:-20px;
     }
     
-    .table td, .table th{
-        white-space: nowrap;
-    }
+    // .table td, .table th{
+    //     // white-space: nowrap;
+    // }
     
     table.dataTable {
         border-collapse: collapse !important;

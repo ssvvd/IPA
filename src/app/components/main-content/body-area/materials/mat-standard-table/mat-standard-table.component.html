@@ -14,18 +14,22 @@
             </div>  -->
 
             <div class="divst">
-               <h3 class="tableTitle desc-label-big-bold " >{{this.selectedStandard}}</h3>
+               <h3 class="siteTitle float-left" >{{this.selectedStandard}}</h3>
+               <div Class="float-right pt-2">
+                  <img src="{{environment.ImgArrowLeft}}" title="Previous" (click)="Previous()" class="icon-edit" [hidden]="curPage==0">
+                  <img src="{{environment.ImgArrowRight}}" title="Next" (click)="Next()" class="icon-edit" [hidden]="curPage==lastPage">
+               </div>
                <table datatable id="tblmaterialDetails" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
                   <thead>                                                                           
                      <tr>
-                        <th *ngFor="let col of headers" title={{selectedCateg}} (click)="environment.internal ? OnSelectMaterial(col,'') : false"
+                        <th *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" title={{selectedCateg}} (click)="environment.internal ? OnSelectMaterial(col,'') : false"
                            [routerLink]="environment.internal ? '/home/machining-operation' : []">{{mySplit(col,0)}}</th>
                      </tr>
                   </thead>
                   <tbody>
                      <tr *ngFor="let obj of dtResult">
                         <!-- <div>{{obj}}</div> -->
-                        <td *ngFor="let col of headers"  (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(col,obj[col]) : false"
+                        <td *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)"  (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(col,obj[col]) : false"
                            [routerLink]="(environment.internal && obj[col].indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"  attr.data-value={{obj[col]}}
                            [ngClass]="{'td-selected' : mySplit(col,0) == this.selectedMatOrGrp || (obj[col] == this.selectedMatOrGrp && mySplit(col,0) == this.selectedMaterial.group)}">
                            {{obj[col]}} </td>             
