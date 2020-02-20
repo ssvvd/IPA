@@ -37,6 +37,8 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let myColumns1 = [6,7];
     let myColumns2 = [];
+    let sortHardnessCol1 = 8;
+    let sortHardnessCol2 = 6;
 
     this.dtOptionsMat = {
       pagingType: 'full_numbers',
@@ -46,7 +48,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
        "autoWidth":false,
        "scrollY": '65vh',
        "scrollCollapse" : true,
-       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: 8, type: 'num' }, { "iDataSort": 8, "aTargets": [ 5 ] }],
+       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal ? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal ? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ 5 ] }],
        "language": {
         "emptyTable": "No data available in table",
         "zeroRecords": "",
