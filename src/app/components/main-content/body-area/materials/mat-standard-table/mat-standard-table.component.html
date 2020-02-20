@@ -13,16 +13,17 @@
          </table>        
             </div>  -->
 
-            <div class="divst">
+            <div class="">
                <h3 class="siteTitle float-left" >{{this.selectedStandard}}</h3>
-               <div Class="float-right pt-2">
+               <div Class="float-right pb-2 pr-3">
                   <img src="{{environment.ImgArrowLeft}}" title="Previous" (click)="Previous()" class="icon-edit" [hidden]="curPage==0">
                   <img src="{{environment.ImgArrowRight}}" title="Next" (click)="Next()" class="icon-edit" [hidden]="curPage==lastPage">
                </div>
-               <table datatable id="tblmaterialDetails" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
+               <div class="table-responsive">
+               <table datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover " >
                   <thead>                                                                           
                      <tr>
-                        <th *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" title={{selectedCateg}} (click)="environment.internal ? OnSelectMaterial(col,'') : false"
+                        <th *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" [attr.data-color]=(selectedCateg) (click)="environment.internal ? OnSelectMaterial(col,'') : false"
                            [routerLink]="environment.internal ? '/home/machining-operation' : []"><label>{{mySplit(col,0)}}</label></th>
                      </tr>
                   </thead>
@@ -36,5 +37,6 @@
                      </tr>
                   </tbody>
                </table>
+            </div>
             </div>
             

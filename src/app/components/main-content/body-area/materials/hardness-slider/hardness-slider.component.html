@@ -2,7 +2,7 @@
     <div class="radio radio-inline" *ngFor="let item of radioList">
         <input type="radio" id="rb{{item}}" name="radio1" value="{{item}}" [(ngModel)]="curRadioChecked" (click)="onRadioButtonClick(item)" >
         <label  for="rb{{item}}">
-            {{item}}
+            {{item.replace('2','')}}<sup [hidden]="(!item.includes('2'))">2</sup>
         </label>
     </div>
 </div> 

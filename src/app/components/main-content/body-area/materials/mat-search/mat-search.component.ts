@@ -29,6 +29,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   allSubsMat$: Subscription;
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
+  _timeout: any = null;
   @Input() filterSearchTextInput: string;
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService) { }
@@ -43,6 +44,8 @@ export class MatSearchComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
+       "scrollY": '65vh',
+       "scrollCollapse" : true,
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: 8, type: 'num' }, { "iDataSort": 8, "aTargets": [ 5 ] }],
        "language": {
         "emptyTable": "No data available in table",
@@ -89,8 +92,15 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnChanges(changes:SimpleChanges) {
-      this.fillMainTable();
-  }
+      // this._timeout  = null;
+      if(this._timeout){ //if there is already a timeout in process cancel it
+        window.clearTimeout(this._timeout);
+      }
+      this._timeout = window.setTimeout(() => {
+         this._timeout = null;
+         this.fillMainTable();
+      },1000);
+   }
 
   ngOnDestroy() {
     this.allSubsMat$.unsubscribe();

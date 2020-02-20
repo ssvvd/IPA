@@ -45,6 +45,8 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
+       "scrollY": '65vh',
+       "scrollCollapse" : true,
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: 9, type: 'num' }, { "iDataSort": 9, "aTargets": [ 4 ] }],
        "language": {
         "emptyTable": "",
@@ -74,7 +76,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       this.materialsResultFilterd = this.materialsResult;
       // this.filterTable();
       if (this.srv_statemanage.GetMaterialSelected()== null)
-          this.selectedMaterial = "";
+          this.OnSelectMaterial(this.materialsResult[6]);
        else
           this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
           

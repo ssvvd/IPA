@@ -61,48 +61,48 @@
   transition: none !important;
 }
 
- .table thead th[title*="P"]{
+ .table thead th[data-color*="P"]{
   background-color: var(--bg-mat-P) !important;
   }
 
- .table thead th[title*="M"]{
+ .table thead th[data-color*="M"]{
   background-color: var(--bg-mat-M) !important;
   }
 
-  .table thead th[title*="K"]{
+  .table thead th[data-color*="K"]{
    background-color: var(--bg-mat-K) !important;
   }
 
-  .table thead th[title*="N"]{
+  .table thead th[data-color*="N"]{
    background-color: var(--bg-mat-N);
   }
 
-  .table thead th[title*="S"]{
+  .table thead th[data-color*="S"]{
    background-color: var(--bg-mat-S) !important;
    }
 
- .table thead th[title*="H"]{
+ .table thead th[data-color*="H"]{
    background-color: var(--bg-mat-H) !important;
      }
 
 
-     .table thead th[title*="P"] label{
+     .table thead th[data-color*="P"] label{
       color:white !important;
       }
 
-      .table thead th[title*="K"] label{
+      .table thead th[data-color*="K"] label{
        color:white !important;
       }
     
-      .table thead th[title*="N"] label{
+      .table thead th[data-color*="N"] label{
        color:white !important;
       }
     
-      .table thead th[title*="S"] label{
+      .table thead th[data-color*="S"] label{
        color:white !important;
        }
     
-     .table thead th[title*="H"] label{
+     .table thead th[data-color*="H"] label{
        color:white !important;
          }
 

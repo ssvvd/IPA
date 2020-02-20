@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,SimpleChanges,ViewChild,OnDestroy } from '@angular/core';
+import { Component, OnInit, Input,SimpleChanges,ViewChild,OnDestroy,DoCheck } from '@angular/core';
 import { MaterialService } from 'src/app/services/material.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { clsMaterial } from 'src/app/models/materials/material'
@@ -11,7 +11,7 @@ import { Subject, Subscription } from 'rxjs';
   templateUrl: './mat-details.component.html',
   styleUrls: ['./mat-details.component.scss','../materials.component.scss']
 })
-export class MatDetailsComponent implements OnInit, OnDestroy {
+export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
@@ -39,6 +39,8 @@ export class MatDetailsComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
+       "scrollY": '65vh',
+       "scrollCollapse" : true,
        "language": {
         "emptyTable": "",
         "zeroRecords": "",
@@ -112,5 +114,15 @@ export class MatDetailsComponent implements OnInit, OnDestroy {
   setCurVisColumns(){
     let nextPageStart:number = this.curPage * 8;
     this.curShownColumns = [nextPageStart + 1,nextPageStart + 2,nextPageStart + 3,nextPageStart + 4,nextPageStart + 5,nextPageStart + 6,nextPageStart + 7,nextPageStart + 8];
+  //   setTimeout(function(){
+  //     if(true){
+  //     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //       dtInstance.columns.adjust();
+  //       this.dtTriggerMat.next();
+  //     });
+  // }}, 1000);
   }
+  
+  ngDoCheck(){}
+
 }

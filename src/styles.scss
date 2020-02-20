@@ -210,7 +210,7 @@ tr.tr-selected {
 
 .tr-not-selected:hover
 {
-    background-color: #ebedf2;
+    background-color: #ebedf2 !important;
 }
 
 .td-selected{
@@ -291,3 +291,19 @@ table.dataTable.no-footer{
   font-size: 14px !important;
   font-family: var(--family-font) !important;
 }
+
+
+.dataTables_scrollBody thead tr[role="row"]{
+  visibility: collapse !important;
+  display: none !important;
+}
+
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody{
+  border-bottom: none;
+}
+// .dataTables_scrollBody {
+// max-height: 65vh !important;
+// height: auto !important;
+
+// }
