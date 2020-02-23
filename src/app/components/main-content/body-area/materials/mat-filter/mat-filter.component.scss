@@ -10,10 +10,16 @@
 button:focus {outline:0;}
 
 .list-group-item.active  {
-color:#495057;
+color:var(--content-color);
 background-color:var(--row-selected) !important ;
   }
 
 .list-group-item:hover {
     background-color: var(--bg-hover) !important ;
+}
+.list-group-item-action {
+  color:var(--content-color);
+}
+.bg-light {
+  background-color:#F1F1F1 !important ;
 }

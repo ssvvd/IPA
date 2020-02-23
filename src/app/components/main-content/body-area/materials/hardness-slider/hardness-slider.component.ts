@@ -69,10 +69,11 @@ export class HardnessSliderComponent implements OnInit, DoCheck {
     }, 1);
   }
 
-  setInetialParameters(id:number,hardness:number,origHardness:number){
+  setInetialParameters(id:number,hardness:number,origHardness:number,units:string){
     this.modal_mat_id = id;
     this.modal_hardness = hardness;
     this.origin_hardness = origHardness;
+    this.curRadioChecked = units;
    }
 
   onSearchChange(v:number): void {  
@@ -85,7 +86,7 @@ export class HardnessSliderComponent implements OnInit, DoCheck {
 
      ngOnInit() {
 
-      this.curRadioChecked = 'HB';
+      // this.curRadioChecked = 'HB';
       this.value = this.modal_hardness;
 
       this.serv.getmaterialhardness().subscribe((res:any)=>{
@@ -94,10 +95,11 @@ export class HardnessSliderComponent implements OnInit, DoCheck {
 
         this.serv.getmaterialimits(this.modal_mat_id).subscribe((res:any)=>{
           this.hardnessLimit=JSON.parse(res)[0];
-          const newOptions: Options = Object.assign({}, this.options);
-          newOptions.floor = this.hardnessLimit.min0;
-          newOptions.ceil = this.hardnessLimit.max0;
-          this.options = newOptions;
+          // const newOptions: Options = Object.assign({}, this.options);
+          // newOptions.floor = this.hardnessLimit.min0;
+          // newOptions.ceil = this.hardnessLimit.max0;
+          // this.options = newOptions;
+          this.findLimits(this.curRadioChecked);
           this.finishOnInit = true;
         })
 
@@ -212,14 +214,17 @@ export class HardnessSliderComponent implements OnInit, DoCheck {
 
   getCurValue(){
     let curHBValue: number = 0;
+    let result:string = "";
     if (this.dangMsg == ''){
        curHBValue = this.value;
+       result = curHBValue + "," + this.curRadioChecked
       if (this.curRadioChecked != 'HB'){
         curHBValue = this.findHardness(this.curRadioChecked,this.value,'HB')
+        result = result + "," + curHBValue;
       }
     }
 
-    return curHBValue;
+    return result;
   }
 
 

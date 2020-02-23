@@ -45,6 +45,7 @@ import { Optimizetool59Component } from './components/main-content/body-area/ope
 import { OptimizetoolFilterComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-filter/optimizetool-filter.component';
 import { NgxSpinnerModule } from "ngx-spinner"; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSearchComponent } from './components/main-content/body-area/materials/mat-search/mat-search.component';
 
 @NgModule({
   declarations: [   
@@ -78,7 +79,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HardnessSliderComponent,
     HomeComponent,
     Optimizetool59Component,
-    OptimizetoolFilterComponent
+    OptimizetoolFilterComponent,
+    MatSearchComponent
   ],
   imports: [
     FormsModule,

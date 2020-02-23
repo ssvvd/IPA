@@ -46,4 +46,8 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-hardness-limit/' + mat);
   }
+  public  searchmaterial(mat:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-search/' + mat);
+  }
 }

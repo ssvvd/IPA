@@ -3,10 +3,14 @@ export class clsMaterial {
     group:string;
     description:string;
     Condition:string;
-    Hardness:string;
+    Hardness:number;
     material:string;
-    HardnessOrigin:string;
+    HardnessOrigin:number;
     Category:string;
+    Standard:string;
+    HardnessUnits:string = 'HB';
+    HardnessHBValue:number = this.Hardness;
+
 
     constructor(public grp: string,public desc: string,public mat: string,public cat: string) { 
         this.group =grp;

@@ -19,6 +19,8 @@ export const environment = {
   ImgViewTable:"assets/img/AlternativeIcon.svg",
   ImgEditParams:"assets/img/icon_edit_ITA.svg",
   ImgStock:"assets/img/icon_stock.svg",
+  ImgArrowLeft:"assets/img/arrows_left.png",
+  ImgArrowRight:"assets/img/arrows_right.png",
   ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx"
 };
 

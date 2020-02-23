@@ -6,44 +6,45 @@
         <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
           <thead >
             <tr id="dtOptionsMat">
-              <th class="d-none">ID</th>
+              <th><label>ISO<span class="sort-icon ml-1"></span></label></th>
               <th><label>Group<span class="sort-icon ml-1"></span></label></th>
-              <th><label>Description<span class="sort-icon ml-1"></span></label></th>
+              <th><label>Material Name<span class="sort-icon ml-1"></span></label></th>
+              <th><label>Standard<span class="sort-icon ml-1"></span></label></th>
               <th><label>Condition<span class="sort-icon ml-1"></span></label></th>
               <th><label>Hardness<span class="sort-icon ml-1"></span></label></th>
-              <th class="no-sort"></th>
-              <th class="no-sort" *ngIf="environment.internal"></th>
               <th class="no-sort" *ngIf="environment.internal"></th>
               <th class="no-sort" *ngIf="environment.internal"></th>
               <th class="d-none"></th>
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
-                <th scope="row" class="d-none">{{material.id}}</th>         
-                  <td><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
-                  <td>{{material.description}}</td>
+              <tr *ngFor="let material of materialsResultSorted" [className]="(material.material == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">      
+                  <td><label class="bold font-weight-bold m-1 categLabel" [title]="material.Category">{{material.Category}}</label></td>
+                  <td>{{material.group}}</td>
+                  <td>{{material.material}}</td>
+                  <td>{{material.Standard}}</td>
                   <td>{{material.Condition}}</td>
                   <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' }}</td>
-                  <td>
-
-                    <img src="{{environment.ImgView}}" (click)="matDetailClick(material)" title="View materials and standards"  class="icon-grid">
-
-              </td>
                   <td *ngIf="environment.internal">
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to my materials" class="icon-grid">
                   </td>
-                  <td *ngIf="environment.internal">                    
-                        <img src="{{environment.ImgSetDefault}}" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid">
-                  </td>
                   <td *ngIf="environment.internal">
                     <div>
-                    <button [className]="(material.group == selectedMaterial)? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
+                    <button [className]="(material.material == selectedMaterial)? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
                     </div>
-                  </td>     
-                  <td class="d-none">{{material.Hardness}}</td>    
+                  </td>  
+                  <td class="d-none">{{material.Hardness}}</td>        
               </tr>
           </tbody>
         </table>
      
       </div>
+
+
+      <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+      bdOpacity ="0.05"
+      size="medium"
+      color="#676767"
+      type="ball-circus">    
+      <p style="color:#676767">Please wait while ITA is processing your request. </p> 
+    </ngx-spinner>   

@@ -18,6 +18,7 @@ export class MatFilterComponent implements OnInit {
   standardSelected:String;
   searchText:String;
   environment=environment;
+  selectDisabled:boolean;
 
   @Output() categEvent = new EventEmitter<string>();
   @Output() standardEvent = new EventEmitter<string>();
@@ -28,6 +29,7 @@ export class MatFilterComponent implements OnInit {
 
   ngOnInit() {
 
+    this.selectDisabled = false;
     this.fillStandard();
     this.filTabs();
     this.curSelectedCategory = 'P';
@@ -55,10 +57,13 @@ export class MatFilterComponent implements OnInit {
     this.categEvent.emit(categ)
     this.curSelectedCategory = categ;
     this.standardSelected = '';
+    this.searchText = '';
+    this.selectDisabled = false;
   }
 
   onStandardChange(standardValue:string) {
     console.log(standardValue);
+    this.searchText = '';
     if (standardValue == ''){
       this.categClick(this.curSelectedCategory);
     }
@@ -80,6 +85,15 @@ FilterChange(event: ChangeContext ) {
 /*   if (this.searchText == '')
       this.MaterialSearchClear.emit();
   else */
+  if (this.searchText == ''){  
+    this.curSelectedCategory = "P";
+    this.selectDisabled = false;
+  }
+  else{
+    this.curSelectedCategory = "All";
+    this.selectDisabled = true;
+  }
+      this.standardSelected = '';
       this.MaterialSearchChanged.emit(this.searchText);   
 }
 

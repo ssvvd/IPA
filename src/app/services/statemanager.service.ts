@@ -155,6 +155,7 @@ export class StateManagerService {
    }
  
   SelectMaterial(mat: clsMaterial) {
+    mat.HardnessHBValue = mat.HardnessUnits?mat.HardnessHBValue:mat.Hardness;
     this.materialSelected=mat;   
     let desc:string;
     if (mat.material && mat.material != ''){

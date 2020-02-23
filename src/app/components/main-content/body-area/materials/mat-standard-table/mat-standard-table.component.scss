@@ -8,6 +8,31 @@
       background-color: var(--bg-hover) !important; 
       cursor: pointer;
     }
+
+    .table td, .table th{
+      border-right: 2px solid #dee2e6;
+      border-top:none;
+    }
+
+    .table td{
+      background-color: var(--bg-gray);
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  table {
+    table-layout: fixed !important;
+    width: 100% !important;
+  }
+  .dataTables_scrollHeadInner{
+    width: 100% !important;
+  }
+//   .table td, .table th{
+//     width: 12.5% !important;
+// }
     // .td-hover:hover{
     //   background-color: black !important; 
     // }

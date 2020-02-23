@@ -6,30 +6,39 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    color:white !important;
   }
 
+  .square label{
+    color:white !important;
+  }
+
+  .square[title*="M"] label{
+    color:black !important;
+  }
   .square[title*="P"]{
-    background-color: var(--bg-mat-P);
+    background-color: var(--bg-mat-P) !important;
     }
 
    .square[title*="M"]{
-    background-color: var(--bg-mat-M);
+    background-color: var(--bg-mat-M) !important;
+    
     }
 
     .square[title*="K"]{
-     background-color: var(--bg-mat-K);
+     background-color: var(--bg-mat-K) !important;
     }
 
     .square[title*="N"]{
-     background-color: var(--bg-mat-N);
+     background-color: var(--bg-mat-N) !important;
     }
 
     .square[title*="S"]{
-     background-color: var(--bg-mat-S);
+     background-color: var(--bg-mat-S) !important;
      }
 
    .square[title*="H"]{
-     background-color: var(--bg-mat-H);
+     background-color: var(--bg-mat-H) !important;
        }
 
        .tableTitle{
@@ -45,31 +54,79 @@
     }
 
     ::ng-deep .customModalClass .modal-dialog { 
-      max-width: 705px;
+      max-width: 684px;
+
  }
+ ::ng-deep .customModalClass .modal-backdrop.fade{
+  transition: none !important;
+}
 
- .table thead th[title*="P"]{
-  background-color: var(--bg-mat-P);
+ .table thead th[data-color*="P"]{
+  background-color: var(--bg-mat-P) !important;
   }
 
- .table thead th[title*="M"]{
-  background-color: var(--bg-mat-M);
+ .table thead th[data-color*="M"]{
+  background-color: var(--bg-mat-M) !important;
   }
 
-  .table thead th[title*="K"]{
-   background-color: var(--bg-mat-K);
+  .table thead th[data-color*="K"]{
+   background-color: var(--bg-mat-K) !important;
   }
 
-  .table thead th[title*="N"]{
+  .table thead th[data-color*="N"]{
    background-color: var(--bg-mat-N);
   }
 
-  .table thead th[title*="S"]{
-   background-color: var(--bg-mat-S);
+  .table thead th[data-color*="S"]{
+   background-color: var(--bg-mat-S) !important;
    }
 
- .table thead th[title*="H"]{
-   background-color: var(--bg-mat-H);
+ .table thead th[data-color*="H"]{
+   background-color: var(--bg-mat-H) !important;
      }
 
 
+     .table thead th[data-color*="P"] label{
+      color:white !important;
+      }
+
+      .table thead th[data-color*="K"] label{
+       color:white !important;
+      }
+    
+      .table thead th[data-color*="N"] label{
+       color:white !important;
+      }
+    
+      .table thead th[data-color*="S"] label{
+       color:white !important;
+       }
+    
+     .table thead th[data-color*="H"] label{
+       color:white !important;
+         }
+
+     .col-20 {
+      flex: 0 0 20%;
+      max-width: 20%;
+  }
+  .col-80 {
+      flex: 0 0 80%;
+      max-width: 80%;
+  }
+
+
+  .icon-edit{
+    width:25px;
+    padding-right:5px;
+    cursor: pointer;
+    // margin-left:-20px;
+    }
+    
+    // .table td, .table th{
+    //     // white-space: nowrap;
+    // }
+    
+    table.dataTable {
+        border-collapse: collapse !important;
+    }

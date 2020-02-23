@@ -108,7 +108,7 @@ export class OperationDataComponent implements OnInit {
   FillDataInputParamAndRouteToResult()
   {
     this.Ipl.GetItem('Material').value =String(this.srv_StMng.GetMaterialSelected().id);
-    this.Ipl.GetItem('HardnessHB').value =this.srv_StMng.GetMaterialSelected().Hardness;
+    // this.Ipl.GetItem('HardnessHB').value =this.srv_StMng.GetMaterialSelected().Hardness;
 
     this.srv_StMng.IPL=this.Ipl; 
     let listparams: { name: string, value: string }[]=[];
