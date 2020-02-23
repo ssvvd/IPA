@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input, Output,EventEmitter,OnChanges, SimpleChanges, SimpleChange} from '@angular/core';
+import { Component, OnInit ,Input, Output,EventEmitter,OnChanges, SimpleChanges} from '@angular/core';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import 'chart.js';
 
@@ -63,7 +63,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
         this.chartdata.PoinY_2 =this.spindle.T2;
         this.chartdata.PoinY_3 =this.spindle.T3;
         this.chartdata.PoinY_4 =this.spindle.T4;
-        this.chartDesc= "Torque diagram Mc [Nm]/n [1/min]";
+        this.chartDesc= "Torque";
         this.chartDescY ="T"
       }
     if(this.typeChart=='power')
@@ -72,7 +72,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
         this.chartdata.PoinY_2 =this.spindle.P2;
         this.chartdata.PoinY_3 =this.spindle.P3;
         this.chartdata.PoinY_4 =this.spindle.P4;
-        this.chartDesc= "Power diagram Pc [Kw]/n [1/min]";
+        this.chartDesc= "Power";
         this.chartDescY ="P"
       }       
        this.CreateChart();
@@ -80,13 +80,17 @@ export class MachineItemSpindleChartComponent implements OnInit {
 
    CreateChart()
   {
+    let labelaxisY:string;
+    if(this.typeChart=='power') labelaxisY="P[Kw]";
+    if(this.typeChart=='torque') labelaxisY="T[Nm]";
+
     this.chartType = 'line';    
     this.chartDatasets= [      
       { lineTension: 0,     
         data: [this.chartdata.PoinY_1, this.chartdata.PoinY_2, this.chartdata.PoinY_3, this.chartdata.PoinY_4]
          }     
     ];
-
+    
     this.chartLabels = [this.chartdata.PoinX_1, this.chartdata.PoinX_2, this.chartdata.PoinX_3, this.chartdata.PoinX_4];
     this.chartColors = [
       {
@@ -101,7 +105,21 @@ export class MachineItemSpindleChartComponent implements OnInit {
       responsive: true,
        legend: {
             display: false           
-       }
+       },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+          display: true,
+          labelString: labelaxisY
+          }
+        }],
+         xAxes: [{
+          scaleLabel: {
+          display: true,
+          labelString: 'N[rpm]'
+          }
+        }]
+  }    
     }; 
  }  
      public chartClicked(e: any): void { }
@@ -120,10 +138,10 @@ export class MachineItemSpindleChartComponent implements OnInit {
           this.T1Changed.emit({ value: this.chartdata.PoinY_1});        
      }
 
-     ngOnChanges(changes: SimpleChanges) {
+     ngOnChanges(changes: SimpleChanges) {       
         if (typeof this.chartdata!== 'undefined') 
           for (let property in changes) {
-              if (property === 'SpindleSpeed') {
+              if (property === 'SpindleSpeed') {                
                 this.chartdata.PoinX_1 = changes[property].currentValue;
                 this.CreateChart();            
               } 

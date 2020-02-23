@@ -171,7 +171,6 @@ export class OptimizetoolFilterComponent implements OnInit {
     this.SpinnerService.hide();
     this.after_get_data =true;
     this.arrDataF=this.arrData;   
-    console.log(this.arrDataF);
     this.isshowdetail=true;  
   }
   

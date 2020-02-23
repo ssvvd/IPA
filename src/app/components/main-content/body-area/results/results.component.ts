@@ -16,7 +16,8 @@ export class ResultsComponent implements OnInit {
     private SpinnerService: NgxSpinnerService) { }
 
   arrResult:string[];
-  
+  ErrMsg:string="";
+
   ngOnInit() {
     this.GetResult();
 
@@ -24,28 +25,34 @@ export class ResultsComponent implements OnInit {
 
   GetResult() 
   {
-   
-     /*  this.srv_DataLayer.setinputparameters1().subscribe(
-        res => console.log('ok' +res),
+     
+    /*     this.srv_DataLayer.setinputparameters1().subscribe(
+        res => console.log(res),
         err => console.log( err),
         () => console.log('yay')
-      );   */
+      );   */  
 
       this.SpinnerService.show();  
-        this.srv_DataLayer.getresult('760','1').subscribe((res: any) => {
+        /* this.srv_DataLayer.getresult('760','1').subscribe((res: any) => {
         this.arrResult = JSON.parse(res); 
         this.SpinnerService.hide(); 
-      });   
-        
+      });  
+         */
 
-    //alert(this.srv_StMng.IPLChanged);
-    /* this.srv_DataLayer.setinputparameters1(this.srv_StMng.IPLChanged).subscribe( */
-   /*    this.srv_DataLayer.setinputparameters1().subscribe(
-        res => console.log('ok' +res),
-        err => console.log( err),
-        () => console.log('yay')
-      );   */
-
-       
+      let strpar:string='';
+      this.srv_StMng.IPL_ListChanged.forEach(par => {
+        strpar = strpar + par.name + "=" + par.value + ";";
+        //strpar = strpar + "/" +  par.name + "/" + par.value ;
+      });
+      //strpar = "Material=1;HardnessHB=125;AdaptorType=BT;AdaptorSize=40;PW_AX=100;PW_AY=0.5;PW_BX=1000;PW_BY=7.5;PW_CX=12000;PW_CY=7.5";          
+      //strpar=strpar.split('.').join('xxx'); 
+      //console.log(strpar);
+      strpar =encodeURIComponent(strpar); 
+      
+       this.srv_DataLayer.getresults('760','M',strpar).subscribe((res: any) => {
+        this.arrResult = JSON.parse(res); 
+        this.SpinnerService.hide(); 
+        },   
+        err => {this.ErrMsg ="Error Find";this.SpinnerService.hide()}); 
   }
 }

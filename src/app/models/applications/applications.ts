@@ -2,7 +2,9 @@ export class MainApp {
     MenuID:string;
     MainApp:string;
     MenuName:string;
-    MenuImage:string;
+    MenuImage:string;    
+    IsActive:boolean;
+    SpindleSelected:string;
 }
 
 export class SecondaryApp {
@@ -12,4 +14,6 @@ export class SecondaryApp {
     MenuImage:string;
     ParentMenuID:string;
     ApplicationITAID:string;
+    IsActive:boolean;
+   
 }

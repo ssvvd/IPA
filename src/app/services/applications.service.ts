@@ -11,6 +11,11 @@ export class ApplicationsService {
   constructor(private httpClient: HttpClient) 
   {} 
 
+  public  getmainapp(lang:string,machinetype:string)
+  {            
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmainapp/' + lang + '/' + machinetype);
+  }
+
   public  getmenu(lang:string,usergroup:string)
   {            
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmenu/' + lang + '/' + usergroup);

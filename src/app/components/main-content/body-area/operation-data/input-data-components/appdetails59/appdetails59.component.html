@@ -5,8 +5,8 @@
             <div class="pt-2" >   
                 <div class="form-group row">
                     <div class="row col-5 ">
-                        <label for="txtDepthOfShoulder_ap" class="col-form-label pl-0 ">Depth (D)</label>
-                        <label class="col-form-label pl-2 asterisk-red">*</label>
+                        <label for="txtDepthOfShoulder_ap" class="pl-0 pt-2">Depth (D)</label>
+                        <label class="pl-2 asterisk-red pt-2">*</label>
                     </div>
                     <div class="col-7  pt-2">
                         <input type="number" required [className]="Ipl&&Ipl.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty':'form-control'"  id="txtDepthOfShoulder_ap" name="txtDepthOfShoulder_ap" 
@@ -14,19 +14,19 @@
                     </div>
                 </div>   
                 <div class="form-group row">
-                    <div class="row col-5  ">
-                        <label for="txtDepthOfShoulder_ap" class="col-form-label pl-0 ">Width (W)</label>
-                        <label class="col-form-label pl-2 asterisk-red">*</label>
+                    <div class="row col-5">
+                        <label for="txtDepthOfShoulder_ap" class="pl-0 pt-2">Width (W)</label>
+                        <label class="pl-2 asterisk-red pt-2">*</label>
                     </div>
                     <div class="col-7  pt-2">
                         <input type="number" required [className]="Ipl&&Ipl.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty': 'form-control'" id="txtWidthOfShoulder_ae" name="txtWidthOfShoulder_ae" 
                                             [(ngModel)]="Ipl&&Ipl.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
                     </div>
                 </div>
-                <div class="form-group row ">
-                    <div class="row col-5 ">
-                        <label for="txtLengthOfShoulder_L" class="col-form-label pl-0 ">Length (L)</label>
-                        <label class="col-form-label pl-2 asterisk-red">*</label>
+                <div class="form-group row">
+                    <div class="row col-5">
+                        <label for="txtLengthOfShoulder_L" class="pl-0 pt-2">Length (L)</label>
+                        <label class="pl-2 asterisk-red pt-2">*</label>
                     </div>
                     <div class="col-7  pt-2">
                         <input type="number"required [className]="Ipl&&Ipl.GetItem('LengthOfShoulder_L').value==null ? 'form-control  input-empty':'form-control'" id="txtLengthOfShoulder_L" name="txtLengthOfShoulder_L" 
@@ -55,7 +55,7 @@
                         </div>                      
                </div>
                 </div>
-            <div  class="pt-4"> 
+            <div  class="pt-2"> 
                  <div class="form-group">            
                     
                          <div class="pl-0">
@@ -71,64 +71,9 @@
                                 <label class="custom-control-label" for="optGeneral">General</label>
                             </div>                                        
                         </div>  
-                    </div>
-                
-                
-        </div> 
-              <!--   <div class="form-group row">
-               
-                        <label for="txtRampDownAngle" class="col-form-label col-5 pl-0 ml-0">Ramp angle (RD)</label>
-                        
-                    
-                    <div class="col-7  pt-2">
-                        <input type="number"  class="form-control" id="txtRampDownAngle" name="txtRampDownAngle" 
-                                            [(ngModel)]="Ipl&&Ipl.GetItem('HRampDownAngle').value" (focus)="onfocusfield('HRampDownAngle')" (focusout)="onfocusoutfield()"> 
-                    </div>
-                </div> -->
-         
-          <!--   <div class="pt-2">
-                <div class="form-group">
-                    <label  class="col-form-label col-5 pl-0 ml-0">Corner radius (R)</label>
-                    <div class="form-group row">
-                        <div class="pl-0 ml-0 col-2">
-                            <label  class="col-form-label ">Min</label>   
-                        </div>
-                        <div class="pl-2 col-4  pt-2">
-                            <input type="number"  class="form-control" id="txtMinCornerRadius" name="txtMinCornerRadius" 
-                                                [(ngModel)]="Ipl&&Ipl.GetItem('MinCornerRadius').value" (focus)="onfocusfield('MinCornerRadius')" (focusout)="onfocusoutfield()"> 
-                        </div>
-                        <div class="pl-4 col-2">
-                            <label  class="col-form-label">Max</label>   
-                        </div>
-                        <div class="pl-2 col-4  pt-2">
-                            <input type="number"  class="form-control" id="txtMaxCornerRadius" name="txtMaxCornerRadius" 
-                                                [(ngModel)]="Ipl&&Ipl.GetItem('MaxCornerRadius').value" (focus)="onfocusfield('MaxCornerRadius')" (focusout)="onfocusoutfield()"> 
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <!--  <div class="pt-2">
-                <div class="form-group">
-                    <label  class="col-form-label col-5 pl-0 ml-0">Chamfer (C)</label>
-                    <div class="form-group row">
-                        <div class="pl-0 ml-0 col-2">
-                            <label  class="col-form-label ">Min</label>   
-                        </div>
-                        <div class="pl-2 col-4  pt-2">
-                            <input type="number"  class="form-control" id="txtMinChamferRange" name="txtMinChamferRange" 
-                                                [(ngModel)]="Ipl&&Ipl.GetItem('MinChamferRange').value" (focus)="onfocusfield('MinChamferRange')" (focusout)="onfocusoutfield()"> 
-                        </div>
-                        <div class="pl-4 col-2">
-                            <label  class="col-form-label">Max</label>   
-                        </div>
-                        <div class="pl-2 col-4  pt-2">
-                            <input type="number"  class="form-control" id="txtMaxChamferRange" name="txtMaxChamferRange" 
-                                                [(ngModel)]="Ipl&&Ipl.GetItem('MaxChamferRange').value" (focus)="onfocusfield('MaxChamferRange')" (focusout)="onfocusoutfield()"> 
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="pt-4">
+                    </div>                                
+        </div>                                           
+            <div class="pt-2">
                 <div class="form-group">  
                     <div class="pl-0">
                         <label>Overhang</label>
@@ -149,7 +94,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-4">
+            <div class="pt-2">
                 <div class="form-group"> 
                     <div class="pl-0">
                         <label>Clamping</label>
@@ -170,7 +115,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-4">
+            <div class="pt-2">
             <div class="form-group"> 
                 <div class="pl-0">
                     <label>Part Shape</label>
@@ -187,7 +132,7 @@
                     </div>
                 </div>
             </div>
-            <div class="pt-4">     
+            <div class="pt-2">     
                 <div class="form-group">
                     <div class="pl-0"> 
                         <label>Type of cut</label>

@@ -11,6 +11,7 @@ interface ToolOptimizeItem
   Value:string;
   Checked:boolean;
 }
+
 @Component({
   selector: 'app-optimizetool',
   templateUrl: './optimizetool.component.html',
@@ -22,10 +23,7 @@ export class OptimizetoolComponent implements OnInit {
   @Input() Ipl:InputParameterlist;
   @Input() parentSubject:Subject<any>;
  
-
   TypeFeed:string ="BothFeed";
-
-  //isshow_brandname:boolean =false;
 
   arrBrandName:ToolOptimizeItem[]=[];
   arrToolDesignation:ToolOptimizeItem[]=[];

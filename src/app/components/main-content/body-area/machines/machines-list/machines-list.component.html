@@ -17,25 +17,28 @@
         </nav>
         <div class="divcontainer">
           <div class="pb-2 pt-2">
-            <h3 class="desc-label-big-bold pb-2 pl-2">Machine Results</h3>
+            <h3 class="desc-label-big-bold pb-2 pl-2">Select Machine</h3>
           </div>
           <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"
             class="table table-stripe row-border hover">
             <thead>
               <tr id="dtOptions">
                 <th class="d-none">ID</th>
-                <th class="no-sort">
+                <!-- <th class="no-sort">
                   <label>Machine Type</label>
-                </th>
+                </th> -->
                 <th>
                   <label>Machine Name</label>
                 </th>
                 <th>
-                  <label>Spindle Speed</label>
+                  <label>Adaptation Type & Size</label>
                 </th>
                 <th>
                   <label>Power</label>
                 </th>
+                <th>
+                  <label>Spindle Speed</label>
+                </th>                
                 <th>
                   <label>Torque</label>
                 </th>
@@ -48,11 +51,12 @@
             <tbody>
               <tr *ngFor="let mach of listmachines" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{mach.MachineID}}</th>
-                <td>{{mach.MachineType}}</td>
-                <td>{{mach.MachineName}}</td>
-                <td>{{mach.SpindleSpeed}}</td>
-                <td>{{mach.Power}}</td>
-                <td>{{mach.Torque}}</td>
+               <!--  <td>{{mach.MachineType}}</td> -->
+                <td><div class="pl-2">{{mach.MachineName}}</div></td>
+                <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
+                <td><div class="pl-2">{{mach.Power}}</div></td>
+                <td><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
+                <td><div class="pl-2">{{mach.Torque}}</div></td>
                 <td>
                   <a data-toggle="tooltip" title="View Machine Detailed">
                     <img src="{{environment.ImgView}}" (click)="OnViewMachine(mach)"

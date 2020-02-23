@@ -8,8 +8,10 @@ export class Machineheader {
     public Power:number;
     public Torque:number;
     public IsSelected:boolean=false;  
-
+    public AdaptationType:string;
+    public AdaptationSize:string;
     public DescSelect:string="Select";
+    
     constructor( )
         {
             this.DescSelect="Select";

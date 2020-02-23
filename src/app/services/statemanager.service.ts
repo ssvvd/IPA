@@ -56,14 +56,15 @@ export class StateManagerService {
   }
   set SelectedMachine(m:Machineheader) {
     this.mSelectedMachine=m;   
-    let desc:string;
-    desc=m.SpindleSpeed.toString() + " rpm /" + m.Power.toString() + " Kw"; 
+    let desc:string;  
+    //desc=m.SpindleSpeed.toString() + " rpm /" + m.Power.toString() + " Kw"; 
+    desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() ; 
     this.CheckTabOperationalDataEnable();   
     this.obsMachineSelected.next([m.MachineName,desc]);
   }
 
   ViewMachine(mach: Machineheader) { 
-    this.obsMachineSelected.next([mach.MachineName,mach.SpindleSpeed.toString()]);
+    //this.obsMachineSelected.next([mach.MachineName,mach.SpindleSpeed.toString()]);
   }
   
   get SelectMachineFilter():MachineFilter {
@@ -80,6 +81,22 @@ export class StateManagerService {
     this.marrMachineSpindle = mf;
   }
   
+  mMachineSpindleMain:Machinespindle;
+  get MachineSpindleMain():Machinespindle {
+    return this.mMachineSpindleMain;
+  }
+  set MachineSpindleMain(ms:Machinespindle) {
+    this.mMachineSpindleMain = ms;
+  }
+
+  mMachineSpindleTool:Machinespindle;
+  get MachineSpindleTool():Machinespindle {
+    return this.mMachineSpindleTool;
+  }
+  set MachineSpindleTool(ms:Machinespindle) {
+    this.mMachineSpindleTool = ms;
+  }
+
   get SecAppSelected():SecondaryApp {
     return this.mSecondaryAppSelected;
   }
@@ -120,6 +137,14 @@ export class StateManagerService {
     this.CheckTabOperationalDataEnable();   
     this.mIPL = ipl;
    }
+   
+   private mIPL_ListChanged: { name: string, value: string }[];
+   get IPL_ListChanged():{ name: string, value: string }[] {
+    return this.mIPL_ListChanged;
+    }
+  set IPL_ListChanged(ipl:{ name: string, value: string }[]) {   
+    this.mIPL_ListChanged = ipl;
+   }
 
    private mIPLChanged:string;
    get IPLChanged():string {
@@ -128,7 +153,7 @@ export class StateManagerService {
   set IPLChanged(ipl:string) {  
     this.mIPLChanged = ipl;
    }
-
+ 
   SelectMaterial(mat: clsMaterial) {
     this.materialSelected=mat;   
     let desc:string;

@@ -30,34 +30,43 @@ export class MachiningOperationComponent implements OnInit {
   
   ngOnInit() {
 
-    this.isToOperationData =this.srv_statemanage.CheckToOperationData();
+    this.isToOperationData =this.srv_statemanage.CheckToOperationData();  
+    let MachineType:string;
+    MachineType=  this.srv_statemanage.SelectedMachine.MachineType;
+    this.srv_app.getmainapp('en',MachineType)
+      .subscribe((res: any)=> {
+          for (const d of JSON.parse(res)) {                     
+          if(d.ParentMenuID==0)
+            {          
+              this.arrMainApps.push({
+                MenuID: d.MenuID,
+                MenuName: d.MenuName,
+                MainApp:d.MainApp,
+                MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png"  ,
+                IsActive:d.IsActive,
+                SpindleSelected:d.SpindleType                          
+            })
+          }
+        }
 
     this.srv_app.getmenu('en','user')
     .subscribe((data: any)=> {
-      for (const d of JSON.parse(data)) {                     
-        if(d.ParentMenuID==0)
-          {          
-            this.arrMainApps.push({
-              MenuID: d.MenuID,
-              MenuName: d.MenuName,
-              MainApp:d.MainApp,
-              MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png"              
-          })
+        for (const d of JSON.parse(data)) {                          
+          if(d.ParentMenuID!=0 && d.IsNewITA) 
+            {          
+              this.arrSecApps.push({
+                MainApp:d.MainApp,
+                MenuID: d.MenuID,
+                MenuName: d.MenuName,
+                MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png" ,
+                ParentMenuID:d.ParentMenuID ,
+                ApplicationITAID: d.ApplicationITAID,
+                IsActive:true 
+            })
+          };
         }
-        else if(d.IsNewITA) 
-           {          
-            this.arrSecApps.push({
-              MainApp:d.MainApp,
-              MenuID: d.MenuID,
-              MenuName: d.MenuName,
-              MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png" ,
-              ParentMenuID:d.ParentMenuID ,
-              ApplicationITAID: d.ApplicationITAID       
-          })
-        };
-      }
-       let ma:MainApp =this.srv_statemanage.MainAppSelected;
-       if (ma!= null)
+        let ma:MainApp =this.srv_statemanage.MainAppSelected;
+        if (ma!= null)
          {
            this.SelectedMainApp=ma;     
            this.SelectedMainAppID=ma.MenuID;
@@ -77,21 +86,34 @@ export class MachiningOperationComponent implements OnInit {
         this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
         this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;        
     });
+     });
   }
 
+ GetSpindleSelected() :string
+ {
+   return "";
+ }
 
-  onSelectMainApp(obj:MainApp) { 
-    this.arrSelectedSecApp1=[];
-    this.arrSelectedSecApp2=[];
-    this.SelectedMainApp=obj;     
-    this.SelectedMainAppID=obj.MenuID; 
-    this.SelectedSecApp=null;
-    this.SelectedSecAppID=""; 
-    this.ApplyFilter1(obj.MenuID);  
+  onSelectMainApp(obj:MainApp) {     
+    if (obj.IsActive)
+      {
+      this.arrSelectedSecApp1=[];
+      this.arrSelectedSecApp2=[];
+      this.SelectedMainApp=obj;     
+      this.SelectedMainAppID=obj.MenuID; 
+      this.SelectedSecApp=null;
+      this.SelectedSecAppID=""; 
+      this.ApplyFilter1(obj.MenuID);  
+      }
    }  
   
    onFilterSecApp (obj:SecondaryApp)
    {
+     if(obj.ApplicationITAID!="0")
+      {
+        this.OnSelectSecApp(obj,1)
+        return;
+      }
      this.SelectedMenuID1 =obj.MenuID;
      this.srv_statemanage.MenuIDLevel1 =obj.MenuID;
      if(obj.ApplicationITAID=="0")
@@ -104,6 +126,12 @@ export class MachiningOperationComponent implements OnInit {
    
    onFilterSecApp1(obj:SecondaryApp)
    {
+     if(obj.ApplicationITAID!="0")
+      {
+        this.OnSelectSecApp(obj,2);
+        return;
+      }
+     
       this.SelectedMenuID2 =obj.MenuID;
       this.srv_statemanage.MenuIDLevel2 =obj.MenuID;
    }

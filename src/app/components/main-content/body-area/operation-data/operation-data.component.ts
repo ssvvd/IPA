@@ -77,41 +77,43 @@ export class OperationDataComponent implements OnInit {
     this.showistoodata =!this.showistoodata;
   }
 
-  GetResult()
-  {        
-    this.parentSubject.next('some value');
+  FillMachineData(arrMachineSpindle: Machinespindle[])
+  {
+      let mainspindletype:string;
+      let ms:Machinespindle;
+      mainspindletype='M';
+      if(this.srv_StMng.SelectedMachine.MachineType=='Multi task')
+      {
+        if(this.srv_StMng.MainAppSelected.MainApp=='ML') mainspindletype='T';
+        if(this.srv_StMng.MainAppSelected.MainApp=='TH') mainspindletype='T';
+        //todo:drilling
         
-    this.Ipl.GetItem('MainApplication').value = this.srv_StMng.MainAppSelected.MainApp;
-    this.Ipl.GetItem('SecondaryApplication').value = this.srv_StMng.SecAppSelected.ApplicationITAID;
-      
-    if(this.srv_StMng.arrMachineSpindle != null && typeof(this.srv_StMng.arrMachineSpindle) !== 'undefined')
-    {
-      this.Ipl.GetItem('AdaptorType').value =this.srv_StMng.arrMachineSpindle[0].AdaptationType;
-      this.Ipl.GetItem('AdaptorSize').value =String(this.srv_StMng.arrMachineSpindle[0].AdaptationSize);
-    }
-    else
-    {
-      this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID).subscribe((res: any) => {
-        let arrMachineSpindle: Machinespindle[];
-        arrMachineSpindle = JSON.parse(res);  
+        ms = arrMachineSpindle.filter(x=> x.SpindleType ==mainspindletype)[0];
+      }
+      else 
+        ms = arrMachineSpindle[0];
        
-        this.Ipl.GetItem('PW_AX').value = arrMachineSpindle[0].N1+""; 
-        this.Ipl.GetItem('PW_BX').value = arrMachineSpindle[0].N2+"";
-        this.Ipl.GetItem('PW_CX').value = arrMachineSpindle[0].N3+"";
+      this.Ipl.GetItem('AdaptorType').value =ms.AdaptationType;
+      this.Ipl.GetItem('AdaptorSize').value =ms.AdaptationSize;
 
-        this.Ipl.GetItem('PW_AY').value = arrMachineSpindle[0].P1 +""; 
-        this.Ipl.GetItem('PW_BY').value = arrMachineSpindle[0].P2 +"";
-        this.Ipl.GetItem('PW_CY').value = arrMachineSpindle[0].P3 + "";  
-      });     
-    }
-    
+      this.Ipl.GetItem('PW_AX').value = ms.N1+""; 
+      this.Ipl.GetItem('PW_BX').value = ms.N2+"";
+      this.Ipl.GetItem('PW_CX').value = ms.N3+"";
+
+      this.Ipl.GetItem('PW_AY').value = ms.P1 +""; 
+      this.Ipl.GetItem('PW_BY').value = ms.P2 +"";
+      this.Ipl.GetItem('PW_CY').value = ms.P3 + ""; 
+  }
+  
+  FillDataInputParamAndRouteToResult()
+  {
     this.Ipl.GetItem('Material').value =String(this.srv_StMng.GetMaterialSelected().id);
     this.Ipl.GetItem('HardnessHB').value =this.srv_StMng.GetMaterialSelected().Hardness;
 
     this.srv_StMng.IPL=this.Ipl; 
     let listparams: { name: string, value: string }[]=[];
     let JSONParams:string;   
-    if (this.Ipl.items.filter(x=> x.value==null && x.required).length==0)
+    if (this.Ipl.items.filter(x=> x.value==null && x.required).length==0)    
       {
       this.Ipl.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {        
         listparams.push(
@@ -121,21 +123,35 @@ export class OperationDataComponent implements OnInit {
         })
       });
        
-      /*   this.srv_DataLayer.setinputparameters(listparams).subscribe(
-        res => console.log( res),
-        err => console.log(err),
-        () => alert('sss')
-      );    */ 
+      this.srv_StMng.IPL_ListChanged = listparams;
 
-       /* this.srv_DataLayer.test().subscribe(
-        res => console.log( res),
-        err => console.log(err),
-        () => alert('sss')
-      );   */
- 
       JSONParams = JSON.stringify(listparams); 
       this.srv_StMng.IPLChanged=JSONParams;      
       this.router.navigate(['/home/results']);
       }    
+  }
+
+  GetResult()
+  {        
+    this.parentSubject.next('some value');
+        
+    this.Ipl.GetItem('MainApplication').value = this.srv_StMng.MainAppSelected.MainApp;
+    this.Ipl.GetItem('SecondaryApplication').value = this.srv_StMng.SecAppSelected.ApplicationITAID;
+
+    let arrMachineSpindle: Machinespindle[];     
+    if(this.srv_StMng.arrMachineSpindle != null && typeof(this.srv_StMng.arrMachineSpindle) !== 'undefined') 
+    {   
+      this.FillMachineData(this.srv_StMng.arrMachineSpindle);        
+      this.FillDataInputParamAndRouteToResult();
+    }
+    else
+    {
+      this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID).subscribe((res: any) => 
+       { 
+        arrMachineSpindle = JSON.parse(res);         
+        this.FillMachineData(arrMachineSpindle); 
+        this.FillDataInputParamAndRouteToResult();
+      });     
+    }            
   }    
 }
