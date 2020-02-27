@@ -112,21 +112,25 @@ export class OperationDataComponent implements OnInit {
 
     this.srv_StMng.IPL=this.Ipl; 
     let listparams: { name: string, value: string }[]=[];
-    let JSONParams:string;   
+    let JSONParams:string; 
+    let str:string='';
+
     if (this.Ipl.items.filter(x=> x.value==null && x.required).length==0)    
       {
-      this.Ipl.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {        
+      this.Ipl.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {   
+        str=str + '"' + p.name + '":"' + p.value +'",';
         listparams.push(
         {
           "name": p.name,
           "value": p.value
         })
       });
-       
-      this.srv_StMng.IPL_ListChanged = listparams;
-
-      JSONParams = JSON.stringify(listparams); 
-      this.srv_StMng.IPLChanged=JSONParams;      
+      str=str.substr (0,str.length-1);
+      str="{" + str + "}"; 
+      //this.srv_StMng.IPL_ListChanged = listparams;
+      this.srv_StMng.IPLChanged = str;
+      //JSONParams = JSON.stringify(listparams); 
+      //this.srv_StMng.IPLChanged=JSONParams;      
       this.router.navigate(['/home/results']);
       }    
   }

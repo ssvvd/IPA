@@ -1,90 +1,78 @@
 
 
-<div class="container-fluid pt-0 m-0 pl-0 pr-0 border-left border-right" >  
-  <div class="form-group row ml-0 pl-0" >    
-    <div class="col-2 ml-0 pl-2 pr-0 pt-3">
-      <div class="pr-0" >
-      <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"
-        (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
-      </div>
-    </div>
-    <div class="col-10 mt-2 pr-0 mr-0" >
-      <div class="form-group border-left">
-        <nav aria-label="breadcrumb" style="background-color:white">
-          <ol class="breadcrumb" style="background-color:white">
-            <li class="breadcrumb-item active"><a href="#">All</a></li>
-          </ol>
-        </nav>
-        <div class="divcontainer">
-          <div class="pb-2 pt-2">
-            <h3 class="desc-label-big-bold pb-2 pl-2">Select Machine</h3>
+<!-- <div class="container-fluid pt-0 m-0 pl-0 pr-0 border-left" >  --> 
+<div class="border-left-gray border-right-gray"> 
+    <div class="row ">    
+      <div class="col col-20 ml-0 pl-2 pr-0 pt-3 border-right-gray" >
+        <div class="pr-3" >
+          <app-machines-filter (MachineFilterChanged)="onMachineFilterChanged($event)"
+            (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
           </div>
-          <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"
-            class="table table-stripe row-border hover">
-            <thead>
-              <tr id="dtOptions">
-                <th class="d-none">ID</th>
-                <!-- <th class="no-sort">
-                  <label>Machine Type</label>
-                </th> -->
-                <th>
-                  <label>Machine Name</label>
-                </th>
-                <th>
-                  <label>Adaptation Type & Size</label>
-                </th>
-                <th>
-                  <label>Power</label>
-                </th>
-                <th>
-                  <label>Spindle Speed</label>
-                </th>                
-                <th>
-                  <label>Torque</label>
-                </th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let mach of listmachines" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
-                <th scope="row" class="d-none">{{mach.MachineID}}</th>
-               <!--  <td>{{mach.MachineType}}</td> -->
-                <td><div class="pl-2">{{mach.MachineName}}</div></td>
-                <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
-                <td><div class="pl-2">{{mach.Power}}</div></td>
-                <td><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
-                <td><div class="pl-2">{{mach.Torque}}</div></td>
-                <td>
-                  <a data-toggle="tooltip" title="View Machine Detailed">
-                    <img src="{{environment.ImgView}}" (click)="OnViewMachine(mach)"
-                      [routerLink]="'/home/machine-item/' + mach.MachineID" class="icon-grid">
-                  </a>
-                </td>
-                <td>
-                  <a data-toggle="tooltip" title="Add To My Machine" class="cursor-pointer">
-                    <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
-                  </a>
-                </td>
-                <td>
-                  <a data-toggle="tooltip" title="Default Machine" class="cursor-pointer">
-                    <img src="{{environment.ImgSetDefault}}" class="icon-grid">
-                  </a>
-                </td>
-                <td>
-                  <div class="float-right">
-                    <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
-                      (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect}}</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      </div>
+      <div class="col col-80 mt-2 mr-0 pl-2 pr-2" >
+        <div class="form-group" >
+         <!--  <nav aria-label="breadcrumb" style="background-color:white">
+            <ol class="breadcrumb pl-2 pb-0" style="background-color:white">
+              <li class="breadcrumb-item active">All</li>
+            </ol>
+          </nav>  -->         
+            <div class="pb-1 pt-0 mt-0 pt-3" >
+              <h3 class="siteTitle pl-2 pb-2">Select Machine</h3>
+            </div>
+            <div *ngIf="isLoaded" class="div-datatable">              
+              <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"
+                class="table table-stripe row-border hover">
+                <thead>
+                  <tr id="dtOptions">
+                    <th class="d-none">ID</th>                                     
+                    <th><label>Machine Name<span class="sort-icon ml-1"></span></label></th>                  
+                    <th><label>Adaptation Type & Size<span class="sort-icon ml-1"></span></label></th>
+                    <th><label>Power<span class="sort-icon ml-1"></span></label></th>
+                    <th><label>Spindle Speed<span class="sort-icon ml-1"></span></label></th>                
+                    <th><label>Torque<span class="sort-icon ml-1"></span></label></th>
+                    <th class="no-sort"></th>
+                    <th class="no-sort"></th>
+                    <th class="no-sort"></th>
+                    <th class="no-sort"></th>                   
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let mach of listmachines" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
+                    <th scope="row" class="d-none">{{mach.MachineID}}</th>                    
+                  <!--  <td>{{mach.MachineType}}</td> -->
+                    <td><div class="pl-2">{{mach.MachineName}}</div></td>
+                    <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
+                    <td><div class="pl-2">{{mach.Power}}</div></td>
+                    <td><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
+                    <td><div class="pl-2">{{mach.Torque}}</div></td>
+                    <td>
+                      <a data-toggle="tooltip" title="View Machine Details">
+                        <img src="{{environment.ImgView}}" (click)="OnViewMachine(mach)"
+                          [routerLink]="'/home/machine-item/' + mach.MachineID" class="icon-grid">
+                      </a>
+                    </td>
+                    <td>
+                      <a data-toggle="tooltip" title="Add To My Machine" class="cursor-pointer">
+                        <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
+                      </a>
+                    </td>
+                    <td>
+                      <a data-toggle="tooltip" title="Default Machine" class="cursor-pointer">
+                        <img src="{{environment.ImgSetDefault}}" class="icon-grid">
+                      </a>
+                    </td>
+                    <td>
+                      <div class="float-right">
+                        <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
+                          (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect}}</button>
+                      </div>
+                    </td>                    
+                  </tr>                  
+                </tbody>
+              </table>
+            </div>         
         </div>
       </div>
-    </div>
-  </div>
+    </div> 
 </div>
 

@@ -19,7 +19,8 @@
   --family-font: 'Roboto',Calibri,Arial;
   --row-selected:#b5c4da;
   --background-color-menu:#e7e8e9;
-  --border-color-gray:#b2b2b2 ;
+  --border-color-gray:#7c7f7e ;
+  /* --border-color-gray:#b2b2b2 ; */
 }
  
 .desc-label-big-bold
@@ -246,12 +247,10 @@ tr.tr-selected {
   cursor: pointer;
 }
 
-<<<<<<< HEAD
 .cursor-not-allowed
 {
   cursor: not-allowed
 }
-=======
 .table thead th {
 border-bottom: 2px solid #dee2e6 !important;
 padding: 0.5rem !important;
@@ -308,9 +307,13 @@ table.dataTable.no-footer{
 .dataTables_wrapper.no-footer .dataTables_scrollBody{
   border-bottom: none;
 }
-// .dataTables_scrollBody {
-// max-height: 65vh !important;
-// height: auto !important;
 
-// }
->>>>>>> efa8925be90c6ae221f9b21147772da183758612
+.border-left-gray
+{
+    border-left :1px solid  #7c7f7e;
+}
+
+.border-right-gray
+{
+    border-right :1px solid  #7c7f7e;
+}

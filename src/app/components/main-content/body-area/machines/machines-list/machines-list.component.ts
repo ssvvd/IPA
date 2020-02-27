@@ -15,9 +15,9 @@ import { Subject, Subscription } from 'rxjs';
 
 export class MachinesListComponent implements OnInit, OnDestroy {
 
-  @ViewChild(DataTableDirective, {static: false})dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
   isDtInitialized:boolean = false;
-  
+
   myVar: any;
   dtOptions: DataTables.Settings = {};
   listmachines: Machineheader[] = [];
@@ -28,6 +28,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   datatableElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
   allSubs$: Subscription;
+  isLoaded:boolean =true;
   constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService) {
   }
 
@@ -36,13 +37,22 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       pagingType: 'full_numbers',
       "searching": false,
       "lengthChange": false,
-      "paging": false,
+      "paging": false,       
+       "autoWidth":false,
+       "scrollY": '65vh',
+       "scrollCollapse" : true,
+        "language": {
+        "emptyTable": "",
+        "zeroRecords": "",
+        "infoEmpty": "",
+        "info": "" }
     };        
 
     this.allSubs$ = this.srv_machine.getmachines()
       .subscribe((data: any) => {
-        this.listmachines = JSON.parse(data);
-        this.listmachines_sorted = this.listmachines;
+        this.listmachines = JSON.parse(data);     
+        this.listmachines_sorted = JSON.parse(data);
+        //this.listmachines_sorted = Object.assign({}, this.listmachines);
         this.myMachineSettings();
         this.dtTrigger.next();
       });      
@@ -56,11 +66,24 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.ApplyFilter(stfilter);
     }
     if (this.srv_statemanage.SelectedMachine == null) {
-      this.UpdateStateSelectedMachine(-1);
-    }
-    else {
-      this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);
-    }
+      this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID == 12);           
+    } 
+    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);   
+    this.SortTableData();
+  }
+
+  SortTableData()
+  {
+    //TODO: error - remove the scroll and icons of sorting !!!!!  
+   /*  this.isLoaded=false;
+    let arr:Machineheader[];
+    //arr=Object.assign({}, this.listmachines);
+    arr = JSON.parse(JSON.stringify(this.listmachines));
+    arr.sort((a,b)=> {if(a.IsSelected && !b.IsSelected) return -1; else return 0;});
+    //this.listmachines=Object.assign({}, arr);
+    this.listmachines = JSON.parse(JSON.stringify(arr));
+    //this.listmachines=Object.assign({},this.listmachines.sort((a,b)=> {if(a.IsSelected && !b.IsSelected) return -1; else return 0;}));      
+    this.isLoaded=true;  */
   }
 
   ngOnDestroy() {
@@ -71,7 +94,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     this.srv_statemanage.ViewMachine(mach);   
   }
 
-  UpdateStateSelectedMachine(MachineID: number) {
+  UpdateStateSelectedMachine(MachineID: number) {    
     this.listmachines.forEach((m) => {
       m.DescSelect = "Select";
       if (MachineID == m.MachineID)
@@ -79,6 +102,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       else
         m.IsSelected = false;
     });
+
   }
 
   OnSelectMachine(mach: Machineheader) {
@@ -88,6 +112,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   }
 
   onMachineFilterChanged($event) {  
+    this.isLoaded=true;
     this.MachineFilter = $event.filter;
     this.ApplyFilter($event.filter);
     if (this.srv_statemanage.SelectedMachine == null){
@@ -96,31 +121,40 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         dtInstance.destroy();
         this.dtTrigger.next();
       });           
-
     }
-    else{
+    else
+    {
       this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);
-      this.isDtInitialized = true
-      this.dtTrigger.next();
-
+      //this.isDtInitialized = true
+      //this.dtTrigger.next();
     }
   }
 
-  onMachineFilterClear() {
-    this.listmachines =  this.listmachines_sorted
+  onMachineFilterClear() {    
+   /*  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.destroy();
+        this.dtTrigger.next();
+    });  */
+    this.isLoaded=true;
+    this.listmachines =  this.listmachines_sorted;
+    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);
+    this.SortTableData();
   }
 
-  ApplyFilter(filter: MachineFilter) {
+  ApplyFilter(filter: MachineFilter) {        
     this.listmachines = this.listmachines_sorted.filter(
       m => m.SpindleSpeed >= filter.SpeedMin && m.SpindleSpeed <= filter.SpeedMax &&
         m.Power >= filter.PowerMin && m.Power <= filter.PowerMax &&
         m.Torque >= filter.TorqueMin && m.Torque <= filter.TorqueMax &&
         ((!filter.IsMachiningCenter && m.MachineType != "Machining center") || filter.IsMachiningCenter) &&
         ((!filter.IsLathe && m.MachineType != "Lathe") || filter.IsLathe) &&
-        ((!filter.IsMultiTask && m.MachineType != "Multi task") || filter.IsMultiTask)
+        ((!filter.IsMultiTask && m.MachineType != "Multi task") || filter.IsMultiTask &&
+        ((!filter.IsMultiSpindle && m.MachineType != "MultiSpindle") || filter.IsMultiSpindle) &&
+        ((!filter.IsSwissType && m.MachineType != "SwissType") || filter.IsSwissType))
         && (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1
         ));
     this.srv_statemanage.SelectMachineFilter = filter;
+    this.SortTableData();
   }
 }
 

@@ -36,22 +36,9 @@ export class DatalayerService {
 
   public  getresults(secapp:string,units:string,inputparam:string)
   {    
-    //let tst:string;
-    //tst="http://localhost:17586/api/datalayer/get-results/get-result-test/760/M/mat=10/lenth=2/ppp=4/mmm=sss dddd/nnn=ddd dddd/par6=122 333/par7=4/par8=5/par10=333/par10=ooo/par11=aa ss/par12=777/par13=jj/par14=fff dd/par15=ddd" ;
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-results/' + secapp + '/'+units + "/" + inputparam);
-     //return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-results-test/' + secapp + '/'+units + "/" + inputparam);
+    return  this.httpClient.post(environment.API_HOST + this.API_ROUTE +  'get-results/' + secapp + '/'+units  , inputparam );
   }
 
-  public  setinputparameters(inputparam:{ name: string, value: string }[]) {      
-    const testparam={"name":"ben"};
-    return this.httpClient.post(environment.API_HOST + this.API_ROUTE + 'set-parameters', inputparam);               
-  }   
-  
-  /*  public  td_brandname_list(units:string,bTA:number,bSolid:number,secapp:string)
-  {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-list/' + units + '/' + bTA + '/' +bSolid+ '/' + secapp);
-  } */
-  
   public  td_brandname_list(par:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-list/' + par);
@@ -61,24 +48,9 @@ export class DatalayerService {
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-tool-list/' + par);
   }
-
-  public  setinputparameters1() {
-    
-     const testparam={'Name':'sveta','Value':'123'};
-     //let ss:string= this.p.encodeValue ("'Name':'sveta','Value':'12.3'"); 
-     //const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-    return this.httpClient.post(environment.API_HOST + this.API_ROUTE +'set-parameters', "[{'name':'sveta','value':'12.3'},{'name':'sveta1','value':'12.3'}");       
-     //return this.httpClient.post('http://www.iscar.com/ita_api/api/datalayer/set-parameters',"adadadadad" );       
+  public  dictionarygetlanguage()
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionary-get-language');
   }
-
-  test() {
-      const data = {'username': 'sveta', 'password': '12345'};
-      const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
-      //return this.httpClient.post(environment.API_HOST + this.API_ROUTE + 'set-parameters', data, config);
-      let JSONParams = JSON.stringify(data); 
-      
-    return this.httpClient.post(environment.API_HOST + this.API_ROUTE + 'set-parameters-test',"test string");
-    }
   
-
 }

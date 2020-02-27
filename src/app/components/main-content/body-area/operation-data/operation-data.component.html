@@ -8,7 +8,7 @@
                         <i  [ngClass]="showistoodata ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
                     </a>                            
                     <div>                    
-                        <label [ngClass]="showistoodata ? 'desc-label-big-bold text-nowrap':'desc-label-big-bold text-nowrap vertical-text'">Tool Data</label>                    
+                        <label [ngClass]="showistoodata ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
                     </div>
                     <div>
                         <app-optimizetool [parentSubject]="parentSubject" *ngIf = "isLoaded&&showistoodata" [Ipl]=Ipl></app-optimizetool>
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <div class="form-group row col-12"> 
                     <div  class= "float-left pl-3">                                       
-                        <label  class="float-left desc-label-big-bold col-form-label">Operation Data</label> 
+                        <label  class="float-left siteTitle col-form-label">Operation Data</label> 
                     </div>
                     <div class= "ml-auto mr-4">                     
                         <button class="btn btn-select" (click)="GetResult()">Get Result</button>                                                           

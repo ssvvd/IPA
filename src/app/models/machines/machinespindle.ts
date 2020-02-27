@@ -20,7 +20,7 @@ export class Machinespindle {
     public MaxCutFeedSpeed:number;
     public MaxRapidFeedSpeed:number;
     public AdaptationType:string;
-    public AdaptationSize:number;
+    public AdaptationSize:string;
     public ClampingType:string;
     public IntAirBlast:boolean;
     public ExtAirBlast:boolean;

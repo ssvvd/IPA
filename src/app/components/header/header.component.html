@@ -1,62 +1,112 @@
     <!-- logo -->  
-    <div class="container-fluid pt-2 pl-0 pr-0" >    
-        <div class="float-left">
-          <a href="#">
-                <img src="{{environment.IscarLogo}}"  class="logoImg">
-          </a>
-        </div>
-        <div class="justify-content-end float-right"> 
-            <div class="form-group">
-                <div>
-                    <a  class="cursor-pointer" (click)="showmenu()">
-                        <img [src]="menuisshown ? 'assets/img/CloseIcon.svg' :'assets/img/HamburgerIcon.svg'"  class="icon-grid">
-                    </a> 
-                </div>
-                <div class="form-group">
-                <div class="row" [ngClass]="{'menu-visible':menuisshown,'menu-not-visible':!menuisshown}">            
-                <div class="shadow bg-white">                       
-                    <ul class="list-group list-group-flush"> 
-                            <li class="list-group-item div-image-menu p-0 m-0">                         
-                                <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="logoImg p-2"></a>                         
-                            </li>
-                            <li class="list-group-item div-image-menu p-0 m-0">                        
-                                <a><img [src]="environment.ImagePath+'icon_Favorite.svg'" (click)="menuisshown=false;openfavorite()" class="logoImg p-2"></a>                        
-                            </li>                           
-                            <li class="list-group-item div-image-menu p-0 m-0">   
-                                <div class="dropdown">                        
-                                <div class="btn-group"  ngbDropdown role="group" placement="bottom-right" id="test">                                
-                                    <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="logoImg p-2"></div>
-                                    <div class="dropdown-menu calc-table" ngbDropdownMenu aria-labelledby="calc">
-                                        <div  ngbDropdownItem  class="row col-12 dropdown-item menuitem">                                                                                                                                   
-                                            <a><img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3"></a>                                                                                                                                                                                                    
-                                            <label class="col-form-label" >Machining Calculators</label>                                                                                              
-                                        </div>
-                                        <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                         
-                                            <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="logoImg  p-3">                                           
-                                            <label class="col-form-label" >Machining Support</label>                                                   
-                                        </div>
-                                        <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                    
-                                            <img [src]="environment.ImagePath+'productive_b.svg'"  class="logoImg  p-3">                                      
-                                            <label class="col-form-label" >Productive Geometries</label>                                                   
-                                        </div>
-                                        <div class ="row col-12 menuitem" ngbDropdownItem>                                                                                  
-                                            <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="logoImg  p-3">                                      
-                                            <label class="col-form-label" >Grade Optimizer</label>                                                
-                                        </div>
-                                    </div>
-                                </div>
-                                </div>                            
-                            </li>                   
-                            <li class="list-group-item div-image-menu p-0 m-0">                                                 
-                                <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="logoImg p-2"></a>                       
-                            </li>
-                        </ul>
-                 </div> 
-                </div> 
-                </div>         
+    <!-- <div class="container-fluid pt-2 pl-0 pr-0" style="background-color: yellow"> -->
+<div class="row justify-content-center">
+<div class="col-12 banner-top d-flex justify-content-center" >
+    <div class="col-11 pr-0">
+        <div class="row float-right div-banner-images">
+            <div class="div-header-link pl-1 pt-1">
+                <label class="switch"><input type="checkbox" (change)="UnitsChanged($event)" [checked]="isMetric" id="togBtn">
+                    <div class="slider round"></div>
+                </label>          
             </div>
-        </div>     
+            <div class="border-right-gray pl-2">
+            </div>
+            <div class="div-header-link pl-2 pt-1">
+                <a href="https://www.linkedin.com/company/iscar" target="_blank" ><img [src] = "environment.ImagePath+'LinkdIn.svg'"  class="MenuImg"></a>                                               
+            </div>
+            <div class="div-header-link pl-1 pt-1">
+                <a href="https://twitter.com/ISCARltd" target="_blank" ><img [src] = "environment.ImagePath+'twitter.svg'"  class="MenuImg"></a>                                               
+            </div>
+            <div class="div-header-link pl-1 pt-1">
+                <a href="https://www.facebook.com/IscarCuttingTools" target="_blank" ><img [src] = "environment.ImagePath+'facebook.svg'"  class="MenuImg"></a>                                               
+            </div>
+            <div class="div-header-link pl-1 pt-1">
+                <a href="https://www.youtube.com/user/iscarweb" target="_blank" ><img [src] = "environment.ImagePath+'you_tube.svg'"  class="MenuImg"></a>                                               
+            </div>
+            <div class="border-right-gray pl-2">
+            </div>   
+                                                                       
+             <div class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
+                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + SelectedLang.LanguageCode + '.svg'" (click)="GetLanguages();" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
+                    <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
+                        <div *ngFor="let lan of lstLanguage" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{lan.LanguageEnName}} (click)="onChangeLanguage(lan)">                                                                                                                                                               
+                            <img [src]="environment.ImagePath + 'flags/' + lan.LanguageCode + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >                                                                                                                                                                                                 
+                            <label class="mt-2" style="background-color:trasparent" >{{lan.LanguageName}}</label>                                                                                                                          
+                        </div>                                                                  
+                </div>
+            </div>
+            <div  class="div-header-link pl-2 pt-1">
+                <label class="user-login">
+                    <div class="row">
+                        <div >
+                            <img [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="user-img" >
+                        </div>
+                        <div class="mt-1 ml-1 mr-2">
+                            <Label class="user-label">Hi User Name</Label>           
+                        </div>
+                    </div>              
+                </label>    
+
+            </div>    
+        </div>
     </div>
+</div>
+<div class="col-11 pl-0 pr-0 pt-2">
+    <div class="row ml-1">    
+        <div class="float-left pb-0 mb-0 pl-3" >
+            <a href="#">
+                    <img src="{{environment.IscarLogo}}"  class="logoImg">
+            </a>
+        </div>
+        <div class="ml-auto mr-0 bottom-align-text pr-3"> 
+            <div class="row ">
+                <div class="div-header-link pl-1">
+                    <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="MenuImg"></a>                                               
+                </div>
+                <div class="div-header-link pl-1">
+                    <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="MenuImg"></a>                                               
+                </div>
+                <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
+                    <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="MenuImg"></div>
+                    <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
+                        <div  class="row col-12 dropdown-item menuitem mt-2 mb-2">                                                                                                                                                               
+                            <a [href]="environment.MachiningCalculatorSite" target="_blank">
+                                <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                                                                                                                                                                              
+                                <label class="siteTitle  mt-2" style="background-color:trasparent">Machining Calculators</label>                                                                                                                          
+                            </a>
+                        </div>
+                        <div class ="row col-12 dropdown-item menuitem" >                                                                                                                   
+                            <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                                                 
+                            <label class="siteTitle mt-2" >Machining Support</label>                                                                           
+                        </div>
+                        <div class ="row col-12 dropdown-item menuitem" > 
+                            <a [href]="environment.IscarSite +'/GeometryAnalyzer/?lang=' + srv_statemanage.Lang" target="_blank">                                                                                   
+                                <img [src]="environment.ImagePath+'productive_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                      
+                                <label class="siteTitle  mt-2" >Productive Geometries</label>   
+                            </a>                                                
+                        </div>
+                        <div class ="row col-12 dropdown-item menuitem" >                              
+                            <a [href]="'https://www.iscar.com/insertconvertor/?lang=' + srv_statemanage.Lang" target="_blank">                                                                                
+                                <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                      
+                                <label class="siteTitle  mt-2" >Grade Optimizer</label>
+                            </a>                                                
+                        </div>
+                    </div>
+                </div>
+                <div class="div-header-link pl-1">
+                    <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg"></a>
+                </div>
+                <div class="div-header-link pl-1">
+                    <a><img [src]="environment.ImagePath+'icon_Favorite.svg'" (click)="menuisshown=false;openfavorite()" class="MenuImg"></a>                            
+                </div>
+            </div>
+        </div>                
+    </div>
+</div>    
+</div>
+<div class="col-12 pt-2  border-bottom-gray" >
+</div> 
+   
 
    
 

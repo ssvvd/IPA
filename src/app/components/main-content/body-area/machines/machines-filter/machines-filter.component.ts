@@ -53,7 +53,9 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMachiningCenter =true;
     this.machFilter.IsLathe =true;
     this.machFilter.IsMultiTask =true;
-    
+    this.machFilter.IsMultiSpindle =true;
+    this.machFilter.IsSwissType =true;
+
     //todo:
     this.machFilter.SpeedMin = 0; 
     this.machFilter.SpeedMax = 19000;
@@ -72,6 +74,7 @@ export class MachinesFilterComponent implements OnInit {
   ClearFilter ()
   {
     this.MachineFilterClear.emit();
+    this.InitFilterSliders();
   }
 
 }

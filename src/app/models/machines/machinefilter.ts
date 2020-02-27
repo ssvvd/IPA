@@ -2,6 +2,8 @@ export class MachineFilter{
   IsMachiningCenter:boolean;
   IsLathe:boolean;
   IsMultiTask:boolean;
+  IsMultiSpindle:boolean;
+  IsSwissType:boolean;
   SpeedMin:number;
   SpeedMax:number;
   PowerMin:number;

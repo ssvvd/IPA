@@ -5,9 +5,9 @@
 export const environment = {
   internal: true ,
   production: false  ,
-  API_HOST: 'http://localhost:17586/',
+  //API_HOST: 'http://localhost:17586/',
   //API_HOST: 'https://www.iscar.com/ITA_API/',
-  //API_HOST: 'http://intranet.imc.co.il/ITA_API/',
+  API_HOST: 'http://intranet.imc.co.il/ITA_API/',
   IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
   ImageInputPath:"assets/img/input_images/",
@@ -21,7 +21,9 @@ export const environment = {
   ImgStock:"assets/img/icon_stock.svg",
   ImgArrowLeft:"assets/img/arrows_left.png",
   ImgArrowRight:"assets/img/arrows_right.png",
-  ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx"
+  ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx",
+  IscarSite:"http://intranet.imc.co.il",
+  MachiningCalculatorSite:"https://eiplb.iscar.com/MachiningPwr/"
 };
 
     

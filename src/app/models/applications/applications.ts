@@ -17,3 +17,11 @@ export class SecondaryApp {
     IsActive:boolean;
    
 }
+
+export class Language {
+  LanguageCode:string;
+  LanguageName: string ;
+  LanguageEnName: string ; 
+}
+
+

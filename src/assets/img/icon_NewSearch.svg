@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="icon_x5F_NewSearch" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+	 y="0px" viewBox="0 0 34 34" style="enable-background:new 0 0 34 34;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#1D4F95;}
+	.st1{fill:#0571B1;}
+	.st2{fill:#FFFFFF;}
+</style>
+<path class="st0" d="M34,17c0-9.4-7.6-17-17-17S0,7.6,0,17s7.6,17,17,17c3,0,5.8-0.8,8.2-2.1c-0.4-0.1-0.8-0.3-1.1-0.5L19,26.1
+	c-1.5,0.9-3.3,1.4-5.2,1.4C8.2,27.5,3.7,23,3.7,17.4S8.2,7.3,13.8,7.3s10.1,4.5,10.1,10.1c0,1.9-0.5,3.7-1.5,5.2l5.2,5.2
+	c0.6,0.6,0.7,1.4,0.5,2.1C31.7,26.8,34,22.2,34,17z"/>
+<polygon class="st1" points="28.1,15.2 26.1,15.2 26.1,13.3 24.2,13.3 24.2,11.3 26.1,11.3 26.1,9.4 28.1,9.4 28.1,11.3 30,11.3 
+	30,13.3 28.1,13.3 "/>
+<path class="st2" d="M25.6,31.9c0.5,0,1.1-0.2,1.4-0.6l0.6-0.6c0.2-0.2,0.4-0.5,0.5-0.7c-0.9,0.7-1.8,1.4-2.8,1.9
+	C25.3,31.9,25.5,31.9,25.6,31.9z"/>
+<path class="st2" d="M27.6,27.8l-5.2-5.2c1-1.6,1.5-3.4,1.5-5.2c0-5.6-4.5-10.1-10.1-10.1S3.7,11.9,3.7,17.4s4.5,10.1,10.1,10.1
+	c1.9,0,3.6-0.5,5.2-1.4l5.2,5.2c0.3,0.3,0.7,0.5,1.1,0.5c1-0.6,1.9-1.2,2.8-1.9C28.3,29.2,28.1,28.4,27.6,27.8z"/>
+<circle class="st2" cx="13.6" cy="17.3" r="5.5"/>
+<circle class="st0" cx="13.6" cy="17.3" r="5.5"/>
+<rect x="24.2" y="11.3" class="st2" width="1.9" height="2"/>
+<rect x="28.1" y="11.3" class="st2" width="1.9" height="2"/>
+<rect x="26.1" y="9.4" class="st2" width="2" height="1.9"/>
+<rect x="26.1" y="13.3" class="st2" width="2" height="1.9"/>
+<rect x="26.1" y="11.3" class="st2" width="2" height="2"/>
+</svg>

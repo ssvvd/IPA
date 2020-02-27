@@ -3,7 +3,7 @@ import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { clsMaterial } from 'src/app/models/materials/material'
-import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
+import { MainApp,SecondaryApp ,Language} from 'src/app/models/applications/applications';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { InputParamItemChanged} from 'src/app/models/operational-data/inputparameteritem';
 import { BehaviorSubject } from 'rxjs';
@@ -18,6 +18,7 @@ export class StateManagerService {
   private mMachineFilter:MachineFilter;
   private mSelectedMachine:Machineheader;
   private marrMachineSpindle:Machinespindle[];
+  private marrLanguages:Language[];
 
   private obsMachineSelected = new BehaviorSubject<string[]>([]);
   CurrentMachineSelected = this.obsMachineSelected.asObservable();   
@@ -34,6 +35,8 @@ export class StateManagerService {
 
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 
+ 
+  private mUnits:string='M'; //todo:
 
   CheckTabOperationalDataEnable()
   {   
@@ -54,13 +57,12 @@ export class StateManagerService {
   get SelectedMachine():Machineheader {
     return this.mSelectedMachine;
   }
-  set SelectedMachine(m:Machineheader) {
-    this.mSelectedMachine=m;   
-    let desc:string;  
-    //desc=m.SpindleSpeed.toString() + " rpm /" + m.Power.toString() + " Kw"; 
+  set SelectedMachine(m:Machineheader) { 
+    this.mSelectedMachine = Object.assign({}, m);
+    let desc:string;     
     desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() ; 
     this.CheckTabOperationalDataEnable();   
-    this.obsMachineSelected.next([m.MachineName,desc]);
+    this.obsMachineSelected.next([m.MachineName,desc]);  
   }
 
   ViewMachine(mach: Machineheader) { 
@@ -172,6 +174,32 @@ export class StateManagerService {
   {
     return this.materialSelected;    
   }
+  
+  get SelectedUnits():string {
+    return this.mUnits;
+    }
+  set SelectedUnits(u:string) {  
+    this.mUnits = u;
+   }
 
+
+  get lstLanguages():Language[] {
+    return this.marrLanguages;
+    }
+  set lstLanguages(l:Language[]) {  
+    this.marrLanguages = l;
+   }
+  private mLanguages:Language;
+  get SelectedLanguage():Language {
+    return this.mLanguages;
+    }
+  set SelectedLanguage(l:Language) {  
+    this.mLanguages = l;
+   }
+
+  get Lang():string
+  {
+    return this.mLanguages.LanguageCode;
+  }
 }
  

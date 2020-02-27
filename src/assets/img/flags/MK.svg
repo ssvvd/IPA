@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+	.st0{clip-path:url(#SVGID_2_);}
+	.st1{fill:#CE2028;}
+	.st2{fill:#F9D616;}
+	.st3{fill:#F9D616;stroke:#CE2028;stroke-width:2.5;}
+</style>
+<g>
+	<defs>
+		<path id="SVGID_1_" d="M61.9,1.8c26.6,6.6,42.8,33.5,36.2,60.1C91.5,88.5,64.6,104.7,38,98.1c-26.5-6.5-42.7-33.4-36.2-60
+			C8.4,11.5,35.3-4.8,61.9,1.8"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  style="overflow:visible;"/>
+	</clipPath>
+	<g class="st0">
+		<path class="st1" d="M-55.1-1.6H154V103H-55.1V-1.6z"/>
+		<path class="st2" d="M62.1,58.2L-55.1-1.6h31.4L62.1,58.2z M36.7,43.2l85.9,59.8H154L36.7,43.2z M36.7,58.2l85.9-59.8H154
+			L36.7,58.2z M62.1,43.2L-55.1,103h31.4L62.1,43.2z M49.4,50.7L-55.1,40.3v20.9L49.4,50.7z M49.4,50.7L154,40.3v20.9L49.4,50.7z
+			 M49.4,50.7L39-1.6h20.9L49.4,50.7z M49.4,50.7L39,103h20.9L49.4,50.7z"/>
+		<circle class="st3" cx="49.4" cy="50.7" r="16.8"/>
+	</g>
+</g>
+</svg>

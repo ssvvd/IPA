@@ -39,17 +39,18 @@ export class ResultsComponent implements OnInit {
       });  
          */
 
-      let strpar:string='';
-      this.srv_StMng.IPL_ListChanged.forEach(par => {
+      //let strpar:string='';
+      /* this.srv_StMng.IPL_ListChanged.forEach(par => {
         strpar = strpar + par.name + "=" + par.value + ";";
         //strpar = strpar + "/" +  par.name + "/" + par.value ;
-      });
+      }); */
       //strpar = "Material=1;HardnessHB=125;AdaptorType=BT;AdaptorSize=40;PW_AX=100;PW_AY=0.5;PW_BX=1000;PW_BY=7.5;PW_CX=12000;PW_CY=7.5";          
       //strpar=strpar.split('.').join('xxx'); 
       //console.log(strpar);
-      strpar =encodeURIComponent(strpar); 
-      
-       this.srv_DataLayer.getresults('760','M',strpar).subscribe((res: any) => {
+      //strpar =encodeURIComponent(strpar); 
+      //strpar=JSON.stringify(this.srv_StMng.IPL_ListChanged);
+
+       this.srv_DataLayer.getresults('760','M',this.srv_StMng.IPLChanged).subscribe((res: any) => {
         this.arrResult = JSON.parse(res); 
         this.SpinnerService.hide(); 
         },   
