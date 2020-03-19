@@ -12,7 +12,7 @@ export class AppsettingService {
   private mUnitslengthDesc :string='mm'; //todo:
   private marrLanguages:Language[];
 
-   get Units():string {
+   get Units():string{   
     return this.mUnits;
     }
   set Units(u:string) {  
@@ -42,6 +42,7 @@ export class AppsettingService {
 
   get Lang():string
   {
+    
     return this.mLanguages.LanguageCode;
   }
 }
