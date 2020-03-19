@@ -96,7 +96,8 @@
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css",
+              "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css"
             ],
             "scripts": [   
               "node_modules/jquery/dist/jquery.js",
@@ -104,7 +105,8 @@
               "node_modules/chart.js/dist/Chart.bundle.min.js" ,
               "node_modules/popper.js/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/popper.js/dist/umd/popper.js"
+              "./node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/datatables.net-responsive/js/dataTables.responsive.js"
             ]   
           }
         },

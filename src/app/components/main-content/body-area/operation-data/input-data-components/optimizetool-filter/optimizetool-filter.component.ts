@@ -1,5 +1,9 @@
 import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
+import { StateManagerService } from 'src/app/services/statemanager.service';
+import { AppsettingService} from 'src/app/services/appsetting.service';
+import { Observable ,Subscription} from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
 
 interface ToolOptimizeItem
@@ -18,14 +22,19 @@ interface ToolOptimizeItem
 
 export class OptimizetoolFilterComponent implements OnInit {
 
-  @Input() selitems:ToolOptimizeItem[];
   @Input() labeldescription:string;
   @Input() funcname:string;
-  @Input() funcpar:string;
-  @Input() field:string;
- 
+  
+  @Input() fieldname:string;
+  @Input() fieldid:string;
+
+  @Input() events: Observable<void>;
+  private eventsSubscription: Subscription;
+
   //@Output() selectitems = new EventEmitter();
-  @Output() selectitems = new EventEmitter<{items: ToolOptimizeItem[],funcname:string}>();
+  //@Output() selectitems = new EventEmitter<{items: ToolOptimizeItem[],funcname:string}>();
+
+  selitems:ToolOptimizeItem[];
 
   arrData:ToolOptimizeItem[]=[];
   arrDataF:ToolOptimizeItem[]=[];
@@ -34,26 +43,60 @@ export class OptimizetoolFilterComponent implements OnInit {
   show_more:boolean =false;
   show_all:boolean =false;
   after_getmore =false;
-
-  description:string;
   desc_show_more:string;
   str_search:string ='';
   max_row_show:number;
   after_get_data:boolean;
-  data:any;
   Top:number =10;
-  Filter:string='All';
-  status_view:string;
-  
-  constructor(private srv_DataLayer:DatalayerService,
-    private SpinnerService: NgxSpinnerService) { }
+  Filter:string='All';  
+
+  constructor(private srv_DataLayer:DatalayerService,private srv_dl_toolopt:DatalayerOptimizeToolService,
+              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+              private SpinnerService: NgxSpinnerService) { }
   
   ngOnInit() { 
-     this.desc_show_more ="Show more...";
-     this.arrData=[];
-     this.after_get_data=false;
-     this.status_view="new";
-  }  
+    this.eventsSubscription = this.events.subscribe(() => this.ClearData());
+
+    this.desc_show_more ="Show more...";
+    this.arrData=[];
+    this.after_get_data=false;
+    this.selitems= [];
+    if(this.srv_StMng.IPL.GetItem(this.fieldid).value!=this.srv_StMng.IPL.GetItem(this.fieldid).valuedefault)  
+      {
+        this.BuildSelectItems();
+      } 
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
+  ClearData()
+  {
+    this.isshowdetail=false;  
+    this.select_items='';
+    this.show_more=false;
+    this.show_all =false;
+    this.after_getmore =false;
+    this.desc_show_more ="Show more...";
+    this.arrData=[];
+    this.arrDataF=[];
+    this.after_get_data=false;
+    this.selitems= [];
+    this.srv_StMng.IPL.GetItem(this.fieldid).value =this.srv_StMng.IPL.GetItem(this.fieldid).valuedefault; 
+  }
+
+  BuildSelectItems()
+  {
+    let arr = this.srv_StMng.IPL.GetItem(this.fieldid).value.split(",");   
+    for (let value of arr) {
+        this.selitems.push({ RecordID:0,
+                             Designation:value,
+                             Value:  value,
+                             Checked:true
+                            });      
+    }   
+  }
 
   ApplySearch(s:string) {    
     this.str_search = s;
@@ -70,33 +113,74 @@ export class OptimizetoolFilterComponent implements OnInit {
     }    
   }
  
-  callfunchttp(func:string)
+  callfunchttp(funcname:string)
   {   
     this.SpinnerService.show();
     let str_param:string;
     let str_s:string= this.str_search;
+    str_s =str_s.trim();
     let t:number= this.Top;
     if (str_s.replace(/\s/g, "") !='') t =9999 ; 
     str_s=str_s.replace (' ' ,'blank');
     if (str_s.replace(/\s/g, "") =='') str_s ='All';
 
-    str_param=this.funcpar + str_s + "/" + t;
+    //str_param=this.funcpar + str_s + "/" + t;
+    let param:string;
+    switch(funcname)
+    { 
+      case "BRAND": {
+          //"M/1/1/760/"
+          param=this.srv_appsetting.Units + "/1/1/" + this.srv_StMng.SecApp + "/"; 
+          str_param=param + str_s + "/" + t;
+          this.srv_dl_toolopt.td_brandname_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) ;
+          break; 
+      } 
+      case"TOOL":  { 
+          //"All/0/999/All/1/1/760/M/All/"
+          param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
+          str_param=param + str_s + "/" + t;
+          this.srv_dl_toolopt.td_tool_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          break; 
+      }
+      case "INSERT":  {         
+          //(mBrand, mTool, mDiaFrom, mDiaTo, mInnerDiaFrom, mInnerDiaTo, mTA,mSolid, mSecondaryApp, mUnits            
+          param=this.srv_StMng.IPL.GetItem("TD_BrandName").value +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+  "/0/999/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/";
+          str_param=param + str_s + "/" + t;
+          this.srv_dl_toolopt.td_insert_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          break; 
+      } 
+      case"TOOLCATALOGNO":  { 
+          //"All/0/999/All/1/1/760/M/All/"
+          //{BrandName}/{DiaFrom}/{DiaTo}/{Insert}/{bTA}/{bSolid}/{pSecondaryApp}/{pUnits}/{Family}/{ToolDesignation}/}{Filter}/{Top}
+          param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/"  + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/";
+          str_param=param + str_s + "/" + t;
+          this.srv_dl_toolopt.td_tool_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          break; 
+      }
+      case"INSERTCATALOGNO":  { 
+          //"All/0/999/All/1/1/760/M/All/"
+          // /{BrandName}/{Designation}/{Units}/{bTA}/{bSolid}/{CarbideGrade}/{SecondaryApp}/{Tool}/{DiaFrom}/{DiaTo}/{Filter}/{Top}
+          param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/" +this.srv_StMng.IPL.GetItem("TD_InsertDesignation").value + "/" 
+          + this.srv_appsetting.Units + "/1/1/All/" + this.srv_StMng.SecApp +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/0/999/";
+          str_param=param + str_s + "/" + t;
+          this.srv_dl_toolopt.td_insert_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          break; 
+      }
+      case"GRADE":  {          
+          //{BrandName}/{Designation}/{bTA}/{bSolid}/{InsertCatalog}/{pUnits}/{pSecondaryApp}/{Tool}/{DiaFrom}/{DiaTo}/{Filter}/{Top}
+          //All/         All/           1/    1/       /     M/760/All/0/999/All/5
+          param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/" +this.srv_StMng.IPL.GetItem("TD_InsertDesignation").value + "/1/1/" +
+          this.srv_StMng.IPL.GetItem("TD_InsertCatalogNo").value +"/"+ this.srv_appsetting.Units + "/" + this.srv_StMng.SecApp +"/" + 
+          this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/0/999/";
+          str_param=param + str_s + "/" + t;
+          this.srv_dl_toolopt.td_grade_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          break; 
+      }
+      default: {             
+          break; 
+      } 
+    }   
 
-    switch(func)
-        { 
-          case "brandname": { 
-              this.srv_DataLayer.td_brandname_list(str_param).subscribe((res: any)=>{this.data=res;this.filldatasubscribe(res);}) ;
-              break; 
-          } 
-          case"tool":  { 
-              this.srv_DataLayer.td_tool_list(str_param).subscribe((res: any)=>{this.data=res;this.filldatasubscribe(res)}) ;
-              break; 
-          } 
-          default: { 
-              //statements; 
-              break; 
-          } 
-        }               
   }
 
   getmore()
@@ -104,8 +188,7 @@ export class OptimizetoolFilterComponent implements OnInit {
     this.show_all =!this.show_all;
     if(this.show_all)
       {
-        this.Top=9999;        
-        //this.selectitems.emit({ items: this.selitems,funcname:this.funcname, Top:this.Top,Filter:this.Filter});
+        this.Top=9999;               
         this.callfunchttp(this.funcname);
         this.after_getmore=true;
         this.desc_show_more ="Show less...";
@@ -125,20 +208,18 @@ export class OptimizetoolFilterComponent implements OnInit {
   {    
     this.show_more = false;   
     let n:number=0;
-    this.arrData =[];   
+    this.arrData =[];     
     //add from post      
-    for (const d of JSON.parse(data)) {                  
-          {                                   
-            if(d[this.field]!='All' && d[this.field].replace(/\s/g, "")!='')                                     
+    for (const d of JSON.parse(data)) {                                                     
+            if(d[this.fieldname]!='All' && d[this.fieldname].replace(/\s/g, "")!='')                                     
               this.arrData.push({                
                                   RecordID:n++,
-                                  Designation:d[this.field],
-                                  Value:  d[this.field],
+                                  Designation:d[this.fieldname],
+                                  Value:  d[this.fieldname],
                                   Checked:false
-                                }) 
-          }
+                                })          
     }
-    //add selected
+      //add selected
       this.selitems.forEach(pp=>{
       let a:ToolOptimizeItem[];
       a=this.arrData.filter(p=>p.Designation==pp.Designation)
@@ -146,15 +227,13 @@ export class OptimizetoolFilterComponent implements OnInit {
       {
         this.arrData.unshift({                
                         RecordID:pp.RecordID,
-                        Designation:pp[this.field],
-                        Value:  pp[this.field],
+                        Designation:pp[this.fieldname],
+                        Value:  pp[this.fieldname],
                         Checked:true
                         }) 
       }
-      else
-      {
-        a[0].Checked=true;
-      }
+      else    
+        a[0].Checked=true;      
     } );
              
     if(this.arrData.length <6) 
@@ -166,27 +245,52 @@ export class OptimizetoolFilterComponent implements OnInit {
     {
       this.max_row_show = 6;
       this.show_more = true;
-    }                                                                                                                        
-    
+    }                                                                                                                            
     this.SpinnerService.hide();
     this.after_get_data =true;
-    this.arrDataF=this.arrData;   
-    this.isshowdetail=true;  
+    this.arrDataF=this.arrData;
+    this.setSelectedItemsFromServerStateManager();
+    this.isshowdetail=true;        
   }
   
+  setSelectedItemsFromServerStateManager()
+  {
+    if(this.srv_StMng.IPL!= null)
+     {
+       //this.srv_StMng.IPL.GetItem(this.fieldid).value;
+       let arr:string[];
+       arr = this.srv_StMng.IPL.GetItem(this.fieldid).value.split(',');      
+       for (let value of arr) {
+          if(this.arrDataF.filter(p=>p.Value==value).length>0)
+            this.arrData.filter(p=>p.Value==value)[0].Checked =true;
+      }     
+    }
+  }
+  
+  get_strselectedvalue(arr :ToolOptimizeItem[]):string
+  {
+    let str:string ='';     
+    arr.forEach(pp=>{str = str +pp.Designation + ",";} );
+    if(str!='') str=str.substring(0,str.length-1);
+    return str;
+    //str =str.substring (0,this.select_items.length-1);
+  }
+
   checkItem()
   {
     this.selitems =this.arrDataF.filter(p => p.Checked);  
-    this.fillselectedvalue();   
-    this.selectitems.emit({ items: this.selitems,funcname:this.funcname});          
+    this.fillselectedvalue(); 
+    this.srv_StMng.IPL.GetItem(this.fieldid).value = this.get_strselectedvalue( this.selitems);             
   }
   
   remove_select()
   {      
     this.arrDataF.filter(p=>p.Checked).forEach((pp=>{pp.Checked=false;}));
     this.selitems=[];
-    this.select_items='';
-    this.selectitems.emit({ items: this.selitems,funcname:this.funcname});
+    this.select_items='';   
+    this.srv_StMng.IPL.GetItem(this.fieldid).value =this.srv_StMng.IPL.GetItem(this.fieldid).valuedefault;
+    this.after_get_data=false;
+    this.showdetail();    
   }
 
   showdetail()

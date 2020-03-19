@@ -1,7 +1,9 @@
-import { Component, OnInit,Input,SimpleChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@angular/core';
 import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { StateManagerService } from 'src/app/services/statemanager.service';
+import { OptimizetoolFilterComponent} from 'src/app/components/main-content/body-area/operation-data/input-data-components/optimizetool-filter/optimizetool-filter.component'
 import { Observable, Subject } from 'rxjs';
 
 interface ToolOptimizeItem
@@ -20,100 +22,73 @@ interface ToolOptimizeItem
 
 export class OptimizetoolComponent implements OnInit {
 
-  @Input() Ipl:InputParameterlist;
-  @Input() parentSubject:Subject<any>;
- 
+  //@Input() Ipl:InputParameterlist;
+  //@Input() parentSubject:Subject<any>;
+   @ViewChild(OptimizetoolFilterComponent,{ static: false }) OptimizetoolFilter: OptimizetoolFilterComponent ; 
   TypeFeed:string ="BothFeed";
 
   arrBrandName:ToolOptimizeItem[]=[];
   arrToolDesignation:ToolOptimizeItem[]=[];
 
-  parBrandName:string='All';
-  parToolDesignation:string='All';
+  //parBrandName:string='All';
+  //parToolDesignation:string='All';
+  eventsSubject: Subject<void> = new Subject<void>();
 
   isLoad:boolean =false;
   
-  constructor(private srv_DataLayer:DatalayerService) { }
+  constructor(private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) { }
   
-  GetSelectedBrandName() : string
-  {
-    let strItems:string='';
-    this.arrBrandName.forEach (p=>{strItems = strItems +p.Value + ",";});  
-    if(strItems=='') strItems ="All";
-    return strItems;
+  ClearDataChild() {
+    this.TypeFeed='BothFeed';
+    this.changeTypeFeed();
+    this.srv_StMng.IPL.GetItem('TD_IT_InsertTool').value =this.srv_StMng.IPL.GetItem('TD_IT_InsertTool').valuedefault;
+    this.srv_StMng.IPL.GetItem('TD_IT_InsertHead').value =this.srv_StMng.IPL.GetItem('TD_IT_InsertHead').valuedefault;
+    this.srv_StMng.IPL.GetItem('TD_IT_SolidTool').value =this.srv_StMng.IPL.GetItem('TD_IT_SolidTool').valuedefault;
+    this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').value =this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').valuedefault;
+    this.eventsSubject.next();
   }
 
-  GetSelectedToolDesignation() : string
+ /*  onClearFilter()
+  {
+    alert('ssssss');
+    this.OptimizetoolFilter.ClearData();
+  } */
+
+  GetSelectedItemsString(items:ToolOptimizeItem[]): string
   {
     let strItems:string='';
-    this.arrToolDesignation.forEach (p=>{strItems = strItems +p.Value + ",";});
-    if(strItems=='') strItems ="All";    
+    items.forEach (p=>{strItems = strItems +p.Value + ",";});  
+    if(strItems=='') 
+      strItems ="All";
+    else
+      strItems =strItems.substring (0,strItems.length-1);
     return strItems;
   }
-
-  ngOnInit() { 
-    this.parentSubject.subscribe(event => {              
-    this.Ipl.GetItem('TD_BrandName').value= this.GetSelectedBrandName() ;
-    this.Ipl.GetItem('TD_ToolDesignation').value= this.GetSelectedToolDesignation();     
-    });
-    
-    this.parBrandName="M/1/1/760/";
-    this.parToolDesignation="All/0/999/All/1/1/760/M/All/";
-
-    if(this.Ipl.GetItem('TD_FASTFEED').value=='1' && this.Ipl.GetItem('TD_REGULAR').value=='1')        
+ 
+  ngOnInit() {   
+    if(this.srv_StMng.IPL.GetItem('TD_FASTFEED').value=='True'&& this.srv_StMng.IPL.GetItem('TD_REGULAR').value=='True')        
       this.TypeFeed="BothFeed";     
     else             
-        if (this.Ipl.GetItem('TD_FASTFEED').value=='1') 
+        if (this.srv_StMng.IPL.GetItem('TD_FASTFEED').value=='True') 
           this.TypeFeed="HightFeed";
         else 
           this.TypeFeed="NormalFeed";           
     this.isLoad =true;
   }
-  
-  onSelectedItems($event) {          
-    switch($event.funcname)
-        { 
-          case "brandname": { 
-              this.arrBrandName = $event.items;
-              this.Ipl.GetItem('TD_BrandName').value=this.get_strselectedvalue(this.arrBrandName);
-              break; 
-          } 
-          case"tool":  { 
-              this.arrToolDesignation = $event.items;
-              this.Ipl.GetItem('TD_ToolDesignation').value=this.get_strselectedvalue(this.arrToolDesignation);
-              break; 
-          } 
-          default: {               
-              break; 
-          } 
-        }           
-        this.parToolDesignation=this.GetSelectedBrandName()+ "/0/999/All/1/1/760/M/All/"  ;
-        //alert(this.parToolDesignation);
-   }
-
-   onSelectedBrandNamesChanged($event) {    
-    this.arrBrandName = $event.items; 
-     
-    this.parToolDesignation="";      
-   }
-  
-   onSelectedToolDesignationChanged($event) {    
-    this.arrToolDesignation = $event.items;         
-   }
 
   change(field:string)
   {      
-      if(this.Ipl.GetItem(field).value=='0') 
-        this.Ipl.GetItem(field).value='1';
+      if(this.srv_StMng.IPL.GetItem(field).value=='True')
+        this.srv_StMng.IPL.GetItem(field).value='False';
       else
-        this.Ipl.GetItem(field).value='0';                
+        this.srv_StMng.IPL.GetItem(field).value='True';                
   }
 
   changeTypeFeed()
   {
-    if(this.TypeFeed=="BothFeed")  {this.Ipl.GetItem('TD_FASTFEED').value='True'; this.Ipl.GetItem('TD_REGULAR').value='True'};
-    if(this.TypeFeed=="HightFeed")  {this.Ipl.GetItem('TD_FASTFEED').value='True'; this.Ipl.GetItem('TD_REGULAR').value='False'};
-    if(this.TypeFeed=="NormalFeed")  {this.Ipl.GetItem('TD_FASTFEED').value='False'; this.Ipl.GetItem('TD_REGULAR').value='True'};
+    if(this.TypeFeed=="BothFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='True'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='True'};
+    if(this.TypeFeed=="HightFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='True'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='False'};
+    if(this.TypeFeed=="NormalFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='False'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='True'};
   } 
   
   get_strselectedvalue(arr :ToolOptimizeItem[]):string

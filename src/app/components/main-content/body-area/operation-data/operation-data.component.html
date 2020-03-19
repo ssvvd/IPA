@@ -1,36 +1,36 @@
 
-<div class="container-fluid ml-0 pl-0 mt-0  pr-0">   
+<div class="container-fluid ml-0 pl-0 mt-0  pr-0" >   
      <div class="form-group row col-12">       
-        <div  [ngClass]="showistoodata ? 'col-3 border-right border-left  pt-2 ' : 'col-1 border-right border-left  pt-2'">
-            <div class="pt-4">
-                <div class="form-group">                     
-                    <a  [ngClass]="showistoodata ?'cursor-pointer float-right':'pl-4 cursor-pointer float-center'" (click)="showtooldata()">                        
-                        <i  [ngClass]="showistoodata ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
+        <div  [ngClass]="srv_StMng.IsTabToolDataOpen ? 'col-3  border-right border-left  pt-2' : 'col-cust-5 border-right border-left  ml-0 pl-0 pl-0 pr-0 pt-2'">
+            <div class="pt-4"  >
+                <div class="form-group" >                     
+                    <a  [ngClass]="srv_StMng.IsTabToolDataOpen ?'cursor-pointer float-right':'pl-3 cursor-pointer float-center'" (click)="showtooldata()">                        
+                        <i  [ngClass]="srv_StMng.IsTabToolDataOpen ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
                     </a>                            
                     <div>                    
-                        <label [ngClass]="showistoodata ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
+                        <label [ngClass]="srv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
                     </div>
                     <div>
-                        <app-optimizetool [parentSubject]="parentSubject" *ngIf = "isLoaded&&showistoodata" [Ipl]=Ipl></app-optimizetool>
-                    </div>
-                    <div class="pt-4">
-                        <app-optimizetool59 *ngIf = "isLoaded&&showistoodata&&SecApp==760" [Ipl]=Ipl></app-optimizetool59>
-                    </div>
+                        <app-optimizetool  *ngIf = "isLoaded&&srv_StMng.IsTabToolDataOpen" ></app-optimizetool>
+                    </div>                  
                 </div>           
             </div> 
         </div>
-        <div [ngClass]="showistoodata ? 'border-right col-9 pl-2 pr-0  pt-4':'border-right col-11 pl-2 pr-0  pt-4'">
+        <div [ngClass]="srv_StMng.IsTabToolDataOpen ? 'border-right col-9 pl-2 pr-0  pt-4':'border-right col-cust-95 pl-0 pr-0  pt-4'">
             <div class="form-group">
                 <div class="form-group row col-12"> 
                     <div  class= "float-left pl-3">                                       
                         <label  class="float-left siteTitle col-form-label">Operation Data</label> 
-                    </div>
+                    </div>                    
                     <div class= "ml-auto mr-4">                     
                         <button class="btn btn-select" (click)="GetResult()">Get Result</button>                                                           
                     </div>
                  </div>
-                <div >
-                    <app-appdetails59 *ngIf = "isLoaded"  [Ipl]=Ipl></app-appdetails59>
+                <div>
+                    <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">Clear All</button>
+                </div> 
+                <div class="pt-0">
+                    <app-appdetails59 *ngIf = "isLoaded"  [events]="eventsSubject.asObservable()"></app-appdetails59>
                 </div>
             </div>
         </div>

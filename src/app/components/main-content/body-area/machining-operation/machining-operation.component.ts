@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 import { ApplicationsService } from 'src/app/services/applications.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-machining-operation',
@@ -26,14 +28,14 @@ export class MachiningOperationComponent implements OnInit {
   SelectedMenuID1:string="";
   SelectedMenuID2:string="";
   isToOperationData:boolean=false;
-  constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService) { }
+  constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) { }
   
   ngOnInit() {
 
     this.isToOperationData =this.srv_statemanage.CheckToOperationData();  
     let MachineType:string;
     MachineType=  this.srv_statemanage.SelectedMachine.MachineType;
-    this.srv_app.getmainapp('en',MachineType)
+    this.srv_app.getmainapp(this.srv_appsetting.Lang,MachineType)
       .subscribe((res: any)=> {
           for (const d of JSON.parse(res)) {                     
           if(d.ParentMenuID==0)
@@ -48,21 +50,38 @@ export class MachiningOperationComponent implements OnInit {
             })
           }
         }
-
-    this.srv_app.getmenu('en','user')
+    
+    this.srv_app.getmenu(this.srv_appsetting.Lang,'user') //todo:user
     .subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                          
           if(d.ParentMenuID!=0 && d.IsNewITA) 
-            {          
-              this.arrSecApps.push({
-                MainApp:d.MainApp,
-                MenuID: d.MenuID,
-                MenuName: d.MenuName,
-                MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png" ,
-                ParentMenuID:d.ParentMenuID ,
-                ApplicationITAID: d.ApplicationITAID,
-                IsActive:true 
-            })
+            { 
+              let isadditem:boolean =true;
+              if(d.ParentMenuID=='61') //drilling
+              {
+                if(MachineType=='Multi task' || MachineType=='SwissType' || MachineType=='MultiSpindle')
+                {
+                  if(d.MenuID==111 || d.MenuID ==112)  isadditem =true;
+                  if(d.MenuID==71)  isadditem =false;
+                }
+                else
+                {
+                  if(d.MenuID==111 || d.MenuID ==112)  isadditem =false;
+                  if(d.MenuID==71)  isadditem =true;
+                }
+              } 
+              if(isadditem)
+                {
+                  this.arrSecApps.push({
+                  MainApp:d.MainApp,
+                  MenuID: d.MenuID,
+                  MenuName: d.MenuName,
+                  MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png" ,
+                  ParentMenuID:d.ParentMenuID ,
+                  ApplicationITAID: d.ApplicationITAID,
+                  IsActive:true 
+                })
+              }
           };
         }
         let ma:MainApp =this.srv_statemanage.MainAppSelected;
@@ -89,11 +108,6 @@ export class MachiningOperationComponent implements OnInit {
      });
   }
 
- GetSpindleSelected() :string
- {
-   return "";
- }
-
   onSelectMainApp(obj:MainApp) {     
     if (obj.IsActive)
       {
@@ -103,6 +117,12 @@ export class MachiningOperationComponent implements OnInit {
       this.SelectedMainAppID=obj.MenuID; 
       this.SelectedSecApp=null;
       this.SelectedSecAppID=""; 
+
+      this.SelectedMenuID1='';
+      this.SelectedMenuID2='';
+      
+      this.srv_statemanage.IPL =null;
+
       this.ApplyFilter1(obj.MenuID);  
       }
    }  

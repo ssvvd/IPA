@@ -77,7 +77,7 @@ export class MachineItemSpindleComponent implements OnInit
 
   onPowerChanged($event)
   {     
-    this.spindle.Power =$event.target.value;
+    this.spindle.Power =$event.value;
   }
 
   onTorqueChanged($event)

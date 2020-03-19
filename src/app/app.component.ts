@@ -29,7 +29,7 @@ ngOnInit(){
   onlyLegacy: false,
   watch: true,
   onComplete(cssText, styleNode, cssVariables) {
-    console.log(cssText);
+    //console.log(cssText);
   }});
 }
 }

@@ -113,7 +113,7 @@ cursor:pointer;
 
 .border-bottom-gray
 {
-    border-bottom:2px solid #7c7f7e;
+    border-bottom:2px solid var(--border-color-gray) ;
 }
 
 .banner-top
@@ -124,7 +124,7 @@ cursor:pointer;
 
 .border-right-gray
 {
-    border-right:1px solid #7c7f7e ;
+    border-right:1px solid var(--border-color-gray)  ;
 }
 .switch {
   position: relative;

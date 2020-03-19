@@ -46,6 +46,7 @@ import { OptimizetoolFilterComponent } from './components/main-content/body-area
 import { NgxSpinnerModule } from "ngx-spinner"; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSearchComponent } from './components/main-content/body-area/materials/mat-search/mat-search.component';
+import { OptimizetoolAdaptortypeComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-adaptortype/optimizetool-adaptortype.component';
 
 @NgModule({
   declarations: [   
@@ -80,7 +81,8 @@ import { MatSearchComponent } from './components/main-content/body-area/material
     HomeComponent,
     Optimizetool59Component,
     OptimizetoolFilterComponent,
-    MatSearchComponent
+    MatSearchComponent,
+    OptimizetoolAdaptortypeComponent
   ],
   imports: [
     FormsModule,
