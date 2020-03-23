@@ -32,9 +32,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService) {
   }
 
-  ngOnInit() {   
-    //this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.ReloadMe());
-
+  ngOnInit() {  
     this.dtOptions = {
       pagingType: 'full_numbers',
       "searching": false,
@@ -50,7 +48,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         "info": "" },
         responsive: true
     };        
-
+  
     this.allSubs$ = this.srv_machine.getmachines()
       .subscribe((data: any) => {
 
@@ -66,12 +64,13 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         this.myMachineSettings();
         this.dtTrigger.next();
         this.isLoaded =true;
-      });      
+      });  
+       //this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.ReloadMe());  // todo: 
   }
   
   ReloadMe()
   {
-    alert('ReloadMe');
+      //alert('ReloadMe');
       this.allSubs$ = this.srv_machine.getmachines()
       .subscribe((data: any) => {
 
@@ -82,8 +81,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         {
           this.UpdateListBySelectedMachineValues(this.listmachines);
           this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
-        }  
-        //this.listmachines_sorted = Object.assign({}, this.listmachines);
+        }          
         this.myMachineSettings();
         this.dtTrigger.next();
         this.isLoaded =true;
@@ -99,7 +97,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     mach.Power=this.srv_statemanage.SelectedMachine.Power;
     mach.SpindleSpeed=this.srv_statemanage.SelectedMachine.SpindleSpeed;
     mach.Torque=this.srv_statemanage.SelectedMachine.Torque;
+
   }
+  
+  
 
   myMachineSettings() {
     let stfilter: MachineFilter;
@@ -108,7 +109,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.MachineFilter = stfilter;
       this.ApplyFilter(stfilter);
     }
-    if (this.srv_statemanage.SelectedMachine == null) {
+    if (this.srv_statemanage.SelectedMachine == null) {      
       this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID == 12);           
     } 
     this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);   

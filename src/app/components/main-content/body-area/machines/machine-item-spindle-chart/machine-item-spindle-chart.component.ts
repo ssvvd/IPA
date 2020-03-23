@@ -34,6 +34,9 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() Power:number;
   @Input() Torque:number;
   
+  @Input() AdaptationType:string;
+  @Input() AdaptationSize:number;
+
   @Output() N1Changed = new EventEmitter<{value: number}>();  
   @Output() T1Changed = new EventEmitter<{value: number}>();
   @Output() P1Changed = new EventEmitter<{value: number}>();
@@ -178,6 +181,15 @@ export class MachineItemSpindleChartComponent implements OnInit {
               } 
               if (property === 'Power' || property === 'Torque') {              
                 this.chartdata.PoinY_1 = changes[property].currentValue;
+                this.CreateChart();                
+              }
+                             
+              if (property === 'AdaptationType' ) {              
+                //todo:get new graph             
+                this.CreateChart();              
+              }
+              if (property === 'AdaptationSize' ) {                                           
+                //todo:get new graph
                 this.CreateChart();              
               }
               

@@ -1,5 +1,5 @@
-<div class="container-fluid pt-4  ml-0 pl-0 pr-0 mr-0 border-left border-right">
-<div class="pt-2 pb-2 border-top border-bottom">
+<div class="container-fluid pt-4  ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray">
+<div class="pt-2 pb-2 border-top-gray border-bottom-gray">
  <ul class="nav nav-fill ">               
     <li (click)="onSelectMainApp(mainapp);"  class="nav-item" *ngFor="let mainapp of arrMainApps" >
         <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
@@ -16,7 +16,7 @@
     </li>          
 </ul>
 </div>
-<div class="border-bottom" *ngIf="arrSelectedSecApp1?.length >0">
+<div class="border-bottom-gray" *ngIf="arrSelectedSecApp1?.length >0">
 <ul class="nav nav-fill  pt-2 pb-2">               
     <li  (click)="onFilterSecApp(secapp)"  [routerLink]="isToOperationData&&secapp.ApplicationITAID!='0'?['/home/operation-data']:null" class="nav-item" *ngFor="let secapp of arrSelectedSecApp1">
         <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
@@ -36,7 +36,7 @@
     </li>          
 </ul>
 </div>
-<div class="border-bottom" *ngIf="arrSelectedSecApp2?.length >0">
+<div class="border-bottom-gray" *ngIf="arrSelectedSecApp2?.length >0">
 <ul class="nav nav-fill pt-2 pb-2">               
     <li   (click)="onFilterSecApp1(secapp)" [routerLink]="isToOperationData && secapp.ApplicationITAID!='0'?['/home/operation-data']:null" class="nav-item" *ngFor="let secapp of arrSelectedSecApp2">
         <div class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2 && SelectedMenuID2!='',

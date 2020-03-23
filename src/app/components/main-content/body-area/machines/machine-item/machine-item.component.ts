@@ -5,7 +5,7 @@ import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { Routes,ActivatedRoute,Router} from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject,Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-machineitem',
@@ -21,16 +21,21 @@ export class MachineItemComponent implements OnInit {
   machHeader:Machineheader;
   imgNameMachine:string; 
   environment = environment;  
+  isLoading:boolean =false;
 
   ClickSelectMachine:Subject<any> = new Subject();
+  private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService,private router1:Router, private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
   {  
-      this.router.params.subscribe(params => {
+      this.eventsSubscription.add(this.router.params.subscribe(params => {
       this.MachineID = parseInt(params["id"]);
-    })
+    }));
   }
 
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
   ngOnInit() {                    
     if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
     {
@@ -38,16 +43,18 @@ export class MachineItemComponent implements OnInit {
       if(this.srv_statemanage.arrMachineSpindle!=null)      
         {    
           this.arrMachineSpindle =this.srv_statemanage.arrMachineSpindle;
-          this.FillImageMachineType();
+          this.FillImageMachineType(); 
+          this.isLoading =true;         
         }
       else
-          this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
+          this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
           this.arrMachineSpindle = JSON.parse(res);      
           this.machSpindleMain = this.arrMachineSpindle[0]; 
           this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
           this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
           this.FillImageMachineType();
-        });            
+          this.isLoading =true;
+        }));            
     }         
     if(this.machHeader==null)
     {
@@ -57,25 +64,25 @@ export class MachineItemComponent implements OnInit {
   
   FillImageMachineType()
   {
-       this.imgNameMachine =environment.ImagePath +"no-image.svg";        
-        if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
-        if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-        if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
+      this.imgNameMachine =environment.ImagePath +"no-image.svg";        
+      if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
+      if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
+      if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
   }
 
   FillMachineDataFromServer()
   {
-     this.srv_machine.getmachineheader(this.MachineID).subscribe((res: any) => {                   
+     this.eventsSubscription.add(this.srv_machine.getmachineheader(this.MachineID).subscribe((res: any) => {                   
         this.machHeader =JSON.parse(res)[0];                
-        this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
+        this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
         this.arrMachineSpindle = JSON.parse(res);      
         this.machSpindleMain = this.arrMachineSpindle[0]; 
         this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
         this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
-        this.FillImageMachineType(); 
-          
-      });   
-    });    
+        this.FillImageMachineType();
+        this.isLoading =true;           
+      }));   
+    }));    
   }
 
   OnSelectMachine()

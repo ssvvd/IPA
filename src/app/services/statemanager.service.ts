@@ -62,7 +62,7 @@ export class StateManagerService {
     return this.mSelectedMachine;
   }
   set SelectedMachine(m:Machineheader) { 
-    if(typeof(this.SelectedMachine)!=='undefined')      
+    if(typeof(this.SelectedMachine)!=='undefined' && this.SelectedMachine!==null)      
       if(m.MachineID!=this.mSelectedMachine.MachineID)
       {
         this.mMainAppSelected = null;
@@ -198,7 +198,7 @@ export class StateManagerService {
     this.mIsTabToolDataOpen = v;
    }
 
-   ClearData()
+   ChangeUnits()
    {
      this.SelectMachineFilter =null;
      this.mSelectedMachine =null;

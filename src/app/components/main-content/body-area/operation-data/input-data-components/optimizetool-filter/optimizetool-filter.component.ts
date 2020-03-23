@@ -29,7 +29,7 @@ export class OptimizetoolFilterComponent implements OnInit {
   @Input() fieldid:string;
 
   @Input() events: Observable<void>;
-  private eventsSubscription: Subscription;
+  private eventsSubscription: Subscription=new Subscription();
 
   //@Output() selectitems = new EventEmitter();
   //@Output() selectitems = new EventEmitter<{items: ToolOptimizeItem[],funcname:string}>();
@@ -55,7 +55,7 @@ export class OptimizetoolFilterComponent implements OnInit {
               private SpinnerService: NgxSpinnerService) { }
   
   ngOnInit() { 
-    this.eventsSubscription = this.events.subscribe(() => this.ClearData());
+    this.eventsSubscription.add(this.events.subscribe(() => this.ClearData()));
 
     this.desc_show_more ="Show more...";
     this.arrData=[];
@@ -95,10 +95,12 @@ export class OptimizetoolFilterComponent implements OnInit {
                              Value:  value,
                              Checked:true
                             });      
-    }   
+    }
+    this.selitems.forEach(pp=>{this.select_items = this.select_items +pp.Designation + ",";} );
+    this.select_items =this.select_items.substring (0,this.select_items.length-1);  
   }
-
-  ApplySearch(s:string) {    
+    
+    ApplySearch(s:string) {    
     this.str_search = s;
     if(this.after_getmore)
     {
@@ -110,7 +112,8 @@ export class OptimizetoolFilterComponent implements OnInit {
     {
       this.callfunchttp(this.funcname);
       if(this.str_search!='') this.after_getmore=false;
-    }    
+    }  
+   
   }
  
   callfunchttp(funcname:string)
@@ -132,21 +135,21 @@ export class OptimizetoolFilterComponent implements OnInit {
           //"M/1/1/760/"
           param=this.srv_appsetting.Units + "/1/1/" + this.srv_StMng.SecApp + "/"; 
           str_param=param + str_s + "/" + t;
-          this.srv_dl_toolopt.td_brandname_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) ;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_brandname_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       } 
       case"TOOL":  { 
-          //"All/0/999/All/1/1/760/M/All/"
+          //"All/0/999/All/1/1/760/M/All/"          
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
           str_param=param + str_s + "/" + t;
-          this.srv_dl_toolopt.td_tool_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_tool_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }
       case "INSERT":  {         
           //(mBrand, mTool, mDiaFrom, mDiaTo, mInnerDiaFrom, mInnerDiaTo, mTA,mSolid, mSecondaryApp, mUnits            
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+  "/0/999/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/";
           str_param=param + str_s + "/" + t;
-          this.srv_dl_toolopt.td_insert_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_insert_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       } 
       case"TOOLCATALOGNO":  { 
@@ -154,16 +157,16 @@ export class OptimizetoolFilterComponent implements OnInit {
           //{BrandName}/{DiaFrom}/{DiaTo}/{Insert}/{bTA}/{bSolid}/{pSecondaryApp}/{pUnits}/{Family}/{ToolDesignation}/}{Filter}/{Top}
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/"  + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/";
           str_param=param + str_s + "/" + t;
-          this.srv_dl_toolopt.td_tool_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_tool_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }
       case"INSERTCATALOGNO":  { 
           //"All/0/999/All/1/1/760/M/All/"
-          // /{BrandName}/{Designation}/{Units}/{bTA}/{bSolid}/{CarbideGrade}/{SecondaryApp}/{Tool}/{DiaFrom}/{DiaTo}/{Filter}/{Top}
+          // /{BrandName}/{Designation}/{Units}/{bTA}/{bSolid}/{CarbideGrade}/{SecondaryApp}/{Tool}/{ToolCatalogNo}/{DiaFrom}/{DiaTo}/{Filter}/{Top}
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/" +this.srv_StMng.IPL.GetItem("TD_InsertDesignation").value + "/" 
-          + this.srv_appsetting.Units + "/1/1/All/" + this.srv_StMng.SecApp +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/0/999/";
+          + this.srv_appsetting.Units + "/1/1/All/" + this.srv_StMng.SecApp +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+"/" + this.srv_StMng.IPL.GetItem("TD_ToolCatalogNo").value+ "/0/999/";
           str_param=param + str_s + "/" + t;
-          this.srv_dl_toolopt.td_insert_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_insert_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
       case"GRADE":  {          
@@ -173,7 +176,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.srv_StMng.IPL.GetItem("TD_InsertCatalogNo").value +"/"+ this.srv_appsetting.Units + "/" + this.srv_StMng.SecApp +"/" + 
           this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/0/999/";
           str_param=param + str_s + "/" + t;
-          this.srv_dl_toolopt.td_grade_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) ;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_grade_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
       default: {             
@@ -205,7 +208,8 @@ export class OptimizetoolFilterComponent implements OnInit {
   }
 
   filldatasubscribe(data:any)
-  {    
+  {   
+    if(data=='error') { this.SpinnerService.hide();return;}   
     this.show_more = false;   
     let n:number=0;
     this.arrData =[];     
@@ -290,7 +294,7 @@ export class OptimizetoolFilterComponent implements OnInit {
     this.select_items='';   
     this.srv_StMng.IPL.GetItem(this.fieldid).value =this.srv_StMng.IPL.GetItem(this.fieldid).valuedefault;
     this.after_get_data=false;
-    this.showdetail();    
+    //this.showdetail();    
   }
 
   showdetail()

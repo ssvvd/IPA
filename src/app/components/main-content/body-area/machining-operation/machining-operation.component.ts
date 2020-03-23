@@ -4,7 +4,7 @@ import { ApplicationsService } from 'src/app/services/applications.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-machining-operation',
@@ -28,6 +28,8 @@ export class MachiningOperationComponent implements OnInit {
   SelectedMenuID1:string="";
   SelectedMenuID2:string="";
   isToOperationData:boolean=false;
+  private eventsSubscription: Subscription=new Subscription();
+
   constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) { }
   
   ngOnInit() {
@@ -35,7 +37,7 @@ export class MachiningOperationComponent implements OnInit {
     this.isToOperationData =this.srv_statemanage.CheckToOperationData();  
     let MachineType:string;
     MachineType=  this.srv_statemanage.SelectedMachine.MachineType;
-    this.srv_app.getmainapp(this.srv_appsetting.Lang,MachineType)
+    this.eventsSubscription.add(this.srv_app.getmainapp(this.srv_appsetting.Lang,MachineType)
       .subscribe((res: any)=> {
           for (const d of JSON.parse(res)) {                     
           if(d.ParentMenuID==0)
@@ -51,7 +53,7 @@ export class MachiningOperationComponent implements OnInit {
           }
         }
     
-    this.srv_app.getmenu(this.srv_appsetting.Lang,'user') //todo:user
+    this.eventsSubscription.add(this.srv_app.getmenu(this.srv_appsetting.Lang,'user') //todo:user
     .subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                          
           if(d.ParentMenuID!=0 && d.IsNewITA) 
@@ -104,10 +106,14 @@ export class MachiningOperationComponent implements OnInit {
         }        
         this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
         this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;        
-    });
-     });
+    }));
+     }));
   }
-
+  
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+  
   onSelectMainApp(obj:MainApp) {     
     if (obj.IsActive)
       {

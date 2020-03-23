@@ -26,10 +26,10 @@
                         <label class="desc-machine" for="txtCostPerHour">Cost Per Hour</label>           
                     </div>                    
                     <div class="col-1 p-0 m-0">                                                               
-                        <input type="number" class="form-control" *ngIf="machHeader!==null" id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
+                        <input type="number" class="form-control" *ngIf="isLoading" id="txtCostPerHour" name="CostPerHour" [(ngModel)]="machHeader.CostPerHour">                         
                     </div>
                      <div class="pl-4"> 
-                        <select class="form-control-sm"  *ngIf="machHeader!==null" [(ngModel)]="machHeader.Currency">
+                        <select class="form-control-sm" *ngIf="isLoading" [(ngModel)]="machHeader.Currency">
                             <option value='$'>$</option>
                             <option value='Euro'>Euro</option>
                             <option value='Ruble'>Ruble</option>                            

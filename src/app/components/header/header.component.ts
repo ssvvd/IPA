@@ -1,11 +1,10 @@
 import { Component, OnInit,ElementRef } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { Language} from 'src/app/models/applications/applications';
+import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -24,8 +23,8 @@ export class HeaderComponent implements OnInit {
   SelectedLang:Language;
 
   // /dictionarygetlanguage
-  constructor(private modalService: NgbModal,private srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
-              private srv_appsetting:AppsettingService,private router:Router) { }
+  constructor(private modalService: NgbModal,private srv_statemanage:StateManagerService,
+              private srv_appsetting:AppsettingService,private router:Router,private activeroute: ActivatedRoute) { }
 
   ngOnInit() {
     if (this.srv_appsetting.Units=='M') 
@@ -47,7 +46,7 @@ export class HeaderComponent implements OnInit {
   {
     if (typeof (this.srv_appsetting.lstLanguages)=== 'undefined')
     {
-      this.srv_DataLayer.dictionarygetlanguage().subscribe((data: any) => {
+      this.srv_appsetting.dictionarygetlanguage().subscribe((data: any) => {
       this.lstLanguage = JSON.parse(data); 
       this.srv_appsetting.lstLanguages =this.lstLanguage;
       this.isLoadingLang=true;
@@ -67,7 +66,7 @@ export class HeaderComponent implements OnInit {
   }
 
   UnitsChanged(event)
-  {      
+  {    
     if(event.target.checked)
     {
       this.srv_appsetting.Units="M";
@@ -77,9 +76,21 @@ export class HeaderComponent implements OnInit {
     {
       this.srv_appsetting.Units="I";
       this.srv_appsetting.UnitslengthDesc="inch"; //todo:language
-    }
-    //this.srv_statemanage.ClearData();
-    //this.router.navigate(['/home/machines']);   
+    }    
+    //this.router.navigate(['/home/machines']);  
+    //alert(this.activeroute.url);
+    //alert(window.location.href);
+    if (window.location.href.indexOf('machines')>-1)
+      {
+        this.srv_statemanage.ChangeUnits();        
+      }        
+    else
+      {
+        this.router.navigate(['/home/machines']);
+        this.srv_statemanage.ChangeUnits();
+        
+      }
+       
   }
 
   showmenu()

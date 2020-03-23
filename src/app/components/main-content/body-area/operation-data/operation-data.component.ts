@@ -7,7 +7,7 @@ import { MachineService } from 'src/app/services/machine.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject ,Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-operation-data',
@@ -27,6 +27,7 @@ export class OperationDataComponent implements OnInit {
   isLoaded:boolean=false;
   
    eventsSubject: Subject<void> = new Subject<void>();
+  private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService,router:Router,private srv_DataLayer:DatalayerService,
               private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) 
@@ -44,7 +45,7 @@ export class OperationDataComponent implements OnInit {
 
     if (this.srv_StMng.IPL== null)    
     {
-      this.srv_DataLayer.getinputparameters(this.SecApp,'M').subscribe((data: any)=> {
+      this.eventsSubscription.add(this.srv_DataLayer.getinputparameters(this.SecApp, this.srv_appsetting.Units).subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                                       
               Ipl.items.push({
                 name:d.name,
@@ -62,7 +63,7 @@ export class OperationDataComponent implements OnInit {
         this.isLoaded=true;  
     }   
       
-)
+));
 }
 else
       this.isLoaded=true;
@@ -158,12 +159,12 @@ else
     }
     else
     {
-      this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID).subscribe((res: any) => 
+      this.eventsSubscription.add( this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID).subscribe((res: any) => 
        { 
         arrMachineSpindle = JSON.parse(res);         
         this.FillMachineData(arrMachineSpindle); 
         this.FillDataInputParamAndRouteToResult();
-      });     
+      }));     
     }            
   }    
 }

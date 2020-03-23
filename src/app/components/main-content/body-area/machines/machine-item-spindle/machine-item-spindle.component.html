@@ -155,9 +155,9 @@
 
 <div class="form-group row ml-0 pl-0">
     <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6" >
-        <app-item-machine-spindle-chart [SpindleSpeed]=spindle.SpindleSpeed [Torque]=spindle.Torque  [typeChart]="'torque'" [spindle]=spindle (N1Changed)="onSpindleSpeedChanged($event)" (T1Changed)="onTorqueChanged($event)" >torque</app-item-machine-spindle-chart>
+        <app-item-machine-spindle-chart [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Torque]=spindle.Torque  [typeChart]="'torque'" [spindle]=spindle (N1Changed)="onSpindleSpeedChanged($event)" (T1Changed)="onTorqueChanged($event)" >torque</app-item-machine-spindle-chart>
     </div>
     <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6">
-        <app-item-machine-spindle-chart [SpindleSpeed]=spindle.SpindleSpeed [Power]=spindle.Power  [typeChart]="'power'" [spindle]=spindle  (N1Changed)="onSpindleSpeedChanged($event)" (P1Changed)="onPowerChanged($event)" >power</app-item-machine-spindle-chart>
+        <app-item-machine-spindle-chart [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Power]=spindle.Power  [typeChart]="'power'" [spindle]=spindle  (N1Changed)="onSpindleSpeedChanged($event)" (P1Changed)="onPowerChanged($event)" >power</app-item-machine-spindle-chart>
     </div>
 </div>

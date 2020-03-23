@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Language} from 'src/app/models/applications/applications';
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppsettingService {
 
-  constructor() { }
+  constructor(private srv_DataLayer:DatalayerService) { }
   
   private mUnits:string ='M'; //todo:
   private mUnitslengthDesc :string='mm'; //todo:
@@ -44,5 +45,10 @@ export class AppsettingService {
   {
     
     return this.mLanguages.LanguageCode;
+  }
+
+  dictionarygetlanguage()
+  {
+    return this.srv_DataLayer.dictionarygetlanguage()
   }
 }
