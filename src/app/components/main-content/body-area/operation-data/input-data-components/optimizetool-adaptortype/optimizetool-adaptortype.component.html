@@ -1,0 +1,69 @@
+<div class="pt-4">
+<label class="pb-2">Connection Type Workpiece Side Holder</label>
+<div class="row"> 
+    <div class="row pl-0 col-4">
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkAdapType_CH"  name="chkAdapType_CH" 
+                [checked]="srv_StMng.IPL.GetItem('ADAPTOR_ColletChuck').value=='True'" (change)="changeAdaptorType('ADAPTOR_ColletChuck')">
+                <label class="custom-control-label" for="chkAdapType_CH"></label>
+            </div>
+        </div> 
+        <div class="pr-4  pl-0 ">
+            <label for="chkAdapType_CH" class="form-check-label text-nowrap">Collet Chuck</label>
+        </div>
+             
+    </div>
+    <div class="row pl-0 col-4">       
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkAdapType_Hydro"  name="chkAdapType_Hydro" 
+                [checked]="srv_StMng.IPL.GetItem('ADAPTOR_Hydro').value=='True'" (change)="changeAdaptorType('ADAPTOR_Hydro')">
+                <label class="custom-control-label" for="chkAdapType_Hydro"></label>
+            </div>
+        </div>   
+         <div class="pr-4  pl-0 ">
+            <label for="chkAdapType_Hydro" class="form-check-label text-nowrap">Hydro</label>
+        </div>     
+    </div>
+     <div class="row pl-0 col-4">       
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkAdapType_SRKIN"  name="chkAdapType_SRKIN" 
+                [checked]="srv_StMng.IPL.GetItem('ADAPTOR_SRKIN').value=='True'" (change)="changeAdaptorType('ADAPTOR_SRKIN')">
+                <label class="custom-control-label" for="chkAdapType_SRKIN"></label>
+            </div>
+        </div>  
+         <div class="pr-4  pl-0 ">
+            <label for="chkAdapType_SRKIN" class="form-check-label text-nowrap">SKRIN</label>
+        </div>      
+    </div>
+</div>
+<div class="row"> 
+      <div class="row pl-0 col-4">       
+        <div >
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkAdapType_MAXIN"  name="chkAdapType_MAXIN" 
+                [checked]="srv_StMng.IPL.GetItem('ADAPTOR_Maxin').value=='True'" (change)="changeAdaptorType('ADAPTOR_Maxin')">
+                <label class="custom-control-label" for="chkAdapType_MAXIN"></label>
+            </div>
+        </div>  
+         <div class="pr-4  pl-0 ">
+            <label for="chkAdapType_MAXIN" class="form-check-label text-nowrap">MAXIN</label>
+        </div>      
+    </div>
+     <div class="row pl-0 col-4">       
+        <div>
+            <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input"  id="chkAdapType_EM"  name="chkAdapType_EM" 
+                [checked]="srv_StMng.IPL.GetItem('ADAPTOR_EM').value=='True'" (change)="changeAdaptorType('ADAPTOR_EM')">
+                <label class="custom-control-label" for="chkAdapType_EM"></label>
+            </div>
+        </div> 
+         <div class="pr-4  pl-0">
+            <label for="chkAdapType_EM" class="form-check-label text-nowrap">MAXIN</label>
+        </div>       
+    </div>
+</div>
+</div>
+

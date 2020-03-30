@@ -1,8 +1,7 @@
-
 .vertical-text
 {
 transform: rotate(270deg);
-transform-origin: 80% 140%;
+transform-origin: 70% 140%;
 }
 
 .icon-open
@@ -10,3 +9,12 @@ transform-origin: 80% 140%;
    font-size:20px;
    color:var(--btn-bg-gray-color) ;
 }
+
+.col-cust-5 {
+      flex: 0 0 5%;
+      max-width: 5%;
+  }
+  .col-cust-95 {
+      flex: 0 0 95%;
+      max-width: 95%;
+  }

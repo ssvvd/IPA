@@ -2,35 +2,44 @@
 <div class="container" class="p-0 m-0" >
     <div class="form-group row">
         <div class="col-6" >
-            <div class="pt-2" >   
+            <div class="pt-0" >   
                 <div class="form-group row">
-                    <div class="row col-5 ">
+                    <div class="row col-5 pt-0">
                         <label for="txtDepthOfShoulder_ap" class="pl-0 pt-2">Depth (D)</label>
                         <label class="pl-2 asterisk-red pt-2">*</label>
                     </div>
-                    <div class="col-7  pt-2">
-                        <input type="number" required [className]="Ipl&&Ipl.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty':'form-control'"  id="txtDepthOfShoulder_ap" name="txtDepthOfShoulder_ap" 
-                                            [(ngModel)]="Ipl&&Ipl.GetItem('DepthOfShoulder_ap').value"  (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()"> 
+                    <div class="col-4  pt-0">
+                        <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty':'form-control'"  id="txtDepthOfShoulder_ap" name="txtDepthOfShoulder_ap" 
+                                            [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value"  (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-1  pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{srv_appsetting.UnitslengthDesc}}</label>
                     </div>
                 </div>   
                 <div class="form-group row">
-                    <div class="row col-5">
-                        <label for="txtDepthOfShoulder_ap" class="pl-0 pt-2">Width (W)</label>
-                        <label class="pl-2 asterisk-red pt-2">*</label>
+                    <div class="row col-5 pt-2">
+                        <label for="txtDepthOfShoulder_ap" class="pl-0 pt-3">Width (W)</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-7  pt-2">
-                        <input type="number" required [className]="Ipl&&Ipl.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty': 'form-control'" id="txtWidthOfShoulder_ae" name="txtWidthOfShoulder_ae" 
-                                            [(ngModel)]="Ipl&&Ipl.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
+                    <div class="col-4  pt-2">
+                        <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty': 'form-control'" id="txtWidthOfShoulder_ae" name="txtWidthOfShoulder_ae" 
+                                            [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-1  pt-2 pl-0">
+                        <label class="pl-0 pt-2">{{srv_appsetting.UnitslengthDesc}}</label>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="row col-5">
-                        <label for="txtLengthOfShoulder_L" class="pl-0 pt-2">Length (L)</label>
+                    <div class="row col-5 pt-2">
+                        <label for="txtLengthOfShoulder_L" class="pl-0 pt-3">Length (L)</label>
                         <label class="pl-2 asterisk-red pt-2">*</label>
                     </div>
-                    <div class="col-7  pt-2">
-                        <input type="number"required [className]="Ipl&&Ipl.GetItem('LengthOfShoulder_L').value==null ? 'form-control  input-empty':'form-control'" id="txtLengthOfShoulder_L" name="txtLengthOfShoulder_L" 
-                                            [(ngModel)]="Ipl&&Ipl.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()"> 
+                    <div class="col-4  pt-2">
+                        <input type="number"required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control  input-empty':'form-control'" id="txtLengthOfShoulder_L" name="txtLengthOfShoulder_L" 
+                                            [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-1  pt-2 pl-0">
+                        <label class="pl-0 pt-2">{{srv_appsetting.UnitslengthDesc}}</label>
                     </div>
                 </div>
             </div>     
@@ -41,21 +50,21 @@
                         </div>                           
                          <div class="ml-0">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="optLight" name="OperationType" checked  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType').value" value="Light">
+                                <input type="radio" class="custom-control-input" id="optLight" name="OperationType" checked  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Light">
                                 <label class="custom-control-label" for="optLight">Light</label>
                             </div>            
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="optMedium" name="OperationType"  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType').value" value="Medium">
+                                <input type="radio" class="custom-control-input" id="optMedium" name="OperationType"  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Medium">
                                 <label class="custom-control-label" for="optMedium">Medium</label>
                             </div>            
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="optHeavy" name="OperationType" [(ngModel)]="Ipl&&Ipl.GetItem('OperationType').value" value="Heavy">
+                                <input type="radio" class="custom-control-input" id="optHeavy" name="OperationType" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Heavy">
                                 <label class="custom-control-label" for="optHeavy">Heavy</label>
                             </div>
                         </div>                      
                </div>
                 </div>
-            <div  class="pt-2"> 
+            <div  class="pt-3"> 
                  <div class="form-group">            
                     
                          <div class="pl-0">
@@ -63,91 +72,91 @@
                         </div>                           
                          <div class="ml-0">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input" id="optFinishing" name="OperationType4Solid" checked  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType4Solid').value" value="Finishing">
+                                <input type="radio" class="custom-control-input" id="optFinishing" name="OperationType4Solid" checked  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType4Solid').value" value="Finishing">
                                 <label class="custom-control-label" for="optFinishing">Finishing</label>
                             </div>            
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" class="custom-control-input " id="optGeneral" name="OperationType4Solid"  [(ngModel)]="Ipl&&Ipl.GetItem('OperationType4Solid').value" value="General">
+                                <input type="radio" class="custom-control-input " id="optGeneral" name="OperationType4Solid"  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType4Solid').value" value="General">
                                 <label class="custom-control-label" for="optGeneral">General</label>
                             </div>                                        
                         </div>  
                     </div>                                
         </div>                                           
-            <div class="pt-2">
+            <div class="pt-3">
                 <div class="form-group">  
                     <div class="pl-0">
                         <label>Overhang</label>
                     </div>
                     <div class="ml-0 ">
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optShort" name="Overhang" checked  [(ngModel)]="Ipl&&Ipl.GetItem('OverHang').value" value="Short">
+                            <input type="radio" class="custom-control-input" id="optShort" name="Overhang" checked  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OverHang').value" value="Short">
                             <label class="custom-control-label" for="optShort">Short</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optLong" name="Overhang" [(ngModel)]="Ipl&&Ipl.GetItem('OverHang').value" value="Long">
+                            <input type="radio" class="custom-control-input" id="optLong" name="Overhang" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OverHang').value" value="Long">
                             <label class="custom-control-label" for="optLong">Long</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optVeryLong" name="Overhang" [(ngModel)]="Ipl&&Ipl.GetItem('OverHang').value" value="Very long">
+                            <input type="radio" class="custom-control-input" id="optVeryLong" name="Overhang" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OverHang').value" value="Very long">
                             <label class="custom-control-label" for="optVeryLong">Very long</label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="pt-2">
+            <div class="pt-3">
                 <div class="form-group"> 
                     <div class="pl-0">
                         <label>Clamping</label>
                     </div>
                     <div class="ml-0">
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optStable"  [(ngModel)]="Ipl&&Ipl.GetItem('Clamping').value" value="Stable" name="Clamping" checked>
+                            <input type="radio" class="custom-control-input" id="optStable"  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Clamping').value" value="Stable" name="Clamping" checked>
                             <label class="custom-control-label" for="optStable">Stable</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optNormal" name="Clamping" [(ngModel)]="Ipl&&Ipl.GetItem('Clamping').value" value="Normal">
+                            <input type="radio" class="custom-control-input" id="optNormal" name="Clamping" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Clamping').value" value="Normal">
                             <label class="custom-control-label" for="optNormal">Normal</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optUnstable" name="Clamping" [(ngModel)]="Ipl&&Ipl.GetItem('Clamping').value" value="Unstable">
+                            <input type="radio" class="custom-control-input" id="optUnstable" name="Clamping" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
                             <label class="custom-control-label" for="optUnstable">Unstable</label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="pt-2">
+            <div class="pt-3">
             <div class="form-group"> 
                 <div class="pl-0">
                     <label>Part Shape</label>
                 </div>
                     <div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="PartShape1" name="PartShape" checked [(ngModel)]="Ipl&&Ipl.GetItem('PartShape').value" value="Normal">
+                            <input type="radio" class="custom-control-input" id="PartShape1" name="PartShape" checked [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('PartShape').value" value="Normal">
                             <label class="custom-control-label" for="PartShape1">Normal</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="PartShape2" name="PartShape" [(ngModel)]="Ipl&&Ipl.GetItem('PartShape').value" value="Thin wall">
+                            <input type="radio" class="custom-control-input" id="PartShape2" name="PartShape" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('PartShape').value" value="Thin wall">
                             <label class="custom-control-label" for="PartShape2">Thin wall</label>
                         </div>                        
                     </div>
                 </div>
             </div>
-            <div class="pt-2">     
+            <div class="pt-3">     
                 <div class="form-group">
                     <div class="pl-0"> 
                         <label>Type of cut</label>
                     </div>
                     <div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optRegular" name="TypeOfCut" checked  [(ngModel)]="Ipl&&Ipl.GetItem('TypeOfCut').value" value="Regular">
+                            <input type="radio" class="custom-control-input" id="optRegular" name="TypeOfCut" checked  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('TypeOfCut').value" value="Regular">
                             <label class="custom-control-label" for="optRegular">Regular</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optInterrupted" name="TypeOfCut"  [(ngModel)]="Ipl&&Ipl.GetItem('TypeOfCut').value" value="Interrupted">
+                            <input type="radio" class="custom-control-input" id="optInterrupted" name="TypeOfCut"  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('TypeOfCut').value" value="Interrupted">
                             <label class="custom-control-label" for="optInterrupted">Interrupted</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optHeavilyinterrupted" name="TypeOfCut" [(ngModel)]="Ipl&&Ipl.GetItem('TypeOfCut').value" value="Heavily interrupted">
+                            <input type="radio" class="custom-control-input" id="optHeavilyinterrupted" name="TypeOfCut" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('TypeOfCut').value" value="Heavily interrupted">
                             <label class="custom-control-label" for="optHeavilyinterrupted">Heavily interrupted</label>
                         </div>
                     </div>   

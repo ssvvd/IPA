@@ -11,9 +11,9 @@ export class MainContentComponent implements OnInit {
   constructor() { 
   
   }
-  
+  public innerWidth: any;
   ngOnInit() {
-     
+     this.innerWidth = window.innerWidth;
   }
   
 

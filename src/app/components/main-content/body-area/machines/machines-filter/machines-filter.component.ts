@@ -40,21 +40,22 @@ export class MachinesFilterComponent implements OnInit {
   constructor(private srv_statemanage:StateManagerService) { }
  
   ngOnInit() {
-    this.InitFilterSliders();
-    let statefilter:MachineFilter;
+    this.InitFilterSliders();      
+    let statefilter:MachineFilter;    
     statefilter=this.srv_statemanage.SelectMachineFilter;
     if (typeof(statefilter) !== 'undefined' && statefilter !== null )     
-        this.machFilter=statefilter;                   
-  }
-  
+        this.machFilter=statefilter;  
+    this.MachineFilterChanged.emit({ filter: this.machFilter});                  
+  }   
+
   InitFilterSliders()
   {
     this.machFilter=new MachineFilter;
-    this.machFilter.IsMachiningCenter =true;
-    this.machFilter.IsLathe =true;
+    this.machFilter.IsMachiningCenter =false;
+    this.machFilter.IsLathe =false;
     this.machFilter.IsMultiTask =true;
-    this.machFilter.IsMultiSpindle =true;
-    this.machFilter.IsSwissType =true;
+    this.machFilter.IsMultiSpindle =false;
+    this.machFilter.IsSwissType =false;
 
     //todo:
     this.machFilter.SpeedMin = 0; 
@@ -75,6 +76,11 @@ export class MachinesFilterComponent implements OnInit {
   {
     this.MachineFilterClear.emit();
     this.InitFilterSliders();
+    this.machFilter.IsMachiningCenter =true;
+    this.machFilter.IsLathe =true;
+    this.machFilter.IsMultiTask =true;
+    this.machFilter.IsMultiSpindle =true;
+    this.machFilter.IsSwissType =true; 
   }
 
 }

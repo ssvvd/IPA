@@ -1,20 +1,18 @@
-<div class="container" class="p-0 m-0 pt-0 pr-2">
+<div class="container" class="p-0 m-0 pt-4 pr-2 border-bottom">
     
         <div class="form-group row col-12  d-flex justify-content-between" >   
-            <div class="col-4 pl-0 ml-0 pt-4">       
+            <div class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
                 <label>{{labeldescription}}</label>
-            </div>                   
-                <!-- <label class="form-control-sm text-truncate">{{decs_brandname}}></label> -->
-            <div class="col-6 pl-0 ml-0 pt-4 text-truncate">
+            </div>                                   
+            <div class="col-5 pl-0 ml-0 text-truncate selected-items">
                 {{select_items}}
             </div>
-             <div *ngIf="select_items!=''" class="col-1  pt-4">
+             <div *ngIf="select_items!=''" class="col-1  pl-0 ml-0 mr-0 pr-0" >
                 <a (click)="remove_select()">
                     <i class="fa fa-remove icon-remove cursor-pointer"></i>
                 </a> 
-            </div>
-            
-            <div class="col-1  pt-4">
+            </div>            
+            <div class="ml-auto pl-0 ml-0 mr-0 pr-0">
                 <a (click)="showdetail()">
                     <i [ngClass]="isshowdetail?'fa fa-caret-up icon-open':'fa fa-caret-down icon-open'"></i>
                 </a> 
@@ -33,7 +31,7 @@
                         </div>                                                                           
                 </div>
                 <div *ngIf="show_more && str_search==''">
-                    <button class="btn" (click)="getmore()">{{desc_show_more}}</button>
+                    <button class="btn sileLinks" (click)="getmore()">{{desc_show_more}}</button>
                 </div>
         </div>
     

@@ -1,9 +1,149 @@
-<div class="container" class="p-0 m-0">  
-  <div class="form-group row">               
-    <label for="txtRampDownAngle" class="col-form-label col-5 pl-0 ml-0">Ramp angle (RD)</label>    
-                    <div class="col-7  pt-2">
-                        <input type="number"  class="form-control" id="txtRampDownAngle" name="txtRampDownAngle" 
-                                            [(ngModel)]="Ipl&&Ipl.GetItem('HRampDownAngle').value" (focus)="onfocusfield('HRampDownAngle')" (focusout)="onfocusoutfield()"> 
-                    </div>
-                </div>            
+<div class="p-0 m-0"> 
+    <div class="pt-3 mt-2">                
+      <label>DC- Cutting Diameter</label>    
+      <div class="custom-slider pt-0 mt-4">
+          <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('TD_DiameterFrom').value"  class="form-control-sm  pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('TD_DiameterTo').value" [options]="options_dc"></ng5-slider>
+      </div>   
+      <div class="row pt-2">
+          <div class="col-6 pl-0 row">
+              <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                                [(ngModel)]="srv_StMng.IPL.GetItem('TD_DiameterFrom').value"> 
+              </div>
+              <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+                    
+          <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control" id="txtRampDownAngle"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('TD_DiameterTo').value">
+              </div>
+              <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>          
+      </div>             
+    </div>
+    <div class="pt-3 mt-2">
+      <label>DCX- Cutting Diameter</label>    
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('TD_DCXMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('TD_DCXMax').value" [options]="options_dc"></ng5-slider>
+      </div>  
+
+      <div class="row pt-4">
+          <div class="col-6 pl-0 row">
+              <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('TD_DCXMin').value"> 
+              </div>
+              <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+          <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control" id="txtRampDownAngle"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('TD_DCXMax').value">
+                </div>
+                <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <div class="pt-3 mt-2">
+      <label>NOF - Number Of Effective Flutes</label>    
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('TD_NOFMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('TD_NOFMax').value" [options]="options_nof"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+           <div class="col-6 pl-0 row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('TD_NOFMin').value"> 
+              </div>
+              <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+          <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+              <input type="number" class="form-control" id="txtRampDownAngle"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('TD_NOFMax').value">
+                </div>
+                <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <div class="pt-3 mt-2">
+      <label>RE - Corner Radius</label>    
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('MinCornerRadius').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('MaxCornerRadius').value" [options]="options_radius"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+            <div class="col-6 pl-0 row">
+              <div class="col-8 pl-0">
+              <input type="number" class="form-control"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('MinCornerRadius').value">
+                               </div>
+              <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div> 
+          </div>
+          <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                    <input type="number" class="form-control" id="txtRampDownAngle"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('MaxCornerRadius').value">
+                </div>
+                <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <div class="pt-3 mt-2">
+      <label>CHW - Corner Chamfer Width</label>    
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('MinChamferRange').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('MaxChamferRange').value" [options]="options_chamfer"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+             <div class="col-6 pl-0 row">
+                <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('MinChamferRange').value">
+               </div>
+              <div class="pl-0">
+                <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div> 
+          </div>
+           <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control" id="txtRampDownAngle"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('MaxChamferRange').value">
+                </div>
+                <div class="pl-0">
+                    <label>{{srv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <div class="pt-3 mt-2">
+      <label>RMPX - Ramping Angle maximum</label>    
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('HRampDownAngle').value"  class="form-control-sm pt-0 mt-0"   [options]="options_rampdown"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+          <div class="col-4 pl-0">
+              <input type="number" class="form-control"  
+                              [(ngModel)]="srv_StMng.IPL.GetItem('HRampDownAngle').value"> 
+          </div>  
+          <div class="pl-0">
+              <label>{{srv_appsetting.UnitslengthDesc}}</label>
+          </div>        
+      </div>   
+    </div>  
 </div>

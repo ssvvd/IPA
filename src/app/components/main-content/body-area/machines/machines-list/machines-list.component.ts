@@ -28,11 +28,11 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   datatableElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
   allSubs$: Subscription;
-  isLoaded:boolean =true;
+  isLoaded:boolean =false;
   constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService) {
   }
 
-  ngOnInit() {
+  ngOnInit() {  
     this.dtOptions = {
       pagingType: 'full_numbers',
       "searching": false,
@@ -45,18 +45,62 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         "emptyTable": "",
         "zeroRecords": "",
         "infoEmpty": "",
-        "info": "" }
+        "info": "" },
+        responsive: true
     };        
-
+  
     this.allSubs$ = this.srv_machine.getmachines()
       .subscribe((data: any) => {
-        this.listmachines = JSON.parse(data);     
+
+        this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
+
+        if(this.srv_statemanage.SelectedMachine!=null)
+        {
+          this.UpdateListBySelectedMachineValues(this.listmachines);
+          this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
+        }  
         //this.listmachines_sorted = Object.assign({}, this.listmachines);
         this.myMachineSettings();
         this.dtTrigger.next();
+        this.isLoaded =true;
+      });  
+       //this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.ReloadMe());  // todo: 
+  }
+  
+  ReloadMe()
+  {
+      //alert('ReloadMe');
+      this.allSubs$ = this.srv_machine.getmachines()
+      .subscribe((data: any) => {
+
+        this.listmachines = JSON.parse(data);          
+        this.listmachines_sorted = JSON.parse(data);
+
+        if(this.srv_statemanage.SelectedMachine!=null)
+        {
+          this.UpdateListBySelectedMachineValues(this.listmachines);
+          this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
+        }          
+        this.myMachineSettings();
+        this.dtTrigger.next();
+        this.isLoaded =true;
       });      
   }
+
+  UpdateListBySelectedMachineValues(list:Machineheader[])
+  {
+    let mach:Machineheader;
+    mach=list.find(m=> m.MachineID == this.srv_statemanage.SelectedMachine.MachineID);
+    mach.AdaptationType=this.srv_statemanage.SelectedMachine.AdaptationType;
+    mach.AdaptationSize=this.srv_statemanage.SelectedMachine.AdaptationSize;
+    mach.Power=this.srv_statemanage.SelectedMachine.Power;
+    mach.SpindleSpeed=this.srv_statemanage.SelectedMachine.SpindleSpeed;
+    mach.Torque=this.srv_statemanage.SelectedMachine.Torque;
+
+  }
+  
+  
 
   myMachineSettings() {
     let stfilter: MachineFilter;
@@ -65,7 +109,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.MachineFilter = stfilter;
       this.ApplyFilter(stfilter);
     }
-    if (this.srv_statemanage.SelectedMachine == null) {
+    if (this.srv_statemanage.SelectedMachine == null) {      
       this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID == 12);           
     } 
     this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);   
@@ -90,9 +134,9 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     this.allSubs$.unsubscribe();
   }
 
-  OnViewMachine(mach: Machineheader) {
+  /* OnViewMachine(mach: Machineheader) {
     this.srv_statemanage.ViewMachine(mach);   
-  }
+  } */
 
   UpdateStateSelectedMachine(MachineID: number) {    
     this.listmachines.forEach((m) => {
@@ -113,8 +157,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   onMachineFilterChanged($event) {  
     this.isLoaded=true;
-    this.MachineFilter = $event.filter;
-    this.ApplyFilter($event.filter);
+    this.MachineFilter = $event.filter;    
+    this.ApplyFilter($event.filter);    
     if (this.srv_statemanage.SelectedMachine == null){
       this.UpdateStateSelectedMachine(-1);
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

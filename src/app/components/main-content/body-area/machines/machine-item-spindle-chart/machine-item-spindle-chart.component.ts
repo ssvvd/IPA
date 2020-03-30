@@ -34,6 +34,9 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() Power:number;
   @Input() Torque:number;
   
+  @Input() AdaptationType:string;
+  @Input() AdaptationSize:number;
+
   @Output() N1Changed = new EventEmitter<{value: number}>();  
   @Output() T1Changed = new EventEmitter<{value: number}>();
   @Output() P1Changed = new EventEmitter<{value: number}>();
@@ -132,11 +135,42 @@ export class MachineItemSpindleChartComponent implements OnInit {
 
      OnChangePoinY_1()
      {        
-       if(this.typeChart=="power")                 
+       if(this.typeChart=="power")  
+        { 
+          this.spindle.P1=this.chartdata.PoinY_1;
+          alert(this.chartdata.PoinY_1);
           this.P1Changed.emit({ value: this.chartdata.PoinY_1});        
-       else                 
+        }
+       else 
+        { 
+          this.spindle.T1=this.chartdata.PoinY_1;              
           this.T1Changed.emit({ value: this.chartdata.PoinY_1});        
+        }
      }
+
+    OnChangePoinY_2()
+    {        
+      if(this.typeChart=="power")          
+        this.spindle.P2=this.chartdata.PoinY_2;                         
+      else          
+        this.spindle.T2=this.chartdata.PoinY_2;                                       
+    }
+
+     OnChangePoinY_3()
+    {        
+      if(this.typeChart=="power")          
+        this.spindle.P3=this.chartdata.PoinY_3;                         
+      else          
+        this.spindle.T3=this.chartdata.PoinY_3;                                       
+    }
+
+     OnChangePoinY_4()
+    {        
+      if(this.typeChart=="power")          
+        this.spindle.P4=this.chartdata.PoinY_4;                         
+      else          
+        this.spindle.T4=this.chartdata.PoinY_4;                                       
+    }
 
      ngOnChanges(changes: SimpleChanges) {       
         if (typeof this.chartdata!== 'undefined') 
@@ -147,6 +181,15 @@ export class MachineItemSpindleChartComponent implements OnInit {
               } 
               if (property === 'Power' || property === 'Torque') {              
                 this.chartdata.PoinY_1 = changes[property].currentValue;
+                this.CreateChart();                
+              }
+                             
+              if (property === 'AdaptationType' ) {              
+                //todo:get new graph             
+                this.CreateChart();              
+              }
+              if (property === 'AdaptationSize' ) {                                           
+                //todo:get new graph
                 this.CreateChart();              
               }
               

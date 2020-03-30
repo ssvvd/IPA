@@ -11,14 +11,14 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-
+  
 export class StateManagerService { 
 
-  private lstMachineHeader:Machineheader[]; 
+  //private lstMachineHeader:Machineheader[]; 
   private mMachineFilter:MachineFilter;
   private mSelectedMachine:Machineheader;
   private marrMachineSpindle:Machinespindle[];
-  private marrLanguages:Language[];
+ 
 
   private obsMachineSelected = new BehaviorSubject<string[]>([]);
   CurrentMachineSelected = this.obsMachineSelected.asObservable();   
@@ -28,15 +28,19 @@ export class StateManagerService {
   CurrentMaterialSelected = this.obsMaterialSelected.asObservable();   
 
   private obsSecondaryAppSelected = new BehaviorSubject<string[]>([]);
-  CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable(); 
+  CurrentSecAppSelected = this.obsSecondaryAppSelected.asObservable();  
  
   private obsOperationDataEnable = new BehaviorSubject<boolean>(false);
   OperationDataEnable = this.obsOperationDataEnable.asObservable();   
+  
+  private obsReloadMachineTab = new BehaviorSubject<boolean>(false);
+  ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
 
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 
  
-  private mUnits:string='M'; //todo:
+  //private mUnits:string='M'; //todo:
+  private mIsTabToolDataOpen:boolean =false;
 
   CheckTabOperationalDataEnable()
   {   
@@ -58,16 +62,20 @@ export class StateManagerService {
     return this.mSelectedMachine;
   }
   set SelectedMachine(m:Machineheader) { 
+    if(typeof(this.SelectedMachine)!=='undefined' && this.SelectedMachine!==null)      
+      if(m.MachineID!=this.mSelectedMachine.MachineID)
+      {
+        this.mMainAppSelected = null;
+        this.mSecondaryAppSelected = null; 
+        this.MenuIDLevel1="";
+        this.MenuIDLevel2 ="";          
+      }
     this.mSelectedMachine = Object.assign({}, m);
     let desc:string;     
-    desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() ; 
+    desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " Kw"; 
     this.CheckTabOperationalDataEnable();   
     this.obsMachineSelected.next([m.MachineName,desc]);  
-  }
-
-  ViewMachine(mach: Machineheader) { 
-    //this.obsMachineSelected.next([mach.MachineName,mach.SpindleSpeed.toString()]);
-  }
+  }  
   
   get SelectMachineFilter():MachineFilter {
     return this.mMachineFilter;
@@ -104,8 +112,11 @@ export class StateManagerService {
   }
   set SecAppSelected(sa:SecondaryApp) {
     this.mSecondaryAppSelected = sa;   
-    this.CheckTabOperationalDataEnable();   
-    this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, sa.MenuName]);
+    this.CheckTabOperationalDataEnable();
+    if(typeof(this.SelectedMachine)!=='undefined')
+    {         
+      this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, sa.MenuName]);
+    }
   }
 
   get MainAppSelected():MainApp {
@@ -115,7 +126,7 @@ export class StateManagerService {
     this.mMainAppSelected = ma;
   }
 
-  private mMenuIDLevel1:string;
+  private mMenuIDLevel1:string='';
   get MenuIDLevel1():string {
     return this.mMenuIDLevel1;
   }
@@ -123,7 +134,7 @@ export class StateManagerService {
     this.mMenuIDLevel1 = id;
   }
   
-  private mMenuIDLevel2:string;
+  private mMenuIDLevel2:string='';
   get MenuIDLevel2():string {
     return this.mMenuIDLevel2;
   }
@@ -165,8 +176,7 @@ export class StateManagerService {
     }
     else{
       desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
-    }
-       
+    }       
     this.obsMaterialSelected.next([desc]);
   }
 
@@ -175,31 +185,31 @@ export class StateManagerService {
     return this.materialSelected;    
   }
   
-  get SelectedUnits():string {
-    return this.mUnits;
-    }
-  set SelectedUnits(u:string) {  
-    this.mUnits = u;
-   }
-
-
-  get lstLanguages():Language[] {
-    return this.marrLanguages;
-    }
-  set lstLanguages(l:Language[]) {  
-    this.marrLanguages = l;
-   }
-  private mLanguages:Language;
-  get SelectedLanguage():Language {
-    return this.mLanguages;
-    }
-  set SelectedLanguage(l:Language) {  
-    this.mLanguages = l;
-   }
-
-  get Lang():string
+ 
+   get SecApp():string
   {
-    return this.mLanguages.LanguageCode;
-  }
+    return this.mSecondaryAppSelected.ApplicationITAID;
+  } 
+   
+  get IsTabToolDataOpen():boolean {
+    return this.mIsTabToolDataOpen;
+    }
+  set IsTabToolDataOpen(v:boolean) {  
+    this.mIsTabToolDataOpen = v;
+   }
+
+   ChangeUnits()
+   {
+     this.SelectMachineFilter =null;
+     this.mSelectedMachine =null;
+     this.arrMachineSpindle=null;
+     this.MachineSpindleMain=null;
+     this.mSecondaryAppSelected=null;
+     this.MainAppSelected=null;
+     this.MenuIDLevel1="";
+     this.MenuIDLevel2 =""; 
+     this.IPL =null;
+     this.obsReloadMachineTab.next(true);
+   }
 }
  

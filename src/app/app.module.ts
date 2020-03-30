@@ -48,6 +48,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSearchComponent } from './components/main-content/body-area/materials/mat-search/mat-search.component';
 import { ResultsTableComponent } from './components/main-content/body-area/results/results-table/results-table.component';
 import { ResFilterComponent } from './components/main-content/body-area/results/res-filter/res-filter.component';
+import { OptimizetoolAdaptortypeComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-adaptortype/optimizetool-adaptortype.component';
 
 @NgModule({
   declarations: [   
@@ -84,7 +85,8 @@ import { ResFilterComponent } from './components/main-content/body-area/results/
     OptimizetoolFilterComponent,
     MatSearchComponent,
     ResultsTableComponent,
-    ResFilterComponent
+    ResFilterComponent,
+    OptimizetoolAdaptortypeComponent
   ],
   imports: [
     FormsModule,

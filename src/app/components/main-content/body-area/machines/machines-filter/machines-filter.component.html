@@ -1,5 +1,5 @@
-<div class="container-fluid p-0 pl-2" >
-    <div class="form-group row pt-3">
+<div class="container-fluid p-0 pl-2 pr-2 pt-2" >
+    <div class="form-group row">
         <input class="form-control" [(ngModel)]="machFilter.SearchText" (keyup)="FilterChange($event)" type="text" placeholder="Search" aria-label="Search">    
     </div>
     <div class="border-bottom pt-3"></div>
@@ -12,42 +12,42 @@
         </div>
     </div>  
     <div class="row">
-        <div [ngClass]="machFilter.IsMachiningCenter?'col-4 pl-1 pt-2 div-not-opacity':'col-4 pl-1 pt-2 div-opacity'">
+        <div [ngClass]="machFilter.IsMachiningCenter?'col-4 pl-0 pt-2 pr-3 pb-2 pb-2 div-not-opacity':'col-4 pl-0 pt-2 pr-3 pb-2 pb-2 div-opacity'">
             <div>
-                <img [src]="environment.ImagePath+'MachiningCenter.svg'">
+                <img [src]="environment.ImagePath+'MachiningCenter.svg'" class="cursor-pointer" (click)="machFilter.IsMachiningCenter=!machFilter.IsMachiningCenter;FilterChange($event)">
             </div>
-            <div class="d-flex justify-content-center">
-                <div class="custom-control custom-checkbox" >
-                    <input type="checkbox" class="custom-control-input" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "FilterChange($event)"  [(ngModel)]="machFilter.IsMachiningCenter">
-                    <label class="custom-control-label" for="chkMachiningCenter"></label>
+            <div class="d-flex justify-content-center" >
+                <div class="custom-control custom-checkbox cursor-pointer">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "FilterChange($event)"  [(ngModel)]="machFilter.IsMachiningCenter">
+                    <label class="custom-control-label cursor-pointer" for="chkMachiningCenter"></label>
                 </div>
             </div>
             <div class="d-flex justify-content-center">               
                 <label>Machining Center</label>               
             </div>
         </div>
-        <div  [ngClass]="machFilter.IsLathe?'col-4 pl-1 pt-2 div-not-opacity':'col-4 pl-1 pt-2 div-opacity'">
-            <div>
-                <img [src]="environment.ImagePath + 'lathe.svg'">
+        <div  [ngClass]="machFilter.IsLathe?'col-4 p-2 div-not-opacity':'col-4 p-2 div-opacity'" >   
+            <div class="d-flex justify-content-center">       
+                <img [src]="environment.ImagePath + 'lathe.svg'" class="cursor-pointer img-fluid" (click)="machFilter.IsLathe=!machFilter.IsLathe;FilterChange($event)">           
             </div>
             <div class="d-flex justify-content-center">
-                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="chkLathe" name="chkLathe" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsLathe">
-                    <label class="custom-control-label" for="chkLathe"></label>
+                 <div class="custom-control custom-checkbox cursor-pointer">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkLathe" name="chkLathe" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsLathe">
+                    <label class="custom-control-label cursor-pointer" for="chkLathe"></label>
                 </div>
             </div>
             <div>
                 <label>Lathe</label>
             </div>
         </div>
-            <div  [ngClass]="machFilter.IsMultiTask?'col-4 pl-1 pt-2 div-not-opacity':'col-4 pl-1 pt-2 div-opacity'">
+            <div  [ngClass]="machFilter.IsMultiTask?'col-4  pl-3 pt-2 pr-0 pb-2 pb-2  div-not-opacity':'col-4  pl-3 pt-2 pr-0 pb-2 pb-2  div-opacity'">
                 <div>
-                    <img [src]="environment.ImagePath + 'MultiTask.svg'">
+                    <img [src]="environment.ImagePath + 'MultiTask.svg'" class="cursor-pointer" (click)="machFilter.IsMultiTask=!machFilter.IsMultiTask;FilterChange($event)">
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="chkMultiTask" name="chkMultiTask" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsMultiTask">
-                        <label class="custom-control-label" for="chkMultiTask"></label>
+                    <div class="custom-control custom-checkbox cursor-pointer">
+                        <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMultiTask" name="chkMultiTask" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsMultiTask">
+                        <label class="custom-control-label cursor-pointer" for="chkMultiTask"></label>
                     </div>
                 </div>
                 <div>
@@ -58,12 +58,12 @@
     <div class="row">
         <div [ngClass]="machFilter.IsMultiSpindle?'col-4 pl-1 pt-2 div-not-opacity':'col-4 pl-1 pt-2 div-opacity'">
             <div>
-                <img [src]="environment.ImagePath+'MultiSpindle.svg'" > 
+                <img [src]="environment.ImagePath+'MultiSpindle.svg'" class="cursor-pointer" (click)="machFilter.IsMultiSpindle=!machFilter.IsMultiSpindle;FilterChange($event)"> 
             </div>
             <div class="d-flex justify-content-center">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="chkMultiSpindle" name="chkMultiSpindle" (change)= "FilterChange($event)"  [(ngModel)]="machFilter.IsMultiSpindle">
-                    <label class="custom-control-label" for="chkMultiSpindle"></label>
+                <div class="custom-control custom-checkbox cursor-pointer">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMultiSpindle" name="chkMultiSpindle" (change)= "FilterChange($event)"  [(ngModel)]="machFilter.IsMultiSpindle">
+                    <label class="custom-control-label cursor-pointer" for="chkMultiSpindle"></label>
                 </div>
             </div>
              <div class="col-4">
@@ -72,12 +72,12 @@
         </div>
         <div [ngClass]="machFilter.IsSwissType?'col-4 pl-1 pt-2 div-not-opacity':'col-4 pl-1 pt-2 div-opacity'">
             <div>
-                <img [src]="environment.ImagePath+'SwissType.svg'" > 
+                <img [src]="environment.ImagePath+'SwissType.svg'" class="cursor-pointer" (click)="machFilter.IsSwissType=!machFilter.IsSwissType;FilterChange($event)"> 
             </div>
             <div class="d-flex justify-content-center">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="chkSwissType" name="chkSwissType" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsSwissType">
-                    <label class="custom-control-label" for="chkSwissType"></label>
+                <div class="custom-control custom-checkbox cursor-pointer">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkSwissType" name="chkSwissType" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsSwissType">
+                    <label class="custom-control-label cursor-pointer" for="chkSwissType"></label>
                 </div>
             </div>
             <div class="col-4">
@@ -88,46 +88,25 @@
     <div class="form-group row">
         
                  
-    </div>
-<!--     <div class="form-group row" >
-        <div class="col-4  pt-2">
-             <div class="custom-control custom-checkbox change-chb">
-                <input type="checkbox" class="custom-control-input" id="chkMultiSpindle" name="chkMultiSpindle" (change)= "FilterChange($event)"  [(ngModel)]="machFilter.IsMultiSpindle">
-                <label class="custom-control-label" for="chkMultiSpindle"></label>
-             </div>
-        </div>
-        <div class="col-4 pt-2">
-            <div class="custom-control custom-checkbox change-chb">
-                <input type="checkbox" class="custom-control-input" id="chkSwissType" name="chkSwissType" (change)= "FilterChange($event)" [(ngModel)]="machFilter.IsSwissType">
-                <label class="custom-control-label" for="chkSwissType"></label>
-            </div>
-        </div>        
-    </div>
-      <div class="form-group row">
-        <div class="col-4">
-             <label>Multy Spindle</label>
-        </div>
-        <div class="col-4">
-            <label>Swiss Type</label>
-        </div>        
-    </div> -->    
+    </div>  
 </div>
-<div class="border-bottom pt-2">
-</div>
-<div class="form-group "> 
-    <div class="pt-2 pr-0 mt-0 pl-2">    
+
+<div> 
+    <div class="border-bottom pl-3">
+    </div>
+    <div class="pt-2 pr-2 mt-0 pl-2">    
         <label class="pt-4">Rotating Speed(rpm)</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider  [(value)]="machFilter.SpeedMin"  class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.SpeedMax" [options]="options_speed"></ng5-slider>
         </div> 
     </div>  
-     <div class="pt-2 pr-0 mt-0 pl-2">    
+     <div class="pt-2 pr-2 mt-0 pl-2">    
         <label class="pt-4">Power(Kw)</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider [(value)]="machFilter.PowerMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.PowerMax" [options]="options_power"></ng5-slider>
         </div>
     </div>     
-     <div  class="pt-2 pr-0 mt-0 pl-2">    
+     <div  class="pt-2 pr-2 mt-0 pl-2">    
         <label class="pt-4">Torque(Nm)</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider [(value)]="machFilter.TorqueMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.TorqueMax" [options]="options_torque"></ng5-slider>

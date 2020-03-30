@@ -111,10 +111,6 @@ cursor:pointer;
     height:30px;
   }
 
-.border-bottom-gray
-{
-    border-bottom:2px solid #7c7f7e;
-}
 
 .banner-top
 {
@@ -124,7 +120,7 @@ cursor:pointer;
 
 .border-right-gray
 {
-    border-right:1px solid #7c7f7e ;
+    border-right:1px solid var(--border-color-gray)  ;
 }
 .switch {
   position: relative;
