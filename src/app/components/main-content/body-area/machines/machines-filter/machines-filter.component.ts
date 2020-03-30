@@ -76,6 +76,11 @@ export class MachinesFilterComponent implements OnInit {
   {
     this.MachineFilterClear.emit();
     this.InitFilterSliders();
+    this.machFilter.IsMachiningCenter =true;
+    this.machFilter.IsLathe =true;
+    this.machFilter.IsMultiTask =true;
+    this.machFilter.IsMultiSpindle =true;
+    this.machFilter.IsSwissType =true; 
   }
 
 }

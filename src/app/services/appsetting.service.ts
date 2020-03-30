@@ -16,7 +16,7 @@ export class AppsettingService {
    get Units():string{   
     return this.mUnits;
     }
-  set Units(u:string) {  
+   set Units(u:string) {  
     this.mUnits = u;
    }
   
@@ -42,8 +42,7 @@ export class AppsettingService {
    }
 
   get Lang():string
-  {
-    
+  {    
     return this.mLanguages.LanguageCode;
   }
 
@@ -51,4 +50,11 @@ export class AppsettingService {
   {
     return this.srv_DataLayer.dictionarygetlanguage()
   }
+  private mCountry:string;
+  get Country():string {
+    return this.mCountry;
+    }
+  set Country(c:string) {  
+    this.mCountry = c;
+   }
 }

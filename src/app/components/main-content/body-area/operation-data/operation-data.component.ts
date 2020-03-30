@@ -6,6 +6,7 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { MachineService } from 'src/app/services/machine.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
+import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Router } from '@angular/router';
 import { Observable, Subject ,Subscription} from 'rxjs';
 
@@ -17,12 +18,8 @@ import { Observable, Subject ,Subscription} from 'rxjs';
 
 export class OperationDataComponent implements OnInit {
   
-  SecApp:string;
-  //Ipl:InputParameterlist =new InputParameterlist;
- 
+  SecApp:string;  
   SecAppName:string;
-  //opendetails:boolean =false;
-  //showistoodata:boolean=false;
   router:Router;
   isLoaded:boolean=false;
   
@@ -34,7 +31,11 @@ export class OperationDataComponent implements OnInit {
   {
     this.router=router;
    }
-  
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
   ngOnInit() {   
     if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
         {
@@ -71,10 +72,10 @@ else
  
   @HostListener('window:resize', ['$event'])
   onResize(event) {  
-    if(event.target.innerWidth<900)
+    /* if(event.target.innerWidth < 900)
       this.srv_StMng.IsTabToolDataOpen=false;  
     else
-      this.srv_StMng.IsTabToolDataOpen=true;
+      this.srv_StMng.IsTabToolDataOpen=true; */
   }
 
   showtooldata()
@@ -93,6 +94,9 @@ else
       let mainspindletype:string;
       let ms:Machinespindle;
       mainspindletype='M';
+      
+      this.srv_StMng.IPL.GetItem('MachCostPerHour').value = this.srv_StMng.SelectedMachine.CostPerHour + "";
+      this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.Country;
       if(this.srv_StMng.SelectedMachine.MachineType=='Multi task')
       {
         if(this.srv_StMng.MainAppSelected.MainApp=='ML') mainspindletype='T';

@@ -2,13 +2,13 @@
 <div class="border-left-gray border-right-gray"> 
     <div class="row ">    
       <div class="col col-20 ml-0 pl-2 pr-0 pt-3 border-right-gray">
-        <div class="pr-3" >
-          <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
-            (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
+          <div class="pr-2">
+            <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
+                                (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
           </div>
       </div>
       <div class="col col-80 mt-2 mr-0 pl-2 pr-2">                     
-            <div class="pb-1 pt-0 mt-0 pt-3" >
+            <div class="pb-1 pt-0 mt-0 pt-4" >
               <h3 class="siteTitle pl-2 pb-2">Select Machine</h3>
             </div>           
             <div class="div-datatable">              
