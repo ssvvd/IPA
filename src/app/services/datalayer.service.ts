@@ -28,7 +28,6 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-result/' + secapp + '/' + requestid);
   }
 
-<<<<<<< HEAD
   public  td_brandname_list(par:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-list/' + par);
@@ -38,14 +37,6 @@ export class DatalayerService {
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-tool-list/' + par);
   }
-=======
-  public  getresults(secapp:string,units:string,inputparam:string)
-  {    
-    return  this.httpClient.post(environment.API_HOST + this.API_ROUTE +  'get-results/' + secapp + '/'+units  , inputparam );
-  }
-
-  
->>>>>>> 91098349ceab9aacbd8aecb0284a430b906e110a
   public  dictionarygetlanguage()
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionary-get-language');
