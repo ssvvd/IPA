@@ -1,0 +1,27 @@
+        <h4 class="siteTitle float-left">Results</h4>
+        <div class="divst">
+        <table    datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
+            <thead>
+                    <tr id="dtOptions"><th *ngFor="let hd of headers; "><label>{{hd}}</label></th></tr>
+                 </thead>
+                 <tbody>
+                    <tr  *ngFor="let row of dtResultsObjects3d;" >
+                       <td *ngFor="let col of row; let num = index">                 
+                           <span class="d-inline-block" *ngFor="let prty of col.slice().reverse()"><label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
+                         </td>
+                    </tr>
+                 </tbody>
+      </table>
+    </div>
+<p>{{ErrMsg}}</p>
+
+
+
+
+<ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+bdOpacity ="0.05"
+size="medium"
+color="#676767"
+type="ball-circus">    
+<p style="color:#676767">Please wait while ITA is processing your request. </p> 
+</ngx-spinner>  

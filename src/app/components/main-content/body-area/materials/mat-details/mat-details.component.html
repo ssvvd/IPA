@@ -15,7 +15,7 @@
                                (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(obj[col]) : false" 
                                [routerLink]="(environment.internal && (obj[col] + '').indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"
                                [ngClass]="{'td-selected' : obj[col] == this.selectedMatOrGrp}"
-                               > {{obj[col]}} 
+                               > {{obj[col].toString().replace('________','')}}
                                </td>
                             </tr>
                          </tbody>

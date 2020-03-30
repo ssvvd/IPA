@@ -1,4 +1,3 @@
-<p>Results</p>
 <li *ngFor="let obj of arrResult">
     <div>
         <h3> Tool </h3>
@@ -6,10 +5,19 @@
     </div>
 </li>
 <p>{{ErrMsg}}</p>
- <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
-  bdOpacity ="0.05"
-  size="medium"
-  color="#676767"
-  type="ball-circus">    
-  <p style="color:#676767">Please wait while ITA is processing your request. </p> 
-</ngx-spinner>   
+
+
+
+<div class="border-left border-right">
+    <div class="row">
+      <div class="col col-20">
+        <app-res-filter ></app-res-filter>
+      </div>
+      <div class="col col-80 pl-2 border-left">
+        <div class="row">
+        </div>
+        <app-results-table></app-results-table>
+      </div>
+    </div>
+  </div> 
+

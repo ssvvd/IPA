@@ -1,0 +1,175 @@
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { ResultsService} from 'src/app/services/results.service' ;
+import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { clsGroups } from 'src/app/models/results/groups';
+import { clsMainFields } from 'src/app/models/results/main-fields';
+import { clsProperties } from 'src/app/models/results/properties';
+import {clsPropertyValue} from 'src/app/models/results/property-value';
+import { NgxSpinnerService } from "ngx-spinner"; 
+import { Subject, Subscription, forkJoin } from 'rxjs';
+import { DataTableDirective } from 'angular-datatables';
+
+@Component({
+  selector: 'app-results-table',
+  templateUrl: './results-table.component.html',
+  styleUrls: ['./results-table.component.scss']
+})
+export class ResultsTableComponent implements OnInit {
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective;
+
+  dtTrigger: Subject<any> = new Subject();
+  allSubs$: Subscription;
+  dtOptions: any = {};
+  dtRsults:object[];
+  dtRsultsVisble:object[];
+  dtFullTable:object[];
+  dtPropertiesTable:clsProperties[];
+  dtPropertiesTableVisible:clsProperties[];
+  dtGroups:clsGroups[];
+  dtDefaultFields:clsMainFields[];
+  dtResultsObjects:clsPropertyValue[][];
+  dtResultsObjects3d:clsPropertyValue[][][];
+  dtResultShow:any;
+  headers:string[] = [];
+  arrResult:string[];
+  ErrMsg:string="";
+
+  constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,
+    private SpinnerService: NgxSpinnerService) { }
+
+
+
+  ngOnInit() {
+
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+       "searching": false,
+       "lengthChange": false ,
+       "paging":false,  
+       "autoWidth":false,
+      //  "scrollY": '65vh',
+       "scrollCollapse" : true,
+       "language": {
+        "emptyTable": "",
+        "zeroRecords": "",
+        "infoEmpty": "",
+        "info": ""
+      } 
+            
+      }; 
+
+
+    this.GetResult();
+  }
+
+
+  GetResult() 
+  {
+       
+      this.getShowTable()
+  }
+
+getShowTable(){
+  this.SpinnerService.show(); 
+  this.allSubs$ = forkJoin(
+          this.srv_Results.getresults('760','M',this.srv_StMng.IPLChanged),
+          this.srv_Results.getoolproperties('760','M',this.srv_StMng.IPLChanged),
+          this.srv_Results.getgroups('760'),
+          this.srv_Results.getdefaultfields('760')
+        )
+        .subscribe(([res1, res2, res3, res4]:[any,any,any,any]) => {
+          this.dtRsults =JSON.parse(res1);
+          // this.headers = Object.keys(this.dtRsults[0]);
+          this.dtPropertiesTable = JSON.parse(res2); 
+          this.dtGroups = JSON.parse(res3);
+          this.dtDefaultFields = JSON.parse(res4); 
+
+
+          var columnsCount = this.dtPropertiesTable.length
+          var rowsCount = this.dtRsults.length
+
+          this.dtResultsObjects = []
+          let index:number = 0;
+          for(var i: number = 0; i < rowsCount; i++) {
+              this.dtResultsObjects[i] = [];
+              index = 0
+              for(var j: number = 0; j< columnsCount; j++) {
+                if (this.dtPropertiesTable[j].IsVisible){
+                  this.dtResultsObjects[i][index] = new clsPropertyValue()
+                  this.dtResultsObjects[i][index].property = this.dtPropertiesTable[j]
+                  this.dtResultsObjects[i][index].value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+                  index++
+                }
+                  
+              }
+          }
+
+
+          var visColumnsCount = this.dtResultsObjects[0].length
+          this.dtResultsObjects3d = []
+          let index3:number = 0;
+          var dupColumns:number [] = []
+          var groupsOrder:number [] =[]
+          for(var i: number = 0; i < rowsCount; i++) {
+            this.dtResultsObjects3d[i] = []
+            index = 0
+            dupColumns = []
+            groupsOrder = []
+          for(var col1: number = 0; col1 < visColumnsCount; col1++) {
+            if(dupColumns.indexOf(col1) == -1){
+              this.dtResultsObjects3d[i][index] = []
+              index3 = 0
+              if (index == 2){
+                let grpID:number = this.dtResultsObjects[i][col1].property.GroupID
+                let order:number = groupsOrder.indexOf(grpID, 0)
+                index3 = order
+                for(var brandNamePos: number = 0; brandNamePos < index3; brandNamePos++) {
+                  this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+                }
+                for(var brandNamePos: number = index3 + 1; brandNamePos < groupsOrder.length; brandNamePos++) {
+                  this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+                }
+              }
+              this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col1]
+              if (i==0)
+                this.headers.push(this.dtResultsObjects[i][col1].property.FieldDescriptionSmall);
+              if (col1 == 0)
+                groupsOrder.push(this.dtResultsObjects[i][col1].property.GroupID)
+          for(var col2: number = col1 +  1; col2 < visColumnsCount; col2++) {
+            if (dupColumns.indexOf(col2) == -1 
+            && this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall            )
+            {
+              if (this.dtResultsObjects[i][col2].value
+           &&  this.dtResultsObjects[i][col2].value.trim() !== this.dtResultsObjects3d[i][index][0].value.trim()){
+            index3++
+            if (index == 0)
+            {
+              groupsOrder.push(this.dtResultsObjects[i][col2].property.GroupID)
+            }
+            if (index == 2){
+              let grpID:number = this.dtResultsObjects[i][col2].property.GroupID
+              let order:number = groupsOrder.indexOf(grpID, 0)
+              index3 = order
+            }
+            this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col2] 
+           }      
+              dupColumns.push(col2)     
+            }
+          }
+          index++
+            }
+            
+          }
+          
+        }
+
+        this.dtTrigger.next();
+        this.SpinnerService.hide();
+        let a =0
+        });
+
+}
+
+
+}

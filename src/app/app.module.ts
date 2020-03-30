@@ -46,6 +46,8 @@ import { OptimizetoolFilterComponent } from './components/main-content/body-area
 import { NgxSpinnerModule } from "ngx-spinner"; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSearchComponent } from './components/main-content/body-area/materials/mat-search/mat-search.component';
+import { ResultsTableComponent } from './components/main-content/body-area/results/results-table/results-table.component';
+import { ResFilterComponent } from './components/main-content/body-area/results/res-filter/res-filter.component';
 
 @NgModule({
   declarations: [   
@@ -80,7 +82,9 @@ import { MatSearchComponent } from './components/main-content/body-area/material
     HomeComponent,
     Optimizetool59Component,
     OptimizetoolFilterComponent,
-    MatSearchComponent
+    MatSearchComponent,
+    ResultsTableComponent,
+    ResFilterComponent
   ],
   imports: [
     FormsModule,
