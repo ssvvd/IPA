@@ -34,7 +34,7 @@ export class Appdetails59Component implements OnInit {
   }
 
   onfocusoutfield()
-  {
+  {  
     this.InFocus=false;
     this.ImageName="";
   }
