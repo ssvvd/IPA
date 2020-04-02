@@ -145,7 +145,7 @@ getShowTable(){
             && this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall            )
             {
               if (this.dtResultsObjects[i][col2].value
-           &&  this.dtResultsObjects[i][col2].value.trim() !== this.dtResultsObjects3d[i][index][0].value.trim()){
+           &&  this.dtResultsObjects[i][col2].value.toString().trim() !== this.dtResultsObjects3d[i][index][0].value.toString().trim()){
             index3++
             if (index == 0)
             {
