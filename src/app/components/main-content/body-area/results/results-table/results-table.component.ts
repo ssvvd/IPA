@@ -65,7 +65,6 @@ export class ResultsTableComponent implements OnInit {
     this.GetResult();
   }
 
-מע 
   GetResult() 
   {
        
