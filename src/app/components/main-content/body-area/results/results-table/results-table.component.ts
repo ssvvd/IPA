@@ -5,6 +5,7 @@ import { clsGroups } from 'src/app/models/results/groups';
 import { clsMainFields } from 'src/app/models/results/main-fields';
 import { clsProperties } from 'src/app/models/results/properties';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Subject, Subscription, forkJoin } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -30,12 +31,13 @@ export class ResultsTableComponent implements OnInit {
   dtDefaultFields:clsMainFields[];
   dtResultsObjects:clsPropertyValue[][];
   dtResultsObjects3d:clsPropertyValue[][][];
+  dtResultsObjects3dToShow:clsPropertyValue[][][]
   dtResultShow:any;
   headers:string[] = [];
   arrResult:string[];
   ErrMsg:string="";
 
-  constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,
+  constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService) { }
 
 
@@ -63,7 +65,7 @@ export class ResultsTableComponent implements OnInit {
     this.GetResult();
   }
 
-
+מע 
   GetResult() 
   {
        
@@ -73,10 +75,10 @@ export class ResultsTableComponent implements OnInit {
 getShowTable(){
   this.SpinnerService.show(); 
   this.allSubs$ = forkJoin(
-          this.srv_Results.getresults('760','M',this.srv_StMng.IPLChanged),
-          this.srv_Results.getoolproperties('760','M',this.srv_StMng.IPLChanged),
-          this.srv_Results.getgroups('760'),
-          this.srv_Results.getdefaultfields('760')
+          this.srv_Results.getresults(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
+          this.srv_Results.getoolproperties(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
+          this.srv_Results.getgroups(this.srv_StMng.SecApp),
+          this.srv_Results.getdefaultfields(this.srv_StMng.SecApp)
         )
         .subscribe(([res1, res2, res3, res4]:[any,any,any,any]) => {
           this.dtRsults =JSON.parse(res1);
@@ -98,6 +100,8 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].IsVisible){
                   this.dtResultsObjects[i][index] = new clsPropertyValue()
                   this.dtResultsObjects[i][index].property = this.dtPropertiesTable[j]
+                  if (!this.dtRsults[i][Object.keys(this.dtRsults[i])[j]])
+                  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = '';
                   this.dtResultsObjects[i][index].value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
                   index++
                 }
@@ -166,7 +170,7 @@ getShowTable(){
 
         this.dtTrigger.next();
         this.SpinnerService.hide();
-        let a =0
+        // let a =0
         });
 
 }
