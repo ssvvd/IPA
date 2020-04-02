@@ -87,7 +87,7 @@
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_grade"    *ngIf="isLoad" [labeldescription]="'Grade'"   [fieldname]="'CarbideGrade'"   [funcname]="'GRADE'"   [fieldid]="'TD_Grade'"></app-optimizetool-filter>   
     </div>
     <div class="pt-2">
-        <app-optimizetool59  *ngIf="srv_StMng.SecApp==760" [events]="eventsSubject.asObservable()" ></app-optimizetool59>
+        <app-optimizetool59  *ngIf="srv_StMng.SecApp==760 || srv_StMng.SecApp==770 || srv_StMng.SecApp==57" [events]="eventsSubject.asObservable()" ></app-optimizetool59>
     </div>
     <app-optimizetool-adaptortype [events]="eventsSubject.asObservable()"></app-optimizetool-adaptortype>   
 </div>
