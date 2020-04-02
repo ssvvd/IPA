@@ -30,7 +30,7 @@
                     <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">Clear All</button>
                 </div> 
                 <div class="pt-0">
-                    <app-appdetails59 *ngIf = "isLoaded"  [events]="eventsSubject.asObservable()"></app-appdetails59>
+                    <app-appdetails59 *ngIf = "isLoaded && (SecApp==760||SecApp==770||SecApp==57)"  [events]="eventsSubject.asObservable()"></app-appdetails59>
                 </div>
             </div>
         </div>

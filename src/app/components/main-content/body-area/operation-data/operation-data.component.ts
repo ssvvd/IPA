@@ -123,7 +123,8 @@ else
   FillDataInputParamAndRouteToResult()
   {
     this.srv_StMng.IPL.GetItem('Material').value = String(this.srv_StMng.GetMaterialSelected().id);
-    this.srv_StMng.IPL.GetItem('HardnessHB').value = String(this.srv_StMng.GetMaterialSelected().HardnessHBValue);
+    if(this.srv_StMng.GetMaterialSelected().HardnessHBValue!==undefined)
+      this.srv_StMng.IPL.GetItem('HardnessHB').value = String(this.srv_StMng.GetMaterialSelected().HardnessHBValue);
 
     //this.srv_StMng.IPL=this.Ipl; 
     let listparams: { name: string, value: string }[]=[];
