@@ -42,8 +42,35 @@
                         <label class="pl-0 pt-2">{{srv_appsetting.UnitslengthDesc}}</label>
                     </div>
                 </div>
-            </div>     
-                <div class="pt-4">               
+            </div>  
+            <div *ngIf = "srv_StMng.SecApp==770" class="pt-4">               
+                <div class="form-group">                   
+                        <div class="pl-0">
+                            <label>Feed Type</label>
+                        </div>                           
+                         <div class="ml-0">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optLight" name="OperationType" checked  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Light">
+                                <label class="custom-control-label" for="optLight">Light</label>
+                            </div>            
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optMedium" name="OperationType"  [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Medium">
+                                <label class="custom-control-label" for="optMedium">Medium</label>
+                            </div>            
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optHeavy" name="OperationType" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Heavy">
+                                <label class="custom-control-label" for="optHeavy">Heavy</label>
+                            </div>
+                            
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optFinishing" name="OperationType" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('OperationType').value" value="Finishing">
+                                <label class="custom-control-label" for="optFinishing">Finishing (with wiper inserts)</label>
+                            </div>
+
+                        </div>                      
+                </div>
+            </div>   
+            <div *ngIf = "srv_StMng.SecApp==760 || srv_StMng.SecApp==57 " class="pt-4">               
                 <div class="form-group">                   
                         <div class="pl-0">
                             <label>Operation Type - Indexable</label>
@@ -62,11 +89,10 @@
                                 <label class="custom-control-label" for="optHeavy">Heavy</label>
                             </div>
                         </div>                      
-               </div>
                 </div>
-            <div  class="pt-3"> 
-                 <div class="form-group">            
-                    
+            </div>
+            <div  *ngIf = "srv_StMng.SecApp==760 || srv_StMng.SecApp==57" class="pt-3"> 
+                 <div class="form-group">                                
                          <div class="pl-0">
                             <label>Operation Type - Solid</label>
                         </div>                           
