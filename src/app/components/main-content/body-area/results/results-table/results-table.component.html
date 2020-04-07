@@ -2,12 +2,19 @@
         <div class="divst">
         <table    datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
             <thead>
-                    <tr id="dtOptions"><th *ngFor="let hd of headers; "><label>{{hd}}</label></th></tr>
+                    <tr id="dtOptions">
+                     <th><label></label></th>  
+                     <th *ngFor="let hd of headers; "><label>{{hd}}</label></th></tr>
                  </thead>
                  <tbody>
-                    <tr  *ngFor="let row of dtResultsObjects3d;" >
+                    <tr  *ngFor="let row of dtResultsObjects3d; let rowIndex = index" >
+                       <td>
+                        <img src="{{arrResultImgsItem[rowIndex]}}"
+                        (error) ="changeSource($event, arrResultImgsFamily[rowIndex])" class="img-grid">
+                       </td>
                        <td *ngFor="let col of row; let num = index">                 
-                           <span class="d-inline-block" *ngFor="let prty of col.slice().reverse()"><label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
+                           <span class="d-inline-block" *ngFor="let prty of col.slice().reverse()">
+                              <label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                     </tr>
                  </tbody>
