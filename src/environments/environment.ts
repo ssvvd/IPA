@@ -24,7 +24,9 @@ export const environment = {
   ImgArrowRight:"assets/img/arrows_right.png",
   ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx",
   IscarSite:"http://intranet.imc.co.il",
-  MachiningCalculatorSite:"https://eiplb.iscar.com/MachiningPwr/"
+  MachiningCalculatorSite:"https://eiplb.iscar.com/MachiningPwr/",
+  eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
+  eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/"
 };
 
     
