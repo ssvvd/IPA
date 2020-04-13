@@ -69,14 +69,6 @@ export class OperationDataComponent implements OnInit {
 else
       this.isLoaded=true;
 }
- 
-  @HostListener('window:resize', ['$event'])
-  onResize(event) {  
-    /* if(event.target.innerWidth < 900)
-      this.srv_StMng.IsTabToolDataOpen=false;  
-    else
-      this.srv_StMng.IsTabToolDataOpen=true; */
-  }
 
   showtooldata()
   {

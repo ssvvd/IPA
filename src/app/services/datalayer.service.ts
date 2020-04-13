@@ -23,12 +23,12 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters/' + secapp + '/' + units);
   }
 
-  public  getresult(secapp:string,requestid:string)
+/*   public  getresult(secapp:string,requestid:string)
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-result/' + secapp + '/' + requestid);
-  }
+  } */
 
-  public  td_brandname_list(par:string)
+/*   public  td_brandname_list(par:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-list/' + par);
   }
@@ -36,10 +36,14 @@ export class DatalayerService {
   public  td_tool_list(par:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-tool-list/' + par);
-  }
+  } */
   public  dictionarygetlanguage()
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionary-get-language');
+  }
+  public  dictionarygetlinelanguage(lang:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionaty-get-lines/'+lang);
   }
 
 

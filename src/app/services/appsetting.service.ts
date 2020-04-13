@@ -57,4 +57,10 @@ export class AppsettingService {
   set Country(c:string) {  
     this.mCountry = c;
    }
+
+   FillLanguage(lan:string)
+   {
+     return this.srv_DataLayer.dictionarygetlinelanguage(lan);
+    
+   }
 }

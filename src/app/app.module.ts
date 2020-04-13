@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import * as $ from "jquery";
 
 import { HeaderComponent } from './components/header/header.component';
@@ -49,6 +51,8 @@ import { MatSearchComponent } from './components/main-content/body-area/material
 import { ResultsTableComponent } from './components/main-content/body-area/results/results-table/results-table.component';
 import { ResFilterComponent } from './components/main-content/body-area/results/res-filter/res-filter.component';
 import { OptimizetoolAdaptortypeComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-adaptortype/optimizetool-adaptortype.component';
+import { Appdetails780Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails780/appdetails780.component';
+import { Appdetails790Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails790/appdetails790.component';
 
 @NgModule({
   declarations: [   
@@ -86,7 +90,9 @@ import { OptimizetoolAdaptortypeComponent } from './components/main-content/body
     MatSearchComponent,
     ResultsTableComponent,
     ResFilterComponent,
-    OptimizetoolAdaptortypeComponent
+    OptimizetoolAdaptortypeComponent,
+    Appdetails780Component,
+    Appdetails790Component
   ],
   imports: [
     FormsModule,
@@ -99,7 +105,14 @@ import { OptimizetoolAdaptortypeComponent } from './components/main-content/body
     NgbModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   entryComponents:[
     PpAddFavoritComponent,
@@ -111,3 +124,7 @@ import { OptimizetoolAdaptortypeComponent } from './components/main-content/body
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

@@ -1,6 +1,4 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
-import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
@@ -13,7 +11,6 @@ import { Observable ,Subscription} from 'rxjs';
 })
 export class Appdetails59Component implements OnInit {
 
-  //@Input() Ipl:InputParameterlist;
   ImageName:string='';
   InFocus:boolean=false;
   environment=environment;
@@ -41,9 +38,9 @@ export class Appdetails59Component implements OnInit {
    
   ClearData()
   {
-    this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value =null;//this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').valuedefault;
-    this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value =null;//this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').valuedefault;
-    this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value =null;//this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').valuedefault;
+    this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value =null;
+    this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value =null;
+    this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value =null;
     this.srv_StMng.IPL.GetItem('OperationType').value =this.srv_StMng.IPL.GetItem('OperationType').valuedefault;
     this.srv_StMng.IPL.GetItem('OperationType4Solid').value =this.srv_StMng.IPL.GetItem('OperationType4Solid').valuedefault;
     this.srv_StMng.IPL.GetItem('OverHang').value =this.srv_StMng.IPL.GetItem('OverHang').valuedefault;

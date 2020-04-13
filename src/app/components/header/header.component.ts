@@ -1,10 +1,11 @@
 import { Component, OnInit,ElementRef } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Language} from 'src/app/models/applications/applications';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -23,8 +24,8 @@ export class HeaderComponent implements OnInit {
   SelectedLang:Language;
 
   // /dictionarygetlanguage
-  constructor(private modalService: NgbModal,private srv_statemanage:StateManagerService,
-              private srv_appsetting:AppsettingService,private router:Router,private activeroute: ActivatedRoute) { }
+  constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,
+              private srv_appsetting:AppsettingService, private router:Router) { }
 
   ngOnInit() {
     if (this.srv_appsetting.Units=='M') 
@@ -59,12 +60,19 @@ export class HeaderComponent implements OnInit {
   }
 
   onChangeLanguage(lan:Language)
-  {  
+  {     
     this.srv_appsetting.SelectedLanguage =lan;    
     this.SelectedLang=lan;
-    
+    if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
+      this.translate.use(lan.LanguageCode);
+    else
+      this.translate.use(this.translate.getDefaultLang());
+    //this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {
+    //const fs = require('fs');      
+    //fs.writeFileSync(environment.LanguagePath + "/" + lan.LanguageCode + ".json", data);
+    // });       
   }
-
+  
   UnitsChanged(event)
   {    
     if(event.target.checked)
@@ -77,9 +85,7 @@ export class HeaderComponent implements OnInit {
       this.srv_appsetting.Units="I";
       this.srv_appsetting.UnitslengthDesc="inch"; //todo:language
     }    
-    //this.router.navigate(['/home/machines']);  
-    //alert(this.activeroute.url);
-    //alert(window.location.href);
+  
     if (window.location.href.indexOf('machines')>-1)
       {
         this.srv_statemanage.ChangeUnits();        

@@ -1,7 +1,7 @@
 
 <div class="container-fluid ml-0 pl-0 mt-0  pr-0" >   
      <div class="form-group row col-12">       
-        <div  [ngClass]="srv_StMng.IsTabToolDataOpen ? 'col-3  border-right-gray border-left-gray  pt-2' : 'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
+        <div  [ngClass]="srv_StMng.IsTabToolDataOpen ? 'width-tooldata  border-right-gray border-left-gray  pt-2' : 'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
             <div class="pt-4"  >
                 <div class="form-group" >                     
                     <a  [ngClass]="srv_StMng.IsTabToolDataOpen ?'cursor-pointer float-right':'pl-3 cursor-pointer float-center'" (click)="showtooldata()">                        
@@ -16,21 +16,23 @@
                 </div>           
             </div> 
         </div>
-        <div [ngClass]="srv_StMng.IsTabToolDataOpen ? 'border-right-gray col-9 pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
+        <div [ngClass]="srv_StMng.IsTabToolDataOpen ? 'border-right-gray width-appdetails pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
             <div class="form-group">
                 <div class="form-group row col-12"> 
                     <div  class= "float-left pl-3">                                       
-                        <label  class="float-left siteTitle col-form-label">Operation Data</label> 
+                        <label  class="float-left siteTitle col-form-label">{{'Operation Data' | translate}}</label> 
                     </div>                    
                     <div class= "ml-auto mr-4">                     
-                        <button class="btn btn-select" (click)="GetResult()">Get Result</button>                                                           
+                        <button class="col-12 btn btn-select" (click)="GetResult()">{{'Get Results'| translate}}</button>                                                           
                     </div>
                  </div>
                 <div>
-                    <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">Clear All</button>
+                    <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">{{'Clear All'| translate}}</button>
                 </div> 
-                <div class="pt-0">
+                <div class="pt-0">         
                     <app-appdetails59 *ngIf = "isLoaded && (SecApp==760||SecApp==770||SecApp==57)"  [events]="eventsSubject.asObservable()"></app-appdetails59>
+                    <app-appdetails780 *ngIf = "isLoaded && SecApp==780"  [events]="eventsSubject.asObservable()"></app-appdetails780>
+                    <app-appdetails790 *ngIf = "isLoaded && SecApp==790"  [events]="eventsSubject.asObservable()"></app-appdetails790>
                 </div>
             </div>
         </div>
