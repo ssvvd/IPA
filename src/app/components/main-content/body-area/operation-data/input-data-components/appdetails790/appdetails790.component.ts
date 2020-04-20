@@ -104,4 +104,9 @@ export class Appdetails790Component implements OnInit {
     this.srv_StMng.IPL.GetItem('MaxCornerRadius').value=null; 
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;   
   }
+
+  OnDepthChange ()
+  {
+    
+  }
 }

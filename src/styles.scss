@@ -39,12 +39,11 @@
     font-size: 14px;
 }
 
-@include media-breakpoint-between(lg, xl){ 
+@include media-breakpoint-up(xl){ 
  .btn-select  
  { 
     min-width:150px;
-    max-width: 150px;
-  
+    max-width: 150px;  
 }
 .btn-select-selected 
   {    
@@ -63,9 +62,7 @@
 {
    background-color: #597cb0;
    color:#FFF;
-   border-color:var(--btn-bg-select-color);  
-   /* min-width:150px;
-   max-width: 150px;  */
+   border-color:var(--btn-bg-select-color);    
    font-size: 14px;
 }
 
@@ -73,9 +70,7 @@
 {
     background-color: #597cb0;
     color:#FFF!important;
-    border-color:var(--btn-bg-select-color);  
-    /* min-width:150px;
-    max-width: 150px;  */
+    border-color:var(--btn-bg-select-color);   
     font-size: 14px;
     font-weight: bold;
 }

@@ -36,7 +36,8 @@ ngOnInit(){
     //console.log(cssText);
   }});
   
-  this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK']);
+  this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
+                           'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
   this.translate.setDefaultLang('EN');
 
   //check with HTTPS:// -TODO:

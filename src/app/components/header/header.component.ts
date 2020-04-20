@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit {
     else
       this.isMetric = false;
 
+    this.GetLanguages();
     if (typeof (this.srv_appsetting.SelectedLanguage)=== 'undefined')
     {
       this.SelectedLang=new Language;
@@ -67,10 +68,10 @@ export class HeaderComponent implements OnInit {
       this.translate.use(lan.LanguageCode);
     else
       this.translate.use(this.translate.getDefaultLang());
-    //this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {
+   this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {
     //const fs = require('fs');      
     //fs.writeFileSync(environment.LanguagePath + "/" + lan.LanguageCode + ".json", data);
-    // });       
+     });       
   }
   
   UnitsChanged(event)

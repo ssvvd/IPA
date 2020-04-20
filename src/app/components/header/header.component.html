@@ -27,13 +27,13 @@
             </div>   
                                                                        
              <div class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
-                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + SelectedLang.LanguageCode + '.svg'" (click)="GetLanguages();" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
+                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + SelectedLang.LanguageCode + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
                     <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
                         <div *ngFor="let lan of lstLanguage" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{lan.LanguageEnName}} (click)="onChangeLanguage(lan)">                                                                                                                                                               
                             <img [src]="environment.ImagePath + 'flags/' + lan.LanguageCode + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >                                                                                                                                                                                                 
                             <label class="mt-2" style="background-color:trasparent" >{{lan.LanguageName}}</label>                                                                                                                          
                         </div>                                                                  
-                </div>
+                    </div>
             </div>
             <div  class="div-header-link pl-2 pt-1">
                 <label class="user-login">

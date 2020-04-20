@@ -34,6 +34,27 @@ transform-origin: 70% 140%;
     @extend .col-lg-8;
     @extend .col-xl-9;
 }
+
+
+/* @include media-breakpoint-up (xs){ 
+ .btn-select  
+ { 
+    min-width:150px;
+    max-width: 150px;
+  
+}
+.btn-select-selected 
+  {    
+    min-width:150px;
+    max-width: 150px;   
+  }
+
+  .btn-select-selected:hover
+  {     
+    min-width:150px;
+    max-width: 150px;   
+  }
+ } */
   
 
   
