@@ -105,14 +105,14 @@
             </div>                
             <div class="row">
                 <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-2">
-                    <label class="pl-0 pt-3">{{'Depth (D)' | translate}}</label>
-                    <label class="pl-2 asterisk-red pt-3">*</label>
+                    <label class="pl-0 pt-4">{{'Depth (D)' | translate}}</label>
+                    <label class="pl-2 asterisk-red pt-4">*</label>
                 </div>
-                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-2 pl-0">
                     <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Depth').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
                                         [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
                 </div>
-                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-2 pl-0">
                     <label class="pl-0 pt-2">{{srv_appsetting.UnitslengthDesc | translate}}</label>
                 </div>
             </div>

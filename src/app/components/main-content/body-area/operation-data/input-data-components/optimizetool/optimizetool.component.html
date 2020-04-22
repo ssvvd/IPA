@@ -7,7 +7,7 @@
     </div>
     <div class="row"> 
          <div class="pl-0 col-6 ">
-            <label>Indexable Insert</label>  
+            <label>{{srv_StMng.SecApp==77?'Indexable':'Indexable Insert' | translate}}</label>  
             <div class="row pt-2">           
                 <div>
                     <div class="custom-control custom-checkbox">
@@ -16,11 +16,14 @@
                         <label class="custom-control-label" for="chkbIsIndTool"></label>
                     </div>
                 </div>        
-                <div class="pr-2">
-                    <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Tools' | translate}}</label>
+                <div class="pr-2" *ngIf="srv_StMng.SecApp!=77">
+                    <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Tool' | translate}}</label>
+                </div>
+                 <div class="pr-2" *ngIf="srv_StMng.SecApp==77">
+                    <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Indexable Insert' | translate}}</label>
                 </div>
             </div>
-            <div class="row">          
+            <div class="row" *ngIf="srv_StMng.SecApp!=77">          
                 <div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input"  id="chkbIsIndHead"  name="chkbIsIndHead" 
@@ -32,7 +35,6 @@
                     <label for="chkbIsIndHead" class="form-check-label text-nowrap">{{'Heads' | translate}}</label>
                 </div>
             </div>               
-
         </div>   
         <div *ngIf="srv_StMng.SecApp!=770" class="pl-4 pr-4 col-6 border-left-gray">   
             <label>Solid</label> 
@@ -61,10 +63,19 @@
                 </div>     
             </div>
            
-        </div>
-       
+        </div>       
     </div>
-    <div class="pl-0 pt-4 ">
+    <div *ngIf="srv_StMng.SecApp==77" class="pl-0 row">
+        <div class="custom-control custom-checkbox col-6 pt-4">
+            <input type="checkbox" class="custom-control-input" id="chkbShank_C" name="Shank" [(ngModel)] ="srv_StMng.IPL.GetItem('TD_Shank_C').value" [checked]="srv_StMng.IPL.GetItem('TD_Shank_C').value">
+            <label class="custom-control-label" for="chkbShank_C">{{'Cylindrical' | translate}}</label>
+        </div>                              
+        <div class="custom-control custom-checkbox col-6 pt-4">
+            <input type="checkbox" class="custom-control-input" id="chkbShank_W" name="Shank" [(ngModel)] ="srv_StMng.IPL.GetItem('TD_Shank_W').value"   [checked]="srv_StMng.IPL.GetItem('TD_Shank_W').value">
+            <label class="custom-control-label" for="chkbShank_W">{{'Weldon/WN' | translate}}</label>
+        </div>       
+    </div>
+    <div *ngIf="srv_StMng.SecApp!=770 && srv_StMng.SecApp!=77" class="pl-0 pt-4">
         <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="optHightFeed" name="TypeFeed" [(ngModel)] ="TypeFeed" (change)="changeTypeFeed()"  value="HightFeed">
             <label class="custom-control-label" for="optHightFeed">{{'High Feed' | translate}}</label>
@@ -81,9 +92,9 @@
     <div class="pr-2">
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandname"          *ngIf="isLoad" [labeldescription]="'Brand Name'"       [fieldname]="'BrandName'"     [funcname]="'BRAND'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter> 
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_tooldesignation"    *ngIf="isLoad" [labeldescription]="'Tool Designation'" [fieldname]="'Designation'"   [funcname]="'TOOL'"     [fieldid]="'TD_ToolDesignation'"></app-optimizetool-filter>  
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertdesignation"    *ngIf="isLoad" [labeldescription]="'Insert/Solid Designation'"   [fieldname]="'Designation'"   [funcname]="'INSERT'"   [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertdesignation"    *ngIf="isLoad" [labeldescription]="srv_StMng.SecApp==770 ?'Insert Designation':'Insert / Solid Designation'"   [fieldname]="'Designation'"   [funcname]="'INSERT'"   [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_toolcatalog"    *ngIf="isLoad" [labeldescription]="'Tool Catalog No'"   [fieldname]="'CatalogNo'"   [funcname]="'TOOLCATALOGNO'"   [fieldid]="'TD_ToolCatalogNo'"></app-optimizetool-filter>       
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertcatalog"    *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"   [fieldname]="'CatalogNo'"   [funcname]="'INSERTCATALOGNO'"   [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertcatalog"    *ngIf="isLoad" [labeldescription]="srv_StMng.SecApp==770 ?'Insert Designation':'Insert / Solid Catalog No'" [fieldname]="'CatalogNo'"   [funcname]="'INSERTCATALOGNO'"   [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter> 
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_grade"    *ngIf="isLoad" [labeldescription]="'Grade'"   [fieldname]="'CarbideGrade'"   [funcname]="'GRADE'"   [fieldid]="'TD_Grade'"></app-optimizetool-filter>   
     </div>
     <div class="pt-2">

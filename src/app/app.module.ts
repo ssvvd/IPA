@@ -53,6 +53,9 @@ import { ResFilterComponent } from './components/main-content/body-area/results/
 import { OptimizetoolAdaptortypeComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-adaptortype/optimizetool-adaptortype.component';
 import { Appdetails780Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails780/appdetails780.component';
 import { Appdetails790Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails790/appdetails790.component';
+import { Appdetails77Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails77/appdetails77.component';
+import { Appdetails120Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails120/appdetails120.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [   
@@ -92,7 +95,9 @@ import { Appdetails790Component } from './components/main-content/body-area/oper
     ResFilterComponent,
     OptimizetoolAdaptortypeComponent,
     Appdetails780Component,
-    Appdetails790Component
+    Appdetails790Component,
+    Appdetails77Component,
+    Appdetails120Component
   ],
   imports: [
     FormsModule,
@@ -106,6 +111,7 @@ import { Appdetails790Component } from './components/main-content/body-area/oper
     ReactiveFormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    NgSelectModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

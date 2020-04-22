@@ -27,7 +27,7 @@
       </div>             
     </div>
     <div class="pt-3 mt-2">
-      <span>DCX - </span><span>{{'Cutting Diameter' | translate}}</span>   
+      <span>DCX - </span><span>{{'Cutting Diameter Maximum' | translate}}</span>   
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('TD_DCXMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('TD_DCXMax').value" [options]="options_dc"></ng5-slider>
       </div>  
@@ -73,7 +73,7 @@
           </div>
       </div>   
     </div>
-    <div  *ngIf="srv_StMng.SecApp==760 || srv_StMng.SecApp==760 || srv_StMng.SecApp==57" class="pt-3 mt-2">
+    <div  *ngIf="srv_StMng.SecApp==760 || srv_StMng.SecApp==770 || srv_StMng.SecApp==57" class="pt-3 mt-2">
       <span>RE - </span><span>{{'Corner radius' | translate}}</span>    
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('MinCornerRadius').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('MaxCornerRadius').value" [options]="options_radius"></ng5-slider>
@@ -99,7 +99,7 @@
           </div>
       </div>   
     </div>
-    <div *ngIf="srv_StMng.SecApp==760" class="pt-3 mt-2">    
+    <div *ngIf="srv_StMng.SecApp==760 || srv_StMng.SecApp==57" class="pt-3 mt-2">    
       <span>CHW - </span><span>{{'Corner Chamfer Width' | translate}}</span>      
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('MinChamferRange').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('MaxChamferRange').value" [options]="options_chamfer"></ng5-slider>

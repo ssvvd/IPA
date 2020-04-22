@@ -22,13 +22,7 @@ export class Appdetails790Component implements OnInit {
   private eventsSubscription: Subscription; 
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
- 
-    options_d2: Options = {
-    floor: 0,
-    ceil: 100 , // Number(this.srv_StMng.IPL.GetItem('D2Max').valuemax),
-    step: 0.1,
-    showTicks: false
-  };
+
 
  ngOnInit() {  
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
