@@ -59,6 +59,7 @@ export class MachiningOperationComponent implements OnInit {
           if(d.ParentMenuID!=0 && d.IsNewITA) 
             { 
               let isadditem:boolean =true;
+              let isactive:boolean=true;
               if(d.ParentMenuID=='61') //drilling
               {
                 if(MachineType=='Multi task' || MachineType=='SwissType' || MachineType=='MultiSpindle')
@@ -72,6 +73,17 @@ export class MachiningOperationComponent implements OnInit {
                   if(d.MenuID==71)  isadditem =true;
                 }
               } 
+              if(d.ParentMenuID=='110') //threading
+              {
+                if(MachineType=='Lathe' )
+                {
+                  if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;                  
+                }
+                if(MachineType=='Machining center' )
+                {
+                  if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;                  
+                }
+              } 
               if(isadditem)
                 {
                   this.arrSecApps.push({
@@ -81,7 +93,7 @@ export class MachiningOperationComponent implements OnInit {
                   MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png" ,
                   ParentMenuID:d.ParentMenuID ,
                   ApplicationITAID: d.ApplicationITAID,
-                  IsActive:true 
+                  IsActive:isactive 
                 })
               }
           };
@@ -128,7 +140,6 @@ export class MachiningOperationComponent implements OnInit {
       this.SelectedMenuID2='';
       
       this.srv_statemanage.IPL =null;
-
       this.ApplyFilter1(obj.MenuID);  
       }
    }  
@@ -178,9 +189,8 @@ export class MachiningOperationComponent implements OnInit {
     this.srv_statemanage.MainAppSelected=this.SelectedMainApp;
     this.srv_statemanage.SecAppSelected=sa; 
     if(l==1) this.srv_statemanage.MenuIDLevel1=sa.MenuID;
-    if(l==2) this.srv_statemanage.MenuIDLevel2=sa.MenuID;
-    
+    if(l==2) this.srv_statemanage.MenuIDLevel2=sa.MenuID;    
   }
 
-  ToOperationData(){}
+  //ToOperationData(){}
 }

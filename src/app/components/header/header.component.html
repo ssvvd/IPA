@@ -27,13 +27,13 @@
             </div>   
                                                                        
              <div class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
-                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + SelectedLang.LanguageCode + '.svg'" (click)="GetLanguages();" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
+                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + SelectedLang.LanguageCode + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
                     <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
                         <div *ngFor="let lan of lstLanguage" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{lan.LanguageEnName}} (click)="onChangeLanguage(lan)">                                                                                                                                                               
                             <img [src]="environment.ImagePath + 'flags/' + lan.LanguageCode + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >                                                                                                                                                                                                 
                             <label class="mt-2" style="background-color:trasparent" >{{lan.LanguageName}}</label>                                                                                                                          
                         </div>                                                                  
-                </div>
+                    </div>
             </div>
             <div  class="div-header-link pl-2 pt-1">
                 <label class="user-login">
@@ -61,13 +61,13 @@
         <div class="ml-auto mr-0 bottom-align-text pr-3"> 
             <div class="row ">
                 <div class="div-header-link pl-1">
-                    <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="MenuImg"></a>                                               
+                    <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="MenuImg" title="{{'New Search' | translate}}"></a>                                               
                 </div>
                 <div class="div-header-link pl-1">
-                    <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="MenuImg"></a>                                               
+                    <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="MenuImg" title="{{'E-Catalog' | translate}}"></a>                                               
                 </div>
                 <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
-                    <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="MenuImg"></div>
+                    <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="MenuImg" title="{{'Calculators' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
                         <div  class="row col-12 dropdown-item menuitem mt-2 mb-2">                                                                                                                                                               
                             <a [href]="environment.MachiningCalculatorSite" target="_blank">
@@ -94,10 +94,10 @@
                     </div>
                 </div>
                 <div class="div-header-link pl-1">
-                    <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg"></a>
+                    <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg" title="{{'Help' | translate}}"></a>
                 </div>
                 <div class="div-header-link pl-1">
-                    <a><img [src]="environment.ImagePath+'icon_Favorite.svg'" (click)="menuisshown=false;openfavorite()" class="MenuImg"></a>                            
+                    <a><img [src]="environment.ImagePath+'icon_Favorite.svg'" (click)="menuisshown=false;openfavorite()" class="MenuImg" title="{{'Favorites' | translate}}"></a>                            
                 </div>
             </div>
         </div>                

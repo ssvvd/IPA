@@ -15,7 +15,6 @@ export class AdaptationSize
   AdaptationSize:string;
 }
 
-
 @Component({
   selector: 'app-machine-item-spindle',
   templateUrl: './machine-item-spindle.component.html',

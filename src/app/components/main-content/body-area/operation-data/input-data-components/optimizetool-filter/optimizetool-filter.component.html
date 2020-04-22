@@ -2,7 +2,7 @@
     
         <div class="form-group row col-12  d-flex justify-content-between" >   
             <div class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
-                <label>{{labeldescription}}</label>
+                <label>{{labeldescription | translate}}</label>
             </div>                                   
             <div class="col-5 pl-0 ml-0 text-truncate selected-items">
                 {{select_items}}
@@ -25,13 +25,13 @@
                         <div *ngIf="show_all || (itm.RecordID<= max_row_show) || str_search!=''">                            
                              <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="cursor-pointer" [attr.id]="'chk' + funcname + itm.RecordID" [(ngModel)]="itm.Checked" (change)="checkItem()" [attr.name]="'chk' + funcname + itm.RecordID"  class="custom-control-input" >
-                                <label  class="custom-control-label cursor-pointer" [attr.for]="'chk' + funcname + itm.RecordID">{{itm.Designation}}</label>
+                                <label  class="custom-control-label cursor-pointer" [attr.for]="'chk' + funcname + itm.RecordID">{{itm.Designation | translate}}</label>
                             </div>
                         </div>   
                         </div>                                                                           
                 </div>
                 <div *ngIf="show_more && str_search==''">
-                    <button class="btn sileLinks" (click)="getmore()">{{desc_show_more}}</button>
+                    <button class="btn sileLinks" (click)="getmore()">{{desc_show_more | translate}}</button>
                 </div>
         </div>
     

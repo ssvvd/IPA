@@ -6,6 +6,7 @@ import { StateManagerService } from 'src/app/services/statemanager.service';
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject, Subscription } from 'rxjs';
+//import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-machines-list',
@@ -30,6 +31,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   allSubs$: Subscription;
   isLoaded:boolean =false;
   constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService) {
+    //translate.addLangs(['en', 'nl']);
+    //translate.setDefaultLang('en');
   }
 
   ngOnInit() {  
@@ -195,7 +198,11 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         ((!filter.IsMultiTask && m.MachineType != "Multi task") || filter.IsMultiTask &&
         ((!filter.IsMultiSpindle && m.MachineType != "MultiSpindle") || filter.IsMultiSpindle) &&
         ((!filter.IsSwissType && m.MachineType != "SwissType") || filter.IsSwissType))
-        && (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1
+        && (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1 || m.AdaptationType.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1 
+        || m.AdaptationSize.toString().indexOf(filter.SearchText.toUpperCase()) > -1
+        || m.Power.toString().indexOf(filter.SearchText.toUpperCase()) > -1
+        || m.Torque.toString().indexOf(filter.SearchText.toUpperCase()) > -1
+        || m.SpindleSpeed.toString().indexOf(filter.SearchText.toUpperCase()) > -1
         ));
     this.srv_statemanage.SelectMachineFilter = filter;
     this.SortTableData();

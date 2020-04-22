@@ -1,9 +1,6 @@
 import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@angular/core';
-import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service';
-import { OptimizetoolFilterComponent} from 'src/app/components/main-content/body-area/operation-data/input-data-components/optimizetool-filter/optimizetool-filter.component'
 import { Observable, Subject } from 'rxjs';
 
 interface ToolOptimizeItem
@@ -21,22 +18,16 @@ interface ToolOptimizeItem
 })
 
 export class OptimizetoolComponent implements OnInit {
-
-  //@Input() Ipl:InputParameterlist;
-  //@Input() parentSubject:Subject<any>;
-   @ViewChild(OptimizetoolFilterComponent,{ static: false }) OptimizetoolFilter: OptimizetoolFilterComponent ; 
+    
   TypeFeed:string ="BothFeed";
 
   arrBrandName:ToolOptimizeItem[]=[];
-  arrToolDesignation:ToolOptimizeItem[]=[];
-
-  //parBrandName:string='All';
-  //parToolDesignation:string='All';
+  arrToolDesignation:ToolOptimizeItem[]=[]; 
   eventsSubject: Subject<void> = new Subject<void>();
 
   isLoad:boolean =false;
   
-  constructor(private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService) { }
+  constructor(private srv_StMng:StateManagerService) { }
   
   ClearDataChild() {
     this.TypeFeed='BothFeed';
@@ -47,12 +38,6 @@ export class OptimizetoolComponent implements OnInit {
     this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').value =this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').valuedefault;
     this.eventsSubject.next();
   }
-
- /*  onClearFilter()
-  {
-    alert('ssssss');
-    this.OptimizetoolFilter.ClearData();
-  } */
 
   GetSelectedItemsString(items:ToolOptimizeItem[]): string
   {
@@ -95,7 +80,6 @@ export class OptimizetoolComponent implements OnInit {
   {
     let str:string ='';     
     arr.forEach(pp=>{str = str +pp.Designation + ",";} );
-    return str;
-    //str =str.substring (0,this.select_items.length-1);
+    return str;    
   }
 }

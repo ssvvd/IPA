@@ -7,12 +7,26 @@
                 <div>                                          
                     <img [src]="tab.isDisabled ? tab.ImageDisableURL : tab.ImageURL" class="img-main-menu">                                                                                                  
                 </div>            
+                <div class="mb-0 pb-0">                                                           
+                    <div>                       
+                        <label [className]="tab.isDisabled?'siteTitle-disable text-truncate d-none d-lg-block mb-0 pb-0':'siteTitle text-truncate d-none d-lg-block mb-0 pb-0'">{{tab.Description | translate}}</label> 
+                    </div>
+                    <div>
+                        <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-lg-block mb-0 pb-0">{{tab.SelectedItemDesc | translate}}</label> 
+                        <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-lg-block mt-0 pt-0  mb-0 pb-0">{{tab.SelectedItemDesc1 | translate}}</label> 
+                    </div>  
+                </div> 
+                         
+                <!-- <div>                                          
+                    <img [src]="tab.isDisabled ? tab.ImageDisableURL : tab.ImageURL" class="img-main-menu">                                                                                                  
+                </div>            
                 <div class="mb-0 pb-0" >                                                           
-                    <div  [className]="tab.isDisabled?'siteTitle-disable d-none d-md-block mb-0 pb-0':'siteTitle d-none d-md-block mb-0 pb-0'">{{tab.Description}}</div>
-                    <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-md-block mb-0 pb-0">{{tab.SelectedItemDesc}}</label> 
-                    <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-md-block mt-0 pt-0  mb-0 pb-0">{{tab.SelectedItemDesc1}}</label> 
-                </div>                                                                              
+                    <div  [className]="tab.isDisabled?'siteTitle-disable d-none d-md-block mb-0 pb-0':'siteTitle d-none d-md-block mb-0 pb-0'">{{tab.Description | translate}}</div>
+                    <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-md-block mb-0 pb-0">{{tab.SelectedItemDesc | translate}}</label> 
+                    <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-md-block mt-0 pt-0  mb-0 pb-0">{{tab.SelectedItemDesc1 | translate}}</label> 
+                </div> -->                                                                              
             </div>
+            
         </li>          
 </ul>
 </div>

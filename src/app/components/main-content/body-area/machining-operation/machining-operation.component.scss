@@ -1,3 +1,5 @@
+@import "bootstrap";
+@import 'src/styles.scss';
 
 .div-app
 {      
@@ -24,10 +26,123 @@
     padding-right: 0px;
     margin-right: 0px;   
 }
+
+.img-not-allowed
+{
+   cursor: not-allowed;  
+   opacity: 0.5;   
+}
 .app-image
 {
-    width:200px;
-   
+    max-width:200px;   
+    width: 50%;
 }
+
+.secapp-image
+{
+    max-width:200px;   
+    width: 50%;
+}
+
+.li-item { 
+   width: 50%;  
+   max-width: 50%;   
+}
+
+@include media-breakpoint-up(sm) {
+.app-image
+{ 
+    max-width:60%;   
+    width: 60%;
+}  
+.secapp-image
+{ 
+    max-width:50%;   
+    width: 50%;
+} 
+    .li-item
+    {
+    width: 33%;  
+    max-width: 33%;
+    } 
+}
+
+@include media-breakpoint-up(md) {
+  .app-image
+{ 
+    max-width:70%;   
+    width: 70%;
+} 
+.secapp-image
+{ 
+    max-width:60%;   
+    width: 60%;
+}  
+ .li-item
+{
+   width: 33%;  
+   max-width: 33%;
+}
+}
+
+@include media-breakpoint-up(lg) {
+.app-image
+{ 
+    max-width:80%;   
+    width: 80%;
+}
+.secapp-image
+{ 
+    max-width:60%;   
+    width: 60%;
+} 
+
+
+.li-item
+{
+   width: 20%; 
+   max-width: 20%; 
+}  
+}
+
+@include media-breakpoint-up(xl) {
+.app-image
+{ 
+    max-width:65%;   
+    width: 65%;
+}
+.secapp-image
+{ 
+    max-width:50%;   
+    width: 50%;
+} 
+
+
+.li-item
+{
+   width: 20%; 
+   max-width: 20%; 
+}  
+}
+
+@include media-breakpoint-up (xs){ 
+ .btn-select  
+ { 
+    min-width:150px;
+    max-width: 150px;
+  
+}
+.btn-select-selected 
+  {    
+    min-width:150px;
+    max-width: 150px;   
+  }
+
+  .btn-select-selected:hover
+  {     
+    min-width:150px;
+    max-width: 150px;   
+  }
+ }
 
 

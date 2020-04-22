@@ -1,0 +1,158 @@
+<div class="container" class="p-0 m-0" >
+    <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-7 col-sm-12 col-12 ">    
+            <div class="row">
+                <div class="col-6">
+                    <div class="custom-control custom-radio custom-control">
+                            <input type="radio" class="custom-control-input" id="optHoleTypeSolid" name="HoleType" checked (change)="changeSolidHole('Solid')" 
+                            [(ngModel)]="HoleType" value="Solid">
+                            <label class="custom-control-label" for="optHoleTypeSolid">{{'Solid material' | translate}}</label>
+                    </div> 
+                </div> 
+                <div class="col-6">
+                     <div class="custom-control custom-radio custom-control">
+                            <input type="radio" class="custom-control-input" id="optHoleTypePreHole" name="HoleType" (change)="changeSolidHole('PreHole')"
+                             [(ngModel)]="HoleType" value="PreHole">
+                            <label class="custom-control-label" for="optHoleTypePreHole">{{'Pre hole' | translate}}</label>
+                        </div>
+                </div>   
+            </div> 
+            <div class="row">
+                <div class="col-6 pt-3">
+                        <div>
+                            <img [src]="environment.ImageInputPath + '730_11.png'" >
+                        </div>  
+                </div>  
+                <div class="col-6 pt-3">
+                        <div>
+                            <img [src]="environment.ImageInputPath + '730_12.png'" >
+                        </div>  
+                </div> 
+            </div> 
+            <div  class="pt-3">
+            </div> 
+             <div class="row" *ngIf="HoleType=='PreHole'">
+                <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <label class="pl-0 pt-3">{{'Pre hole diameter (DPH)' | translate}}</label>
+                    <label class="pl-3 asterisk-red pt-3">*</label>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('D3').value==null || srv_StMng.IPL&&srv_StMng.IPL.GetItem('D3').value==''? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtPreHoleDia" (change)="OnDepthChange()"
+                                        [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <label class="pl-0 pt-3">{{srv_appsetting.UnitslengthDesc | translate}}</label>
+                </div>
+            </div>  
+        
+             <div class="row">
+                <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <label class="pl-0 pt-3">{{'Length (L)' | translate}}</label>
+                    <label class="pl-2 asterisk-red pt-3">*</label>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtLength" name="LengthOfShoulder_L" (change)="OnDepthChange()"
+                                        [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()"> 
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <label class="pl-0 pt-3">{{srv_appsetting.UnitslengthDesc | translate}}</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <label class="pl-0 pt-3">{{'Width (W)' | translate}}</label>
+                    <label class="pl-2 asterisk-red pt-3">*</label>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtW" name="txtW" (change)="OnDepthChange()"
+                                        [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <label class="pl-0 pt-3">{{srv_appsetting.UnitslengthDesc | translate}}</label>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <label class="pl-0 pt-3">{{'Depth (D)' | translate}}</label>
+                    <label class="pl-2 asterisk-red pt-3">*</label>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
+                                        [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value" (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()"> 
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <label class="pl-0 pt-3">{{srv_appsetting.UnitslengthDesc | translate}}</label>
+                </div>
+            </div> 
+             <div class="row">
+                <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <label class="pl-0 pt-3">{{'Corner Radius (CR)' | translate}}</label>
+                    <label class="pl-2 asterisk-red pt-3">*</label>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <input type="number" required [className]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('RToleranceMin').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtR" name="txtR" (change)="OnDepthChange()"
+                                        [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('RToleranceMin').value" (focus)="onfocusfield('RToleranceMin')" (focusout)="onfocusoutfield()"> 
+                </div>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <label class="pl-0 pt-3">{{srv_appsetting.UnitslengthDesc | translate}}</label>
+                </div>
+            </div>
+            <div class="row" >               
+                 <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-1">
+                    <label class="pl-0 pt-4">{{'Bottom Radius (R)' | translate}}</label>
+                    <label class="pl-2 asterisk-red pt-4">*</label>
+                </div>
+                <div class="col-7 pt-3">
+                    <div class="custom-slider pt-0 mt-4">
+                        <ng5-slider  [(value)]="srv_StMng.IPL.GetItem('MinCornerRadius').value"  class="form-control-sm  pt-0 mt-0"  [(highValue)]="srv_StMng.IPL.GetItem('MinCornerRadius').value" [options]="options_d2"></ng5-slider>
+                    </div>   
+                    <div class="row pt-2">
+                        <div class="col-xl-5 col-lg-10 col-md-10 col-sm-10 col-10   pl-0 row">
+                            <div class="col-4">
+                                <label>{{'Min' | translate}}</label>
+                            </div>
+                            <div class="col-8 ">
+                                    <input type="number" class="form-control input-min-width"  
+                                                [(ngModel)]="srv_StMng.IPL.GetItem('MinCornerRadius').value"  (focus)="onfocusfield('MinCornerRadius')" (focusout)="onfocusoutfield()"> 
+                            </div>           
+                        </div>
+                            
+                        <div class="col-xl-5 col-lg-10 col-md-10 col-sm-10 col-10  row">
+                            <div class="col-4">
+                                <label>{{'Max' | translate}}</label>
+                            </div>
+                            <div class="col-8">
+                                <input type="number" class="form-control input-min-width"  
+                                            [(ngModel)]="srv_StMng.IPL.GetItem('MaxCornerRadius').value" (focus)="onfocusfield('MaxCornerRadius')" (focusout)="onfocusoutfield()">
+                            </div>
+                            
+                        </div> 
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2  ">
+                            <label>{{srv_appsetting.UnitslengthDesc}}</label>
+                        </div>         
+                    </div>   
+                </div>                             
+            </div> 
+            <div class="form-group"> 
+                <div class="pl-0 pt-3">
+                    <label>{{'Machining Stability' | translate}}</label>
+                </div>
+                    <div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optNormal" name="MachiningStability" checked [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Clamping').value" value="Normal">
+                            <label class="custom-control-label" for="optNormal">{{'Normal' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optUnstable" name="MachiningStability" [(ngModel)]="srv_StMng.IPL&&srv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
+                            <label class="custom-control-label" for="optUnstable">{{'Unstable' | translate}}</label>
+                        </div>                        
+                    </div>
+                </div>                    
+        </div>
+        <div class="col-xl-6 col-lg-6  col-md-5 pr-4 pt-1 div-input-image">
+            <div *ngIf="ImageName!=''" class="border" >
+                <img src="{{ImageName}}" class="input-image">   
+            </div>
+        </div>    
+    </div>
+</div>

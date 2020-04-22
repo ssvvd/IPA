@@ -1,5 +1,6 @@
 import { Component, OnInit ,Input, Output,EventEmitter,OnChanges, SimpleChanges} from '@angular/core';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
+import { TranslateService } from '@ngx-translate/core';
 import 'chart.js';
 
 export class ChartData
@@ -50,7 +51,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   public chartColors: Array<any>;
   public chartOptions: any;
   
-  constructor() { }
+  constructor(public translate: TranslateService) { }
 
   ngOnInit() {
     //alert(this.typeChart);

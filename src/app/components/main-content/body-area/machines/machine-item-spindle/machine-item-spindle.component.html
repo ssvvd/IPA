@@ -1,22 +1,22 @@
     <div class="container-fluid pl-0 pr-0 mr-0" >
         <div class="form-group row" >
-           <label  class="siteTitle pl-4">{{DescSpindle}}</label>
+           <label  class="siteTitle pl-4">{{DescSpindle | translate}}</label>
         </div>  
     <div class="row">
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12  p-2">
-            <label class="pl-3 pb-0 mb-0 bold font-weight-bold">Spindle</label>
+            <label class="pl-3 pb-0 mb-0 bold font-weight-bold">{{'Spindle' | translate}} </label>
         </div>
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12  p-2">
-            <label class="pl-3 pb-0 mb-0 font-weight-bold">Speeds and Feeds</label>
+            <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Speeds and Feeds' | translate}}</label>
         </div>
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12  p-2">
-            <label class="pl-3 pb-0 mb-0 font-weight-bold">Coolant</label>
+            <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Coolant' | translate}}</label>
         </div>
     </div> 
     <div class="row">        
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top  border-bottom pt-2 pb-2 pr-0">  
              <div class="form-group row pt-2">
-                <label for="txtAdaptationType" class="col-sm-7" >Adaptation Type</label>
+                <label for="txtAdaptationType" class="col-sm-7" >{{'Adaptation Type' | translate}}</label>
                 <div class="col-sm-4" *ngIf="isLoadingAdSize">            
                     <select class="form-control-sm" name="slcApatType" [(ngModel)]="curAdapType" (change)="changeadaptype()" >
                         <option  *ngFor="let adaptype of arrAdapType"  [ngValue]="adaptype">{{adaptype.AdaptationType}}</option>
@@ -24,7 +24,7 @@
                 </div>
             </div>  
              <div class="form-group row pt-2">
-                <label for="txtAdaptationSize" class="col-sm-7" >Adaptation Size</label>
+                <label for="txtAdaptationSize" class="col-sm-7" >{{'Adaptation Size' | translate}}</label>
                 <div class="col-sm-4"  *ngIf="isLoadingAdSize">
                     <select  class="form-control-sm"   [(ngModel)]="curAdapSize" (change)="changeadapsize($event.target.value)">
                         <option *ngFor="let adapsize of arrAdapSizeFilter" [ngValue]="adapsize">{{adapsize.AdaptationSize}}</option>
@@ -32,19 +32,19 @@
                 </div>
             </div>               
                 <div class="form-group row pt-2">
-                    <label for="txtPower" class="col-sm-7">Power (Kw)</label>
+                    <label for="txtPower" class="col-sm-7"><span>{{'Power' | translate}}</span><span>{{'(Kw)' | translate}}</span></label>
                     <div class="col-4">
                         <input type="number" class="form-control" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
                     </div>                    
                 </div>
                 <div class="form-group row pt-2">
-                    <label for="txtTorque" class="col-sm-7">Torque (Nm)</label>
+                    <label for="txtTorque" class="col-sm-7"><span>{{'Torque' | translate}}</span><span>{{'(Nm)' | translate}}</span></label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
                     </div>
                 </div>                  
                 <div class="form-group row pt-2">
-                    <label for="txtClampingType" class="col-sm-7">Clamping Type</label>
+                    <label for="txtClampingType" class="col-sm-7">{{'Clamping Type' | translate}}</label>
                     <div class="col-sm-4">
                         <select class="form-control-sm" [ngModel]="spindle.ClampingType" >
                             <option value='VICE'>VICE</option>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                  <div class="form-group row pt-2">
-                    <label for="txtFaceCont" class="col-sm-7">Face Contact Connection</label>
+                    <label for="txtFaceCont" class="col-sm-7">{{'Face Contact Connection' | translate}}</label>
                      <div class="custom-control custom-checkbox custom-control-inline ml-3">
                         <input type="checkbox" class="custom-control-input"  [attr.id]="'optFaceContact' + spindle.RecordID"  name="optFaceContact" [checked]="spindle.FaceContact">
                         <label class="custom-control-label" [attr.for]="'optFaceContact' + spindle.RecordID"></label>
@@ -64,19 +64,19 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left border-bottom p-2">
               <div class="form-group row pt-2">
-                    <label for="txtSpindleSpeed" class="col-sm-7 ">Spindle Speed (rpm)</label>
+                    <label for="txtSpindleSpeed" class="col-sm-7 ">{{'Spindle Speed (rpm)' | translate}}</label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
                     </div>                    
                 </div>
             <div class="form-group row pt-2">
-                <label for="txtMaxCutFeedSpeed" class="col-sm-7">Maximum cutting feed speed (mm/min)</label>
+                <label for="txtMaxCutFeedSpeed" class="col-sm-7">{{'Maximum cutting feed speed (mm/min)' | translate}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
                 </div>
             </div> 
             <div class="form-group row pt-2">
-                <label for="txtMaxRapidFeedSpeed" class="col-sm-7">Maximum rapid feed speed (mm/min)</label>
+                <label for="txtMaxRapidFeedSpeed" class="col-sm-7">{{'Maximum rapid feed speed (mm/min)' | translate}}</label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
                 </div>
@@ -84,13 +84,13 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left pl-2 border-bottom pl-2 pt-2 pb-2 pl-0">
              <div class="form-group row pt-2">
-                <label for="txtEmultionPressure" class="col-7 col-sm-7">Emulsion Pressure (bar)</label>
+                <label for="txtEmultionPressure" class="col-7 col-sm-7">{{'Emulsion Pressure (bar)' | translate}}</label>
                 <div class="col-4 col-sm-4">
                     <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
                 </div>
             </div>
              <div class="form-group row pt-2">
-                <label for="txtEmultionFlowRate" class="col-7 col-sm-7">Emulsion Flow Rate (L/min)</label>
+                <label for="txtEmultionFlowRate" class="col-7 col-sm-7">{{'Emulsion Flow Rate (L/min)' | translate}}</label>
                 <div class="col-4 col-sm-4">
                     <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
                 </div>
@@ -98,10 +98,10 @@
             <div class="form-group row pt-2">
                 <label  class="col-7 col-sm-7"></label>
                 <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
-                    <label>External</label>
+                    <label>{{'External' | translate}}</label>
                 </div>
                 <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
-                    <label>Internal</label>
+                    <label>{{'Internal' | translate}}</label>
                 </div>
             </div> 
              <div class="form-group row">
@@ -120,7 +120,7 @@
                 </div>        
             </div> 
             <div class="form-group row">
-                <label for="txtAirBlast" class="col-7 col-sm-7 ">Air Blast</label>
+                <label for="txtAirBlast" class="col-7 col-sm-7 ">{{'Air Blast' | translate}}</label>
                 <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
                     <div class="custom-control custom-checkbox custom-control-inline">
                         <input type="checkbox" class="custom-control-input"  [attr.id]="'optAirBlastExt'+spindle.RecordID"  name="AirBlast" [(ngModel)]="spindle.ExtAirBlast">
@@ -135,7 +135,7 @@
                 </div>        
             </div> 
              <div class="form-group row">
-                <label for="txtEmultion" class="col-7 col-sm-7 ">Emulsion</label>
+                <label for="txtEmultion" class="col-7 col-sm-7 ">{{'Emulsion' | translate}}</label>
                 <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
                     <div class="custom-control custom-checkbox custom-control-inline ">
                         <input type="checkbox" class="custom-control-input" name="Emultion" [attr.id]="'chkEmultionExt' + spindle.RecordID"   [(ngModel)]="spindle.ExtEmultion">

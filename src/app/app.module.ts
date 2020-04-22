@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import * as $ from "jquery";
 
 import { HeaderComponent } from './components/header/header.component';
@@ -50,6 +52,8 @@ import { ResultsTableComponent } from './components/main-content/body-area/resul
 import { ResFilterComponent } from './components/main-content/body-area/results/res-filter/res-filter.component';
 import { OptimizetoolAdaptortypeComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-adaptortype/optimizetool-adaptortype.component';
 import { PpSelectColumnsComponent } from './components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
+import { Appdetails780Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails780/appdetails780.component';
+import { Appdetails790Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails790/appdetails790.component';
 
 @NgModule({
   declarations: [   
@@ -88,7 +92,9 @@ import { PpSelectColumnsComponent } from './components/main-content/body-area/re
     ResultsTableComponent,
     ResFilterComponent,
     OptimizetoolAdaptortypeComponent,
-    PpSelectColumnsComponent
+    PpSelectColumnsComponent,
+    Appdetails780Component,
+    Appdetails790Component
   ],
   imports: [
     FormsModule,
@@ -101,7 +107,14 @@ import { PpSelectColumnsComponent } from './components/main-content/body-area/re
     NgbModule,
     ReactiveFormsModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   entryComponents:[
     PpAddFavoritComponent,
@@ -114,3 +127,7 @@ import { PpSelectColumnsComponent } from './components/main-content/body-area/re
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http,'assets/i18n/', '.json');  
+}

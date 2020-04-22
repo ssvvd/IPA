@@ -5,6 +5,7 @@ import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { Routes,ActivatedRoute,Router} from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject,Subscription } from 'rxjs';
 
 @Component({
@@ -22,14 +23,16 @@ export class MachineItemComponent implements OnInit {
   imgNameMachine:string; 
   environment = environment;  
   isLoading:boolean =false;
-
+  
   ClickSelectMachine:Subject<any> = new Subject();
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private srv_machine: MachineService,private router1:Router, private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
-  {  
-      this.eventsSubscription.add(this.router.params.subscribe(params => {
-      this.MachineID = parseInt(params["id"]);
+  constructor(public translate: TranslateService,private srv_machine: MachineService, 
+              private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
+  {           
+    this.eventsSubscription.add(this.router.params.subscribe(params => {
+    this.MachineID = parseInt(params["id"]);
+
     }));
   }
 
