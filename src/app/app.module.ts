@@ -49,6 +49,7 @@ import { MatSearchComponent } from './components/main-content/body-area/material
 import { ResultsTableComponent } from './components/main-content/body-area/results/results-table/results-table.component';
 import { ResFilterComponent } from './components/main-content/body-area/results/res-filter/res-filter.component';
 import { OptimizetoolAdaptortypeComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-adaptortype/optimizetool-adaptortype.component';
+import { PpSelectColumnsComponent } from './components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
 
 @NgModule({
   declarations: [   
@@ -86,7 +87,8 @@ import { OptimizetoolAdaptortypeComponent } from './components/main-content/body
     MatSearchComponent,
     ResultsTableComponent,
     ResFilterComponent,
-    OptimizetoolAdaptortypeComponent
+    OptimizetoolAdaptortypeComponent,
+    PpSelectColumnsComponent
   ],
   imports: [
     FormsModule,
@@ -105,7 +107,8 @@ import { OptimizetoolAdaptortypeComponent } from './components/main-content/body
     PpAddFavoritComponent,
     PpRequestMaterialComponent,
     PpEditParamsComponent,
-    PpSetDefaultComponent
+    PpSetDefaultComponent,
+    PpSelectColumnsComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
