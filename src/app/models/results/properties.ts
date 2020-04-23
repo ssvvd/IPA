@@ -10,6 +10,7 @@ export class clsProperties {
     FieldDescription_INCH:string; 
     FieldDescriptionSmall_INCH:string;
     Field_INCH:string;
-	GroupText:string;
+    GroupText:string;
+    IsShow:boolean;
 
 }

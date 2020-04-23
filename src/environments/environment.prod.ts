@@ -17,6 +17,7 @@ export const environment = {
   ImgStock:"assets/img/icon_stock.svg",
   ImgArrowLeft:"assets/img/arrows_left.png",
   ImgArrowRight:"assets/img/arrows_right.png",
+  ImgThreeDots:"assets/img/threeDots.jpg",
   ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx",
   IscarSite:"http://intranet.imc.co.il",
   MachiningCalculatorSite:"https://mpwr.iscar.com/MachiningPower",

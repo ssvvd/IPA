@@ -28,14 +28,20 @@ table.dataTable thead th {
  table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
  
 
- .table td:nth-child(2), .table th:nth-child(2){
-  min-width: 250px
-}
+//  .table td:nth-child(2), .table th:nth-child(2){
+//   min-width: 100px
+// }
 
-.table td:nth-child(4), .table th:nth-child(4){
-  min-width: 250px;
-}
+// .table td:nth-child(3), .table th:nth-child(3){
+//   min-width: 100px;
+// }
 
 .img-grid{
   height: 70px;
 }
+
+.icon-edit{
+  height:25px;
+  cursor: pointer;
+  // margin-left:-20px;
+  }

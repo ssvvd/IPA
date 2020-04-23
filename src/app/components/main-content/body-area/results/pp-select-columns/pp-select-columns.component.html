@@ -1,0 +1,27 @@
+<div class="selectColsModal">
+    <div class="modal-header">
+        <h4 class="modal-title siteTitle">Select the Columns (Maximum 5)</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.close('A')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <div class="modal-body"> 
+        <!-- <div *ngFor="let col of modal_columns">
+            <input type="checkbox" [checked]="col.IsShow"> {{col.FieldDescriptionSmall}}
+          </div> -->
+          <div *ngFor="let col of modal_columns_cur">
+          <div class="custom-control custom-checkbox" [hidden]="col.FieldDescriptionSmall == 'Brand Name' || col.FieldDescriptionSmall == 'Designation'">
+            <input type="checkbox" [checked]="col.IsShow" class="custom-control-input" [id]="col.FieldDescriptionSmall" (change)="checkedState($event, col)">
+            <label class="custom-control-label" [for]="col.FieldDescriptionSmall">{{col.FieldDescriptionSmall}}</label>
+          </div>
+          </div>
+      </div>
+      <h3 class="text-danger desc-label-big-bold pl-2">{{dangMsg}}</h3>
+      <div class="modal-footer">
+            
+        <button type="button" class="btn btn-select-cancel" (click)="reset()">Reset</button>
+        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">Cancel</button>
+        <button type="button" class="btn btn-select" (click)="set()">Set</button>
+      </div>
+    </div>
+    

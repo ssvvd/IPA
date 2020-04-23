@@ -9,7 +9,9 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Subject, Subscription, forkJoin } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
-import { environment } from '../../../../../../environments/environment';
+import { environment } from 'src/environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
 
 @Component({
   selector: 'app-results-table',
@@ -22,6 +24,7 @@ export class ResultsTableComponent implements OnInit {
 
   dtTrigger: Subject<any> = new Subject();
   allSubs$: Subscription;
+  environment = environment;
   dtOptions: any = {};
   dtRsults:object[];
   dtRsultsVisble:object[];
@@ -29,12 +32,14 @@ export class ResultsTableComponent implements OnInit {
   dtPropertiesTable:clsProperties[];
   dtPropertiesTableVisible:clsProperties[];
   dtGroups:clsGroups[];
-  dtDefaultFields:clsMainFields[];
+  dtDefaultFields:string[]=[]
+  arrCurShownFields:string[]=[]
   dtResultsObjects:clsPropertyValue[][];
   dtResultsObjects3d:clsPropertyValue[][][];
   dtResultsObjects3dToShow:clsPropertyValue[][][]
   dtResultShow:any;
-  headers:string[] = [];
+  headers:clsProperties[] = [];
+  headersOrig:clsProperties[] = [];
   arrResult:string[];
   arrResultImgsItem:string[]=[];
   arrResultImgsFamily:string[]=[];
@@ -42,7 +47,7 @@ export class ResultsTableComponent implements OnInit {
   ErrMsg:string="";
 
   constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
-    private SpinnerService: NgxSpinnerService) { }
+    private SpinnerService: NgxSpinnerService,private modalService: NgbModal) { }
 
 
 
@@ -91,6 +96,7 @@ getShowTable(){
           this.dtDefaultFields = JSON.parse(res4); 
           this.arrResultImgsAll = JSON.parse(res5);
 
+          this.arrCurShownFields = this.dtDefaultFields 
           var columnsCount = this.dtPropertiesTable.length
           var rowsCount = this.dtRsults.length
 
@@ -107,6 +113,14 @@ getShowTable(){
                   if (!this.dtRsults[i][Object.keys(this.dtRsults[i])[j]])
                   this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = '';
                   this.dtResultsObjects[i][index].value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+
+                  if (this.dtDefaultFields.indexOf(this.dtPropertiesTable[j].FieldDescriptionSmall) === -1){
+                    this.dtResultsObjects[i][index].property.IsShow = false;
+                  }
+                  else{
+                    this.dtResultsObjects[i][index].property.IsShow = true;
+                  }
+
                   index++
 
                   if (this.dtPropertiesTable[j].FieldDescriptionSmall == "Catalog No" && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
@@ -132,7 +146,7 @@ getShowTable(){
                   
               }
             }
-        
+      
 
           var visColumnsCount = this.dtResultsObjects[0].length
           this.dtResultsObjects3d = []
@@ -161,7 +175,7 @@ getShowTable(){
               }
               this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col1]
               if (i==0)
-                this.headers.push(this.dtResultsObjects[i][col1].property.FieldDescriptionSmall);
+                this.headers.push(this.dtResultsObjects[i][col1].property);
               if (col1 == 0)
                 groupsOrder.push(this.dtResultsObjects[i][col1].property.GroupID)
           for(var col2: number = col1 +  1; col2 < visColumnsCount; col2++) {
@@ -192,6 +206,7 @@ getShowTable(){
           
         }
 
+        this.headersOrig = JSON.parse(JSON.stringify(this.headers));
         this.dtTrigger.next();
         this.SpinnerService.hide();
         // let a =0
@@ -208,4 +223,29 @@ getShowTable(){
 
 changeSource(event, name) { event.target.src = name; }
 
+openSelectColumns(){
+  const modalRef = this.modalService.open(PpSelectColumnsComponent, { centered: true });
+  modalRef.componentInstance.modal_columns = this.headers;
+  modalRef.componentInstance.modal_columns_Org = this.headersOrig
+  modalRef.result.then((result) => {
+    if (result) {
+    console.log(result);
+      if(result != 'A'){
+         this.headers = result
+        // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        //   dtInstance.destroy();
+        //   this.dtTrigger.next();
+        // });
+      }
+    }
+    }, () => console.log('Rejected!'));
 }
+
+
+ trackItem (index: number, item: clsProperties):boolean {
+  return item.IsShow;
+}
+
+}
+
+
