@@ -1,29 +1,62 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { environment } from 'src/environments/environment';
-import { Observable ,Subscription} from 'rxjs';
+import { Observable, Subject,Subscription } from 'rxjs';
+
+export interface DiameterHole
+{
+  Value:number;
+  Description:string;
+}
 
 @Component({
   selector: 'app-appdetails77',
   templateUrl: './appdetails77.component.html',
   styleUrls: ['./appdetails77.component.scss']
 })
+
+
 export class Appdetails77Component implements OnInit {
+  
 
   ImageName:string='';
   InFocus:boolean=false;
   environment=environment;
   
-   @Input() events: Observable<void>;
-  private eventsSubscription: Subscription;
+  @Input() events: Observable<void>;
 
-  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
+  public msrv_StMng:StateManagerService =this.srv_StMng;
+  public msrv_appsetting:AppsettingService =this.srv_appsetting;
+  public arrdiameter:DiameterHole[]=[];
+  //arrdia$: Observable<DiameterHole[]>;
+  public IsLoaded:Boolean=false;
+  public SelectedDia:DiameterHole;
+  private eventsSubscription: Subscription=new Subscription();
+
+  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+              private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() {
-    this.eventsSubscription = this.events.subscribe(() => this.ClearData());
+    this.eventsSubscription.add( this.events.subscribe(() => this.ClearData()));
+    this.eventsSubscription.add(this.srv_DataLayer.holediameterdrilling(this.srv_appsetting.Units).subscribe((res: any) => {
+      this.arrdiameter= JSON.parse(res);    
+      this.SelectedDia =  this.arrdiameter.find(v=> v.Description==this.srv_StMng.IPL.GetItem('D_Hole').valuedefault)
+      this.IsLoaded=true;              
+      if(this.srv_StMng.SecAppSelected.MenuID=='111') this.srv_StMng.IPL.GetItem('IsRotating').value='false';
+      if(this.srv_StMng.SecAppSelected.MenuID=='112') this.srv_StMng.IPL.GetItem('IsRotating').value='true';
+      alert(this.srv_StMng.IPL.GetItem('IsRotating').value);
+
+      }
+      )
+    );   
   }
   
+   public onChange(value: any) {
+     if(value!==undefined) this.srv_StMng.IPL.GetItem('D_Hole').value=value.Value;    
+  }
+
    onfocusfield(field:string)
   {
     this.InFocus=true;

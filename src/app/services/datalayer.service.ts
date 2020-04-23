@@ -30,4 +30,8 @@ export class DatalayerService {
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionaty-get-lines/'+lang);
   }
+  public  holediameterdrilling(units:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'holediameter-drilling/'+units);
+  }
 }

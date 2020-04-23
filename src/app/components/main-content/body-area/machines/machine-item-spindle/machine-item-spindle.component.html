@@ -26,7 +26,7 @@
              <div class="form-group row pt-2">
                 <label for="txtAdaptationSize" class="col-sm-7" >{{'Adaptation Size' | translate}}</label>
                 <div class="col-sm-4"  *ngIf="isLoadingAdSize">
-                    <select  class="form-control-sm"   [(ngModel)]="curAdapSize" (change)="changeadapsize($event.target.value)">
+                    <select  class="form-control-sm"   [(ngModel)]="curAdapSize" (change)="changeadapsize()">
                         <option *ngFor="let adapsize of arrAdapSizeFilter" [ngValue]="adapsize">{{adapsize.AdaptationSize}}</option>
                     </select>                                
                 </div>

@@ -98,6 +98,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     Appdetails790Component,
     Appdetails77Component,
     Appdetails120Component
+
   ],
   imports: [
     FormsModule,

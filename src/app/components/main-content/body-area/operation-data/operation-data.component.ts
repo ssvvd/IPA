@@ -25,6 +25,8 @@ export class OperationDataComponent implements OnInit {
   
    eventsSubject: Subject<void> = new Subject<void>();
   private eventsSubscription: Subscription=new Subscription();
+  
+  public msrv_StMng:StateManagerService =this.srv_StMng;
 
   constructor(private srv_machine: MachineService,router:Router,private srv_DataLayer:DatalayerService,
               private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) 

@@ -26,7 +26,8 @@ export class OptimizetoolComponent implements OnInit {
   eventsSubject: Subject<void> = new Subject<void>();
 
   isLoad:boolean =false;
-  
+  public msrv_StMng:StateManagerService =this.srv_StMng;
+
   constructor(private srv_StMng:StateManagerService) { }
   
   ClearDataChild() {

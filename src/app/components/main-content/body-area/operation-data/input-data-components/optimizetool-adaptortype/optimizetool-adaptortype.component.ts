@@ -13,7 +13,9 @@ export class OptimizetoolAdaptortypeComponent implements OnInit {
   private eventsSubscription: Subscription;
 
   constructor(private srv_StMng:StateManagerService) { }
-
+ 
+  public msrv_StMng:StateManagerService =this.srv_StMng;
+   
   ngOnInit() {
      this.eventsSubscription = this.events.subscribe(() => this.ClearData());
   }

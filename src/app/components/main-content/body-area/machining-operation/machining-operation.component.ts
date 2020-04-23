@@ -112,8 +112,9 @@ export class MachiningOperationComponent implements OnInit {
               this.ApplyFilter2(sa.ParentMenuID);                  
           else
           {
-            this.SelectedSecApp = sa;
+            this.SelectedSecApp = sa;           
             this.SelectedSecAppID = sa.ApplicationITAID;
+
           }
         }        
         this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
@@ -146,14 +147,14 @@ export class MachiningOperationComponent implements OnInit {
   
    onFilterSecApp (obj:SecondaryApp)
    {
-     if(obj.ApplicationITAID!="0")
+     if(obj.ApplicationITAID!='0')
       {
         this.OnSelectSecApp(obj,1)
         return;
       }
      this.SelectedMenuID1 =obj.MenuID;
      this.srv_statemanage.MenuIDLevel1 =obj.MenuID;
-     if(obj.ApplicationITAID=="0")
+     if(obj.ApplicationITAID=='0')
       {       
       this.SelectedSecApp=obj; 
       this.SelectedSecAppID=obj.MenuID;            
@@ -163,7 +164,7 @@ export class MachiningOperationComponent implements OnInit {
    
    onFilterSecApp1(obj:SecondaryApp)
    {
-     if(obj.ApplicationITAID!="0")
+     if(obj.ApplicationITAID!='0')
       {
         this.OnSelectSecApp(obj,2);
         return;

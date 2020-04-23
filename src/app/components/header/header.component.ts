@@ -22,6 +22,9 @@ export class HeaderComponent implements OnInit {
   lstLanguage:Language[] =[];
   isLoadingLang:boolean =false;
   SelectedLang:Language;
+  
+  public msrv_appsetting:AppsettingService =this.srv_appsetting;
+ public msrv_statemanage:StateManagerService =this.srv_statemanage;
 
   // /dictionarygetlanguage
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,

@@ -19,6 +19,8 @@ export class Appdetails780Component implements OnInit {
   
   @Input() events: Observable<void>;
   private eventsSubscription: Subscription; 
+  public msrv_StMng:StateManagerService =this.srv_StMng;
+  public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
  
