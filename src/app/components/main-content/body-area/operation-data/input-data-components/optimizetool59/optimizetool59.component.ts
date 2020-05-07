@@ -12,9 +12,7 @@ import { Observable ,Subscription} from 'rxjs';
   styleUrls: ['./optimizetool59.component.scss']
 })
 export class Optimizetool59Component implements OnInit {
-  
-
-  
+    
   @Input() events: Observable<void>;
   private eventsSubscription: Subscription;
   public msrv_StMng:StateManagerService =this.srv_StMng;

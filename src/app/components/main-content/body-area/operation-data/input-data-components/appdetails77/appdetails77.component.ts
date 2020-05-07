@@ -30,7 +30,6 @@ export class Appdetails77Component implements OnInit {
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public arrdiameter:DiameterHole[]=[];
-  //arrdia$: Observable<DiameterHole[]>;
   public IsLoaded:Boolean=false;
   public SelectedDia:DiameterHole;
   private eventsSubscription: Subscription=new Subscription();
@@ -42,18 +41,28 @@ export class Appdetails77Component implements OnInit {
     this.eventsSubscription.add( this.events.subscribe(() => this.ClearData()));
     this.eventsSubscription.add(this.srv_DataLayer.holediameterdrilling(this.srv_appsetting.Units).subscribe((res: any) => {
       this.arrdiameter= JSON.parse(res);    
-      this.SelectedDia =  this.arrdiameter.find(v=> v.Description==this.srv_StMng.IPL.GetItem('D_Hole').valuedefault)
+      this.SelectedDia =  this.arrdiameter.find(v=> v.Description==this.srv_StMng.IPL.GetItem('D_Hole').value)
       this.IsLoaded=true;              
       if(this.srv_StMng.SecAppSelected.MenuID=='111') this.srv_StMng.IPL.GetItem('IsRotating').value='false';
       if(this.srv_StMng.SecAppSelected.MenuID=='112') this.srv_StMng.IPL.GetItem('IsRotating').value='true';      
-
       }
       )
     );   
+
+    /*  this.eventsSubscription.add(this.srv_DataLayer.holediameterdrilling(this.srv_appsetting.Units).subscribe((res: any) => {
+      this.arrdiameter= JSON.parse(res);    
+      }
+      )
+    );  */
   }
   
    public onChange(value: any) {
      if(value!==undefined) this.srv_StMng.IPL.GetItem('D_Hole').value=value.Value;    
+  }
+  
+  public ChangeDiameter()
+  {
+    this.srv_StMng.IPL.GetItem('D_Hole').value=this.SelectedDia.Value.toString(); 
   }
 
    onfocusfield(field:string)

@@ -24,7 +24,8 @@ export class DatalayerOptimizeToolService {
   public  td_tool_designation_list(par:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-tool-designation-list/' + par)
-    .catch((err: HttpErrorResponse) => {      
+    .catch((err: HttpErrorResponse) => {    
+        alert(err) ;
         return "error";
       });  
   }
@@ -56,6 +57,63 @@ export class DatalayerOptimizeToolService {
   public  td_grade_list(par:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-grade-list/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+
+  public  td_get_brandname_thread(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-brandname-thread/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+  
+  public  td_get_family_thread(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'td-get-family-thread/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+
+  public  get_tool_thread_list(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-tool-thread-list/' + par) 
+    .catch((err: HttpErrorResponse) => { 
+      alert('ccc');     
+        return "error";
+      });  
+  }
+
+  public  get_insert_thread_list(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-insert-thread-list/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+  
+  public  get_tool_catalog_thread_list(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-tool-catalog-thread-list/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+
+  public  get_grade_thread_list(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-grade-thread-list/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+  
+  public  get_insert_catalog_thread_list(par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-insert-catalog-thread-list/' + par) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  

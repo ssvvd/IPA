@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "bootstrap";
 @import "~@ng-select/ng-select/themes/default.theme.css";
+@import "bootstrap";
 
 :root {
   --btn-bg-select-color: #204f96;
@@ -366,4 +366,8 @@ html, body{
   //background-color: red;  
   //overflow: hidden;
 } 
+
+.ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
+ .ng-select-container.ng-has-value .ng-value-container 
+ .ng-value{ visibility: visible; }
 

@@ -125,12 +125,12 @@ else
     let JSONParams:string; 
     let str:string='';
 
-    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0') && x.required).length==0)    
+    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0' || x.value=='') && x.required).length==0)    
       {
       this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {   
         str=str + '"' + p.name + '":"' + p.value +'",';
         listparams.push(
-        {
+        {  
           "name": p.name,
           "value": p.value
         })

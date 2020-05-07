@@ -9,17 +9,22 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                       <!--  <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtD_Hole" name="txtD_Hole" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value"  (focus)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()">  -->
-                            <div *ngIf="IsLoaded" style="min-width: 100px">    
-                                <ng-select class="custom" [items]="arrdiameter"                            
+                         <select  class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter()">
+                            <option *ngFor="let d of arrdiameter"  [ngValue]="d" (click)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()">{{d.Description}}</option>
+                        </select> 
+
+                       <!-- <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtD_Hole" name="txtD_Hole" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value"  (focus)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()">   -->
+                            <!-- <div *ngIf="IsLoaded" style="min-width: 100px">    
+                                <ng-select  class="custom" [items]="arrdiameter" 
+                                        [virtualScroll]="true"                           
                                         bindLabel="Description"                           
                                         bindValue="Value"                                                                                                         
                                         (change)="onChange($event)"
                                         appendTo = 'body'
                                         >                            
                                 </ng-select>
-                            </div>
+                            </div> -->
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -86,7 +91,7 @@
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optSlope3" name="Slope" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value=">12">
                             <label class="custom-control-label" for="optSlope3">>12</label>
-                        </div>
+                         </div>
                     </div>
                 </div>
             </div>         

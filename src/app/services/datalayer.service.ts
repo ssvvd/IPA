@@ -30,8 +30,31 @@ export class DatalayerService {
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionaty-get-lines/'+lang);
   }
+
   public  holediameterdrilling(units:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'holediameter-drilling/'+units);
+  }
+
+  public  thread_form()
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form');
+  }
+  
+  public  thread_data_c(units:string,threadform:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-data-c/'+units + '/'+ threadform);
+  }
+ 
+  
+  public  thread_form_data(threadform:string,threadtype:string,units:string)
+  {            
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form-data/'+threadform + '/'+ threadtype + '/' +units);
+  }
+  
+  
+  public  thread_form_colname(threadtype:string)
+  {            
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form-colname/'+  threadtype );
   }
 }

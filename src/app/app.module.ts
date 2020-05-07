@@ -57,6 +57,8 @@ import { Appdetails790Component } from './components/main-content/body-area/oper
 import { Appdetails77Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails77/appdetails77.component';
 import { Appdetails120Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails120/appdetails120.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { OptimizetoolFilterExtComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-filter-ext/optimizetool-filter-ext.component';
+import { Optimizetool120Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool120/optimizetool120.component';
 
 @NgModule({
   declarations: [   
@@ -99,7 +101,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
     Appdetails780Component,
     Appdetails790Component,
     Appdetails77Component,
-    Appdetails120Component
+    Appdetails120Component,
+    OptimizetoolFilterExtComponent,
+    Optimizetool120Component
 
   ],
   imports: [

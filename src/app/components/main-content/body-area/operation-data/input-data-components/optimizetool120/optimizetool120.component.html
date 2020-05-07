@@ -1,0 +1,29 @@
+<div class="p-0 m-0"> 
+    <div class="pt-3 mt-2">                
+      <span>DC - </span><span>{{'Cutting Diameter' | translate}}</span>    
+      <div class="custom-slider pt-0 mt-4">
+          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_DiameterFrom').value"  class="form-control-sm  pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_DiameterTo').value" [options]="options_dc"></ng5-slider>
+      </div>   
+      <div class="row pt-2">
+          <div class="col-6 pl-0 row">
+              <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_DiameterFrom').value"> 
+              </div>
+              <div class="pl-0">
+                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+                    
+          <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_DiameterTo').value">
+              </div>
+              <div class="pl-0">
+                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>          
+      </div>             
+    </div>  
+</div>

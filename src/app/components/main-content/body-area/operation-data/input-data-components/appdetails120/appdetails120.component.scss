@@ -1,0 +1,27 @@
+@import "bootstrap";
+@import 'src/styles.scss';
+
+.input-image
+{
+   width:50% ;
+   margin: 0 auto;
+}
+
+.input-min-width
+{
+    min-width: 100px;
+    max-width: 180px;
+}
+
+.input-dia-min-width
+{
+    min-width: 70px;
+    max-width: 120px;
+}
+
+ @media screen and (max-width: 768px) {
+ .div-input-image
+ {
+     display: none; 
+ }
+} 
