@@ -25,7 +25,7 @@ export class ResFilterListComponent implements OnInit {
   @Output("getListFields") getListFields: EventEmitter<any> = new EventEmitter();
   @Output("change") change: EventEmitter<any> = new EventEmitter();
   @Input() controlName:string;
-  @Input() filteredList:string[] = [];
+  // @Input() filteredList:string[] = [];
 
   @Input() labeldescription:string;
   @Input() funcname:string;

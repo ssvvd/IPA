@@ -31,7 +31,7 @@ export class ResFilterScrollComponent implements OnInit, OnChanges {
   termMax$ = new Subject<number>();
   private eventsSubscription: Subscription=new Subscription();
   isHidden:boolean
-  constructor(private srv_appsetting:AppsettingService) { 
+  constructor(public srv_appsetting:AppsettingService) { 
 
     this.termMin$
       .debounceTime(500)

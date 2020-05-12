@@ -30,7 +30,7 @@ export class ResFilterComponent implements OnInit {
 
   eventsSubject: Subject<void> = new Subject<void>();
   
-  constructor(private srv_StMng:StateManagerService,private cdRef:ChangeDetectorRef) { }
+  constructor(public srv_StMng:StateManagerService,private cdRef:ChangeDetectorRef) { }
 
   ngOnInit() {
 
@@ -66,7 +66,7 @@ export class ResFilterComponent implements OnInit {
              
   }
 
-  change(control:string,Res:string[]){
+  change(control:string,Res:string){
     this.filterEvent.emit({control,Res})
   }
 
@@ -77,7 +77,8 @@ export class ResFilterComponent implements OnInit {
   changeScroll(outPut){
     this.filterEvent.emit({control:outPut.control,Res:outPut.Res})
   }
-  getListFields(filedName:string,res:string[]):string[]{
+  getListFields(filedName:string):string[]{
+    let res:string[]
      let allValues:string[] = []
 
     let m = this.helpArr.map(a => a[filedName])
