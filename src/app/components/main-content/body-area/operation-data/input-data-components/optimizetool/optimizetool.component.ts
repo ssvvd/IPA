@@ -3,13 +3,13 @@ import { InputParameterlist } from 'src/app/models/operational-data/inputparamet
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { Observable, Subject } from 'rxjs';
 
-interface ToolOptimizeItem
+/* interface ToolOptimizeItem
 {
   RecordID:number;
   Designation:string;
   Value:string;
   Checked:boolean;
-}
+} */
 
 @Component({
   selector: 'app-optimizetool',
@@ -21,8 +21,8 @@ export class OptimizetoolComponent implements OnInit {
     
   TypeFeed:string ="BothFeed";
 
-  arrBrandName:ToolOptimizeItem[]=[];
-  arrToolDesignation:ToolOptimizeItem[]=[]; 
+/*   arrBrandName:ToolOptimizeItem[]=[];
+  arrToolDesignation:ToolOptimizeItem[]=[];  */
   eventsSubject: Subject<void> = new Subject<void>();
   
   isLoad:boolean =false;
@@ -40,7 +40,7 @@ export class OptimizetoolComponent implements OnInit {
     this.eventsSubject.next();
   }
 
-  GetSelectedItemsString(items:ToolOptimizeItem[]): string
+/*   GetSelectedItemsString(items:ToolOptimizeItem[]): string
   {
     let strItems:string='';
     items.forEach (p=>{strItems = strItems +p.Value + ",";});  
@@ -49,7 +49,7 @@ export class OptimizetoolComponent implements OnInit {
     else
       strItems =strItems.substring (0,strItems.length-1);
     return strItems;
-  }
+  } */
  
   ngOnInit() {   
     if(this.srv_StMng.IPL.GetItem('TD_FASTFEED').value=='True'&& this.srv_StMng.IPL.GetItem('TD_REGULAR').value=='True')        
@@ -77,10 +77,10 @@ export class OptimizetoolComponent implements OnInit {
     if(this.TypeFeed=="NormalFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='False'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='True'};
   } 
   
-  get_strselectedvalue(arr :ToolOptimizeItem[]):string
+ /*  get_strselectedvalue(arr :ToolOptimizeItem[]):string
   {
     let str:string ='';     
     arr.forEach(pp=>{str = str +pp.Designation + ",";} );
     return str;    
-  }
+  } */
 }

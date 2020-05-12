@@ -120,17 +120,17 @@
                 <div class="pl-0 pt-3">
                     <label>{{'Machining Stability' | translate}}</label>
                 </div>
-                    <div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optNormal" name="MachiningStability" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Normal">
-                            <label class="custom-control-label" for="optNormal">{{'Normal' | translate}}</label>
-                        </div>            
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="optUnstable" name="MachiningStability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
-                            <label class="custom-control-label" for="optUnstable">{{'Unstable' | translate}}</label>
-                        </div>                        
-                    </div>
+                <div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optNormal" name="MachiningStability" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Normal">
+                        <label class="custom-control-label" for="optNormal">{{'Normal' | translate}}</label>
+                    </div>            
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optUnstable" name="MachiningStability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
+                        <label class="custom-control-label" for="optUnstable">{{'Unstable' | translate}}</label>
+                    </div>                        
                 </div>
+            </div>
         </div>
         <div class="col-xl-6 col-lg-6  col-md-5 pr-4 pt-1 div-input-image">
             <div *ngIf="ImageName!=''" class="border" >

@@ -179,7 +179,7 @@ ClearData()
     this.fillarrpitch();   
     this.fillimagepath(this.objthreadform.ThreadFormISO);
     if (this.threadform == 'M60' || this.threadform == 'MJ60')
-        this.pitch_units =this.srv_appsetting.UnitslengthDesc;
+        this.pitch_units ='mm';//this.srv_appsetting.UnitslengthDesc;
     else
         this.pitch_units ='TPI';
   }

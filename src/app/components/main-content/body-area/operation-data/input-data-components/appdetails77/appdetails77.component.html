@@ -9,8 +9,8 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                         <select  class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter()">
-                            <option *ngFor="let d of arrdiameter"  [ngValue]="d" (click)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()">{{d.Description}}</option>
+                         <select  class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter()" (focusout)="onfocusoutfield()" (focus)="onfocusfield('D_Hole')">
+                            <option *ngFor="let d of arrdiameter"  [ngValue]="d" >{{d.Description}}</option>
                         </select> 
 
                        <!-- <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtD_Hole" name="txtD_Hole" 
@@ -83,12 +83,12 @@
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optSlope1"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value="<=6" name="Slope" checked>
                             <label class="custom-control-label" for="optSlope1"><=6</label>
-                        </div>                                             
-                        <div class="custom-control custom-radio custom-control-inline">
+                        </div>                         
+                        <div class="custom-control custom-radio custom-control-inline">                            
                             <input type="radio" class="custom-control-input" id="optSlope2" name="Slope" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value=">6<=12">
-                            <label class="custom-control-label" for="optSlope2"><=12</label>
+                            <label class="custom-control-label" for="optSlope2"><=6 & <=12</label>
                         </div>
-                        <div class="custom-control custom-radio custom-control-inline">
+                        <div class="custom-control custom-radio custom-control-inline">                            
                             <input type="radio" class="custom-control-input" id="optSlope3" name="Slope" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value=">12">
                             <label class="custom-control-label" for="optSlope3">>12</label>
                          </div>

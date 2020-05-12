@@ -10,15 +10,20 @@
 .input-min-width
 {
     min-width: 100px;
-    max-width: 180px;
+    /* max-width: 180px; */
 }
 
 .input-dia-min-width
 {
     min-width: 70px;
-    max-width: 120px;
+    //max-width: 120px;
 }
 
+.header-data
+{
+    background-color: #bababa;
+    color:white;
+}
  @media screen and (max-width: 768px) {
  .div-input-image
  {

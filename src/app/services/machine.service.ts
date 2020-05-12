@@ -31,5 +31,8 @@ export class MachineService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-size');
   }
-  
+   public  getmachineadaptationdata(adaptationtype:string,adaptationsize:string,spindle:string,units:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-data/'+ adaptationtype +"/" +adaptationsize + "/" +spindle +"/" +units);
+  }
 }
