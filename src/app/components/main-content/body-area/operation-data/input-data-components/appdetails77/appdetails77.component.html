@@ -1,0 +1,124 @@
+
+<div class="container" class="p-0 m-0" >
+    <div class="form-group row">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 ">    
+            <div class="pt-0" >   
+                <div class="form-group row">                                       
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtD_Hole" class="pl-0 pt-3">{{'Hole Diameter (DH)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                         <select  class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter()">
+                            <option *ngFor="let d of arrdiameter"  [ngValue]="d" (click)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()">{{d.Description}}</option>
+                        </select> 
+
+                       <!-- <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtD_Hole" name="txtD_Hole" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value"  (focus)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()">   -->
+                            <!-- <div *ngIf="IsLoaded" style="min-width: 100px">    
+                                <ng-select  class="custom" [items]="arrdiameter" 
+                                        [virtualScroll]="true"                           
+                                        bindLabel="Description"                           
+                                        bindValue="Value"                                                                                                         
+                                        (change)="onChange($event)"
+                                        appendTo = 'body'
+                                        >                            
+                                </ng-select>
+                            </div> -->
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+                </div>   
+                <div class="form-group row">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtDepth" class="pl-0 pt-3">{{'Depth (DPT)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtLengthOfShoulder_L" class="pl-0 pt-3">{{'Pre hole dia (DPH)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input type="number"required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DiameterBoring').value==null ? 'form-control  input-empty':'form-control'" id="txtDiameterBoring" name="txtDiameterBoring" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DiameterBoring').value" (focus)="onfocusfield('DiameterBoring')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+                </div>
+            </div>                                                                                    
+            <div class="pt-3">
+                <div class="form-group"> 
+                    <div class="pl-0">
+                        <label>{{'Clamping' | translate}}</label>
+                    </div>
+                    <div class="ml-0">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optStable"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Stable" name="Clamping" checked>
+                            <label class="custom-control-label" for="optStable">{{'Stable' | translate}}</label>
+                        </div>                                             
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optUnstable" name="Clamping" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
+                            <label class="custom-control-label" for="optUnstable">{{'Unstable'| translate}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+             <div class="pt-3">
+                <div class="form-group"> 
+                    <div class="pl-0">
+                        <label>{{'Slope' | translate}}</label>
+                    </div>
+                    <div class="ml-0">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optSlope1"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value="<=6" name="Slope" checked>
+                            <label class="custom-control-label" for="optSlope1"><=6</label>
+                        </div>                                             
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optSlope2" name="Slope" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value=">6<=12">
+                            <label class="custom-control-label" for="optSlope2"><=12</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optSlope3" name="Slope" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Slope').value" value=">12">
+                            <label class="custom-control-label" for="optSlope3">>12</label>
+                         </div>
+                    </div>
+                </div>
+            </div>         
+            <div class="pt-3">     
+                <div class="form-group">
+                    <div class="pl-0"> 
+                        <label>{{'Type Of Cut' | translate}}</label>
+                    </div>
+                    <div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optRegular" name="TypeOfCut" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TypeOfCut').value" value="Regular">
+                            <label class="custom-control-label" for="optRegular">{{'Regular' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optInterrupted" name="TypeOfCut"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TypeOfCut').value" value="Interrupted">
+                            <label class="custom-control-label" for="optInterrupted">{{'Interrupted' | translate}}</label>
+                        </div>                                    
+                    </div>   
+                </div>
+            </div>         
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
+            <div *ngIf="ImageName!=''" class="border" >
+                <img src="{{ImageName}}" class="input-image">   
+            </div>
+        </div>    
+    </div>
+</div>
+
+

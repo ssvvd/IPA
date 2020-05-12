@@ -6,12 +6,17 @@
             </div>                                   
             <div class="col-5 pl-0 ml-0 text-truncate selected-items">
                 {{select_items}}
-            </div>
+            </div>           
              <div *ngIf="select_items!=''" class="col-1  pl-0 ml-0 mr-0 pr-0" >
                 <a (click)="remove_select()">
                     <i class="fa fa-remove icon-remove cursor-pointer"></i>
-                </a> 
-            </div>            
+                </a>                 
+            </div>  
+             <div  *ngIf="select_items==''" class="col-1  pl-0 ml-0 mr-0 pr-0">
+                <a (click)="ClearData()">
+                    <i class="fa fa-refresh icon-remove cursor-pointer"></i>
+                </a>                 
+            </div>           
             <div class="ml-auto pl-0 ml-0 mr-0 pr-0">
                 <a (click)="showdetail()">
                     <i [ngClass]="isshowdetail?'fa fa-caret-up icon-open':'fa fa-caret-down icon-open'"></i>

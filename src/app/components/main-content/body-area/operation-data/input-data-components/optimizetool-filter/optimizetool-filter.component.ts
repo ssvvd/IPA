@@ -1,5 +1,5 @@
 import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
+//import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
@@ -50,7 +50,7 @@ export class OptimizetoolFilterComponent implements OnInit {
   Top:number =10;
   Filter:string='All';  
 
-  constructor(private srv_DataLayer:DatalayerService,private srv_dl_toolopt:DatalayerOptimizeToolService,
+  constructor(private srv_dl_toolopt:DatalayerOptimizeToolService,
               private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
               private SpinnerService: NgxSpinnerService) { }
   
@@ -179,11 +179,171 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.eventsSubscription.add(this.srv_dl_toolopt.td_grade_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
-      default: {             
+      
+       case"BRANDNAMETHREAD":  {  
+         let cool_yes:string;
+         let cool_no:string;  
+         let threadform:string;
+         let pitch:string;
+         this.srv_StMng.IPL.GetItem("TD_CoolantYes").value=='True'? cool_yes = '1':cool_yes = '0'; 
+         this.srv_StMng.IPL.GetItem("TD_CoolantNo").value=='True'? cool_no = '1':cool_no = '0';  
+         this.srv_StMng.IPL.GetItem("ThreadForm").value==null || this.srv_StMng.IPL.GetItem("ThreadForm").value==''? threadform = 'All':threadform = this.srv_StMng.IPL.GetItem("ThreadForm").value; 
+         this.srv_StMng.IPL.GetItem("Pitch").value==null || this.srv_StMng.IPL.GetItem("Pitch").value==''? pitch = 'All':pitch = this.srv_StMng.IPL.GetItem("Pitch").value; 
+          //td-get-brandname-thread/{pUnits}/{bTA}/{bSolid}/{pSecondaryApp}/{pPitch}/{pSecondaryApp}/{pThreeadForm}/{pCoolantNo}/{pCoolantYes}/{Filter}/{Top}        
+          param=this.srv_StMng.IPL.GetItem("Units").value +  "/1/1/" + this.srv_StMng.SecApp +"/" + pitch + "/" 
+          + threadform +"/" + cool_no +"/" + cool_yes +"/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_dl_toolopt.td_get_brandname_thread(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          break; 
+      } 
+
+      case"TOOLTHREAD":  {  
+         let cool_yes:string;
+         let cool_no:string;  
+         let brandname:string;
+         let threadform:string;
+         let pitch:string;
+         let size:string;
+         let family:string;
+         let dia:string;
+         let majordiameter:string;
+         let l:string;
+         this.srv_StMng.IPL.GetItem("TD_CoolantYes").value=='True'? cool_yes = '1':cool_yes = '0'; 
+         this.srv_StMng.IPL.GetItem("TD_CoolantNo").value=='True'? cool_no = '1':cool_no = '0';
+         this.srv_StMng.IPL.GetItem("MajorDiameter").value==null || this.srv_StMng.IPL.GetItem("MajorDiameter").value==''? majordiameter = '0':majordiameter = this.srv_StMng.IPL.GetItem("MajorDiameter").value;           
+         this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==null || this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==''? l = '0':l = this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value;           
+         this.srv_StMng.IPL.GetItem("D_Hole").value==null || this.srv_StMng.IPL.GetItem("D_Hole").value==''? dia = '0':dia = this.srv_StMng.IPL.GetItem("D_Hole").value;           
+         
+         brandname =this.getvalueparambyname("TD_BrandName");
+         family =this.getvalueparambyname("TD_Family");
+         threadform =this.getvalueparambyname("ThreadForm");
+         pitch =this.getvalueparambyname("Pitch");         
+         size=this.getvalueparambyname("Size");
+         
+          //{SecondaryApp}/{Units}/{BrandName}/{DiaFrom}/{DiaTo}/{bTA}/{bSolid}/{Family}/{Pitch}/{Size}/{Diameter}/{Length}/{MajorDiameter}/{ThreadForm}/{mCoolantNo}/{mCoolantYes}/{Filter}/{Top}        
+          param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
+                "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" +cool_no +"/" + cool_yes + "/";       
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_dl_toolopt.get_tool_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          break; 
+      }       
+       case"INSERTTHREAD":  {  
+         let cool_yes:string;
+         let cool_no:string;  
+         let brandname:string =this.getvalueparambyname("TD_BrandName");
+         let threadform:string=this.getvalueparambyname("ThreadForm");
+         let pitch:string =this.getvalueparambyname("Pitch");
+         let size:string='All' //this.getvalueparambyname("Size");
+         let family:string=this.getvalueparambyname("TD_Family");
+         let tool:string =this.getvalueparambyname("TD_ToolDesignation");
+         let dia:string;
+         let majordiameter:string;
+         let l:string;
+         this.srv_StMng.IPL.GetItem("TD_CoolantYes").value=='True'? cool_yes = '1':cool_yes = '0'; 
+         this.srv_StMng.IPL.GetItem("TD_CoolantNo").value=='True'? cool_no = '1':cool_no = '0';
+         this.srv_StMng.IPL.GetItem("MajorDiameter").value==null || this.srv_StMng.IPL.GetItem("MajorDiameter").value==''? majordiameter = '0':majordiameter = this.srv_StMng.IPL.GetItem("MajorDiameter").value;           
+         this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==null || this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==''? l = '0':l = this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value;           
+         this.srv_StMng.IPL.GetItem("D_Hole").value==null || this.srv_StMng.IPL.GetItem("D_Hole").value==''? dia = '0':dia = this.srv_StMng.IPL.GetItem("D_Hole").value;                             
+          //{SecondaryApp}/{Units}/{BrandName}/{DiaFrom}/{DiaTo}/{bTA}/{bSolid}/{Family}/{Pitch}/{Size}/{Diameter}/{Length}/{MajorDiameter}/{ThreadForm}/{Tool}/{mCoolantNo}/{mCoolantYes}/{Filter}/{Top}"        
+          param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
+                "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" + tool + "/" +cool_no +"/" + cool_yes + "/";       
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_dl_toolopt.get_insert_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          break; 
+      }      
+      case"TOOLCATALOGNOTHREAD":  {  
+         let cool_yes:string;
+         let cool_no:string;  
+         let brandname:string =this.getvalueparambyname("TD_BrandName");
+         let threadform:string=this.getvalueparambyname("ThreadForm");
+         let pitch:string =this.getvalueparambyname("Pitch");
+         let size:string=this.getvalueparambyname("Size");
+         let family:string=this.getvalueparambyname("TD_Family");
+         let tool:string =this.getvalueparambyname("TD_ToolDesignation");
+         let dia:string;
+         let majordiameter:string;
+         let l:string;         
+         this.srv_StMng.IPL.GetItem("TD_CoolantYes").value=='True'? cool_yes = '1':cool_yes = '0'; 
+         this.srv_StMng.IPL.GetItem("TD_CoolantNo").value=='True'? cool_no = '1':cool_no = '0';
+         this.srv_StMng.IPL.GetItem("MajorDiameter").value==null || this.srv_StMng.IPL.GetItem("MajorDiameter").value==''? majordiameter = '0':majordiameter = this.srv_StMng.IPL.GetItem("MajorDiameter").value;           
+         this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==null || this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==''? l = '0':l = this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value;           
+         this.srv_StMng.IPL.GetItem("D_Hole").value==null || this.srv_StMng.IPL.GetItem("D_Hole").value==''? dia = '0':dia = this.srv_StMng.IPL.GetItem("D_Hole").value;           
+                
+          //{SecondaryApp}/{Units}/{BrandName}/{DiaFrom}/{DiaTo}/{bTA}/{bSolid}/{Family}/{Pitch}/{Size}/{Diameter}/{Length}/{MajorDiameter}/{ThreadForm}/{Tool}/{mCoolantNo}/{mCoolantYes}/{Filter}/{Top}        
+          param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
+                "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" + tool + "/" +cool_no +"/" + cool_yes + "/";       
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_dl_toolopt.get_tool_catalog_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          break; 
+      }    
+      case"INSERTCATALOGNOTHREAD":  {  
+         let cool_yes:string;
+         let cool_no:string;  
+         let brandname:string =this.getvalueparambyname("TD_BrandName");
+         let threadform:string=this.getvalueparambyname("ThreadForm");
+         let pitch:string =this.getvalueparambyname("Pitch");
+         let size:string='All'; //this.getvalueparambyname("Size");
+         let family:string=this.getvalueparambyname("TD_Family");
+         let tool:string =this.getvalueparambyname("TD_ToolDesignation");
+         let insert:string =this.getvalueparambyname("TD_InsertDesignation");
+         let grade:string =this.getvalueparambyname("TD_Grade");
+         let dia:string;
+         let majordiameter:string;
+         let l:string;         
+         this.srv_StMng.IPL.GetItem("TD_CoolantYes").value=='True'? cool_yes = '1':cool_yes = '0'; 
+         this.srv_StMng.IPL.GetItem("TD_CoolantNo").value=='True'? cool_no = '1':cool_no = '0';
+         this.srv_StMng.IPL.GetItem("MajorDiameter").value==null || this.srv_StMng.IPL.GetItem("MajorDiameter").value==''? majordiameter = '0':majordiameter = this.srv_StMng.IPL.GetItem("MajorDiameter").value;           
+         this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==null || this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==''? l = '0':l = this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value;           
+         this.srv_StMng.IPL.GetItem("D_Hole").value==null || this.srv_StMng.IPL.GetItem("D_Hole").value==''? dia = '0':dia = this.srv_StMng.IPL.GetItem("D_Hole").value;           
+                
+          //get-insert-catalog-thread-list/120/M/All/0/250/1/1/All/All/All/0/0/0/All/All/All/1/1/All/10     
+          param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
+                "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" + tool + "/" +insert +"/" +grade+ "/" +cool_no +"/" + cool_yes + "/";       
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_dl_toolopt.get_insert_catalog_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          break; 
+      }      
+         case"GRADETHREAD":  
+      {  
+         let cool_yes:string;
+         let cool_no:string;  
+         let brandname:string =this.getvalueparambyname("TD_BrandName");
+         let threadform:string=this.getvalueparambyname("ThreadForm");
+         let pitch:string =this.getvalueparambyname("Pitch");
+         let size:string='All' //this.getvalueparambyname("Size");
+         let family:string=this.getvalueparambyname("TD_Family");
+         let tool:string =this.getvalueparambyname("TD_ToolDesignation");
+         let insert:string =this.getvalueparambyname("TD_InsertDesignation");         
+         let dia:string;
+         let majordiameter:string;
+         let l:string;         
+         this.srv_StMng.IPL.GetItem("TD_CoolantYes").value=='True'? cool_yes = '1':cool_yes = '0'; 
+         this.srv_StMng.IPL.GetItem("TD_CoolantNo").value=='True'? cool_no = '1':cool_no = '0';
+         this.srv_StMng.IPL.GetItem("MajorDiameter").value==null || this.srv_StMng.IPL.GetItem("MajorDiameter").value==''? majordiameter = '0':majordiameter = this.srv_StMng.IPL.GetItem("MajorDiameter").value;           
+         this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==null || this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value==''? l = '0':l = this.srv_StMng.IPL.GetItem("LengthOfShoulder_L").value;           
+         this.srv_StMng.IPL.GetItem("D_Hole").value==null || this.srv_StMng.IPL.GetItem("D_Hole").value==''? dia = '0':dia = this.srv_StMng.IPL.GetItem("D_Hole").value;           
+                
+          //get-grade-thread-list/{SecondaryApp}/{Units}/{BrandName}/{DiaFrom}/{DiaTo}/{bTA}/{bSolid}/{Family}/
+          //{Pitch}/{Size}/{Diameter}/{Length}/{MajorDiameter}/{ThreadForm}/{Tool}/{Insert}/{mCoolantNo}/{mCoolantYes}/{Filter}/{Top}     
+          param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
+                "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" + threadform + "/" + tool + "/" +insert +"/"  +cool_no +"/" + cool_yes + "/";       
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_dl_toolopt.get_grade_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          break; 
+      }         
+
+       default: {             
           break; 
       } 
     }   
 
+  }
+ 
+  getvalueparambyname(name:string)
+  {
+    let val:string;
+    this.srv_StMng.IPL.GetItem(name).value==null || this.srv_StMng.IPL.GetItem(name).value==''? val = 'All':val = this.srv_StMng.IPL.GetItem(name).value;
+    return val;
   }
 
   getmore()
@@ -208,8 +368,8 @@ export class OptimizetoolFilterComponent implements OnInit {
   }
 
   filldatasubscribe(data:any)
-  {   
-    if(data=='error') { this.SpinnerService.hide();return;}   
+  {       
+    if(data=='e') { this.SpinnerService.hide();return;}   
     this.show_more = false;   
     let n:number=0;
     this.arrData =[];     

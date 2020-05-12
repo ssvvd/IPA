@@ -57,6 +57,11 @@ import { Appdetails790Component } from './components/main-content/body-area/oper
 import { NgpSortModule } from "ngp-sort-pipe";
 import { ResFilterListComponent } from './components/main-content/body-area/results/res-filter/res-filter-list/res-filter-list.component';
 import { ResFilterScrollComponent } from './components/main-content/body-area/results/res-filter/res-filter-scroll/res-filter-scroll.component';
+import { Appdetails77Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails77/appdetails77.component';
+import { Appdetails120Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails120/appdetails120.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { OptimizetoolFilterExtComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-filter-ext/optimizetool-filter-ext.component';
+import { Optimizetool120Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool120/optimizetool120.component';
 
 @NgModule({
   declarations: [   
@@ -99,7 +104,12 @@ import { ResFilterScrollComponent } from './components/main-content/body-area/re
     Appdetails780Component,
     Appdetails790Component,
     ResFilterListComponent,
-    ResFilterScrollComponent
+    ResFilterScrollComponent,
+    Appdetails77Component,
+    Appdetails120Component,
+    OptimizetoolFilterExtComponent,
+    Optimizetool120Component
+
   ],
   imports: [
     FormsModule,
@@ -114,6 +124,7 @@ import { ResFilterScrollComponent } from './components/main-content/body-area/re
     NgxSpinnerModule,
     BrowserAnimationsModule,
     NgpSortModule,
+    NgSelectModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

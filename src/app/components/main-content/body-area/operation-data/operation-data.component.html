@@ -1,22 +1,22 @@
 
 <div class="container-fluid ml-0 pl-0 mt-0  pr-0" >   
      <div class="form-group row col-12">       
-        <div  [ngClass]="srv_StMng.IsTabToolDataOpen ? 'width-tooldata  border-right-gray border-left-gray  pt-2' : 'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
+        <div  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'width-tooldata  border-right-gray border-left-gray  pt-2' : 'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
             <div class="pt-4"  >
                 <div class="form-group" >                     
-                    <a  [ngClass]="srv_StMng.IsTabToolDataOpen ?'cursor-pointer float-right':'pl-3 cursor-pointer float-center'" (click)="showtooldata()">                        
-                        <i  [ngClass]="srv_StMng.IsTabToolDataOpen ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
+                    <a  [ngClass]="msrv_StMng.IsTabToolDataOpen ?'cursor-pointer float-right':'pl-3 cursor-pointer float-center'" (click)="showtooldata()">                        
+                        <i  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
                     </a>                            
                     <div>                    
-                        <label [ngClass]="srv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
+                        <label [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
                     </div>
                     <div>
-                        <app-optimizetool  *ngIf = "isLoaded&&srv_StMng.IsTabToolDataOpen" ></app-optimizetool>
+                        <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen" ></app-optimizetool>
                     </div>                  
                 </div>           
             </div> 
         </div>
-        <div [ngClass]="srv_StMng.IsTabToolDataOpen ? 'border-right-gray width-appdetails pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
+        <div [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'border-right-gray width-appdetails pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
             <div class="form-group">
                 <div class="form-group row col-12"> 
                     <div  class= "float-left pl-3">                                       
@@ -30,9 +30,11 @@
                     <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">{{'Clear All'| translate}}</button>
                 </div> 
                 <div class="pt-0">         
-                    <app-appdetails59 *ngIf = "isLoaded && (SecApp==760||SecApp==770||SecApp==57)"  [events]="eventsSubject.asObservable()"></app-appdetails59>
-                    <app-appdetails780 *ngIf = "isLoaded && SecApp==780"  [events]="eventsSubject.asObservable()"></app-appdetails780>
-                    <app-appdetails790 *ngIf = "isLoaded && SecApp==790"  [events]="eventsSubject.asObservable()"></app-appdetails790>
+                    <app-appdetails59 *ngIf = "isLoaded && (SecApp=='760'||SecApp=='770'||SecApp=='57')"  [events]="eventsSubject.asObservable()"></app-appdetails59>
+                    <app-appdetails780 *ngIf = "isLoaded && SecApp=='780'"  [events]="eventsSubject.asObservable()"></app-appdetails780>
+                    <app-appdetails790 *ngIf = "isLoaded && SecApp=='790'"  [events]="eventsSubject.asObservable()"></app-appdetails790>
+                    <app-appdetails77 *ngIf = "isLoaded && SecApp=='77'"  [events]="eventsSubject.asObservable()"></app-appdetails77>
+                     <appdetails120 *ngIf = "isLoaded && (SecApp=='120' || SecApp=='119')"  [events]="eventsSubject.asObservable()"></appdetails120>                 
                 </div>
             </div>
         </div>

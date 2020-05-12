@@ -151,8 +151,8 @@ export class StateManagerService {
     this.mIPL = ipl;
    }
    
-   private mIPL_ListChanged: { name: string, value: string }[];
-   get IPL_ListChanged():{ name: string, value: string }[] {
+  private mIPL_ListChanged: { name: string, value: string }[];
+  get IPL_ListChanged():{ name: string, value: string }[] {
     return this.mIPL_ListChanged;
     }
   set IPL_ListChanged(ipl:{ name: string, value: string }[]) {   
@@ -184,8 +184,7 @@ export class StateManagerService {
   {
     return this.materialSelected;    
   }
-  
- 
+   
    get SecApp():string
   {
     return this.mSecondaryAppSelected.ApplicationITAID;
@@ -210,6 +209,14 @@ export class StateManagerService {
      this.MenuIDLevel2 =""; 
      this.IPL =null;
      this.obsReloadMachineTab.next(true);
+   }
+  
+   private mopttool_selectedfamily:any[]=[];
+  get opttool_selectedfamily():any[] {
+    return this.mopttool_selectedfamily;
+    }
+  set opttool_selectedfamily(arr:any[]) {  
+    this.mopttool_selectedfamily = arr;
    }
 }
  

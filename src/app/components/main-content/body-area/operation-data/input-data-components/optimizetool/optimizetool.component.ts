@@ -24,9 +24,10 @@ export class OptimizetoolComponent implements OnInit {
   arrBrandName:ToolOptimizeItem[]=[];
   arrToolDesignation:ToolOptimizeItem[]=[]; 
   eventsSubject: Subject<void> = new Subject<void>();
-
-  isLoad:boolean =false;
   
+  isLoad:boolean =false;
+  public msrv_StMng:StateManagerService =this.srv_StMng;
+
   constructor(private srv_StMng:StateManagerService) { }
   
   ClearDataChild() {

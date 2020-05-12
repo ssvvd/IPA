@@ -1,0 +1,133 @@
+<div class="container" class="p-0 m-0" >
+    <div class="form-group row" *ngIf="isLoaded">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 ">               
+            <div class="pt-0" >   
+                <div class="form-group row">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label class="pl-0 pt-3">{{'Thread Std. (TS)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
+                        <select  class="form-control input-min-width" [(ngModel)]="objthreadform" (change)="changethreadform()">
+                            <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">{{tf.Description}}</option>
+                        </select> 
+                    </div>                   
+                </div> 
+                <div class="form-group row">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label class="pl-0 pt-3">{{'Pitch (P)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                         <select  class="form-control input-min-width"   [(ngModel)]="pitch" (change)="changepitch()">
+                            <option *ngFor="let p of arrPitch"  [selected]="p==pitch" [ngValue]="p">{{p}}</option>
+                        </select> 
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2  pt-1 pl-0">
+                        <label class="pl-0 pt-1">{{pitch_units | translate}}</label>
+                    </div>                   
+                </div>  
+                 <div class="row">
+                    
+                   
+                 </div>
+                 <div class="form-group row">                                         
+                    <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10 pt-0 pl-0 pr-2">   
+                        <div>
+                            <label class="pl-0 pt-3">{{'Thread Dia. (Do)' | translate}}</label>                        
+                        </div> 
+                        <div class="row"> 
+                            <div>                  
+                                <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-dia-min-width':'form-control input-dia-min-width'"  id="txtSize" name="txtSize" 
+                                   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value" (change)="ChangeDiameter()">                                                    
+                                </div>
+                            <div>
+                                <label class="pl-2 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                            </div>
+                        </div>
+                    </div>                     
+                    <div class="col-xl-1 col-lg-1 col-md-10 col-sm-10 col-10 pt-0 pl-0">
+                        <label class="pt-3">{{'OR' | translate}}</label>
+                        <label class="pl-2 asterisk-red">*</label>                        
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-10 col-sm-10 col-10 pt-0 pl-0">
+                         <div>
+                            <label class="pl-0 pt-3">{{'Nominal Size (NS)' | translate}}</label>                        
+                        </div>
+                         <select  class="form-control input-min-width"  [(ngModel)]="size" (change)="changesize()">
+                            <option *ngFor="let s of arrSize"   [selected]="s==size"  [ngValue]="s">{{s}}</option>
+                        </select> 
+                    </div>                   
+                </div> 
+            </div>
+            <div class="form-group row">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0 pr-0">
+                        <label for="txtLengt" class="pl-0 pt-3">{{'Depth (D)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-8 col-8  pt-1 pl-0">                        
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtLength" name="txtLength" 
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value">                                                                        
+                    </div>    
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2  pt-1 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>               
+            </div> 
+             <div *ngIf="arrDisplayData.length>0"  class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 pt-4 pl-0 pr-0">    
+                        <div class="row">                           
+                                <div class="col-6 border">
+                                    <label >{{'Item' | translate}}</label>
+                                </div>
+                                <div class="col-3 border">
+                                    <label >{{'Value' | translate}}</label>
+                                </div>
+                                <div class="col-3 border">
+                                    <label >{{'Units' | translate}}</label>
+                                </div>                                                    
+                        </div>                                   
+                        <div *ngFor="let dd of arrDisplayData" class="row">                           
+                                <div class="col-6 border">
+                                    <label >{{dd.item}}</label>
+                                </div>
+                                <div class="col-3 border">
+                                    <label >{{dd.value}}</label>
+                                </div>
+                                <div class="col-3 border">
+                                    <label >{{dd.units}}</label>
+                                </div>                                                    
+                        </div>                                   
+             </div>
+             <div class="pt-3">
+                <div class="form-group">  
+                    <div class="pl-0">
+                        <label>{{'Stability' | translate}}</label>
+                    </div>
+                    <div class="ml-0 ">
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optLow" name="Stability" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="Low">
+                            <label class="custom-control-label" for="optLow">{{'Low' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optMedium" name="Stability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="Medium">
+                            <label class="custom-control-label" for="optMedium">{{'Medium' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optHigh" name="Stability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="High">
+                            <label class="custom-control-label" for="optHigh">{{'High' | translate}}</label>
+                        </div>
+                    </div>
+                </div>
+             </div>
+             
+            
+         </div>   
+         <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">            
+            <div *ngIf="ImageName1!=''" class="border col-12 text-center" >
+                <img src="{{ImageName1}}" class="input-image img-responsive">   
+            </div>
+            <div *ngIf="ImageName!=''" class="border col-12 text-center">
+                <img src="{{ImageName}}" class="input-image img-responsive">   
+            </div>
+        </div>
+    </div>
+</div>

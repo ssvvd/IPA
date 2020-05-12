@@ -7,24 +7,27 @@
     </div>
     <div class="row"> 
          <div class="pl-0 col-6 ">
-            <label>Indexable Insert</label>  
-            <div class="row pt-2">           
-                <div>
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input"  id="chkbIsIndTool"  name="chkbIsIndTool" 
-                        [checked]="srv_StMng.IPL.GetItem('TD_IT_InsertTool').value=='True'" (change)="change('TD_IT_InsertTool')">
-                        <label class="custom-control-label" for="chkbIsIndTool"></label>
+            <label>{{msrv_StMng.SecApp=='77'?'Indexable':'Indexable Insert' | translate}}</label>  
+                <div class="row pt-2">           
+                    <div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input"  id="chkbIsIndTool"  name="chkbIsIndTool" 
+                            [checked]="msrv_StMng.IPL.GetItem('TD_IT_InsertTool').value=='True'" (change)="change('TD_IT_InsertTool')">
+                            <label class="custom-control-label" for="chkbIsIndTool"></label>
+                        </div>
+                    </div>        
+                    <div class="pr-2" *ngIf="msrv_StMng.SecApp!='77'">
+                        <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Tool' | translate}}</label>
                     </div>
-                </div>        
-                <div class="pr-2">
-                    <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Tools' | translate}}</label>
+                    <div class="pr-2" *ngIf="msrv_StMng.SecApp=='77'">
+                        <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Indexable Insert' | translate}}</label>
+                    </div>
                 </div>
-            </div>
-            <div class="row">          
+            <div class="row" *ngIf="msrv_StMng.SecApp!='77'">          
                 <div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input"  id="chkbIsIndHead"  name="chkbIsIndHead" 
-                        [checked]="srv_StMng.IPL.GetItem('TD_IT_InsertHead').value=='True'" (change)="change('TD_IT_InsertHead')">
+                        [checked]="msrv_StMng.IPL.GetItem('TD_IT_InsertHead').value=='True'" (change)="change('TD_IT_InsertHead')">
                         <label class="custom-control-label" for="chkbIsIndHead"></label>
                     </div>
                 </div>  
@@ -32,15 +35,14 @@
                     <label for="chkbIsIndHead" class="form-check-label text-nowrap">{{'Heads' | translate}}</label>
                 </div>
             </div>               
-
         </div>   
-        <div *ngIf="srv_StMng.SecApp!=770" class="pl-4 pr-4 col-6 border-left-gray">   
+        <div *ngIf="msrv_StMng.SecApp!='770'" class="pl-4 pr-4 col-6 border-left-gray">   
             <label>Solid</label> 
              <div div class="row   pt-2">               
                 <div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input"  id="chkbIsSolid"  name="chkbIsSolid" 
-                        [checked]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value=='True'" (change)="change('TD_IT_SolidTool')">
+                        [checked]="msrv_StMng.IPL.GetItem('TD_IT_SolidTool').value=='True'" (change)="change('TD_IT_SolidTool')">
                         <label class="custom-control-label" for="chkbIsSolid"></label>
                     </div>
                 </div>  
@@ -52,7 +54,7 @@
                 <div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input"  id="chkbIsSolidHead"  name="chkbIsSolidHead" 
-                        [checked]="srv_StMng.IPL.GetItem('TD_IT_SolidHead').value=='True'" (change)="change('TD_IT_SolidHead')">
+                        [checked]="msrv_StMng.IPL.GetItem('TD_IT_SolidHead').value=='True'" (change)="change('TD_IT_SolidHead')">
                         <label class="custom-control-label" for="chkbIsSolidHead"></label>
                     </div>
                 </div>   
@@ -61,10 +63,32 @@
                 </div>     
             </div>
            
-        </div>
-       
+        </div>       
     </div>
-    <div class="pl-0 pt-4 ">
+    <div *ngIf="msrv_StMng.SecApp=='77'" class="pl-0 row">
+        <div class="custom-control custom-checkbox col-6 pt-4">
+            <input type="checkbox" class="custom-control-input" id="chkbShank_C" name="Shank" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_Shank_C').value" [checked]="msrv_StMng.IPL.GetItem('TD_Shank_C').value">
+            <label class="custom-control-label" for="chkbShank_C">{{'Cylindrical' | translate}}</label>
+        </div>                              
+        <div class="custom-control custom-checkbox col-6 pt-4">
+            <input type="checkbox" class="custom-control-input" id="chkbShank_W" name="Shank" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_Shank_W').value"   [checked]="msrv_StMng.IPL.GetItem('TD_Shank_W').value">
+            <label class="custom-control-label" for="chkbShank_W">{{'Weldon/WN' | translate}}</label>
+        </div>       
+    </div>
+    <div *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" class="pl-0 pt-4">
+        <label>{{'CSP - Coolant supply property' | translate}}</label>
+        <div  class="pl-0 row">        
+            <div class="custom-control custom-checkbox col-6 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_Shank_C').value">
+                <label class="custom-control-label" for="chkCoolantYes">{{'Yes' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-6 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_Shank_W').value">
+                <label class="custom-control-label" for="chkCoolantNo">{{'No' | translate}}</label>
+            </div>       
+        </div>
+    </div>
+    <div *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='780' || msrv_StMng.SecApp=='790'" class="pl-0 pt-4">
         <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="optHightFeed" name="TypeFeed" [(ngModel)] ="TypeFeed" (change)="changeTypeFeed()"  value="HightFeed">
             <label class="custom-control-label" for="optHightFeed">{{'High Feed' | translate}}</label>
@@ -78,16 +102,28 @@
             <label class="custom-control-label" for="optBothFeed">{{'Both' | translate}}</label>
         </div>  
     </div>
-    <div class="pr-2">
+    <div class="pr-2" *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='780' || msrv_StMng.SecApp=='790'  || msrv_StMng.SecApp=='77'  || msrv_StMng.SecApp=='57'">
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandname"          *ngIf="isLoad" [labeldescription]="'Brand Name'"       [fieldname]="'BrandName'"     [funcname]="'BRAND'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter> 
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_tooldesignation"    *ngIf="isLoad" [labeldescription]="'Tool Designation'" [fieldname]="'Designation'"   [funcname]="'TOOL'"     [fieldid]="'TD_ToolDesignation'"></app-optimizetool-filter>  
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertdesignation"    *ngIf="isLoad" [labeldescription]="'Insert/Solid Designation'"   [fieldname]="'Designation'"   [funcname]="'INSERT'"   [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertdesignation"    *ngIf="isLoad" [labeldescription]="msrv_StMng.SecApp=='770' ?'Insert Designation':'Insert / Solid Designation'"   [fieldname]="'Designation'"   [funcname]="'INSERT'"   [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_toolcatalog"    *ngIf="isLoad" [labeldescription]="'Tool Catalog No'"   [fieldname]="'CatalogNo'"   [funcname]="'TOOLCATALOGNO'"   [fieldid]="'TD_ToolCatalogNo'"></app-optimizetool-filter>       
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertcatalog"    *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"   [fieldname]="'CatalogNo'"   [funcname]="'INSERTCATALOGNO'"   [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertcatalog"    *ngIf="isLoad" [labeldescription]="msrv_StMng.SecApp=='770' ?'Insert Designation':'Insert / Solid Catalog No'" [fieldname]="'CatalogNo'"   [funcname]="'INSERTCATALOGNO'"   [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter> 
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_grade"    *ngIf="isLoad" [labeldescription]="'Grade'"   [fieldname]="'CarbideGrade'"   [funcname]="'GRADE'"   [fieldid]="'TD_Grade'"></app-optimizetool-filter>   
     </div>
+    <div class="pr-2" *ngIf="msrv_StMng.SecApp=='120' || msrv_StMng.SecApp=='119'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"     id="app_brandnamethread"   *ngIf="isLoad" [labeldescription]="'Brand Name'"                  [fieldname]="'BrandName'"     [funcname]="'BRANDNAMETHREAD'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter> 
+        <app-optimizetool-filter-ext [events]="eventsSubject.asObservable()" id="app_FamilyName"        *ngIf="isLoad" [labeldescription]="'Family'"                      [fieldname]="'FamilyName'"    [fieldvalue]="'Family'"           [funcname]="'FAMILYTHREAD'"    [fieldid]="'TD_Family'"></app-optimizetool-filter-ext>                
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"     id="app_tooldesignation"   *ngIf="isLoad" [labeldescription]="'Tool Designation'"            [fieldname]="'Designation'"   [funcname]="'TOOLTHREAD'"         [fieldid]="'TD_ToolDesignation'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"     id="app_insertdesignation" *ngIf="isLoad" [labeldescription]="'Insert / Solid Designation'"  [fieldname]="'Designation'"   [funcname]="'INSERTTHREAD'"       [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_toolcatalog"    *ngIf="isLoad" [labeldescription]="'Tool Catalog No'"   [fieldname]="'CatalogNo'"   [funcname]="'TOOLCATALOGNOTHREAD'"   [fieldid]="'TD_ToolCatalogNo'"></app-optimizetool-filter> 
+         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertcatalog"    *ngIf="isLoad" [labeldescription]="'Insert / Solid Catalog No'" [fieldname]="'CatalogNo'"   [funcname]="'INSERTCATALOGNOTHREAD'"   [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_grade"    *ngIf="isLoad" [labeldescription]="'Grade'"   [fieldname]="'CarbideGrade'"   [funcname]="'GRADETHREAD'"   [fieldid]="'TD_Grade'"></app-optimizetool-filter>   
+    </div>      
     <div class="pt-2">
-        <app-optimizetool59  *ngIf="srv_StMng.SecApp==760 || srv_StMng.SecApp==770 || srv_StMng.SecApp==57 || srv_StMng.SecApp==780 || srv_StMng.SecApp==790" [events]="eventsSubject.asObservable()" ></app-optimizetool59>
+        <app-optimizetool59  *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='57' || msrv_StMng.SecApp=='780' || msrv_StMng.SecApp=='790'" [events]="eventsSubject.asObservable()" ></app-optimizetool59>
+    </div>
+     <div class="pt-2">
+        <app-optimizetool120  *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" [events]="eventsSubject.asObservable()" ></app-optimizetool120>
     </div>
     <app-optimizetool-adaptortype [events]="eventsSubject.asObservable()"></app-optimizetool-adaptortype>   
 </div>
