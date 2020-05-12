@@ -1,10 +1,10 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild, Input, SimpleChanges } from '@angular/core';
 import { ResultsService} from 'src/app/services/results.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsGroups } from 'src/app/models/results/groups';
-import { clsMainFields } from 'src/app/models/results/main-fields';
 import { clsProperties } from 'src/app/models/results/properties';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
+import {clsHelpProp} from 'src/app/models/results/help-prop';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Subject, Subscription, forkJoin } from 'rxjs';
@@ -37,6 +37,7 @@ export class ResultsTableComponent implements OnInit {
   dtResultsObjects:clsPropertyValue[][];
   dtResultsObjects3d:clsPropertyValue[][][];
   dtResultsObjects3dToShow:clsPropertyValue[][][]
+  dtResultsObjectsHelp:clsHelpProp[]=[];
   dtResultShow:any;
   headers:clsProperties[] = [];
   headersOrig:clsProperties[] = [];
@@ -45,7 +46,12 @@ export class ResultsTableComponent implements OnInit {
   arrResultImgsFamily:string[]=[];
   arrResultImgsAll:any;
   ErrMsg:string="";
+  lasTypeFeed:string="";
+  sortProp:string="";
 
+  @Input() filterChangedRec: any ;
+  
+  
   constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal) { }
 
@@ -53,7 +59,7 @@ export class ResultsTableComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dtOptions = {
+     this.dtOptions = {
       pagingType: 'full_numbers',
        "searching": false,
        "lengthChange": false ,
@@ -70,7 +76,8 @@ export class ResultsTableComponent implements OnInit {
             
       }; 
 
-
+      this.lasTypeFeed == 'BothFeed';
+      this.sortProp = 'index';
     this.GetResult();
   }
 
@@ -104,10 +111,119 @@ getShowTable(){
           let index:number = 0;
           for(var i: number = 0; i < rowsCount; i++) {
               this.dtResultsObjects[i] = [];
+              this.dtResultsObjectsHelp[i] = new clsHelpProp(this.srv_Results,i);           
               index = 0
 
               for(var j: number = 0; j< columnsCount; j++) {
+                
+                //Build Helper
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage')
+                this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+
+                if (this.dtPropertiesTable[j].Field == 'DetailsIsExpand'){
+                  this.dtResultsObjectsHelp[i].IsExpand = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+                  this.filterRecommended(this.dtResultsObjectsHelp[i]);
+                }
+                
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Brand Name')
+                this.dtResultsObjectsHelp[i].BrandName.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+
+                if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
+                this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No'){
+                  this.dtResultsObjectsHelp[i].CatalogNo.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+                  if (this.dtResultsObjectsHelp[i].itemType == 'H'){
+                    // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                    this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                    // this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  }
+                  else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
+                    // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                    this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  }
+                }
+                
+
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
+                this.dtResultsObjectsHelp[i].Grade.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+
+                if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
+                this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Designation'){
+                  this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+                  if (this.dtResultsObjectsHelp[i].itemType == 'H'){
+                    this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                    // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                    this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  }
+                  else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
+                    this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                    // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  }
+                }
+                
+
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'ItemType'){
+                  this.dtResultsObjectsHelp[i].itemType = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+                  if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'T'){
+                  this.dtResultsObjectsHelp[i].DesgT.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  this.dtResultsObjectsHelp[i].CatalogNoT.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                }
+                else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
+                  this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                  this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                }
+                //   else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
+                //   this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   // this.dtResultsObjectsHelp[i].CatalogNoS.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                // }
+                }
+                
+
+                // if (((this.srv_StMng.SecApp == '760' && this.dtPropertiesTable[j].Field == 'DMin') || (this.srv_StMng.SecApp != '760' && this.dtPropertiesTable[j].Field == 'Tool_D')) && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]])
+                // this.dtResultsObjectsHelp[i].DC = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+
+
+                //End Build Helper
                 if (this.dtPropertiesTable[j].IsVisible){
+
+                  let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
+                  let value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+                  switch (fieldsmallSplit){
+                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':
+                      if (value && value > 0){
+                      this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
+                      }
+                      break;
+                    case 'LU':
+                      if (value && value > 0){
+                        this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
+                      }
+                      break;
+                    case 'LH':
+                      if (typeof this.dtResultsObjectsHelp[i].LU == 'undefined'){
+                        this.dtResultsObjectsHelp[i].LU = value;
+                      }
+                      break;
+                    case 'LF':
+                      break;
+                    case 'LB':
+                      break;
+                    case 'NOF':
+                      if (value && value > 0){
+                        this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
+                      }
+                      break;
+                    case 'CICT':
+                      if (typeof this.dtResultsObjectsHelp[i].NOF == 'undefined'){
+                        this.dtResultsObjectsHelp[i].NOF = value;
+                      }
+                      break;
+                  }
+
                   this.dtResultsObjects[i][index] = new clsPropertyValue()
                   this.dtResultsObjects[i][index].property = this.dtPropertiesTable[j]
                   if (!this.dtRsults[i][Object.keys(this.dtRsults[i])[j]])
@@ -162,7 +278,7 @@ getShowTable(){
             if(dupColumns.indexOf(col1) == -1){
               this.dtResultsObjects3d[i][index] = []
               index3 = 0
-              if (index == 2){
+              if (this.dtResultsObjects[i][col1].property.Field == "BrandName"){
                 let grpID:number = this.dtResultsObjects[i][col1].property.GroupID
                 let order:number = groupsOrder.indexOf(grpID, 0)
                 index3 = order
@@ -189,7 +305,7 @@ getShowTable(){
             {
               groupsOrder.push(this.dtResultsObjects[i][col2].property.GroupID)
             }
-            if (index == 2){
+            if (this.dtResultsObjects[i][col2].property.Field == "BrandName"){
               let grpID:number = this.dtResultsObjects[i][col2].property.GroupID
               let order:number = groupsOrder.indexOf(grpID, 0)
               index3 = order
@@ -245,6 +361,184 @@ openSelectColumns(){
  trackItem (index: number, item: clsProperties):boolean {
   return item.IsShow;
 }
+
+// trackHelp(index: number, item: clsHelpProp):number {
+//   return item.isHidden;
+// }
+
+
+
+ngOnChanges(changes:SimpleChanges) {
+
+  if (this.filterChangedRec && changes.filterChangedRec){
+    
+    for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
+      switch (this.filterChangedRec.control){
+        case 'ST':
+          if (this.dtResultsObjectsHelp[i].DesgS.filter(s => !s.startsWith('MM')).length > 0){
+          if (!this.filterChangedRec.Res)
+              this.dtResultsObjectsHelp[i].isHidden++
+          else
+              this.dtResultsObjectsHelp[i].isHidden--
+         }      
+          break;
+       case 'SH':
+          if (this.dtResultsObjectsHelp[i].DesgT.filter(s => s.startsWith('MM')).length > 0){
+            if (!this.filterChangedRec.Res)
+                this.dtResultsObjectsHelp[i].isHidden++
+            else
+                this.dtResultsObjectsHelp[i].isHidden--
+          }
+          break;
+        case 'IT':
+        case 'IH':
+          this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
+          break;   
+        case 'TypeFeed':
+          switch (this.filterChangedRec.Res){
+            case 'BothFeed':
+              if (this.lasTypeFeed == 'HightFeed'){
+                if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '700')
+                  {this.dtResultsObjectsHelp[i].isHidden--}
+                if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '710')
+                  {this.dtResultsObjectsHelp[i].isHidden--}
+                if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '730')
+                  {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '740')
+                  {this.dtResultsObjectsHelp[i].isHidden--}    
+              }
+              if (this.lasTypeFeed == 'NormalFeed'){
+                if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '59')
+                  {this.dtResultsObjectsHelp[i].isHidden--}
+                if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '61')
+                  {this.dtResultsObjectsHelp[i].isHidden--}
+                if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '720')
+                  {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '750')
+                  {this.dtResultsObjectsHelp[i].isHidden--}   
+              }
+              break;
+            case 'HightFeed':
+              
+                  if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '700')
+                    {this.dtResultsObjectsHelp[i].isHidden++}
+                  if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '710')
+                    {this.dtResultsObjectsHelp[i].isHidden++}
+                  if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '730')
+                    {this.dtResultsObjectsHelp[i].isHidden++}                                    
+                  if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '740')
+                    {this.dtResultsObjectsHelp[i].isHidden++}    
+                    if (this.lasTypeFeed == 'NormalFeed'){
+                      if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '59')
+                        {this.dtResultsObjectsHelp[i].isHidden--}
+                      if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '61')
+                        {this.dtResultsObjectsHelp[i].isHidden--}
+                      if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '720')
+                        {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                      if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '750')
+                        {this.dtResultsObjectsHelp[i].isHidden--}   
+                    }           
+              break;
+            case 'NormalFeed':          
+                  if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '59')
+                    {this.dtResultsObjectsHelp[i].isHidden++}
+                  if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '61')
+                    {this.dtResultsObjectsHelp[i].isHidden++}
+                  if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '720')
+                    {this.dtResultsObjectsHelp[i].isHidden++}                                    
+                  if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '750')
+                    {this.dtResultsObjectsHelp[i].isHidden++}   
+                    if (this.lasTypeFeed == 'HightFeed'){
+                      if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '700')
+                        {this.dtResultsObjectsHelp[i].isHidden--}
+                      if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '710')
+                        {this.dtResultsObjectsHelp[i].isHidden--}
+                      if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '730')
+                        {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                      if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '740')
+                        {this.dtResultsObjectsHelp[i].isHidden--}    
+                    }
+              break;
+          }   
+          break;  
+          case 'optFilter':
+            switch (this.filterChangedRec.Res){
+              case 'FilterRec':
+                this.filterRecommended(this.dtResultsObjectsHelp[i]);
+                  // if (this.dtResultsObjectsHelp[i].IsExpand == "False")
+                  // this.dtResultsObjectsHelp[i].isHidden++
+                break;
+              case 'FilteAllRes':
+                  if (this.dtResultsObjectsHelp[i].IsExpand == "False")
+                  this.dtResultsObjectsHelp[i].isHidden--
+                break;
+            }
+            break;   
+            case 'optSort':
+              switch (this.filterChangedRec.Res){
+                case 'SortRec':
+                  this.sortProp = 'index';
+                  break;
+                case 'SortSeller':
+                  this.sortProp = 'AverageUse';
+                  break;
+              }
+              return;  
+              
+            case 'filterList':
+              let field:string = this.filterChangedRec.Res[0];
+              let value:string = this.filterChangedRec.Res[1];
+              switch (this.filterChangedRec.Res[2]){
+                case 'T':
+                  if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
+                        this.dtResultsObjectsHelp[i].isHidden--
+                  break;
+                case 'F':
+                  if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
+                      this.dtResultsObjectsHelp[i].isHidden++
+                  break;
+                case 'S':
+                  if (this.dtResultsObjectsHelp[i][field].filter(s => !s.toUpperCase().includes(value)).length > 0)
+                      this.dtResultsObjectsHelp[i].isHidden++
+                  break;
+                case 'CS':
+                  if (this.dtResultsObjectsHelp[i][field].filter(s => !s.toUpperCase().includes(value)).length > 0)
+                        this.dtResultsObjectsHelp[i].isHidden--
+                  break;
+              }
+              console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
+              break;
+
+              case 'scrolList':
+                let fieldS:string = this.filterChangedRec.Res[0];
+                let minValue:string = this.filterChangedRec.Res[1];
+                let maxValue:string = this.filterChangedRec.Res[2];
+                if (this.dtResultsObjectsHelp[i][fieldS] < minValue || this.dtResultsObjectsHelp[i][fieldS] > maxValue)
+                        {this.dtResultsObjectsHelp[i].isHidden++}    
+                else
+                        {this.dtResultsObjectsHelp[i].isHidden--}  
+                console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
+                break;
+                case 'ClearAll':
+                  this.dtResultsObjectsHelp[i].isHidden = 0;
+                  this.sortProp = 'index';
+                  this.filterRecommended(this.dtResultsObjectsHelp[i]);
+                  break;
+      }
+    
+      
+    }
+    if (this.filterChangedRec.control == 'TypeFeed')
+      this.lasTypeFeed = this.filterChangedRec.Res;
+  }
+  
+}
+
+filterRecommended(prop:clsHelpProp){
+    if (prop.IsExpand == "False")
+        prop.isHidden++
+}
+
 
 }
 

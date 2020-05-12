@@ -1,0 +1,46 @@
+<div class="container" class="p-0 m-0 pt-4 pr-2 border-bottom">
+    
+    <div class="form-group row col-12  d-flex justify-content-between" >   
+        <div class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
+            <label>{{labeldescription | translate}}</label>
+        </div>                                   
+        <div class="col-5 pl-0 ml-0 text-truncate selected-items">
+            {{select_items}}
+        </div>
+         <div *ngIf="select_items!=''" class="col-1  pl-0 ml-0 mr-0 pr-0" >
+            <a (click)="remove_select()">
+                <i class="fa fa-remove icon-remove cursor-pointer"></i>
+            </a> 
+        </div>            
+        <div class="ml-auto pl-0 ml-0 mr-0 pr-0">
+            <a (click)="showdetail()">
+                <i [ngClass]="isshowdetail?'fa fa-caret-up icon-open':'fa fa-caret-down icon-open'"></i>
+            </a> 
+        </div>           
+   </div>
+    <div *ngIf="isshowdetail" class="form-group pl-0 ml-0">            
+        <input   class="form-control" type="text" placeholder="Search" aria-label="Search"  (keyup)="ApplySearch($event.target.value)">    
+            <div class="list-group">
+                <div   *ngFor="let itm of arrlistFields; let itmIndex = index" >                                                 
+                    <div *ngIf="show_all || (itmIndex<= max_row_show) || str_search!=''">                            
+                         <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="cursor-pointer" checked [attr.id]="'chk' + funcname + itmIndex" (change)="checkItem(itm,$event)" [attr.name]="'chk' + funcname + itmIndex"  class="custom-control-input" >
+                            <label  class="custom-control-label cursor-pointer" [attr.for]="'chk' + funcname + itmIndex">{{itm | translate}}</label>
+                        </div>
+                    </div>   
+                    </div>                                                                           
+            </div>
+            <div *ngIf="show_more && str_search==''">
+                <button class="btn sileLinks" (click)="getmore()">{{desc_show_more | translate}}</button>
+            </div>
+    </div>
+
+</div>
+<ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+bdOpacity ="0.05"
+size="medium"
+color="#676767"
+type="ball-circus">    
+<p style="color:#676767"></p> 
+</ngx-spinner>  
+

@@ -1,0 +1,27 @@
+<div class="pt-3 mt-2" [hidden]="isHidden">                
+    <span>{{prm}} - </span><span>{{prmDesc | translate}}</span>    
+    <div class="custom-slider pt-0 mt-4">
+        <ng5-slider [(value)]="textBoxMin" [(highValue)]="textBoxMax" class="form-control-sm  pt-0 mt-0" [options]="options" (userChangeEnd)="onUserChangeEnd($event)"></ng5-slider>
+    </div>   
+    <div class="row pt-2">
+        <div class="col-6 pl-0 row">
+            <div class="col-8 pl-0">
+                  <input type="number" class="form-control"  
+                              [value]="textBoxMin" (keyup)="termMin$.next($event.target.value)"> 
+            </div>
+            <div class="pl-0">
+              <label>{{srv_appsetting.UnitslengthDesc}}</label>
+            </div>
+        </div>
+                  
+        <div class="col-6 ml-auto row">
+            <div class="col-8 pl-0">
+              <input type="number" class="form-control"  
+                            [value]="textBoxMax" (keyup)="termMax$.next($event.target.value)">
+            </div>
+            <div class="pl-0">
+              <label>{{srv_appsetting.UnitslengthDesc}}</label>
+            </div>
+        </div>          
+    </div>             
+  </div>
