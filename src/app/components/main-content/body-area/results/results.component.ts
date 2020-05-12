@@ -1,4 +1,5 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import { ResultsTableComponent } from 'src/app/components/main-content/body-area/results/results-table/results-table.component';
 
 
 @Component({
@@ -7,14 +8,29 @@ import { Component, OnInit} from '@angular/core';
   styleUrls: ['./results.component.scss']
 })
 
-export class ResultsComponent implements OnInit { 
+export class ResultsComponent implements OnInit, AfterViewInit { 
+
+filterChanged:any;
+
+@ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 
   constructor() { }
+  ngAfterViewInit() {
+    console.log(this.resTable); 
+  }
 
 
 
   ngOnInit() {
 
+    
+  }
+
+  receiveFilterChange(value){
+    this.filterChanged = value;
+  }
+
+  getHelpFilter(){
 
   }
 

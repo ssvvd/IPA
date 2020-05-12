@@ -54,6 +54,9 @@ import { OptimizetoolAdaptortypeComponent } from './components/main-content/body
 import { PpSelectColumnsComponent } from './components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
 import { Appdetails780Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails780/appdetails780.component';
 import { Appdetails790Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails790/appdetails790.component';
+import { NgpSortModule } from "ngp-sort-pipe";
+import { ResFilterListComponent } from './components/main-content/body-area/results/res-filter/res-filter-list/res-filter-list.component';
+import { ResFilterScrollComponent } from './components/main-content/body-area/results/res-filter/res-filter-scroll/res-filter-scroll.component';
 
 @NgModule({
   declarations: [   
@@ -94,7 +97,9 @@ import { Appdetails790Component } from './components/main-content/body-area/oper
     OptimizetoolAdaptortypeComponent,
     PpSelectColumnsComponent,
     Appdetails780Component,
-    Appdetails790Component
+    Appdetails790Component,
+    ResFilterListComponent,
+    ResFilterScrollComponent
   ],
   imports: [
     FormsModule,
@@ -108,6 +113,7 @@ import { Appdetails790Component } from './components/main-content/body-area/oper
     ReactiveFormsModule,
     NgxSpinnerModule,
     BrowserAnimationsModule,
+    NgpSortModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

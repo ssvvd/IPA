@@ -14,12 +14,23 @@
                     </tr>
                  </thead>
                  <tbody>
-                    <tr  *ngFor="let row of dtResultsObjects3d; let rowIndex = index" >
+                  <!-- <tr  *ngFor="let row of dtResultsObjects3d; let rowIndex = index" 
+                  [hidden]="dtResultsObjectsHelp[rowIndex].isHidden > 0">
+                          <td>
+                           <img src="{{arrResultImgsItem[rowIndex]}}"
+                           (error) ="changeSource($event, arrResultImgsFamily[rowIndex])" class="img-grid">
+                          </td>
+                          <td *ngFor="let col of row; let num = index" [hidden]="!headers[num].IsShow">                 
+                              <span class="d-block" *ngFor="let prty of col.slice().reverse()">
+                                 <label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
+                            </td>
+                       </tr> -->
+                    <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: 'asc':sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0" >
                        <td>
-                        <img src="{{arrResultImgsItem[rowIndex]}}"
-                        (error) ="changeSource($event, arrResultImgsFamily[rowIndex])" class="img-grid">
+                        <img src="{{arrResultImgsItem[row.index]}}"
+                        (error) ="changeSource($event, arrResultImgsFamily[row.index])" class="img-grid">
                        </td>
-                       <td *ngFor="let col of row; let num = index" [hidden]="!headers[num].IsShow">                 
+                       <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow">                 
                            <span class="d-block" *ngFor="let prty of col.slice().reverse()">
                               <label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
                          </td>
