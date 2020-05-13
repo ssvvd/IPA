@@ -17,10 +17,7 @@ export interface DiameterHole
   styleUrls: ['./appdetails77.component.scss']
 })
 
-
 export class Appdetails77Component implements OnInit {
-  
-
   ImageName:string='';
   InFocus:boolean=false;
   environment=environment;
@@ -48,12 +45,6 @@ export class Appdetails77Component implements OnInit {
       }
       )
     );   
-
-    /*  this.eventsSubscription.add(this.srv_DataLayer.holediameterdrilling(this.srv_appsetting.Units).subscribe((res: any) => {
-      this.arrdiameter= JSON.parse(res);    
-      }
-      )
-    );  */
   }
   
    public onChange(value: any) {
@@ -79,7 +70,7 @@ export class Appdetails77Component implements OnInit {
     
   ClearData()
   {
-    this.srv_StMng.IPL.GetItem('D_Hole').value =null;   
+    this.srv_StMng.IPL.GetItem('D_Hole').value ='';   
     this.srv_StMng.IPL.GetItem('DiameterBoring').value =null;
     this.srv_StMng.IPL.GetItem('Depth').value =null;  
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;

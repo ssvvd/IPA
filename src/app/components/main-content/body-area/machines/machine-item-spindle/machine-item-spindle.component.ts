@@ -2,6 +2,7 @@ import { Component, OnInit ,Input,OnChanges, SimpleChanges} from '@angular/core'
 import { MachineService } from 'src/app/services/machine.service' ;
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable, Subject,Subscription } from 'rxjs';
 
 export class AdaptationType
@@ -35,7 +36,7 @@ export class MachineItemSpindleComponent implements OnInit
   isLoadingAdSize:boolean=false;
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private serv: MachineService,private srv_statemanage:StateManagerService) {}
+  constructor(private serv: MachineService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) {}
 
   ngOnInit() 
   {    
@@ -67,11 +68,21 @@ export class MachineItemSpindleComponent implements OnInit
     this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);    
     this.curAdapSize=this.arrAdapSizeFilter[0];
     this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;
+    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);
   }
   
+  filladaptordata(at:string,az:string,st:string)
+  {
+     this.eventsSubscription.add(this.serv.getmachineadaptationdata(at,az,st,this.srv_appsetting.Units).subscribe((res: any) => {
+       this.spindle =JSON.parse(res)[0];   
+       this.spindle.EmultionPressure = 25;//TODO:
+       this.spindle.EmultionFlowRate = 40;                       
+      }));  
+  }
   changeadapsize()
   {  
     this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;        
+    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);
   }
 
   onSpindleSpeedChanged($event)

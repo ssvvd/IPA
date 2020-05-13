@@ -3,7 +3,7 @@
         <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 ">               
             <div class="pt-0" >   
                 <div class="form-group row">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-1">
                         <label class="pl-0 pt-3">{{'Thread Std. (TS)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                     </div>                     
-                    <div class="col-xl-1 col-lg-1 col-md-10 col-sm-10 col-10 pt-0 pl-0">
+                    <div class="col-xl-1 col-lg-1 col-md-10 col-sm-10 col-10 pt-0 pl-0 text-center">
                         <label class="pt-3">{{'OR' | translate}}</label>
                         <label class="pl-2 asterisk-red">*</label>                        
                     </div>
@@ -62,27 +62,27 @@
             </div>
             <div class="form-group row">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0 pr-0">
-                        <label for="txtLengt" class="pl-0 pt-3">{{'Depth (D)' | translate}}</label>
+                        <label for="txtLengt" class="pl-0 pt-3">{{'Thread Length (LTH)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-8 col-8  pt-1 pl-0">                        
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtLength" name="txtLength" 
+                    <div class="col-xl-4 col-lg-4 col-md-8 col-sm-8 col-8  pt-1 pl-0">                                                
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width pr-0':'pr-0 form-control input-min-width'"  id="txtLength" name="txtLength" 
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value">                                                                        
                     </div>    
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2  pt-1 pl-0">
+                    <div class="pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>               
             </div> 
-             <div *ngIf="arrDisplayData.length>0"  class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 pt-4 pl-0 pr-0">    
+             <div *ngIf="arrDisplayData.length>0"  class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 pt-4 pl-0 pr-0 pr-3">    
                         <div class="row">                           
-                                <div class="col-6 border">
-                                    <label >{{'Item' | translate}}</label>
+                                <div class="col-6 border header-data">
+                                    <label class="header-data">{{'Item' | translate}}</label>
                                 </div>
-                                <div class="col-3 border">
-                                    <label >{{'Value' | translate}}</label>
+                                <div class="col-3 border header-data">
+                                    <label class="header-data">{{'Value' | translate}}</label>
                                 </div>
-                                <div class="col-3 border">
-                                    <label >{{'Units' | translate}}</label>
+                                <div class="col-3 border header-data">
+                                    <label class="header-data">{{'Units' | translate}}</label>
                                 </div>                                                    
                         </div>                                   
                         <div *ngFor="let dd of arrDisplayData" class="row">                           

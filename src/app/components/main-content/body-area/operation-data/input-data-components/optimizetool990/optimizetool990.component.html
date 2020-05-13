@@ -1,0 +1,96 @@
+
+<div class="container" class="p-0 m-0 pt-2">
+    <div class="row">
+        <div>
+            <button type="button" class="btn sileLinks mb-0 pl-0 ml-0" (click)="ClearDataChild()">{{'Clear All' | translate}}</button>
+        </div>       
+    </div>
+    <div  class="pl-0 pt-2">
+        <label>{{'Coolant' | translate}}</label>
+        <div  class="pl-0 row">                  
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantYes').value">
+                <label class="custom-control-label" for="chkCoolantYes">{{'Yes' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_CoolantNo').value">
+                <label class="custom-control-label" for="chkCoolantNo">{{'No' | translate}}</label>
+            </div> 
+             <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantHP" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantHP').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantHP').value">
+                <label class="custom-control-label" for="chkCoolantYes">{{'All' | translate}}</label>
+            </div>        
+        </div>
+    </div>
+     <div class="pl-0 pt-2">
+        <label>{{'Insert Material' | translate}}</label>
+        <div  class="pl-0 row"> 
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optMAll" name="Material"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_ISOMat').value"   value="All">
+                <label class="custom-control-label" for="optMAll">{{'All' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optMCarb" name="Material"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_ISOMat').value"   value="REG">
+                <label class="custom-control-label" for="optMCarb">{{'Carbide' | translate}}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optMAdv" name="Material"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_ISOMat').value"   value="ADV">
+                <label class="custom-control-label" for="optMAdv">{{'Advanced' | translate}}</label>
+            </div>  
+        </div>
+    </div>
+     <div class="pl-0 pt-2">
+        <label>{{'Relief angle' | translate}}</label>
+        <div  class="pl-0 row"> 
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optRelAngAll" name="RelAngle"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_NegOrPosAngle').value"   value="All">
+                <label class="custom-control-label" for="optRelAngAll">{{'All' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optRelAngNeg" name="RelAngle"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_NegOrPosAngle').value"   value="Neg">
+                <label class="custom-control-label" for="optRelAngNeg">{{'Negative Angle' | translate}}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optRelAngPos" name="RelAngle"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_NegOrPosAngle').value"   value="Pos">
+                <label class="custom-control-label" for="optRelAngPos">{{'Positive Angle' | translate}}</label>
+            </div>  
+        </div>
+    </div>
+    <div class="pl-0 pt-2">
+        <label>{{'Precision' | translate}}</label>
+        <div  class="pl-0 row"> 
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optPrAll" name="Precision"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value"   value="All">
+                <label class="custom-control-label" for="optPrAll">{{'All' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optPrP" name="Precision"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value"   value="P">
+                <label class="custom-control-label" for="optPrP">{{'Precision' | translate}}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optPrU" name="Precision"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value"   value="U">
+                <label class="custom-control-label" for="optPrU">{{'Utility' | translate}}</label>
+            </div>  
+        </div>
+    </div>
+    <div class="pl-0 pt-2">
+        <div class="row">
+            <div class="col-3">
+                <div>
+                    <label>IC</label>
+                </div>
+                <div>
+                    <label>L</label>
+                </div>
+                <div>
+                    <label>RE</label>
+                </div>
+            </div>
+            <div class="col-4">
+
+            </div>
+            <div class="col-4">
+            </div>
+        </div>
+    </div>
+</div>

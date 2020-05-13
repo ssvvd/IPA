@@ -54,7 +54,37 @@ export class MachineItemSpindleChartComponent implements OnInit {
   constructor(public translate: TranslateService) { }
 
   ngOnInit() {
+    this.FilldataChart();
     //alert(this.typeChart);
+   /*  this.chartdata=new ChartData();    
+    this.chartdata.PoinX_1 =this.spindle.N1;
+    this.chartdata.PoinX_2 =this.spindle.N2;
+    this.chartdata.PoinX_3 =this.spindle.N3;
+    this.chartdata.PoinX_4 =this.spindle.N4;
+    
+    if(this.typeChart=='torque')
+      {
+        this.chartdata.PoinY_1 =this.spindle.T1;
+        this.chartdata.PoinY_2 =this.spindle.T2;
+        this.chartdata.PoinY_3 =this.spindle.T3;
+        this.chartdata.PoinY_4 =this.spindle.T4;
+        this.chartDesc= "Torque";
+        this.chartDescY ="T"
+      }
+    if(this.typeChart=='power')
+      {
+        this.chartdata.PoinY_1 =this.spindle.P1;
+        this.chartdata.PoinY_2 =this.spindle.P2;
+        this.chartdata.PoinY_3 =this.spindle.P3;
+        this.chartdata.PoinY_4 =this.spindle.P4;
+        this.chartDesc= "Power";
+        this.chartDescY ="P"
+      }  */      
+       this.CreateChart();
+  }
+  
+  FilldataChart()
+  {
     this.chartdata=new ChartData();    
     this.chartdata.PoinX_1 =this.spindle.N1;
     this.chartdata.PoinX_2 =this.spindle.N2;
@@ -78,10 +108,8 @@ export class MachineItemSpindleChartComponent implements OnInit {
         this.chartdata.PoinY_4 =this.spindle.P4;
         this.chartDesc= "Power";
         this.chartDescY ="P"
-      }       
-       this.CreateChart();
+      } 
   }
-
    CreateChart()
   {
     let labelaxisY:string;
@@ -191,6 +219,10 @@ export class MachineItemSpindleChartComponent implements OnInit {
               }
               if (property === 'AdaptationSize' ) {                                           
                 //todo:get new graph
+                this.CreateChart();              
+              }
+               if (property === 'spindle' ) { 
+                this.FilldataChart();                                                          
                 this.CreateChart();              
               }
               

@@ -74,8 +74,7 @@ else
 
   showtooldata()
   {
-    this.srv_StMng.IsTabToolDataOpen =!this.srv_StMng.IsTabToolDataOpen;
-    //alert(this.srv_StMng.IsTabToolDataOpen);
+    this.srv_StMng.IsTabToolDataOpen =!this.srv_StMng.IsTabToolDataOpen;    
   }
   
   ClearDataChild()

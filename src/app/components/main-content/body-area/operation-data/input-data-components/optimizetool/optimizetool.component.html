@@ -79,11 +79,11 @@
         <label>{{'CSP - Coolant supply property' | translate}}</label>
         <div  class="pl-0 row">        
             <div class="custom-control custom-checkbox col-6 pt-0">
-                <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_Shank_C').value">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantYes').value">
                 <label class="custom-control-label" for="chkCoolantYes">{{'Yes' | translate}}</label>
             </div>                              
             <div class="custom-control custom-checkbox col-6 pt-0">
-                <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_Shank_W').value">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_CoolantNo').value">
                 <label class="custom-control-label" for="chkCoolantNo">{{'No' | translate}}</label>
             </div>       
         </div>
