@@ -32,6 +32,7 @@ export class ResultsTableComponent implements OnInit {
   dtPropertiesTable:clsProperties[];
   dtPropertiesTableVisible:clsProperties[];
   dtGroups:clsGroups[];
+  promotionFamilies:string[]=[]
   dtDefaultFields:string[]=[]
   arrCurShownFields:string[]=[]
   dtResultsObjects:clsPropertyValue[][];
@@ -94,14 +95,17 @@ getShowTable(){
           this.srv_Results.getoolproperties(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getgroups(this.srv_StMng.SecApp),
           this.srv_Results.getdefaultfields(this.srv_StMng.SecApp),
-          this.srv_Results.Getfamilymovies()
+          this.srv_Results.Getfamilymovies(),
+          this.srv_Results.GetPromotionFamilies()
         )
-        .subscribe(([res1, res2, res3, res4,res5]:[any,any,any,any,any]) => {
+        .subscribe(([res1, res2, res3, res4,res5, res6]:[any,any,any,any,any,any]) => {
           this.dtRsults =JSON.parse(res1);
           this.dtPropertiesTable = JSON.parse(res2); 
           this.dtGroups = JSON.parse(res3);
           this.dtDefaultFields = JSON.parse(res4); 
           this.arrResultImgsAll = JSON.parse(res5);
+          var obj = JSON.parse(res6);
+          this.promotionFamilies = obj.map(ele=>ele.GFNUM);
 
           this.arrCurShownFields = this.dtDefaultFields 
           var columnsCount = this.dtPropertiesTable.length
@@ -127,6 +131,13 @@ getShowTable(){
                 
                 if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Brand Name')
                 this.dtResultsObjectsHelp[i].BrandName.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Family'){
+                  if (this.promotionFamilies.indexOf(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]) > -1){
+                    this.dtResultsObjectsHelp[i].Promotion = true;
+                  }            
+                }
+                
 
                 if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
                 this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
@@ -524,6 +535,18 @@ ngOnChanges(changes:SimpleChanges) {
                   this.sortProp = 'index';
                   this.filterRecommended(this.dtResultsObjectsHelp[i]);
                   break;
+
+
+                  case 'Promotion':
+                    if (this.filterChangedRec.Res){
+                      if (!this.dtResultsObjectsHelp[i].Promotion)
+                        this.dtResultsObjectsHelp[i].isHidden++
+                    }
+                    else{
+                      if (!this.dtResultsObjectsHelp[i].Promotion)
+                        this.dtResultsObjectsHelp[i].isHidden--
+                    }
+                    break;
       }
     
       

@@ -61,6 +61,14 @@ export class ResultsService {
     });
   }
 
+  public  GetPromotionFamilies()
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetPromotionFamilies' ).catch((err: HttpErrorResponse) => {     
+      console.error('An error occurred:', err.error); 
+      return "error";
+    });
+  }
+
   // public  checkItemImgExists()
   // {        
   //   return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists' ).catch((err: HttpErrorResponse) => {      

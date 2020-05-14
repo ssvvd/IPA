@@ -15,6 +15,7 @@ export class clsHelpProp {
     BrandName:string[]=[];
     Designation:string[]=[];
     CatalogNo:string[]=[];
+    Promotion:boolean;
     Dconms:string[]=[];
     Grade:string[]=[];
     CCTMS:string[]=[]
@@ -36,6 +37,7 @@ export class clsHelpProp {
         constructor(private srv_Results:ResultsService, ind:number){
             this._isHidden = 0;
             this.index = ind;
+            this.Promotion = false;
         }
 
     get isHidden(): number {

@@ -38,11 +38,28 @@
     </div>
     <hr>
 
+
+
     <div id="moreFilters" class="collapse" [ngbCollapse]="isCollapsed">
+<div class="pb-2">
+        <div class="row   pt-2" >               
+            <div>
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input"  id="chkbPr"  name="chkbPr" 
+                    (change)="change('Promotion',$event.currentTarget.checked)">
+                    <label class="custom-control-label" for="chkbPr"></label>
+                </div>
+            </div>  
+             <div class="pr-4 pl-0">
+                <label for="chkbPr" class="form-check-label text-nowrap">{{'On Promotion' | translate}}</label>
+            </div>      
+        </div> 
+    </div>
+
     <div class="row pt-4 " [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_SolidHead').value!='True'">   
        <div *ngIf="srv_StMng.SecApp!='770'" class="pr-4 ">   
            <label>Solid</label> 
-            <div div class="row   pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True'">               
+            <div class="row   pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True'">               
                <div>
                    <div class="custom-control custom-checkbox">
                        <input type="checkbox" class="custom-control-input"  id="chkbIsSolid"  name="chkbIsSolid" 
