@@ -2,7 +2,7 @@ import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Observable, Subject,Subscription} from 'rxjs';
+import { Observable, Subject} from 'rxjs';
 import { Options,ChangeContext } from 'ng5-slider';
 
 @Component({
@@ -15,7 +15,6 @@ export class Optimizetool990Component implements OnInit {
   
   @Input() events: Observable<void>;
   eventsSubject: Subject<void> = new Subject<void>();
-  private eventsSubscription: Subscription;
 
   isLoad:boolean =true;
   public msrv_StMng:StateManagerService =this.srv_StMng;
@@ -81,18 +80,14 @@ export class Optimizetool990Component implements OnInit {
  
   ngOnInit() {     
     this.isLoad =true;   
-    this.eventsSubscription = this.events.subscribe(() => this.ClearDataChild());       
-  }
-  
-  ngOnDestroy() {
-    this.eventsSubscription.unsubscribe();
+     
   }
 
-  change(field:string)
+  /* change(field:string)
   {      
       if(this.srv_StMng.IPL.GetItem(field).value=='True')
         this.srv_StMng.IPL.GetItem(field).value='False';
       else
         this.srv_StMng.IPL.GetItem(field).value='True';                
-  }  
+  }   */
 }
