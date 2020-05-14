@@ -5,14 +5,6 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable, Subject,Subscription} from 'rxjs';
 import { Options,ChangeContext } from 'ng5-slider';
 
-/* interface ToolOptimizeItem
-{
-  RecordID:number;
-  Designation:string;
-  Value:string;
-  Checked:boolean;
-} */
-
 @Component({
   selector: 'app-optimizetool990',
   templateUrl: './optimizetool990.component.html',
@@ -25,7 +17,7 @@ export class Optimizetool990Component implements OnInit {
   eventsSubject: Subject<void> = new Subject<void>();
   private eventsSubscription: Subscription;
 
-  isLoad:boolean =false;
+  isLoad:boolean =true;
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
@@ -87,9 +79,9 @@ export class Optimizetool990Component implements OnInit {
     this.eventsSubject.next();
   }
  
-  ngOnInit() {        
-    this.eventsSubscription = this.events.subscribe(() => this.ClearDataChild());   
-    this.isLoad =true;
+  ngOnInit() {     
+    this.isLoad =true;   
+    this.eventsSubscription = this.events.subscribe(() => this.ClearDataChild());       
   }
   
   ngOnDestroy() {
