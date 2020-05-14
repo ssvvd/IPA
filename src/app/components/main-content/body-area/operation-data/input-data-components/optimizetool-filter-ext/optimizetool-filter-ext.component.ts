@@ -1,6 +1,6 @@
 import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
-//import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
+//import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable ,Subscription} from 'rxjs';
@@ -51,8 +51,7 @@ export class OptimizetoolFilterExtComponent implements OnInit {
   Top:number =10;
   Filter:string='All';  
 
-  constructor(private srv_dl_toolopt:DatalayerOptimizeToolService,
-              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+  constructor(private srv_DataLayer:DatalayerService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
               private SpinnerService: NgxSpinnerService) { }
   
   ngOnInit() { 
@@ -161,7 +160,7 @@ export class OptimizetoolFilterExtComponent implements OnInit {
          param=this.srv_StMng.IPL.GetItem("Units").value + "/" + this.srv_StMng.SecApp+ "/" +brandname +"/1/1/" 
                                  + threadform + "/" + pitch + "/" + size + "/" +cool_no + "/" +cool_yes+"/";    
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_get_family_thread(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-family-thread',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
        default: {             

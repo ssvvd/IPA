@@ -111,6 +111,13 @@ else
       this.srv_StMng.IPL.GetItem('PW_AY').value = ms.P1 +""; 
       this.srv_StMng.IPL.GetItem('PW_BY').value = ms.P2 +"";
       this.srv_StMng.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
+
+           //todo: temp for check results
+      if(this.srv_StMng.SecApp=='990')
+      {
+       this.srv_StMng.IPL.GetItem('AdaptorType').value="SQUARE";
+       this.srv_StMng.IPL.GetItem('AdaptorSize').value="25";
+      }
   }
   
   FillDataInputParamAndRouteToResult()

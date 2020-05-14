@@ -1,6 +1,6 @@
 import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
-//import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
+//import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable ,Subscription} from 'rxjs';
@@ -50,9 +50,8 @@ export class OptimizetoolFilterComponent implements OnInit {
   Top:number =10;
   Filter:string='All';  
 
-  constructor(private srv_dl_toolopt:DatalayerOptimizeToolService,
-              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
-              private SpinnerService: NgxSpinnerService) { }
+  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+              private SpinnerService: NgxSpinnerService,private srv_DataLayer:DatalayerService) { }
   
   ngOnInit() { 
     this.eventsSubscription.add(this.events.subscribe(() => this.ClearData()));
@@ -135,21 +134,21 @@ export class OptimizetoolFilterComponent implements OnInit {
           //"M/1/1/760/"
           param=this.srv_appsetting.Units + "/1/1/" + this.srv_StMng.SecApp + "/"; 
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_brandname_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-brandname-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       } 
       case"TOOL":  { 
           //"All/0/999/All/1/1/760/M/All/"          
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_tool_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-tool-designation-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }
       case "INSERT":  {         
           //(mBrand, mTool, mDiaFrom, mDiaTo, mInnerDiaFrom, mInnerDiaTo, mTA,mSolid, mSecondaryApp, mUnits            
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+  "/0/999/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/";
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_insert_designation_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-insert-designation-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       } 
       case"TOOLCATALOGNO":  { 
@@ -157,7 +156,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           //{BrandName}/{DiaFrom}/{DiaTo}/{Insert}/{bTA}/{bSolid}/{pSecondaryApp}/{pUnits}/{Family}/{ToolDesignation}/}{Filter}/{Top}
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/"  + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/";
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_tool_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-tool-catalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }
       case"INSERTCATALOGNO":  { 
@@ -166,7 +165,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/" +this.srv_StMng.IPL.GetItem("TD_InsertDesignation").value + "/" 
           + this.srv_appsetting.Units + "/1/1/All/" + this.srv_StMng.SecApp +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+"/" + this.srv_StMng.IPL.GetItem("TD_ToolCatalogNo").value+ "/0/999/";
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_insert_catalogno_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-insert-catalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
       case"GRADE":  {          
@@ -176,7 +175,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.srv_StMng.IPL.GetItem("TD_InsertCatalogNo").value +"/"+ this.srv_appsetting.Units + "/" + this.srv_StMng.SecApp +"/" + 
           this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/0/999/";
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_grade_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-grade-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
       
@@ -193,7 +192,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.IPL.GetItem("Units").value +  "/1/1/" + this.srv_StMng.SecApp +"/" + pitch + "/" 
           + threadform +"/" + cool_no +"/" + cool_yes +"/";
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.td_get_brandname_thread(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-brandname-thread',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       } 
 
@@ -224,7 +223,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
                 "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" +cool_no +"/" + cool_yes + "/";       
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.get_tool_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-tool-thread-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }       
        case"INSERTTHREAD":  {  
@@ -233,7 +232,7 @@ export class OptimizetoolFilterComponent implements OnInit {
          let brandname:string =this.getvalueparambyname("TD_BrandName");
          let threadform:string=this.getvalueparambyname("ThreadForm");
          let pitch:string =this.getvalueparambyname("Pitch");
-         let size:string='All' //this.getvalueparambyname("Size");
+         let size:string='All';
          let family:string=this.getvalueparambyname("TD_Family");
          let tool:string =this.getvalueparambyname("TD_ToolDesignation");
          let dia:string;
@@ -248,7 +247,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
                 "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" + tool + "/" +cool_no +"/" + cool_yes + "/";       
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.get_insert_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-insert-thread-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }      
       case"TOOLCATALOGNOTHREAD":  {  
@@ -273,7 +272,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
                 "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" + tool + "/" +cool_no +"/" + cool_yes + "/";       
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.get_tool_catalog_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-tool-catalog-thread-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }    
       case"INSERTCATALOGNOTHREAD":  {  
@@ -300,7 +299,7 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
                 "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" + tool + "/" +insert +"/" +grade+ "/" +cool_no +"/" + cool_yes + "/";       
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.get_insert_catalog_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-insert-catalog-thread-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }      
          case"GRADETHREAD":  
@@ -328,10 +327,74 @@ export class OptimizetoolFilterComponent implements OnInit {
           param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
                 "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" + threadform + "/" + tool + "/" +insert +"/"  +cool_no +"/" + cool_yes + "/";       
           str_param=param + str_s + "/" + t;
-          this.eventsSubscription.add(this.srv_dl_toolopt.get_grade_thread_list(str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-grade-thread-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
-      }         
-
+      } 
+      case "BRANDISO": {
+          // get-ISO-brandnames-list/{mIsoMat}/{pUnits}/{pSecondaryApp}
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value + "/" +this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-brandnames-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }      
+       case "SHAPEISO": {
+          // get-ISO-shapes-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{Filter}/{Top}"
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value + "/" +this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +brandname + "/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-shapes-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }  
+      case "INSERTISO": {
+          // get-ISO-inserts-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}")
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-inserts-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      } 
+      case "GRADEISO": {
+          //get-ISO-grade-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{Filter}/{Top}")>  
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" +inserts + "/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-grade-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }   
+      case "HOLDERISO": {
+         //get-ISO-holder-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pGrooveCuttingEdge}/{pKaAngleMin}/{pKaAngleMax}/{pKrAngleMin}/{pKrAngleMax}/{Filter}/{Top}")
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" +inserts + "/" +grade +"/All/0/999/0/9999/"  ;
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-holder-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }  
+        case "TOOLISO": {
+         //get-ISO-tool-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pGrooveCuttingEdge}/{pKaAngleMin}/{pKaAngleMax}/{pKrAngleMin}/{pKrAngleMax}/{pHolderType}/{Filter}/{Top}  
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          let holder:string =this.getvalueparambyname("TD_HolderDesignation");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" +inserts + "/" +grade +"/All/0/999/0/9999/" +holder+"/" ;
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-tool-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }  
        default: {             
           break; 
       } 

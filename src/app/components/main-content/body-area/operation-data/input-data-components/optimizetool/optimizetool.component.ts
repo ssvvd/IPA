@@ -20,9 +20,6 @@ import { Observable, Subject } from 'rxjs';
 export class OptimizetoolComponent implements OnInit {
     
   TypeFeed:string ="BothFeed";
-
-/*   arrBrandName:ToolOptimizeItem[]=[];
-  arrToolDesignation:ToolOptimizeItem[]=[];  */
   eventsSubject: Subject<void> = new Subject<void>();
   
   isLoad:boolean =false;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { HttpClient,HttpHeaders  } from '@angular/common/http';
-//import { HttpParameterCodec } from '@angular/common/http';
+import { HttpClient,HttpHeaders ,HttpErrorResponse} from '@angular/common/http';
+import 'rxjs/add/operator/catch'
   
 @Injectable({
   providedIn: 'root'
@@ -46,15 +46,21 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-data-c/'+units + '/'+ threadform);
   }
  
-  
   public  thread_form_data(threadform:string,threadtype:string,units:string)
   {            
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form-data/'+threadform + '/'+ threadtype + '/' +units);
   }
-  
-  
+    
   public  thread_form_colname(threadtype:string)
   {            
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form-colname/'+  threadtype );
   }
+
+  public  get_tdlist(func:string,par:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + 'api/optimizetool/' + func + '/' + par) 
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }  
 }
