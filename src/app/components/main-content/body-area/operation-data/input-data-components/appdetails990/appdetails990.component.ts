@@ -3,7 +3,7 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { SurfacequalityService} from 'src/app/services/surfacequality.service';
 import { environment } from 'src/environments/environment';
-import { Observable ,Subscription} from 'rxjs';
+import { Observable ,Subscription,Subject} from 'rxjs';
 
 
 @Component({
@@ -18,8 +18,10 @@ export class Appdetails990Component implements OnInit {
   environment=environment;
   
    @Input() events: Observable<void>;
-  private eventsSubscription: Subscription;
-  
+
+  private eventsSubscription: Subscription;  
+  eventsSubject: Subject<void> = new Subject<void>();
+
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   private s:SurfacequalityService;
@@ -47,6 +49,7 @@ export class Appdetails990Component implements OnInit {
               this.RMS=0;
           }
       }
+   
   }
  
   onfocusfield(field:string)
@@ -121,19 +124,17 @@ export class Appdetails990Component implements OnInit {
         this.srv_StMng.IPL.GetItem('SurfaceQualityRt').value ='0'; 
   }
 
-
   ClearData()
   {
-    switch (this.srv_StMng.SecApp)
-    {
+    // alert(this.srv_StMng.SecApp);
+    switch (this.srv_StMng.SecApp.toString())
+    {     
       case '990' :
-      {
+      {      
         this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
         this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
         this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;
-        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;
-       /*  this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =null;
-        this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').value =null;       */
+        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;  
         break;
       }
       case '960' :
@@ -141,21 +142,18 @@ export class Appdetails990Component implements OnInit {
         this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
         this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
         this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;
-        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;
-        this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =null;
-        this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').value =null;
-        this.srv_StMng.IPL.GetItem('MinRadEntAngle').value =null;
-        this.srv_StMng.IPL.GetItem('MaxRadEntAngle').value =null;
+        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;       
+        this.srv_StMng.IPL.GetItem('MinRadEntAngle').value =this.srv_StMng.IPL.GetItem('MinRadEntAngle').valuedefault;
+        this.srv_StMng.IPL.GetItem('MaxRadEntAngle').value =this.srv_StMng.IPL.GetItem('MaxRadEntAngle').valuedefault;
         break;
-      }
-     
-    }
-
+      }     
+    }    
     this.srv_StMng.IPL.GetItem('OperationType').value =this.srv_StMng.IPL.GetItem('OperationType').valuedefault;
     this.srv_StMng.IPL.GetItem('OperationType4Solid').value =this.srv_StMng.IPL.GetItem('OperationType4Solid').valuedefault;
     this.srv_StMng.IPL.GetItem('OverHang').value =this.srv_StMng.IPL.GetItem('OverHang').valuedefault;
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;
     this.srv_StMng.IPL.GetItem('PartShape').value =this.srv_StMng.IPL.GetItem('PartShape').valuedefault;    
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
+    this.eventsSubject.next();
   }
 }

@@ -1,15 +1,9 @@
 import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@angular/core';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService } from 'src/app/services/statemanager.service';
-import { Observable, Subject } from 'rxjs';
-
-/* interface ToolOptimizeItem
-{
-  RecordID:number;
-  Designation:string;
-  Value:string;
-  Checked:boolean;
-} */
+import { AppsettingService} from 'src/app/services/appsetting.service';
+import { Observable, Subject,Subscription} from 'rxjs';
+import { Options,ChangeContext } from 'ng5-slider';
 
 @Component({
   selector: 'app-optimizetool990',
@@ -18,39 +12,80 @@ import { Observable, Subject } from 'rxjs';
 })
 
 export class Optimizetool990Component implements OnInit {
-
-
-/*   arrBrandName:ToolOptimizeItem[]=[];
-  arrToolDesignation:ToolOptimizeItem[]=[];  */
+  
+  @Input() events: Observable<void>;
   eventsSubject: Subject<void> = new Subject<void>();
-  
-  isLoad:boolean =false;
-  public msrv_StMng:StateManagerService =this.srv_StMng;
+  private eventsSubscription: Subscription;
 
-  constructor(private srv_StMng:StateManagerService) { }
+  isLoad:boolean =true;
+  public msrv_StMng:StateManagerService =this.srv_StMng;
+  public msrv_appsetting:AppsettingService =this.srv_appsetting;
+
+  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
   
+   options_IC: Options = {
+    floor: 0,
+    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_IC_MAX').valuedefault),
+    step: this.srv_StMng.IPL.GetItem('Units').value=='M'?0.1:0.01,
+    showTicks: false
+  };
+   options_L: Options = {
+    floor: 0,
+    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_WMax').valuedefault),
+    step: this.srv_StMng.IPL.GetItem('Units').value=='M'?0.1:0.01,
+    showTicks: false
+  };
+  options_R: Options = {
+    floor: 0,
+    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_RadiusMax').valuedefault),
+    step: this.srv_StMng.IPL.GetItem('Units').value=='M'?0.1:0.01,
+    showTicks: false
+  };
+  options_Ang: Options = {
+    floor: 0,
+    ceil:  Number(this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').valuedefault),
+    step: 0.5,
+    showTicks: false
+  };
+
   ClearDataChild() {
  
-   /*  this.srv_StMng.IPL.GetItem('TD_IT_InsertTool').value =this.srv_StMng.IPL.GetItem('TD_IT_InsertTool').valuedefault;
-    this.srv_StMng.IPL.GetItem('TD_IT_InsertHead').value =this.srv_StMng.IPL.GetItem('TD_IT_InsertHead').valuedefault;
-    this.srv_StMng.IPL.GetItem('TD_IT_SolidTool').value =this.srv_StMng.IPL.GetItem('TD_IT_SolidTool').valuedefault;
-    this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').value =this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').valuedefault; */
+    this.srv_StMng.IPL.GetItem('TD_CoolantYes').value =this.srv_StMng.IPL.GetItem('TD_CoolantYes').valuedefault;
+    this.srv_StMng.IPL.GetItem('TD_CoolantNo').value =this.srv_StMng.IPL.GetItem('TD_CoolantNo').valuedefault;
+    this.srv_StMng.IPL.GetItem('TD_CoolantHP').value =this.srv_StMng.IPL.GetItem('TD_CoolantHP').valuedefault;
+
+    this.srv_StMng.IPL.GetItem('GrooveToolSide').value =this.srv_StMng.IPL.GetItem('GrooveToolSide').valuedefault; 
+    this.srv_StMng.IPL.GetItem('TD_ISOMat').value =this.srv_StMng.IPL.GetItem('TD_ISOMat').valuedefault;
+    this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value =this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').valuedefault;  
+    
+    this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value =this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_IC_MIN').value =this.srv_StMng.IPL.GetItem('TD_IC_MIN').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_IC_MAX').value =this.srv_StMng.IPL.GetItem('TD_IC_MAX').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_WMin').value =this.srv_StMng.IPL.GetItem('TD_WMin').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_WMax').value =this.srv_StMng.IPL.GetItem('TD_WMax').valuedefault;      
+    this.srv_StMng.IPL.GetItem('TD_RadiusMin').value =this.srv_StMng.IPL.GetItem('TD_RadiusMin').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_RadiusMax').value =this.srv_StMng.IPL.GetItem('TD_RadiusMax').valuedefault;      
+    this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =this.srv_StMng.IPL.GetItem('MinAxialEntAngle').valuedefault;  
+    this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').value =this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').valuedefault;  
+    
+    this.srv_StMng.IPL.GetItem('TD_BrandName').value =this.srv_StMng.IPL.GetItem('TD_BrandName').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_InsertShape').value =this.srv_StMng.IPL.GetItem('TD_InsertShape').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_InsertDesignation').value =this.srv_StMng.IPL.GetItem('TD_InsertDesignation').valuedefault;  
+
+   this.srv_StMng.IPL.GetItem('TD_Grade').value =this.srv_StMng.IPL.GetItem('TD_Grade').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_HolderDesignation').value =this.srv_StMng.IPL.GetItem('TD_HolderDesignation').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_SquareDesignation').value =this.srv_StMng.IPL.GetItem('TD_SquareDesignation').valuedefault; 
+
     this.eventsSubject.next();
   }
-
-/*   GetSelectedItemsString(items:ToolOptimizeItem[]): string
-  {
-    let strItems:string='';
-    items.forEach (p=>{strItems = strItems +p.Value + ",";});  
-    if(strItems=='') 
-      strItems ="All";
-    else
-      strItems =strItems.substring (0,strItems.length-1);
-    return strItems;
-  } */
  
-  ngOnInit() {           
-    this.isLoad =true;
+  ngOnInit() {     
+    this.isLoad =true;   
+    this.eventsSubscription = this.events.subscribe(() => this.ClearDataChild());       
+  }
+  
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
   }
 
   change(field:string)
@@ -60,11 +95,4 @@ export class Optimizetool990Component implements OnInit {
       else
         this.srv_StMng.IPL.GetItem(field).value='True';                
   }  
-  
- /*  get_strselectedvalue(arr :ToolOptimizeItem[]):string
-  {
-    let str:string ='';     
-    arr.forEach(pp=>{str = str +pp.Designation + ",";} );
-    return str;    
-  } */
 }

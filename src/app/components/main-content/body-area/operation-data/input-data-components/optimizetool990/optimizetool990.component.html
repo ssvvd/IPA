@@ -10,18 +10,33 @@
         <div  class="pl-0 row">                  
             <div class="custom-control custom-checkbox col-4 pt-0">
                 <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantYes').value">
-                <label class="custom-control-label" for="chkCoolantYes">{{'Yes' | translate}}</label>
+                <label class="custom-control-label" for="chkCoolantYes">{{'Standard' | translate}}</label>
             </div>                              
             <div class="custom-control custom-checkbox col-4 pt-0">
                 <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_CoolantNo').value">
-                <label class="custom-control-label" for="chkCoolantNo">{{'No' | translate}}</label>
+                <label class="custom-control-label" for="chkCoolantNo">{{'Whithout' | translate}}</label>
             </div> 
              <div class="custom-control custom-checkbox col-4 pt-0">
                 <input type="checkbox" class="custom-control-input" id="chkCoolantHP" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantHP').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantHP').value">
-                <label class="custom-control-label" for="chkCoolantYes">{{'All' | translate}}</label>
+                <label class="custom-control-label" for="chkCoolantHP">{{'High Pressure' | translate}}</label>
             </div>        
         </div>
     </div>
+     <div class="form-group"> 
+                <div class="pl-0 pt-3">
+                    <label>{{'Tool Hand' | translate}}</label>
+                </div>
+                <div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optRight" name="Toolside" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="R">
+                        <label class="custom-control-label" for="optRight">{{'Right Hand' | translate}}</label>
+                    </div>            
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optLeft" name="Toolside" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="L">
+                        <label class="custom-control-label" for="optLeft">{{'Left Hand' | translate}}</label>
+                    </div>                        
+                </div>
+            </div>
      <div class="pl-0 pt-2">
         <label>{{'Insert Material' | translate}}</label>
         <div  class="pl-0 row"> 
@@ -73,24 +88,116 @@
             </div>  
         </div>
     </div>
-    <div class="pl-0 pt-2">
-        <div class="row">
-            <div class="col-3">
-                <div>
-                    <label>IC</label>
+    <div class="pt-3 mt-2">    
+      <span>IC - </span><span>{{'Inscribed circle diameter' | translate}}</span>      
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_IC_MIN').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_IC_MAX').value" [options]="options_IC"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+             <div class="col-6 pl-0 row">
+                <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_IC_MIN').value">
+               </div>
+              <div class="pl-0">
+                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div> 
+          </div>
+           <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_IC_MAX').value">
                 </div>
-                <div>
-                    <label>L</label>
-                </div>
-                <div>
-                    <label>RE</label>
-                </div>
-            </div>
-            <div class="col-4">
-
-            </div>
-            <div class="col-4">
-            </div>
-        </div>
+                <div class="pl-0">
+                    <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
     </div>
+    <div class="pt-3 mt-2">    
+      <span>L - </span><span>{{'Cutting edge length' | translate}}</span>       
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_WMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_WMax').value" [options]="options_L"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+             <div class="col-6 pl-0 row">
+                <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMin').value">
+               </div>
+              <div class="pl-0">
+                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div> 
+          </div>
+           <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMax').value">
+                </div>
+                <div class="pl-0">
+                    <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <div class="pt-3 mt-2">    
+      <span>RE - </span><span>{{'Corner radius' | translate}}</span>       
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+             <div class="col-6 pl-0 row">
+                <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value">
+               </div>
+              <div class="pl-0">
+                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div> 
+          </div>
+           <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value">
+                </div>
+                <div class="pl-0">
+                    <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+              </div>
+          </div>
+      </div>   
+    </div>
+    <div class="pt-3 mt-2">    
+      <span>KAPR - </span><span>{{' Tool cutting edge angle' | translate}}</span>       
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinAxialEntAngle').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value" [options]="options_Ang"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+             <div class="col-6 pl-0 row">
+                <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('MinAxialEntAngle').value">
+               </div>
+              <div class="pl-0">
+                <label>&#176;</label>
+              </div> 
+          </div>
+           <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value">
+                </div>
+                <div class="pl-0">
+                    <label>&#176;</label>
+                </div>   
+          </div>
+      </div>   
+    </div>
+    <div>   
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandnameISO"  *ngIf="isLoad" [labeldescription]="'Brand Name'"  [fieldname]="'BrandName'"     [funcname]="'BRANDISO'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter>
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_shapeISO"  *ngIf="isLoad" [labeldescription]="'Insert shape'"  [fieldname]="'Shape'"     [funcname]="'SHAPEISO'"    [fieldid]="'TD_InsertShape'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertISO"  *ngIf="isLoad" [labeldescription]="'Insert designation'"  [fieldname]="'Insert'"     [funcname]="'INSERTISO'"    [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_gradeISO"  *ngIf="isLoad" [labeldescription]="'Insert Grade'"  [fieldname]="'Grade'"     [funcname]="'GRADEISO'"    [fieldid]="'TD_Grade'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_holderISO"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Holders'"     [funcname]="'HOLDERISO'"    [fieldid]="'TD_HolderDesignation'"></app-optimizetool-filter>                
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squareISO"  *ngIf="isLoad" [labeldescription]="'Square Designation'"  [fieldname]="'Tools'"     [funcname]="'TOOLISO'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>                       
+    </div> 
 </div>
