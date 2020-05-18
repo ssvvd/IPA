@@ -32,7 +32,7 @@
                        </td>
                        <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow">                 
                            <span class="d-block" *ngFor="let prty of col.slice().reverse()">
-                              <label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
+                              <label *ngIf="prty.property && prty.property.FieldDescriptionSmall == 'Designation'">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                     </tr>
                  </tbody>
