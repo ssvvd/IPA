@@ -256,7 +256,7 @@ getShowTable(){
 
                 }
               }
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == "Family" && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall.includes('Family')  && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
                   let family:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim();
                   
                   
