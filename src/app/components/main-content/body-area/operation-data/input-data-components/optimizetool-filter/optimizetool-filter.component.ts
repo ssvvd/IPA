@@ -395,6 +395,31 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-tool-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       }  
+      case "TOOLCATALOGNOISO": {
+         //get-ISO-tool-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pGrooveCuttingEdge}/{pKaAngleMin}/{pKaAngleMax}/{pKrAngleMin}/{pKrAngleMax}/{pHolderType}/{Filter}/{Top}  
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          let holder:string =this.getvalueparambyname("TD_HolderDesignation");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" +inserts + "/" +grade +"/All/0/999/0/9999/" +holder+"/" ;
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-toolcatalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }  
+      case "INSERTCATALOGNOISO": {
+          // get-ISO-insertscatalogno-list/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}")
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-insertscatalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      } 
        default: {             
           break; 
       } 

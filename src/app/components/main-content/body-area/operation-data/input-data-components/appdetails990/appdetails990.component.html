@@ -14,10 +14,9 @@
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
             </div>   
-    
             <div class="form-group row">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtDepthAxial" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>
+                        <label for="txtDepthAxial" class="pl-0 pt-3">{{'Radial length (LR)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
@@ -28,7 +27,7 @@
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
             </div>
-            <div class="form-group row">
+             <div class="form-group row">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
                         <label for="txtCutLengthAxial" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
@@ -36,11 +35,10 @@
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial" name="txtCutLengthAxial" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
-                    </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
-                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
-                    </div>
+                    </div>                 
             </div>
+           
+           
             <div class="form-group row">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
                         <label for="txtRmaxAxial" class="pl-0 pt-3">{{'Maximal Radius (R)' | translate}}</label>
@@ -68,7 +66,7 @@
                 </div>                                               
                  <div class="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0 ">
                      <div class="text-center">
-                        <label class="pl-0 pt-3">Rt</label>
+                        <label class="pl-0 pt-3">Rt (μm)</label>
                      </div>
                     <div class="text-center"> 
                         <input  type="number"  class="form-control input-surf"  id="txtRt" name="txtRt"   (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRt()"   
@@ -77,7 +75,7 @@
                 </div>
                  <div class="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
                      <div class="text-center">
-                        <label class="pl-0 pt-3">Ra</label>
+                        <label class="pl-0 pt-3">Ra (μm)</label>
                     </div>
                     <div class="text-center">
                         <input  type="number"  class="form-control input-surf"  id="txtRa"   [(ngModel)]="Ra"  (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRa()"> 
@@ -85,7 +83,7 @@
                 </div>
                  <div clas="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
                      <div class="text-center">
-                        <label class="pl-0 pt-3">RMS</label>
+                        <label class="pl-0 pt-3">RMS (μm)</label>
                     </div>
                     <div class="text-center">
                         <input  type="number"  class="form-control  input-surf"  id="txtRMS"   [(ngModel)]="RMS"  (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRMS()"> 
@@ -96,7 +94,7 @@
            
              <div class="form-group">                   
                 <div class="pl-0 pt-3">
-                    <label>{{'Operation Type - Indexable' | translate}}</label>
+                    <label>{{'Operation Type' | translate}}</label>
                 </div>                           
                 <div class="ml-0">
                      <div class="custom-control custom-radio custom-control-inline">
@@ -119,7 +117,7 @@
             </div>
              <div class="form-group"> 
                 <div class="pl-0 pt-3">
-                    <label>{{'Machining Stability' | translate}}</label>
+                    <label>{{'Clamping' | translate}}</label>
                 </div>
                 <div>
                     <div class="custom-control custom-radio custom-control-inline">

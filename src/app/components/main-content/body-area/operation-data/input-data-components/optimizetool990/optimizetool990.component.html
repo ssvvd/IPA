@@ -6,7 +6,7 @@
         </div>       
     </div>
     <div  class="pl-0 pt-2">
-        <label>{{'Coolant' | translate}}</label>
+        <label>{{'Internal Coolant' | translate}}</label>
         <div  class="pl-0 row">                  
             <div class="custom-control custom-checkbox col-4 pt-0">
                 <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantYes').value">
@@ -14,7 +14,7 @@
             </div>                              
             <div class="custom-control custom-checkbox col-4 pt-0">
                 <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_CoolantNo').value">
-                <label class="custom-control-label" for="chkCoolantNo">{{'Whithout' | translate}}</label>
+                <label class="custom-control-label" for="chkCoolantNo">{{'Without' | translate}}</label>
             </div> 
              <div class="custom-control custom-checkbox col-4 pt-0">
                 <input type="checkbox" class="custom-control-input" id="chkCoolantHP" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantHP').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantHP').value">
@@ -38,7 +38,7 @@
                 </div>
             </div>
      <div class="pl-0 pt-2">
-        <label>{{'Insert Material' | translate}}</label>
+        <label>{{'Cutting Edge Material' | translate}}</label>
         <div  class="pl-0 row"> 
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input" id="optMAll" name="Material"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_ISOMat').value"   value="All">
@@ -196,8 +196,11 @@
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandnameISO"  *ngIf="isLoad" [labeldescription]="'Brand Name'"  [fieldname]="'BrandName'"     [funcname]="'BRANDISO'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter>
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_shapeISO"  *ngIf="isLoad" [labeldescription]="'Insert shape'"  [fieldname]="'Shape'"     [funcname]="'SHAPEISO'"    [fieldid]="'TD_InsertShape'"></app-optimizetool-filter>  
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertISO"  *ngIf="isLoad" [labeldescription]="'Insert designation'"  [fieldname]="'Inserts'"     [funcname]="'INSERTISO'"    [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertISO"  *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"  [fieldname]="'Inserts'"     [funcname]="'INSERTCATALOGNOISO'"    [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter>          
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_gradeISO"  *ngIf="isLoad" [labeldescription]="'Insert Grade'"  [fieldname]="'Grades'"     [funcname]="'GRADEISO'"    [fieldid]="'TD_Grade'"></app-optimizetool-filter>  
         <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_holderISO"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Holders'"     [funcname]="'HOLDERISO'"    [fieldid]="'TD_HolderDesignation'"></app-optimizetool-filter>                
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squareISO"  *ngIf="isLoad" [labeldescription]="'Square Designation'"  [fieldname]="'Tools'"     [funcname]="'TOOLISO'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>                       
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squareISO"  *ngIf="isLoad" [labeldescription]="'Square Designation'"  [fieldname]="'Tools'"     [funcname]="'TOOLISO'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>    
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squarecatalogISO"  *ngIf="isLoad" [labeldescription]="'Square Catalog No'"  [fieldname]="'Tools'"     [funcname]="'TOOLCATALOGNOISO'"    [fieldid]="'TD_SquareCatalogNo'"></app-optimizetool-filter>       
+        
     </div> 
 </div>
