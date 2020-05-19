@@ -61,6 +61,14 @@ export class ResultsService {
     });
   }
 
+  public  getitemtype(catNo:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetItemType/' + catNo).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
   public  GetPromotionFamilies()
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetPromotionFamilies' ).catch((err: HttpErrorResponse) => {     

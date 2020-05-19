@@ -8,6 +8,7 @@ export class clsHelpProp {
     DesgS:string[]=[];
     DesgSI:string[]=[];
     CatalogNoT:string[]=[];
+    Families:string[]=[]
     // CatalogNoS:string[]=[];
     CatalogNoSI:string[]=[];
     private _FzminF:string[];
@@ -31,7 +32,8 @@ export class clsHelpProp {
     RE:number;
     NOF:number;
     CHW:number;
-    itemType:string;
+    itemType:string[]=[];
+    GroupText:string[]=[];
     private _isHidden:number;
 
         constructor(private srv_Results:ResultsService, ind:number){

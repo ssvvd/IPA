@@ -31,8 +31,8 @@
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" class="img-grid">
                        </td>
                        <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow">                 
-                           <span class="d-block" *ngFor="let prty of col.slice().reverse()">
-                              <label *ngIf="prty.property && prty.property.FieldDescriptionSmall == 'Designation'">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
+                           <span class="d-block" *ngFor="let prty of col.slice().reverse(); let PrtNum = index">
+                              <label *ngIf="prty.property && prty.property.FieldDescriptionSmall == 'Designation'">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1]}}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                     </tr>
                  </tbody>
