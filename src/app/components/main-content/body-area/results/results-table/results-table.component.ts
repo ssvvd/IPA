@@ -107,6 +107,10 @@ getShowTable(){
           var obj = JSON.parse(res6);
           this.promotionFamilies = obj.map(ele=>ele.GFNUM);
 
+          if (this.dtRsults.length < 1){
+            this.SpinnerService.hide();
+            return;
+          }
           this.arrCurShownFields = this.dtDefaultFields 
           var columnsCount = this.dtPropertiesTable.length
           var rowsCount = this.dtRsults.length
