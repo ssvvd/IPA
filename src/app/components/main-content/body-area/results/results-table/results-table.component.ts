@@ -107,6 +107,10 @@ getShowTable(){
           var obj = JSON.parse(res6);
           this.promotionFamilies = obj.map(ele=>ele.GFNUM);
 
+          if (this.dtRsults.length < 1){
+            this.SpinnerService.hide();
+            return;
+          }
           this.arrCurShownFields = this.dtDefaultFields 
           var columnsCount = this.dtPropertiesTable.length
           var rowsCount = this.dtRsults.length
@@ -143,21 +147,85 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
                 this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No'){
-                  this.dtResultsObjectsHelp[i].CatalogNo.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);    
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                  let catNo:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+                  this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);  
+                  this.dtResultsObjectsHelp[i].GroupText.push(this.dtPropertiesTable[j].GroupText); 
+
+                  let index:number = i
+                  this.srv_Results.getitemtype(catNo).subscribe((res: any) => {
+                    let typeRes:object[] = JSON.parse(res)
+                    let type:string = typeRes[0]['ItemType']
+                    let family:string= typeRes[0]['Family']
+                    let catNoLoc:number = this.dtResultsObjectsHelp[index].CatalogNo.indexOf(catNo)
+                    this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type); 
+                    this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family); 
+                     switch (type){
+                       case 'H':
+                        if (this.srv_StMng.SecApp == '57' && this.dtResultsObjectsHelp[index].GroupText[catNoLoc] == 'Tool'){
+                          this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Shank'
+                        }
+                       break;
+                       case 'T':
+                        this.dtResultsObjectsHelp[index].CatalogNoT.push(catNo);
+                        this.dtResultsObjectsHelp[index].DesgT.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
+
+                        var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                        this.arrResultImgsItem.splice(index, 0,url);
+
+                        let toolFamily = family.toString().trim()
+                        let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
+                        if (curFamilyPic)
+                        toolFamily = curFamilyPic['GFPIC'];
+
+                          var url:string = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
+                          this.arrResultImgsFamily.splice(index, 0,url);
+
+                        break;
+                       case 'I': 
+                        this.dtResultsObjectsHelp[index].CatalogNoSI.push(catNo);
+                        this.dtResultsObjectsHelp[index].DesgSI.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
+                        // if (catNoLoc > 0 && this.dtResultsObjectsHelp[index].itemType[catNoLoc - 1] == 'T'){
+
+                        // }
+                        break;
+                        case 'S':
+                          this.dtResultsObjectsHelp[index].CatalogNoSI.push(catNo);
+                          this.dtResultsObjectsHelp[index].DesgSI.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
+                          this.dtResultsObjectsHelp[index].DesgS.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
+                          
+                          if (this.arrResultImgsItem.length < index + 1){
+                            var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                            this.arrResultImgsItem.splice(index, 0,url);
+
+                            let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
+                            if (curFamilyPic)
+                              family = curFamilyPic['GFPIC'];
+  
+                              var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
+                              this.arrResultImgsFamily.splice(index, 0,url);
+                          }
+                          
+                          if (this.srv_StMng.SecApp == '57'){
+                            this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Solid Head'
+                          }
+                        break;
+                     } 
+                  })
+                }
                   // if (i == 0){
                   //   groupsOrder.push(this.dtPropertiesTable[j].GroupID)
                   // }            
-                  if (this.dtResultsObjectsHelp[i].itemType == 'H'){
-                    // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                    this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                    // this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  }
-                  else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
-                    // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                    this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  }
-                }
+                //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
+                //     // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //     this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //     // this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   }
+                //   else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
+                //     // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //     this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   }
+                // }
                 
 
                 if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
@@ -166,36 +234,37 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
                 this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Designation'){
+                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Designation' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                   this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
-                  if (this.dtResultsObjectsHelp[i].itemType == 'H'){
-                    this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                    // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                    this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  }
-                  else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
-                    this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                    // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  }
                 }
+                //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
+                //     this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //     // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //     this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   }
+                //   else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
+                //     this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //     // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   }
+                // }
                 
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'ItemType'){
-                  this.dtResultsObjectsHelp[i].itemType = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
-                  if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'T'){
-                  this.dtResultsObjectsHelp[i].DesgT.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  this.dtResultsObjectsHelp[i].CatalogNoT.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                }
-                else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
-                  this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                  this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                }
-                //   else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
-                //   this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-                //   // this.dtResultsObjectsHelp[i].CatalogNoS.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                // if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'ItemType'){
+                //   this.dtResultsObjectsHelp[i].itemType = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+                //   if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'T'){
+                //   this.dtResultsObjectsHelp[i].DesgT.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   this.dtResultsObjectsHelp[i].CatalogNoT.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
                 // }
-                }
+                // else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
+                //   this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                //   this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                // }
+                // //   else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
+                // //   this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                // //   // this.dtResultsObjectsHelp[i].CatalogNoS.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
+                // // }
+                // }
                 
 
                 // if (((this.srv_StMng.SecApp == '760' && this.dtPropertiesTable[j].Field == 'DMin') || (this.srv_StMng.SecApp != '760' && this.dtPropertiesTable[j].Field == 'Tool_D')) && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]])
@@ -259,24 +328,25 @@ getShowTable(){
 
                   index++
 
-                  if (this.dtPropertiesTable[j].FieldDescriptionSmall == "Catalog No" && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
-                    var url:string = environment.eCatItemPictures + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim() + ".gif ";
-                    this.arrResultImgsItem.push(url);
+                  
+                //   if (this.dtPropertiesTable[j].FieldDescriptionSmall == "Catalog No" && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
+                //     var url:string = environment.eCatItemPictures + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim() + ".gif ";
+                //     this.arrResultImgsItem.push(url);
 
-                }
+                // }
               }
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall.includes('Family')  && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
-                  let family:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim();
+                // if (this.dtPropertiesTable[j].FieldDescriptionSmall.includes('Family')  && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
+                //   let family:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim();
                   
                   
-                  let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
-                  if (curFamilyPic)
-                    family = curFamilyPic['GFPIC'];
+                //   let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
+                //   if (curFamilyPic)
+                //     family = curFamilyPic['GFPIC'];
 
-                    var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
-                    this.arrResultImgsFamily.push(url);
+                //     var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
+                //     this.arrResultImgsFamily.push(url);
 
-                }
+                // }
 
              
                   
