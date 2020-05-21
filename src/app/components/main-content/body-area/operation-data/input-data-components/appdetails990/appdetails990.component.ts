@@ -25,6 +25,7 @@ export class Appdetails990Component implements OnInit {
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   private s:SurfacequalityService;
+  UnitsSurf:string;
 
   N:number;
   Ra:number;
@@ -49,7 +50,10 @@ export class Appdetails990Component implements OnInit {
               this.RMS=0;
           }
       }
-   
+    if(this.srv_appsetting.Units=='M')
+      this.UnitsSurf='μm';    
+    else
+      this.UnitsSurf='microinch';
   }
  
   onfocusfield(field:string)

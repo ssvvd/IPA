@@ -32,13 +32,13 @@
                 </div>
             </div>               
                 <div class="form-group row pt-2">
-                    <label for="txtPower" class="col-sm-7"><span>{{'Power' | translate}}</span><span>{{'(Kw)' | translate}}</span></label>
+                    <label for="txtPower" class="col-sm-7"><span>{{'Power' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (Kw)' : ' (HP)' }}</span></label>
                     <div class="col-4">
                         <input type="number" class="form-control" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
                     </div>                    
                 </div>
                 <div class="form-group row pt-2">
-                    <label for="txtTorque" class="col-sm-7"><span>{{'Torque' | translate}}</span><span>{{'(Nm)' | translate}}</span></label>
+                    <label for="txtTorque" class="col-sm-7"><span>{{'Torque' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (Nm | translate)' : ' (Lbf)' }}</span></label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
                     </div>
@@ -70,13 +70,13 @@
                     </div>                    
                 </div>
             <div class="form-group row pt-2">
-                <label for="txtMaxCutFeedSpeed" class="col-sm-7">{{'Maximum cutting feed speed (mm/min)' | translate}}</label>
+                <label for="txtMaxCutFeedSpeed" class="col-sm-7"><span>{{'Maximum cutting feed speed' | translate }}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipm)' }}</span></label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
                 </div>
             </div> 
             <div class="form-group row pt-2">
-                <label for="txtMaxRapidFeedSpeed" class="col-sm-7">{{'Maximum rapid feed speed (mm/min)' | translate}}</label>
+                <label for="txtMaxRapidFeedSpeed" class="col-sm-7"><span>{{'Maximum rapid feed speed' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipm)' }}</span></label>
                 <div class="col-sm-4">
                     <input type="number" class="form-control" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
                 </div>
@@ -84,13 +84,13 @@
         </div>
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-top border-left pl-2 border-bottom pl-2 pt-2 pb-2 pl-0">
              <div class="form-group row pt-2">
-                <label for="txtEmultionPressure" class="col-7 col-sm-7">{{'Emulsion Pressure (bar)' | translate}}</label>
+                <label for="txtEmultionPressure" class="col-7 col-sm-7"><span>{{'Emulsion Pressure' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (bar)' : ' (Psi)' }}</span></label>
                 <div class="col-4 col-sm-4">
                     <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
                 </div>
             </div>
              <div class="form-group row pt-2">
-                <label for="txtEmultionFlowRate" class="col-7 col-sm-7">{{'Emulsion Flow Rate (L/min)' | translate}}</label>
+                <label for="txtEmultionFlowRate" class="col-7 col-sm-7"><span>{{'Emulsion Flow Rate' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (L/min)' : ' (Gpm)' }}</span></label>
                 <div class="col-4 col-sm-4">
                     <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
                 </div>
@@ -154,7 +154,7 @@
 </div>
 
 <div class="form-group row ml-0 pl-0">
-    <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6" >
+    <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6">
         <app-item-machine-spindle-chart [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Torque]=spindle.Torque  [typeChart]="'torque'" [spindle]=spindle (N1Changed)="onSpindleSpeedChanged($event)" (T1Changed)="onTorqueChanged($event)" >torque</app-item-machine-spindle-chart>
     </div>
     <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6">

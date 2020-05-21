@@ -166,7 +166,7 @@
           </div>
       </div>   
     </div>
-    <div class="pt-3 mt-2">    
+    <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='990' || msrv_StMng.SecApp=='970' || msrv_StMng.SecApp=='960'">    
       <span>KAPR - </span><span>{{' Tool cutting edge angle' | translate}}</span>       
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinAxialEntAngle').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value" [options]="options_Ang"></ng5-slider>
@@ -187,6 +187,33 @@
                               [(ngModel)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value">
                 </div>
                 <div class="pl-0">
+                    <label>&#176;</label>
+                </div>   
+          </div>
+      </div>   
+    </div>
+    
+     <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='980' || msrv_StMng.SecApp=='970' || msrv_StMng.SecApp=='960'">    
+      <span>Kr - </span><span>{{'Tool lead angle' | translate}}</span>       
+      <div class="custom-slider pt-0 mt-4" >
+          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinRadEntAngle').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxRadEntAngle').value" [options]="options_rad_ang"></ng5-slider>
+      </div>   
+      <div class="row pt-4">
+             <div class="col-6 pl-0 row">
+                <div class="col-8 pl-0">
+                    <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('MinRadEntAngle').value">
+               </div>
+              <div class="pl-0">
+                <label>&#176;</label>
+              </div> 
+          </div>
+           <div class="col-6 ml-auto row">
+              <div class="col-8 pl-0">
+                <input type="number" class="form-control"  
+                              [(ngModel)]="msrv_StMng.IPL.GetItem('MaxRadEntAngle').value">
+                </div>
+                <div class="pl-0">   
                     <label>&#176;</label>
                 </div>   
           </div>

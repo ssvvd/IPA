@@ -34,6 +34,8 @@ export class MachineItemSpindleComponent implements OnInit
   curAdapType:AdaptationType;
   curAdapSize:AdaptationSize;
   isLoadingAdSize:boolean=false;
+  
+  public msrv_appsetting:AppsettingService =this.srv_appsetting;
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private serv: MachineService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) {}

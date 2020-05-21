@@ -41,8 +41,14 @@ export class Optimizetool990Component implements OnInit {
     showTicks: false
   };
   options_Ang: Options = {
-    floor: 0,
+    floor: Number(this.srv_StMng.IPL.GetItem('MinAxialEntAngle').valuedefault),
     ceil:  Number(this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').valuedefault),
+    step: 0.5,
+    showTicks: false
+  };
+ options_rad_ang: Options = {
+    floor:  Number(this.srv_StMng.IPL.GetItem('MinRadEntAngle').valuedefault),
+    ceil:  Number(this.srv_StMng.IPL.GetItem('MaxRadEntAngle').valuedefault),
     step: 0.5,
     showTicks: false
   };
@@ -77,10 +83,12 @@ export class Optimizetool990Component implements OnInit {
 
     this.eventsSubject.next();
   }
- 
+  
+  
+
   ngOnInit() {     
     this.isLoad =true;   
-     
+   
   }
 
   /* change(field:string)

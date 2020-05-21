@@ -12,7 +12,7 @@
                     </div>
                     <div>
                         <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&& SecApp!='990' && SecApp!='980' && SecApp!='970' && SecApp!='960'" ></app-optimizetool>
-                        <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&&SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960'" ></app-optimizetool990>
+                        <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&&(SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960')" ></app-optimizetool990>
                     </div>                  
                 </div>           
             </div> 
@@ -36,7 +36,7 @@
                     <app-appdetails790 *ngIf = "isLoaded && SecApp=='790'"  [events]="eventsSubject.asObservable()"></app-appdetails790>
                     <app-appdetails77 *ngIf = "isLoaded && SecApp=='77'"  [events]="eventsSubject.asObservable()"></app-appdetails77>
                     <appdetails120 *ngIf = "isLoaded && (SecApp=='120' || SecApp=='119')"  [events]="eventsSubject.asObservable()"></appdetails120> 
-                    <appdetails990 *ngIf = "isLoaded && (SecApp=='990')"  [events]="eventsSubject.asObservable()"></appdetails990>                   
+                    <appdetails990 *ngIf = "isLoaded && (SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960')"  [events]="eventsSubject.asObservable()"></appdetails990>                   
                 </div>
             </div>
         </div>

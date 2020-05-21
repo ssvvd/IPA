@@ -79,15 +79,13 @@ export class HeaderComponent implements OnInit {
   
   UnitsChanged(event)
   {    
-    if(event.target.checked)
+    if(event.target.checked)    
     {
-      this.srv_appsetting.Units="M";
-      this.srv_appsetting.UnitslengthDesc="mm"; //todo:language
+      this.srv_appsetting.ChangeUnits('M');            
     }
     else
     {
-      this.srv_appsetting.Units="I";
-      this.srv_appsetting.UnitslengthDesc="inch"; //todo:language
+      this.srv_appsetting.ChangeUnits('I');
     }    
   
     if (window.location.href.indexOf('machines')>-1)
