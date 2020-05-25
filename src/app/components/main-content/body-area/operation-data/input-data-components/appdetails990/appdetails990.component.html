@@ -43,10 +43,10 @@
                 
              <div class="form-group row" *ngIf="msrv_StMng.SecApp=='990'">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtCutLengthAxial" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>                                               
+                        <label class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>                                               
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control  input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial" name="txtCutLengthAxial" 
+                        <input  type="number"  class="form-control  input-min-width"   
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>    
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -59,7 +59,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>                     
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthRadial" name="txtDepthRadial" 
+                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"   id="txtDepthRadial" name="txtDepthRadial" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
                     </div>  
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -69,10 +69,10 @@
                 
              <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtCutLengthAxial2" class="pl-0 pt-3">{{'Axial length (LA1)' | translate}}</label>                                               
+                        <label class="pl-0 pt-3">{{'Axial length (LA1)' | translate}}</label>                                               
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial2" name="txtCutLengthAxial2" 
+                        <input  type="number"  class="form-control input-min-width"  
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>    
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -120,11 +120,11 @@
             </div>
             <div class="form-group row" *ngIf="msrv_StMng.SecApp=='960'">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtDepthAxial22" class="pl-0 pt-3">{{'Depth of cut (DPT)' | translate}}</label>                        
+                        <label  class="pl-0 pt-3">{{'Depth of cut (DPT)' | translate}}</label>                        
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthAxial22" name="txtDepthAxial22" 
+                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -136,7 +136,7 @@
                         <label for="txtCutLengthAxial33" class="pl-0 pt-3">{{'Cutting length (L)' | translate}}</label>                        
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial33" name="txtRmaxAxial" 
+                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control input-min-width':'form-control input-min-width'"   
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -145,10 +145,10 @@
             </div>
             <div class="form-group row" *ngIf="msrv_StMng.SecApp!='970'">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtRmaxAxial" class="pl-0 pt-3">{{'Maximal Radius (R)' | translate}}</label>                        
+                        <label  class="pl-0 pt-3">{{'Maximal Radius (R)' | translate}}</label>                        
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtRmaxAxial" name="txtRmaxAxial" 
+                        <input  type="number"  class="form-control input-min-width"  
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxAxial').value"  (focus)="onfocusfield('RmaxAxial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">

@@ -76,15 +76,19 @@ export class MachineItemSpindleComponent implements OnInit
   filladaptordata(at:string,az:string,st:string)
   {
      this.eventsSubscription.add(this.serv.getmachineadaptationdata(at,az,st,this.srv_appsetting.Units).subscribe((res: any) => {
+       alert('ss');
        this.spindle =JSON.parse(res)[0];   
        this.spindle.EmultionPressure = 25;//TODO:
-       this.spindle.EmultionFlowRate = 40;                       
-      }));  
+       this.spindle.EmultionFlowRate = 40;    
+       alert(this.spindle.Power);   
+
+      })); 
+      //alert(this.spindle.Power); 
   }
   changeadapsize()
   {  
     this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;        
-    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);
+    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);    
   }
 
   onSpindleSpeedChanged($event)
@@ -93,7 +97,8 @@ export class MachineItemSpindleComponent implements OnInit
   }
 
   onPowerChanged($event)
-  {     
+  {    
+    //alert($event.value) ;
     this.spindle.Power =$event.value;
   }
 

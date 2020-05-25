@@ -20,6 +20,7 @@ export class OperationDataComponent implements OnInit {
   
   SecApp:string;  
   SecAppName:string;
+  MainApp:string;
   router:Router;
   isLoaded:boolean=false;
   
@@ -43,9 +44,10 @@ export class OperationDataComponent implements OnInit {
         {
           this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
           this.SecAppName = this.srv_StMng.SecAppSelected.MenuName;
+          this.MainApp=this.srv_StMng.SecAppSelected.MainApp;
         } 
     let Ipl:InputParameterlist =new InputParameterlist;
-
+    
     if (this.srv_StMng.IPL== null)    
     {
       this.eventsSubscription.add(this.srv_DataLayer.getinputparameters(this.SecApp, this.srv_appsetting.Units).subscribe((data: any)=> {

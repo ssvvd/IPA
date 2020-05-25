@@ -24,7 +24,7 @@ export class MachineItemComponent implements OnInit {
   environment = environment;  
   isLoading:boolean =false;
   
-  ClickSelectMachine:Subject<any> = new Subject();
+  //ClickSelectMachine:Subject<any> = new Subject();
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(public translate: TranslateService,private srv_machine: MachineService, 

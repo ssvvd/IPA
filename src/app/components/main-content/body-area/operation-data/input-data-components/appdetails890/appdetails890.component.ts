@@ -135,7 +135,7 @@ export class Appdetails890Component implements OnInit {
     {     
       case '890' :
       {      
-        this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =null;
+        this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
         this.srv_StMng.IPL.GetItem('GroovePosition').value =null;
         this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
         this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;  
@@ -150,7 +150,39 @@ export class Appdetails890Component implements OnInit {
         this.srv_StMng.IPL.GetItem('CutLengthRadial').value =null;  
         this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;           
         break;
-      }     
+      }    
+       case '870' :
+      {     
+        this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
+        this.srv_StMng.IPL.GetItem('GroovePosition').value =null;
+        this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
+        this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;  
+        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null; 
+         this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =null;
+        this.srv_StMng.IPL.GetItem('GroovePositionRad').value =null;
+        this.srv_StMng.IPL.GetItem('DepthRadial').value =null;
+        this.srv_StMng.IPL.GetItem('CutLengthRadial').value =null;  
+        this.srv_StMng.IPL.GetItem('RmaxRadial').value =null;            
+        break;
+      }   
+      case '860':
+      {             
+        this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
+        this.srv_StMng.IPL.GetItem('GroovePosition').value =null;
+        this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
+        this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;  
+        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;         
+        break;
+      }
+      case '850':
+      {             
+        this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
+        this.srv_StMng.IPL.GetItem('GroovePosition').value =null;
+        this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
+        this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;  
+        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;         
+        break;
+      }
     }    
     this.srv_StMng.IPL.GetItem('OperationType').value =this.srv_StMng.IPL.GetItem('OperationType').valuedefault;
     this.srv_StMng.IPL.GetItem('OperationType4Solid').value =this.srv_StMng.IPL.GetItem('OperationType4Solid').valuedefault;
