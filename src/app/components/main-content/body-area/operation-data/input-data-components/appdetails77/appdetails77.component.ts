@@ -41,7 +41,8 @@ export class Appdetails77Component implements OnInit {
       this.SelectedDia =  this.arrdiameter.find(v=> v.Description==this.srv_StMng.IPL.GetItem('D_Hole').value)
       this.IsLoaded=true;              
       if(this.srv_StMng.SecAppSelected.MenuID=='111') this.srv_StMng.IPL.GetItem('IsRotating').value='0';
-      if(this.srv_StMng.SecAppSelected.MenuID=='112') this.srv_StMng.IPL.GetItem('IsRotating').value='1';      
+      if(this.srv_StMng.SecAppSelected.MenuID=='112') this.srv_StMng.IPL.GetItem('IsRotating').value='1';  
+      if(this.srv_StMng.SecAppSelected.MenuID=='71') this.srv_StMng.IPL.GetItem('IsRotating').value='1';      
       }
       )
     );   

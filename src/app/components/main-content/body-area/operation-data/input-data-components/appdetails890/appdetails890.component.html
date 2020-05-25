@@ -1,0 +1,359 @@
+<div class="container" class="p-0 m-0" >
+    <div class="form-group row">
+        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 "> 
+            <div class="form-group row" *ngIf="msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='880'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label  class="pl-0 pt-3">{{'Diameter (D)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0" *ngIf="msrv_StMng.SecApp=='890'">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value"  (focus)="onfocusfield('WorkpieceDiameter')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0" *ngIf="msrv_StMng.SecApp=='880'">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value"  (focus)="onfocusfield('WorkpieceDiameterRad')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>   
+            <div class="form-group row"  *ngIf="msrv_StMng.SecApp=='890'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtGroovePosition" class="pl-0 pt-3">{{'Penetration Length (LP)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtGroovePosition" name="txtGroovePosition" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value"  (focus)="onfocusfield('GroovePosition')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>
+                 <div class="form-group row"  *ngIf="msrv_StMng.SecApp=='880'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtGroovePositionRad" class="pl-0 pt-3">{{'Penetration Length (LP)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtGroovePositionRad" name="txtGroovePositionRad" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value"  (focus)="onfocusfield('GroovePositionRad')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>
+              
+             <div class="form-group row"  *ngIf="msrv_StMng.SecApp=='880'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtDepthAxial1" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthRadial1" name="txtDepthRadial1" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>    
+            <div class="form-group row"  *ngIf="msrv_StMng.SecApp=='880'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtCutLengthRadial1" class="pl-0 pt-3">{{'Radial length (LR)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtCutLengthRadial1" name="txtCutLengthRadial1" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value"  (focus)="onfocusfield('CutLengthRadial')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>    
+            <div class="form-group row"  *ngIf="msrv_StMng.SecApp=='890'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtDepthAxial" class="pl-0 pt-3">{{'Radial length (LR)' | translate}}</label>
+                        <label class="pl-2 asterisk-red pt-3">*</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthAxial" name="txtDepthAxial" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>                
+             <div class="form-group row" *ngIf="msrv_StMng.SecApp=='890'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtCutLengthAxial" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>                                               
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control  input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial" name="txtCutLengthAxial" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
+                    </div>    
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>             
+            </div>                                                                                         
+            <div class="form-group row" *ngIf="msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='880'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <label for="txtRmaxAxial" class="pl-0 pt-3">{{'Maximal Radius (R)' | translate}}</label>                        
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtRmaxAxial" name="txtRmaxAxial" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxAxial').value"  (focus)="onfocusfield('RmaxAxial')" (focusout)="onfocusoutfield()"> 
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                    </div>
+            </div>                  
+            <div class="form-group" *ngIf="msrv_StMng.SecApp=='870'">
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Diameter (D1)' | translate}}</label>
+                            <label class="pl-2 asterisk-red pt-3">*</label>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value"  (focus)="onfocusfield('WorkpieceDiameter')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div>   
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Penetration Length (LP1)' | translate}}</label>
+                            <label class="pl-2 asterisk-red pt-3">*</label>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value"  (focus)="onfocusfield('GroovePosition')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Machining Depth (LR1)' | translate}}</label>
+                            <label class="pl-2 asterisk-red pt-3">*</label>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                     <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Cutting Length (LA1)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                     <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Maximal Radius (R1)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxAxial').value"  (focus)="onfocusfield('RmaxAxial')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                    <div class="form-group row" >
+                          <label  class="pl-0 pt-3">{{'Radial Turning' | translate}}</label>         
+                    </div>
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Diameter (D2)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value"  (focus)="onfocusfield('WorkpieceDiameterRad')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                     <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Penetration Length (LP2)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value"  (focus)="onfocusfield('GroovePositionRad')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Machining Depth (LA2)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Cutting Length (LR2)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value"  (focus)="onfocusfield('CutLengthRadial')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+                    <div class="form-group row" >
+                        <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <label  class="pl-0 pt-3">{{'Maximal Radius (R2)' | translate}}</label>                            
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RmaxRadial').value"  (focus)="onfocusfield('RmaxRadial')" (focusout)="onfocusoutfield()"> 
+                        </div>                   
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                        </div>
+                    </div> 
+            </div>
+            <div class="pt-3">
+                <label>{{'Surface quality' | translate}}</label>                                                
+            </div>
+            <div class="form-group row">
+                <div class="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
+                    <div class="text-center">
+                        <label class="pl-0 pt-3">N</label>
+                    </div>
+                    <div class="text-center">
+                        <input  type="number"  [(ngModel)]="N" class="form-control input-surf" (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeN()" id="txtN"> 
+                    </div>
+                </div>                                               
+                 <div class="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0 ">
+                     <div class="text-center">
+                        <label class="pl-0 pt-3">Rt ({{UnitsSurf}})</label>
+                     </div>
+                    <div class="text-center"> 
+                        <input  type="number"  class="form-control input-surf"  id="txtRt" name="txtRt"   (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRt()"   
+                                            [(ngModel)]="Rt" > 
+                    </div>
+                </div>
+                 <div class="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
+                     <div class="text-center">
+                        <label class="pl-0 pt-3">Ra ({{UnitsSurf}})</label>
+                    </div>
+                    <div class="text-center">
+                        <input  type="number"  class="form-control input-surf"  id="txtRa"   [(ngModel)]="Ra"  (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRa()"> 
+                    </div>
+                </div>
+                 <div clas="col-xl-3 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
+                     <div class="text-center">
+                        <label class="pl-0 pt-3">RMS ({{UnitsSurf}})</label>
+                    </div>
+                    <div class="text-center">
+                        <input  type="number"  class="form-control  input-surf"  id="txtRMS"   [(ngModel)]="RMS"  (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRMS()"> 
+                    </div>
+                </div>
+            </div>
+           
+           
+             <div class="form-group">                   
+                <div class="pl-0 pt-3">
+                    <label>{{'Operation Type' | translate}}</label>
+                </div>                           
+                <div class="ml-0">
+                     <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optAll" name="OperationType" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OperationType').value" value="All">
+                        <label class="custom-control-label" for="optAll">{{'All' | translate}}</label>
+                    </div>   
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optFinishing" name="OperationType" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OperationType').value" value="Finishing">
+                        <label class="custom-control-label" for="optFinishing">{{'Finishing' | translate}}</label>
+                    </div>            
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optMedium" name="OperationType"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OperationType').value" value="Medium">
+                        <label class="custom-control-label" for="optMedium">{{'Medium' | translate}}</label>
+                    </div>            
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optRoughing" name="OperationType" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OperationType').value" value="Roughing">
+                        <label class="custom-control-label" for="optRoughing">{{'Roughing' | translate}}</label>
+                    </div>
+                </div>                      
+            </div>
+             <div class="form-group"> 
+                <div class="pl-0 pt-3">
+                    <label>{{'Clamping' | translate}}</label>
+                </div>
+                <div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optNormal" name="MachiningStability" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Stable">
+                        <label class="custom-control-label" for="optNormal">{{'Stable' | translate}}</label>
+                    </div>            
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input" id="optUnstable" name="MachiningStability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
+                        <label class="custom-control-label" for="optUnstable">{{'Unstable' | translate}}</label>
+                    </div>                        
+                </div>
+            </div>
+            <div class="form-group"> 
+                <div class="pl-0 pt-3">
+                    <label>{{'Part Shape' | translate}}</label>
+                </div>
+                    <div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="PartShape1" name="PartShape" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('PartShape').value" value="Normal">
+                            <label class="custom-control-label" for="PartShape1">{{'Normal' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="PartShape2" name="PartShape" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('PartShape').value" value="Thin wall">
+                            <label class="custom-control-label" for="PartShape2">{{'Thin wall' | translate}}</label>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="pl-0 pt-3"> 
+                        <label>{{'Type Of Cut' | translate}}</label>
+                    </div>
+                    <div>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optRegular" name="TypeOfCut" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TypeOfCut').value" value="Continuous">
+                            <label class="custom-control-label" for="optRegular">{{'Continuous' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optInterrupted" name="TypeOfCut"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TypeOfCut').value" value="Interrupted">
+                            <label class="custom-control-label" for="optInterrupted">{{'Interrupted' | translate}}</label>
+                        </div>            
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="optHeavilyinterrupted" name="TypeOfCut" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TypeOfCut').value" value="Heavily interrupted">
+                            <label class="custom-control-label" for="optHeavilyinterrupted">{{'Heavily Interrupted' | translate}}</label>
+                        </div>
+                    </div>   
+                </div>
+        </div>    
+        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
+            <div *ngIf="ImageName!=''" class="border" >
+                <img src="{{ImageName}}" class="input-image">   
+            </div>
+        </div>    
+    </div>
+</div>    
+
