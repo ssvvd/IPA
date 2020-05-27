@@ -60,6 +60,7 @@ export class OperationDataComponent implements OnInit {
                 valuemin:d.valuemin ,
                 valuemax: d.valuemax ,
                 image:d.image ,
+                image1:d.image1==null?'':d.image1,
                 required:d.required     
             })                            
               // alert(this.isLoaded);                                  
@@ -115,7 +116,7 @@ else
       this.srv_StMng.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
 
            //todo: temp for check results
-      if(this.srv_StMng.MainAppSelected.MainApp=='IS')
+      if(this.srv_StMng.MainAppSelected.MainApp=='IS' || this.srv_StMng.MainAppSelected.MainApp=='TG')
       {
        this.srv_StMng.IPL.GetItem('AdaptorType').value="SQUARE";
        this.srv_StMng.IPL.GetItem('AdaptorSize').value="25";

@@ -420,6 +420,46 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-insertscatalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       } 
+      case "INT_ISOHOLDER": {
+          //localhost:17586/api/op All/    M/          890/              All/             All/        All/        All/                0/     999/      0/            999             /All/                  All             /All/       All/       10 
+          // get-int-ISO-holder/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pDiameter}/{pIsoShankM}/{Filter}/{Top}")
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" + inserts + "/All/All/All/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-ISO-holder',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }
+      case "INT_ISORHOLDER": {
+          // get-int-ISO-r-holder/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pDiameter}/{pIsoShankM}/{Filter}/{Top}")          
+            let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+           param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" + inserts + "/All/All/All/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-ISO-r-holder',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      } 
+      case "INT_ISOTOOL": {
+          // get-int-ISO-tool/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pDiameter}/{pIsoShankM}/{Filter}/{Top}")          
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                 "/0/999/0/999/" + inserts + "/All/All/All/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-ISO-tool',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      } 
        default: {             
           break; 
       } 

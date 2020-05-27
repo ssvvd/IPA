@@ -38,6 +38,10 @@
                     <appdetails120 *ngIf = "isLoaded && (SecApp=='120' || SecApp=='119')"  [events]="eventsSubject.asObservable()"></appdetails120> 
                     <appdetails990 *ngIf = "isLoaded && (SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960')"  [events]="eventsSubject.asObservable()"></appdetails990>   
                     <appdetails890 *ngIf = "isLoaded && (SecApp=='890' || SecApp=='880' || SecApp=='870' || SecApp=='860' || SecApp=='850')"  [events]="eventsSubject.asObservable()"></appdetails890>                 
+                    <appdetails52  *ngIf = "isLoaded && (SecApp=='52' || SecApp=='53' || SecApp=='50')" [events]="eventsSubject.asObservable()"></appdetails52>   
+                    <appdetails1  *ngIf = "isLoaded && SecApp=='1'" [events]="eventsSubject.asObservable()"></appdetails1> 
+                    <appdetails51  *ngIf = "isLoaded && SecApp=='51'" [events]="eventsSubject.asObservable()"></appdetails51>               
+                    <appdetails54  *ngIf = "isLoaded && (SecApp=='54' || SecApp=='10'  || SecApp=='188')" [events]="eventsSubject.asObservable()"></appdetails54>
                 </div>
             </div>
         </div>           

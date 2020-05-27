@@ -6,12 +6,12 @@ import { Observable, Subject} from 'rxjs';
 import { Options,ChangeContext } from 'ng5-slider';
 
 @Component({
-  selector: 'app-optimizetool990',
-  templateUrl: './optimizetool990.component.html',
-  styleUrls: ['./optimizetool990.component.scss']
+  selector: 'app-optimizetool52',
+  templateUrl: './optimizetool52.component.html',
+  styleUrls: ['./optimizetool52.component.scss']
 })
 
-export class Optimizetool990Component implements OnInit {
+export class Optimizetool52Component implements OnInit {
   
   @Input() events: Observable<void>;
   eventsSubject: Subject<void> = new Subject<void>();
@@ -84,8 +84,6 @@ export class Optimizetool990Component implements OnInit {
     this.eventsSubject.next();
   }
   
-  
-
   ngOnInit() {     
     this.isLoad =true;     
   }

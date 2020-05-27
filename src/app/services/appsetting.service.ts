@@ -31,7 +31,7 @@ export class AppsettingService {
       else
         {
           this.Units="I";
-          this.UnitslengthDesc="mm"; 
+          this.UnitslengthDesc="inch"; 
         }
    }
    get UnitslengthDesc():string {
