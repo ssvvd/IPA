@@ -62,15 +62,23 @@ export class MachiningOperationComponent implements OnInit {
               let isactive:boolean=true;
               if(d.ParentMenuID=='61') //drilling
               {
+                if(d.MenuID==71)  isadditem =false;
                 if(MachineType=='Multi task' || MachineType=='SwissType' || MachineType=='MultiSpindle')
                 {
-                  if(d.MenuID==111 || d.MenuID ==112)  isadditem =true;
-                  if(d.MenuID==71)  isadditem =false;
+                  if(d.MenuID==111 || d.MenuID ==112)  isadditem =true;                  
                 }
                 else
-                {
-                  if(d.MenuID==111 || d.MenuID ==112)  isadditem =false;
-                  if(d.MenuID==71)  isadditem =true;
+                { 
+                  if(MachineType=='Lathe')
+                  {
+                    if(d.MenuID==111)  isadditem =false;
+                    if(d.MenuID==112)  isadditem =true;                    
+                  }
+                  if(MachineType=='Machining center')
+                  {
+                    if(d.MenuID==111)  isadditem =true;
+                    if(d.MenuID==112)  isadditem =false;                    
+                  }                  
                 }
               } 
               if(d.ParentMenuID=='110') //threading

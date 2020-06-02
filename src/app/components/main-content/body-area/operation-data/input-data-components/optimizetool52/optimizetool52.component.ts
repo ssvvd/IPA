@@ -22,24 +22,20 @@ export class Optimizetool52Component implements OnInit {
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
   
-   options_IC: Options = {
+  options_W: Options = {
     floor: 0,
-    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_IC_MAX').valuedefault),
+    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_WMax').valuedefault),
     step:  this.msrv_appsetting.Units=='M'?0.1:0.01,
     showTicks: false
   };
-   options_L: Options = {
-    floor: 0,
-    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_WMax').valuedefault),
-    step: this.msrv_appsetting.Units=='M'?0.1:0.01,
-    showTicks: false
-  };
+    
   options_R: Options = {
     floor: 0,
     ceil:  Number(this.srv_StMng.IPL.GetItem('TD_RadiusMax').valuedefault),    
     step: this.msrv_appsetting.Units=='M'?0.1:0.01, 
     showTicks: false
   };
+  
   options_Ang: Options = {
     floor: Number(this.srv_StMng.IPL.GetItem('MinAxialEntAngle').valuedefault),
     ceil:  Number(this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').valuedefault),

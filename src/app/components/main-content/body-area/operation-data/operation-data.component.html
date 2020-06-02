@@ -11,8 +11,9 @@
                         <label [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
                     </div>
                     <div>
-                        <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&&MainApp!='IS'" ></app-optimizetool>
-                        <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&&(MainApp=='IS')" ></app-optimizetool990>
+                        <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp!='IS' && MainApp!='TG'" ></app-optimizetool>
+                        <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='IS'" ></app-optimizetool990>
+                        <app-optimizetool52  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='TG'" ></app-optimizetool52>
                     </div>                  
                 </div>           
             </div> 

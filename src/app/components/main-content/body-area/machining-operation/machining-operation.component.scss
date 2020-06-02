@@ -10,18 +10,36 @@
     opacity: 0.5;   
 }
 
+.div-app :hover
+{      
+    background-color:var(--bg-hover);
+    cursor: pointer;  
+    padding-right: 0px;
+    margin-right: 0px; 
+    opacity: 0.5;   
+}
+
 .div-app-open
 {      
     background-color:white; 
     cursor: pointer;  
     padding-right: 0px;
-    margin-right: 0px; 
+    margin-right: 0px;     
+    //opacity: 0.5;   
+}
+
+.div-app-open:hover
+{      
+    background-color:var(--bg-hover);
+    cursor: pointer;  
+    padding-right: 0px;
+    margin-right: 0px;     
     //opacity: 0.5;   
 }
 
 .div-app-selected
 {        
-    background-color:#E0E0E0; 
+    background-color:var(--row-selected); 
     cursor: pointer;  
     padding-right: 0px;
     margin-right: 0px;   
@@ -47,7 +65,12 @@
 .li-item { 
    width: 50%;  
    max-width: 50%;   
+
 }
+
+.li-item :hover {  
+   background-color:var(--bg-hover); 
+} 
 
 @include media-breakpoint-up(sm) {
 .app-image
@@ -60,11 +83,11 @@
     max-width:50%;   
     width: 50%;
 } 
-    .li-item
-    {
+.li-item
+{
     width: 33%;  
     max-width: 33%;
-    } 
+} 
 }
 
 @include media-breakpoint-up(md) {
@@ -137,12 +160,6 @@
     min-width:150px;
     max-width: 150px;   
   }
-
-  .btn-select-selected:hover
-  {     
-    min-width:150px;
-    max-width: 150px;   
-  }
  }
-
+ 
 

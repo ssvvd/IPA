@@ -29,8 +29,9 @@ export class Appdetails59Component implements OnInit {
  
   onfocusfield(field:string)
   {
-    this.InFocus=true;
+    this.InFocus=true;    
     this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;
+    //alert(this.ImageName);
   }
 
   onfocusoutfield()

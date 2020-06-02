@@ -93,153 +93,91 @@
                 <label class="custom-control-label" for="optassembly5">{{'Adaptation with blade' | translate}}</label>
             </div>  
         </div>
-    </div>
-   
+    </div>    
+     
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandname"          *ngIf="isLoad" [labeldescription]="'Brand Name'"       [fieldname]="'BrandName'"     [funcname]="'BRAND'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter>
+
     <div class="pt-3 mt-2">        
-      <span>IC - </span><span>{{'Inscribed circle diameter' | translate}}</span>      
-      <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_IC_MIN').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_IC_MAX').value" [options]="options_IC"></ng5-slider>
-      </div>   
-      <div class="row pt-4">
-             <div class="col-6 pl-0 row">
-                <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_IC_MIN').value">
-               </div>
-              <div class="pl-0">
-                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
-              </div> 
-          </div>
-           <div class="col-6 ml-auto row">
-              <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_IC_MAX').value">
-                </div>
+        <span>W - </span><span>{{'Insert width' | translate}}</span>      
+        <div class="custom-slider pt-0 mt-4" >
+            <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_WMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_WMax').value" [options]="options_W"></ng5-slider>
+        </div>   
+        <div class="row pt-4">
+               <div class="col-6 pl-0 row">
+                  <div class="col-8 pl-0">
+                      <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMin').value">
+                 </div>
                 <div class="pl-0">
-                    <label>{{msrv_appsetting.UnitslengthDesc}}</label>
-              </div>
-          </div>
-      </div>   
+                  <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div> 
+            </div>
+             <div class="col-6 ml-auto row">
+                <div class="col-8 pl-0">
+                  <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMax').value">
+                  </div>
+                  <div class="pl-0">
+                      <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div>
+            </div>
+        </div>   
     </div>
-    <div class="pt-3 mt-2">    
-      <span>L - </span><span>{{'Cutting edge length' | translate}}</span>       
-      <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_WMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_WMax').value" [options]="options_L"></ng5-slider>
-      </div>   
-      <div class="row pt-4">
-             <div class="col-6 pl-0 row">
-                <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMin').value">
-               </div>
-              <div class="pl-0">
-                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
-              </div> 
-          </div>
-           <div class="col-6 ml-auto row">
-              <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMax').value">
-                </div>
-                <div class="pl-0">
-                    <label>{{msrv_appsetting.UnitslengthDesc}}</label>
-              </div>
-          </div>
-      </div>   
+    <div *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"   *ngIf="isLoad" [labeldescription]="'W Tolerance'"  [fieldname]="'InsertWidthTol'"     [funcname]="'WTOLERANCE'"    [fieldid]="'TD_WTolerance'"></app-optimizetool-filter>  
     </div>
-    <div class="pt-3 mt-2">    
-      <span>RE - </span><span>{{'Corner radius' | translate}}</span>       
-      <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
-      </div>   
-      <div class="row pt-4">
-             <div class="col-6 pl-0 row">
-                <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value">
-               </div>
-              <div class="pl-0">
-                <label>{{msrv_appsetting.UnitslengthDesc}}</label>
-              </div> 
-          </div>
-           <div class="col-6 ml-auto row">
-              <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value">
-                </div>
+    <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">        
+        <div *ngIf="msrv_StMng.SecApp!='51'"><span>R - </span><span>{{'Insert radius' | translate}}</span></div>
+        <div *ngIf="msrv_StMng.SecApp=='51'"><span>R - </span><span>{{'Corner radius' | translate}}</span></div>    
+        <div class="custom-slider pt-0 mt-4" >
+            <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
+        </div>   
+        <div class="row pt-4">
+               <div class="col-6 pl-0 row">
+                  <div class="col-8 pl-0">
+                      <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value">
+                 </div>
                 <div class="pl-0">
-                    <label>{{msrv_appsetting.UnitslengthDesc}}</label>
-              </div>
-          </div>
-      </div>   
+                  <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div> 
+            </div>
+             <div class="col-6 ml-auto row">
+                <div class="col-8 pl-0">
+                  <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value">
+                  </div>
+                  <div class="pl-0">
+                      <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div>
+            </div>
+        </div>   
     </div>
-    <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='990' || msrv_StMng.SecApp=='870' || msrv_StMng.SecApp=='860' || msrv_StMng.SecApp=='850' || msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='970' || msrv_StMng.SecApp=='960'">    
-      <span>KAPR - </span><span>{{' Tool cutting edge angle' | translate}}</span>       
-      <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinAxialEntAngle').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value" [options]="options_Ang"></ng5-slider>
-      </div>   
-      <div class="row pt-4">
-             <div class="col-6 pl-0 row">
-                <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('MinAxialEntAngle').value">
-               </div>
-              <div class="pl-0">
-                <label>&#176;</label>
-              </div> 
-          </div>
-           <div class="col-6 ml-auto row">
-              <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value">
-                </div>
-                <div class="pl-0">
-                    <label>&#176;</label>
-                </div>   
-          </div>
-      </div>   
+    <div *ngIf="msrv_StMng.SecApp=='51'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Max K lead angle'"  [fieldname]="'KappaLeadAngle'"     [funcname]="'KAPPALEADANGLE'"    [fieldid]="'TD_KappaLeadAngle'"></app-optimizetool-filter>
+    </div>
+    <div *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'R Tolerance'"  [fieldname]="'CornerRadTol'"     [funcname]="'RTOLERANCE'"    [fieldid]="'TD_RTolerance'"></app-optimizetool-filter>
+    </div>
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINSERT'"    [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"  [fieldname]="'CatalogNo'"     [funcname]="'GROOVEINSERTCATALOG'"    [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter>
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Grade'"  [fieldname]="'CarbideGrade'"     [funcname]="'GROOVEGRADE'"    [fieldid]="'TD_Grade'"></app-optimizetool-filter>  
+    <div *ngIf="msrv_StMng.SecApp=='53' ||  msrv_StMng.SecApp=='50' || msrv_StMng.SecApp=='188'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Shank diameter'"  [fieldname]="'ShankDiameter'"     [funcname]="'GROOVEINTDIAMETER'"    [fieldid]="'TD_DiameterFrom'"></app-optimizetool-filter>  
     </div>
     
-     <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='980' || msrv_StMng.SecApp=='880' || msrv_StMng.SecApp=='870' || msrv_StMng.SecApp=='970' || msrv_StMng.SecApp=='960'">    
-      <span>PSIR - </span><span>{{'Tool lead angle' | translate}}</span>       
-      <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinRadEntAngle').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxRadEntAngle').value" [options]="options_rad_ang"></ng5-slider>
-      </div>   
-      <div class="row pt-4">
-             <div class="col-6 pl-0 row">
-                <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('MinRadEntAngle').value">
-               </div>
-              <div class="pl-0">
-                <label>&#176;</label>
-              </div> 
-          </div>
-           <div class="col-6 ml-auto row">
-              <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
-                              [(ngModel)]="msrv_StMng.IPL.GetItem('MaxRadEntAngle').value">
-                </div>
-                <div class="pl-0">   
-                    <label>&#176;</label>
-                </div>   
-          </div>
-      </div>   
+    <div *ngIf="msrv_StMng.SecApp=='52' ||  msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='1' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEHOLDER'"    [fieldid]="'TD_Adaptation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Square Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVESQUARE'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Adaptor Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEADAPTOR'"    [fieldid]="'TD_AdapterDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Blade Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEBLADE'"    [fieldid]="'TD_BladeDesignation'"></app-optimizetool-filter>         
     </div>
-    <div>   
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandnameISO"  *ngIf="isLoad" [labeldescription]="'Brand Name'"  [fieldname]="'BrandName'"     [funcname]="'BRANDISO'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter>
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_shapeISO"  *ngIf="isLoad" [labeldescription]="'Insert shape'"  [fieldname]="'Shape'"     [funcname]="'SHAPEISO'"    [fieldid]="'TD_InsertShape'"></app-optimizetool-filter>  
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertISO"  *ngIf="isLoad" [labeldescription]="'Insert designation'"  [fieldname]="'Inserts'"     [funcname]="'INSERTISO'"    [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertISO"  *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"  [fieldname]="'Inserts'"     [funcname]="'INSERTCATALOGNOISO'"    [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter>          
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_gradeISO"  *ngIf="isLoad" [labeldescription]="'Insert Grade'"  [fieldname]="'Grades'"     [funcname]="'GRADEISO'"    [fieldid]="'TD_Grade'"></app-optimizetool-filter>  
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_holderISO"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Holders'"     [funcname]="'HOLDERISO'"    [fieldid]="'TD_HolderDesignation'"></app-optimizetool-filter> 
-        <div *ngIf="msrv_StMng.SecApp=='990' || msrv_StMng.SecApp=='980' || msrv_StMng.SecApp=='970' || msrv_StMng.SecApp=='960'">               
-            <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squareISO"  *ngIf="isLoad" [labeldescription]="'Square Designation'"  [fieldname]="'Tools'"     [funcname]="'TOOLISO'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>            
-            <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squarecatalogISO"  *ngIf="isLoad" [labeldescription]="'Square Catalog No'"  [fieldname]="'Tools'"     [funcname]="'TOOLCATALOGNOISO'"    [fieldid]="'TD_SquareCatalogNo'"></app-optimizetool-filter>               
-        </div>
-        <div *ngIf="msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='880' || msrv_StMng.SecApp=='870' || msrv_StMng.SecApp=='860' || msrv_StMng.SecApp=='850'">               
-            <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squareISO"  *ngIf="isLoad" [labeldescription]="'Round holder designation'"  [fieldname]="'Tools'"     [funcname]="'TOOLISO'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>            
-            <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squarecatalogISO"  *ngIf="isLoad" [labeldescription]="'Round holder Catalog No'"  [fieldname]="'Tools'"     [funcname]="'TOOLCATALOGNOISO'"    [fieldid]="'TD_SquareCatalogNo'"></app-optimizetool-filter>               
-        </div>
-    </div>    
+
+    <div *ngIf="msrv_StMng.SecApp=='53' ||  msrv_StMng.SecApp=='50' || msrv_StMng.SecApp=='188'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTHOLDER'"    [fieldid]="'TD_HolderDesignation'"></app-optimizetool-filter>     
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Round Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTHOLDER'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Tool Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTTOOL'"    [fieldid]="'TD_AdapterDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Adapter/Blade Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTBLADE'"    [fieldid]="'TD_BladeDesignation'"></app-optimizetool-filter> 
+    </div>
+       
 </div>

@@ -125,7 +125,6 @@ import { Appdetails54Component } from './components/main-content/body-area/opera
     Appdetails1Component,
     Appdetails51Component,
     Appdetails54Component
-
   ],
   imports: [
     FormsModule,
