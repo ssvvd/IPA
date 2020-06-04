@@ -9,15 +9,92 @@
 
 
 <div class="border-left-gray border-right-gray">
-    <div class="row">
+    <div class="row" [hidden]="!MainPage">
       <div class="col col-20">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
       <div class="col col-80 pl-2 border-left-gray">
         <div class="row">
         </div>
-        <app-results-table #resTable [filterChangedRec]="filterChanged"></app-results-table>
+        <app-results-table #resTable [filterChangedRec]="filterChanged" (goToViewEvent)="goToView($event)"></app-results-table>
       </div>
+    </div>
+
+    <div class="row" [hidden]="MainPage">
+      <div class="container-fluid">
+      
+        <div class="mt-0 ml-0 pl-0 mt-0 pt-2" >
+          <nav class="ml-0 pl-0 mt-0 pl-0 pt-0" aria-label="breadcrumb">
+             <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
+                 <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">All</a></li>
+                 <li class="breadcrumb-item active text-secondary"  aria-current="page">Result Information</li> 
+             </ol>
+           </nav>
+     </div>  
+
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
+
+          <li [ngbNavItem]="1" class="navli">
+            <a ngbNavLink class="siteTitle">Machining Parameters</a>
+            <ng-template ngbNavContent>
+              <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="2" class="navli">
+            <a ngbNavLink class="siteTitle">Product Information</a>
+            <ng-template ngbNavContent>
+              <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA1'"></product-info>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="3" class="navli">
+            <a ngbNavLink class="siteTitle">2D+3D Representation</a>
+            <ng-template ngbNavContent>
+              <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
+            </ng-template>
+          </li>
+
+          <li [ngbNavItem]="4" [disabled]="true" class="navli">
+            <a ngbNavLink class="siteTitle"></a>
+            <ng-template ngbNavContent></ng-template>
+          </li>
+
+          <li [ngbNavItem]="5" [disabled]="true" class="navli">
+            <a ngbNavLink class="siteTitle"></a>
+            <ng-template ngbNavContent></ng-template>
+          </li>
+
+        </ul>
+
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        <!-- <ngb-tabset [destroyOnHide]="false" type="pills" justify="fill">
+          
+          <ngb-tab title="Machining Parameters">
+            <ng-template ngbTabContent>
+              <machining-prms></machining-prms>
+            </ng-template>
+          </ngb-tab>
+           
+          <ngb-tab>
+            <ng-template ngbTabTitle>Product Information</ng-template>
+            <ng-template ngbTabContent>
+                <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA1'"></product-info>
+            </ng-template>
+          </ngb-tab>
+           
+          <ngb-tab>
+            <ng-template ngbTabTitle>2D+3D Representation</ng-template>
+            <ng-template ngbTabContent>
+              <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
+            </ng-template>
+          </ngb-tab>
+
+          <ngb-tab [disabled]="true"></ngb-tab>
+          <ngb-tab [disabled]="true"></ngb-tab>
+                     
+        </ngb-tabset> -->
+        </div>
     </div>
   </div> 
 

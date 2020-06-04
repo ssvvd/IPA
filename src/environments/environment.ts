@@ -23,11 +23,14 @@ export const environment = {
   ImgArrowLeft:"assets/img/arrows_left.png",
   ImgArrowRight:"assets/img/arrows_right.png",
   ImgThreeDots:"assets/img/threeDots.jpg",
+  ImgAssembly:"assets/img/icon_Assembly.svg",
   ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx",
   IscarSite:"http://intranet.imc.co.il",
   MachiningCalculatorSite:"https://eiplb.iscar.com/MachiningPwr/",
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
-  eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/"
+  eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
+  eCatItemRedPage:"http://intranet.imc.co.il/ecat/eHiba.asp?cat=",
+  eCatItemPage:"http://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat="
 };
 
     
