@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener} from '@angular/core';
 import { MachineService } from 'src/app/services/machine.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { Machineheader } from 'src/app/models/machines/machineheader';
@@ -6,7 +6,7 @@ import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { Routes,ActivatedRoute,Router} from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subject,Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-machineitem',
@@ -35,11 +35,18 @@ export class MachineItemComponent implements OnInit {
 
     }));
   }
+  public innerheight: any;
 
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {  
+      this.innerheight = window.innerHeight-400;
+     
+  }
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
-  ngOnInit() {                    
+  ngOnInit() {                              
     if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
     {
       this.machHeader=this.srv_statemanage.SelectedMachine;
@@ -57,12 +64,15 @@ export class MachineItemComponent implements OnInit {
           this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
           this.FillImageMachineType();
           this.isLoading =true;
+          
         }));            
     }         
     if(this.machHeader==null)
     {
         this.FillMachineDataFromServer(); 
-    }      
+    } 
+
+    this.innerheight = window.innerHeight-200;
   }
   
   FillImageMachineType()

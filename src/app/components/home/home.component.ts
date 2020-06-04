@@ -18,13 +18,12 @@ export class HomeComponent implements OnInit {
   public innerheightmaincontent:any;
   ngOnInit() {
      this.innerheight = window.innerHeight-30;
-     this.innerheightmaincontent= window.innerHeight-230;
-     //alert(this.innerheight);
+     this.innerheightmaincontent= window.innerHeight-140;    
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {  
       this.innerheight = window.innerHeight-30;
-      this.innerheightmaincontent= window.innerHeight-230;
+      this.innerheightmaincontent= window.innerHeight-140;
   }
 }

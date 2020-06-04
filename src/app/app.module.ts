@@ -70,6 +70,7 @@ import { Optimizetool52Component } from './components/main-content/body-area/ope
 import { Appdetails1Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails1/appdetails1.component';
 import { Appdetails51Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails51/appdetails51.component';
 import { Appdetails54Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails54/appdetails54.component';
+import { FavoritesComponent } from './components/main-content/body-area/favorites/favorites.component';
 
 @NgModule({
   declarations: [   
@@ -124,7 +125,8 @@ import { Appdetails54Component } from './components/main-content/body-area/opera
     Optimizetool52Component,
     Appdetails1Component,
     Appdetails51Component,
-    Appdetails54Component
+    Appdetails54Component,
+    FavoritesComponent
   ],
   imports: [
     FormsModule,
