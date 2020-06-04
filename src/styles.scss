@@ -348,6 +348,11 @@ table.dataTable.no-footer{
     border-bottom:1px solid var(--border-color-gray) ;
 }
 
+.border-top-gray
+{
+    border-top:1px solid var(--border-color-gray) ;
+}
+
 .btn-reset
 {
     color:var(--btn-bg-select-color)!important;
@@ -363,8 +368,8 @@ html, body{
   display: flex!important;
   flex-direction: column!important;
   margin:0!important; 
-  //background-color: red;  
-  //overflow: hidden;
+  //background-color:lightyellow;
+  overflow: hidden;
 } 
 
 .ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)

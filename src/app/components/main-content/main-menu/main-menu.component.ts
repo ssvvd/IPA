@@ -80,9 +80,9 @@ export class MainMenuComponent implements OnInit {
  }
 
   SelectedMachine(arr:string[])
-  {       
-    this.Tabs[0].SelectedItemDesc = arr[0]; 
-    this.Tabs[0].SelectedItemDesc1 = arr[1];
+  {         
+    if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc = arr[0] + ': '; 
+    if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc1 = arr[1];    
   }
   
   SelectedMaterial(arr:string[])
@@ -91,9 +91,9 @@ export class MainMenuComponent implements OnInit {
   }
 
   SelectedSecApp(arr:string[])
-  {    
-    this.Tabs[2].SelectedItemDesc = arr[0]; 
-    this.Tabs[2].SelectedItemDesc1 = arr[1];
+  {     
+    if(arr[0]!==undefined) this.Tabs[2].SelectedItemDesc = arr[0] + ', ';
+    if(arr[1]!==undefined) this.Tabs[2].SelectedItemDesc1 = arr[1];    
   }
 
  TabSelected(RouteName:string) {       

@@ -13,6 +13,7 @@ export class InputParameterItem {
     public valuemin:string;
     public valuemax:string;
     public image:string;
+    public image1:string;
     public required;
     
     constructor()

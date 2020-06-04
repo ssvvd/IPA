@@ -1,5 +1,5 @@
-<div class="container-fluid pt-4  ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray">
-<div class="pt-2 pb-2 border-top-gray border-bottom-gray ">
+<div class="container-fluid pt-5  ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray">
+<div class="pt-2 pb-2 border-top-gray border-bottom-gray" >
  <ul class="nav nav-fill" >               
     <li (click)="onSelectMainApp(mainapp);"  class="nav-item li-item" *ngFor="let mainapp of arrMainApps" >
         <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
@@ -23,7 +23,7 @@
                     <label  [ngClass]="secapp.IsActive?'siteTitle cursor-pointer':'siteTitle cursor-not-allowed div-app'">{{secapp.MenuName  |translate }}</label>                    
                  </div>                                                              
             </div>
-            <div *ngIf="secapp.ApplicationITAID!='0'">
+            <div *ngIf="secapp.ApplicationITAID!='0'"  class="pt-2">
                <button [ngClass]="secapp.IsActive?'btn btn-select cursor-pointer visible':'btn btn-select cursor-not-allowed div-app invisible'"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="isToOperationData && secapp.IsActive?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
             </div> 
         </div>
@@ -41,7 +41,7 @@
                     <label  class="siteTitle cursor-pointer">{{secapp.MenuName |translate }}</label>                    
                  </div>                                                                               
             </div>
-            <div  *ngIf="secapp.ApplicationITAID!='0'">
+            <div  *ngIf="secapp.ApplicationITAID!='0'" class="pt-2">
                <button class="btn btn-select"  (click)="OnSelectSecApp(secapp,2);" [routerLink]="isToOperationData?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
             </div> 
         </div>

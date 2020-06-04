@@ -420,6 +420,264 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-ISO-insertscatalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       } 
+      case "INT_ISOHOLDER": {
+          //localhost:17586/api/op All/    M/          890/              All/             All/        All/        All/                0/     999/      0/            999             /All/                  All             /All/       All/       10 
+          // get-int-ISO-holder/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pDiameter}/{pIsoShankM}/{Filter}/{Top}")
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" + inserts + "/All/All/All/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-ISO-holder',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }
+      case "INT_ISORHOLDER": {
+          // get-int-ISO-r-holder/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pDiameter}/{pIsoShankM}/{Filter}/{Top}")          
+            let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+           param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                "/0/999/0/999/" + inserts + "/All/All/All/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-ISO-r-holder',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      } 
+      case "INT_ISOTOOL": {
+          // get-int-ISO-tool/{pIsoMat}/{pUnits}/{pSecondaryApp}/{pGrooveBrandName}/{pInsertShape}/{pAngle}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pGrooveInsertDesignation}/{pCarbideGrade}/{pDiameter}/{pIsoShankM}/{Filter}/{Top}")          
+          let brandname:string =this.getvalueparambyname("TD_BrandName");
+          let shape:string =this.getvalueparambyname("TD_InsertShape");
+          let inserts:string =this.getvalueparambyname("TD_InsertDesignation");
+          let grade:string =this.getvalueparambyname("TD_Grade");
+          param=this.srv_StMng.IPL.GetItem('TD_ISOMat').value+"/"+this.srv_StMng.IPL.GetItem("Units").value +"/" + this.srv_StMng.SecApp+"/" +
+                brandname + "/" +shape + "/" +this.srv_StMng.IPL.GetItem('TD_NegOrPosAngle').value +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value+
+                 "/0/999/0/999/" + inserts + "/All/All/All/";
+          str_param=param + str_s + "/" + t;
+          this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-ISO-tool',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+          break; 
+      }       
+      case "WTOLERANCE": {
+        // get-w-tolerance/{pUnits}/{pBrandName}/{bPresicionOrUtility}/{pSecondaryApp}/{pWMin}/{pWMax}
+        let brandname:string =this.getvalueparambyname("TD_BrandName");      
+        param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value + "/" +this.srv_StMng.SecApp+
+              "/" + "/All/All/";
+        str_param=param + str_s + "/" + t;
+        this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-w-tolerance',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+        break; 
+    }
+    
+    case "RTOLERANCE": {
+      //get-r-tolerance/{pUnits}/{pBrandName}/{pPresicionOrUtility}/{pSecondaryApp}/{pRadiusMin}/{pRadiusMax}/{pWMin}/{pWMax}/{pWTolerance}/{Filter}/{Top}
+      //get-r-tolerance/M/          All /          All/                 52/0/999/0/999/All/10 
+      let brandname:string =this.getvalueparambyname("TD_BrandName");  
+      let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+      param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value + "/" +this.srv_StMng.SecApp+
+            "/0/999/0/999/" + wtolerance + "/";
+      str_param=param + str_s + "/" + t;
+      this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-r-tolerance',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+      break; 
+  }
+
+  case "GROOVEINSERT": {
+    //get-groove-insert/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pSecondaryApp}/{pRTolerance}/{pKappaLeadAngle}/{Filter}/{Top}"    
+    let brandname:string =this.getvalueparambyname("TD_BrandName");  
+    let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+    let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+    param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+          "/0/999/0/999/" + wtolerance + "/All/" +this.srv_StMng.SecApp+ "/" +rtolerance + "/0/";
+    str_param=param + str_s + "/" + t;
+    this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-insert',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+    break; 
+}
+case "GROOVEINSERTCATALOG": {
+  //get-groove-insert-catalog/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pSecondaryApp}/{pRTolerance}/{pKappaLeadAngle}/{Filter}/{Top}"    
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" +this.srv_StMng.SecApp+ "/" +rtolerance + "/0/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-insert-catalog',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+case "GROOVEGRADE": {
+  //get-groove-grade/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pInsertDesignation}/{pSecondaryApp}/{pRTolerance}/{Filter}/{Top}"  
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" +insertdes + "/" + this.srv_StMng.SecApp+ "/" +rtolerance + "/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-grade',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+
+case "GROOVEHOLDER": {
+  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
+  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
+  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
+  //52/All/HOLDER/0/999/All/All/All/10
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/" + wtolerance + "/All/" +insertdes + "/"  +rtolerance + "/" +grade + "/" + 
+        // {pSecondaryApp}/    {pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"
+        this.srv_StMng.SecApp+ "/All/HOLDER/0/999/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+
+
+
+case "GROOVESQUARE": {
+  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
+  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
+  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
+  //52/All/HOLDER/0/999/All/All/All/10
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/" + wtolerance + "/All/" +insertdes + "/"  +rtolerance + "/" +grade + "/" + 
+        // {pSecondaryApp}/    {pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"
+        this.srv_StMng.SecApp+ "/All/SQUARE/0/999/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+case "GROOVEADAPTOR": {
+  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
+  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
+  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
+  //52/All/HOLDER/0/999/All/All/All/10
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/" + wtolerance + "/All/" +insertdes + "/"  +rtolerance + "/" +grade + "/" + 
+        // {pSecondaryApp}/    {pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"
+        this.srv_StMng.SecApp+ "/All/ADAPTER/0/999/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+case "GROOVEBLADE": {
+  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
+  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
+  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
+  //52/All/HOLDER/0/999/All/All/All/10
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/" + wtolerance + "/All/" +insertdes + "/"  +rtolerance + "/" +grade + "/" + 
+        // {pSecondaryApp}/    {pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"
+        this.srv_StMng.SecApp+ "/All/BLADE/0/999/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+case "KAPPALEADANGLE": {
+  //get-kappaleadangle/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pSecondaryApp}/{Filter}/{Top}  
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/" + this.srv_StMng.SecApp+ "/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-kappaleadangle',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+
+case "GROOVEINTDIAMETER": {
+  //get-int-diameter/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pInsertDesignation}/{pCarbideGrade}/{pSecondaryApp}/{pRTolerance}/{Filter}/{Top}
+  //get-kappaleadangle/M/         All/                   All/            0/       999/      0/          999/         All/           All/                All/                All/            53/              All/        All/10
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param=this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" + insertdes + "/" +grade + "/" + this.srv_StMng.SecApp+ "/" +rtolerance + "/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-diameter',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+
+case "GROOVEINTHOLDER": {
+  //get-int-groove-tool-designation/{pType}/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/
+  //{pWTolerance}/{pGrooveCuttingEdge}/{pInsertDesignation}/{pCarbideGrade}/{pSecondaryApp}/{pRTolerance}/{pDiameter}/{pToolDesignation}/{Filter}/{Top}" 
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param="Holder/"+ this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" + insertdes + "/" +grade + "/" + this.srv_StMng.SecApp+ "/" +rtolerance + "/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+
+case "GROOVEINTRHOLDER": {
+  //get-int-groove-tool-designation/{pType}/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/
+  //{pWTolerance}/{pGrooveCuttingEdge}/{pInsertDesignation}/{pCarbideGrade}/{pSecondaryApp}/{pRTolerance}/{pDiameter}/{pToolDesignation}/{Filter}/{Top}" 
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param="RHolder/"+ this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" + insertdes + "/" +grade + "/" + this.srv_StMng.SecApp+ "/" +rtolerance + "/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+case "GROOVEINTTOOL": {
+  //get-int-groove-tool-designation/{pType}/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/
+  //{pWTolerance}/{pGrooveCuttingEdge}/{pInsertDesignation}/{pCarbideGrade}/{pSecondaryApp}/{pRTolerance}/{pDiameter}/{pToolDesignation}/{Filter}/{Top}" 
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param="Tool/"+ this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" + insertdes + "/" +grade + "/" + this.srv_StMng.SecApp+ "/" +rtolerance + "/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
+case "GROOVEINTBLADE": {
+  //get-int-groove-tool-designation/{pType}/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pWMin}/{pWMax}/{pRadiusMin}/{pRadiusMax}/
+  //{pWTolerance}/{pGrooveCuttingEdge}/{pInsertDesignation}/{pCarbideGrade}/{pSecondaryApp}/{pRTolerance}/{pDiameter}/{pToolDesignation}/{Filter}/{Top}" 
+  let brandname:string =this.getvalueparambyname("TD_BrandName");  
+  let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
+  let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
+  let insertdes:string=this.getvalueparambyname("TD_InsertDesignation");
+  let grade:string=this.getvalueparambyname("TD_Grade");
+  param="Blade/"+ this.srv_StMng.IPL.GetItem("Units").value + "/" +brandname +"/" + this.srv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value +
+        "/0/999/0/999/" + wtolerance + "/All/" + insertdes + "/" +grade + "/" + this.srv_StMng.SecApp+ "/" +rtolerance + "/All/All/";
+  str_param=param + str_s + "/" + t;
+  this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-int-groove-tool-designation',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
+  break; 
+}
        default: {             
           break; 
       } 

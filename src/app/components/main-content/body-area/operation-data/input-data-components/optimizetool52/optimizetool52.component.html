@@ -1,0 +1,183 @@
+
+<div class="container" class="p-0 m-0 pt-2">
+    <div class="row">
+        <div>
+            <button type="button" class="btn sileLinks mb-0 pl-0 ml-0" (click)="ClearDataChild()">{{'Clear All' | translate}}</button>
+        </div>       
+    </div>
+    <div  class="pl-0 pt-2">
+        <label>{{'Internal Coolant' | translate}}</label>
+        <div  class="pl-0 row">                  
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantYes').value">
+                <label class="custom-control-label" for="chkCoolantYes">{{'Standard' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_CoolantNo').value">
+                <label class="custom-control-label" for="chkCoolantNo">{{'Without' | translate}}</label>
+            </div> 
+             <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantHP" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantHP').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantHP').value">
+                <label class="custom-control-label" for="chkCoolantHP">{{'High Pressure' | translate}}</label>
+            </div>        
+        </div>
+    </div>
+     <div class="form-group"> 
+        <div class="pl-0 pt-3">
+            <label>{{'Tool Hand' | translate}}</label>
+        </div>
+        <div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optRight" name="Toolside" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="R">
+                <label class="custom-control-label" for="optRight">{{'Right Hand' | translate}}</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optLeft" name="Toolside" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="L">
+                <label class="custom-control-label" for="optLeft">{{'Left Hand' | translate}}</label>
+            </div>                        
+        </div>
+    </div>
+     <div class="form-group"> 
+        <div class="pl-0 pt-3">
+            <label>{{'Tool position' | translate}}</label>
+        </div>
+        <div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optToolPos1" name="ToolPos" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RadialPerpendicular').value" value="R">
+                <label class="custom-control-label" for="optToolPos1">{{'Radial' | translate}}</label>
+            </div>            
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optToolPos2" name="ToolPos" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RadialPerpendicular').value" value="P">
+                <label class="custom-control-label" for="optToolPos2">{{'Perpendicular' | translate}}</label>
+            </div>                        
+        </div>
+    </div>
+    <div class="pl-0 pt-3" >
+        <label>{{'Precision' | translate}}</label>
+        <div  class="pl-0 row"> 
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optPrAll" name="Precision"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value"   value="All">
+                <label class="custom-control-label" for="optPrAll">{{'All' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optPrP" name="Precision"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value"   value="P">
+                <label class="custom-control-label" for="optPrP">{{'Precision' | translate}}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optPrU" name="Precision"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_PrecisionOrUtility').value"   value="U">
+                <label class="custom-control-label" for="optPrU">{{'Utility' | translate}}</label>
+            </div>  
+        </div>
+    </div>
+    <div class="pl-0 pt-3" >
+        <label>{{'Tool assembly' | translate}}</label>
+        <div  class="pl-0 row"> 
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optassembly1" name="assembly"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_Adaptation').value"   value="All">
+                <label class="custom-control-label" for="optassembly1">{{'All' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optassembly2" name="assembly"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_Adaptation').value"   value="Integral">
+                <label class="custom-control-label" for="optassembly2">{{'Integral' | translate}}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optassembly3" name="assembly"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_Adaptation').value"   value="Square">
+                <label class="custom-control-label" for="optassembly3">{{'Adaptation with square' | translate}}</label>
+            </div> 
+             <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optassembly4" name="assembly"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_Adaptation').value"   value="Adapter">
+                <label class="custom-control-label" for="optassembly4">{{'Adaptation with adapter' | translate}}</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" class="custom-control-input" id="optassembly5" name="assembly"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_Adaptation').value"   value="Blade">
+                <label class="custom-control-label" for="optassembly5">{{'Adaptation with blade' | translate}}</label>
+            </div>  
+        </div>
+    </div>    
+     
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_brandname"          *ngIf="isLoad" [labeldescription]="'Brand Name'"       [fieldname]="'BrandName'"     [funcname]="'BRAND'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter>
+
+    <div class="pt-3 mt-2">        
+        <span>W - </span><span>{{'Insert width' | translate}}</span>      
+        <div class="custom-slider pt-0 mt-4" >
+            <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_WMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_WMax').value" [options]="options_W"></ng5-slider>
+        </div>   
+        <div class="row pt-4">
+               <div class="col-6 pl-0 row">
+                  <div class="col-8 pl-0">
+                      <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMin').value">
+                 </div>
+                <div class="pl-0">
+                  <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div> 
+            </div>
+             <div class="col-6 ml-auto row">
+                <div class="col-8 pl-0">
+                  <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_WMax').value">
+                  </div>
+                  <div class="pl-0">
+                      <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <div *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"   *ngIf="isLoad" [labeldescription]="'W Tolerance'"  [fieldname]="'InsertWidthTol'"     [funcname]="'WTOLERANCE'"    [fieldid]="'TD_WTolerance'"></app-optimizetool-filter>  
+    </div>
+    <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">        
+        <div *ngIf="msrv_StMng.SecApp!='51'"><span>R - </span><span>{{'Insert radius' | translate}}</span></div>
+        <div *ngIf="msrv_StMng.SecApp=='51'"><span>R - </span><span>{{'Corner radius' | translate}}</span></div>    
+        <div class="custom-slider pt-0 mt-4" >
+            <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
+        </div>   
+        <div class="row pt-4">
+               <div class="col-6 pl-0 row">
+                  <div class="col-8 pl-0">
+                      <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value">
+                 </div>
+                <div class="pl-0">
+                  <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div> 
+            </div>
+             <div class="col-6 ml-auto row">
+                <div class="col-8 pl-0">
+                  <input type="number" class="form-control"  
+                                [(ngModel)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value">
+                  </div>
+                  <div class="pl-0">
+                      <label>{{msrv_appsetting.UnitslengthDesc}}</label>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <div *ngIf="msrv_StMng.SecApp=='51'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Max K lead angle'"  [fieldname]="'KappaLeadAngle'"     [funcname]="'KAPPALEADANGLE'"    [fieldid]="'TD_KappaLeadAngle'"></app-optimizetool-filter>
+    </div>
+    <div *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'R Tolerance'"  [fieldname]="'CornerRadTol'"     [funcname]="'RTOLERANCE'"    [fieldid]="'TD_RTolerance'"></app-optimizetool-filter>
+    </div>
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINSERT'"    [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"  [fieldname]="'CatalogNo'"     [funcname]="'GROOVEINSERTCATALOG'"    [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter>
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Grade'"  [fieldname]="'CarbideGrade'"     [funcname]="'GROOVEGRADE'"    [fieldid]="'TD_Grade'"></app-optimizetool-filter>  
+    <div *ngIf="msrv_StMng.SecApp=='53' ||  msrv_StMng.SecApp=='50' || msrv_StMng.SecApp=='188'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Shank diameter'"  [fieldname]="'ShankDiameter'"     [funcname]="'GROOVEINTDIAMETER'"    [fieldid]="'TD_DiameterFrom'"></app-optimizetool-filter>  
+    </div>
+    
+    <div *ngIf="msrv_StMng.SecApp=='52' ||  msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='1' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEHOLDER'"    [fieldid]="'TD_Adaptation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Square Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVESQUARE'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Adaptor Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEADAPTOR'"    [fieldid]="'TD_AdapterDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Blade Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEBLADE'"    [fieldid]="'TD_BladeDesignation'"></app-optimizetool-filter>         
+    </div>
+
+    <div *ngIf="msrv_StMng.SecApp=='53' ||  msrv_StMng.SecApp=='50' || msrv_StMng.SecApp=='188'">
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTHOLDER'"    [fieldid]="'TD_HolderDesignation'"></app-optimizetool-filter>     
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Round Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTHOLDER'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Tool Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTTOOL'"    [fieldid]="'TD_AdapterDesignation'"></app-optimizetool-filter> 
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Adapter/Blade Designation'"  [fieldname]="'Designation'"     [funcname]="'GROOVEINTBLADE'"    [fieldid]="'TD_BladeDesignation'"></app-optimizetool-filter> 
+    </div>
+       
+</div>

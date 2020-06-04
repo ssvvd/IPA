@@ -65,8 +65,17 @@ import { OptimizetoolFilterExtComponent } from './components/main-content/body-a
 import { Optimizetool120Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool120/optimizetool120.component';
 import { Appdetails990Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails990/appdetails990.component';
 import { Optimizetool990Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool990/optimizetool990.component';
+<<<<<<< HEAD
 import { MachiningPrmsComponent } from './components/main-content/body-area/results/machining-prms/machining-prms.component';
 import { ProductInfoComponent } from './components/main-content/body-area/results/product-info/product-info.component';
+=======
+import { Appdetails890Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails890/appdetails890.component';
+import { Appdetails52Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails52/appdetails52.component';
+import { Optimizetool52Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool52/optimizetool52.component';
+import { Appdetails1Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails1/appdetails1.component';
+import { Appdetails51Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails51/appdetails51.component';
+import { Appdetails54Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails54/appdetails54.component';
+>>>>>>> 6e9873f57a01feba6d6e893f1bcfd6046fd5421a
 
 @NgModule({
   declarations: [   
@@ -116,9 +125,18 @@ import { ProductInfoComponent } from './components/main-content/body-area/result
     Optimizetool120Component,
     Appdetails990Component,
     Optimizetool990Component,
+<<<<<<< HEAD
     MachiningPrmsComponent,
     ProductInfoComponent
 
+=======
+    Appdetails890Component,
+    Appdetails52Component,
+    Optimizetool52Component,
+    Appdetails1Component,
+    Appdetails51Component,
+    Appdetails54Component
+>>>>>>> 6e9873f57a01feba6d6e893f1bcfd6046fd5421a
   ],
   imports: [
     FormsModule,

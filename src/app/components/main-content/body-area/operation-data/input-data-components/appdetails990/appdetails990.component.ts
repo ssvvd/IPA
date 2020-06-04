@@ -25,6 +25,7 @@ export class Appdetails990Component implements OnInit {
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   private s:SurfacequalityService;
+  UnitsSurf:string;
 
   N:number;
   Ra:number;
@@ -49,16 +50,21 @@ export class Appdetails990Component implements OnInit {
               this.RMS=0;
           }
       }
-   
+    if(this.srv_appsetting.Units=='M')
+      this.UnitsSurf='μm';    
+    else
+      this.UnitsSurf='microinch';
   }
  
   onfocusfield(field:string)
   {
     this.InFocus=true;
     if(field=='surface')
-      this.ImageName= environment.ImageInputPath + "inpt_surface" + this.srv_StMng.SecApp+".jpg";
+      this.ImageName= environment.ImageInputPath + "inpt_surface" + this.srv_StMng.SecApp+".png";
     else
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;
+    {
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;      
+    }
   }
 
   onfocusoutfield()
@@ -102,8 +108,7 @@ export class Appdetails990Component implements OnInit {
     if(this.Ra!=0)
       {
         this.Rt=this.srv_sq.GetRt(this.Ra);      
-        this.RMS=this.srv_sq.GetRMS(this.Ra);
-        this.N=this.srv_sq.GetN(this.Rt);
+        this.RMS=this.srv_sq.GetRMS(this.Ra);        this.N=this.srv_sq.GetN(this.Rt);
         this.srv_StMng.IPL.GetItem('SurfaceQualityRt').value =this.Rt.toString();
       }
       else      
@@ -126,28 +131,14 @@ export class Appdetails990Component implements OnInit {
 
   ClearData()
   {
-    // alert(this.srv_StMng.SecApp);
-    switch (this.srv_StMng.SecApp.toString())
-    {     
-      case '990' :
-      {      
-        this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
-        this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
-        this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;
-        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;  
-        break;
-      }
-      case '960' :
-      {
-        this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
-        this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
-        this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;
-        this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;       
-        this.srv_StMng.IPL.GetItem('MinRadEntAngle').value =this.srv_StMng.IPL.GetItem('MinRadEntAngle').valuedefault;
-        this.srv_StMng.IPL.GetItem('MaxRadEntAngle').value =this.srv_StMng.IPL.GetItem('MaxRadEntAngle').valuedefault;
-        break;
-      }     
-    }    
+      
+    this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
+    this.srv_StMng.IPL.GetItem('DepthAxial').value =null;
+    this.srv_StMng.IPL.GetItem('DepthRadial').value =null;
+    this.srv_StMng.IPL.GetItem('CutLengthAxial').value =null;
+    this.srv_StMng.IPL.GetItem('CutLengthRadial').value =null;      
+    this.srv_StMng.IPL.GetItem('RmaxAxial').value =null;       
+  
     this.srv_StMng.IPL.GetItem('OperationType').value =this.srv_StMng.IPL.GetItem('OperationType').valuedefault;
     this.srv_StMng.IPL.GetItem('OperationType4Solid').value =this.srv_StMng.IPL.GetItem('OperationType4Solid').valuedefault;
     this.srv_StMng.IPL.GetItem('OverHang').value =this.srv_StMng.IPL.GetItem('OverHang').valuedefault;

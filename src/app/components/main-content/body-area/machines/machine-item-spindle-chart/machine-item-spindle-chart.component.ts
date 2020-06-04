@@ -1,6 +1,6 @@
 import { Component, OnInit ,Input, Output,EventEmitter,OnChanges, SimpleChanges} from '@angular/core';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { TranslateService } from '@ngx-translate/core';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import 'chart.js';
 
 export class ChartData
@@ -51,7 +51,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   public chartColors: Array<any>;
   public chartOptions: any;
   
-  constructor(public translate: TranslateService) { }
+  constructor(private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     this.FilldataChart();
@@ -113,8 +113,9 @@ export class MachineItemSpindleChartComponent implements OnInit {
    CreateChart()
   {
     let labelaxisY:string;
-    if(this.typeChart=='power') labelaxisY="P[Kw]";
-    if(this.typeChart=='torque') labelaxisY="T[Nm]";
+
+    if(this.typeChart=='power') this.srv_appsetting.Units=='M'?labelaxisY="P[Kw]":labelaxisY="P[HP]";
+    if(this.typeChart=='torque') this.srv_appsetting.Units=='M'?labelaxisY="T[Nm]":labelaxisY="P[Lbf]";
 
     this.chartType = 'line';    
     this.chartDatasets= [      

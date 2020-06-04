@@ -46,7 +46,6 @@
                         </div>
                     </div>              
                 </label>    
-
             </div>    
         </div>
     </div>
@@ -60,9 +59,19 @@
         </div>
         <div class="ml-auto mr-0 bottom-align-text pr-3"> 
             <div class="row ">
-                <div class="div-header-link pl-1">
-                    <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="MenuImg" title="{{'New Search' | translate}}"></a>                                               
-                </div>
+               <!--  <div class="div-header-link pl-1">
+                    <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="MenuImg " title="{{'New Search' | translate}}"></a>                                               
+                </div> -->
+                <label class="new-search">
+                    <div class="row">
+                        <div >
+                            <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="user-img" title="{{'New Search' | translate}}"></a>                                               
+                        </div>
+                        <div class="mt-1 ml-1 mr-2 ">
+                            <label class="user-label  cursor-pointer"><a href="#" class="user-label">{{'New Search' | translate}}</a></label>           
+                        </div>
+                    </div> 
+                </label>
                 <div class="div-header-link pl-1">
                     <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="MenuImg" title="{{'E-Catalog' | translate}}"></a>                                               
                 </div>

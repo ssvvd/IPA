@@ -3,10 +3,10 @@ import { Machineheader } from 'src/app/models/machines/machineheader';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { MachineService } from 'src/app/services/machine.service';
 import { StateManagerService } from 'src/app/services/statemanager.service';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject, Subscription } from 'rxjs';
-//import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-machines-list',
@@ -19,7 +19,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
   isDtInitialized:boolean = false;
 
-  myVar: any;
+  //myVar: any;
   dtOptions: DataTables.Settings = {};
   listmachines: Machineheader[] = [];
   listmachines_sorted: Machineheader[] = [];
@@ -30,9 +30,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   dtTrigger: Subject<any> = new Subject();
   allSubs$: Subscription;
   isLoaded:boolean =false;
-  constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService) {
-    //translate.addLangs(['en', 'nl']);
-    //translate.setDefaultLang('en');
+
+  public msrv_appsetting:AppsettingService =this.srv_appsetting;
+
+  constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, private srv_appsetting:AppsettingService) {   
   }
 
   ngOnInit() {  
@@ -103,8 +104,6 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   }
   
-  
-
   myMachineSettings() {
     let stfilter: MachineFilter;
     stfilter = this.srv_statemanage.SelectMachineFilter;
@@ -171,6 +170,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     }
     else
     {
+      
       this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);
       //this.isDtInitialized = true
       //this.dtTrigger.next();
@@ -206,6 +206,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         ));
     this.srv_statemanage.SelectMachineFilter = filter;
     this.SortTableData();
+    //this.dtTrigger.next();
   }
 }
 

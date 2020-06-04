@@ -1,11 +1,13 @@
 <div class="container" class="p-0 m-0 pt-4 pr-2 border-bottom">
     
-        <div class="form-group row col-12  d-flex justify-content-between" >   
-            <div class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
-                <label>{{labeldescription | translate}}</label>
-            </div>                                   
-            <div class="col-5 pl-0 ml-0 text-truncate selected-items">
-                {{select_items}}
+        <div class="form-group row col-12  d-flex justify-content-between" >
+            <div class="col-10 row pl-0 ml-0 mr-0 pr-0 ">   
+                <div class="pl-0 ml-0 mr-0 pr-2 text-nowrap">       
+                    <label>{{labeldescription | translate}}</label>
+                </div>                                   
+                <div class="pl-0 ml-0 text-truncate selected-items">
+                    {{select_items}}
+                </div>
             </div>           
              <div *ngIf="select_items!=''" class="col-1  pl-0 ml-0 mr-0 pr-0" >
                 <a (click)="remove_select()">

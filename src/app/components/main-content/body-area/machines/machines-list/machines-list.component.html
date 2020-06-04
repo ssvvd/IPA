@@ -1,8 +1,11 @@
 
 <div class="border-left-gray border-right-gray"> 
-    <div class="row ">    
-      <div class="col col-20 ml-0 pl-2 pr-0 pt-3 border-right-gray">
-          <div class="pr-2">
+    <div class="row">          
+      <div class="col col-20 ml-0 pl-2 pr-0 pt-0 " > 
+         <div class="pt-4 pb-0">
+
+         </div>
+          <div class="pr-2 pt-0 border-right-gray">
             <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
                                 (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
           </div>
@@ -19,9 +22,9 @@
                     <th class="d-none" >ID</th>                                     
                     <th ><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                  
                     <th><label>{{'Adaptation Type & Size'  | translate}}<span class="sort-icon ml-1"></span></label></th>
-                    <th><label>{{'Power' | translate}}<span class="sort-icon ml-1"></span></label></th>
-                    <th><label>{{'Spindle Speed' | translate}}<span class="sort-icon ml-1"></span></label></th>                
-                    <th><label>{{'Torque' | translate}}<span class="sort-icon ml-1"></span></label></th>
+                    <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Kw)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
+                    <th><label>{{'Spindle Speed (rpm)' | translate}}<span class="sort-icon ml-1"></span></label></th>                
+                    <th><label>{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th class="no-sort"></th>
                     <th class="no-sort"></th>
                     <th class="no-sort"></th>
@@ -64,6 +67,5 @@
               </table>
             </div>               
         </div>
-      </div>
-   
+      </div>   
 </div>

@@ -20,6 +20,7 @@ export class OperationDataComponent implements OnInit {
   
   SecApp:string;  
   SecAppName:string;
+  MainApp:string;
   router:Router;
   isLoaded:boolean=false;
   
@@ -43,9 +44,10 @@ export class OperationDataComponent implements OnInit {
         {
           this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
           this.SecAppName = this.srv_StMng.SecAppSelected.MenuName;
+          this.MainApp=this.srv_StMng.SecAppSelected.MainApp;
         } 
     let Ipl:InputParameterlist =new InputParameterlist;
-
+    
     if (this.srv_StMng.IPL== null)    
     {
       this.eventsSubscription.add(this.srv_DataLayer.getinputparameters(this.SecApp, this.srv_appsetting.Units).subscribe((data: any)=> {
@@ -58,6 +60,7 @@ export class OperationDataComponent implements OnInit {
                 valuemin:d.valuemin ,
                 valuemax: d.valuemax ,
                 image:d.image ,
+                image1:d.image1==null?'':d.image1,
                 required:d.required     
             })                            
               // alert(this.isLoaded);                                  
@@ -113,10 +116,18 @@ else
       this.srv_StMng.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
 
            //todo: temp for check results
-      if(this.srv_StMng.SecApp=='990')
+      if(this.srv_StMng.MainAppSelected.MainApp=='IS' || this.srv_StMng.MainAppSelected.MainApp=='TG')
       {
        this.srv_StMng.IPL.GetItem('AdaptorType').value="SQUARE";
        this.srv_StMng.IPL.GetItem('AdaptorSize').value="25";
+       
+      this.srv_StMng.IPL.GetItem('PW_AX').value = '20'; 
+      this.srv_StMng.IPL.GetItem('PW_BX').value = '200';
+      this.srv_StMng.IPL.GetItem('PW_CX').value = '700';
+
+      this.srv_StMng.IPL.GetItem('PW_AY').value = '1'; 
+      this.srv_StMng.IPL.GetItem('PW_BY').value = '15';
+      this.srv_StMng.IPL.GetItem('PW_CY').value = '15'; 
       }
   }
   

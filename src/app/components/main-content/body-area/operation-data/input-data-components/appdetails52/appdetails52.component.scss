@@ -1,0 +1,25 @@
+@import "bootstrap";
+@import 'src/styles.scss';
+
+.input-image
+{
+   width:100% ;
+}
+
+.input-min-width
+{
+    min-width: 100px;
+}
+
+.input-min-sl-width
+{
+    min-width: 50px;
+}
+
+ @media screen and (max-width: 768px) {
+   .div-input-image
+ {
+     display: none; 
+ }
+} 
+

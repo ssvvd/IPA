@@ -25,24 +25,30 @@ export class Optimizetool990Component implements OnInit {
    options_IC: Options = {
     floor: 0,
     ceil:  Number(this.srv_StMng.IPL.GetItem('TD_IC_MAX').valuedefault),
-    step: this.srv_StMng.IPL.GetItem('Units').value=='M'?0.1:0.01,
+    step:  this.msrv_appsetting.Units=='M'?0.1:0.01,
     showTicks: false
   };
    options_L: Options = {
     floor: 0,
     ceil:  Number(this.srv_StMng.IPL.GetItem('TD_WMax').valuedefault),
-    step: this.srv_StMng.IPL.GetItem('Units').value=='M'?0.1:0.01,
+    step: this.msrv_appsetting.Units=='M'?0.1:0.01,
     showTicks: false
   };
   options_R: Options = {
     floor: 0,
-    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_RadiusMax').valuedefault),
-    step: this.srv_StMng.IPL.GetItem('Units').value=='M'?0.1:0.01,
+    ceil:  Number(this.srv_StMng.IPL.GetItem('TD_RadiusMax').valuedefault),    
+    step: this.msrv_appsetting.Units=='M'?0.1:0.01, 
     showTicks: false
   };
   options_Ang: Options = {
-    floor: 0,
+    floor: Number(this.srv_StMng.IPL.GetItem('MinAxialEntAngle').valuedefault),
     ceil:  Number(this.srv_StMng.IPL.GetItem('MaxAxialEntAngle').valuedefault),
+    step: 0.5,
+    showTicks: false
+  };
+ options_rad_ang: Options = {
+    floor:  Number(this.srv_StMng.IPL.GetItem('MinRadEntAngle').valuedefault),
+    ceil:  Number(this.srv_StMng.IPL.GetItem('MaxRadEntAngle').valuedefault),
     step: 0.5,
     showTicks: false
   };
@@ -77,10 +83,11 @@ export class Optimizetool990Component implements OnInit {
 
     this.eventsSubject.next();
   }
- 
+  
+  
+
   ngOnInit() {     
-    this.isLoad =true;   
-     
+    this.isLoad =true;     
   }
 
   /* change(field:string)

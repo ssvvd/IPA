@@ -10,8 +10,9 @@ export class AppsettingService {
   constructor(private srv_DataLayer:DatalayerService) { }
   
   private mUnits:string ='M'; //todo:
-  private mUnitslengthDesc :string='mm'; //todo:
+  private mUnitslengthDesc :string='mm'; //todo:  
   private marrLanguages:Language[];
+
 
    get Units():string{   
     return this.mUnits;
@@ -19,7 +20,20 @@ export class AppsettingService {
    set Units(u:string) {  
     this.mUnits = u;
    }
-  
+
+   ChangeUnits(units:string)
+   {
+      if(units=='M')
+        {
+          this.Units="M";
+          this.UnitslengthDesc="mm";                     
+        }
+      else
+        {
+          this.Units="I";
+          this.UnitslengthDesc="inch"; 
+        }
+   }
    get UnitslengthDesc():string {
     return this.mUnitslengthDesc;
     }

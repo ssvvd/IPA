@@ -53,25 +53,24 @@ export class Appdetails790Component implements OnInit {
   changeinputimage(val)
  {     
     if(val=='Solid')
-    {
-        //this.srv_StMng.IPL.GetItem('D3').image= "Images/Disk/jpg_png_gif/inpt_SM_Prehole_Diameter750.jpg";
-        this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').image= "inpt_SM_Length750.jpg";
-        this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').image= "inpt_SM_Width750.jpg";
-        this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').image= "inpt_SM_Depth750.jpg";
-        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_SM_Radius750.jpg";
-        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_SM_ButtomRadius750.jpg";
-        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_SM_ButtomRadius750.jpg";          
+    {     
+        this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').image= "inpt_SM_Length750.png";
+        this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').image= "inpt_SM_Width750.png";
+        this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').image= "inpt_SM_Depth750.png";
+        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_SM_Radius750.png";
+        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_SM_ButtomRadius750.png";
+        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_SM_ButtomRadius750.png";          
     }
 
     if(val=='PreHole')
     {
-        this.srv_StMng.IPL.GetItem('D3').image= "inpt_PH_Prehole_Diameter750.jpg";
-        this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').image= "inpt_PH_Length750.jpg";
-        this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').image= "inpt_PH_Width750.jpg";
-        this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').image= "inpt_PH_Depth750.jpg";
-        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_PH_Radius750.jpg";
-        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_PH_ButtomRadius750.jpg";
-        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_PH_ButtomRadius750.jpg";        
+        this.srv_StMng.IPL.GetItem('D3').image= "inpt_PH_Prehole_Diameter750.png";
+        this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').image= "inpt_PH_Length750.png";
+        this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').image= "inpt_PH_Width750.png";
+        this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').image= "inpt_PH_Depth750.png";
+        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_PH_Radius750.png";
+        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_PH_ButtomRadius750.png";
+        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_PH_ButtomRadius750.png";        
     }    
  }
 

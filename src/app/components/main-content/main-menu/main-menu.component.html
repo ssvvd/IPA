@@ -4,16 +4,16 @@
             [className]="tab.IsSelected? 
                                         tab.TabID=='5'? 'nav-item div-tab-menu-selected-last': 'nav-item div-tab-menu-selected':tab.isDisabled? tab.TabID=='5'?'nav-item div-tab-menu-disabled-last' :'nav-item div-tab-menu-disabled':'nav-item div-tab-menu'"  [routerLink]="tab.isDisabled? null:tab.RouteName">  
             <div class="row"> 
-                <div>                                          
+                <div class="pl-1">                                          
                     <img [src]="tab.isDisabled ? tab.ImageDisableURL : tab.ImageURL" class="img-main-menu">                                                                                                  
                 </div>            
-                <div class="mb-0 pb-0">                                                           
+                <div class="mb-0 pb-0 pl-1">                                                           
                     <div>                       
                         <label [className]="tab.isDisabled?'siteTitle-disable text-truncate d-none d-lg-block mb-0 pb-0':'siteTitle text-truncate d-none d-lg-block mb-0 pb-0'">{{tab.Description | translate}}</label> 
                     </div>
-                    <div>
+                    <div class="row">
                         <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-lg-block mb-0 pb-0">{{tab.SelectedItemDesc | translate}}</label> 
-                        <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-lg-block mt-0 pt-0  mb-0 pb-0">{{tab.SelectedItemDesc1 | translate}}</label> 
+                        <label class="desc-main-menu-selected text-nowrap text-truncate d-none d-lg-block mt-0 pt-0  mb-0 pb-0 pl-1">{{tab.SelectedItemDesc1 | translate}}</label> 
                     </div>  
                 </div> 
                          

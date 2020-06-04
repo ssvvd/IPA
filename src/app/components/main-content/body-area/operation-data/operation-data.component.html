@@ -1,5 +1,5 @@
 
-<div class="container-fluid ml-0 pl-0 mt-0  pr-0" >   
+<div class="container-fluid ml-0 pl-0 mt-0  pr-0">   
      <div class="form-group row col-12">       
         <div  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'width-tooldata  border-right-gray border-left-gray  pt-2' : 'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
             <div class="pt-4"  >
@@ -11,8 +11,9 @@
                         <label [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
                     </div>
                     <div>
-                        <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&& SecApp!='990' && SecApp!='980' && SecApp!='970' && SecApp!='960'" ></app-optimizetool>
-                        <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen&&SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960'" ></app-optimizetool990>
+                        <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp!='IS' && MainApp!='TG'" ></app-optimizetool>
+                        <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='IS'" ></app-optimizetool990>
+                        <app-optimizetool52  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='TG'" ></app-optimizetool52>
                     </div>                  
                 </div>           
             </div> 
@@ -36,10 +37,14 @@
                     <app-appdetails790 *ngIf = "isLoaded && SecApp=='790'"  [events]="eventsSubject.asObservable()"></app-appdetails790>
                     <app-appdetails77 *ngIf = "isLoaded && SecApp=='77'"  [events]="eventsSubject.asObservable()"></app-appdetails77>
                     <appdetails120 *ngIf = "isLoaded && (SecApp=='120' || SecApp=='119')"  [events]="eventsSubject.asObservable()"></appdetails120> 
-                    <appdetails990 *ngIf = "isLoaded && (SecApp=='990')"  [events]="eventsSubject.asObservable()"></appdetails990>                   
+                    <appdetails990 *ngIf = "isLoaded && (SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960')"  [events]="eventsSubject.asObservable()"></appdetails990>   
+                    <appdetails890 *ngIf = "isLoaded && (SecApp=='890' || SecApp=='880' || SecApp=='870' || SecApp=='860' || SecApp=='850')"  [events]="eventsSubject.asObservable()"></appdetails890>                 
+                    <appdetails52  *ngIf = "isLoaded && (SecApp=='52' || SecApp=='53' || SecApp=='50')" [events]="eventsSubject.asObservable()"></appdetails52>   
+                    <appdetails1  *ngIf = "isLoaded && SecApp=='1'" [events]="eventsSubject.asObservable()"></appdetails1> 
+                    <appdetails51  *ngIf = "isLoaded && SecApp=='51'" [events]="eventsSubject.asObservable()"></appdetails51>               
+                    <appdetails54  *ngIf = "isLoaded && (SecApp=='54' || SecApp=='10'  || SecApp=='188')" [events]="eventsSubject.asObservable()"></appdetails54>
                 </div>
             </div>
-        </div>
-           
+        </div>           
      </div>
 </div> 

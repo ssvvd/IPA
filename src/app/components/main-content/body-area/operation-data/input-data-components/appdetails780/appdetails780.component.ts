@@ -81,27 +81,27 @@ export class Appdetails780Component implements OnInit {
  {     
     if(val=='Solid_Through')
     {
-      this.srv_StMng.IPL.GetItem('D2Min').image='inpt_SM_Throughhole_holeDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('D2Max').image='inpt_SM_Throughhole_holeDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('Depth').image='inpt_SM_Throughhole_Depth720.jpg';      
+      this.srv_StMng.IPL.GetItem('D2Min').image='inpt_SM_Throughhole_holeDiameter720.png';
+      this.srv_StMng.IPL.GetItem('D2Max').image='inpt_SM_Throughhole_holeDiameter720.png';
+      this.srv_StMng.IPL.GetItem('Depth').image='inpt_SM_Throughhole_Depth720.png';      
     }
     if(val=='Solid_Blind')
     {
-      this.srv_StMng.IPL.GetItem('D2Min').image='inpt_SM_Blindhole_HoleDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('D2Max').image='inpt_SM_Blindhole_HoleDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('Depth').image='inpt_SM_Blindhole_Depth720.jpg';      
+      this.srv_StMng.IPL.GetItem('D2Min').image='inpt_SM_Blindhole_HoleDiameter720.png';
+      this.srv_StMng.IPL.GetItem('D2Max').image='inpt_SM_Blindhole_HoleDiameter720.png';
+      this.srv_StMng.IPL.GetItem('Depth').image='inpt_SM_Blindhole_Depth720.png';      
     }
      if(val=='Hole_Through')
     {     
-      this.srv_StMng.IPL.GetItem('D3').image='inpt_PH_ThroughHole_PreHoleDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('D2').image='inpt_PH_Throughhole_HoleDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('Depth').image='inpt_PH_ThroughHole_Depth720.jpg';      
+      this.srv_StMng.IPL.GetItem('D3').image='inpt_PH_ThroughHole_PreHoleDiameter720.png';
+      this.srv_StMng.IPL.GetItem('D2').image='inpt_PH_Throughhole_HoleDiameter720.png';
+      this.srv_StMng.IPL.GetItem('Depth').image='inpt_PH_ThroughHole_Depth720.png';      
     }
      if(val=='Hole_Blind')
     {     
-      this.srv_StMng.IPL.GetItem('D3').image='inpt_PH_Blindhole_PreholeDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('D2').image='inpt_PH_Blindhole_HoleDiameter720.jpg';
-      this.srv_StMng.IPL.GetItem('Depth').image='inpt_PH_Blindhole_Depth720.jpg';      
+      this.srv_StMng.IPL.GetItem('D3').image='inpt_PH_Blindhole_PreholeDiameter720.png';
+      this.srv_StMng.IPL.GetItem('D2').image='inpt_PH_Blindhole_HoleDiameter720.png';
+      this.srv_StMng.IPL.GetItem('Depth').image='inpt_PH_Blindhole_Depth720.png';      
     }
  }
 
