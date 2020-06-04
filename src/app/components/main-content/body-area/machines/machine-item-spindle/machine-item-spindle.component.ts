@@ -75,15 +75,12 @@ export class MachineItemSpindleComponent implements OnInit
   
   filladaptordata(at:string,az:string,st:string)
   {
-     this.eventsSubscription.add(this.serv.getmachineadaptationdata(at,az,st,this.srv_appsetting.Units).subscribe((res: any) => {
-       alert('ss');
+     this.eventsSubscription.add(this.serv.getmachineadaptationdata(at,az,st,this.srv_appsetting.Units).subscribe((res: any) => {     
        this.spindle =JSON.parse(res)[0];   
        this.spindle.EmultionPressure = 25;//TODO:
        this.spindle.EmultionFlowRate = 40;    
-       alert(this.spindle.Power);   
-
-      })); 
-      //alert(this.spindle.Power); 
+        
+      }));   
   }
   changeadapsize()
   {  

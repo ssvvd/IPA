@@ -200,8 +200,8 @@ input:checked + .slider:after
 }
 
 .user-login input {display:none;}
-.user-login {
-  
+
+.user-login {  
   cursor: pointer;
   top: 0;
   left: 0;
@@ -214,6 +214,17 @@ input:checked + .slider:after
   border:1px solid var(--btn-bg-select-color);
 }
 
+.new-search {  
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;  
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+  border:1px solid var(--btn-bg-select-color);
+}
 .user-img
 {
     height:32px;
@@ -227,4 +238,5 @@ input:checked + .slider:after
  color: var(--btn-bg-select-color);
  display: block;  
  white-space:nowrap;
+ text-decoration: none;
 }
