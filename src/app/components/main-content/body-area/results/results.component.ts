@@ -11,6 +11,9 @@ import { ResultsTableComponent } from 'src/app/components/main-content/body-area
 export class ResultsComponent implements OnInit, AfterViewInit { 
 
 filterChanged:any;
+viewParams:any;
+MainPage:boolean = true;
+active = 1;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 
@@ -22,7 +25,7 @@ filterChanged:any;
 
 
   ngOnInit() {
-
+    this.MainPage = true;
     
   }
 
@@ -33,6 +36,14 @@ filterChanged:any;
   getHelpFilter(){
 
   }
+  goToView(value){
+    this.MainPage = false;
+    this.viewParams = value;
+    this.active = 1;
+  }
 
+  switchPage(){
+    this.MainPage = true;
+  }
 
 }

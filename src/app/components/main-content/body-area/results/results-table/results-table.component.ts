@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { ResultsService} from 'src/app/services/results.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsGroups } from 'src/app/models/results/groups';
@@ -51,7 +51,7 @@ export class ResultsTableComponent implements OnInit {
   sortProp:string="";
 
   @Input() filterChangedRec: any ;
-  
+  @Output() goToViewEvent = new EventEmitter<any>();
   
   constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal) { }
@@ -99,6 +99,10 @@ getShowTable(){
           this.srv_Results.GetPromotionFamilies()
         )
         .subscribe(([res1, res2, res3, res4,res5, res6]:[any,any,any,any,any,any]) => {
+          if (res1 == 'Error'){
+            this.SpinnerService.hide();
+            return;
+          }
           this.dtRsults =JSON.parse(res1);
           this.dtPropertiesTable = JSON.parse(res2); 
           this.dtGroups = JSON.parse(res3);
@@ -642,6 +646,13 @@ filterRecommended(prop:clsHelpProp){
         prop.isHidden++
 }
 
+
+viewInfo(index:number){
+
+  this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]]})
+
+
+}
 
 }
 

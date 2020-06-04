@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SafePipeModule } from 'safe-pipe';
 import * as $ from "jquery";
 
 import { HeaderComponent } from './components/header/header.component';
@@ -64,6 +65,8 @@ import { OptimizetoolFilterExtComponent } from './components/main-content/body-a
 import { Optimizetool120Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool120/optimizetool120.component';
 import { Appdetails990Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails990/appdetails990.component';
 import { Optimizetool990Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool990/optimizetool990.component';
+import { MachiningPrmsComponent } from './components/main-content/body-area/results/machining-prms/machining-prms.component';
+import { ProductInfoComponent } from './components/main-content/body-area/results/product-info/product-info.component';
 import { Appdetails890Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails890/appdetails890.component';
 import { Appdetails52Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails52/appdetails52.component';
 import { Optimizetool52Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool52/optimizetool52.component';
@@ -120,6 +123,8 @@ import { FavoritesComponent } from './components/main-content/body-area/favorite
     Optimizetool120Component,
     Appdetails990Component,
     Optimizetool990Component,
+    MachiningPrmsComponent,
+    ProductInfoComponent,
     Appdetails890Component,
     Appdetails52Component,
     Optimizetool52Component,
@@ -142,6 +147,7 @@ import { FavoritesComponent } from './components/main-content/body-area/favorite
     BrowserAnimationsModule,
     NgpSortModule,
     NgSelectModule,
+    SafePipeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
