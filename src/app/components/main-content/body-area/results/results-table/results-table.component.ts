@@ -564,21 +564,25 @@ ngOnChanges(changes:SimpleChanges) {
                   // this.dtResultsObjectsHelp[i].isHidden++
                 break;
               case 'FilteAllRes':
-                  if (this.dtResultsObjectsHelp[i].IsExpand == "False")
+                  if (this.dtResultsObjectsHelp[i].IsExpand == "False" || this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden--
+                break;
+              case 'FilterSeller':
+                if (this.dtResultsObjectsHelp[i].AverageUse < 1)
+                  this.dtResultsObjectsHelp[i].isHidden++
                 break;
             }
             break;   
-            case 'optSort':
-              switch (this.filterChangedRec.Res){
-                case 'SortRec':
-                  this.sortProp = 'index';
-                  break;
-                case 'SortSeller':
-                  this.sortProp = 'AverageUse';
-                  break;
-              }
-              return;  
+            // case 'optSort':
+            //   switch (this.filterChangedRec.Res){
+            //     case 'SortRec':
+            //       this.sortProp = 'index';
+            //       break;
+            //     case 'SortSeller':
+            //       this.sortProp = 'AverageUse';
+            //       break;
+            //   }
+            //   return;  
               
             case 'filterList':
               let field:string = this.filterChangedRec.Res[0];
@@ -644,6 +648,8 @@ ngOnChanges(changes:SimpleChanges) {
 filterRecommended(prop:clsHelpProp){
     if (prop.IsExpand == "False")
         prop.isHidden++
+    else
+        prop.isHidden--
 }
 
 

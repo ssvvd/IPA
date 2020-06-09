@@ -4,6 +4,7 @@ import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { MachineService } from 'src/app/services/machine.service';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { MaterialService } from 'src/app/services/material.service'
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject, Subscription } from 'rxjs';
@@ -33,7 +34,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
-  constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, private srv_appsetting:AppsettingService) {   
+  constructor(private serv: MaterialService,private srv_machine: MachineService, private srv_statemanage: StateManagerService, private srv_appsetting:AppsettingService) {   
   }
 
   ngOnInit() {  
@@ -51,7 +52,13 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         "infoEmpty": "",
         "info": "" },
         responsive: true
-    };        
+    };    
+    
+    this.serv.getmaterialsbygrp('EN','P')
+    .subscribe((data: any) => {
+      this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
+    });
+    
   
     this.allSubs$ = this.srv_machine.getmachines()
       .subscribe((data: any) => {

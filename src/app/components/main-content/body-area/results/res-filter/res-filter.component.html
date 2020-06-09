@@ -5,7 +5,7 @@
             <button type="button" class="btn sileLinks mb-0 pl-0 ml-0" (click)="ClearDataChild()">{{'Clear All' | translate}}</button>
         </div>       
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <div class="pr-4 ">   
             <label class="font-weight-bold">Sort By:</label> 
 
@@ -13,26 +13,26 @@
                 <input type="radio" class="custom-control-input" id="optSortRec" name="optSort"  [(ngModel)]="sortBy" (change)="change('optSort','SortRec')" value="SortRec">
                 <label class="custom-control-label" for="optSortRec">Most Recommended</label>
             </div>                              
-            <div class="custom-control custom-radio ">
-                <input  type="radio" class="custom-control-input" id="optSortSeller" name="optSort" [(ngModel)]="sortBy" (change)="change('optSort','SortSeller')" value="SortSeller">
-                <label class="custom-control-label" for="optSortSeller">Best Seller</label>
-            </div>
            
         </div>
 
     </div>
-    <hr>
+    <hr> -->
     <div class="row">
         <div class="pr-4 ">   
             <label class="font-weight-bold">Filter By:</label> 
             <div class="custom-control custom-radio ">
-                <input type="radio" class="custom-control-input" id="optFilterRec" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterRec')" value="FilterRec">
-                <label class="custom-control-label" for="optFilterRec">Most Recommended</label>
-            </div>                              
-            <div class="custom-control custom-radio ">
                 <input  type="radio" class="custom-control-input" id="optFilteRes" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilteAllRes')" value="FilteAllRes">
                 <label class="custom-control-label" for="optFilteRes">View All Results</label>
-            </div>          
+            </div> 
+            <div class="custom-control custom-radio ">
+                <input type="radio" class="custom-control-input" id="optFilterRec" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterRec')" value="FilterRec">
+                <label class="custom-control-label" for="optFilterRec">Most Recommended</label>
+            </div> 
+            <div class="custom-control custom-radio ">
+                <input  type="radio" class="custom-control-input" id="optFilterSeller" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterSeller')" value="FilterSeller">
+                <label class="custom-control-label" for="optFilterSeller">Best Seller</label>
+            </div>                                      
         </div>
 
     </div>
