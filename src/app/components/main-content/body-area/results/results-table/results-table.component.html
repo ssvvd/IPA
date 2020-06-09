@@ -35,7 +35,10 @@
                        </td>
                        <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow">                 
                            <span  *ngFor="let prty of col.slice().reverse(); let PrtNum = index"
-                           [ngClass]="(col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-')? 'd-none' : 'd-block'">
+                           [ngClass]="(col.length > 1 && 
+                           (dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-') ||
+                           (prty.property && (prty.property.FieldDescriptionSmall == 'Designation' || prty.property.FieldDescriptionSmall == 'Catalog No') && prty.value == '' ))
+                           ? 'd-none' : 'd-block'">
                             <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
                               <label *ngIf="prty.property && prty.property.FieldDescriptionSmall == 'Designation'">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
                          </td>
