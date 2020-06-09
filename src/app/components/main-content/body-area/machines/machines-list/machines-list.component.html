@@ -19,7 +19,8 @@
                 class="table table-stripe row-border hover ">
                 <thead *ngIf="isLoaded">
                   <tr id="dtOptions">
-                    <th class="d-none" >ID</th>                                     
+                    <th class="d-none" >ID</th>  
+                    <th >ID</th>                                      
                     <th ><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                  
                     <th><label>{{'Adaptation Type & Size'  | translate}}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Kw)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
@@ -35,6 +36,7 @@
                   <tr  *ngFor="let mach of listmachines" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
                     <th scope="row" class="d-none">{{mach.MachineID}}</th>                    
                   <!--  <td>{{mach.MachineType}}</td> -->
+                    <td><div class="pl-2">{{mach.MachineID}}</div></td>
                     <td><div class="pl-2">{{mach.MachineName}}</div></td>
                     <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
                     <td><div class="pl-2">{{mach.Power}}</div></td>

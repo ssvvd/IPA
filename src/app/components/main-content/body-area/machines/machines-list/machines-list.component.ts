@@ -158,7 +158,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   UpdateStateSelectedMachine(MachineID: number) {    
     let arr_fav:string[];
     let str_fav:string=this.srv_cook.get_cookie("fav_machines");
-    arr_fav=str_fav.split(',');
+    arr_fav=str_fav.split(' ');
     this.listmachines.forEach((m) => {
       m.DescSelect = "Select";
       if (MachineID == m.MachineID)

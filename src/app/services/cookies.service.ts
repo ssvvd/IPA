@@ -25,22 +25,28 @@ export class CookiesService {
   }
   add_fav_machine(id:number)
   {
-    
-    let id_str:string=id.toString();
     //this.delete_cookie("fav_machines");
+    //return;
+    let id_str:string=id.toString();
+    
     if(!this.srv_cock.check("fav_machines"))
     {
       this.srv_cock.set("fav_machines","");
     }    
     let str_machines=this.srv_cock.get("fav_machines");
     let arr:string[]=[];
-    arr=str_machines.split(',');   
-    
+    if(str_machines!='') arr=str_machines.split(' ');
+           
     if(arr.indexOf(id_str)==-1)    
     {
+      if(id_str!='')
+      {
+      str_machines='';
       arr.push(id_str);
-      arr.forEach(pp=>{str_machines = str_machines +pp + ",";} );
+      arr.forEach(pp=>{str_machines = str_machines + ' ' + pp ;} );     
+      str_machines=str_machines.trim(); 
       this.srv_cock.set("fav_machines",str_machines);
+      }
     }
   }
 
@@ -51,11 +57,19 @@ export class CookiesService {
     {
       let str_machines=this.srv_cock.get("fav_machines");
       let arr:string[]=[];
-      arr=str_machines.split(','); 
-      if( arr.indexOf(id_str)>-1) arr.splice( arr.indexOf(id_str));
-      arr.forEach(pp=>{str_machines = str_machines +pp + ",";} );
+      arr=str_machines.split(' '); 
+
+      let updatedarr:string []= [];
+      for (let el of arr) {
+      if (el !== id_str) {
+        updatedarr.push(el);
+      }
+      }
+      arr = updatedarr;  
+      str_machines='';   
+      arr.forEach(pp=>{str_machines = str_machines +' ' + pp ;} );
+      str_machines=str_machines.trim();
       this.srv_cock.set("fav_machines",str_machines);
-    }    
-        
+    }            
   }
 }
