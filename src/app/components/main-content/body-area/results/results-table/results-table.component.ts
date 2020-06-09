@@ -6,6 +6,7 @@ import { clsProperties } from 'src/app/models/results/properties';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
 import {clsHelpProp} from 'src/app/models/results/help-prop';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Subject, Subscription, forkJoin } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -53,7 +54,7 @@ export class ResultsTableComponent implements OnInit {
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
   
-  constructor(private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+  constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal) { }
 
 
@@ -564,21 +565,25 @@ ngOnChanges(changes:SimpleChanges) {
                   // this.dtResultsObjectsHelp[i].isHidden++
                 break;
               case 'FilteAllRes':
-                  if (this.dtResultsObjectsHelp[i].IsExpand == "False")
+                  if (this.dtResultsObjectsHelp[i].IsExpand == "False" || this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden--
+                break;
+              case 'FilterSeller':
+                if (this.dtResultsObjectsHelp[i].AverageUse < 1)
+                  this.dtResultsObjectsHelp[i].isHidden++
                 break;
             }
             break;   
-            case 'optSort':
-              switch (this.filterChangedRec.Res){
-                case 'SortRec':
-                  this.sortProp = 'index';
-                  break;
-                case 'SortSeller':
-                  this.sortProp = 'AverageUse';
-                  break;
-              }
-              return;  
+            // case 'optSort':
+            //   switch (this.filterChangedRec.Res){
+            //     case 'SortRec':
+            //       this.sortProp = 'index';
+            //       break;
+            //     case 'SortSeller':
+            //       this.sortProp = 'AverageUse';
+            //       break;
+            //   }
+            //   return;  
               
             case 'filterList':
               let field:string = this.filterChangedRec.Res[0];
@@ -644,6 +649,8 @@ ngOnChanges(changes:SimpleChanges) {
 filterRecommended(prop:clsHelpProp){
     if (prop.IsExpand == "False")
         prop.isHidden++
+    else
+        prop.isHidden--
 }
 
 

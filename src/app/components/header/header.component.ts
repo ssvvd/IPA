@@ -5,7 +5,7 @@ import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import {Subscription} from 'rxjs';
+//import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
   SelectedLang:Language;
   
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
- public msrv_statemanage:StateManagerService =this.srv_statemanage;
+  public msrv_statemanage:StateManagerService =this.srv_statemanage;
 
   // /dictionarygetlanguage
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,
