@@ -12,7 +12,7 @@
           <div *ngFor="let col of modal_columns_cur">
           <div class="custom-control custom-checkbox" [hidden]="col.FieldDescriptionSmall == 'Brand Name' || col.FieldDescriptionSmall == 'Designation'">
             <input type="checkbox" [checked]="col.IsShow" class="custom-control-input" [id]="col.FieldDescriptionSmall" (change)="checkedState($event, col)">
-            <label class="custom-control-label" [for]="col.FieldDescriptionSmall">{{col.FieldDescriptionSmall}}</label>
+            <label class="custom-control-label" [for]="col.FieldDescriptionSmall" [innerHTML]="col.FieldDescriptionSmall | translate"></label>
           </div>
           </div>
       </div>
