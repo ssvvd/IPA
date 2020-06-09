@@ -3,10 +3,12 @@ import { Machineheader } from 'src/app/models/machines/machineheader';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { MachineService } from 'src/app/services/machine.service';
 import { StateManagerService } from 'src/app/services/statemanager.service';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject, Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-machines-list',
@@ -33,7 +35,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
-  constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, private srv_appsetting:AppsettingService) {   
+  constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
+          private srv_appsetting:AppsettingService,private srv_cook:CookiesService ) {   
   }
 
   ngOnInit() {  
@@ -136,17 +139,37 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     this.allSubs$.unsubscribe();
   }
 
-  /* OnViewMachine(mach: Machineheader) {
-    this.srv_statemanage.ViewMachine(mach);   
-  } */
+  OnFavoriteMachine(mach: Machineheader)
+  {
+    if(mach.isFavorite)
+    {
+      mach.isFavorite =false;
+      this.srv_cook.remove_fav_machine(mach.MachineID);
+    }
+    else
+    {
+      mach.isFavorite =true;
+      this.srv_cook.add_fav_machine(mach.MachineID);
+    }
+
+    
+  }  
 
   UpdateStateSelectedMachine(MachineID: number) {    
+    let arr_fav:string[];
+    let str_fav:string=this.srv_cook.get_cookie("fav_machines");
+    arr_fav=str_fav.split(',');
     this.listmachines.forEach((m) => {
       m.DescSelect = "Select";
       if (MachineID == m.MachineID)
         m.IsSelected = true;
       else
-        m.IsSelected = false;
+        m.IsSelected = false;  
+        
+      if( arr_fav.indexOf(m.MachineID.toString())==-1)
+        m.isFavorite =false;        
+      else
+        m.isFavorite =true;
     });
 
   }

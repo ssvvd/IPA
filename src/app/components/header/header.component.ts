@@ -118,6 +118,6 @@ export class HeaderComponent implements OnInit {
 
   openfavorite()
   {
-
+    this.router.navigate(['/home/favorites']);
   }
 }

@@ -48,7 +48,7 @@
                     </td>
                     <td>
                       <a data-toggle="tooltip" title="{{'Add To My Machine' | translate}}" class="cursor-pointer">
-                        <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
+                        <img [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite"class="icon-grid" (click)="OnFavoriteMachine(mach)" >
                       </a>
                     </td>
                     <td>
