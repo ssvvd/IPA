@@ -14,6 +14,7 @@ export const environment = {
   ImageInputPath:"assets/img/input_images/",
   ImageApplicationsPath:"assets/img/Applications/",
   ImgAddToFavorite:"assets/img/AddToFavoritIcon.svg" ,
+  ImgFavorite:"assets/img/icon_Favorite.svg" ,
   ImgDefault:"assets/img/SetDiffult_Icon.svg" ,
   ImgView:"assets/img/View_Icon.svg",
   ImgSetDefault:"assets/img/SetDiffult_Icon.svg",

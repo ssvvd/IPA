@@ -5,7 +5,6 @@ import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
-//import { InputParamItemChanged} from 'src/app/models/operational-data/inputparameteritem';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -221,5 +220,6 @@ export class StateManagerService {
   set opttool_selectedfamily(arr:any[]) {  
     this.mopttool_selectedfamily = arr;
    }
+
 }
  

@@ -19,7 +19,7 @@
                 class="table table-stripe row-border hover ">
                 <thead *ngIf="isLoaded">
                   <tr id="dtOptions">
-                    <th class="d-none" >ID</th>                                     
+                    <th class="d-none" >ID</th>                                                      
                     <th ><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                  
                     <th><label>{{'Adaptation Type & Size'  | translate}}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Kw)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
@@ -34,7 +34,7 @@
                 <tbody *ngIf="isLoaded">
                   <tr  *ngFor="let mach of listmachines" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
                     <th scope="row" class="d-none">{{mach.MachineID}}</th>                    
-                  <!--  <td>{{mach.MachineType}}</td> -->
+                  <!--  <td>ng s{{mach.MachineType}}</td> -->                 
                     <td><div class="pl-2">{{mach.MachineName}}</div></td>
                     <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
                     <td><div class="pl-2">{{mach.Power}}</div></td>
@@ -48,7 +48,7 @@
                     </td>
                     <td>
                       <a data-toggle="tooltip" title="{{'Add To My Machine' | translate}}" class="cursor-pointer">
-                        <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
+                        <img [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite"class="icon-grid" (click)="OnFavoriteMachine(mach)" >
                       </a>
                     </td>
                     <td>

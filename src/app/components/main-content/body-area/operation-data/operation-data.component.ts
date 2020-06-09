@@ -123,7 +123,7 @@ else
        
       this.srv_StMng.IPL.GetItem('PW_AX').value = '20'; 
       this.srv_StMng.IPL.GetItem('PW_BX').value = '200';
-      this.srv_StMng.IPL.GetItem('PW_CX').value = '700';
+      this.srv_StMng.IPL.GetItem('PW_CX').value = '7000';
 
       this.srv_StMng.IPL.GetItem('PW_AY').value = '1'; 
       this.srv_StMng.IPL.GetItem('PW_BY').value = '15';
