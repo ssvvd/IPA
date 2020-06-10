@@ -51,11 +51,11 @@ export class MachinesFilterComponent implements OnInit {
   InitFilterSliders()
   {
     this.machFilter=new MachineFilter;
-    this.machFilter.IsMachiningCenter =false;
-    this.machFilter.IsLathe =false;
+    this.machFilter.IsMachiningCenter =true;
+    this.machFilter.IsLathe =true;
     this.machFilter.IsMultiTask =true;
-    this.machFilter.IsMultiSpindle =false;
-    this.machFilter.IsSwissType =false;
+    this.machFilter.IsMultiSpindle =true;
+    this.machFilter.IsSwissType =true;
 
     //todo:
     this.machFilter.SpeedMin = 0; 

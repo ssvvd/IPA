@@ -51,13 +51,12 @@
                 </div>                  
             
                <div class="form-group row pt-2">
-                    <label for="txtClampingType" class="col-sm-7">{{'Clamping Type' | translate}}</label>
+                    <label for="txtPartFixtureStability" class="col-sm-7">{{'Part Fixture Stability' | translate}}</label>
                     <div class="col-sm-4">
                         <select class="form-control-sm" [ngModel]="spindle.ClampingType" >
-                            <option value='VICE'>VICE</option>
-                            <option value='VACUME'>VACUME</option>
-                            <option value='TOMB STONE'>TOMB STONE</option>
-                            <option value='FIXTURE'>FIXTURE</option>
+                            <option value='unrigid'>unrigid</option>
+                            <option value='Fair'>Fair</option>                            
+                            <option value='Rigid'>Rigid</option>                            
                         </select>                                
                     </div>
                 </div>

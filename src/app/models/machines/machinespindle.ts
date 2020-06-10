@@ -5,6 +5,7 @@ export class Machinespindle {
     public SpindleSpeed:number;
     public Power:number;
     public Torque:number;
+    public MachineType1:string;
     public N1:number;
     public T1:number;
     public P1:number;
