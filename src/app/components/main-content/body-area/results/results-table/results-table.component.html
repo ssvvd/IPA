@@ -8,7 +8,7 @@
             <thead>
                     <tr id="dtOptions">
                      <th><label></label></th>  
-                     <th *ngFor="let hd of headers; trackBy: trackItem" [hidden]="!hd.IsShow">
+                     <th *ngFor="let hd of headers;" [hidden]="!hd.IsShow">
                          <label title="{{hd.FieldDescription | translate}}" [innerHTML]="hd.FieldDescriptionSmall | translate"></label>
                         </th>
                         <th></th>

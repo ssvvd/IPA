@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ResultsService} from 'src/app/services/results.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsGroups } from 'src/app/models/results/groups';
@@ -55,7 +55,7 @@ export class ResultsTableComponent implements OnInit {
   @Output() goToViewEvent = new EventEmitter<any>();
   
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
-    private SpinnerService: NgxSpinnerService,private modalService: NgbModal) { }
+    private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef) { }
 
 
 
@@ -287,7 +287,7 @@ getShowTable(){
                   let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
                   let value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
                   switch (fieldsmallSplit){
-                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':
+                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':
                       if (value && value > 0){
                       this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
                       }
@@ -297,11 +297,11 @@ getShowTable(){
                         this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
                       }
                       break;
-                    case 'LH':
-                      if (typeof this.dtResultsObjectsHelp[i].LU == 'undefined'){
-                        this.dtResultsObjectsHelp[i].LU = value;
-                      }
-                      break;
+                    // case 'LH':
+                    //   if (typeof this.dtResultsObjectsHelp[i].LU == 'undefined'){
+                    //     this.dtResultsObjectsHelp[i].LU = value;
+                    //   }
+                    //   break;
                     case 'LF':
                       break;
                     case 'LB':
@@ -444,6 +444,7 @@ openSelectColumns(){
     console.log(result);
       if(result != 'A'){
          this.headers = result
+         this.cdr.detectChanges();
         // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         //   dtInstance.destroy();
         //   this.dtTrigger.next();
