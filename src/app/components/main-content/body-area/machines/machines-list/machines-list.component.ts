@@ -122,7 +122,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.ApplyFilter(stfilter);
     }
     if (this.srv_statemanage.SelectedMachine == null) {      
-      this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID == 12);           
+      this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID == 53);           
     } 
     this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);   
     this.SortTableData();

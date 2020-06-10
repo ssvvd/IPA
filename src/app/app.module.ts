@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { SafePipeModule } from 'safe-pipe';
+//import { SafePipeModule } from 'safe-pipe';
 import * as $ from "jquery";
 
 import { HeaderComponent } from './components/header/header.component';
@@ -147,7 +147,7 @@ import { FavoritesComponent } from './components/main-content/body-area/favorite
     BrowserAnimationsModule,
     NgpSortModule,
     NgSelectModule,
-    SafePipeModule,
+  //  SafePipeModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
