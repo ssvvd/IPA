@@ -459,6 +459,8 @@ openSelectColumns(){
   return item.IsShow;
 }
 
+customTB(index, song) { return `${index}-${song.id}`; }
+
 // trackHelp(index: number, item: clsHelpProp):number {
 //   return item.isHidden;
 // }
