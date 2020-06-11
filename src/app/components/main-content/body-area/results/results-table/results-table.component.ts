@@ -287,7 +287,7 @@ getShowTable(){
                   let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
                   let value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
                   switch (fieldsmallSplit){
-                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':
+                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':case 'CSP':case 'CP':
                       if (value && value > 0){
                       this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
                       }

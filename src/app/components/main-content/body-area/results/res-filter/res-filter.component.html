@@ -167,12 +167,12 @@
         </div> 
         <div >                       
             <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="cursor-pointer" checked  class="custom-control-input" >
-                <label  class="custom-control-label cursor-pointer" >{{'Yes' | translate}}</label>
+                <input type="checkbox" class="cursor-pointer" checked id="CSPYes" name="CSBYes" class="custom-control-input" (change)="checkItem('1',$event.target.checked,'CSP')">
+                <label  class="custom-control-label cursor-pointer" for="CSPYes" >{{'Yes' | translate}}</label>
               </div>   
               <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="cursor-pointer" checked class="custom-control-input" >
-                <label  class="custom-control-label cursor-pointer" >{{'No' | translate}}</label>
+                <input type="checkbox" class="cursor-pointer" checked id="CSPNo" name="CSPNo" class="custom-control-input" (change)="checkItem('0',$event.target.checked,'CSP')">
+                <label  class="custom-control-label cursor-pointer" for="CSPNo" >{{'No' | translate}}</label>
               </div>                                                                        
         </div>
     </div>
@@ -182,17 +182,17 @@
             <label title="{{'Coolant Supply Property'| translate}}">Internal Coolant</label>
         </div> 
         <div >                       
-            <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="cursor-pointer" checked  class="custom-control-input" >
-                <label  class="custom-control-label cursor-pointer" >{{'Standard' | translate}}</label>
+            <div class="custom-control custom-checkbox custom-control-inline mr-3">
+                <input type="checkbox" class="cursor-pointer" checked id="ICS" name="ICS" class="custom-control-input" (change)="checkItem('1',$event.target.checked,'CSP');checkItem('9999',$event,'CP');">
+                <label  class="custom-control-label cursor-pointer" for="ICS">{{'Standard' | translate}}</label>
               </div>   
-              <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="cursor-pointer" checked class="custom-control-input" >
-                <label  class="custom-control-label cursor-pointer" >{{'Without' | translate}}</label>
+              <div class="custom-control custom-checkbox custom-control-inline mr-3">
+                <input type="checkbox" class="cursor-pointer" checked id="ICW" name="ICW" class="custom-control-input" (change)="checkItem('0',$event.target.checked,'CSP')" >
+                <label  class="custom-control-label cursor-pointer" for="ICW">{{'Without' | translate}}</label>
               </div>      
               <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="cursor-pointer" checked class="custom-control-input" >
-                <label  class="custom-control-label cursor-pointer" >{{'High Pressure' | translate}}</label>
+                <input type="checkbox" class="cursor-pointer" checked id="ICH" name="ICH" class="custom-control-input" (change)="checkItem('9999',!$event.target.checked,'CP');">
+                <label  class="custom-control-label cursor-pointer" for="ICH">{{'High Pressure' | translate}}</label>
               </div>                                                                   
         </div>
     </div>

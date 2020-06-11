@@ -146,4 +146,19 @@ else
     this.filterEvent.emit({control:'ClearAll',Res:''})
     this.eventsSubject.next();
   }
+
+
+  checkItem(value:string, event:boolean, controlName:string)
+  {
+
+    let checked:string;
+    if (event)
+      checked = "T"
+    else
+      checked = "F"
+
+    this.filterEvent.emit({control:'filterList',Res:[controlName,value,checked]});
+         
+  }
+
 }

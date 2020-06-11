@@ -23,6 +23,7 @@ export class clsHelpProp {
     // CCFMS:string;
     BMC:string[]=[];
     CSP:number;
+    CP:number;
     DC:number;
     DCX:number;
     KAPR:number;
