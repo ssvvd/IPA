@@ -152,7 +152,7 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
                 this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                   let catNo:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
                   this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);  
                   this.dtResultsObjectsHelp[i].GroupText.push(this.dtPropertiesTable[j].GroupText); 
@@ -239,7 +239,7 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
                 this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Designation' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                if (this.dtPropertiesTable[j].Field.toLowerCase().includes('designation') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                   this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
                 }
                 //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
@@ -279,7 +279,7 @@ getShowTable(){
                 //End Build Helper
                 if (this.dtPropertiesTable[j].IsVisible){
 
-                  if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No' && i == 0 && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                  if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && i == 0 && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                       groupsOrder.push(this.dtPropertiesTable[j].GroupID)
                     }  
 
@@ -392,7 +392,9 @@ getShowTable(){
               
           for(var col2: number = col1 +  1; col2 < visColumnsCount; col2++) {
             if (dupColumns.indexOf(col2) == -1 
-            && this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall            )
+            && (this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall
+              ||(this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('catalogno') && this.dtResultsObjects[i][col2].property.Field.toLowerCase().includes('catalogno'))
+              ||(this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('designation') && this.dtResultsObjects[i][col2].property.Field.toLowerCase().includes('designation'))))
             {
               if (this.dtResultsObjects[i][col2].value
            &&  this.dtResultsObjects[i][col2].value.toString().trim() !== this.dtResultsObjects3d[i][index][0].value.toString().trim()){

@@ -10,6 +10,7 @@ import { MachineItemComponent } from './components/main-content/body-area/machin
 import { FavoritesComponent } from './components/main-content/body-area/favorites/favorites.component';
 const routes: Routes = [
 	{path:"materials",component:MaterialsComponent},
+	{path:"materials/:lang",component:MaterialsComponent},
 	{path:"",component:HomeComponent},
 	{path:"home",component:HomeComponent,
 	children:[
@@ -17,6 +18,7 @@ const routes: Routes = [
 		{path:"machines",component:MachinesListComponent},	
 		{path:"machine-item/:id", component: MachineItemComponent},
 		{path:"materials",component:MaterialsComponent},
+		{path:"materials/:lang",component:MaterialsComponent},
 		{path:"machining-operation",component:MachiningOperationComponent},
 		{path:"operation-data",component:OperationDataComponent},
 		{path:"results",component:ResultsComponent}	,	

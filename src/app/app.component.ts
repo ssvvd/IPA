@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   
   constructor(location: Location, router: Router,private srv_visitors:VisitorsService, private srv_appsetting:AppsettingService,
               public translate:TranslateService) {
-    if(location.path().toLowerCase() != '/materials'){
+    if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
     else{

@@ -2,9 +2,11 @@ import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter, OnDestro
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MaterialService } from 'src/app/services/material.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
+import { ActivatedRoute} from '@angular/router';
 import {PpSetDefaultComponent} from 'src/app/components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
@@ -29,11 +31,25 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   allSubsMat$: Subscription;
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
+  lang:string;
   @Input() selectedCategory: string ;
   @Input() filterSearchTextInput: string;
   @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal) { }
+  private eventsSubscription: Subscription=new Subscription();
+
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
+    ,private router: ActivatedRoute ) { 
+      this.eventsSubscription.add(this.router.params.subscribe(params => {
+        this.lang = params["lang"];
+        if (!this.lang){
+          this.lang = this.srv_appsetting.Lang
+          if (!this.lang)
+            this.lang = "EN"
+        }
+          
+        }));
+    }
 
   ngOnInit() {
     let myColumns1 = [5,6,7,8];
@@ -71,7 +87,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
 
   fillMainTable(){
-    this.allSubsMat$ = this.serv.getmaterialsbygrp('EN',this.selectedCategory)
+    this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
       this.materialsResultSorted = this.materialsResult;

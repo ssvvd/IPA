@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { MaterialService } from 'src/app/services/material.service';
 import { clsMaterial } from 'src/app/models/materials/material';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { HardnessSliderComponent } from 'src/app/components/main-content/body-area/materials/hardness-slider/hardness-slider.component';
 
 @Component({
@@ -22,7 +23,7 @@ export class PpRequestMaterialComponent implements OnInit {
   ddlCondition:clsMaterial[]=[];
   materialsResult:clsMaterial[]=[];
 
-  constructor(public activeModal: NgbActiveModal,private formBuilder: FormBuilder,private serv: MaterialService) { }
+  constructor(public activeModal: NgbActiveModal,private formBuilder: FormBuilder,private serv: MaterialService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     this.slider.setInetialParameters(0,225,225,'HB');
@@ -52,7 +53,7 @@ export class PpRequestMaterialComponent implements OnInit {
 
   fillMainTable(){
     
-    this.serv.getmaterialsbygrp('EN','').subscribe((res:any)=>{
+    this.serv.getmaterialsbygrp(this.srv_appsetting.Lang,'').subscribe((res:any)=>{
       this.materialsResult=JSON.parse(res);
 
       this.ddlCondition = this.materialsResult.filter((obj, pos, arr) => {
