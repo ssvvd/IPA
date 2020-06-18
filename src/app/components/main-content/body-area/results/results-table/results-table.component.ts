@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ResultsService} from 'src/app/services/results.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsGroups } from 'src/app/models/results/groups';
@@ -55,7 +55,7 @@ export class ResultsTableComponent implements OnInit {
   @Output() goToViewEvent = new EventEmitter<any>();
   
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
-    private SpinnerService: NgxSpinnerService,private modalService: NgbModal) { }
+    private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef) { }
 
 
 
@@ -152,7 +152,7 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
                 this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                   let catNo:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
                   this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);  
                   this.dtResultsObjectsHelp[i].GroupText.push(this.dtPropertiesTable[j].GroupText); 
@@ -239,7 +239,7 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
                 this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
-                if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Designation' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                if (this.dtPropertiesTable[j].Field.toLowerCase().includes('designation') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                   this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
                 }
                 //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
@@ -279,7 +279,7 @@ getShowTable(){
                 //End Build Helper
                 if (this.dtPropertiesTable[j].IsVisible){
 
-                  if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Catalog No' && i == 0 && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+                  if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && i == 0 && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                       groupsOrder.push(this.dtPropertiesTable[j].GroupID)
                     }  
 
@@ -287,7 +287,7 @@ getShowTable(){
                   let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
                   let value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
                   switch (fieldsmallSplit){
-                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':
+                    case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':case 'CSP':case 'CP':
                       if (value && value > 0){
                       this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
                       }
@@ -297,11 +297,11 @@ getShowTable(){
                         this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
                       }
                       break;
-                    case 'LH':
-                      if (typeof this.dtResultsObjectsHelp[i].LU == 'undefined'){
-                        this.dtResultsObjectsHelp[i].LU = value;
-                      }
-                      break;
+                    // case 'LH':
+                    //   if (typeof this.dtResultsObjectsHelp[i].LU == 'undefined'){
+                    //     this.dtResultsObjectsHelp[i].LU = value;
+                    //   }
+                    //   break;
                     case 'LF':
                       break;
                     case 'LB':
@@ -392,7 +392,9 @@ getShowTable(){
               
           for(var col2: number = col1 +  1; col2 < visColumnsCount; col2++) {
             if (dupColumns.indexOf(col2) == -1 
-            && this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall            )
+            && (this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall
+              ||(this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('catalogno') && this.dtResultsObjects[i][col2].property.Field.toLowerCase().includes('catalogno'))
+              ||(this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('designation') && this.dtResultsObjects[i][col2].property.Field.toLowerCase().includes('designation'))))
             {
               if (this.dtResultsObjects[i][col2].value
            &&  this.dtResultsObjects[i][col2].value.toString().trim() !== this.dtResultsObjects3d[i][index][0].value.toString().trim()){
@@ -444,6 +446,7 @@ openSelectColumns(){
     console.log(result);
       if(result != 'A'){
          this.headers = result
+         this.cdr.detectChanges();
         // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         //   dtInstance.destroy();
         //   this.dtTrigger.next();
@@ -457,6 +460,8 @@ openSelectColumns(){
  trackItem (index: number, item: clsProperties):boolean {
   return item.IsShow;
 }
+
+customTB(index, song) { return `${index}-${song.id}`; }
 
 // trackHelp(index: number, item: clsHelpProp):number {
 //   return item.isHidden;

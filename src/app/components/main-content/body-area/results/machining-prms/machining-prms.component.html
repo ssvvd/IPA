@@ -8,11 +8,15 @@
       </div>
 
 
-<ng-container *ngFor="let row of selectedOptionMP; let PrmNum = index; ">
+
+<mp77 [selectedRes]="selectedOptionMP"></mp77>
+
+
+<!-- <ng-container *ngFor="let row of selectedOptionMP; let PrmNum = index; ">
     <div class="row justify-content-start w-50" *ngIf="PrmNum > 2">
         <div class="col-4">{{getPropWithoutUnits(row[0].property.FieldDescription)}}</div>
         <div class="col-3">{{getPropWithoutUnits(row[0].property.FieldDescriptionSmall)}}</div>
         <div class="col-3 grayDiv text-center">{{row[0].value}}</div>
         <div class="col-2">{{getUnitsFromProp(row[0].property.FieldDescriptionSmall)}}</div>
       </div>
-</ng-container>
+</ng-container> -->

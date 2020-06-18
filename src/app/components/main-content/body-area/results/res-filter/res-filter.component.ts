@@ -1,5 +1,6 @@
 import { Component, OnInit ,ChangeDetectorRef, Output, EventEmitter, Input, ViewChildren, QueryList } from '@angular/core';
 import { StateManagerService } from 'src/app/services/statemanager.service';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Subject } from 'rxjs';
 import {ResFilterListComponent} from 'src/app/components/main-content/body-area/results/res-filter/res-filter-list/res-filter-list.component';
 import { Options } from 'ng5-slider';
@@ -22,6 +23,7 @@ export class ResFilterComponent implements OnInit {
   TypeFeedDisabled:boolean;
   sortBy:string;
   filterBy:string;
+  mainApp:string;
   public isCollapsed = true;
   // filterFields : Map<string, string[]> = new Map<string, string[]>();
 
@@ -30,7 +32,7 @@ export class ResFilterComponent implements OnInit {
 
   eventsSubject: Subject<void> = new Subject<void>();
   
-  constructor(public srv_StMng:StateManagerService,private cdRef:ChangeDetectorRef) { }
+  constructor(public srv_StMng:StateManagerService,private cdRef:ChangeDetectorRef,public srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
 
@@ -49,6 +51,8 @@ export class ResFilterComponent implements OnInit {
     this.TD_IT_SolidHead=(this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').value == 'True')
     this.TD_IT_InsertTool=(this.srv_StMng.IPL.GetItem('TD_IT_InsertTool').value == 'True')
     this.TD_IT_InsertHead=(this.srv_StMng.IPL.GetItem('TD_IT_InsertHead').value == 'True')
+
+    this.mainApp =  this.srv_StMng.SecAppSelected.MainApp;
   }
 
 
@@ -142,4 +146,19 @@ else
     this.filterEvent.emit({control:'ClearAll',Res:''})
     this.eventsSubject.next();
   }
+
+
+  checkItem(value:string, event:boolean, controlName:string)
+  {
+
+    let checked:string;
+    if (event)
+      checked = "T"
+    else
+      checked = "F"
+
+    this.filterEvent.emit({control:'filterList',Res:[controlName,value,checked]});
+         
+  }
+
 }

@@ -1,5 +1,5 @@
 <div class="pt-3 mt-2" [hidden]="isHidden">                
-    <span title="{{prmDesc | translate}}">{{prm}}<span ng-show="!srv_appsetting.UnitslengthDesc.length">{{' (' + srv_appsetting.UnitslengthDesc + ')'}}</span>
+    <span title="{{prmDesc | translate}}">{{prm}}<span [hidden]="units == ''">{{' (' + units + ')'}}</span>
     </span>    
     <div class="custom-slider pt-0 mt-4">
         <ng5-slider [(value)]="textBoxMin" [(highValue)]="textBoxMax" class="form-control-sm  pt-0 mt-0" [options]="options" (userChangeEnd)="onUserChangeEnd($event)"></ng5-slider>

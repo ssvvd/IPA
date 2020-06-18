@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
-import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Options , ChangeContext} from 'ng5-slider';
 import { Observable, Subject, Subscription } from 'rxjs';
 import 'rxjs/add/operator/debounceTime';
@@ -21,6 +20,7 @@ export class ResFilterScrollComponent implements OnInit, OnChanges {
   @Input() maxValue:number;
   @Input() step:number;
   @Input() controlName:string;
+  @Input() units:string
   @Input() events: Observable<void>;
   notInit:boolean
 
@@ -31,7 +31,7 @@ export class ResFilterScrollComponent implements OnInit, OnChanges {
   termMax$ = new Subject<number>();
   private eventsSubscription: Subscription=new Subscription();
   isHidden:boolean
-  constructor(public srv_appsetting:AppsettingService) { 
+  constructor() { 
 
     this.termMin$
       .debounceTime(500)

@@ -77,6 +77,14 @@ export class ResultsService {
     });
   }
 
+
+  public  GetItemParameterValueSpecial(catNo:string,param:string,units:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetItemType/' + catNo + '/'+param + '/'+units).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
   // public  checkItemImgExists()
   // {        
   //   return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists' ).catch((err: HttpErrorResponse) => {      

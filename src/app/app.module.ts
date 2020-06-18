@@ -133,7 +133,11 @@ import { MachinePpAddFavoriteComponent } from './components/main-content/body-ar
     Appdetails51Component,
     Appdetails54Component,
     FavoritesComponent,
+<<<<<<< HEAD
     MachinePpAddFavoriteComponent
+=======
+    Mp77Component
+>>>>>>> 0a09902f8de5dd9f53d6c1214a0bc63e58300220
   ],
   imports: [
     FormsModule,

@@ -23,6 +23,7 @@ export class clsHelpProp {
     // CCFMS:string;
     BMC:string[]=[];
     CSP:number;
+    CP:number;
     DC:number;
     DCX:number;
     KAPR:number;
@@ -32,6 +33,11 @@ export class clsHelpProp {
     RE:number;
     NOF:number;
     CHW:number;
+    IC:number;
+    L:number;
+    PSIR:number;
+    CEDC:number;
+    CW:number;
     itemType:string[]=[];
     GroupText:string[]=[];
     private _isHidden:number;

@@ -8,7 +8,7 @@
             <thead>
                     <tr id="dtOptions">
                      <th><label></label></th>  
-                     <th *ngFor="let hd of headers; trackBy: trackItem" [hidden]="!hd.IsShow">
+                     <th *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
                          <label title="{{hd.FieldDescription | translate}}" [innerHTML]="hd.FieldDescriptionSmall | translate"></label>
                         </th>
                         <th></th>
@@ -37,17 +37,17 @@
                            <span  *ngFor="let prty of col.slice().reverse(); let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
                            (dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-') ||
-                           (prty.property && (prty.property.FieldDescriptionSmall == 'Designation' || prty.property.FieldDescriptionSmall == 'Catalog No') && prty.value == '' ))
+                           (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && prty.value == '' ))
                            ? 'd-none' : 'd-block'">
                             <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
-                              <label *ngIf="prty.property && prty.property.FieldDescriptionSmall == 'Designation'">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                          <td>
-
+<!-- (click)="viewInfo(row.index)" -->
                            <img src="{{environment.ImgView}}" 
                            
                            title="View info" class="icon-grid">
-                           <!-- (click)="viewInfo(row.index)"  -->
+                            
                      </td>
                          <td >
                                 <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
