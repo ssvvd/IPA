@@ -43,11 +43,11 @@
                               <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                          <td>
-
+<!-- (click)="viewInfo(row.index)" -->
                            <img src="{{environment.ImgView}}" 
                            
                            title="View info" class="icon-grid">
-                           <!-- (click)="viewInfo(row.index)"  -->
+                            
                      </td>
                          <td >
                                 <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
