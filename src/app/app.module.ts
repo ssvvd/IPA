@@ -66,6 +66,7 @@ import { Optimizetool120Component } from './components/main-content/body-area/op
 import { Appdetails990Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails990/appdetails990.component';
 import { Optimizetool990Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool990/optimizetool990.component';
 import { MachiningPrmsComponent } from './components/main-content/body-area/results/machining-prms/machining-prms.component';
+import { Mp77Component } from './components/main-content/body-area/results/machining-prms/mp77/mp77.component';
 import { ProductInfoComponent } from './components/main-content/body-area/results/product-info/product-info.component';
 import { Appdetails890Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails890/appdetails890.component';
 import { Appdetails52Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails52/appdetails52.component';
@@ -133,7 +134,8 @@ import { MachinePpAddFavoriteComponent } from './components/main-content/body-ar
     Appdetails51Component,
     Appdetails54Component,
     FavoritesComponent,
-    MachinePpAddFavoriteComponent
+    MachinePpAddFavoriteComponent,
+    Mp77Component
   ],
   imports: [
     FormsModule,
