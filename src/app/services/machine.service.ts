@@ -11,9 +11,9 @@ export class MachineService {
   constructor(private httpClient: HttpClient) 
   {}
 
-  public  getmachines()
+  public  getmachines(units:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines');
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units);
   }
   public  getmachinedetailed(id:number)
   {        
@@ -34,5 +34,10 @@ export class MachineService {
    public  getmachineadaptationdata(adaptationtype:string,adaptationsize:string,spindle:string,units:string)
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-data/'+ adaptationtype +"/" +adaptationsize + "/" +spindle +"/" +units);
+  }
+
+  public  machine_copy(machineid:string,machinetype:string,machinename:string,machinename_new:string)
+  {  //machines-copy/{MachineID}/{MachineType}/{MachineName}/{MachineName_new}      
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines-copy/' + machineid + '/' + machinetype + '/' + machinename + '/' + machinename_new);
   }
 }

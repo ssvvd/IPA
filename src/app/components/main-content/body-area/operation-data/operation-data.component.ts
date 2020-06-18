@@ -1,14 +1,12 @@
-import { Component, OnInit,Input,HostListener } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { MachineService } from 'src/app/services/machine.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Router } from '@angular/router';
-import { Observable, Subject ,Subscription} from 'rxjs';
+import { Subject ,Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-operation-data',
@@ -116,7 +114,7 @@ else
       this.srv_StMng.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
 
            //todo: temp for check results
-      if(this.srv_StMng.MainAppSelected.MainApp=='IS' || this.srv_StMng.MainAppSelected.MainApp=='TG')
+      /* if(this.srv_StMng.MainAppSelected.MainApp=='IS' || this.srv_StMng.MainAppSelected.MainApp=='TG')
       {
        this.srv_StMng.IPL.GetItem('AdaptorType').value="SQUARE";
        this.srv_StMng.IPL.GetItem('AdaptorSize').value="25";
@@ -128,7 +126,7 @@ else
       this.srv_StMng.IPL.GetItem('PW_AY').value = '1'; 
       this.srv_StMng.IPL.GetItem('PW_BY').value = '15';
       this.srv_StMng.IPL.GetItem('PW_CY').value = '15'; 
-      }
+      } */
   }
   
   FillDataInputParamAndRouteToResult()
@@ -141,10 +139,13 @@ else
     let listparams: { name: string, value: string }[]=[];
     let JSONParams:string; 
     let str:string='';
-
-    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0' || x.value=='') && x.required).length==0)    
+    
+    //if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0' || x.value=='') && x.required).length==0)  
+    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' )) && x.required).length==0)    
       {
-      this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {   
+      this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {  
+        //alert()
+        p.value =p.value.toString().replace('"','\"'); 
         str=str + '"' + p.name + '":"' + p.value +'",';
         listparams.push(
         {  

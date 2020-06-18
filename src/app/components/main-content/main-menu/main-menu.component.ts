@@ -72,6 +72,8 @@ export class MainMenuComponent implements OnInit {
     this.srv_statemanage.CurrentSecAppSelected.subscribe(arr => this.SelectedSecApp(arr));
     
     this.srv_statemanage.OperationDataEnable.subscribe(x=>this.OperationDataEnable(x));
+    this.srv_statemanage.InputParamSelected.subscribe(x=>this.InputParamSelected(x));
+    
   }
 
  OperationDataEnable(isenable:boolean)
@@ -79,6 +81,10 @@ export class MainMenuComponent implements OnInit {
    this.Tabs[3].isDisabled=!isenable;  
  }
 
+ InputParamSelected(s:string)
+ {
+  this.Tabs[3].SelectedItemDesc=s;
+ }
   SelectedMachine(arr:string[])
   {         
     if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc = arr[0] + ': '; 

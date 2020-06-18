@@ -1,4 +1,5 @@
 export class Machineheader {
+    public Sec:number;
     public MachineID:number;
     public MachineType:string;
     public MachineType1:string;
@@ -11,7 +12,7 @@ export class Machineheader {
     public IsSelected:boolean=false;  
     public AdaptationType:string;
     public AdaptationSize:string;
-    public DescSelect:string="Select";
+    public DescSelect:string="Select";    
     public isFavorite:boolean = false;
     constructor( )
         {

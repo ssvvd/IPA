@@ -135,7 +135,7 @@ export class Appdetails120Component implements OnInit {
     }         
 )); 
 }
-   
+
 ClearData()
   {
     this.srv_StMng.IPL.GetItem('ThreadForm').value =null;
@@ -197,6 +197,10 @@ ClearData()
         this.arrSize.push(arr[i].Size);       
   }
 
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+  
   fillimagepath(threadform:string)
   {
       switch (threadform) {

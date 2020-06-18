@@ -11,5 +11,10 @@ export class MachineFilter{
   TorqueMin:number;
   TorqueMax:number;  
   SearchText:string="";
+  IsMachineTypeStandard:boolean;
+  IsMachineTypeHeavyDuty:boolean;
+  IsMachineTypeHighSpeed:boolean;
+  AdaptationType:string;
+  AdaptationSize:string;
 }
 

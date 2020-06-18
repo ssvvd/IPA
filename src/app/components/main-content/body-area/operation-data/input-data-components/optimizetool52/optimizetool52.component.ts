@@ -1,9 +1,8 @@
-import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@angular/core';
-import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+import { Component, OnInit,Input} from '@angular/core';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable, Subject} from 'rxjs';
-import { Options,ChangeContext } from 'ng5-slider';
+import { Options } from 'ng5-slider';
 
 @Component({
   selector: 'app-optimizetool52',
@@ -73,7 +72,7 @@ export class Optimizetool52Component implements OnInit {
     this.srv_StMng.IPL.GetItem('TD_InsertShape').value =this.srv_StMng.IPL.GetItem('TD_InsertShape').valuedefault;  
     this.srv_StMng.IPL.GetItem('TD_InsertDesignation').value =this.srv_StMng.IPL.GetItem('TD_InsertDesignation').valuedefault;  
 
-   this.srv_StMng.IPL.GetItem('TD_Grade').value =this.srv_StMng.IPL.GetItem('TD_Grade').valuedefault;  
+    this.srv_StMng.IPL.GetItem('TD_Grade').value =this.srv_StMng.IPL.GetItem('TD_Grade').valuedefault;  
     this.srv_StMng.IPL.GetItem('TD_HolderDesignation').value =this.srv_StMng.IPL.GetItem('TD_HolderDesignation').valuedefault;  
     this.srv_StMng.IPL.GetItem('TD_SquareDesignation').value =this.srv_StMng.IPL.GetItem('TD_SquareDesignation').valuedefault; 
 

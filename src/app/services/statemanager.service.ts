@@ -31,7 +31,10 @@ export class StateManagerService {
  
   private obsOperationDataEnable = new BehaviorSubject<boolean>(false);
   OperationDataEnable = this.obsOperationDataEnable.asObservable();   
-  
+    
+  private obsInputParamSelected = new BehaviorSubject<string>('');
+  InputParamSelected = this.obsInputParamSelected.asObservable();
+
   private obsReloadMachineTab = new BehaviorSubject<boolean>(false);
   ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
 
@@ -168,8 +171,24 @@ export class StateManagerService {
   set IPLChanged(ipl:string) {  
     this.mIPLChanged = ipl;
    }
- 
+   
+   mIPLMMandatory:string;
+   get IPLMMandatory():string {
+    return this.mIPLMMandatory;
+  }
+  set IPLMMandatory(p:string) {
+    this.mIPLMMandatory = p;
+    this.obsInputParamSelected.next(p);
+  }
+  
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.IPL.GetItem(name).value!=null && this.IPL.GetItem(name).value!='')
+    this.IPLMMandatory=this.IPLMMandatory +desc + this.IPL.GetItem(name).value + units + ', ';    
+  }
+
   SelectMaterial(mat: clsMaterial) {
+    
     mat.HardnessHBValue = mat.HardnessUnits?mat.HardnessHBValue:mat.Hardness;
     this.materialSelected=mat;   
     let desc:string;

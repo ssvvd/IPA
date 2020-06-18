@@ -1,9 +1,8 @@
 import { Component, OnInit ,Input,OnChanges, SimpleChanges} from '@angular/core';
 import { MachineService } from 'src/app/services/machine.service' ;
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Observable, Subject,Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 export class AdaptationType
 {
@@ -25,7 +24,8 @@ export class AdaptationSize
 export class MachineItemSpindleComponent implements OnInit 
 {  
   @Input() spindle:Machinespindle;   
-
+  @Input() MachineType:string;
+   
   DescSpindle:string;  
   arrAdapType:AdaptationType[]=[];
   arrAdapSize:AdaptationSize[]=[];
@@ -38,7 +38,7 @@ export class MachineItemSpindleComponent implements OnInit
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private serv: MachineService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) {}
+  constructor(private serv: MachineService,private srv_appsetting:AppsettingService) {}
 
   ngOnInit() 
   {    
@@ -104,7 +104,7 @@ export class MachineItemSpindleComponent implements OnInit
     this.spindle.Torque =$event.value;
   }
 
-  ngOnChanges(changes: SimpleChanges) 
+ /*  ngOnChanges(changes: SimpleChanges) 
   {      
       for (let property in changes) {
           if (property === 'clickedSelect') {   
@@ -114,5 +114,5 @@ export class MachineItemSpindleComponent implements OnInit
             }
           }          
       }
-  }
+  } */
 }

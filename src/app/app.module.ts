@@ -74,7 +74,7 @@ import { Appdetails1Component } from './components/main-content/body-area/operat
 import { Appdetails51Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails51/appdetails51.component';
 import { Appdetails54Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails54/appdetails54.component';
 import { FavoritesComponent } from './components/main-content/body-area/favorites/favorites.component';
-import { Mp77Component } from './components/main-content/body-area/results/machining-prms/mp77/mp77.component';
+import { MachinePpAddFavoriteComponent } from './components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 
 @NgModule({
   declarations: [   
@@ -133,7 +133,7 @@ import { Mp77Component } from './components/main-content/body-area/results/machi
     Appdetails51Component,
     Appdetails54Component,
     FavoritesComponent,
-    Mp77Component
+    MachinePpAddFavoriteComponent
   ],
   imports: [
     FormsModule,

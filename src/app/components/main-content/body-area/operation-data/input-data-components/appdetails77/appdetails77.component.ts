@@ -3,7 +3,7 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { environment } from 'src/environments/environment';
-import { Observable, Subject,Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 export interface DiameterHole
 {
@@ -46,6 +46,9 @@ export class Appdetails77Component implements OnInit {
       }
       )
     );   
+  }
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
   }
   
    public onChange(value: any) {

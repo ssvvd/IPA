@@ -2,7 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
-import { Options,ChangeContext } from 'ng5-slider';
+import { Options } from 'ng5-slider';
 import { Observable ,Subscription} from 'rxjs';
 
 @Component({
@@ -37,7 +37,11 @@ export class Appdetails780Component implements OnInit {
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value!='') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value!='') this.HoleType="PreHole";   
   }
- 
+  
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
   onfocusfield(field:string)
   {    
     this.InFocus=true;    

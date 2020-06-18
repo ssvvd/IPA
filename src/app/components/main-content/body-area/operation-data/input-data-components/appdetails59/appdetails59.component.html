@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthOfShoulder_ap" name="txtDepthOfShoulder_ap" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value"  (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value"  (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtWidthOfShoulder_ae" name="txtWidthOfShoulder_ae" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input type="number"required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control  input-empty':'form-control'" id="txtLengthOfShoulder_L" name="txtLengthOfShoulder_L" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>

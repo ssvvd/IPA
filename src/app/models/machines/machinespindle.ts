@@ -19,6 +19,7 @@ export class Machinespindle {
     public T4:number;
     public P4:number;
     public MaxCutFeedSpeed:number;
+    public MaxFeedRate:number;
     public MaxRapidFeedSpeed:number;
     public AdaptationType:string;
     public AdaptationSize:string;

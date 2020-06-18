@@ -55,7 +55,11 @@ export class Appdetails990Component implements OnInit {
     else
       this.UnitsSurf='microinch';
   }
- 
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+  
   onfocusfield(field:string)
   {
     this.InFocus=true;
