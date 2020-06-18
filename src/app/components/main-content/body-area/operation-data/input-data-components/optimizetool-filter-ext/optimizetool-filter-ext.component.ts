@@ -1,6 +1,5 @@
-import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
-//import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable ,Subscription} from 'rxjs';

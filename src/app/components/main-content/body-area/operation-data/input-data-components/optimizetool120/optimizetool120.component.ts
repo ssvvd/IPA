@@ -1,9 +1,7 @@
 import { Component, OnInit ,Input} from '@angular/core';
-//import { InputParameterItem } from 'src/app/models/operational-data/inputparameteritem';
-//import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Options,ChangeContext } from 'ng5-slider';
+import { Options } from 'ng5-slider';
 import { Observable ,Subscription} from 'rxjs';
 
 @Component({

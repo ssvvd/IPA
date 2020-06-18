@@ -33,6 +33,10 @@ export class Appdetails790Component implements OnInit {
     this.changeinputimage(this.HoleType);
   }
 
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+  
   changeSolidHole(val)
   {
     this.changeinputimage(val);
@@ -57,9 +61,9 @@ export class Appdetails790Component implements OnInit {
         this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').image= "inpt_SM_Length750.png";
         this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').image= "inpt_SM_Width750.png";
         this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').image= "inpt_SM_Depth750.png";
-        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_SM_Radius750.png";
-        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_SM_ButtomRadius750.png";
-        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_SM_ButtomRadius750.png";          
+        this.srv_StMng.IPL.GetItem('RToleranceMin').image="inpt_SM_ButtomRadius750.png";
+        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_SM_Radius750.png";
+        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_SM_Radius750.png";        
     }
 
     if(val=='PreHole')
@@ -68,9 +72,9 @@ export class Appdetails790Component implements OnInit {
         this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').image= "inpt_PH_Length750.png";
         this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').image= "inpt_PH_Width750.png";
         this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').image= "inpt_PH_Depth750.png";
-        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_PH_Radius750.png";
-        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_PH_ButtomRadius750.png";
-        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_PH_ButtomRadius750.png";        
+        this.srv_StMng.IPL.GetItem('RToleranceMin').image= "inpt_PH_ButtomRadius750.png";
+        this.srv_StMng.IPL.GetItem('MinCornerRadius').image= "inpt_PH_Radius750.png";
+        this.srv_StMng.IPL.GetItem('MaxCornerRadius').image= "inpt_PH_Radius750.png";    
     }    
  }
 

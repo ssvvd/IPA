@@ -12,7 +12,14 @@ export class AppsettingService {
   private mUnits:string ='M'; //todo:
   private mUnitslengthDesc :string='mm'; //todo:  
   private marrLanguages:Language[];
-
+  private mLangName:string='EN';
+  
+  get LangName():string{   
+    return this.mLangName;
+    }
+   set LangName(l:string) {  
+    this.mLangName = l;
+   }
 
    get Units():string{   
     return this.mUnits;

@@ -26,7 +26,11 @@ export class Appdetails1Component implements OnInit {
   ngOnInit() {  
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());     
   }
- 
+  
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
   onfocusfield(field:string)
   {
     this.InFocus=true;
@@ -50,5 +54,23 @@ export class Appdetails1Component implements OnInit {
 
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;     
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    this.AddTostrMandatoryParam('DepthOfShoulder_ap',"D:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('LengthOfShoulder_L',"L:",this.srv_appsetting.UnitslengthDesc);
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }

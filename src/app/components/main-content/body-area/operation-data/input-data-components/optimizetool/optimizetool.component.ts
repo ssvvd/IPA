@@ -1,15 +1,6 @@
-import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@angular/core';
-import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+import { Component, OnInit, } from '@angular/core';
 import { StateManagerService } from 'src/app/services/statemanager.service';
-import { Observable, Subject } from 'rxjs';
-
-/* interface ToolOptimizeItem
-{
-  RecordID:number;
-  Designation:string;
-  Value:string;
-  Checked:boolean;
-} */
+import {  Subject } from 'rxjs';
 
 @Component({
   selector: 'app-optimizetool',
@@ -36,17 +27,6 @@ export class OptimizetoolComponent implements OnInit {
     this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').value =this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').valuedefault;
     this.eventsSubject.next();
   }
-
-/*   GetSelectedItemsString(items:ToolOptimizeItem[]): string
-  {
-    let strItems:string='';
-    items.forEach (p=>{strItems = strItems +p.Value + ",";});  
-    if(strItems=='') 
-      strItems ="All";
-    else
-      strItems =strItems.substring (0,strItems.length-1);
-    return strItems;
-  } */
  
   ngOnInit() {   
     if(this.srv_StMng.IPL.GetItem('TD_FASTFEED').value=='True'&& this.srv_StMng.IPL.GetItem('TD_REGULAR').value=='True')        
@@ -74,10 +54,4 @@ export class OptimizetoolComponent implements OnInit {
     if(this.TypeFeed=="NormalFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='False'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='True'};
   } 
   
- /*  get_strselectedvalue(arr :ToolOptimizeItem[]):string
-  {
-    let str:string ='';     
-    arr.forEach(pp=>{str = str +pp.Designation + ",";} );
-    return str;    
-  } */
 }

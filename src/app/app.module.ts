@@ -74,6 +74,7 @@ import { Appdetails1Component } from './components/main-content/body-area/operat
 import { Appdetails51Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails51/appdetails51.component';
 import { Appdetails54Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails54/appdetails54.component';
 import { FavoritesComponent } from './components/main-content/body-area/favorites/favorites.component';
+import { MachinePpAddFavoriteComponent } from './components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 
 @NgModule({
   declarations: [   
@@ -131,7 +132,8 @@ import { FavoritesComponent } from './components/main-content/body-area/favorite
     Appdetails1Component,
     Appdetails51Component,
     Appdetails54Component,
-    FavoritesComponent
+    FavoritesComponent,
+    MachinePpAddFavoriteComponent
   ],
   imports: [
     FormsModule,

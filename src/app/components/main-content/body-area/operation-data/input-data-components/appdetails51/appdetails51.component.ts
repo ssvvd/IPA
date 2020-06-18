@@ -26,7 +26,10 @@ export class Appdetails51Component implements OnInit {
   ngOnInit() {  
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }
- 
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+  
   onfocusfield(field:string)
   {
     this.InFocus=true;

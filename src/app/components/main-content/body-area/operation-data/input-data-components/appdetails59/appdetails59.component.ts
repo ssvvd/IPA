@@ -24,16 +24,20 @@ export class Appdetails59Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
-    this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
+    this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
+    this.SetIPLMandatory();    
   }
- 
+  
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+
   onfocusfield(field:string)
   {
     this.InFocus=true;    
-    this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;
-    //alert(this.ImageName);
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;    
   }
-
+  
   onfocusoutfield()
   {  
     this.InFocus=false;
@@ -51,5 +55,23 @@ export class Appdetails59Component implements OnInit {
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;
     this.srv_StMng.IPL.GetItem('PartShape').value =this.srv_StMng.IPL.GetItem('PartShape').valuedefault;    
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    this.AddTostrMandatoryParam('DepthOfShoulder_ap',"D:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('LengthOfShoulder_L',"L:",this.srv_appsetting.UnitslengthDesc);
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }

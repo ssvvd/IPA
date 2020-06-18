@@ -28,7 +28,8 @@ export class AppComponent implements OnInit {
 
   }
 
-ngOnInit(){
+ngOnInit()
+{
   cssVars({
   onlyLegacy: false,
   watch: true,
@@ -38,25 +39,11 @@ ngOnInit(){
   
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
                            'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
-  this.translate.setDefaultLang('EN');
+  this.translate.setDefaultLang(this.srv_appsetting.LangName);
 
   //check with HTTPS:// -TODO:
-  this.srv_appsetting.Country ="35"
-/*   this.srv_visitors.getIpAddress().subscribe(res => {
+  this.srv_appsetting.Country ="35";
+}
+}
 
-        let ipaddress = res['ip'];
-        this.srv_visitors.getGEOLocation(ipaddress).subscribe(res => { 
-          this.srv_appsetting.Country = res['country_code3'];
-          //this.latitude = res['latitude'];
-          //this.longitude = res['longitude'];
-          //this.currency = res['currency']['code'];
-          //this.currencysymbol = res['currency']['symbol'];
-          //this.city = res['city'];          
-          //this.isp = res['isp'];
-          console.log(res);
-        });
-     
-      }); */
-}
-}
 

@@ -11,15 +11,21 @@
           </div>
       </div>
       <div class="col col-80 mt-2 mr-0 pl-2 pr-2">                     
-            <div class="pb-1 pt-0 mt-0 pt-4" >
-              <h3 class="siteTitle pl-2 pb-2">Select Machine</h3>
+           <!--  <div class="pb-1 pt-0 mt-0 pt-4 row" > -->
+              <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" >
+              <div class="col-6 pt-4 pl-0">  
+                <h3 class="siteTitle pl-0 pb-0">Select Machine</h3>
+              </div>
+              <div class="float-right col-6 text-right pt-4">
+                <label class="pl-2 pb-0">{{'Number of machines ' | translate}} : {{countrow}}</label>
+              </div>
             </div>           
             <div class="div-datatable">              
               <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions"
                 class="table table-stripe row-border hover ">
                 <thead *ngIf="isLoaded">
                   <tr id="dtOptions">
-                    <th class="d-none" >ID</th>                                                      
+                    <th class="d-none" >ID</th>                                                                                           
                     <th ><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                  
                     <th><label>{{'Adaptation Type & Size'  | translate}}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Kw)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
@@ -28,12 +34,14 @@
                     <th class="no-sort"></th>
                     <th class="no-sort"></th>
                     <th class="no-sort"></th>
-                    <th class="no-sort"></th>                   
+                    <th class="no-sort"></th> 
+                    <th class="d-none" >Sec</th> 
+                    <th class="d-none" >Fav</th>                  
                   </tr>
                 </thead>
                 <tbody *ngIf="isLoaded">
                   <tr  *ngFor="let mach of listmachines" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
-                    <th scope="row" class="d-none">{{mach.MachineID}}</th>                    
+                    <th scope="row" class="d-none">{{mach.MachineID}}</th>                                                        
                   <!--  <td>ng s{{mach.MachineType}}</td> -->                 
                     <td><div class="pl-2">{{mach.MachineName}}</div></td>
                     <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
@@ -61,7 +69,9 @@
                         <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
                           (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect| translate}}</button>
                       </div>
-                    </td>                    
+                    </td> 
+                    <th scope="row" class="d-none">{{mach.Sec}}</th> 
+                    <th scope="row" class="d-none">{{mach.isFavorite}}</th>                 
                   </tr>                  
                 </tbody>
               </table>

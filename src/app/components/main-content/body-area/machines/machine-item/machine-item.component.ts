@@ -3,9 +3,8 @@ import { MachineService } from 'src/app/services/machine.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { Routes,ActivatedRoute,Router} from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -27,7 +26,7 @@ export class MachineItemComponent implements OnInit {
   //ClickSelectMachine:Subject<any> = new Subject();
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(public translate: TranslateService,private srv_machine: MachineService, 
+  constructor(private srv_machine: MachineService, 
               private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
   {           
     this.eventsSubscription.add(this.router.params.subscribe(params => {
@@ -36,7 +35,6 @@ export class MachineItemComponent implements OnInit {
     }));
   }
   public innerheight: any;
-
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {  
@@ -80,7 +78,7 @@ export class MachineItemComponent implements OnInit {
       this.imgNameMachine =environment.ImagePath +"no-image.svg";        
       if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
       if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-      if(this.machHeader.MachineType =='Machining center ') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
+      if(this.machHeader.MachineType =='Machining center') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
   }
 
   FillMachineDataFromServer()
