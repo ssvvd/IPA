@@ -142,9 +142,6 @@ this.O = 0
     //http
     this.Fax
 
-    //param
-    this.O
-
     //calc
     this.B = 50000;
     this.HPP = 1;
