@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 export class MachineItemComponent implements OnInit {
  
   MachineID: number; 
+  MachineName:string;
   machSpindleMain: Machinespindle;
   machSpindleTool: Machinespindle;
   arrMachineSpindle: Machinespindle[];
@@ -31,7 +32,7 @@ export class MachineItemComponent implements OnInit {
   {           
     this.eventsSubscription.add(this.router.params.subscribe(params => {
     this.MachineID = parseInt(params["id"]);
-
+    this.MachineName= params["name"];
     }));
   }
   public innerheight: any;

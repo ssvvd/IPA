@@ -63,7 +63,7 @@ export class MachiningOperationComponent implements OnInit {
               if(d.ParentMenuID=='61') //drilling
               {
                 if(d.MenuID==71)  isadditem =false;
-                if(MachineType=='Multi task' || MachineType=='SwissType' || MachineType=='MultiSpindle')
+                if(MachineType=='Multi task' || MachineType=='Swiss type' || MachineType=='Multi spindle')
                 {
                   if(d.MenuID==111 || d.MenuID ==112)  isadditem =true;                  
                 }

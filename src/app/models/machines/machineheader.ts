@@ -1,6 +1,7 @@
 export class Machineheader {
     public Sec:number;
     public MachineID:number;
+    public MachineIDBase:number;
     public MachineType:string;
     public MachineType1:string;
     public MachineName:string;    

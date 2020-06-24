@@ -25,6 +25,18 @@ export class Appdetails54Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
+    this.SetIPLMandatory();
+
+    if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
+    {
+      if(this.TypeApp=='1')      
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+      else
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
+    }
+    else      
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }
   ngOnDestroy() {
@@ -37,16 +49,41 @@ export class Appdetails54Component implements OnInit {
     if(this.TypeApp=='1')
       this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;
     else
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
-    
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;    
   }
 
+  SetImageApplication(TypeApp:number)
+  {
+
+  }
+  
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
+    {
+      if(this.TypeApp=='1')      
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+      else
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
+    }
+    else      
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
    
+  ChangeTypeApp(v:number)
+  {
+    if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
+    {
+      if(v==1)      
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+      else
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
+    }
+    else      
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+  }
+
   ClearData()
   {
     this.srv_StMng.IPL.GetItem('WorkpieceDiameter').value =null;
@@ -63,5 +100,41 @@ export class Appdetails54Component implements OnInit {
 
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;     
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    if( this.srv_StMng.SecApp=='188' )
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"OD:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Width',"ID:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Depth',"DOD:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthInner',"DID:",this.srv_appsetting.UnitslengthDesc);      
+    }
+    if(this.srv_StMng.SecApp=='10' )
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"OD:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DiameterInner',"ID:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Depth',"DOD:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthInner',"DID:",this.srv_appsetting.UnitslengthDesc);      
+    }
+    if(this.srv_StMng.SecApp=='54')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DiameterInner',"W:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Depth',"DOD:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthInner',"DID:",this.srv_appsetting.UnitslengthDesc);
+    } 
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }

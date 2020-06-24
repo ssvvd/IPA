@@ -24,6 +24,8 @@ export class Appdetails51Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
+    this.SetIPLMandatory();
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }
   ngOnDestroy() {
@@ -39,7 +41,7 @@ export class Appdetails51Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
    
   ClearData()
@@ -50,5 +52,23 @@ export class Appdetails51Component implements OnInit {
 
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;     
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    this.AddTostrMandatoryParam('WorkpieceDiameter',"OD:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('DiameterBoring',"ID:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('Width',"L:",this.srv_appsetting.UnitslengthDesc);
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }

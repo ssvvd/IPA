@@ -16,7 +16,7 @@ export class Appdetails780Component implements OnInit {
   InFocus:boolean=false;
   HoleType:string='Solid';
   environment=environment;
-  
+
   @Input() events: Observable<void>;
   private eventsSubscription: Subscription; 
   public msrv_StMng:StateManagerService =this.srv_StMng;
@@ -31,8 +31,13 @@ export class Appdetails780Component implements OnInit {
     showTicks: false
   };
 
- ngOnInit() {  
-  
+ ngOnInit() {
+    this.SetIPLMandatory();
+    if( this.HoleType=='Solid') 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_0.png";
+
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value!='') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value!='') this.HoleType="PreHole";   
@@ -51,7 +56,10 @@ export class Appdetails780Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    if( this.HoleType=='Solid') 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_0.png";
   }
   
   changeSolidHole(val)
@@ -132,5 +140,32 @@ export class Appdetails780Component implements OnInit {
         this.srv_StMng.IPL.GetItem('Depth').value=null;
         alert('Maximum value is <' + this.srv_StMng.IPL.GetItem('Depth').valuemax + '>');
       }
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    if( this.HoleType=='Solid') 
+    {
+      this.AddTostrMandatoryParam('D2Min',"DH min:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('D2Max',"DH max:",this.srv_appsetting.UnitslengthDesc);
+    }
+    if( this.HoleType=='PreHole') 
+    {
+      this.AddTostrMandatoryParam('D2',"DPH:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('D3',"DH:",this.srv_appsetting.UnitslengthDesc);
+    }
+    this.AddTostrMandatoryParam('Depth',"D:",this.srv_appsetting.UnitslengthDesc);
+
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }

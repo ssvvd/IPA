@@ -35,6 +35,12 @@ export class Appdetails77Component implements OnInit {
               private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() {
+    this.SetIPLMandatory();
+    if( this.srv_StMng.SecAppSelected.MenuID=='111') 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";
+          
     this.eventsSubscription.add( this.events.subscribe(() => this.ClearData()));
     this.eventsSubscription.add(this.srv_DataLayer.holediameterdrilling(this.srv_appsetting.Units).subscribe((res: any) => {
       this.arrdiameter= JSON.parse(res);    
@@ -73,7 +79,11 @@ export class Appdetails77Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";   
+    
+    if( this.srv_StMng.SecAppSelected.MenuID=='111') 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";
   }
     
   ClearData()
@@ -84,6 +94,23 @@ export class Appdetails77Component implements OnInit {
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;
     this.srv_StMng.IPL.GetItem('Slope').value =this.srv_StMng.IPL.GetItem('Slope').valuedefault;    
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;        
+  }
+  
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    this.AddTostrMandatoryParam('D_Hole',"DH:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('Depth',"DPT:",this.srv_appsetting.UnitslengthDesc);
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 
 }

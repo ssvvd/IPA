@@ -26,6 +26,7 @@ export class Appdetails59Component implements OnInit {
   ngOnInit() {  
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     this.SetIPLMandatory();    
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
   
   ngOnDestroy() {
@@ -41,7 +42,7 @@ export class Appdetails59Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
    
   ClearData()

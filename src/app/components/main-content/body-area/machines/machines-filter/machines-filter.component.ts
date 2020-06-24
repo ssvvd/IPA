@@ -85,11 +85,11 @@ export class MachinesFilterComponent implements OnInit {
       statefilter=this.srv_statemanage.SelectMachineFilter;
       if (typeof(statefilter) !== 'undefined' && statefilter !== null ) 
       {    
-          this.machFilter=statefilter;  
+          this.machFilter=statefilter;           
           this.curAdapType = { AdaptationType:this.machFilter.AdaptationType} ;
           this.curAdapSize = { AdaptationType:this.machFilter.AdaptationType,AdaptationSize:this.machFilter.AdaptationSize} ;
       }
-      //this.MachineFilterChanged.emit({ filter: this.machFilter});
+      this.MachineFilterChanged.emit({ filter: this.machFilter});
       this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units)
       .subscribe((data: any) => {        
         this.arrMachines = JSON.parse(data); 
@@ -173,7 +173,10 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMachineTypeStandard=true;
     this.machFilter.IsMachineTypeHeavyDuty=true;
     this.machFilter.IsMachineTypeHighSpeed=true;
-    this.MachineFilterClear.emit();
+    this.curAdapType=this.arrAdapType[0]; 
+    this.curAdapSize=this.arrAdapSize[0];
+    //this.MachineFilterClear.emit();
+    this.MachineFilterChanged.emit({ filter: this.machFilter});   
   }
 
 }

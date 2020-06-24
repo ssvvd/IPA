@@ -9,7 +9,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                         <select  class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter()" (focusout)="onfocusoutfield()" (focus)="onfocusfield('D_Hole')">
+                         <select  class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter();SetIPLMandatory()" (focusout)="onfocusoutfield()" (focus)="onfocusfield('D_Hole')">
                             <option *ngFor="let d of arrdiameter"  [ngValue]="d" >{{d.Description}}</option>
                         </select> 
 
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -45,8 +45,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtLengthOfShoulder_L" class="pl-0 pt-3">{{'Pre hole dia (DPH)' | translate}}</label>
-                        <label class="pl-2 asterisk-red pt-3">*</label>
+                        <label for="txtLengthOfShoulder_L" class="pl-0 pt-3">{{'Pre hole dia (DPH)' | translate}}</label>                        
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input type="number"required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DiameterBoring').value==null ? 'form-control  input-empty':'form-control'" id="txtDiameterBoring" name="txtDiameterBoring" 

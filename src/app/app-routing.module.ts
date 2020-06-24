@@ -16,7 +16,7 @@ const routes: Routes = [
 	children:[
 		{path:"",component:MachinesListComponent},
 		{path:"machines",component:MachinesListComponent},	
-		{path:"machine-item/:id", component: MachineItemComponent},
+		{path:"machine-item/:id/:name", component: MachineItemComponent},
 		{path:"materials",component:MaterialsComponent},
 		{path:"materials/:lang",component:MaterialsComponent},
 		{path:"machining-operation",component:MachiningOperationComponent},

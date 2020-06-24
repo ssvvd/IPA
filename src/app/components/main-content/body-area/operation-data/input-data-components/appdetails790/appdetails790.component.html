@@ -37,8 +37,8 @@
                     <label class="pl-3 asterisk-red pt-3">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
-                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==''? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtPreHoleDia" (change)="OnDepthChange()"
-                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
+                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==''? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtPreHoleDia" (change)="SetIPLMandatory()"
+                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                     <label class="pl-0 pt-3">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -51,8 +51,8 @@
                     <label class="pl-2 asterisk-red pt-3">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
-                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtLength" name="LengthOfShoulder_L" (change)="OnDepthChange()"
-                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()"> 
+                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtLength" name="LengthOfShoulder_L" (change)="SetIPLMandatory()"
+                     [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                     <label class="pl-0 pt-3">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -64,8 +64,8 @@
                     <label class="pl-2 asterisk-red pt-3">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
-                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtW" name="txtW" (change)="OnDepthChange()"
-                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
+                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtW" name="txtW" (change)="SetIPLMandatory()"
+                         [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                     <label class="pl-0 pt-3">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -77,8 +77,8 @@
                     <label class="pl-2 asterisk-red pt-3">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
-                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
-                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value" (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()"> 
+                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="SetIPLMandatory()"
+                     [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value" (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                     <label class="pl-0 pt-3">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -90,8 +90,8 @@
                     <label class="pl-2 asterisk-red pt-3">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">
-                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtR" name="txtR" (change)="OnDepthChange()"
-                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value" (focus)="onfocusfield('RToleranceMin')" (focusout)="onfocusoutfield()"> 
+                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtR" name="txtR" (change)="SetIPLMandatory()"
+                       [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value" (focus)="onfocusfield('RToleranceMin')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                     <label class="pl-0 pt-3">{{msrv_appsetting.UnitslengthDesc | translate}}</label>

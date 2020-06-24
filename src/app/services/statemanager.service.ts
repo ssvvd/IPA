@@ -73,10 +73,13 @@ export class StateManagerService {
         this.MenuIDLevel2 ="";          
       }
     this.mSelectedMachine = Object.assign({}, m);
-    let desc:string;     
-    desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " Kw"; 
-    this.CheckTabOperationalDataEnable();   
-    this.obsMachineSelected.next([m.MachineName,desc]);  
+    let desc:string; 
+    if(typeof(m)!=='undefined' && m!==null) 
+    {
+      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " Kw";
+      this.CheckTabOperationalDataEnable();   
+      this.obsMachineSelected.next([m.MachineName,desc]); 
+    }              
   }  
   
   get SelectMachineFilter():MachineFilter {
