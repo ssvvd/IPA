@@ -127,16 +127,20 @@ this.O = 0
           this.O = this.O + +prmLta
         }
       })
+
+      this.srv_Results.GetRatioLD(pr.value).subscribe((res: any) => {
+        let prmRatioLD:string = JSON.parse(res); 
+        if (prmRatioLD != '0'){
+          this.AW = this.AW + +prmRatioLD
+        }
+      })
+
     }
       
 
 
     }
   }
-
-    
-    //flatData
-    this.AW
 
 
     //http
