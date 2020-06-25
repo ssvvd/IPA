@@ -38,7 +38,9 @@ export class clsHelpProp {
     PSIR:number;
     CEDC:number;
     CW:number;
+    kappaLeadAngle:number;
     itemType:string[]=[];
+    itemTypeRes:string;
     GroupText:string[]=[];
     private _isHidden:number;
 
