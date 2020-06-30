@@ -261,7 +261,14 @@ if (pr.value.trim().length == 7){
 
 
         //http
-        let insetFamily = this.selectedHelp.Families[this.selectedHelp.Families.length - 1]
+        let insetFamily = ''
+        for (var col = this.selectedHelp.Families.length - 1; col > 0; col--){
+          if (this.selectedHelp.Families[col].trim().length > 3){
+            insetFamily = this.selectedHelp.Families[col]         
+            break;   
+          }
+        }
+        // let insetFamily = this.selectedHelp.Families[this.selectedHelp.Families.length - 1]
         let edgeGeometry = ""
         //in(4297,2672,3087,3593,3156)
         switch (insetFamily){
