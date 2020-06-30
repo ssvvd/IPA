@@ -303,9 +303,31 @@ if (pr.value.trim().length == 7){
             if (splitted.length == 4){
               _Mc = +splitted[0]
               _Kc = +splitted[1]
-              _k = +splitted[2] / 2
+              _k = +splitted[2]
               insertBrandName = splitted[3]
 
+
+
+              switch (insertBrandName.trim().toUpperCase()){
+                  case 'SUMOCHAM FLAT HEAD': case 'SUMOCHAM CHAMDRILL LINE': case 'SUMOCHAMIQ':
+                    insertType = 'Sumo'
+                  break;
+                  case 'FLASHCHAM':  case	'CHAMDRILL':
+                    insertType = 'IDI'
+                  break;
+                  case 'CHAMDRILLJET':
+                    insertType = 'Jet'
+                  break;
+                  case 'LOGIQ3CHAM':
+                    insertType = 'Logic3'
+                  break;
+                  case 'DR-TWIST':
+                    insertType = 'DR'
+                  break;  
+                  case 'SOLIDDRILL':
+                    insertType = 'StraightEdge'
+                  break;  
+              }
 //GetCuttingForcesDrilling(DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number)
               this.srv_Results.GetCuttingForcesDrilling(insertType,_dd,_d,_z,_f,_n,_Kc,_Mc,_ɣ,_k,edgeGeometry).subscribe((res: any) => {
                 var result = res as MPResult;
