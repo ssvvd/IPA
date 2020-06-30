@@ -37,10 +37,10 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
 
   getUrl1(row:string,index:number)
   {
-    if (row.length != 7){
+    if (row.trim().length != 7){
       return this.sanitizer.bypassSecurityTrustResourceUrl('')
     }
-    let _index:number = this.selectedOption.GroupText.length - index - 1
+    let _index:number = this.selectedOption.CatalogNo.indexOf(row)
     let mapp:string = 'IT'
     if (this.selectedOption.itemType[_index].trim() != 'H'){
       mapp = this.srv_statemanage.SecAppSelected.MainApp
