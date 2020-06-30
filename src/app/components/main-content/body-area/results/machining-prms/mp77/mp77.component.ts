@@ -77,7 +77,7 @@ resType:string = ''
 
 // this.fillParams()
 
-this.reset()
+// this.reset()
   }
 
 

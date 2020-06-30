@@ -1,6 +1,6 @@
 
 
-<div *ngFor="let row of selectedOption?.CatalogNo.slice().reverse(); let PrtNum = index"  >
+<div *ngFor="let row of selectedOption?.CatalogNo.slice().reverse(); let PrtNum = index"  [hidden]="row.trim().length != 7">
     <br>
     <label class="bold font-weight-bold">{{selectedOption.GroupText[selectedOption.GroupText.length - PrtNum - 1]}}:</label>
     <br>

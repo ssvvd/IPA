@@ -43,9 +43,9 @@
                               <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                          <td>
-<!-- (click)="viewInfo(row.index)" -->
+<!--  -->
                            <img src="{{environment.ImgView}}" 
-                           
+                           (click)="viewInfo(row.index)"
                            title="View info" class="icon-grid">
                             
                      </td>

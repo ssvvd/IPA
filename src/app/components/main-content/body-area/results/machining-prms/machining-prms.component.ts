@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
 import {clsHelpProp} from 'src/app/models/results/help-prop';
+import { environment } from 'src/environments/environment';
+import { StateManagerService} from 'src/app/services/statemanager.service' ;
 
 @Component({
   selector: 'machining-prms',
@@ -12,8 +14,9 @@ export class MachiningPrmsComponent implements OnInit {
   @Input() viewParamsChangedMP: any ;
   selectedOptionMP:clsPropertyValue[][];
   selectedOptionMPHelp:clsHelpProp;
+  environment = environment;
   
-  constructor() { }
+  constructor(public srv_StMng:StateManagerService) { }
 
   ngOnInit(): void {
   }

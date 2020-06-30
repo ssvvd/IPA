@@ -37,6 +37,9 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
 
   getUrl1(row:string,index:number)
   {
+    if (row.length != 7){
+      return this.sanitizer.bypassSecurityTrustResourceUrl('')
+    }
     let _index:number = this.selectedOption.GroupText.length - index - 1
     let mapp:string = 'IT'
     if (this.selectedOption.itemType[_index].trim() != 'H'){

@@ -169,8 +169,8 @@ getShowTable(){
                   let index:number = i
                   this.srv_Results.getitemtype(catNo).subscribe((res: any) => {
                     let typeRes:object[] = JSON.parse(res)
-                    let type:string = typeRes[0]['ItemType']
-                    let family:string= typeRes[0]['Family']
+                    let type:string = typeRes[0]['ItemType'] || ''
+                    let family:string= typeRes[0]['Family'] || ''
                     let catNoLoc:number = this.dtResultsObjectsHelp[index].CatalogNo.indexOf(catNo)
                     this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type); 
                     this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family); 
