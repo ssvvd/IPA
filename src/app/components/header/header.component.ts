@@ -51,14 +51,14 @@ export class HeaderComponent implements OnInit {
   LogIn()
   {
     
-    this.srv_data.get_token().subscribe((res: any)=>{
+    /* this.srv_data.get_token().subscribe((res: any)=>{
       window.open('https://sign.ssl.imc-companies.com/signin?t=' +res);
       this.srv_data.login(res).subscribe ((r:any)=>
       {
           
           alert(r);
       });
-    });
+    }); */
   }
 
   GetLanguages()

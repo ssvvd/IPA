@@ -13,6 +13,7 @@ export class MachineService {
 
   public  getmachines(units:string,userid:string)
   {        
+    if(userid=='') userid='autologin';
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units + '/' + userid);
   }
   public  getmachinedetailed(id:number)

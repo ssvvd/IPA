@@ -48,7 +48,7 @@ ngOnInit()
   //this.srv_cook.set_cookie('user_id',u.UserID); 
   //this.srv_cook.set_cookie('user_fn',u.FirstName); 
   //this.srv_cook.set_cookie('user_ln',u.LastName); 
-  this.srv_appsetting.UserID ="gabri";
+  this.srv_appsetting.UserID ="";
 }
 }
 
