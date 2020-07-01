@@ -74,7 +74,6 @@ import { Optimizetool52Component } from './components/main-content/body-area/ope
 import { Appdetails1Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails1/appdetails1.component';
 import { Appdetails51Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails51/appdetails51.component';
 import { Appdetails54Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails54/appdetails54.component';
-import { FavoritesComponent } from './components/main-content/body-area/favorites/favorites.component';
 import { MachinePpAddFavoriteComponent } from './components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 
 @NgModule({
@@ -132,8 +131,7 @@ import { MachinePpAddFavoriteComponent } from './components/main-content/body-ar
     Optimizetool52Component,
     Appdetails1Component,
     Appdetails51Component,
-    Appdetails54Component,
-    FavoritesComponent,
+    Appdetails54Component,  
     MachinePpAddFavoriteComponent,
     Mp77Component
   ],
@@ -170,7 +168,9 @@ import { MachinePpAddFavoriteComponent } from './components/main-content/body-ar
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+}
 
 export function httpTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http,'assets/i18n/', '.json');  

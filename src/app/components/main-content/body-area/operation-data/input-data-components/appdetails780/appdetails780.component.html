@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-8 ">
                                     <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Min').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Min').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'"  
-                                                [(ngModel)]="msrv_StMng.IPL.GetItem('D2Min').value"  (focus)="onfocusfield('D2Min')" (focusout)="onfocusoutfield()"> 
+                                    (change)="SetIPLMandatory()"  [(ngModel)]="msrv_StMng.IPL.GetItem('D2Min').value"  (focus)="onfocusfield('D2Min')" (focusout)="onfocusoutfield()"> 
                             </div>           
                         </div>
                             
@@ -67,7 +67,7 @@
                             </div>
                             <div class="col-8">
                                 <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Min').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Max').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" 
-                                            [(ngModel)]="msrv_StMng.IPL.GetItem('D2Max').value" (focus)="onfocusfield('D2Max')" (focusout)="onfocusoutfield()">
+                                (change)="SetIPLMandatory()"   [(ngModel)]="msrv_StMng.IPL.GetItem('D2Max').value" (focus)="onfocusfield('D2Max')" (focusout)="onfocusoutfield()">
                             </div>
                             
                         </div> 
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
+                        (change)="SetIPLMandatory()"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value" (focus)="onfocusfield('D2')" (focusout)="onfocusoutfield()"> 
+                        (change)="SetIPLMandatory()"(change)="SetIPLMandatory()"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value" (focus)="onfocusfield('D2')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-2 pl-0">
                     <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
-                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
+                    (change)="SetIPLMandatory()"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-2 pl-0">
                     <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>

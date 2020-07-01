@@ -24,6 +24,8 @@ export class Appdetails1Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
+    this.SetIPLMandatory();
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());     
   }
   
@@ -40,7 +42,7 @@ export class Appdetails1Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
    
   ClearData()
@@ -60,9 +62,9 @@ export class Appdetails1Component implements OnInit {
   SetIPLMandatory()
   {
     this.strMandatory='';
-    this.AddTostrMandatoryParam('DepthOfShoulder_ap',"D:",this.srv_appsetting.UnitslengthDesc);
-    this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc);
-    this.AddTostrMandatoryParam('LengthOfShoulder_L',"L:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('Depth',"DPT:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('Width',"W:",this.srv_appsetting.UnitslengthDesc);
     if(this.strMandatory.length>0)
       this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
   }

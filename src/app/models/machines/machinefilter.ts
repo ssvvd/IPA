@@ -16,5 +16,6 @@ export class MachineFilter{
   IsMachineTypeHighSpeed:boolean;
   AdaptationType:string;
   AdaptationSize:string;
+  IsMostRecommended:boolean;
 }
 

@@ -4,7 +4,7 @@
      <nav class="ml-0 pl-0 mt-0 pl-4 pt-0" aria-label="breadcrumb">
         <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
             <li class="breadcrumb-item text-secondary" ><a routerLink="/home/machines">All</a></li>
-            <li class="breadcrumb-item active text-secondary"  aria-current="page">{{machHeader?.MachineName}}</li> 
+            <li class="breadcrumb-item active text-secondary"  aria-current="page">{{MachineName}}</li> 
         </ol>
       </nav>
 </div>  
@@ -15,7 +15,7 @@
     </div>
     <div class="pl-3 pt-0 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-8 col-lg-8">
             <div class="p-0 m-0">           
-                <label class="siteTitle">{{machHeader?.MachineName}}</label>                      
+                <label class="siteTitle">{{MachineName}}</label>                      
             </div>
              <div class="form-group">                 
                 <div class="col-3 p-0 m-0">    
@@ -49,24 +49,11 @@
                         </select>                                          
                     </div>                    
                 </div>
-
-                <!-- <div class="form-group row pt-2">
-                    <div class="col-4 p-0 m-0"> 
-                        <label for="txtClampingType" class="col-sm-7">{{'Clamping Type' | translate}}</label>
-                    </div>
-                    <div class="pl-4">
-                        <select class="form-control-sm" [ngModel]="machHeader.MachineType1" >
-                            <option value='Standard'>Standard</option>
-                            <option value='High speed'>High speed</option>                            
-                            <option value='Heavy Duty'>Heavy Duty</option>                            
-                        </select>                                
-                    </div>
-                </div> -->
-                <div class="form-group row">
+                <div class="form-group row" *ngIf="isLoading">
                     <div class="row col-2 pt-2">                     
                         <div class="pt-2 pr-4">                     
                             <a>
-                                <img src="{{environment.ImgAddToFavorite}}" class="icon-grid">
+                                <img [src]="machHeader.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(machHeader)">
                             </a> 
                         </div>
                         <div class="pr-4 pt-2">                                                                 
@@ -77,7 +64,10 @@
                     </div>
                     <div class="pt-2">                        
                         <button class="btn btn-select"  (click)="OnSelectMachine();" [routerLink]="['/home/materials']">{{'Select'| translate}}</button>                                                              
-                    </div>                                            
+                    </div> 
+                    <div class="pt-2 pl-2" *ngIf="machHeader.isFavorite">                        
+                        <button class="btn btn-select"  (click)="OnSaveMachine();">{{'Save'| translate}}</button>                                                              
+                    </div>                                           
                 </div>           
             <div class="form-group">
             </div>

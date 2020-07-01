@@ -24,6 +24,8 @@ export class Appdetails52Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
+    this.SetIPLMandatory();
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }
   ngOnDestroy() {
@@ -39,7 +41,7 @@ export class Appdetails52Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
    
   ClearData()
@@ -56,5 +58,42 @@ export class Appdetails52Component implements OnInit {
 
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;     
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    if( this.srv_StMng.SecApp=='52')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Depth',"DPT:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Width',"W:",this.srv_appsetting.UnitslengthDesc);      
+    }
+    if( this.srv_StMng.SecApp=='53' || this.srv_StMng.SecApp=='50')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('GroovePosition',"LP:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Depth',"DPT:",this.srv_appsetting.UnitslengthDesc);   
+      this.AddTostrMandatoryParam('Width',"W:",this.srv_appsetting.UnitslengthDesc);    
+    }
+  /*   if( this.srv_StMng.SecApp=='53')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('GroovePosition',"LP:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthofGroove',"DPT:",this.srv_appsetting.UnitslengthDesc);   
+      this.AddTostrMandatoryParam('WidthofGroove',"W:",this.srv_appsetting.UnitslengthDesc);    
+    } */
+      if(this.strMandatory.length>0)
+        this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+
+    
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }

@@ -78,14 +78,15 @@ export class Appdetails120Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() {    
+    this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     if(this.srv_StMng.SecApp=='120')
     {
-      this.ImageName1 =environment.ImagePath +"internal_thread.PNG";
+      //this.ImageName1 =environment.ImagePath +"internal_thread.PNG";
       this.threadtype="Internal";
     }
     else
     {
-      this.ImageName1 =environment.ImagePath +"external_thread.PNG";
+      //this.ImageName1 =environment.ImagePath +"external_thread.PNG";
       this.threadtype="External";
     }
     let dia:string;
@@ -129,11 +130,24 @@ export class Appdetails120Component implements OnInit {
             this.srv_StMng.IPL.GetItem('D_Hole').value =dia;
             this.ChangeDiameter();              
         }
-
+        this.SetIPLMandatory();
         }         
         ));      
     }         
 )); 
+    
+}
+
+onfocusfield(field:string)
+{
+  this.InFocus=true;  
+    this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
+}
+
+onfocusoutfield()
+{  
+  this.InFocus=false;       
+  this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";  
 }
 
 ClearData()
@@ -160,21 +174,48 @@ ClearData()
                   Size:d.size                  
             })  
             if(this.arrPitch.filter(p=>p==d.pitch).length==0) 
-                this.arrPitch.push(d.pitch);  
-            
-            
+                this.arrPitch.push(d.pitch);                          
         }  
+        
         //this.pitch= this.srv_StMng.IPL.GetItem('Pitch').value;
         this.changepitch();               
-        this.get_threadformdata();                          
+        this.get_threadformdata(); 
+                               
     }         
     ));
   }
+  
+  strMandatory:string='';
+  SetIPLMandatory()
+  {
+    this.strMandatory='';
+    this.msrv_StMng.IPLMMandatory='';
+    this.AddTostrMandatoryParam('ThreadForm',"TS:","");
+    this.AddTostrMandatoryParam('Pitch',"P:",this.pitch_units);
+    this.AddTostrMandatoryParam('D_Hole',"Do:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('Size',"NS:","");
+    this.AddTostrMandatoryParam('LengthOfShoulder_L',"LTH:",this.srv_appsetting.UnitslengthDesc);
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
+  }
 
   changethreadform()
-  {    
+  {  
+    
+    this.srv_StMng.IPL.GetItem('Pitch').value=null;
+    this.srv_StMng.IPL.GetItem('D_Hole').value=null;
+    this.srv_StMng.IPL.GetItem('Size').value=null;
+    this.strMandatory='TS:' + this.objthreadform.ThreadFormISO;
+    this.msrv_StMng.IPLMMandatory= this.strMandatory;
+
     this.threadform=this.objthreadform.ThreadFormISO;
-    //this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value = '';
     this.srv_StMng.IPL.GetItem('ThreadForm').value=this.objthreadform.ThreadFormISO;
     this.fillarrpitch();   
     this.fillimagepath(this.objthreadform.ThreadFormISO);
@@ -186,15 +227,15 @@ ClearData()
 
   changepitch()
   {
-    this.srv_StMng.IPL.GetItem('Pitch').value=this.pitch;
-    //this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value = '';
+    this.srv_StMng.IPL.GetItem('Pitch').value=this.pitch;   
     this.arrSize=[];
     let arr:ThreadFormPitch []=this.arrThreadFormPitch.filter(e=> e.Pitch == this.pitch);
     this.size =this.srv_StMng.IPL.GetItem('Size').value;
     this.srv_StMng.IPL.GetItem('D_Hole').value='';
     this.arrSize.push('');
     for(let i=0; i<arr.length; i++)
-        this.arrSize.push(arr[i].Size);       
+        this.arrSize.push(arr[i].Size);   
+         
   }
 
   ngOnDestroy() {
@@ -280,9 +321,9 @@ ClearData()
                 this.FillDisplayDataBySize();
 
             if(this.srv_StMng.IPL.GetItem('D_Hole').value!=null && this.srv_StMng.IPL.GetItem('D_Hole').value!='')
-                this.FillDisplayDataByDiameter();                 
-        }         
-  ));
+                this.FillDisplayDataByDiameter();                             
+        }                 
+  ))  
   }
 
   FillDisplayDataBySize()

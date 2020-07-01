@@ -13,10 +13,18 @@ export class CookiesService {
   
   constructor(private srv_cock:CookieService) { }
   
+  public delete_all()
+  {
+    this.srv_cock.deleteAll('/');
+  }
+
   public delete_cookie(name:string)
   {
     if(this.srv_cock.check(name))
-      this.srv_cock.delete(name);
+      this.srv_cock.delete(name,'/');
+      this.srv_cock.set(name, '', new Date("Thu, 01 Jan 1970 00:00:01 GMT"));
+    //let c:any;
+    //c=this.srv_cock.getAll();
   }
   
   public get_cookielist(name:string):string[]

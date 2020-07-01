@@ -8,7 +8,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
-                        <select  class="form-control input-min-width" [(ngModel)]="objthreadform" (change)="changethreadform()">
+                        <select  class="form-control input-min-width" [(ngModel)]="objthreadform" (change)="changethreadform();">
                             <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">{{tf.Description}}</option>
                         </select> 
                     </div>                   
@@ -19,7 +19,8 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                         <select  class="form-control input-min-width"   [(ngModel)]="pitch" (change)="changepitch()">
+                         <select  class="form-control input-min-width"   [(ngModel)]="pitch" (change)="changepitch();onfocusfield('Pitch');SetIPLMandatory()"
+                         (focusout)="onfocusoutfield()" (focus)="onfocusfield('Pitch')">
                             <option *ngFor="let p of arrPitch"  [selected]="p==pitch" [ngValue]="p">{{p}}</option>
                         </select> 
                     </div>
@@ -39,7 +40,7 @@
                         <div class="row"> 
                             <div>                  
                                 <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-dia-min-width':'form-control input-dia-min-width'"  id="txtSize" name="txtSize" 
-                                   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value" (change)="ChangeDiameter()">                                                    
+                                   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value" (change)="ChangeDiameter();SetIPLMandatory()" (focus)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()" >                                                    
                                 </div>
                             <div>
                                 <label class="pl-2 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -54,7 +55,8 @@
                          <div>
                             <label class="pl-0 pt-3">{{'Nominal Size (NS)' | translate}}</label>                        
                         </div>
-                         <select  class="form-control input-min-width"  [(ngModel)]="size" (change)="changesize()">
+                         <select  class="form-control input-min-width"  [(ngModel)]="size" (change)="changesize();SetIPLMandatory()"
+                            (focusout)="onfocusoutfield()" (focus)="onfocusfield('D_Hole')">
                             <option *ngFor="let s of arrSize"   [selected]="s==size"  [ngValue]="s">{{s}}</option>
                         </select> 
                     </div>                   
@@ -67,7 +69,8 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-8 col-sm-8 col-8  pt-1 pl-0">                                                
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width pr-0':'pr-0 form-control input-min-width'"  id="txtLength" name="txtLength" 
-                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value">                                                                        
+                                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (change)="SetIPLMandatory()" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()" 
+                                                >                                                                        
                     </div>    
                     <div class="pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -123,7 +126,7 @@
          </div>   
          <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">            
             <div *ngIf="ImageName1!=''" class="col-12 text-center" >
-                <img src="{{ImageName1}}" class="input-image img-responsive">   
+                <img src="{{ImageName1}}" class="input-image1 img-responsive">   
             </div>
             <div *ngIf="ImageName!=''" class="col-12 text-center">
                 <img src="{{ImageName}}" class="input-image img-responsive">   

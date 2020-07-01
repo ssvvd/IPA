@@ -7,7 +7,7 @@
          </div>
           <div class="pr-2 pt-0 border-right-gray">
             <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
-                                (MachineFilterClear)="onMachineFilterClear()"></app-machines-filter>
+                                (MachineFilterClear)="onMachineFilterClear()"  [onChangeFavorite]="eventsChangeFavorite.asObservable()"></app-machines-filter>
           </div>
       </div>
       <div class="col col-80 mt-2 mr-0 pl-2 pr-2">                     
@@ -31,10 +31,10 @@
                     <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Kw)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Spindle Speed (rpm)' | translate}}<span class="sort-icon ml-1"></span></label></th>                
                     <th><label>{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
-                    <th class="no-sort"></th>
-                    <th class="no-sort"></th>
-                    <th class="no-sort"></th>
-                    <th class="no-sort"></th> 
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th> 
                     <th class="d-none" >Sec</th> 
                     <th class="d-none" >Fav</th>                  
                   </tr>
@@ -48,23 +48,25 @@
                     <td><div class="pl-2">{{mach.Power}}</div></td>
                     <td><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
                     <td><div class="pl-2">{{mach.Torque}}</div></td>
+                   <!--  [routerLink]="'/home/machine-item/' + mach.MachineIDBase + '/'+ mach.MachineName" class="icon-grid">  -->
                     <td>
                       <a data-toggle="tooltip" title="{{ 'View Machine Details' | translate}}">
                         <img src="{{environment.ImgView}}" 
-                          [routerLink]="'/home/machine-item/' + mach.MachineID" class="icon-grid">
+                         
+                          [routerLink]="['/home/machine-item/', mach.MachineIDBase, mach.MachineName ]" class="icon-grid">
                       </a>
                     </td>
-                    <td>
+                    <td data-sort="image1">
                       <a data-toggle="tooltip" title="{{'Add To My Machine' | translate}}" class="cursor-pointer">
-                        <img [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite"class="icon-grid" (click)="OnFavoriteMachine(mach)" >
+                        <img [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(mach)" >
                       </a>
                     </td>
-                    <td>
-                      <a data-toggle="tooltip" title="{{'Default Machine' | translate}}" class="cursor-pointer">
-                        <img src="{{environment.ImgSetDefault}}" class="icon-grid">
+                    <td data-sort="image2">
+                      <a data-toggle="tooltip" title="{{'Default Machine' | translate}}" class="cursor-pointer" (click)="SetDefault(mach.MachineID)"> 
+                        <img [src]="mach.MachineID==defaultmachine ?environment.ImgSetDefault: environment.ImgDefault"  class="icon-grid">
                       </a>
                     </td>
-                    <td>
+                    <td data-sort="image3">
                       <div class="float-right">
                         <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
                           (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect| translate}}</button>

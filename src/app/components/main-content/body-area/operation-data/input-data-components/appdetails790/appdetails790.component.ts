@@ -26,7 +26,9 @@ export class Appdetails790Component implements OnInit {
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
   
- ngOnInit() {  
+ ngOnInit() { 
+    this.SetIPLMandatory(); 
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value=='Solid') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole') this.HoleType="PreHole";   
@@ -89,7 +91,7 @@ export class Appdetails790Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
 
  ClearData()
@@ -104,8 +106,28 @@ export class Appdetails790Component implements OnInit {
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;   
   }
 
-  OnDepthChange ()
+  strMandatory:string='';
+  SetIPLMandatory()
+  {   
+    this.strMandatory=''; 
+    if(this.HoleType=='Solid')
+    {       
+        this.AddTostrMandatoryParam('D3',"DPH:",this.srv_appsetting.UnitslengthDesc);
+    }   
+    this.AddTostrMandatoryParam('LengthOfShoulder_L',"L:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc); 
+    this.AddTostrMandatoryParam('DepthOfShoulder_ap',"D:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc); 
+    //this.AddTostrMandatoryParam('RToleranceMin',"CR:",this.srv_appsetting.UnitslengthDesc);      
+  
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
   {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
     
   }
 }

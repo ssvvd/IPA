@@ -46,18 +46,18 @@ export class MachineItemSpindleComponent implements OnInit
     if(this.spindle.SpindleType=="T")  this.DescSpindle="Tool Spindle";
     this.eventsSubscription.add(this.serv.getmachineadaptationtype().subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
-        this.curAdapType=this.arrAdapType.find(e=> e.AdaptationType == this.spindle.AdaptationType );            
-        //this.curAdapType= this.spindle.AdaptationType;
+        this.curAdapType=this.arrAdapType.find(e=> e.AdaptationType == this.spindle.AdaptationType );                   
         this.eventsSubscription.add(this.serv.getmachineadaptationsize().subscribe((res: any) => {
         this.arrAdapSize = JSON.parse(res); 
-        this.curAdapSize=this.arrAdapSize.find(e=> e.AdaptationType == this.spindle.AdaptationType && e.AdaptationSize === this.spindle.AdaptationSize);                      
+        this.curAdapSize=this.arrAdapSize.find(e=> e.AdaptationType == this.spindle.AdaptationType 
+          && e.AdaptationSize === this.spindle.AdaptationSize);                      
         this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.spindle.AdaptationType);               
         this.isLoadingAdSize =true;
       }));         
     })); 
               
-      this.spindle.EmultionPressure = 25;//TODO:
-      this.spindle.EmultionFlowRate = 40;
+    this.spindle.EmultionPressure = 25;//TODO:
+    this.spindle.EmultionFlowRate = 40;
   }
   
   ngOnDestroy() {
@@ -70,7 +70,7 @@ export class MachineItemSpindleComponent implements OnInit
     this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);    
     this.curAdapSize=this.arrAdapSizeFilter[0];
     this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;
-    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);
+    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,'all');
   }
   
   filladaptordata(at:string,az:string,st:string)
@@ -78,8 +78,7 @@ export class MachineItemSpindleComponent implements OnInit
      this.eventsSubscription.add(this.serv.getmachineadaptationdata(at,az,st,this.srv_appsetting.Units).subscribe((res: any) => {     
        this.spindle =JSON.parse(res)[0];   
        this.spindle.EmultionPressure = 25;//TODO:
-       this.spindle.EmultionFlowRate = 40;    
-        
+       this.spindle.EmultionFlowRate = 40;            
       }));   
   }
   changeadapsize()

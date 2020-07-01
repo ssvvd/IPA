@@ -1,10 +1,13 @@
 import { Component, OnInit, HostListener} from '@angular/core';
 import { MachineService } from 'src/app/services/machine.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
+import {MachinePpAddFavoriteComponent} from 'src/app/components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 import { ActivatedRoute} from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -15,6 +18,7 @@ import { Subscription } from 'rxjs';
 export class MachineItemComponent implements OnInit {
  
   MachineID: number; 
+  MachineName:string;
   machSpindleMain: Machinespindle;
   machSpindleTool: Machinespindle;
   arrMachineSpindle: Machinespindle[];
@@ -26,12 +30,12 @@ export class MachineItemComponent implements OnInit {
   //ClickSelectMachine:Subject<any> = new Subject();
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private srv_machine: MachineService, 
-              private router: ActivatedRoute , private srv_statemanage:StateManagerService) 
+  constructor(private srv_machine: MachineService, private srv_appsetting:AppsettingService,
+              private router: ActivatedRoute , private srv_statemanage:StateManagerService,private modalService: NgbModal) 
   {           
     this.eventsSubscription.add(this.router.params.subscribe(params => {
     this.MachineID = parseInt(params["id"]);
-
+    this.MachineName= params["name"];
     }));
   }
   public innerheight: any;
@@ -41,9 +45,11 @@ export class MachineItemComponent implements OnInit {
       this.innerheight = window.innerHeight-400;
      
   }
+
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
+
   ngOnInit() {                              
     if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
     {
@@ -61,18 +67,62 @@ export class MachineItemComponent implements OnInit {
           this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
           this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
           this.FillImageMachineType();
-          this.isLoading =true;
-          
+          this.isLoading =true;          
         }));            
     }         
     if(this.machHeader==null)
     {
-        this.FillMachineDataFromServer(); 
+        this.FillMachineDataFromServer(this.MachineID); 
     } 
 
     this.innerheight = window.innerHeight-200;
   }
   
+  OnSaveMachine()
+  {
+    let s:string;
+    s=JSON.stringify(this.arrMachineSpindle);
+    //{MachineID}/{MachineType}/{MachineName}/{Units}/{MachineType1}/{CostPerHour}/{Currency}"
+    this.eventsSubscription.add(this.srv_machine.machine_update(
+       this.MachineID,this.machHeader.MachineType,
+       this.machHeader.MachineName, this.srv_appsetting.Units,
+       this.machHeader.MachineType1,this.machHeader.CostPerHour,this.machHeader.Currency,s).subscribe((res: any) => {
+       //alert(res);       
+    }));            
+    console.log();
+  }
+
+  OnFavoriteMachine(mach: Machineheader)
+  {    
+    //this.srv_cook.delete_cookie('fav_machine_user');
+    //this.srv_cook.delete_cookie('fav_machines');
+    //this.srv_cook.delete_all();
+    //return;
+    const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
+    modalRef.componentInstance.MachineName = mach.MachineName;
+    
+    if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
+        
+    modalRef.result.then((result) => {
+      if(result=='cancel') return;
+      if(mach.isFavorite && result=='delete')
+      {
+        mach.isFavorite =false;
+        this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
+        
+      }
+      else         
+      {            
+        //todo: with user
+        this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+          this.FillMachineDataFromServer(newid);
+          //this.srv_cook.add_fav_machine(mach.MachineID);         
+        }); 
+        
+      }         
+  } );
+}
+
   FillImageMachineType()
   {
       this.imgNameMachine =environment.ImagePath +"no-image.svg";        
@@ -81,16 +131,18 @@ export class MachineItemComponent implements OnInit {
       if(this.machHeader.MachineType =='Machining center') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg";                      
   }
 
-  FillMachineDataFromServer()
+ 
+  FillMachineDataFromServer(MachineID:number)
   {
-     this.eventsSubscription.add(this.srv_machine.getmachineheader(this.MachineID).subscribe((res: any) => {                   
+     this.eventsSubscription.add(this.srv_machine.getmachineheader(MachineID).subscribe((res: any) => {                   
         this.machHeader =JSON.parse(res)[0];                
-        this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
+        this.eventsSubscription.add(this.srv_machine.getmachinedetailed(MachineID).subscribe((res: any) => {
         this.arrMachineSpindle = JSON.parse(res);      
         this.machSpindleMain = this.arrMachineSpindle[0]; 
         this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
         this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
         this.FillImageMachineType();
+        this.MachineName = this.machHeader.MachineName;
         this.isLoading =true;           
       }));   
     }));    

@@ -38,6 +38,8 @@ export class Appdetails990Component implements OnInit {
   }
 
   ngOnInit() {  
+    this.SetIPLMandatory();
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     if(this.srv_StMng.IPL.GetItem('SurfaceQualityRt').value!=null  && this.srv_StMng.IPL.GetItem('SurfaceQualityRt').value!='')    
       {
@@ -74,7 +76,7 @@ export class Appdetails990Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName="";
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
 
   onchangeN()
@@ -150,5 +152,47 @@ export class Appdetails990Component implements OnInit {
     this.srv_StMng.IPL.GetItem('PartShape').value =this.srv_StMng.IPL.GetItem('PartShape').valuedefault;    
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;    
     this.eventsSubject.next();
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory()
+  {   
+    this.strMandatory='';       
+    if( this.srv_StMng.SecApp=='990')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthAxial',"LR:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('CutLengthAxial',"LA:",this.srv_appsetting.UnitslengthDesc);     
+    }
+    if( this.srv_StMng.SecApp=='980')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('CutLengthRadial',"LR:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthRadial',"LA:",this.srv_appsetting.UnitslengthDesc);
+      
+    } 
+    if( this.srv_StMng.SecApp=='970')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('CutLengthAxial',"LA1:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthRadial',"LA2:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthAxial',"LR1:",this.srv_appsetting.UnitslengthDesc);
+      //this.AddTostrMandatoryParam('CutLengthRadial',"LR2:",this.srv_appsetting.UnitslengthDesc);      
+    } 
+    if( this.srv_StMng.SecApp=='960')
+    {
+      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('CutLengthRadial',"DPT:",this.srv_appsetting.UnitslengthDesc);
+      
+    }  
+    if(this.strMandatory.length>0)
+      this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  AddTostrMandatoryParam(name:string,desc:string,units:string)
+  {
+    if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
+    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    
   }
 }
