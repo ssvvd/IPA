@@ -134,6 +134,9 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage')
                 this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
+                if (this.dtPropertiesTable[j].Field == 'kappaLeadAngle')
+                this.dtResultsObjectsHelp[i].kappaLeadAngle = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+
                 if (this.dtPropertiesTable[j].Field == 'DetailsIsExpand'){
                   this.dtResultsObjectsHelp[i].IsExpand = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
                   this.filterRecommended(this.dtResultsObjectsHelp[i]);
@@ -152,6 +155,12 @@ getShowTable(){
                 if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
                 this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
+
+               if (this.dtPropertiesTable[j].Field == 'ItemType'){
+                  this.dtResultsObjectsHelp[i].itemTypeRes = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+                }
+
+
                 if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
                   let catNo:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
                   this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);  
@@ -160,8 +169,8 @@ getShowTable(){
                   let index:number = i
                   this.srv_Results.getitemtype(catNo).subscribe((res: any) => {
                     let typeRes:object[] = JSON.parse(res)
-                    let type:string = typeRes[0]['ItemType']
-                    let family:string= typeRes[0]['Family']
+                    let type:string = typeRes[0]['ItemType'] || ''
+                    let family:string= typeRes[0]['Family'] || ''
                     let catNoLoc:number = this.dtResultsObjectsHelp[index].CatalogNo.indexOf(catNo)
                     this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type); 
                     this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family); 

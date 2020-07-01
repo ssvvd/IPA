@@ -31,9 +31,9 @@
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: 'asc':sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0" >
                        <td>
                         <img src="{{arrResultImgsItem[row.index]}}"
-                        (error) ="changeSource($event, arrResultImgsFamily[row.index])" class="img-grid">
+                        (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
-                       <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow">                 
+                       <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
                            <span  *ngFor="let prty of col.slice().reverse(); let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
                            (dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-') ||
@@ -43,9 +43,9 @@
                               <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
                          </td>
                          <td>
-<!-- (click)="viewInfo(row.index)" -->
+<!--  -->
                            <img src="{{environment.ImgView}}" 
-                           
+                           (click)="viewInfo(row.index)"
                            title="View info" class="icon-grid">
                             
                      </td>

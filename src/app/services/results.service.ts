@@ -88,7 +88,34 @@ export class ResultsService {
 
   public  GetItemParameterValueSpecial(catNo:string,param:string,units:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetItemType/' + catNo + '/'+param + '/'+units).catch((err: HttpErrorResponse) => {      
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetItemParameterValueSpecial/' + catNo + '/'+param + '/'+units).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+
+  public  GetPivotParamValue(catNo:string,param:number,sucApp:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetPivotParamValue/' + catNo + '/'+param + '/'+sucApp).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+
+  public  GetMPowerParams77(material:number,  Units:string,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParams77/' + material + '/' + Units + '/' + KappaLeadAngle + '/' + Flutes + '/' + Feed + '/' + catalogNoList).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+
+  public  GetCuttingForcesDrilling(insertType:string,DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number,edgeGeometry:string)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Drilling/' + insertType + '/' + + DD + '/' + d + '/' + z + '/' + f + '/' + n + '/' + Kc + '/' + Mc + '/' + ɣ + '/' + k + '/' + edgeGeometry).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";
     });

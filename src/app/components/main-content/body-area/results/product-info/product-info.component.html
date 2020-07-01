@@ -1,13 +1,13 @@
 
 
-<div *ngFor="let row of selectedOption?.CatalogNo.slice().reverse(); let PrtNum = index"  >
+<div *ngFor="let row of selectedOption?.CatalogNo.slice().reverse(); let PrtNum = index"  [hidden]="row.trim().length != 7">
     <br>
     <label class="bold font-weight-bold">{{selectedOption.GroupText[selectedOption.GroupText.length - PrtNum - 1]}}:</label>
     <br>
     <br>
     <!-- <iframe [src]="getUrl(environment.eCatItemRedPage + row.trim() + '&SRC=' + SRC)" style="width:71%;height:550px;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe> -->
-    <iframe [src]="getUrl1(row.trim(),PrtNum)" [style.height]="SRC == 'ITA1' ? '400px' : '550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
+    <iframe [src]="getUrl1(row,PrtNum)" [style.height]="SRC == 'ITA1' ? '400px' : '550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe>
     <hr>
 </div>

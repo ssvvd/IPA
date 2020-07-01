@@ -7,11 +7,16 @@
         <div class="col-2"></div>
       </div>
 
+      <div class="">
+            <div class="row">
+<div class="col-xs-6 col-sm-6 col-md-6">
+<mp77 *ngIf = "srv_StMng.SecApp=='77'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp77>
+</div>
 
-
-<mp77 [selectedRes]="selectedOptionMP"></mp77>
-
-
+<div class="col-xs-6 col-sm-6 col-md-6">
+      <img [src]="environment.ImageInputPath + srv_StMng.SecApp + '.png'" class="input-image">   
+</div>
+            </div></div>
 <!-- <ng-container *ngFor="let row of selectedOptionMP; let PrmNum = index; ">
     <div class="row justify-content-start w-50" *ngIf="PrmNum > 2">
         <div class="col-4">{{getPropWithoutUnits(row[0].property.FieldDescription)}}</div>
