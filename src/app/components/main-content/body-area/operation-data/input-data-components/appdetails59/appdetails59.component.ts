@@ -28,7 +28,7 @@ export class Appdetails59Component implements OnInit {
     this.SetIPLMandatory();    
     this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
   }
-  
+      
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }

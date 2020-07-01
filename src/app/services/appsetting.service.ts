@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Language} from 'src/app/models/applications/applications';
+import { User} from 'src/app/models/users/user';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 
 @Injectable({
@@ -13,7 +14,22 @@ export class AppsettingService {
   private mUnitslengthDesc :string='mm'; //todo:  
   private marrLanguages:Language[];
   private mLangName:string='EN';
+  private mUser:User;
+  private mUserID:string;
+  get User():User{   
+    return this.mUser;
+    }
+   set User(u:User) {  
+    this.mUser = u;
+   }
   
+   get UserID():string{   
+    return this.mUserID;
+    }
+   set UserID(u:string) {  
+    this.mUserID = u;
+   }
+
   get LangName():string{   
     return this.mLangName;
     }

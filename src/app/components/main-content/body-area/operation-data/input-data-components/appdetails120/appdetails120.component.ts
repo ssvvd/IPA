@@ -216,7 +216,6 @@ ClearData()
     this.msrv_StMng.IPLMMandatory= this.strMandatory;
 
     this.threadform=this.objthreadform.ThreadFormISO;
-    //this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value = '';
     this.srv_StMng.IPL.GetItem('ThreadForm').value=this.objthreadform.ThreadFormISO;
     this.fillarrpitch();   
     this.fillimagepath(this.objthreadform.ThreadFormISO);
@@ -228,8 +227,7 @@ ClearData()
 
   changepitch()
   {
-    this.srv_StMng.IPL.GetItem('Pitch').value=this.pitch;
-    //this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value = '';
+    this.srv_StMng.IPL.GetItem('Pitch').value=this.pitch;   
     this.arrSize=[];
     let arr:ThreadFormPitch []=this.arrThreadFormPitch.filter(e=> e.Pitch == this.pitch);
     this.size =this.srv_StMng.IPL.GetItem('Size').value;
@@ -323,13 +321,9 @@ ClearData()
                 this.FillDisplayDataBySize();
 
             if(this.srv_StMng.IPL.GetItem('D_Hole').value!=null && this.srv_StMng.IPL.GetItem('D_Hole').value!='')
-                this.FillDisplayDataByDiameter(); 
-                
-            //this.SetIPLMandatory();
-        }  
-               
-  ))
-  
+                this.FillDisplayDataByDiameter();                             
+        }                 
+  ))  
   }
 
   FillDisplayDataBySize()

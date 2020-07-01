@@ -3,9 +3,10 @@ import { environment } from '../../../environments/environment';
 import { Language} from 'src/app/models/applications/applications';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-//import {Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,7 @@ export class HeaderComponent implements OnInit {
 
   // /dictionarygetlanguage
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,
-              private srv_appsetting:AppsettingService, private router:Router) { }
+              private srv_appsetting:AppsettingService, private router:Router,private srv_data:DatalayerService) { }
 
   ngOnInit() {
     if (this.srv_appsetting.Units=='M') 
@@ -47,6 +48,19 @@ export class HeaderComponent implements OnInit {
     }
   } 
   
+  LogIn()
+  {
+    
+    this.srv_data.get_token().subscribe((res: any)=>{
+      window.open('https://sign.ssl.imc-companies.com/signin?t=' +res);
+      this.srv_data.login(res).subscribe ((r:any)=>
+      {
+          
+          alert(r);
+      });
+    });
+  }
+
   GetLanguages()
   {
     if (typeof (this.srv_appsetting.lstLanguages)=== 'undefined')

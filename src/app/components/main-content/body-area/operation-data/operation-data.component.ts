@@ -139,15 +139,15 @@ else
     let listparams: { name: string, value: string }[]=[];
     let str:string='';
     
+    if(this.srv_StMng.SecApp=='119' || this.srv_StMng.SecApp=='120')        
+    {
+      this.srv_StMng.IPL.GetItem('Size').value= this.srv_StMng.IPL.GetItem('Size').value.toString().replace('"', '***');
+    }
+    
     //if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0' || x.value=='') && x.required).length==0)  
     if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' )) && x.required).length==0)    
       {
-      this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {  
-        if(p.value.toString().indexOf('"')>-1)
-        {
-          p.value =p.value.toString().replace('"', '\"');
-          alert(p.value);
-        }              
+      this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {                                       
         str=str + '"' + p.name + '":"' + p.value +'",';
         listparams.push(
         {  

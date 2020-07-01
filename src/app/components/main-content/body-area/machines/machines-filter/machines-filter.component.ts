@@ -1,4 +1,4 @@
-import { Component, OnInit ,Output,EventEmitter} from '@angular/core';
+import { Component, OnInit ,Output,EventEmitter,Input} from '@angular/core';
 import { Options,ChangeContext } from 'ng5-slider';
 import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
@@ -7,7 +7,7 @@ import { CookiesService } from 'src/app/services/cookies.service';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
-import { Subscription } from 'rxjs';
+import { Subscription ,Observable} from 'rxjs';
 
 export class AdaptationType
 {
@@ -27,8 +27,10 @@ export class AdaptationSize
 })
 
 
+  
 export class MachinesFilterComponent implements OnInit {
   
+  @Input() onChangeFavorite: Observable<void>;
   private eventsSubscription: Subscription=new Subscription();
 
   @Output() MachineFilterChanged = new EventEmitter<{filter: MachineFilter}>();
@@ -68,11 +70,15 @@ export class MachinesFilterComponent implements OnInit {
   curAdapType:AdaptationType;
   curAdapSize:AdaptationSize;
   arrMachines: Machineheader[] = [];
+  isMostRecom:string = '1';
+ 
   isLoadingAdSize:boolean=false;
   
+  
   ngOnInit() {
-    this.srv_cook.MachineFavorite.subscribe(fav => this.SetFavorites(fav));
-    this.InitFilter();                    
+    this.srv_cook.MachineFavorite.subscribe(fav => this.ChangeFavorite());
+    this.InitFilter();  
+    this.eventsSubscription.add( this.onChangeFavorite.subscribe(() => this.ChangeFavorite()));                        
     this.eventsSubscription.add(this.serv.getmachineadaptationtype().subscribe((res: any) => {
       this.arrAdapType = JSON.parse(res); 
       this.arrAdapType.unshift( { AdaptationType:''});      
@@ -90,11 +96,11 @@ export class MachinesFilterComponent implements OnInit {
           this.curAdapSize = { AdaptationType:this.machFilter.AdaptationType,AdaptationSize:this.machFilter.AdaptationSize} ;
       }
       this.MachineFilterChanged.emit({ filter: this.machFilter});
-      this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units)
+      this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
       .subscribe((data: any) => {        
         this.arrMachines = JSON.parse(data); 
-        this.SetFavorites(this.srv_cook.get_cookielist("fav_machines"));  
-           
+           this.SetFavorites();  
+        //this.SetFavorites();   
         this.isLoadingAdSize =true;
       }));     
       
@@ -102,14 +108,30 @@ export class MachinesFilterComponent implements OnInit {
   }));    
   }   
   
-  SetFavorites(arr_fav:string[])
-  {     
-    //fav=' ' + fav + ' ';
-    this.arrFavorites=[];
-    if(arr_fav.length>0)                   
-        this.arrMachines.forEach(m=>{if(arr_fav.indexOf( m.MachineID.toString() )>-1) this.arrFavorites.push(m)} );               
+  changeismost()
+  {
+    if(this.isMostRecom=='1')  
+      {this.machFilter.IsMostRecommended =true;}
+    else
+      {this.machFilter.IsMostRecommended =false;}
   }
-
+  SetFavorites()
+  {       
+    this.arrFavorites=[];
+    this.arrMachines.forEach(m=>{if(m.isFavorite) this.arrFavorites.push(m)} );                    
+  } 
+  
+  ChangeFavorite()
+  { 
+    this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
+    .subscribe((data: any) => {        
+      this.arrMachines = JSON.parse(data); 
+      this.arrFavorites=[];
+      this.arrMachines.forEach(m=>{if(m.isFavorite) this.arrFavorites.push(m)} );           
+      this.isLoadingAdSize =true;
+    }));     
+  }
+  
   changeadaptype()
   {        
     if(this.curAdapType.AdaptationType=='')
@@ -156,6 +178,8 @@ export class MachinesFilterComponent implements OnInit {
 
     this.machFilter.AdaptationType ='';
     this.machFilter.AdaptationSize ='';
+
+    this.machFilter.IsMostRecommended=true;
   }
 
   FilterChange(event: ChangeContext ) {          

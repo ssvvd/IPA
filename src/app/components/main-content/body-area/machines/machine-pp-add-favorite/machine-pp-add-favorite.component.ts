@@ -24,7 +24,8 @@ export class MachinePpAddFavoriteComponent implements OnInit {
   }
 
   GetName() {    
-    this.activeModal.close(this.MachineNameNew);
+    if(this.MachineNameNew.replace(/\s/g, "").toUpperCase()!=this.MachineName.replace(/\s/g, "").toUpperCase()) 
+      this.activeModal.close(this.MachineNameNew);
   }
 }
 

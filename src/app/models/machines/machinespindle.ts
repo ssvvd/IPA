@@ -4,8 +4,7 @@ export class Machinespindle {
     public SpindleType:string;
     public SpindleSpeed:number;
     public Power:number;
-    public Torque:number;
-    public MachineType1:string;
+    public Torque:number;   
     public N1:number;
     public T1:number;
     public P1:number;
@@ -26,7 +25,7 @@ export class Machinespindle {
     public ClampingType:string;
     public IntAirBlast:boolean;
     public ExtAirBlast:boolean;
-    public ThruSpindleEmultion:boolean;
+    //public ThruSpindleEmultion:boolean;
     public ExtEmultion:boolean;
     public IntEmultion:boolean;
     public IntMQL:boolean;

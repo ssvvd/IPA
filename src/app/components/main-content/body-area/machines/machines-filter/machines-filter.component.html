@@ -10,6 +10,16 @@
         <div class="ml-auto">
             <button type="button" class="btn btn-reset mb-0 pl-0 ml-0" (click)="ClearFilter()">{{'Reset' | translate}}</button>
         </div>
+    </div> 
+   <div  class="pl-0 pt-3 pb-2">
+        <div class="custom-control custom-radio ">
+            <input type="radio" class="custom-control-input" id="optmost1" name="most" [(ngModel)] ="isMostRecom" value="1"  (change)="changeismost();FilterChange($event)"  >
+            <label class="custom-control-label" for="optmost1">{{'Most recommended' | translate}}</label>
+        </div>                              
+        <div class="custom-control custom-radio ">
+            <input type="radio" class="custom-control-input" id="optmost2" name="most" [(ngModel)] ="isMostRecom" value="0" (change)="changeismost();FilterChange($event)">  
+            <label class="custom-control-label" for="optmost2">{{'View All Machines' | translate}}</label>
+        </div>         
     </div>  
     <div class="row">
         <div [ngClass]="machFilter.IsMachiningCenter?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-0 pt-2 pr-3 pb-2 pb-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   pl-0 pt-2 pr-3 pb-2 pb-2 div-opacity'">
@@ -167,8 +177,8 @@
                 <label class="bold font-weight-bold bg-light">{{'My Machines' | translate}}</label>
             </div>
         </div>
-        <div *ngFor="let m of arrFavorites">  
-            <div class="row pl-2">                                                                                                                                                                                                                                                                                                                                                                          
+        <div class="pl-2" *ngFor="let m of arrFavorites">  
+            <div class="row">                                                                                                                                                                                                                                                                                                                                                                          
                 <a class="mt-2">{{m.MachineName}}</a>                                                                                                                                          
             </div>
         </div> 

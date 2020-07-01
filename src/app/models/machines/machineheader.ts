@@ -15,6 +15,7 @@ export class Machineheader {
     public AdaptationSize:string;
     public DescSelect:string="Select";    
     public isFavorite:boolean = false;
+    public IsMostRecommended:boolean = false;
     constructor( )
         {
             this.DescSelect="Select";

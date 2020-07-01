@@ -7,7 +7,6 @@ import { ResultsComponent } from './components/main-content/body-area/results/re
 import { HomeComponent } from './components/home/home.component';
 import { MachinesListComponent } from './components/main-content/body-area/machines/machines-list/machines-list.component';
 import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
-import { FavoritesComponent } from './components/main-content/body-area/favorites/favorites.component';
 const routes: Routes = [
 	{path:"materials",component:MaterialsComponent},
 	{path:"materials/:lang",component:MaterialsComponent},
@@ -21,8 +20,7 @@ const routes: Routes = [
 		{path:"materials/:lang",component:MaterialsComponent},
 		{path:"machining-operation",component:MachiningOperationComponent},
 		{path:"operation-data",component:OperationDataComponent},
-		{path:"results",component:ResultsComponent}	,	
-		{path:"favorites",component:FavoritesComponent}		
+		{path:"results",component:ResultsComponent}		
 	]}
 	];
 
