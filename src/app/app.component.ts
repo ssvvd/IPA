@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { VisitorsService} from 'src/app/services/visitors.service';
+//import { VisitorsService} from 'src/app/services/visitors.service';
+import { LoginService } from 'src/app/services/login.service';
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { TranslateService } from '@ngx-translate/core';
 import cssVars from 'css-vars-ponyfill';
 
@@ -16,8 +18,9 @@ export class AppComponent implements OnInit {
   title = 'IscarToolAdvisor';
   environment=environment;
   
-  constructor(location: Location, router: Router,private srv_visitors:VisitorsService, private srv_appsetting:AppsettingService,
-              public translate:TranslateService) {
+  constructor(location: Location, router: Router, private srv_appsetting:AppsettingService,
+              public translate:TranslateService,private srv_DataLayer:DatalayerService,
+              private srv_login:LoginService) {
     if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
@@ -30,6 +33,16 @@ export class AppComponent implements OnInit {
 
 ngOnInit()
 {
+  this.srv_login.LogIn();
+ /*  if (localStorage.getItem('token_login')!=null)
+    {
+      this.srv_DataLayer.login(localStorage.getItem('token_login')).subscribe ((r:any)=>
+      {
+        localStorage.setItem('token_login',null);
+        console.log();
+      }); 
+    } */
+
   cssVars({
   onlyLegacy: false,
   watch: true,
