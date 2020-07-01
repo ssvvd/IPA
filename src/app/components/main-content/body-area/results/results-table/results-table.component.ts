@@ -485,22 +485,55 @@ ngOnChanges(changes:SimpleChanges) {
     for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
       switch (this.filterChangedRec.control){
         case 'ST':
-          if (this.dtResultsObjectsHelp[i].DesgS.filter(s => !s.startsWith('MM')).length > 0){
-          if (!this.filterChangedRec.Res)
-              this.dtResultsObjectsHelp[i].isHidden++
-          else
-              this.dtResultsObjectsHelp[i].isHidden--
-         }      
+          if (this.srv_StMng.SecApp == '77')
+          {
+            if (this.dtResultsObjectsHelp[i].itemType.indexOf('S') != -1){
+              if (!this.filterChangedRec.Res)
+                  this.dtResultsObjectsHelp[i].isHidden++
+              else
+                  this.dtResultsObjectsHelp[i].isHidden--
+            }
+          }
+          else{
+            if (this.dtResultsObjectsHelp[i].DesgS.filter(s => !s.startsWith('MM')).length > 0){
+              if (!this.filterChangedRec.Res)
+                  this.dtResultsObjectsHelp[i].isHidden++
+              else
+                  this.dtResultsObjectsHelp[i].isHidden--
+             }  
+          }    
           break;
        case 'SH':
-          if (this.dtResultsObjectsHelp[i].DesgT.filter(s => s.startsWith('MM')).length > 0){
+        if (this.srv_StMng.SecApp == '77')
+        {
+          if (this.dtResultsObjectsHelp[i].itemType.indexOf('T') != -1 && this.dtResultsObjectsHelp[i].NOF >= 2){
             if (!this.filterChangedRec.Res)
                 this.dtResultsObjectsHelp[i].isHidden++
             else
                 this.dtResultsObjectsHelp[i].isHidden--
           }
+        }
+        else{
+          if (this.dtResultsObjectsHelp[i].DesgS.filter(s => s.startsWith('MM')).length > 0){
+            if (!this.filterChangedRec.Res)
+                this.dtResultsObjectsHelp[i].isHidden++
+            else
+                this.dtResultsObjectsHelp[i].isHidden--
+          }}
           break;
         case 'IT':
+          if (this.srv_StMng.SecApp == '77'){
+            if (this.dtResultsObjectsHelp[i].itemType.indexOf('T') != -1 && this.dtResultsObjectsHelp[i].NOF < 2){
+              if (!this.filterChangedRec.Res)
+                  this.dtResultsObjectsHelp[i].isHidden++
+              else
+                  this.dtResultsObjectsHelp[i].isHidden--
+            }
+          }
+          else{
+            this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
+          }
+          break;  
         case 'IH':
           this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
           break;   
