@@ -56,7 +56,8 @@
         </div> 
     </div>
 
-    <div class="row pt-4 " [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_SolidHead').value!='True'">   
+    <div class="row pt-4 " [hidden]="(srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_SolidHead').value!='True')
+    || mainApp == 'IS' || mainApp == 'TG'">   
        <div *ngIf="srv_StMng.SecApp!='770'" class="pr-4 ">   
            <label>Solid</label> 
             <div class="row   pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True'">               
@@ -87,9 +88,10 @@
        </div>
       
    </div>
-    <div class="row" [hidden]="srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_InsertHead').value!='True'"> 
+    <div class="row" [hidden]="(srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_InsertHead').value!='True')
+    || (mainApp == 'IS') || (mainApp == 'TG')"> 
          <div class="pl-0">
-            <label>Indexable Insert</label>  
+            <label>{{mainApp=='DR'?'Indexable':'Indexable Insert' | translate}}</label>  
             <div class="row pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True'">           
                 <div>
                     <div class="custom-control custom-checkbox">
@@ -98,11 +100,14 @@
                         <label class="custom-control-label" for="chkbIsIndTool"></label>
                     </div>
                 </div>        
-                <div class="pr-2">
+                <div class="pr-2" *ngIf="mainApp!='DR'">
                     <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Tools' | translate}}</label>
                 </div>
+                <div class="pr-2" *ngIf="mainApp=='DR'">
+                    <label for="chkbIsIndTool" class="form-check-label text-nowrap">{{'Indexable Insert' | translate}}</label>
+                </div>
             </div>
-            <div class="row" [hidden]="srv_StMng.IPL.GetItem('TD_IT_InsertHead').value!='True'">          
+            <div class="row" [hidden]="srv_StMng.IPL.GetItem('TD_IT_InsertHead').value!='True' || mainApp=='DR'">          
                 <div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input"  id="chkbIsIndHead"  name="chkbIsIndHead" 
@@ -117,6 +122,7 @@
 
         </div>          
     </div>
+
     <div class="pl-0 pt-4 " [hidden]="this.srv_StMng.SecApp != '760' && this.srv_StMng.SecApp != '770' && this.srv_StMng.SecApp != '780' && this.srv_StMng.SecApp != '790'">
         <div class="custom-control custom-radio custom-control-inline">
             <input [disabled]="TypeFeedDisabled" type="radio" class="custom-control-input" id="optHightFeed" name="TypeFeed" [(ngModel)] ="TypeFeed" (change)="change('TypeFeed','HightFeed')"  value="HightFeed">
