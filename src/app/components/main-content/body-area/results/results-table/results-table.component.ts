@@ -491,7 +491,7 @@ customTB(index, song) { return `${index}-${song.id}`; }
 // }
 
 updateGroupText(itemType:string,resultType:string,field:string,catalogNoLoc:number,index:number,catalogNo:string){
-switch(this.srv_StMng.SecApp){
+switch(this.srv_StMng.SecApp.toString()){
     case '760':  case '770': case '780': case '790': case '57': case '119': case '120':
       switch(field){
         case 'HolderDesignation' :
