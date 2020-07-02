@@ -191,11 +191,11 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
             this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type); 
             this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family); 
              switch (type){
-               case 'H':
-                if (this.srv_StMng.SecApp == '57' && this.dtResultsObjectsHelp[index].GroupText[catNoLoc] == 'Tool'){
-                  this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Shank'
-                }
-               break;
+              //  case 'H':
+              //   if (this.srv_StMng.SecApp == '57' && this.dtResultsObjectsHelp[index].GroupText[catNoLoc] == 'Tool'){
+              //     this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Shank'
+              //   }
+              //  break;
                case 'T':
                 this.dtResultsObjectsHelp[index].CatalogNoT.push(catNo);
                 this.dtResultsObjectsHelp[index].DesgT.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
@@ -236,11 +236,13 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
                       this.arrResultImgsFamily.splice(index, 0,url);
                   }
                   
-                  if (this.srv_StMng.SecApp == '57'){
-                    this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Solid Head'
-                  }
+                  // if (this.srv_StMng.SecApp == '57'){
+                  //   this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Solid Head'
+                  // }
                 break;
              } 
+
+             this.updateGroupText(type,this.dtResultsObjectsHelp[index].itemTypeRes,this.dtResultsObjectsHelp[index].desgFieldName[catNoLoc],catNoLoc,index,catNo)
           })
         }
           // if (i == 0){
@@ -266,6 +268,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
         if (this.dtPropertiesTable[j].Field.toLowerCase().includes('designation') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
           this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+          this.dtResultsObjectsHelp[i].desgFieldName.push(this.dtPropertiesTable[j].Field)
         }
         //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
         //     this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
@@ -487,7 +490,138 @@ customTB(index, song) { return `${index}-${song.id}`; }
 //   return item.isHidden;
 // }
 
-
+updateGroupText(itemType:string,resultType:string,field:string,catalogNoLoc:number,index:number,catalogNo:string){
+switch(this.srv_StMng.SecApp){
+    case '760':  case '770': case '780': case '790': case '57': case '119': case '120':
+      switch(field){
+        case 'HolderDesignation' :
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Adaptor'
+          break;
+        case 'HolderDesignationCollet':
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Collet'
+          break;
+        case 'HeaderDesignation':
+          switch(itemType){
+            case 'T':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+            break;
+            case 'H':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Shank'
+            break;
+          }
+          break;
+        case 'DetailsDesignation':
+          switch(itemType){
+            case 'I':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+            break;
+            case 'S':
+              switch(resultType){
+                case 'H':
+                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid Head'
+                break;
+                case 'S':
+                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
+                break;
+              }
+            break;
+          }
+          break;
+      }
+    break
+    case '960':  case '970': case '980': case '990':
+      switch(field){
+        case 'HeaderDesignation' :
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+          break;
+        case 'HeaderDesignation1':
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square Shank'
+          break;
+        case 'DetailsDesignation':
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+          break;
+      }
+    break
+    case '850':  case '860': case '870': case '880': case '890': 
+    switch(field){
+      case 'HeaderDesignation' :
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        break;
+      case 'HeaderDesignation1':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Round shank holder'
+        break;
+      case 'HeaderDesignation2':
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+        break;
+      case 'DetailsDesignation':
+        switch(itemType){
+          case 'S':
+            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
+          break;
+          case 'I':
+            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+          break;
+        }
+        break;
+    }
+    break
+    case '52':  case '1': case '51': case '54': case '19': 
+    switch(field){
+      case 'HeaderDesignation' :
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        break;
+      case 'HeaderDesignation1':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square Shank'
+        break;
+      case 'HeaderDesignation2':
+        this.srv_Results.GetFlatDataField('OperationType',catalogNo,this.srv_StMng.SecApp,this.srv_appsetting.Units).subscribe((res: any) => {
+          let fieldValue:string = JSON.parse(res)
+          switch(fieldValue){
+            case 'BLADE':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Blade'
+              break;
+            case 'ADAPTER':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Adaptor'
+              break;
+          }
+        })
+        break;
+      case 'DetailsDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+        break;
+    }
+    break
+    case '188':  case '53': case '50': 
+    switch(field){
+      case 'HeaderDesignation' :
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        break;
+      case 'HeaderDesignation1':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Round shank holder'
+        break;
+      case 'HeaderDesignation2':
+        this.srv_Results.GetFlatDataField('OperationType',catalogNo,this.srv_StMng.SecApp,this.srv_appsetting.Units).subscribe((res: any) => {
+          let fieldValue:string = JSON.parse(res)
+          switch(fieldValue){
+            case 'BLADE':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Blade'
+              break;
+            case 'ADAPTER':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Adaptor'
+              break;
+            case 'BORING BAR':
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+              break;
+          }
+        })
+        break;
+      case 'DetailsDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+        break;
+    }
+    break
+}
+}
 
 ngOnChanges(changes:SimpleChanges) {
 

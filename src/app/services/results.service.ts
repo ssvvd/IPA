@@ -120,6 +120,16 @@ export class ResultsService {
       return "error";
     });
   }
+
+
+
+  public  GetFlatDataField(field:string, item:string, secApp:string, units:string )
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetFlatDataField/' + field + '/' + item + '/' + secApp + '/' + units ).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
   // public  checkItemImgExists()
   // {        
   //   return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists' ).catch((err: HttpErrorResponse) => {      
