@@ -37,7 +37,9 @@ export class OperationDataComponent implements OnInit {
     this.eventsSubscription.unsubscribe();
   }
 
-  ngOnInit() {   
+  ngOnInit() {  
+    
+
     if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
         {
           this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;

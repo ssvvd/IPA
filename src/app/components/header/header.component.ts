@@ -1,12 +1,12 @@
 import { Component, OnInit,ElementRef } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Language} from 'src/app/models/applications/applications';
+import { LoginService } from 'src/app/services/login.service';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-
+import { NgxSpinnerService } from "ngx-spinner"; 
 
 @Component({
   selector: 'app-header',
@@ -28,10 +28,10 @@ export class HeaderComponent implements OnInit {
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
 
   // /dictionarygetlanguage
-  constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,
-              private srv_appsetting:AppsettingService, private router:Router,private srv_data:DatalayerService) { }
+  constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
+              private srv_appsetting:AppsettingService, private router:Router,private srv_login:LoginService) { }
 
-  ngOnInit() {
+  ngOnInit() {      
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
     else
@@ -49,16 +49,9 @@ export class HeaderComponent implements OnInit {
   } 
   
   LogIn()
-  {
-    
-    /* this.srv_data.get_token().subscribe((res: any)=>{
-      window.open('https://sign.ssl.imc-companies.com/signin?t=' +res);
-      this.srv_data.login(res).subscribe ((r:any)=>
-      {
-          
-          alert(r);
-      });
-    }); */
+  {    
+      this.SpinnerService.show();
+      this.srv_login.GetToken().subscribe(res=>{alert(res);this.SpinnerService.hide();});    
   }
 
   GetLanguages()
