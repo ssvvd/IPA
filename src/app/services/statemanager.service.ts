@@ -5,6 +5,7 @@ import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+//import { User } from 'src/app/models/users/user';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -37,6 +38,8 @@ export class StateManagerService {
 
   private obsReloadMachineTab = new BehaviorSubject<boolean>(false);
   ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
+
+ 
 
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 
@@ -243,5 +246,6 @@ export class StateManagerService {
     this.mopttool_selectedfamily = arr;
    }
 
+ 
 }
  

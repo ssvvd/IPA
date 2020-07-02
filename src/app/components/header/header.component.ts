@@ -26,12 +26,13 @@ export class HeaderComponent implements OnInit {
   
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
-
+  userdes:string='Log In';
   // /dictionarygetlanguage
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
               private srv_appsetting:AppsettingService, private router:Router,private srv_login:LoginService) { }
 
-  ngOnInit() {      
+  ngOnInit() {   
+    this.srv_appsetting.CurrentUserSelected.subscribe(u=>{if(u=='') this.userdes='Log In'; else this.userdes=u});   
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
     else
@@ -51,7 +52,7 @@ export class HeaderComponent implements OnInit {
   LogIn()
   {    
       this.SpinnerService.show();
-      this.srv_login.GetToken().subscribe(res=>{alert(res);this.SpinnerService.hide();});    
+      this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();});    
   }
 
   GetLanguages()
