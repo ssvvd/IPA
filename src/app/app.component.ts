@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-//import { VisitorsService} from 'src/app/services/visitors.service';
 import { LoginService } from 'src/app/services/login.service';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { TranslateService } from '@ngx-translate/core';
 import cssVars from 'css-vars-ponyfill';
+import { User } from './models/users/user';
 
 @Component({
   selector: 'app-root',
@@ -34,15 +34,7 @@ export class AppComponent implements OnInit {
 ngOnInit()
 {
   this.srv_login.LogIn();
- /*  if (localStorage.getItem('token_login')!=null)
-    {
-      this.srv_DataLayer.login(localStorage.getItem('token_login')).subscribe ((r:any)=>
-      {
-        localStorage.setItem('token_login',null);
-        console.log();
-      }); 
-    } */
-
+ 
   cssVars({
   onlyLegacy: false,
   watch: true,
@@ -56,13 +48,20 @@ ngOnInit()
 
   //check with HTTPS:// -TODO:
   this.srv_appsetting.Country ="35";
-
+  
   //users
   //this.srv_cook.set_cookie('user_id',u.UserID); 
   //this.srv_cook.set_cookie('user_fn',u.FirstName); 
   //this.srv_cook.set_cookie('user_ln',u.LastName); 
-  this.srv_appsetting.UserID ="";
+  //this.srv_appsetting.UserID ="";
 }
+
+InitializeUser()
+{
+  let u:User=new User;
+  
+}
+
 }
 
 

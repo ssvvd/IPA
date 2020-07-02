@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Language} from 'src/app/models/applications/applications';
 import { User} from 'src/app/models/users/user';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +17,34 @@ export class AppsettingService {
   private mLangName:string='EN';
   private mUser:User;
   private mUserID:string;
+  
+  private obsUserSelected = new BehaviorSubject<string>('');
+  CurrentUserSelected = this.obsUserSelected.asObservable(); 
+
   get User():User{   
     return this.mUser;
     }
-   set User(u:User) {  
+  set User(u:User) {  
     this.mUser = u;
+    this.obsUserSelected.next(u.FirstName + ' ' + u.LastName);
    }
   
    get UserID():string{   
     return this.mUserID;
     }
    set UserID(u:string) {  
-    this.mUserID = u;
+    this.mUserID = u;    
    }
-
+   
+  /*  private mUser:User
+   get SelectedUser():User {
+    return this.mUser;
+  }
+  set SelectedUser(u:User) {    
+    this.mUser = u;    
+    
+  }
+   */
   get LangName():string{   
     return this.mLangName;
     }
