@@ -13,13 +13,13 @@
       <div class="row justify-content-start w-100">
         <div class="col-4">{{'Hole tollerance max' | translate }}</div>
         <div class="col-3">MaxTol</div>
-        <div class="col-3 grayDiv text-center">+{{MaxTol}}</div>
+        <div class="col-3 grayDiv text-center"><label [hidden]="MaxTol == 0">+</label>{{MaxTol}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100"> 
         <div class="col-4">{{'Hole tollerance min' | translate }}</div>
         <div class="col-3">MinTol</div>
-        <div class="col-3 grayDiv text-center">-{{MinTol}}</div>
+        <div class="col-3 grayDiv text-center"><label [hidden]="MinTol == 0">-</label>{{MinTol}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
@@ -36,7 +36,7 @@
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-4">{{'Cutting speed' | translate }}</div>
-        <div class="col-3">V<sub>c</sub></div>
+        <div class="col-3">v<sub>c</sub></div>
         <div class="col-3 grayDiv text-center">{{Vc}}</div>
         <div class="col-2">m/min</div>
       </div>
@@ -83,7 +83,7 @@
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-4">{{'Feed speed' | translate }}</div>
-        <div class="col-3">V<sub>f</sub></div>
+        <div class="col-3">v<sub>f</sub></div>
         <div class="col-3 grayDiv text-center">{{Vf}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
       </div>
@@ -140,7 +140,7 @@
         <div class="col-4">{{'Tool life time' | translate }}</div>
         <div class="col-3">TLT</div>
         <div class="col-3 grayDiv text-center">{{TLT}}</div>
-        <div class="col-2">hh:mm</div>
+        <div class="col-2">mm:ss</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="resType=='H'">
         <div class="col-4">{{'Holes per drilling head' | translate }}</div>
@@ -254,12 +254,12 @@
         <div class="col-4">{{'Machine time per batch' | translate }}</div>
         <div class="col-3">MTB</div>
         <div class="col-3 grayDiv text-center">{{MTB}}</div>
-        <div class="col-2">hh:mm</div>
+        <div class="col-2">mm:ss</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-4">{{'Total cost' | translate }}</div>
         <div class="col-3">TCB</div>
-        <div class="col-3 grayDiv text-center">{{MTB}}</div>
+        <div class="col-3 grayDiv text-center">{{TCB}}</div>
         <div class="col-2">€/batch</div>
       </div>
     </ng-container>
