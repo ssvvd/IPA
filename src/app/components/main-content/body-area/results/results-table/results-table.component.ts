@@ -620,6 +620,47 @@ switch(this.srv_StMng.SecApp.toString()){
         break;
     }
     break
+    case '77': 
+    switch(field){
+      case 'HolderDesignation' :
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        break;
+      case 'HolderDesignationCollet':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Collet'
+        break;
+      case 'HeaderDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+        break;
+      case 'DetailsDesignation':
+        if (this.dtResultsObjectsHelp[index].itemType.indexOf('S') != -1){
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
+        }
+        else{
+          if (this.dtResultsObjectsHelp[index].NOF >= 2) 
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Head'
+          else
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'External Insert'
+        }
+        
+        
+        break;
+      case 'DetailsIntDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Internal insert'
+        break;
+      case 'EccenterDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Eccenter'
+        break;
+      case 'CartridgeIntDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Cartridge Int'
+        break;
+      case 'CartridgeExtDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Cartridge Ext'
+        break;
+      case 'ShimPartDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Shim Part'
+        break;
+    }
+    break
 }
 }
 
