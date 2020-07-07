@@ -753,16 +753,19 @@ ngOnChanges(changes:SimpleChanges) {
             switch (this.filterChangedRec.Res){
               case 'FilterRec':
                 this.filterRecommended(this.dtResultsObjectsHelp[i]);
+                this.sortProp = 'index';
                   // if (this.dtResultsObjectsHelp[i].IsExpand == "False")
                   // this.dtResultsObjectsHelp[i].isHidden++
                 break;
               case 'FilteAllRes':
                   if (this.dtResultsObjectsHelp[i].IsExpand == "False" || this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden--
+                  this.sortProp = 'index';
                 break;
               case 'FilterSeller':
                 if (this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden++
+                  this.sortProp = 'AverageUse';
                 break;
             }
             break;   
