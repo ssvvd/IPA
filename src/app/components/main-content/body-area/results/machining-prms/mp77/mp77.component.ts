@@ -98,51 +98,56 @@ resType:string = ''
     //output
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
       var pr:clsPropertyValue = this.selectedRes[i][0];
+      var value:string = '0'
+      this.selectedRes[i].forEach(function (v) {
+        if (v.value != '')
+          value = v.value
+      }); 
       if (pr && pr.property){
       switch (pr.property.Field){
         case 'CuttingSpeed':{
-          this.Vc = pr.value
+          this.Vc = value
           break;
         }
         case 'Feed':{
-          this.fr = pr.value
+          this.fr = value
           break;
         }
         case 'Tool_D1':{
-          this.DC = pr.value
+          this.DC = value
           break;
         }
         case 'MetalRemovalRate':{
-          this.MRR = pr.value
+          this.MRR = value
           break;
         }
         case 'PowerConsumption':{
-          this.P = pr.value
+          this.P = value
           break;
         }
         case 'MaxTorque':{
-          this.T= pr.value
+          this.T= value
           break;
         }
         case 'FeedTable':{
-          this.Vf = +pr.value
+          this.Vf = +value
           break;
         }
         case 'RPM':{
-          this.n = pr.value
+          this.n = value
           break;
         }
         case 'DetailsListPrice':{
-          this.H_DHP = +pr.value
-          this.I_IP = +pr.value
+          this.H_DHP = +value
+          this.I_IP = +value
           break;
         }
         case 'HeaderListPrice':{
-          this.TP = +pr.value
+          this.TP = +value
           break;
         }
         case 'Flutes':{
-          this.Flutes = +pr.value
+          this.Flutes = +value
           break;
         }
       }
@@ -158,42 +163,42 @@ if (pr.value.trim().length == 7){
         this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
           let prmLta:string = JSON.parse(res); 
           if (prmLta != '9999'){
-            this.O = Math.round(this.O + +prmLta * 100)/100
+            this.O = Math.round((this.O + +prmLta) * 100)/100
           }
         })
   
         this.srv_Results.GetRatioLD(pr.value).subscribe((res: any) => {
           let prmRatioLD:string = JSON.parse(res); 
           if (prmRatioLD != '0'){
-            this.AW = Math.round(this.AW + +prmRatioLD * 100)/100
+            this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
           }
         })
   
         this.srv_Results.GetPivotParamValue(pr.value.trim(),307,this.srv_StMng.SecApp).subscribe((res: any) => {
           let prmMin:string = JSON.parse(res); 
           if (prmMin != '0'){
-            this.MinTol = Math.round(this.MinTol + +prmMin * 100)/100
+            this.MinTol = Math.round((this.MinTol + +prmMin) * 100)/100
           }
         })
   
         this.srv_Results.GetPivotParamValue(pr.value.trim(),594,this.srv_StMng.SecApp).subscribe((res: any) => {
           let x:string = JSON.parse(res); 
           if (x != '0'){
-            this.I_CICT = Math.round(this.I_CICT + +x * 100)/100
+            this.I_CICT = Math.round((this.I_CICT + +x) * 100)/100
           }
         })
 
         this.srv_Results.GetPivotParamValue(pr.value.trim(),762,this.srv_StMng.SecApp).subscribe((res: any) => {
           let y:string = JSON.parse(res); 
           if (y != '0'){
-            this.I_CEDC = Math.round(this.I_CEDC + +y * 100)/100
+            this.I_CEDC = Math.round((this.I_CEDC + +y) * 100)/100
           }
         })
 
         this.srv_Results.GetPivotParamValue(pr.value.trim(),308,this.srv_StMng.SecApp).subscribe((res: any) => {
           let prMax:string = JSON.parse(res); 
           if (prMax != '0'){
-            this.MaxTol = Math.round(this.MaxTol + +prMax * 100)/100
+            this.MaxTol = Math.round((this.MaxTol + +prMax) * 100)/100
           }
         })
       }
@@ -339,7 +344,7 @@ if (pr.value.trim().length == 7){
 //GetCuttingForcesDrilling(DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number)
               this.srv_Results.GetCuttingForcesDrilling(insertType,_dd,_d,_z,_f,_n,_Kc,_Mc,_ɣ,_k,edgeGeometry).subscribe((res: any) => {
                 var result = res as MPResult;
-                this.Fax = result.ResultRowList[0].Value
+                this.Fax = Math.round(result.ResultRowList[0].Value * 100)/100
               })
 
 
