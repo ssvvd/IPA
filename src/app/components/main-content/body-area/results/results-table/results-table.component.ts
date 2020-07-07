@@ -853,6 +853,19 @@ viewInfo(index:number){
 
 }
 
+
+getPropWithoutUnits(pr:string){
+  let indexOfU:number = pr.lastIndexOf('(')
+  if (indexOfU != -1){
+    return pr.substring(0,indexOfU)
+  }
+  else{
+    return pr;
+  }
+
+}
+
+
 }
 
 
