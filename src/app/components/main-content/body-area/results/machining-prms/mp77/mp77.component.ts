@@ -47,13 +47,13 @@ B:number
 HPP:number
 HI_I:number
 TLL:number
-TLT:number
+TLT:string
 H_HDH:number
 S_HPS:number
 I_HPC:number
 I_CICT:number
 I_CEDC:number
-CTH:number
+CTH:string
 H_DHP:number
 S_NSB:number
 H_HPB:number
@@ -66,7 +66,7 @@ TTC:number
 H_CTB:number
 I_TPT:number
 MCB:number
-MTB:number
+MTB:string
 TCB:number
 Flutes:number
  catalogNo:string[]=[]
@@ -98,51 +98,56 @@ resType:string = ''
     //output
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
       var pr:clsPropertyValue = this.selectedRes[i][0];
+      var value:string = '0'
+      this.selectedRes[i].forEach(function (v) {
+        if (v.value != '')
+          value = v.value
+      }); 
       if (pr && pr.property){
       switch (pr.property.Field){
         case 'CuttingSpeed':{
-          this.Vc = pr.value
+          this.Vc = value
           break;
         }
         case 'Feed':{
-          this.fr = pr.value
+          this.fr = value
           break;
         }
         case 'Tool_D1':{
-          this.DC = pr.value
+          this.DC = value
           break;
         }
         case 'MetalRemovalRate':{
-          this.MRR = pr.value
+          this.MRR = value
           break;
         }
         case 'PowerConsumption':{
-          this.P = pr.value
+          this.P = value
           break;
         }
         case 'MaxTorque':{
-          this.T= pr.value
+          this.T= value
           break;
         }
         case 'FeedTable':{
-          this.Vf = +pr.value
+          this.Vf = +value
           break;
         }
         case 'RPM':{
-          this.n = pr.value
+          this.n = value
           break;
         }
         case 'DetailsListPrice':{
-          this.H_DHP = +pr.value
-          this.I_IP = +pr.value
+          this.H_DHP = +value
+          this.I_IP = +value
           break;
         }
         case 'HeaderListPrice':{
-          this.TP = +pr.value
+          this.TP = +value
           break;
         }
         case 'Flutes':{
-          this.Flutes = +pr.value
+          this.Flutes = +value
           break;
         }
       }
@@ -158,42 +163,42 @@ if (pr.value.trim().length == 7){
         this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
           let prmLta:string = JSON.parse(res); 
           if (prmLta != '9999'){
-            this.O = Math.round(this.O + +prmLta * 100)/100
+            this.O = Math.round((this.O + +prmLta) * 100)/100
           }
         })
   
         this.srv_Results.GetRatioLD(pr.value).subscribe((res: any) => {
           let prmRatioLD:string = JSON.parse(res); 
           if (prmRatioLD != '0'){
-            this.AW = Math.round(this.AW + +prmRatioLD * 100)/100
+            this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
           }
         })
   
         this.srv_Results.GetPivotParamValue(pr.value.trim(),307,this.srv_StMng.SecApp).subscribe((res: any) => {
           let prmMin:string = JSON.parse(res); 
           if (prmMin != '0'){
-            this.MinTol = Math.round(this.MinTol + +prmMin * 100)/100
+            this.MinTol = Math.round((this.MinTol + +prmMin) * 100)/100
           }
         })
   
         this.srv_Results.GetPivotParamValue(pr.value.trim(),594,this.srv_StMng.SecApp).subscribe((res: any) => {
           let x:string = JSON.parse(res); 
           if (x != '0'){
-            this.I_CICT = Math.round(this.I_CICT + +x * 100)/100
+            this.I_CICT = Math.round((this.I_CICT + +x) * 100)/100
           }
         })
 
         this.srv_Results.GetPivotParamValue(pr.value.trim(),762,this.srv_StMng.SecApp).subscribe((res: any) => {
           let y:string = JSON.parse(res); 
           if (y != '0'){
-            this.I_CEDC = Math.round(this.I_CEDC + +y * 100)/100
+            this.I_CEDC = Math.round((this.I_CEDC + +y) * 100)/100
           }
         })
 
         this.srv_Results.GetPivotParamValue(pr.value.trim(),308,this.srv_StMng.SecApp).subscribe((res: any) => {
           let prMax:string = JSON.parse(res); 
           if (prMax != '0'){
-            this.MaxTol = Math.round(this.MaxTol + +prMax * 100)/100
+            this.MaxTol = Math.round((this.MaxTol + +prMax) * 100)/100
           }
         })
       }
@@ -221,11 +226,11 @@ if (pr.value.trim().length == 7){
     this.HPP = 1;
     this.HI_I = 30;
     this.TLL = 50;
-    this.TLT = 50;
+    this.TLT = '50:00';
     this.H_HDH = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
-    this.CTH = Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0
+    this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
     this.S_NSB=Math.round(this.B * this.HPP / this.S_HPS * 100)/100 || 0
     this.H_HPB = Math.round((this.B * this.HPP / this.H_HDH) * 100)/100 || 0
     this.I_NIB=Math.round(this.B * this.HPP * this.I_CICT / (this.I_HPC * this.I_CEDC) * 100)/100 || 0
@@ -241,9 +246,9 @@ if (pr.value.trim().length == 7){
     this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
 
     this.H_CTB = this.TTC+this.H_DHC
-    this.MTB = Math.round((this.B * this.HPP * this.CTH/ 3600)  * 100)/100 
+    this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
     this.I_TPT=this.TTC * this.I_TIC
-    this.MCB = Math.round(this.MTB * this.MCH * 100)/100
+    this.MCB = Math.round(+this.MTB * this.MCH * 100)/100
     
     //change
     if (this.resType == "H")
@@ -255,7 +260,8 @@ if (pr.value.trim().length == 7){
 
 
     
-
+    this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
+    this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
     
     
 
@@ -338,7 +344,7 @@ if (pr.value.trim().length == 7){
 //GetCuttingForcesDrilling(DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number)
               this.srv_Results.GetCuttingForcesDrilling(insertType,_dd,_d,_z,_f,_n,_Kc,_Mc,_ɣ,_k,edgeGeometry).subscribe((res: any) => {
                 var result = res as MPResult;
-                this.Fax = result.ResultRowList[0].Value
+                this.Fax = Math.round(result.ResultRowList[0].Value * 100)/100
               })
 
 
@@ -371,9 +377,9 @@ if (pr.value.trim().length == 7){
   this.HPP=0
   this.HI_I=0
   this.TLL=0
-  this.TLT=0
+  this.TLT=''
   this.H_HDH=0
-  this.CTH=0
+  this.CTH=''
   this.H_DHP=0
   this.H_HPB=0
   this.TP=0
@@ -381,7 +387,7 @@ if (pr.value.trim().length == 7){
   this.TTC=0
   this.H_CTB=0
   this.MCB=0
-  this.MTB=0
+  this.MTB=''
   this.TCB=0
   this.Flutes=0
   this.catalogNo=[]

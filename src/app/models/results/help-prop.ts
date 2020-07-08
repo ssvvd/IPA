@@ -42,6 +42,7 @@ export class clsHelpProp {
     itemType:string[]=[];
     itemTypeRes:string;
     GroupText:string[]=[];
+    desgFieldName:string[]=[];
     private _isHidden:number;
 
         constructor(private srv_Results:ResultsService, ind:number){

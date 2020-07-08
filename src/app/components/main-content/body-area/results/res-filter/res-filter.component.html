@@ -20,14 +20,14 @@
     <hr> -->
     <div class="row">
         <div class="pr-4 ">   
-            <label class="font-weight-bold">Filter By:</label> 
-            <div class="custom-control custom-radio ">
-                <input  type="radio" class="custom-control-input" id="optFilteRes" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilteAllRes')" value="FilteAllRes">
-                <label class="custom-control-label" for="optFilteRes">View All Results</label>
-            </div> 
+            <!-- <label class="font-weight-bold">Filter By:</label>  -->
             <div class="custom-control custom-radio ">
                 <input type="radio" class="custom-control-input" id="optFilterRec" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterRec')" value="FilterRec">
                 <label class="custom-control-label" for="optFilterRec">Most Recommended</label>
+            </div> 
+            <div class="custom-control custom-radio ">
+                <input  type="radio" class="custom-control-input" id="optFilteRes" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilteAllRes')" value="FilteAllRes">
+                <label class="custom-control-label" for="optFilteRes">View All Results</label>
             </div> 
             <div class="custom-control custom-radio ">
                 <input  type="radio" class="custom-control-input" id="optFilterSeller" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterSeller')" value="FilterSeller">

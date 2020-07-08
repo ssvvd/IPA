@@ -9,7 +9,7 @@
                     <tr id="dtOptions">
                      <th><label></label></th>  
                      <th *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
-                         <label title="{{hd.FieldDescription | translate}}" [innerHTML]="hd.FieldDescriptionSmall | translate"></label>
+                         <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate"></label>
                         </th>
                         <th></th>
                         <th></th>
@@ -36,7 +36,7 @@
                        <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
                            <span  *ngFor="let prty of col.slice().reverse(); let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
-                           (dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-') ||
+                           ((dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)||
                            (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && prty.value == '' ))
                            ? 'd-none' : 'd-block'">
                             <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
