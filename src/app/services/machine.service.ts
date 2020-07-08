@@ -12,8 +12,10 @@ export class MachineService {
   {}
 
   public  getmachines(units:string,userid:string)
-  {            
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units + '/' + userid);
+  {       
+    if(userid!='')  userid='/' + userid;
+     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units + userid);
   }
   public  getmachinedetailed(id:number)
   {        

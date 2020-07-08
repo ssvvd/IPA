@@ -41,10 +41,12 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   eventsChangeFavorite: Subject<void> = new Subject<void>();
 
   constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
-          private srv_appsetting:AppsettingService,private srv_cook:CookiesService,private modalService: NgbModal) {   
+          private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
+          private modalService: NgbModal) {   
   }
 
   ngOnInit() {  
+ 
     this.dtOptions = {
       pagingType: 'full_numbers',
       "searching": false,
@@ -84,9 +86,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   Initializemachinelist(withdestroy:boolean)
   {            
     this.allSubs$ = this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
-      .subscribe((data: any) => {        
-        console.log(data);
-     
+      .subscribe((data: any) => {               
         this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
                 
@@ -96,11 +96,23 @@ export class MachinesListComponent implements OnInit, OnDestroy {
           this.UpdateListBySelectedMachineValues(this.listmachines);
           this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
         }  
-       /*  if(withdestroy)
+        this.isLoaded =true;
+        if (this.isDtInitialized) {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.destroy();
             this.dtTrigger.next();
-          }); */                                           
+          });
+        } else {
+          this.isDtInitialized = true
+          this.dtTrigger.next();
+        }  
+        
+
+       /* if(withdestroy)
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.dtTrigger.next();
+          });   */                                      
       });  
        
   }
@@ -116,27 +128,6 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       }
       return 0;
   }
-
-/*   ReloadMe()
-  {
-      //alert('ReloadMe');
-      this.allSubs$ = this.srv_machine.getmachines(this.srv_appsetting.Units)
-      .subscribe((data: any) => {
-
-        this.listmachines = JSON.parse(data);          
-        this.listmachines_sorted = JSON.parse(data);
-
-        if(this.srv_statemanage.SelectedMachine!=null)
-        {
-          this.UpdateListBySelectedMachineValues(this.listmachines);
-          this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
-        }          
-        this.myMachineSettings();       
-        //this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID); 
-        this.isLoaded =true;
-        this.dtTrigger.next();
-      });      
-  } */
 
   UpdateListBySelectedMachineValues(list:Machineheader[])
   {
@@ -170,26 +161,25 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.defaultmachine =+this.srv_cook.get_cookie("def_mach");    
 
     if (this.srv_statemanage.SelectedMachine == null) {  
-      let m_id:string;
-      //if(this.srv_cook.get_cookie("sel_mach")=='')     
-          if(this.srv_cook.get_cookie("def_mach")=='')
-            m_id= '53' ; 
-          else        
-            m_id= this.srv_cook.get_cookie("def_mach");                          
-      //else
-         // m_id=this.srv_cook.get_cookie("sel_mach");
-      
+      let m_id:string;      
+      if(this.srv_cook.get_cookie("def_mach")=='')
+        m_id= '53' ; 
+      else        
+        m_id= this.srv_cook.get_cookie("def_mach");                                    
       this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID.toString() == m_id);           
     } 
-    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);   
-    this.BuildMachinesUserByCookies();
+    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);       
     this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr(a,b));
     this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_arr(a,b));
+
+    //this.isDtInitialized = true
+    //this.dtTrigger.next();    
+
     
     
-    this.isLoaded =true;
-    //this.dtTrigger.next();
-    //this.SortTableData();
+      //
+      
+     
   }
   
   ngOnDestroy() {
@@ -197,11 +187,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   }
 
   OnFavoriteMachine(mach: Machineheader)
-  {    
-    //this.srv_cook.delete_cookie('fav_machine_user');
-    //this.srv_cook.delete_cookie('fav_machines');
-    //this.srv_cook.delete_all();
-    //return;
+  {        
     const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
     modalRef.componentInstance.MachineName = mach.MachineName;
     
@@ -218,7 +204,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       }
       else         
       {            
-        //todo: with user
+        //with user
         this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
         this.Initializemachinelist(true);
         this.eventsChangeFavorite.next();
@@ -229,14 +215,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   } );
 } 
 
-BuildMachineUser(id:number,id_new:number,name_new:string) 
-{
-  /* let arr:string[] = this.srv_cook.get_cookielist("fav_machine_user");  
-  for (let m of arr) 
-  { */
-    /* let id:string=m.split('~')[0];
-    let id_new:string=m.split('~')[1];
-    let name_new:string=m.split('~')[2]; */
+/* BuildMachineUser(id:number,id_new:number,name_new:string) 
+{  
     let m_old:Machineheader;
     let m_new:Machineheader;
     m_old=this.listmachines_sorted.find(a=> a.MachineID==id);
@@ -250,35 +230,9 @@ BuildMachineUser(id:number,id_new:number,name_new:string)
       this.listmachines.push(m_new);  
       this.listmachines_sorted.push(m_new); 
     }
-  }  
+  }  */ 
 
-BuildMachinesUserByCookies() 
-{
-  let arr:string[] = this.srv_cook.get_cookielist('fav_machine_user');  
-  for (let m of arr) 
-  {
-    let id:string=m.split('~')[0];
-    let id_new:string=m.split('~')[1];
-    let name_new:string=m.split('~')[2];
-    this.BuildMachineUser(+id,+id_new,name_new);
-    /* let m_old:Machineheader;
-    let m_new:Machineheader;
-    m_old=this.listmachines_sorted.find(a=> a.MachineID.toString()==id);
-    if(typeof (m_old) !== 'undefined')
-    {
-      m_new=Object.assign({}, m_old);
-      m_new.MachineIDBase = +id;
-      m_new.MachineID = +id_new;
-      m_new.MachineName = name_new;
-      m_new.isFavorite = true;
-      this.listmachines.push(m_new);  
-      this.listmachines_sorted.push(m_new); 
-    } */
-  }  
-}
-
-UpdateStateSelectedMachine(MachineID: number) {       
-    //let arr_fav:string[]=this.srv_cook.get_cookielist('fav_machines');
+UpdateStateSelectedMachine(MachineID: number) {        
     this.listmachines.forEach((m) => {
       m.DescSelect = "Select";
       if (MachineID == m.MachineID)
@@ -289,28 +243,14 @@ UpdateStateSelectedMachine(MachineID: number) {
       if (m.isFavorite)
         m.isFavorite = true;
       else
-        m.isFavorite = false;  
-
-      //if( arr_fav.indexOf( m.MachineID.toString() )==-1)      
-      //  m.isFavorite =false;                      
-      //else      
-      //  m.isFavorite =true;             
+        m.isFavorite = false;                
     });
-       this.listmachines_sorted.forEach((m) => {
+      this.listmachines_sorted.forEach((m) => {
       m.DescSelect = "Select";
       if (MachineID == m.MachineID)
         m.IsSelected = true;
       else
-        m.IsSelected = false;  
-        
-     /*  if( arr_fav.indexOf( m.MachineID.toString() )==-1)      
-        m.isFavorite =false;                      
-      else      
-        m.isFavorite =true; */
-      /* if( m.MachineID>500)      
-        m.isFavorite =true;                      
-      else      
-        m.isFavorite =false;  */            
+        m.IsSelected = false;                      
     }); 
   }
 
@@ -321,11 +261,9 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
   }
 
-  onMachineFilterChanged($event) { 
-    
+  onMachineFilterChanged($event) {     
     this.isLoaded=true;
-    this.MachineFilter = $event.filter; 
-           
+    this.MachineFilter = $event.filter;            
     this.ApplyFilter($event.filter);      
     if (this.srv_statemanage.SelectedMachine == null){
       this.UpdateStateSelectedMachine(-1);
@@ -350,8 +288,7 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.isLoaded=true;
     this.listmachines =  this.listmachines_sorted;
     this.countrow =this.listmachines.length.toString();
-    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);
-    this.SortTableData();
+    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);    
   }
 
   ApplyFilter(filter: MachineFilter) {        
@@ -380,22 +317,6 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.srv_statemanage.SelectMachineFilter = filter;
     this.countrow =this.listmachines.length.toString(); 
     
-    this.SortTableData();
-    //this.dtTrigger.next();
-  }
-
-  SortTableData()
-  {
-    //TODO: error - remove the scroll and icons of sorting !!!!!  
-   /*  this.isLoaded=false;
-    let arr:Machineheader[];
-    //arr=Object.assign({}, this.listmachines);
-    arr = JSON.parse(JSON.stringify(this.listmachines));
-    arr.sort((a,b)=> {if(a.IsSelected && !b.IsSelected) return -1; else return 0;});
-    //this.listmachines=Object.assign({}, arr);
-    this.listmachines = JSON.parse(JSON.stringify(arr));
-    //this.listmachines=Object.assign({},this.listmachines.sort((a,b)=> {if(a.IsSelected && !b.IsSelected) return -1; else return 0;}));      
-    this.isLoaded=true;  */
   }
 
 }

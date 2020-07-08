@@ -2,7 +2,7 @@ import { Component, OnInit ,Input,OnChanges, SimpleChanges} from '@angular/core'
 import { MachineService } from 'src/app/services/machine.service' ;
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Subscription } from 'rxjs';
+import { Subscription ,Subject} from 'rxjs';
 
 export class AdaptationType
 {
@@ -23,6 +23,9 @@ export class AdaptationSize
 
 export class MachineItemSpindleComponent implements OnInit 
 {  
+  eventsSubject: Subject<void> = new Subject<void>();
+  private eventsSubscription: Subscription=new Subscription();
+
   @Input() spindle:Machinespindle;   
   @Input() MachineType:string;
    
@@ -36,7 +39,6 @@ export class MachineItemSpindleComponent implements OnInit
   isLoadingAdSize:boolean=false;
   
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
-  private eventsSubscription: Subscription=new Subscription();
 
   constructor(private serv: MachineService,private srv_appsetting:AppsettingService) {}
 
@@ -93,14 +95,23 @@ export class MachineItemSpindleComponent implements OnInit
   }
 
   onPowerChanged($event)
-  {    
-    //alert($event.value) ;
-    this.spindle.Power =$event.value;
+  {       
+    this.spindle.Power =$event.value; 
+    //this.eventsSubject.next();
   }
-
+  onSpindleChanged($event)
+  {
+    this.eventsSubject.next();
+  }
   onTorqueChanged($event)
   {    
     this.spindle.Torque =$event.value;
+  }
+  
+  onPTChanged($event)
+  {    
+    this.spindle.Torque =$event.T1;
+    this.spindle.Power =$event.P2;
   }
 
  /*  ngOnChanges(changes: SimpleChanges) 

@@ -151,10 +151,19 @@ select{
   font-family: var(--family-font); 
   font-size:14px; 
   border-radius: 0!important; 
-  //  font-size: 0.9rem!important; 
-  // -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px var(--border-color-gray)!important;
-  //         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 3px var(--border-color-gray) !important;  
+  border-color: #CED4DA!important; 
+  outline-color: #CED4DA!important; 
+  background-color:  #F1F1F1!important;   
   box-shadow: none;
+}
+
+select :focus {
+  font-family: var(--family-font); 
+  font-size:14px; 
+  border-radius: 0!important; 
+  outline-color: #CED4DA!important; 
+  background-color:  #F1F1F1!important;   
+  box-shadow: none;  
 }
 
 .custom-checkbox .custom-control-input:checked~.custom-control-label::before {

@@ -115,6 +115,12 @@ else
       this.srv_StMng.IPL.GetItem('PW_BY').value = ms.P2 +"";
       this.srv_StMng.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
 
+      if(ms.FaceContact + ""=='true')
+        this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "1";
+      else
+        this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "0";
+      
+
            //todo: temp for check results
       /* if(this.srv_StMng.MainAppSelected.MainApp=='IS' || this.srv_StMng.MainAppSelected.MainApp=='TG')
       {
