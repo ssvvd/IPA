@@ -161,6 +161,9 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Brand Name')
         this.dtResultsObjectsHelp[i].BrandName.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
+        if (this.dtPropertiesTable[j].Field.toLowerCase().includes('info'))
+        this.dtResultsObjectsHelp[i].info.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Family'){
           if (this.promotionFamilies.indexOf(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]) > -1){
             this.dtResultsObjectsHelp[i].Promotion = true;
@@ -202,6 +205,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
                 var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
                 this.arrResultImgsItem.splice(index, 0,url);
+                this.dtResultsObjectsHelp[index].itemImg = url
 
                 let toolFamily = family.toString().trim()
                 let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
@@ -210,6 +214,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
                   var url:string = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
                   this.arrResultImgsFamily.splice(index, 0,url);
+                  this.dtResultsObjectsHelp[index].familyImg = url
 
                 break;
                case 'I': 
@@ -227,6 +232,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
                   if (this.arrResultImgsItem.length < index + 1){
                     var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
                     this.arrResultImgsItem.splice(index, 0,url);
+                    this.dtResultsObjectsHelp[index].itemImg = url
 
                     let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
                     if (curFamilyPic)
@@ -234,6 +240,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
                       var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
                       this.arrResultImgsFamily.splice(index, 0,url);
+                      this.dtResultsObjectsHelp[index].familyImg = url
                   }
                   
                   // if (this.srv_StMng.SecApp == '57'){

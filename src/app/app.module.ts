@@ -75,6 +75,7 @@ import { Appdetails1Component } from './components/main-content/body-area/operat
 import { Appdetails51Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails51/appdetails51.component';
 import { Appdetails54Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails54/appdetails54.component';
 import { MachinePpAddFavoriteComponent } from './components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
+import { InnerTabsTableComponent } from './components/main-content/body-area/results/inner-tabs-table/inner-tabs-table.component';
 
 @NgModule({
   declarations: [   
@@ -133,7 +134,8 @@ import { MachinePpAddFavoriteComponent } from './components/main-content/body-ar
     Appdetails51Component,
     Appdetails54Component,  
     MachinePpAddFavoriteComponent,
-    Mp77Component
+    Mp77Component,
+    InnerTabsTableComponent
   ],
   imports: [
     FormsModule,

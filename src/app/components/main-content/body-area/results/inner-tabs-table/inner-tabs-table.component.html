@@ -1,0 +1,28 @@
+<ng-container >
+
+        <div class="row justify-content-start w-100">
+          <div class="col-4">
+              <img src="{{selectedOption.itemImg}}"
+            (error) ="changeSource($event, selectedOption.familyImg)" class="img-grid"></div>
+          <div class="col-3">
+            <div class="bold font-weight-bold row justify-content-start w-100">{{'Designation' | translate}}</div>
+            <div *ngFor="let row of selectedOption.Designation; ; let i = index;">{{selectedOption.GroupText[i]}}:{{ row[i]}}{{ selectedOption.Grade[i]}}</div>
+          </div>
+          <div class="col-3 ">
+            <div class="bold font-weight-bold row justify-content-start w-100">{{'Catalog No.' | translate}}</div>
+
+            <div *ngFor="let row of selectedOption.CatalogNo; ; let i = index;">{{row[i]}}</div>
+
+          </div>
+          <div class="col-2">
+            <div class="bold font-weight-bold row justify-content-start w-100">{{'Comments' | translate}}</div>
+
+            <div *ngFor="let row of selectedOption.info; ; let i = index;">{{row[i]}}</div>
+
+
+
+          </div>
+        </div>
+
+
+</ng-container>
