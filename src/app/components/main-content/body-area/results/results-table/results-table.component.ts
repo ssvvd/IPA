@@ -267,8 +267,10 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         // }
         
 
-        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
-        this.dtResultsObjectsHelp[i].Grade.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
+        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade'){
+          this.dtResultsObjectsHelp[i].Grade[this.dtResultsObjectsHelp[i].CatalogNo.length - 1] =  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+        }
+        
 
         if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
         this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
