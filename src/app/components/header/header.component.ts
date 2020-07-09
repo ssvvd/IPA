@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { Language} from 'src/app/models/applications/applications';
 import { LoginService } from 'src/app/services/login.service';
@@ -16,7 +16,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 export class HeaderComponent implements OnInit {  
   
-  tableElement: ElementRef ;
+  //tableElement: ElementRef ;
   environment = environment;
   menuisshown:boolean=false;
   isMetric:boolean=true;
@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
               private srv_appsetting:AppsettingService, private router:Router,private srv_login:LoginService) { }
 
   ngOnInit() {   
+  
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>{if(u=='') this.userdes='Log In'; else this.userdes=u});   
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;

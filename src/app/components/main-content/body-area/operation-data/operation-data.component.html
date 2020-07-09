@@ -8,7 +8,7 @@
                         <i  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
                     </a>                            
                     <div>                    
-                        <label [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap':'siteTitle text-nowrap vertical-text'">Tool Data</label>                    
+                        <label [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap cursor-pointer':'cursor-pointer siteTitle text-nowrap vertical-text'" (click)="showtooldata()">{{'Tool Data' | translate}}</label>                    
                     </div>
                     <div>
                         <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp!='IS' && MainApp!='TG'" ></app-optimizetool>

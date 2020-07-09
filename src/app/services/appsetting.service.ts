@@ -20,21 +20,37 @@ export class AppsettingService {
   
   private obsUserSelected = new BehaviorSubject<string>('');
   CurrentUserSelected = this.obsUserSelected.asObservable(); 
+  
+  private misLoggedIn:boolean;
+  get isLoggedIn():boolean{   
+    return this.misLoggedIn;
+    }
+  set isLoggedIn(u:boolean) {  
+    this.misLoggedIn = u;   
+   }
 
   get User():User{   
     return this.mUser;
     }
   set User(u:User) {  
     this.mUser = u;
-    this.obsUserSelected.next(u.FirstName + ' ' + u.LastName);
+    this.obsUserSelected.next(u.displayName);
    }
   
-   get UserID():string{   
-    return this.mUserID;
+   get UserID():string{ 
+      if(typeof(this.User)=='undefined')  
+        return '';
+      else
+        return this.User.email;
     }
-   set UserID(u:string) {  
-    this.mUserID = u;    
-   }
+
+   /*  get IsLogIn():boolean { 
+      if(typeof(this.User)=='undefined')  
+        return '';
+      else
+        return this.User.Email;
+    } */
+
    
   /*  private mUser:User
    get SelectedUser():User {

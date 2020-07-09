@@ -2,7 +2,7 @@
 <div class="pt-2 pb-2 border-top-gray border-bottom-gray" >
  <ul class="nav nav-fill" >               
     <li (click)="onSelectMainApp(mainapp);"  class="nav-item li-item" *ngFor="let mainapp of arrMainApps" >
-        <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
+        <div data-toggle="tooltip" title="tooltip"  class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
                     'div-app':mainapp.MenuID!=SelectedMainAppID && SelectedMainAppID!='','div-app-open':SelectedMainAppID==''}">                                                                         
             <img src="{{mainapp.MenuImage}}" [ngClass]="mainapp.IsActive?'app-image cursor-pointer ':' app-image cursor-not-allowed img-not-allowed'">                                                                                                               
             <div  class="form-group mb-0 pb-0">                    
@@ -15,7 +15,7 @@
 <div class="border-bottom-gray" *ngIf="arrSelectedSecApp1?.length >0">
 <ul class="nav nav-fill  pt-2 pb-2 ">               
     <li  (click)="onFilterSecApp(secapp)" class="nav-item li-item pt-1" [routerLink]="isToOperationData&&secapp.ApplicationITAID!='0' && secapp.IsActive?['/home/operation-data']:null"  *ngFor="let secapp of arrSelectedSecApp1">
-        <div class="form-group cursor-pointer" [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
+        <div  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
                     'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">                                                  
             <img src="{{secapp.MenuImage}}"  [ngClass]="secapp.IsActive?'secapp-image cursor-pointer':'secapp-image cursor-not-allowed img-not-allowed'">                                                                                                  
             <div>

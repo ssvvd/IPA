@@ -1,10 +1,9 @@
 export class User {
-    UserName:string;
-    Password:string;
-    FirstName:string;
-    LastName:string;
-    CountryID:string;
-    Email:string;
-    PhoneNumber:string;
-    Company:string;
+    displayName:string;
+    surname:string;
+    givenName:string;
+    email:string;
+    country:string;
+    companyName:string;
+    isImc:string;
 }

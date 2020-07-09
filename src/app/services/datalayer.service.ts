@@ -72,10 +72,11 @@ export class DatalayerService {
         return "error";
       });  
   }  
-  public  login(token:string)
+  public  login(token:any)
   {    
     //login/{LoginURLReq}/{LoginURLRes}/{token}/{siteType}    
-    return  this.httpClient.get(environment.API_HOST +'api/login/login/1/1/' + token + '/local') 
+    token='{ "token":"' + token + '"}';
+    return  this.httpClient.post(environment.API_HOST +'api/login/login/1/1/local',token) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  

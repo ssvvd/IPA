@@ -7,7 +7,7 @@
                 <app-header></app-header>
             </div> 
         </div>     
-        <div class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
+        <div *ngIf="msrv_appsetting.isLoggedIn" class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
             <div class="col-11 pb-4 mb-4">
                 <app-main-content></app-main-content>
             </div>                          
