@@ -39,10 +39,14 @@ export class clsHelpProp {
     CEDC:number;
     CW:number;
     kappaLeadAngle:number;
+    itemImg:string='';
+    familyImg:string='';
     itemType:string[]=[];
     itemTypeRes:string;
     GroupText:string[]=[];
     desgFieldName:string[]=[];
+    info:string[]=[];
+
     private _isHidden:number;
 
         constructor(private srv_Results:ResultsService, ind:number){

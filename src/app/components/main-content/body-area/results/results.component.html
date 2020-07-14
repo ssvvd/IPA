@@ -37,6 +37,7 @@
           <li [ngbNavItem]="1" class="navli">
             <a ngbNavLink class="siteTitle">Machining Parameters</a>
             <ng-template ngbNavContent>
+              <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>
             </ng-template>
           </li>
@@ -44,6 +45,7 @@
           <li [ngbNavItem]="2" class="navli">
             <a ngbNavLink class="siteTitle">Product Information</a>
             <ng-template ngbNavContent>
+              <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA1'"></product-info>
             </ng-template>
           </li>
@@ -51,6 +53,7 @@
           <li [ngbNavItem]="3" class="navli">
             <a ngbNavLink class="siteTitle">2D+3D Representation</a>
             <ng-template ngbNavContent>
+              <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
             </ng-template>
           </li>
