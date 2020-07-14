@@ -79,7 +79,7 @@ export class StateManagerService {
     let desc:string; 
     if(typeof(m)!=='undefined' && m!==null) 
     {
-      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " Kw";
+      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " kW";
       this.CheckTabOperationalDataEnable();   
       this.obsMachineSelected.next([m.MachineName,desc]); 
     }              
@@ -236,6 +236,8 @@ export class StateManagerService {
      this.MenuIDLevel2 =""; 
      this.IPL =null;
      this.obsReloadMachineTab.next(true);
+     this.mIPLMMandatory = "";
+     this.obsInputParamSelected.next("");
    }
   
    private mopttool_selectedfamily:any[]=[];

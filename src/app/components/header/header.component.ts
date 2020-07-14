@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   //tableElement: ElementRef ;
   environment = environment;
   menuisshown:boolean=false;
-  isMetric:boolean=true;
+  isMetric:boolean;
   lstLanguage:Language[] =[];
   isLoadingLang:boolean =false;
   SelectedLang:Language;
@@ -80,6 +80,7 @@ export class HeaderComponent implements OnInit {
       this.translate.use(lan.LanguageCode);
     else
       this.translate.use(this.translate.getDefaultLang());
+      
    this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {
     //const fs = require('fs');      
     //fs.writeFileSync(environment.LanguagePath + "/" + lan.LanguageCode + ".json", data);
@@ -88,15 +89,11 @@ export class HeaderComponent implements OnInit {
   
   UnitsChanged(event)
   {       
-    if(event.target.checked)    
-    {
-      this.srv_appsetting.ChangeUnits('M');            
-    }
-    else
-    {
+    if(event.target.checked)        
+      this.srv_appsetting.ChangeUnits('M');                
+    else    
       this.srv_appsetting.ChangeUnits('I');
-    }    
-  
+         
     if (window.location.href.indexOf('machines')>-1)
       {
         this.srv_statemanage.ChangeUnits();        
@@ -104,10 +101,8 @@ export class HeaderComponent implements OnInit {
     else
       {
         this.router.navigate(['/home/machines']);
-        this.srv_statemanage.ChangeUnits();
-        
-      }
-       
+        this.srv_statemanage.ChangeUnits();        
+      }       
   }
 
   showmenu()
@@ -127,6 +122,6 @@ export class HeaderComponent implements OnInit {
 
   openfavorite()
   {
-    this.router.navigate(['/home/favorites']);
+    this.srv_login.LogOut();    
   }
 }

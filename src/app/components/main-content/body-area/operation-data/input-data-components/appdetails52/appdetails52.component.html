@@ -64,7 +64,7 @@
                     <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
                         <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                         <input  type="number" class="form-control input-min-sl-width" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMin').value"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMin').value" (focus)="onfocusfield('WToleranceMin')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -72,7 +72,7 @@
                     <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
                         <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                         <input  type="number"  class="form-control input-min-sl-width" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMax').value"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMax').value"  (focus)="onfocusfield('WToleranceMax')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -97,7 +97,7 @@
                     <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                         <input  type="number" class="form-control input-min-sl-width" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value" (focus)="onfocusfield('RToleranceMin')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -105,7 +105,7 @@
                     <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                         <input  type="number"  class="form-control input-min-sl-width" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMax').value"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMax').value" (focus)="onfocusfield('RToleranceMax')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>

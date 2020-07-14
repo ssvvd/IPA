@@ -75,7 +75,7 @@ export class MainMenuComponent implements OnInit {
     this.srv_statemanage.InputParamSelected.subscribe(x=>this.InputParamSelected(x));
     
   }
-
+ 
  OperationDataEnable(isenable:boolean)
  {    
    this.Tabs[3].isDisabled=!isenable;  
@@ -120,4 +120,10 @@ export class MainMenuComponent implements OnInit {
     });
    }    
   
+   onClickTab(tab:MainTab)
+   {
+    // /[routerLink]="tab.isDisabled? null:tab.RouteName"
+    if(!tab.isDisabled)
+      this.router.navigate([tab.RouteName]);
+   }
 }

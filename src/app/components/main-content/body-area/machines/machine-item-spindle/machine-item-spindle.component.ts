@@ -49,7 +49,7 @@ export class MachineItemSpindleComponent implements OnInit
     this.eventsSubscription.add(this.serv.getmachineadaptationtype().subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
         this.curAdapType=this.arrAdapType.find(e=> e.AdaptationType == this.spindle.AdaptationType );                   
-        this.eventsSubscription.add(this.serv.getmachineadaptationsize().subscribe((res: any) => {
+        this.eventsSubscription.add(this.serv.getmachineadaptationsize(this.srv_appsetting.Units).subscribe((res: any) => {
         this.arrAdapSize = JSON.parse(res); 
         this.curAdapSize=this.arrAdapSize.find(e=> e.AdaptationType == this.spindle.AdaptationType 
           && e.AdaptationSize === this.spindle.AdaptationSize);                      

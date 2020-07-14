@@ -22,9 +22,7 @@ export class CookiesService {
   {
     if(this.srv_cock.check(name))
       this.srv_cock.delete(name,'/');
-      this.srv_cock.set(name, '', new Date("Thu, 01 Jan 1970 00:00:01 GMT"));
-    //let c:any;
-    //c=this.srv_cock.getAll();
+      this.srv_cock.set(name, '', new Date("Thu, 01 Jan 1970 00:00:01 GMT"));    
   }
   
   public get_cookielist(name:string):string[]
@@ -49,17 +47,17 @@ export class CookiesService {
     this.srv_cock.set(name,value);  
   }
 
-  add_fav_machine(id:number)
+/*   add_fav_machine(id:number)
   {        
     this.add_item_to_cookielist("fav_machines",id.toString()); 
     this.obsMachineFavorite.next(this.get_cookielist("fav_machines")); 
-  }
+  } */
 
-  remove_fav_machine(id:number)
+/*   remove_fav_machine(id:number)
   {
     this.remove_item_from_cookielist("fav_machines",id.toString()); 
     this.obsMachineFavorite.next(this.get_cookielist("fav_machines"));         
-  }
+  } */
 
   add_item_to_cookielist(name,id:string)
   {        

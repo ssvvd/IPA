@@ -83,7 +83,7 @@ export class MachinesFilterComponent implements OnInit {
       this.arrAdapType = JSON.parse(res); 
       this.arrAdapType.unshift( { AdaptationType:''});      
       this.curAdapType=this.arrAdapType[0];                          
-      this.eventsSubscription.add(this.serv.getmachineadaptationsize().subscribe((res: any) => {
+      this.eventsSubscription.add(this.serv.getmachineadaptationsize(this.srv_appsetting.Units).subscribe((res: any) => {
       this.arrAdapSize = JSON.parse(res); 
       this.arrAdapSize.unshift( { AdaptationType:'',AdaptationSize:''});      
       

@@ -61,7 +61,7 @@ export class MachineItemComponent implements OnInit {
           this.isLoading =true;         
         }
       else
-          this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID).subscribe((res: any) => {
+          this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
           this.arrMachineSpindle = JSON.parse(res);      
           this.machSpindleMain = this.arrMachineSpindle[0]; 
           this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
@@ -137,7 +137,7 @@ export class MachineItemComponent implements OnInit {
   {
      this.eventsSubscription.add(this.srv_machine.getmachineheader(MachineID).subscribe((res: any) => {                   
         this.machHeader =JSON.parse(res)[0];                
-        this.eventsSubscription.add(this.srv_machine.getmachinedetailed(MachineID).subscribe((res: any) => {
+        this.eventsSubscription.add(this.srv_machine.getmachinedetailed(MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
         this.arrMachineSpindle = JSON.parse(res);      
         this.machSpindleMain = this.arrMachineSpindle[0]; 
         this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;

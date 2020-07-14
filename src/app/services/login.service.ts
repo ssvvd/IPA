@@ -70,7 +70,7 @@ export class LoginService {
       if(localStorage.getItem("email")!=null) email=localStorage.getItem("email");
       if(localStorage.getItem("country")!=null) country=localStorage.getItem("country");
       if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
-      if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc");
+      if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
       u.displayName=displayName;
       u.surname=surname;
       u.givenName=givenName;
@@ -83,5 +83,26 @@ export class LoginService {
     } 
     this.srv_appsetting.isLoggedIn=true;       
     return of('ok'); 
-  }    
+  } 
+  
+  LogOut()
+  {
+    let u=new User;  
+    u.displayName='';
+    u.surname='';
+    u.givenName='';
+    u.email=''
+    u.country='';
+    u.companyName='';
+    u.isImc='';
+    localStorage.setItem("displayName",'');
+    localStorage.setItem("surname",'');
+    localStorage.setItem("givenName",'');
+    localStorage.setItem("email",'');
+    localStorage.setItem("companyName",'');
+    localStorage.setItem("isImc",'');
+    localStorage.setItem("displayName",'');     
+    this.srv_appsetting.User=u;  
+    this.srv_appsetting.isLoggedIn=true;
+  }
 }
