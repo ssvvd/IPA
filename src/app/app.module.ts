@@ -77,6 +77,7 @@ import { Appdetails54Component } from './components/main-content/body-area/opera
 import { MachinePpAddFavoriteComponent } from './components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 import { InnerTabsTableComponent } from './components/main-content/body-area/results/inner-tabs-table/inner-tabs-table.component';
 import { ResultPpDownloadComponent } from './components/main-content/body-area/results/result-pp-download/result-pp-download.component';
+import { Mp760Component } from './components/main-content/body-area/results/machining-prms/mp760/mp760.component';
 
 @NgModule({
   declarations: [   
@@ -137,7 +138,8 @@ import { ResultPpDownloadComponent } from './components/main-content/body-area/r
     MachinePpAddFavoriteComponent,
     Mp77Component,
     InnerTabsTableComponent,
-    ResultPpDownloadComponent
+    ResultPpDownloadComponent,
+    Mp760Component
   ],
   imports: [
     FormsModule,

@@ -30,7 +30,7 @@ export class Mp77Component implements OnInit {
 
 Vc:string
 fr:string
-DC:string
+DH:string
 MaxTol:number
 MinTol:number        
 DOC:number
@@ -94,6 +94,7 @@ resType:string = ''
 
     this.DOC = +this.srv_StMng.IPL.GetItem('Depth').value
     this.MCH = this.srv_StMng.SelectedMachine.CostPerHour
+    this.DH = this.srv_StMng.IPL.GetItem('D_Hole').value
 
     //output
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
@@ -113,10 +114,10 @@ resType:string = ''
           this.fr = value
           break;
         }
-        case 'Tool_D1':{
-          this.DC = value
-          break;
-        }
+        // case 'Tool_D1':{
+        //   this.DC = value
+        //   break;
+        // }
         case 'MetalRemovalRate':{
           this.MRR = value
           break;
@@ -138,12 +139,12 @@ resType:string = ''
           break;
         }
         case 'DetailsListPrice':{
-          this.H_DHP = +value
-          this.I_IP = +value
+          this.H_DHP = +(value.split('')[0])
+          this.I_IP = +(value.split('')[0])
           break;
         }
         case 'HeaderListPrice':{
-          this.TP = +value
+          this.TP = +(value.split('')[0])
           break;
         }
         case 'Flutes':{
@@ -296,7 +297,7 @@ if (pr.value.trim().length == 7){
         }
         
         
-        let _dd:number = +this.srv_StMng.IPL.GetItem('D_Hole').value
+        
         let _d:number = +this.srv_StMng.IPL.GetItem('DiameterBoring').value
         let _z:number = this.Flutes
         let _f:number = +this.fr
@@ -342,7 +343,7 @@ if (pr.value.trim().length == 7){
                   break;  
               }
 //GetCuttingForcesDrilling(DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number)
-              this.srv_Results.GetCuttingForcesDrilling(insertType,_dd,_d,_z,_f,_n,_Kc,_Mc,_ɣ,_k,edgeGeometry).subscribe((res: any) => {
+              this.srv_Results.GetCuttingForcesDrilling(insertType,+this.DH,_d,_z,_f,_n,_Kc,_Mc,_ɣ,_k,edgeGeometry).subscribe((res: any) => {
                 var result = res as MPResult;
                 this.Fax = Math.round(result.ResultRowList[0].Value * 100)/100
               })
@@ -360,7 +361,7 @@ if (pr.value.trim().length == 7){
    
   this.Vc=''
   this.fr=''
-  this.DC=''
+  this.DH=''
   this.MaxTol=0
   this.MinTol=0        
   this.DOC=0

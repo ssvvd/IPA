@@ -113,16 +113,6 @@ export class ResultsService {
   }
 
 
-  public  GetCuttingForcesDrilling(insertType:string,DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number,edgeGeometry:string)
-  {        
-    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Drilling/' + insertType + '/' + + DD + '/' + d + '/' + z + '/' + f + '/' + n + '/' + Kc + '/' + Mc + '/' + ɣ + '/' + k + '/' + edgeGeometry).catch((err: HttpErrorResponse) => {      
-      console.error('An error occurred:', err.error);
-      return "error";
-    });
-  }
-
-
-
   public  GetFlatDataField(field:string, item:string, secApp:string, units:string )
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetFlatDataField/' + field + '/' + item + '/' + secApp + '/' + units ).catch((err: HttpErrorResponse) => {      
@@ -130,6 +120,39 @@ export class ResultsService {
       return "error";
     });
   }
+
+  public  GetCuttingForcesDrilling(insertType:string,DD:number,d:number,z:number,f:number,n:number,Kc:number,Mc:number,ɣ:number,k:number,edgeGeometry:string)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Drilling/' + insertType + '/' +  DD + '/' + d + '/' + z + '/' + f + '/' + n + '/' + Kc + '/' + Mc + '/' + ɣ + '/' + k + '/' + edgeGeometry).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Extflutemillingcutter/{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{w}/{delta}/{alpha}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FeedMillInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{k}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/StraightEdge         /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{k}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Solidcarbidecutter   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{alpha}
+  public  GetCuttingForcesMilling(subApp:string,insertType:string,DD:number,ae:number,z:number,fz:number,ap:number,Kc:number,Mc:number,rake:number,k:number,delta:number,alpha:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Milling/'  + subApp + '/' + insertType + '/' +  DD + '/' + ae + '/' + z + '/' + fz + '/' + ap + '/' + Kc + '/' + Mc + '/' + rake + '/' + k + '/' + delta + '/' + alpha).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge         /{D}/{ae}/{fz}/{k}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}/{ap}/{k}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}/{ap}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}/{ap}
+  public  GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
   // public  checkItemImgExists()
   // {        
   //   return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists' ).catch((err: HttpErrorResponse) => {      
