@@ -7,6 +7,7 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { DownloadresultService} from 'src/app/services/downloadresult.service';
 
 @Component({
   selector: 'app-header',
@@ -29,7 +30,8 @@ export class HeaderComponent implements OnInit {
   userdes:string='Log In';
   // /dictionarygetlanguage
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
-              private srv_appsetting:AppsettingService, private router:Router,private srv_login:LoginService) { }
+              private srv_appsetting:AppsettingService, private router:Router,
+              private srv_login:LoginService,private srv_down:DownloadresultService) { }
 
   ngOnInit() {   
   
@@ -117,11 +119,13 @@ export class HeaderComponent implements OnInit {
   
   openhelp()
   {
-
+    this.srv_down.DownLoadResult('');
   }
 
   openfavorite()
   {
-    this.srv_login.LogOut();    
+    this.srv_login.LogOut();
+    this.router.navigate(['/home/machines']);    
   }
+
 }

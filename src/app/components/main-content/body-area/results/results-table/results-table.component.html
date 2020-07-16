@@ -1,9 +1,13 @@
         <div>
         <h4 class="siteTitle float-left">Results</h4>
+        
+
         <div Class="float-right pb-2 pr-3">
            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit">
         </div>
-    
+        <div Class="float-right pb-2 pr-3 pl-4">
+            <h2 class="siteTitle float-left" (click)="DownLoadData()">Download</h2>
+         </div>
         <table    datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
             <thead>
                     <tr id="dtOptions">

@@ -96,7 +96,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         {
           this.UpdateListBySelectedMachineValues(this.listmachines);
           this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
-        }  
+        } 
+        
         this.isLoaded =true;
         if (this.isDtInitialized) {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -157,7 +158,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.MachineFilter = stfilter;
       this.ApplyFilter(stfilter);
     } 
-
+    else
+    {
+      this.ApplyMostRecommended();
+    } 
     if(this.srv_cook.get_cookie("def_mach")!='')
       this.defaultmachine =+this.srv_cook.get_cookie("def_mach");    
 
@@ -323,6 +327,16 @@ UpdateStateSelectedMachine(MachineID: number) {
         ((filter.IsMostRecommended && (m.isFavorite || m.IsMostRecommended)) || (!filter.IsMostRecommended))) 
         ;
     this.srv_statemanage.SelectMachineFilter = filter;
+    this.countrow =this.listmachines.length.toString(); 
+    
+  }
+
+  ApplyMostRecommended() {        
+    this.listmachines = this.listmachines_sorted.filter(
+      m => 
+        ((m.isFavorite || m.IsMostRecommended)))
+        ;
+    //this.srv_statemanage.SelectMachineFilter = filter;
     this.countrow =this.listmachines.length.toString(); 
     
   }

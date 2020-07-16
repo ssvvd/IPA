@@ -12,7 +12,7 @@ import { Observable,of} from 'rxjs';
 export class LoginService {
 
   constructor(private srv_cook:CookiesService,private srv_DataLayer:DatalayerService,
-              private srv_appsetting:AppsettingService,) { }
+              private srv_appsetting:AppsettingService) { }
   
   GetToken():any
   {
@@ -27,6 +27,8 @@ export class LoginService {
 
   LogIn(token:string):Observable<any>
   { 
+    //this.srv_cook.delete_cookie('units');
+    //localStorage.setItem("units",null);
     if(token!='')
     {      
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
@@ -99,6 +101,7 @@ export class LoginService {
     localStorage.setItem("surname",'');
     localStorage.setItem("givenName",'');
     localStorage.setItem("email",'');
+    localStorage.setItem("country",'');
     localStorage.setItem("companyName",'');
     localStorage.setItem("isImc",'');
     localStorage.setItem("displayName",'');     

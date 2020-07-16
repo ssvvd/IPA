@@ -55,7 +55,7 @@ export class AppsettingService {
    get Units():string{  
       if(this.mUnits =='')
       {
-      if(typeof localStorage.getItem('units')!== 'undefined')      
+      if(typeof localStorage.getItem('units')!== 'undefined' && localStorage.getItem('units')!== null && localStorage.getItem('units')!== 'null')      
         this.mUnits=localStorage.getItem('units');
       else
         if(this.srv_cook.get_cookie('units')!='')
