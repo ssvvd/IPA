@@ -92,7 +92,11 @@ else
       mainspindletype='M';
       
       this.srv_StMng.IPL.GetItem('MachCostPerHour').value = this.srv_StMng.SelectedMachine.CostPerHour + "";
-      this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.Country;
+      if(this.srv_appsetting.User.country!='')
+        this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.User.country;
+      else
+        this.srv_StMng.IPL.GetItem('Country').value ='35';  //NU
+
       if(this.srv_StMng.SelectedMachine.MachineType=='Multi task')
       {
         if(this.srv_StMng.MainAppSelected.MainApp=='ML') mainspindletype='T';
@@ -186,7 +190,7 @@ else
     }
     else
     {
-      this.eventsSubscription.add( this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID).subscribe((res: any) => 
+      this.eventsSubscription.add( this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
        { 
         arrMachineSpindle = JSON.parse(res);         
         this.FillMachineData(arrMachineSpindle); 

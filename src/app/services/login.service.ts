@@ -12,7 +12,7 @@ import { Observable,of} from 'rxjs';
 export class LoginService {
 
   constructor(private srv_cook:CookiesService,private srv_DataLayer:DatalayerService,
-              private srv_appsetting:AppsettingService,) { }
+              private srv_appsetting:AppsettingService) { }
   
   GetToken():any
   {
@@ -27,6 +27,8 @@ export class LoginService {
 
   LogIn(token:string):Observable<any>
   { 
+    //this.srv_cook.delete_cookie('units');
+    //localStorage.setItem("units",null);
     if(token!='')
     {      
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
@@ -70,7 +72,7 @@ export class LoginService {
       if(localStorage.getItem("email")!=null) email=localStorage.getItem("email");
       if(localStorage.getItem("country")!=null) country=localStorage.getItem("country");
       if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
-      if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc");
+      if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
       u.displayName=displayName;
       u.surname=surname;
       u.givenName=givenName;
@@ -83,5 +85,27 @@ export class LoginService {
     } 
     this.srv_appsetting.isLoggedIn=true;       
     return of('ok'); 
-  }    
+  } 
+  
+  LogOut()
+  {
+    let u=new User;  
+    u.displayName='';
+    u.surname='';
+    u.givenName='';
+    u.email=''
+    u.country='';
+    u.companyName='';
+    u.isImc='';
+    localStorage.setItem("displayName",'');
+    localStorage.setItem("surname",'');
+    localStorage.setItem("givenName",'');
+    localStorage.setItem("email",'');
+    localStorage.setItem("country",'');
+    localStorage.setItem("companyName",'');
+    localStorage.setItem("isImc",'');
+    localStorage.setItem("displayName",'');     
+    this.srv_appsetting.User=u;  
+    this.srv_appsetting.isLoggedIn=true;
+  }
 }

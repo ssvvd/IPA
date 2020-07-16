@@ -39,6 +39,7 @@
     "datatables.net-responsive-dt": "^2.2.3",
     "iframe-resizer": "^4.2.11",
     "jquery": "^3.5.0",
+    "jspdf": "^1.5.3",
     "ng-bootstrap-dropdown": "^1.0.0",
     "ng2-charts": "^2.3.0",
     "ng5-slider": "^1.2.4",
@@ -51,6 +52,7 @@
     "rxjs": "~6.5.5",
     "rxjs-compat": "^6.5.5",
     "safe-pipe": "^1.0.3",
+    "svg-to-pdfkit": "^0.1.8",
     "tslib": "^1.10.0",
     "url-exists": "^1.0.3",
     "zone.js": "~0.10.2"

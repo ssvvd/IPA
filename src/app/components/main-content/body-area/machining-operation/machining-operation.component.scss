@@ -8,6 +8,7 @@
     padding-right: 0px;
     margin-right: 0px; 
     opacity: 0.5;   
+    border-style:none!important;
 }
 
 .div-app :hover
@@ -16,7 +17,8 @@
     cursor: pointer;  
     padding-right: 0px;
     margin-right: 0px; 
-    opacity: 0.5;   
+    opacity: 0.5;  
+    border-style:none!important;
 }
 
 .div-app-open
@@ -24,7 +26,8 @@
     background-color:white; 
     cursor: pointer;  
     padding-right: 0px;
-    margin-right: 0px;     
+    margin-right: 0px;  
+    border-style:none!important;   
     //opacity: 0.5;   
 }
 
@@ -33,7 +36,8 @@
     background-color:var(--bg-hover);
     cursor: pointer;  
     padding-right: 0px;
-    margin-right: 0px;     
+    margin-right: 0px; 
+    border-style:none!important;    
     //opacity: 0.5;   
 }
 
@@ -42,7 +46,19 @@
     background-color:var(--row-selected); 
     cursor: pointer;  
     padding-right: 0px;
-    margin-right: 0px;   
+    margin-right: 0px; 
+    border-style:none!important;  
+    outline: 0!important; 
+}
+
+.div-app-selected :focus
+{        
+    background-color:var(--row-selected); 
+    cursor: pointer;  
+    padding-right: 0px;
+    margin-right: 0px; 
+    border-style:none!important;  
+    outline: 0!important;  
 }
 
 .img-not-allowed
@@ -162,4 +178,3 @@
   }
  }
  
-

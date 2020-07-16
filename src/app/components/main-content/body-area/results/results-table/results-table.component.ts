@@ -14,6 +14,8 @@ import { DataTableDirective } from 'angular-datatables';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
+import {ResultPpDownloadComponent} from 'src/app/components/main-content/body-area/results/result-pp-download/result-pp-download.component';
+import { DownloadresultService} from 'src/app/services/downloadresult.service';
 
 @Component({
   selector: 'app-results-table',
@@ -56,7 +58,8 @@ export class ResultsTableComponent implements OnInit {
   @Output() goToViewEvent = new EventEmitter<any>();
   
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
-    private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, private srv_ResultsStore :ResultsStoreService) { }
+    private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
+    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService) { }
 
 
 
@@ -918,7 +921,16 @@ getPropWithoutUnits(pr:string){
 
 }
 
+DownLoadData()
+{
+  const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
+      
+  modalRef.result.then((result) => {
+    if(result=='cancel') return;
+    this.srv_down.DownLoadResult(result);        
+  });
 
 }
 
+}
 

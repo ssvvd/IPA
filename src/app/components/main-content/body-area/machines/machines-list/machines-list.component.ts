@@ -31,7 +31,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   MachineIDSelected = 0;
   datatableElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
-  allSubs$: Subscription;
+  //allSubs$: Subscription;
+  private eventsSubscription: Subscription=new Subscription();
   isLoaded:boolean =false;
   countrow:string='';
   defaultmachine:number=0;
@@ -85,7 +86,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   
   Initializemachinelist(withdestroy:boolean)
   {            
-    this.allSubs$ = this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
+    this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
       .subscribe((data: any) => {               
         this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
@@ -95,7 +96,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         {
           this.UpdateListBySelectedMachineValues(this.listmachines);
           this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
-        }  
+        } 
+        
         this.isLoaded =true;
         if (this.isDtInitialized) {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
@@ -113,7 +115,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
             dtInstance.destroy();
             this.dtTrigger.next();
           });   */                                      
-      });  
+      }));  
        
   }
   sort_arr(a:Machineheader,b:Machineheader)
@@ -156,7 +158,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.MachineFilter = stfilter;
       this.ApplyFilter(stfilter);
     } 
-
+    else
+    {
+      this.ApplyMostRecommended();
+    } 
     if(this.srv_cook.get_cookie("def_mach")!='')
       this.defaultmachine =+this.srv_cook.get_cookie("def_mach");    
 
@@ -171,23 +176,15 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);       
     this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr(a,b));
     this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_arr(a,b));
-
-    //this.isDtInitialized = true
-    //this.dtTrigger.next();    
-
-    
-    
-      //
-      
-     
-  }
-  
-  ngOnDestroy() {
-    this.allSubs$.unsubscribe();
   }
 
   OnFavoriteMachine(mach: Machineheader)
-  {        
+  { 
+    if(this.srv_appsetting.UserID=='')
+    {
+      alert('Only for registered user');
+      return;
+    }       
     const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
     modalRef.componentInstance.MachineName = mach.MachineName;
     
@@ -204,12 +201,23 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       }
       else         
       {            
-        //with user
-        this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
-        this.Initializemachinelist(true);
-        this.eventsChangeFavorite.next();
-          //this.srv_cook.add_fav_machine(mach.MachineID);         
-        }); 
+        if(mach.isFavorite) 
+        {
+            //change only machine name
+            this.eventsSubscription.add(this.srv_machine.machine_update_name(
+              mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => { 
+                this.Initializemachinelist(true);
+                this.eventsChangeFavorite.next();               
+           }));  
+        }
+        else
+        {
+          this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+            this.Initializemachinelist(true);
+            this.eventsChangeFavorite.next();                   
+            }); 
+        }
+        
         
       }         
   } );
@@ -231,6 +239,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       this.listmachines_sorted.push(m_new); 
     }
   }  */ 
+
+ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
 
 UpdateStateSelectedMachine(MachineID: number) {        
     this.listmachines.forEach((m) => {
@@ -315,6 +327,16 @@ UpdateStateSelectedMachine(MachineID: number) {
         ((filter.IsMostRecommended && (m.isFavorite || m.IsMostRecommended)) || (!filter.IsMostRecommended))) 
         ;
     this.srv_statemanage.SelectMachineFilter = filter;
+    this.countrow =this.listmachines.length.toString(); 
+    
+  }
+
+  ApplyMostRecommended() {        
+    this.listmachines = this.listmachines_sorted.filter(
+      m => 
+        ((m.isFavorite || m.IsMostRecommended)))
+        ;
+    //this.srv_statemanage.SelectMachineFilter = filter;
     this.countrow =this.listmachines.length.toString(); 
     
   }

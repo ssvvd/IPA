@@ -6,17 +6,21 @@
                 <div class="form-group">                     
                     <div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="opttype1" name="ToolPos"  [(ngModel)]="TypeApp" value="1" checked  (click)="ChangeTypeApp(1)">
+                            <input type="radio" class="custom-control-input" id="opttype1" name="ToolPos"  [(ngModel)]="TypeApp" value="1" checked  (click)="SetImageSecAppByAppType('1')">
                             <label class="custom-control-label" for="opttype1">{{'External' | translate}}</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="opttype2" name="ToolPos" [(ngModel)]="TypeApp" value="2" (click)="ChangeTypeApp(2)">
+                            <input type="radio" class="custom-control-input" id="opttype2" name="ToolPos" [(ngModel)]="TypeApp" value="2" (click)="SetImageSecAppByAppType('2')">
                             <label class="custom-control-label" for="opttype2">{{'Next to shaft' | translate}}</label>
                         </div>   
-                        <div class="custom-control custom-radio custom-control-inline" *ngIf="msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='188'" (click)="ChangeTypeApp(3)">
+                        <div class="custom-control custom-radio custom-control-inline" *ngIf="msrv_StMng.SecApp=='54'" (click)="SetImageSecAppByAppType('3')">
                             <input type="radio" class="custom-control-input" id="opttype3" name="ToolPos" [(ngModel)]="TypeApp" value="3" [attr.disabled]="true">
                             <label class="custom-control-label" for="opttype3">{{'Internal' | translate}}</label>
-                        </div>                      
+                        </div>  
+                        <div class="custom-control custom-radio custom-control-inline" *ngIf="msrv_StMng.SecApp=='188'" (click)="SetImageSecAppByAppType('3')">
+                            <input type="radio" class="custom-control-input" id="opttype3" name="ToolPos" [(ngModel)]="TypeApp" value="3">
+                            <label class="custom-control-label" for="opttype3">{{'Internal' | translate}}</label>
+                        </div>                     
                     </div>
                 </div>
          
@@ -71,7 +75,7 @@
                     <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
                         <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                         <input  type="number" class="form-control input-min-sl-width" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMin').value"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMin').value" (focus)="onfocusfield('WToleranceMin')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -79,7 +83,7 @@
                     <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
                         <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                         <input  type="number"  class="form-control input-min-sl-width" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMax').value"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMax').value" (focus)="onfocusfield('WToleranceMax')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -139,7 +143,7 @@
                                 <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
                                     <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                                     <input  type="number" class="form-control input-min-sl-width" 
-                                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value"> 
+                                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value"  (focus)="onfocusfield('RToleranceMin')" (focusout)="onfocusoutfield()"> 
                                 </div>
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
                                     <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -147,7 +151,7 @@
                                 <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
                                     <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                                     <input  type="number"  class="form-control input-min-sl-width" 
-                                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMax').value"> 
+                                                        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMax').value" (focus)="onfocusfield('RToleranceMax')" (focusout)="onfocusoutfield()"> 
                                 </div>
                                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
                                     <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>

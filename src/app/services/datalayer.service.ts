@@ -67,7 +67,7 @@ export class DatalayerService {
   public  get_token()
   {    
     //getToken/{LoginURLReq}/{LoginURLTokenUrl}/{LoginURLTokenID}/{LoginURLTokenSecret}/{siteType}      
-    return  this.httpClient.get(environment.API_HOST +'api/login/getToken/1/1/1/1/local') 
+    return  this.httpClient.get(environment.API_HOST +'api/login/getToken/local') 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  
@@ -76,7 +76,7 @@ export class DatalayerService {
   {    
     //login/{LoginURLReq}/{LoginURLRes}/{token}/{siteType}    
     token='{ "token":"' + token + '"}';
-    return  this.httpClient.post(environment.API_HOST +'api/login/login/1/1/local',token) 
+    return  this.httpClient.post(environment.API_HOST +'api/login/login/local',token) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  

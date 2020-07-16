@@ -26,16 +26,22 @@ export class Appdetails54Component implements OnInit {
 
   ngOnInit() {  
     this.SetIPLMandatory();
-
-    if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
+    this.SetImageSecAppByAppType(this.TypeApp);
+    /* if( this.srv_StMng.SecApp=='54' ||  this.srv_StMng.SecApp=='10')
     {
-      if(this.TypeApp=='1')      
+      if(this.TypeApp=='1')       
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
       else
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
     }
+    if (this.srv_StMng.SecApp=='188')
+    {
+      if(this.TypeApp=='1') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";      
+      if(this.TypeApp=='2') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";  
+      if(this.TypeApp=='3') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_2.png";            
+    }
     else      
-       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png"; */
 
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }
@@ -43,24 +49,41 @@ export class Appdetails54Component implements OnInit {
     this.eventsSubscription.unsubscribe();
   }
   
+  SetImageSecAppByAppType(apptype:string)
+  {
+    if( this.srv_StMng.SecApp=='54' ||  this.srv_StMng.SecApp=='10')
+    {
+      if(apptype=='1')       
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+      else
+        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
+    }
+    if (this.srv_StMng.SecApp=='188')
+    {
+      if(apptype=='1') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";      
+      if(apptype=='2') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";  
+      if(apptype=='3') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_2.png";            
+    }
+    else      
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+  }
+
   onfocusfield(field:string)
   {
     this.InFocus=true;  
     if(this.TypeApp=='1')
       this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;
-    else
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;    
-  }
-
-  SetImageApplication(TypeApp:number)
-  {
-
+    if(this.TypeApp=='2')
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1; 
+    if(this.TypeApp=='3')
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1.replace('_1','_2');     
   }
   
   onfocusoutfield()
   {  
     this.InFocus=false;
-    if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
+    this.SetImageSecAppByAppType(this.TypeApp);
+    /* if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
     {
       if(this.TypeApp=='1')      
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
@@ -68,11 +91,11 @@ export class Appdetails54Component implements OnInit {
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
     }
     else      
-       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png"; */
   }
    
-  ChangeTypeApp(v:number)
-  {
+ /*  ChangeTypeApp(v:number)
+  {    
     if( this.srv_StMng.SecApp=='54' || this.srv_StMng.SecApp=='188' || this.srv_StMng.SecApp=='10')
     {
       if(v==1)      
@@ -81,8 +104,9 @@ export class Appdetails54Component implements OnInit {
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
     }
     else      
-       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
-  }
+       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png"; 
+  } 
+  */
 
   ClearData()
   {

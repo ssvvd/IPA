@@ -4,6 +4,7 @@ import { ApplicationsService } from 'src/app/services/applications.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -30,7 +31,8 @@ export class MachiningOperationComponent implements OnInit {
   isToOperationData:boolean=false;
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) { }
+  constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService,
+              private srv_appsetting:AppsettingService,private router:Router) { }
   
   ngOnInit() {
 
@@ -201,5 +203,11 @@ export class MachiningOperationComponent implements OnInit {
     if(l==2) this.srv_statemanage.MenuIDLevel2=sa.MenuID;    
   }
 
-  //ToOperationData(){}
+  ToOperationData(secapp:SecondaryApp)
+  {
+    //[routerLink]="isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive?['/home/operation-data']:null" 
+    //[routerLink]="isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive?['/home/operation-data']:null"
+    if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive)
+      this.router.navigate(['/home/operation-data']);
+  }
 }

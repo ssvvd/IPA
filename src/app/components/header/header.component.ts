@@ -7,6 +7,7 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { DownloadresultService} from 'src/app/services/downloadresult.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
   //tableElement: ElementRef ;
   environment = environment;
   menuisshown:boolean=false;
-  isMetric:boolean=true;
+  isMetric:boolean;
   lstLanguage:Language[] =[];
   isLoadingLang:boolean =false;
   SelectedLang:Language;
@@ -29,7 +30,8 @@ export class HeaderComponent implements OnInit {
   userdes:string='Log In';
   // /dictionarygetlanguage
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
-              private srv_appsetting:AppsettingService, private router:Router,private srv_login:LoginService) { }
+              private srv_appsetting:AppsettingService, private router:Router,
+              private srv_login:LoginService,private srv_down:DownloadresultService) { }
 
   ngOnInit() {   
   
@@ -80,6 +82,7 @@ export class HeaderComponent implements OnInit {
       this.translate.use(lan.LanguageCode);
     else
       this.translate.use(this.translate.getDefaultLang());
+      
    this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {
     //const fs = require('fs');      
     //fs.writeFileSync(environment.LanguagePath + "/" + lan.LanguageCode + ".json", data);
@@ -88,15 +91,11 @@ export class HeaderComponent implements OnInit {
   
   UnitsChanged(event)
   {       
-    if(event.target.checked)    
-    {
-      this.srv_appsetting.ChangeUnits('M');            
-    }
-    else
-    {
+    if(event.target.checked)        
+      this.srv_appsetting.ChangeUnits('M');                
+    else    
       this.srv_appsetting.ChangeUnits('I');
-    }    
-  
+         
     if (window.location.href.indexOf('machines')>-1)
       {
         this.srv_statemanage.ChangeUnits();        
@@ -104,10 +103,8 @@ export class HeaderComponent implements OnInit {
     else
       {
         this.router.navigate(['/home/machines']);
-        this.srv_statemanage.ChangeUnits();
-        
-      }
-       
+        this.srv_statemanage.ChangeUnits();        
+      }       
   }
 
   showmenu()
@@ -122,11 +119,13 @@ export class HeaderComponent implements OnInit {
   
   openhelp()
   {
-
+    this.srv_down.DownLoadResult('');
   }
 
   openfavorite()
   {
-    this.router.navigate(['/home/favorites']);
+    this.srv_login.LogOut();
+    this.router.navigate(['/home/machines']);    
   }
+
 }

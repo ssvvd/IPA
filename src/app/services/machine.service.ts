@@ -17,9 +17,9 @@ export class MachineService {
      
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units + userid);
   }
-  public  getmachinedetailed(id:number)
+  public  getmachinedetailed(id:number,units:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-detailed/' + id);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-detailed/' + id + '/' +units);
   }
   public  getmachineheader(id:number)
   {        
@@ -29,9 +29,9 @@ export class MachineService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-type');
   }
-   public  getmachineadaptationsize()
+   public  getmachineadaptationsize(units:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-size');
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-size/' + units);
   }
 
   public  getmachineadaptationdata(adaptationtype:string,adaptationsize:string,spindle:string,units:string)
@@ -57,5 +57,10 @@ export class MachineService {
       return "error";
     });  
 
+  }
+  
+  public  machine_update_name(machineid:string,machine_name:string,userid:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines-update-name/' + machineid + '/'  + machine_name + '/'+ userid);
   }
 }
