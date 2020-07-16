@@ -276,7 +276,7 @@ if (pr.value.trim().length == 7){
           }
         }
         // let insetFamily = this.selectedHelp.Families[this.selectedHelp.Families.length - 1]
-        let edgeGeometry = ""
+        let edgeGeometry = "''"
         //in(4297,2672,3087,3593,3156)
         switch (insetFamily){
             case '4297':

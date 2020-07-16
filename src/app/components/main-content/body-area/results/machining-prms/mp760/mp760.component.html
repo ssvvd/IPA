@@ -308,7 +308,7 @@
             <div class="col-3 grayDiv text-center">{{H_TSKC}}</div>
             <div class="col-2">€/batch</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType!='T' || resType!='H'">
+          <div class="row justify-content-start w-100" *ngIf="resType=='T'">
             <div class="col-4">{{'Total Tooling cost' | translate }}</div>
             <div class="col-3">TGC</div>
             <div class="col-3 grayDiv text-center">{{T_TGC}}</div>
@@ -326,7 +326,6 @@
             <div class="col-3 grayDiv text-center">{{H_TGC}}</div>
             <div class="col-2">€/batch</div>
           </div>
-
         <div class="row justify-content-start w-100" *ngIf="resType=='S'">
           <div class="col-4">{{'Total no. of Solids' | translate }}</div>
           <div class="col-3">SPB</div>
