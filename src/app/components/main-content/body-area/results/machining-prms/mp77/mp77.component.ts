@@ -101,7 +101,7 @@ resType:string = ''
       var pr:clsPropertyValue = this.selectedRes[i][0];
       var value:string = '0'
       this.selectedRes[i].forEach(function (v) {
-        if (v.value != '')
+        if (v.value != '' && v.value != '0')
           value = v.value
       }); 
       if (pr && pr.property){
@@ -139,12 +139,12 @@ resType:string = ''
           break;
         }
         case 'DetailsListPrice':{
-          this.H_DHP = +(value.split('')[0])
-          this.I_IP = +(value.split('')[0])
+          this.H_DHP = +(value.split(' ')[0])
+          this.I_IP = +(value.split(' ')[0])
           break;
         }
         case 'HeaderListPrice':{
-          this.TP = +(value.split('')[0])
+          this.TP = +(value.split(' ')[0])
           break;
         }
         case 'Flutes':{
