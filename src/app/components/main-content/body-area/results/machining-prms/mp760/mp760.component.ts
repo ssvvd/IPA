@@ -126,7 +126,7 @@ export class Mp760Component implements OnInit {
           if (v.property)
           switch (v.property.Field){
           case 'DetailsListPrice':{
-            this.H_SHB = +(value.split(' ')[0])
+            this.H_SHP = +(value.split(' ')[0])
              this.THe_IP = +(value.split(' ')[0])
              break;
            }
@@ -135,7 +135,7 @@ export class Mp760Component implements OnInit {
              this.He_HP = +(value.split(' ')[0])
              this.He_HHP = +(value.split(' ')[0])
              this.S_SP = +(value.split(' ')[0])
-             this.H_SKB = +(value.split(' ')[0])
+             this.H_SKP = +(value.split(' ')[0])
              break;
            }
           }
