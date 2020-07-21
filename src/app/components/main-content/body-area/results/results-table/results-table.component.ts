@@ -157,6 +157,9 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         this.dtResultsObjectsHelp[i].kappaLeadAngle = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
         if (this.dtPropertiesTable[j].Field == 'DetailsIsExpand'){
+          if (rowsCount < 4)
+          this.dtResultsObjectsHelp[i].IsExpand = true;
+          else
           this.dtResultsObjectsHelp[i].IsExpand = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           this.filterRecommended(this.dtResultsObjectsHelp[i]);
         }
