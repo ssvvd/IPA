@@ -6,10 +6,13 @@ import { StateManagerService } from 'src/app/services/statemanager.service';
 import { CookiesService } from 'src/app/services/cookies.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import {MachinePpAddFavoriteComponent} from 'src/app/components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
+import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
+import { NgxSpinnerService } from "ngx-spinner"; 
+import { LoginService } from 'src/app/services/login.service';
 //import { ENGINE_METHOD_DIGESTS } from 'constants';
 
 @Component({
@@ -43,7 +46,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
-          private modalService: NgbModal) {   
+          private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
 
   ngOnInit() {  
@@ -182,45 +185,59 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   { 
     if(this.srv_appsetting.UserID=='')
     {
-      alert('Only for registered user');
-      return;
-    }       
-    const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
-    modalRef.componentInstance.MachineName = mach.MachineName;
-    
-    if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
-        
-    modalRef.result.then((result) => {
-      if(result=='cancel') return;
-      if(mach.isFavorite && result=='delete')
-      {
-        mach.isFavorite =false;
-        this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
-        this.Initializemachinelist(true);
-        this.eventsChangeFavorite.next();
-      }
-      else         
-      {            
-        if(mach.isFavorite) 
+      //alert('Only for registered user');
+      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
+      //modalRef.componentInstance.MachineName = mach.MachineName;
+      modalRef.result.then((result) => {
+        if(result=='cancel') return;
+        if(result=='login')
         {
-            //change only machine name
-            this.eventsSubscription.add(this.srv_machine.machine_update_name(
-              mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => { 
-                this.Initializemachinelist(true);
-                this.eventsChangeFavorite.next();               
-           }));  
-        }
-        else
+          this.SpinnerService.show();
+          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
+          return;
+        }});
+      
+    }    
+    else
+    {
+      const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
+      modalRef.componentInstance.MachineName = mach.MachineName;
+      
+      if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
+          
+      modalRef.result.then((result) => {
+        if(result=='cancel') return;
+        if(mach.isFavorite && result=='delete')
         {
-          this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
-            this.Initializemachinelist(true);
-            this.eventsChangeFavorite.next();                   
-            }); 
+          mach.isFavorite =false;
+          this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
+          this.Initializemachinelist(true);
+          this.eventsChangeFavorite.next();
         }
-        
-        
-      }         
-  } );
+        else         
+        {            
+          if(mach.isFavorite) 
+          {
+              //change only machine name
+              this.eventsSubscription.add(this.srv_machine.machine_update_name(
+                mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => { 
+                  this.Initializemachinelist(true);
+                  this.eventsChangeFavorite.next();               
+             }));  
+          }
+          else
+          {
+            this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+              this.Initializemachinelist(true);
+              this.eventsChangeFavorite.next();                   
+              }); 
+          }
+          
+          
+        }         
+    } );
+    }   
+
 } 
 
 /* BuildMachineUser(id:number,id_new:number,name_new:string) 

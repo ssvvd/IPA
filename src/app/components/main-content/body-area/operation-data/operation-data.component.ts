@@ -61,7 +61,11 @@ export class OperationDataComponent implements OnInit {
                 valuemax: d.valuemax ,
                 image:d.image ,
                 image1:d.image1==null?'':d.image1,
-                required:d.required     
+                description: d.description==null?'':d.description, 
+                required:d.required,
+                units:d.units==null?'':d.units,
+                istooldetails:d.istooldetails==null?'':d.istooldetails, 
+                valueall:d.valueall==null?'':d.valueall
             })                            
               // alert(this.isLoaded);                                  
         }

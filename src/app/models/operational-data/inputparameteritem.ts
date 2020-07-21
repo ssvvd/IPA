@@ -15,6 +15,10 @@ export class InputParameterItem {
     public image:string;
     public image1:string;
     public required;
+    public description;
+    public units:string;
+    public istooldetails:string;
+    public valueall:string;
     
     constructor()
     {

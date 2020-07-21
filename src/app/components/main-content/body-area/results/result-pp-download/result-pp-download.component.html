@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title siteTitle">{{'Chose download format' | translate}}</h4>
+    <h4 class="modal-title siteTitle">{{'Choose download format' | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -7,24 +7,24 @@
   <div class="modal-body">
     <div class="form-group row">
         <div class="col-3">
-            <img  [src] = "environment.ImagePath+'icon_PDF.svg'" (click) ="Download('PDF')">
+            <img  data-toggle="tooltip" title="{{'Export To PDF' | translate}}" class="cursor-pointer"  [src] = "environment.ImagePath+'icon_PDF.svg'" (click) ="Download('PDF')">
         </div>
         <div class="col-3">
-            <img src = "environment.ImagePath+'icon_p21.svg'" (click) ="Download('P21')">
+            <img data-toggle="tooltip" title="{{'Export To P21' | translate}}" class="cursor-pointer" [src] = "environment.ImagePath+'icon_p21.svg'" (click) ="Download('P21')">
         </div>
         <div class="col-3">
-            <img src = "environment.ImagePath+'icon_Package.svg'" (click) ="Download('FP')">
+            <img data-toggle="tooltip" title="{{'Export To File Package' | translate}}" class="cursor-pointer" [src] = "environment.ImagePath+'icon_Package.svg'" (click) ="Download('FP')">
         </div>
         <div class="col-3">
-            <img [src] = "environment.ImagePath+'icon_2D3D.svg'" (click) ="Download('D2D3')">
+            <img data-toggle="tooltip" title="{{'Export To 2D3D' | translate}}" class="cursor-pointer" [src] = "environment.ImagePath+'icon_2D3D.svg'" (click) ="Download('D2D3')">
         </div>
     </div>
   </div>
   <div class="modal-footer">       
-    <button type="button" class="btn btn-select-cancel" (click)="this.activeModal.close('cancel')"  >Cancel</button>        
+   <!--  <button type="button" class="btn btn-select-cancel" (click)="this.activeModal.close('cancel')"  >Cancel</button>        
     <div>
       <button type="button" class="btn btn-select">Save</button>
-    </div> 
-  </div>
+    </div>  -->
+  </div> 
 
 
