@@ -327,7 +327,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
           let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
           let value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           switch (fieldsmallSplit){
-            case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':case 'CSP':case 'CP':
+            case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':case 'CSP':case 'CP':case 'ZEFF':
               if (value && value > 0){
               this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
               }
@@ -648,7 +648,7 @@ switch(this.srv_StMng.SecApp.toString()){
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
         }
         else{
-          if (this.dtResultsObjectsHelp[index].NOF >= 2) 
+          if (this.dtResultsObjectsHelp[index].ZEFF >= 2) 
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Head'
           else
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'External Insert'
@@ -704,7 +704,7 @@ ngOnChanges(changes:SimpleChanges) {
        case 'SH':
         if (this.srv_StMng.SecApp == '77')
         {
-          if (this.dtResultsObjectsHelp[i].itemType.indexOf('T') != -1 && this.dtResultsObjectsHelp[i].NOF >= 2){
+          if (this.dtResultsObjectsHelp[i].itemType.indexOf('T') != -1 && this.dtResultsObjectsHelp[i].ZEFF >= 2){
             if (!this.filterChangedRec.Res)
                 this.dtResultsObjectsHelp[i].isHidden++
             else
@@ -721,7 +721,7 @@ ngOnChanges(changes:SimpleChanges) {
           break;
         case 'IT':
           if (this.srv_StMng.SecApp == '77'){
-            if (this.dtResultsObjectsHelp[i].itemType.indexOf('T') != -1 && this.dtResultsObjectsHelp[i].NOF < 2){
+            if (this.dtResultsObjectsHelp[i].itemType.indexOf('T') != -1 && this.dtResultsObjectsHelp[i].ZEFF < 2){
               if (!this.filterChangedRec.Res)
                   this.dtResultsObjectsHelp[i].isHidden++
               else
