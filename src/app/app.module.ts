@@ -78,6 +78,7 @@ import { MachinePpAddFavoriteComponent } from './components/main-content/body-ar
 import { InnerTabsTableComponent } from './components/main-content/body-area/results/inner-tabs-table/inner-tabs-table.component';
 import { ResultPpDownloadComponent } from './components/main-content/body-area/results/result-pp-download/result-pp-download.component';
 import { Mp760Component } from './components/main-content/body-area/results/machining-prms/mp760/mp760.component';
+import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 
 @NgModule({
   declarations: [   
@@ -139,7 +140,8 @@ import { Mp760Component } from './components/main-content/body-area/results/mach
     Mp77Component,
     InnerTabsTableComponent,
     ResultPpDownloadComponent,
-    Mp760Component
+    Mp760Component,
+    MachinesPpLoginComponent
   ],
   imports: [
     FormsModule,

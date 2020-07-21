@@ -918,7 +918,6 @@ getPropWithoutUnits(pr:string){
   else{
     return pr;
   }
-
 }
 
 DownLoadData()

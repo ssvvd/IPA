@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="modal-title siteTitle">{{'My Machines:' | translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group row">
+      <label  class="col-sm-2">{{'Please '| translate}}</label><a (click)="this.activeModal.close('login')">login</a>
+      <span>{{'to add the machine to My Machines'| translate}}</span>      
+      <!-- <div class="col-sm-10">
+        <label   class="form-control">{{MachineNameNew}}</label>
+      </div> -->
+    </div>
+  </div>
+ 
+
+
