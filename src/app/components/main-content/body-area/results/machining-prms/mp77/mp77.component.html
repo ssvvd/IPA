@@ -107,7 +107,7 @@
 
 
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Machine cost' | translate }}</div>
+        <div class="col-4">{{'Machine cost (per hour)' | translate }}</div>
         <div class="col-3">MCH</div>
         <div class="col-3 grayDiv text-center">{{MCH}}</div>
         <div class="col-2">€/hour</div>
@@ -233,8 +233,8 @@
         <div class="col-2">€/batch</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="resType=='H'">
-        <div class="col-4">{{'Total cost of cutting tools' | translate }}</div>
-        <div class="col-3">CTB</div>
+        <div class="col-4">{{'Total Tooling cost' | translate }}</div>
+        <div class="col-3">TGC</div>
         <div class="col-3 grayDiv text-center">{{H_CTB}}</div>
         <div class="col-2">€/batch</div>
       </div>
@@ -245,7 +245,7 @@
         <div class="col-2">€/batch</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Machine cost ' | translate }}</div>
+        <div class="col-4">{{'Total Machine cost ' | translate }}</div>
         <div class="col-3">MCB</div>
         <div class="col-3 grayDiv text-center">{{MCB}}</div>
         <div class="col-2">€/batch</div>
