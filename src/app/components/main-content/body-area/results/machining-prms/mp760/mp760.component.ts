@@ -5,6 +5,19 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { ResultsService} from 'src/app/services/results.service' ;
 import {clsHelpProp} from 'src/app/models/results/help-prop';
 
+class ResRow {
+  Name: string;
+  Value: number;
+  Unit: string;
+}
+
+export class MPResult {
+  ResultRowList: Array<ResRow>;
+  Status: boolean;
+  ErrorDescription: string;
+  route: string;
+}
+
 @Component({
   selector: 'mp760',
   templateUrl: './mp760.component.html',
@@ -73,6 +86,7 @@ export class Mp760Component implements OnInit {
   TCB:number
   THeH_I:number
   He_Is:number
+  Flutes:number
   catalogNo:string[]=[]
   resType:string = ''
 
@@ -97,9 +111,9 @@ export class Mp760Component implements OnInit {
     this.reset()
 
 
-    this.D = +this.srv_StMng.IPL.GetItem('Depth').value
-    this.W = +this.srv_StMng.IPL.GetItem('Width').value
-    this.L = +this.srv_StMng.IPL.GetItem('Length').value
+    this.D = +this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value
+    this.W = +this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value
+    this.L = +this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value
     this.MCH = this.srv_StMng.SelectedMachine.CostPerHour
 
     //output
@@ -107,9 +121,27 @@ export class Mp760Component implements OnInit {
       var pr:clsPropertyValue = this.selectedRes[i][0];
       var value:string = '0'
       this.selectedRes[i].forEach(function (v) {
-        if (v.value != '')
+        if (v.value != '' && v.value != '0'){
           value = v.value
-      }); 
+          if (v.property)
+          switch (v.property.Field){
+          case 'DetailsListPrice':{
+            this.H_SHB = +(value.split(' ')[0])
+             this.THe_IP = +(value.split(' ')[0])
+             break;
+           }
+           case 'HeaderListPrice':{
+             this.T_TP = +(value.split(' ')[0])
+             this.He_HP = +(value.split(' ')[0])
+             this.He_HHP = +(value.split(' ')[0])
+             this.S_SP = +(value.split(' ')[0])
+             this.H_SKB = +(value.split(' ')[0])
+             break;
+           }
+          }
+        }
+          
+      }.bind(this)); 
       if (pr && pr.property){
       switch (pr.property.Field){
         case 'CuttingSpeed':{
@@ -120,7 +152,7 @@ export class Mp760Component implements OnInit {
           this.fz = value
           break;
         }
-        case 'Tool_D':{
+        case 'DMin':{
           this.DC = value
           break;
         }
@@ -160,21 +192,9 @@ export class Mp760Component implements OnInit {
           this.n = +value
           break;
         }
-        case 'DetailsListPrice':{
-         this.H_SHB = +value
-          this.THe_IP = +value
-          break;
-        }
-        case 'HeaderListPrice':{
-          this.T_TP = +value
-          this.He_HP = +value
-          this.He_HHP = +value
-          this.S_SP = +value
-          this.H_SKB = +value
-          break;
-        }
         case 'Flutes':{
           this.NOF = +value
+          this.Flutes = +value
           break;
         }
         case 'NoOfTeeth':{
@@ -185,6 +205,10 @@ export class Mp760Component implements OnInit {
           this.THe_CEDC = +value
           break;
         }
+        // case 'Flutes':{
+          
+        //   break;
+        // }
       }
 
     if (pr.property.Field.toLowerCase().includes('catalogno') && pr.value.trim().length == 7){
@@ -226,10 +250,10 @@ if (pr.value.trim().length == 7){
 this.B = 100
 this.He_Is = 100
 this.THeH_I = 110
-this.CTF = +this.NOPE * +this.NOPP * this.L / this.Vf //NOPE * NOPP * L / Vf
+this.CTF = Math.round((+this.NOPE * +this.NOPP * this.L / this.Vf) * 100)/100 //NOPE * NOPP * L / Vf
 this.TLL = 50
 this.TLT = 50
-this.FCE = this.TLT / this.CTF
+this.FCE = Math.round((this.TLT / this.CTF) * 100)/100
 this.THe_IPB = Math.ceil((this.B / this.FCE / this.THe_CEDC) * this.THe_CICT)
 this.T_TPB = Math.ceil(this.B / this.FCE / this.THe_CEDC / this.THeH_I)
 this.He_TPB = this.T_TPB
@@ -247,8 +271,8 @@ this.H_TSHC = this.H_SHP * this.H_SHB
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC = this.H_TSHC + this.H_TSKC
 
-this.MTB = this.B * this.FCE * this.CTF / 60
-this.MCB = this.MTB * this.MCH
+this.MTB = Math.round((this.B * this.FCE * this.CTF / 60) * 100) / 100
+this.MCB = Math.round((this.MTB * this.MCH) * 100) / 100
 
 if (this.selectedHelp.itemTypeRes == 'S'){
   this.resType = "S"
@@ -284,9 +308,84 @@ if (this.selectedHelp.itemTypeRes == 'S'){
 // this.TCB = this.H_TGC + this.MCB
 
 
+let _Mc:number = 0 
+let _Kc:number = 0      
+let _FHA:number = 0
+let GFSCOD:number = 0
+let subApp:string = 'Shouldering'
+let insertType:string = ''
+let thickFirstParam = this.ap
+let thickSecondParam = ''
+let cutForceFirts:string = ''
+let cutForceSecond:string = ''
+let cutForceThird:string = ''
+
+//(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String,families)
+this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,this.selectedHelp.kappaLeadAngle,
+this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toString()).subscribe((res: any) => {
+  let paramsValues:string = JSON.parse(res); 
+  var splitted = paramsValues.split(","); 
+    if (splitted.length == 4){
+      _Mc = +splitted[0]
+      _Kc = +splitted[1]
+       _FHA = +splitted[2]
+      GFSCOD = +splitted[3]
+
+      if (this.selectedHelp.SecondaryAppOrig1 == '59'){
+        if (this.selectedHelp.itemType.includes('S')){
+          insertType = 'Solidcarbidecutter'
+          cutForceFirts = _FHA.toString()
+        }          
+        else
+        {
+          insertType = 'StraightEdge'
+          thickFirstParam = this.selectedHelp.kappaLeadAngle.toString()  
+          cutForceFirts = this.selectedHelp.kappaLeadAngle.toString()
+        } 
+      }
+      else if (this.selectedHelp.SecondaryAppOrig1 == '700'){
+        insertType = 'FastFeed'
+        thickSecondParam = this.selectedHelp.kappaLeadAngle.toString()
+        cutForceFirts = this.selectedHelp.kappaLeadAngle.toString()
+      }
+      else if (GFSCOD > 0){
+        insertType = 'Extflutemillingcutter'
+        cutForceFirts = this.L.toString()
+        cutForceSecond = '0.2'
+        cutForceThird = '35'
+      }
+          
+
+
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Extflutemillingcutter/{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{L}/{delta}/{alpha}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FeedMillInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/StraightEdge         /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Solidcarbidecutter   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{alpha}
+  //GetCuttingForcesMilling(subApp:string,insertType:string,DD:number,ae:number,z:number,fz:number,ap:number,Kc:number,Mc:number,rake:number,k:number,delta:number,alpha:number)
+
+  this.srv_Results.GetCuttingForcesMilling(subApp,insertType,+this.DC,+this.ae,this.NOF,+this.fz,+this.ap,_Kc,_Mc,0,cutForceFirts,cutForceSecond,cutForceThird).subscribe((res: any) => {
+    var result = res as MPResult;
+    this.Fb = Math.round(result.ResultRowList[0].Value * 100)/100
+    this.mb  = Math.round(((this.Fb  * this.O) / 1000)* 100)/100
+  })
+
+
+  //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge        /{D}/{ae}/{fz}  /{k}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}  /{ap}/{k}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}  /{ap}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}  /{ap}
+//GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
+      this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
+        var result = res as MPResult;
+        this.hm = Math.round(result.ResultRowList[0].Value * 100)/100
+        this.MCT = Math.round(result.ResultRowList[1].Value * 100)/100
+      })
 
 
 
+    }
+
+})
 
 
 
@@ -299,6 +398,7 @@ if (this.selectedHelp.itemTypeRes == 'S'){
 
   reset(){
 
+this.Flutes = 0
 this.DC	=	''
 this.D	=	0
 this.W	=	0
@@ -355,7 +455,7 @@ this.S_TSC	=	0
 this.MCB	=	0
 this.MTB	=	0
 this.TCB	=	0
-
+this.catalogNo=[]
   }
 
 }

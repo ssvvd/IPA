@@ -112,6 +112,13 @@ export class ResultsService {
     });
   }
 
+  public  GetMPowerParams760(material:number,  Units:string,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String,  fNoList:String)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParams760/' + material + '/' + Units + '/' + KappaLeadAngle + '/' + Flutes + '/' + Feed + '/' + catalogNoList + '/' + fNoList).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
 
   public  GetFlatDataField(field:string, item:string, secApp:string, units:string )
   {        
@@ -133,7 +140,7 @@ export class ResultsService {
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FeedMillInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{k}
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/StraightEdge         /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{k}
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Solidcarbidecutter   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}/{alpha}
-  public  GetCuttingForcesMilling(subApp:string,insertType:string,DD:number,ae:number,z:number,fz:number,ap:number,Kc:number,Mc:number,rake:number,k:number,delta:number,alpha:number)
+  public  GetCuttingForcesMilling(subApp:string,insertType:string,DD:number,ae:number,z:number,fz:number,ap:number,Kc:number,Mc:number,rake:number,k:string,delta:string,alpha:string)
   {        
     return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Milling/'  + subApp + '/' + insertType + '/' +  DD + '/' + ae + '/' + z + '/' + fz + '/' + ap + '/' + Kc + '/' + Mc + '/' + rake + '/' + k + '/' + delta + '/' + alpha).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
@@ -145,7 +152,7 @@ export class ResultsService {
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}/{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}/{ap}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}/{ap}
-  public  GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
+  public  GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:string,k:string)
   {        
     return  this.httpClient.get(environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
