@@ -210,36 +210,7 @@ export class Mp760Component implements OnInit {
         //   break;
         // }
       }
-
-    if (pr.property.Field.toLowerCase().includes('catalogno') && pr.value.trim().length == 7){
-
-      this.selectedRes[i].forEach(function (value) {
-        pr = value
-if (pr.value.trim().length == 7){
-
-
-        this.catalogNo.push(pr.value.trim());
-        this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
-          let prmLta:string = JSON.parse(res); 
-          if (prmLta != '9999'){
-            this.O = Math.round((this.O + +prmLta) * 100)/100
-          }
-        })
-  
-        this.srv_Results.GetRatioLD(pr.value).subscribe((res: any) => {
-          let prmRatioLD:string = JSON.parse(res); 
-          if (prmRatioLD != '0'){
-            this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
-          }
-        })
-  
-      }
-      }.bind(this));
-
-
-
-    }
-      
+ 
 
 
     }
@@ -275,10 +246,10 @@ this.MTB = Math.round((this.B * this.FCE * this.CTF / 60) * 100) / 100
 this.MCB = Math.round((this.MTB * this.MCH) * 100) / 100
 
 if (this.selectedHelp.itemTypeRes == 'S'){
-  this.resType = "S"
+  this.resType = "S" //Solid
   this.TCB = this.S_TSC + this.MCB
 }else if (this.selectedHelp.itemTypeRes == 'H'){
-  this.resType = "H"
+  this.resType = "H" //MM
   this.TCB = this.H_TGC + this.MCB
 }else{
   this.resType = "T"
@@ -293,6 +264,36 @@ if (this.selectedHelp.itemTypeRes == 'S'){
       })
 }
 }
+
+
+// let itemIndex:number = 0
+  this.selectedHelp.CatalogNo.forEach(function (value) {
+if (value.trim().length == 7){
+
+
+    this.catalogNo.push(value.trim());
+    this.srv_Results.GetItemParameterValueSpecial(value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
+      let prmLta:string = JSON.parse(res); 
+      if (prmLta != '9999'){
+        this.O = Math.round((this.O + +prmLta) * 100)/100
+      }
+    })
+
+    this.srv_Results.GetRatioLD(value,this.srv_appsetting.Units).subscribe((res: any) => {
+      let prmRatioLD:string = JSON.parse(res); 
+      if (prmRatioLD != '0'){
+        if (this.selectedHelp.itemType[this.selectedHelp.CatalogNo.indexOf(value,0)] == 'I' && this.THe_CICT != 0)
+          prmRatioLD = (+prmRatioLD * this.THe_CICT).toString()
+        this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
+      }
+    })
+
+  }
+  // itemIndex++
+  }.bind(this));
+
+
+
 
 // //T
 // if (this.resType == "T")
