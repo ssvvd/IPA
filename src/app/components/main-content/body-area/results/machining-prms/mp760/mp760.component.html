@@ -9,19 +9,19 @@
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100">
-          <div class="col-4">{{'Depth (D)' | translate }}</div>
+          <div class="col-4">{{'Depth' | translate }}</div>
           <div class="col-3">D</div>
           <div class="col-3 grayDiv text-center">{{D}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100"> 
-          <div class="col-4">{{'Width (W)' | translate }}</div>
+          <div class="col-4">{{'Width' | translate }}</div>
           <div class="col-3">W</div>
           <div class="col-3 grayDiv text-center">{{W}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100">
-          <div class="col-4">{{'Length (L)' | translate }}</div>
+          <div class="col-4">{{'Length' | translate }}</div>
           <div class="col-3">L</div>
           <div class="col-3 grayDiv text-center">{{L}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -176,22 +176,22 @@
             <div class="col-2">mm:ss</div>
           </div>
           <div class="row justify-content-start w-100">
-            <div class="col-4">{{'Number of Flutes' | translate }}</div>
+            <div class="col-4">{{'Flute count' | translate }}</div>
             <div class="col-3">NOF</div>
             <div class="col-3 grayDiv text-center">{{NOF}}</div>
-            <div class="col-2">Inserts</div>
+            <div class="col-2">Flutes</div>
           </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
-          <div class="col-4">{{'No. of Inserts on drill body' | translate }}</div>
+          <div class="col-4">{{'Cutting item count' | translate }}</div>
           <div class="col-3">CICT</div>
           <div class="col-3 grayDiv text-center">{{THe_CICT}}</div>
           <div class="col-2">Inserts</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
-          <div class="col-4">{{'No. of Edges per Insert' | translate }}</div>
+          <div class="col-4">{{'Cutting edge count' | translate }}</div>
           <div class="col-3">CEDC</div>
           <div class="col-3 grayDiv text-center">{{THe_CEDC}}</div>
-          <div class="col-2"></div>
+          <div class="col-2">Edges</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
             <div class="col-4">{{'Insert price' | translate }}</div>
@@ -242,25 +242,25 @@
             <div class="col-2">pcs</div>
           </div>      
         <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
-          <div class="col-4">{{'Total no. of Inserts' | translate }}</div>
+          <div class="col-4">{{'Total number of Inserts' | translate }}</div>
           <div class="col-3">IPB</div>
           <div class="col-3 grayDiv text-center">{{THe_IPB}}</div>
           <div class="col-2">Inserts/batch</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T'">
-            <div class="col-4">{{'Total no. of Tools' | translate }}</div>
+            <div class="col-4">{{'Total number of Tools' | translate }}</div>
             <div class="col-3">TPB</div>
             <div class="col-3 grayDiv text-center">{{T_TPB}}</div>
             <div class="col-2">Tools/batch</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='He'">
-            <div class="col-4">{{'Total no. of Heads' | translate }}</div>
+            <div class="col-4">{{'Total number of Heads' | translate }}</div>
             <div class="col-3">TPB</div>
             <div class="col-3 grayDiv text-center">{{He_TPB}}</div>
             <div class="col-2">Heads/batch</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='He'">
-            <div class="col-4">{{'Total no. of Shanks' | translate }}</div>
+            <div class="col-4">{{'Total number of Shanks' | translate }}</div>
             <div class="col-3">THH</div>
             <div class="col-3 grayDiv text-center">{{He_THH}}</div>
             <div class="col-2">Shanks/batch</div>

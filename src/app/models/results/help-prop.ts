@@ -33,6 +33,7 @@ export class clsHelpProp {
     RE:number;
     NOF:number;
     CHW:number;
+    ZEFF:number;
     IC:number;
     L:number;
     PSIR:number;

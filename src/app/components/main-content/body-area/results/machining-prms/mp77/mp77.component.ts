@@ -223,7 +223,7 @@ if (pr.value.trim().length == 7){
   }
 
     //calc
-    this.B = 50000;
+    this.B = 500;
     this.HPP = 1;
     this.HI_I = 30;
     this.TLL = 50;

@@ -381,6 +381,10 @@ html, body{
   //overflow: hidden;
 } 
 
+.grayDiv{
+  background-color: #f0f2f4;
+}
+
 .ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
  .ng-select-container.ng-has-value .ng-value-container 
  .ng-value{ visibility: visible; }
