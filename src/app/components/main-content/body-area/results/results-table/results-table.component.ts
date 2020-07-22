@@ -158,7 +158,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
         if (this.dtPropertiesTable[j].Field == 'DetailsIsExpand'){
           if (rowsCount < 4)
-          this.dtResultsObjectsHelp[i].IsExpand = true;
+          this.dtResultsObjectsHelp[i].IsExpand = "True";
           else
           this.dtResultsObjectsHelp[i].IsExpand = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           this.filterRecommended(this.dtResultsObjectsHelp[i]);
