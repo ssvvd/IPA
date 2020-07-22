@@ -929,9 +929,11 @@ DownLoadData()
       
   modalRef.result.then((result) => {
     if(result=='cancel') return;
-    this.srv_down.DownLoadResult(result);        
+    //this.SpinnerService.show();
+    this.srv_down.DownLoadData(result) ;  
+    //todo:with subscribe 
+    //this.SpinnerService.hide();                      
   });
-
 }
 
 }

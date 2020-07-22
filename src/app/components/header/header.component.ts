@@ -119,7 +119,7 @@ export class HeaderComponent implements OnInit {
   
   openhelp()
   {
-    this.srv_down.DownLoadResult('');
+    //this.srv_down.DownLoadResult('');
   }
 
   openfavorite()
