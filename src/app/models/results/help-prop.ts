@@ -78,7 +78,7 @@ export class clsHelpProp {
         else{
             this._FzminF = []
             for (let entry of this.CatalogNoT) {
-                this.srv_Results.getfzminf(entry.trim()).subscribe((res: any) => {
+                this.srv_Results.getfzminf(entry.trim(),this.SecondaryAppOrig1).subscribe((res: any) => {
                     this._FzminF.push(JSON.parse(res)); 
                     if (this._FzminF.length = this.CatalogNoT.length){
                         this.fZiminFCheckHidden(Res,control);
@@ -92,7 +92,7 @@ export class clsHelpProp {
     fZiminFCheckHidden(Res:boolean,control:string){
         switch (control){
             case 'IT':
-                if (this._FzminF.filter(s => s.trim() != '01' && s.trim() != '02').length > 0){
+                if (this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0){
                   if (!Res)
                       this.isHidden++
                   else
@@ -100,7 +100,7 @@ export class clsHelpProp {
                 }
                   break;
                case 'IH':
-                if (this._FzminF.filter(s => s.trim() == '01' || s.trim() == '02').length > 0){
+                if (this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0){
                   if (!Res)
                       this.isHidden++
                   else

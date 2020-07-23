@@ -53,9 +53,9 @@ export class ResultsService {
     });
   }
 
-  public  getfzminf(catNo:string)
+  public  getfzminf(catNo:string,secApp:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetFzMin_F/' + catNo).catch((err: HttpErrorResponse) => {      
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetFzMin_F/' + catNo + '/' + secApp).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";
     });

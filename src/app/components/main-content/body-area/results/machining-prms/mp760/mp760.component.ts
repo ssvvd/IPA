@@ -120,7 +120,7 @@ export class Mp760Component implements OnInit {
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
       var pr:clsPropertyValue = this.selectedRes[i][0];
       var value:string = '0'
-      
+
       this.selectedRes[i].forEach(function (v) {
         if (v.value != '' && v.value != '0'){
           value = v.value
@@ -247,6 +247,13 @@ this.H_TGC = this.H_TSHC + this.H_TSKC
 this.MTB = Math.round((this.B * this.FCE * this.CTF / 60) * 100) / 100
 this.MCB = Math.round((this.MTB * this.MCH) * 100) / 100
 
+
+/////TYPES
+///1. T itemType = T   TD_IT_InsertTool = 1
+///2. He  itemType = T TD_IT_InsertHead=1
+///3. S itemType = S
+///4. H itemType = H
+
 if (this.selectedHelp.itemTypeRes == 'S'){
   this.resType = "S" //Solid
   this.TCB = this.S_TSC + this.MCB
@@ -257,9 +264,9 @@ if (this.selectedHelp.itemTypeRes == 'S'){
   this.resType = "T"
   this.TCB = this.T_TGC + this.MCB
   for (let entry of this.selectedHelp.CatalogNoT) {
-    this.srv_Results.getfzminf(entry.trim()).subscribe((res: any) => {
+    this.srv_Results.getfzminf(entry.trim(),this.selectedHelp.SecondaryAppOrig1).subscribe((res: any) => {
         let _FzminF = JSON.parse(res)
-        if (_FzminF == '02' || _FzminF == '01'){
+        if (_FzminF == '02,307-01,SAI' || _FzminF == '01,307-01,SAI'){
           this.resType = "He"
           this.TCB = this.He_TGC + this.MCB
         }     
