@@ -103,7 +103,19 @@ resType:string = ''
       this.selectedRes[i].forEach(function (v) {
         if (v.value != '' && v.value != '0')
           value = v.value
-      }); 
+          if (v.property)
+          switch (v.property.Field){
+          case 'DetailsListPrice':{
+            this.H_DHP = +(value.split(' ')[0])
+            this.I_IP = +(value.split(' ')[0])
+             break;
+           }
+           case 'HeaderListPrice':{
+            this.TP = +(value.split(' ')[0])
+             break;
+           }
+          }
+      }.bind(this));  
       if (pr && pr.property){
       switch (pr.property.Field){
         case 'CuttingSpeed':{
@@ -138,22 +150,22 @@ resType:string = ''
           this.n = value
           break;
         }
-        case 'DetailsListPrice':{
-          this.H_DHP = +(value.split(' ')[0])
-          this.I_IP = +(value.split(' ')[0])
-          break;
-        }
-        case 'HeaderListPrice':{
-          this.TP = +(value.split(' ')[0])
-          break;
-        }
+        // case 'DetailsListPrice':{
+        //   this.H_DHP = +(value.split(' ')[0])
+        //   this.I_IP = +(value.split(' ')[0])
+        //   break;
+        // }
+        // case 'HeaderListPrice':{
+        //   this.TP = +(value.split(' ')[0])
+        //   break;
+        // }
         case 'Flutes':{
           this.Flutes = +value
           break;
         }
       }
 
-    if (pr.property.Field.toLowerCase().includes('catalogno') && pr.value.trim().length == 7){
+    if (pr.property.Field.toLowerCase().includes('catalogno')){
 
       this.selectedRes[i].forEach(function (value) {
         pr = value

@@ -120,6 +120,7 @@ export class Mp760Component implements OnInit {
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
       var pr:clsPropertyValue = this.selectedRes[i][0];
       var value:string = '0'
+      
       this.selectedRes[i].forEach(function (v) {
         if (v.value != '' && v.value != '0'){
           value = v.value
@@ -142,6 +143,7 @@ export class Mp760Component implements OnInit {
         }
           
       }.bind(this)); 
+
       if (pr && pr.property){
       switch (pr.property.Field){
         case 'CuttingSpeed':{
