@@ -387,8 +387,8 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
       this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
-        this.hm = Math.round(result.ResultRowList[0].Value * 100)/100
-        this.MCT = Math.round(result.ResultRowList[1].Value * 100)/100
+        this.hm = Math.round(result.ResultRowList[0].Value * 10000)/10000
+        this.MCT = Math.round(result.ResultRowList[1].Value * 10000)/10000
       })
 
 

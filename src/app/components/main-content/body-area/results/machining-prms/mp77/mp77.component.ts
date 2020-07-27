@@ -196,14 +196,14 @@ if (pr.value.trim().length == 7){
   
         this.srv_Results.GetPivotParamValue(pr.value.trim(),594,this.srv_StMng.SecApp).subscribe((res: any) => {
           let x:string = JSON.parse(res); 
-          if (x != '0'){
+          if (x != '0' && this.I_CICT != 0){
             this.I_CICT = Math.round((this.I_CICT + +x) * 100)/100
           }
         })
 
         this.srv_Results.GetPivotParamValue(pr.value.trim(),762,this.srv_StMng.SecApp).subscribe((res: any) => {
           let y:string = JSON.parse(res); 
-          if (y != '0'){
+          if (y != '0' && this.I_CEDC != 0){
             this.I_CEDC = Math.round((this.I_CEDC + +y) * 100)/100
           }
         })
