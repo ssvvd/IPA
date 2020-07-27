@@ -244,8 +244,8 @@ this.H_TSHC = this.H_SHP * this.H_SHB
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC = this.H_TSHC + this.H_TSKC
 
-this.MTB = Math.round((this.B * this.FCE * this.CTF / 60) * 100) / 100
-this.MCB = Math.round((this.MTB * this.MCH) * 100) / 100
+this.MTB = this.B * this.CTF
+this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100) / 100
 
 
 /////TYPES
