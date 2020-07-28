@@ -144,11 +144,8 @@ import { MpIsoTurningComponent } from './components/main-content/body-area/resul
     ResultPpDownloadComponent,
     Mp760Component,
     MachinesPpLoginComponent,
-<<<<<<< HEAD
-    ResultPpInventoryComponent
-=======
+    ResultPpInventoryComponent,
     MpIsoTurningComponent
->>>>>>> 15335a16ef0081f280dc8e120226aa94b446a334
   ],
   imports: [
     FormsModule,
