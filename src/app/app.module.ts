@@ -80,6 +80,7 @@ import { ResultPpDownloadComponent } from './components/main-content/body-area/r
 import { Mp760Component } from './components/main-content/body-area/results/machining-prms/mp760/mp760.component';
 import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 import { ResultPpInventoryComponent } from './components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
+import { MpIsoTurningComponent } from './components/main-content/body-area/results/machining-prms/mp-iso-turning/mp-iso-turning.component';
 
 @NgModule({
   declarations: [   
@@ -143,7 +144,11 @@ import { ResultPpInventoryComponent } from './components/main-content/body-area/
     ResultPpDownloadComponent,
     Mp760Component,
     MachinesPpLoginComponent,
+<<<<<<< HEAD
     ResultPpInventoryComponent
+=======
+    MpIsoTurningComponent
+>>>>>>> 15335a16ef0081f280dc8e120226aa94b446a334
   ],
   imports: [
     FormsModule,

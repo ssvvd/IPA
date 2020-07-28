@@ -120,6 +120,7 @@ export class Mp760Component implements OnInit {
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
       var pr:clsPropertyValue = this.selectedRes[i][0];
       var value:string = '0'
+
       this.selectedRes[i].forEach(function (v) {
         if (v.value != '' && v.value != '0'){
           value = v.value
@@ -142,6 +143,7 @@ export class Mp760Component implements OnInit {
         }
           
       }.bind(this)); 
+
       if (pr && pr.property){
       switch (pr.property.Field){
         case 'CuttingSpeed':{
@@ -210,36 +212,7 @@ export class Mp760Component implements OnInit {
         //   break;
         // }
       }
-
-    if (pr.property.Field.toLowerCase().includes('catalogno') && pr.value.trim().length == 7){
-
-      this.selectedRes[i].forEach(function (value) {
-        pr = value
-if (pr.value.trim().length == 7){
-
-
-        this.catalogNo.push(pr.value.trim());
-        this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
-          let prmLta:string = JSON.parse(res); 
-          if (prmLta != '9999'){
-            this.O = Math.round((this.O + +prmLta) * 100)/100
-          }
-        })
-  
-        this.srv_Results.GetRatioLD(pr.value).subscribe((res: any) => {
-          let prmRatioLD:string = JSON.parse(res); 
-          if (prmRatioLD != '0'){
-            this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
-          }
-        })
-  
-      }
-      }.bind(this));
-
-
-
-    }
-      
+ 
 
 
     }
@@ -271,28 +244,65 @@ this.H_TSHC = this.H_SHP * this.H_SHB
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC = this.H_TSHC + this.H_TSKC
 
-this.MTB = Math.round((this.B * this.FCE * this.CTF / 60) * 100) / 100
-this.MCB = Math.round((this.MTB * this.MCH) * 100) / 100
+this.MTB = Math.round(this.B * this.CTF * 100)/100
+this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100) / 100
+
+
+/////TYPES
+///1. T itemType = T   TD_IT_InsertTool = 1
+///2. He  itemType = T TD_IT_InsertHead=1
+///3. S itemType = S
+///4. H itemType = H
 
 if (this.selectedHelp.itemTypeRes == 'S'){
-  this.resType = "S"
+  this.resType = "S" //Solid
   this.TCB = this.S_TSC + this.MCB
 }else if (this.selectedHelp.itemTypeRes == 'H'){
-  this.resType = "H"
+  this.resType = "H" //MM
   this.TCB = this.H_TGC + this.MCB
 }else{
   this.resType = "T"
   this.TCB = this.T_TGC + this.MCB
   for (let entry of this.selectedHelp.CatalogNoT) {
-    this.srv_Results.getfzminf(entry.trim()).subscribe((res: any) => {
+    this.srv_Results.getfzminf(entry.trim(),this.selectedHelp.SecondaryAppOrig1).subscribe((res: any) => {
         let _FzminF = JSON.parse(res)
-        if (_FzminF == '02' || _FzminF == '01'){
+        if (_FzminF == '02,307-01,SAI' || _FzminF == '01,307-01,SAI'){
           this.resType = "He"
           this.TCB = this.He_TGC + this.MCB
         }     
       })
 }
 }
+
+
+// let itemIndex:number = 0
+  this.selectedHelp.CatalogNo.forEach(function (value) {
+if (value.trim().length == 7){
+
+
+    this.catalogNo.push(value.trim());
+    this.srv_Results.GetItemParameterValueSpecial(value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
+      let prmLta:string = JSON.parse(res); 
+      if (prmLta != '9999'){
+        this.O = Math.round((this.O + +prmLta) * 100)/100
+      }
+    })
+
+    this.srv_Results.GetRatioLD(value,this.srv_appsetting.Units).subscribe((res: any) => {
+      let prmRatioLD:string = JSON.parse(res); 
+      if (prmRatioLD != '0'){
+        if (this.selectedHelp.itemType[this.selectedHelp.CatalogNo.indexOf(value,0)] == 'I' && this.THe_CICT != 0)
+          prmRatioLD = (+prmRatioLD * this.THe_CICT).toString()
+        this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
+      }
+    })
+
+  }
+  // itemIndex++
+  }.bind(this));
+
+
+
 
 // //T
 // if (this.resType == "T")
@@ -377,8 +387,8 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
       this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
-        this.hm = Math.round(result.ResultRowList[0].Value * 100)/100
-        this.MCT = Math.round(result.ResultRowList[1].Value * 100)/100
+        this.hm = Math.round(result.ResultRowList[0].Value * 10000)/10000
+        this.MCT = Math.round(result.ResultRowList[1].Value * 10000)/10000
       })
 
 
