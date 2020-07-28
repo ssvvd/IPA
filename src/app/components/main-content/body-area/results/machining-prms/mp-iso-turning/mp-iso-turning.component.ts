@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { throws } from 'assert';
 
 @Component({
@@ -17,7 +18,7 @@ export class MpIsoTurningComponent implements OnInit {
   Df:number
   LA:number
 
-  constructor(private srv_StMng:StateManagerService) { }
+  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService) { }
 
   ngOnInit(): void {
   }
