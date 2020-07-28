@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h4 class="modal-title siteTitle">{{'Stock Availabality' | translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <div  *ngFor="let cat of objHelpProp.CatalogNo">{{cat}}</div>
+    </div>
+  </div>
+  <div class="modal-footer">       
+   <!--  <button type="button" class="btn btn-select-cancel" (click)="this.activeModal.close('cancel')"  >Cancel</button>        
+    <div>
+      <button type="button" class="btn btn-select">Save</button>
+    </div>  -->
+  </div> 

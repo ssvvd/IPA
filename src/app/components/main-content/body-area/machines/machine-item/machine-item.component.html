@@ -56,18 +56,18 @@
                                 <img [src]="machHeader.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(machHeader)">
                             </a> 
                         </div>
-                        <!-- <div class="pr-4 pt-2">                                                                 
-                            <a data-toggle="tooltip" title="{{'Default Machine' | translate}}" >
-                                <img src="{{environment.ImgDefault}}" class="icon-grid">
+                        <div class="pr-4 pt-2" *ngIf="machHeader.isFavorite">                                                                 
+                            <a data-toggle="tooltip" title="{{'Save Machine' | translate}}" >
+                                <img [src]="environment.ImagePath + 'Updat_Icon.svg'" (click)="OnSaveMachine();" class="icon-grid">
                             </a>                                              
-                        </div> -->
+                        </div> 
                     </div>
                     <div class="pt-2">                        
                         <button class="btn btn-select"  (click)="OnSelectMachine();" [routerLink]="['/home/materials']">{{'Select'| translate}}</button>                                                              
                     </div> 
-                    <div class="pt-2 pl-2" *ngIf="machHeader.isFavorite">                        
+                   <!--  <div class="pt-2 pl-2" *ngIf="machHeader.isFavorite">                        
                         <button class="btn btn-select"  (click)="OnSaveMachine();">{{'Save'| translate}}</button>                                                              
-                    </div>                                           
+                    </div>  -->                                          
                 </div>           
             <div class="form-group">
             </div>

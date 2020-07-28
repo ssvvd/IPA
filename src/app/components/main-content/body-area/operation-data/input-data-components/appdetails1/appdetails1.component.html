@@ -104,7 +104,7 @@
         </div>
         <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
             <div *ngIf="ImageName!=''">
-                <img src="{{ImageName}}" class="input-image">   
+                <img src="{{ImageName}}"  [className]="ImageName==environment.ImageInputPath + '1.png'? 'input-image-50' : 'input-image'">   
             </div>
         </div>    
     </div>

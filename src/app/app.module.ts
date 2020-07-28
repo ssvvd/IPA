@@ -79,6 +79,7 @@ import { InnerTabsTableComponent } from './components/main-content/body-area/res
 import { ResultPpDownloadComponent } from './components/main-content/body-area/results/result-pp-download/result-pp-download.component';
 import { Mp760Component } from './components/main-content/body-area/results/machining-prms/mp760/mp760.component';
 import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
+import { ResultPpInventoryComponent } from './components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
 
 @NgModule({
   declarations: [   
@@ -141,7 +142,8 @@ import { MachinesPpLoginComponent } from './components/main-content/body-area/ma
     InnerTabsTableComponent,
     ResultPpDownloadComponent,
     Mp760Component,
-    MachinesPpLoginComponent
+    MachinesPpLoginComponent,
+    ResultPpInventoryComponent
   ],
   imports: [
     FormsModule,

@@ -28,7 +28,11 @@ export class Appdetails790Component implements OnInit {
   
  ngOnInit() { 
     this.SetIPLMandatory(); 
-    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    if(this.HoleType=="Solid") 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_PH.png";
+
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value=='Solid') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole') this.HoleType="PreHole";   
@@ -53,7 +57,11 @@ export class Appdetails790Component implements OnInit {
         this.srv_StMng.IPL.GetItem('HoleTypeSolid').value='';
         this.srv_StMng.IPL.GetItem('HoleTypePreHole').value='PreHole';
         this.srv_StMng.IPL.GetItem('D3').required=true;
-      }                  
+      } 
+    if(val=="Solid") 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_PH.png";                 
  } 
 
   changeinputimage(val)
@@ -91,7 +99,10 @@ export class Appdetails790Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    if(this.HoleType=="Solid") 
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    else
+      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_PH.png";
   }
 
  ClearData()

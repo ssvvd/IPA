@@ -76,7 +76,7 @@ export class DownloadresultService {
 
     doc.setFontSize(12);
     this.addTextWithBackGround(doc,0,15,400,10,246,246,247,'Machining operation: ' + this.srv_statemanage.MainAppSelected.MenuName + ' ' + this.srv_statemanage.SecAppSelected.MenuName);         
-    this.addTextWithBackGround(doc,0,30,400,10,246,246,247,this.translate.instant('Material') + mat_desc);    
+    this.addTextWithBackGround(doc,0,30,400,10,246,246,247,"Material: " + mat_desc);    
     this.addTextWithBackGround(doc,0,45,400,10,246,246,247,'Machine: ' + desc_machine);    
     this.addTextWithBackGround(doc,0,60,400,10,246,246,247,'Operation Data:' );
        
@@ -84,59 +84,12 @@ export class DownloadresultService {
     this.BuildOperationData(doc);    
     //this.axial_y=this.axial_y+10; 
     doc.addPage();
+    doc.setFontSize(12);
     this.addTextWithBackGround(doc,0,0,400,10,246,246,247,'ITA Recommended:' );
     this.axial_y=5;
-    //doc.addPage();
-    
-   /*  doc.autoTable({ html: '#tbresult',startY: 30,headerStyles: {fillColor: '#757677'} ,margin : {      
-      horizontal : 2
-      },});
-    doc.save('ITARecommendations.pdf'); */
-
+   
     return this.BuildResult(doc);
 }
-
-/* BuildResult(doc:jsPDF)
-{
-  const div = document.getElementById('tbresult');   
-    const options = {
-      background: 'white',
-      scale: 3
-    };
-
-    html2canvas(div, options).then((canvas) => {
-
-      var img = canvas.toDataURL("image/PNG");
-      //var doc = new jsPDF('l', 'mm', 'a4', 1);
-
-      // Add image Canvas to PDF
-      const bufferX = 5;
-      const bufferY = 5;
-      const imgProps = (<any>doc).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
-      //doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      var imgWidth = 295; 
-      var pageHeight = 210;  
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-      //heightLeft -= pageHeight;
-      
-      var position = this.axial_y; // give some top padding to first page
-      //doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
-      while (heightLeft >= 0) {
-        position += heightLeft - imgHeight; // top padding for other pages        
-        doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-        if(heightLeft >= 0)        
-          doc.addPage();        
-      }      
-      //doc.addImage(img, 'PNG', bufferX, this.axial_y, pdfWidth, pdfHeight, undefined, 'FAST');          
-      return doc;
-       }).then((doc) => {
-      doc.save('ITARecommendations.pdf');
-    });     
-} */
 
 BuildResult(doc:jsPDF):any
 {
@@ -171,19 +124,9 @@ BuildResult(doc:jsPDF):any
           doc.addImage(canvas, 'PNG', 0,30, imgWidth, imgHeight);
         else        
           doc.addImage(canvas, 'PNG', 0,(adjust)*r+30, imgWidth, imgHeight);     
-        doc.addPage();
+        if(r<extraNo-1) doc.addPage();
       }
-      
-     /*  var position = this.axial_y; // give some top padding to first page
-      
-      while (heightLeft >= 0) {
-        position += heightLeft - imgHeight; // top padding for other pages        
-        doc.addImage(img, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-        if(heightLeft >= 0)        
-          doc.addPage();        
-      }     */  
-      //doc.addImage(img, 'PNG', bufferX, this.axial_y, pdfWidth, pdfHeight, undefined, 'FAST');          
+                     
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations.pdf');
@@ -192,45 +135,21 @@ BuildResult(doc:jsPDF):any
     //return  of('no');   
 }
 
-/* BuildResult(doc:jsPDF)
-{
-  const div = document.getElementById('tbresult');   
-    const options = {
-      background: 'white',
-      scale: 3
-    };
-
-    html2canvas(div, options).then((canvas) => {
-
-      var img = canvas.toDataURL("image/PNG");
-      //var doc = new jsPDF('l', 'mm', 'a4', 1);
-
-      // Add image Canvas to PDF
-      const bufferX = 5;
-      const bufferY = 5;
-      const imgProps = (<any>doc).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
-      
-      doc.addImage(img, 'PNG', bufferX, this.axial_y, pdfWidth, pdfHeight, undefined, 'FAST');          
-      return doc;
-    }).then((doc) => {
-      doc.save('ITARecommendations.pdf');
-    });     
-} */
-
 BuildOperationData(doc:jsPDF)
   {     
     //add operation data
-
     var img = new Image();
     img.src = environment.ImageInputPath + this.srv_statemanage.SecApp + ".png";   
     doc.addImage(img, 'png', 150, this.axial_y-15, 100, 80);
 
     doc.setFontSize(10);
-    this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails !='1').forEach(p=> {                                       
-      doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
-      this.axial_y=this.axial_y+8;
+    this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails !='1').forEach(p=> {  
+      if(p.value!='')
+      {
+        doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
+        this.axial_y=this.axial_y+8;
+      }                                     
+      
     });  
     //add tool data
     if(this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails =='1' && x.valueall !=x.value && x.value!='Default').length >0)  

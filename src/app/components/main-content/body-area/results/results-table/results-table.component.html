@@ -5,9 +5,13 @@
            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit">
         </div>
         <div class="float-right pb-2 pr-3 pl-4">
-            <div class="pr-3 pl-4">
+            <!-- <div class="pr-3 pl-4">
                <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle float-left cursor-pointer ml-4"  (click)="DownLoadData()">Download</h2>
-            </div>
+            </div> -->
+            <div class="pr-3 pl-4">
+               <img  data-toggle="tooltip" title="{{'Export To PDF' | translate}}" 
+                     class="cursor-pointer img-pdf"  [src] = "environment.ImagePath+'icon_PDF.svg'" (click) ="DownLoadPDF()">
+           </div>
          </div>
         <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
             <thead>
@@ -54,6 +58,9 @@
                            title="View info" class="icon-grid">
                             
                      </td>
+                       <!--  <td >
+                           <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="Stock Availability" class="icon-grid">
+                        </td> -->
                          <td >
                                 <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
                          </td>
