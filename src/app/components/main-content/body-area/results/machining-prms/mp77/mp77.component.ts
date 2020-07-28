@@ -308,7 +308,7 @@ if (pr.value.trim().length == 7){
     this.S_NSB=Math.round(this.B * this.HPP / this.S_HPS * 100)/100 || 0
     this.H_HPB = Math.round((this.B * this.HPP / this.H_HDH) * 100)/100 || 0
     this.I_NIB=Math.round(this.B * this.HPP * this.I_CICT / (this.I_HPC * this.I_CEDC) * 100)/100 || 0
-    this.H_DHC = this.H_HPB * this.H_DHP
+    this.H_DHC = Math.round(this.H_HPB * this.H_DHP * 100)/100
     this.I_TIC= Math.round(this.I_NIB * this.I_IP * 100)/100
 
 //change Tool cost	TTC	TP * HPB / I)	Solid Tools cost	TTC	TP * NSB	Tools cost	TTC	TP * (NIB / I)
@@ -319,7 +319,7 @@ if (pr.value.trim().length == 7){
     if (this.resType == "I")
     this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
 
-    this.H_CTB = this.TTC+this.H_DHC
+    this.H_CTB = Math.round(this.TTC+this.H_DHC * 100)/100
     this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
     this.I_TPT=Math.round(this.TTC * this.I_TIC * 100)/100
     this.MCB = Math.round(+this.MTB * this.MCH * 100)/100
