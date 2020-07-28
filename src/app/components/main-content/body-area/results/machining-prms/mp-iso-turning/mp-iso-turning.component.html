@@ -1,0 +1,51 @@
+<ng-container >
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Cutting Data' | translate}}</div>
+
+    <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Initial diameter' | translate }}</div>
+        <div class="col-3">D<sub>i</sub></div>
+        <div class="col-3 grayDiv text-center">{{Di}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='890' || srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='880'">
+        <div class="col-4">{{'Penetration Length' | translate }}</div>
+        <div class="col-3">LP</div>
+        <div class="col-3 grayDiv text-center">{{LP}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='990' || srv_StMng.SecApp=='980' || srv_StMng.SecApp=='890' || srv_StMng.SecApp=='880' || srv_StMng.SecApp=='850'">
+        <div class="col-4">{{'Radial length' | translate }}</div>
+        <div class="col-3">LR</div>
+        <div class="col-3 grayDiv text-center">{{LR}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='860' || srv_StMng.SecApp=='960'">
+        <div class="col-4">{{'Depth of cut' | translate }}</div>
+        <div class="col-3">DPT</div>
+        <div class="col-3 grayDiv text-center">{{DPT}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Final diameter' | translate }}</div>
+        <div class="col-3">D<sub>f</sub></div>
+        <div class="col-3 grayDiv text-center">{{Df}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='990' || srv_StMng.SecApp=='980' || srv_StMng.SecApp=='890' || srv_StMng.SecApp=='880' || srv_StMng.SecApp=='850'">
+        <div class="col-4">{{'Axial length' | translate }}</div>
+        <div class="col-3">LA</div>
+        <div class="col-3 grayDiv text-center">{{LA}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+
+
+
+
+
+</ng-container>

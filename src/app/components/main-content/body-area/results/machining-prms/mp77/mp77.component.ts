@@ -194,19 +194,19 @@ if (pr.value.trim().length == 7){
           }
         })
   
-        this.srv_Results.GetPivotParamValue(pr.value.trim(),594,this.srv_StMng.SecApp).subscribe((res: any) => {
-          let x:string = JSON.parse(res); 
-          if (x != '0' && this.I_CICT == 0){
-            this.I_CICT = Math.round((this.I_CICT + +x) * 100)/100
-          }
-        })
+        // this.srv_Results.GetPivotParamValue(pr.value.trim(),594,this.srv_StMng.SecApp).subscribe((res: any) => {
+        //   let x:string = JSON.parse(res); 
+        //   if (x != '0' && this.I_CICT == 0){
+        //     this.I_CICT = Math.round((this.I_CICT + +x) * 100)/100
+        //   }
+        // })
 
-        this.srv_Results.GetPivotParamValue(pr.value.trim(),762,this.srv_StMng.SecApp).subscribe((res: any) => {
-          let y:string = JSON.parse(res); 
-          if (y != '0' && this.I_CEDC == 0){
-            this.I_CEDC = Math.round((this.I_CEDC + +y) * 100)/100
-          }
-        })
+        // this.srv_Results.GetPivotParamValue(pr.value.trim(),762,this.srv_StMng.SecApp).subscribe((res: any) => {
+        //   let y:string = JSON.parse(res); 
+        //   if (y != '0' && this.I_CEDC == 0){
+        //     this.I_CEDC = Math.round((this.I_CEDC + +y) * 100)/100
+        //   }
+        // })
 
         this.srv_Results.GetPivotParamValue(pr.value.trim(),308,this.srv_StMng.SecApp).subscribe((res: any) => {
           let prMax:string = JSON.parse(res); 
@@ -233,50 +233,7 @@ if (pr.value.trim().length == 7){
   }else{
     this.resType = "H"
   }
-
-    //calc
-    this.B = 500;
-    this.HPP = 1;
-    this.HI_I = 30;
-    this.TLL = 50;
-    this.TLT = '50:00';
-    this.H_HDH = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
-    this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
-    this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
-    this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
-    this.S_NSB=Math.round(this.B * this.HPP / this.S_HPS * 100)/100 || 0
-    this.H_HPB = Math.round((this.B * this.HPP / this.H_HDH) * 100)/100 || 0
-    this.I_NIB=Math.round(this.B * this.HPP * this.I_CICT / (this.I_HPC * this.I_CEDC) * 100)/100 || 0
-    this.H_DHC = this.H_HPB * this.H_DHP
-    this.I_TIC=this.I_NIB * this.I_IP
-
-//change Tool cost	TTC	TP * HPB / I)	Solid Tools cost	TTC	TP * NSB	Tools cost	TTC	TP * (NIB / I)
-    if (this.resType == "H")
-    this.TTC = Math.round((this.TP * this.H_HPB / this.HI_I) * 100)/100 || 0
-    if (this.resType == "S")
-    this.TTC = this.TP * this.S_NSB
-    if (this.resType == "I")
-    this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
-
-    this.H_CTB = this.TTC+this.H_DHC
-    this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
-    this.I_TPT=this.TTC * this.I_TIC
-    this.MCB = Math.round(+this.MTB * this.MCH * 100)/100
-    
-    //change
-    if (this.resType == "H")
-    this.TCB = this.H_CTB+this.MCB
-    if (this.resType == "S")
-    this.TCB = this.TTC+this.MCB
-    if (this.resType == "I")
-    this.TCB = this.I_TPT+this.MCB
-
-
-    
-    this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
-    this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
-    
-    
+ 
 
 
         //http
@@ -326,14 +283,61 @@ if (pr.value.trim().length == 7){
         this.Flutes,+this.fr,this.catalogNo.toString()).subscribe((res: any) => {
           let paramsValues:string = JSON.parse(res); 
           var splitted = paramsValues.split(","); 
-            if (splitted.length == 4){
+            if (splitted.length == 6){
               _Mc = +splitted[0]
               _Kc = +splitted[1]
               _k = +splitted[2]
               insertBrandName = splitted[3]
+              this.I_CEDC = +splitted[4]
+              this.I_CICT = +splitted[5]
 
 
 
+
+
+    //calc
+    this.B = 500;
+    this.HPP = 1;
+    this.HI_I = 30;
+    this.TLL = 50;
+    this.TLT = '50:00';
+    this.H_HDH = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
+    this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
+    this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
+    this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
+    this.S_NSB=Math.round(this.B * this.HPP / this.S_HPS * 100)/100 || 0
+    this.H_HPB = Math.round((this.B * this.HPP / this.H_HDH) * 100)/100 || 0
+    this.I_NIB=Math.round(this.B * this.HPP * this.I_CICT / (this.I_HPC * this.I_CEDC) * 100)/100 || 0
+    this.H_DHC = this.H_HPB * this.H_DHP
+    this.I_TIC= Math.round(this.I_NIB * this.I_IP * 100)/100
+
+//change Tool cost	TTC	TP * HPB / I)	Solid Tools cost	TTC	TP * NSB	Tools cost	TTC	TP * (NIB / I)
+    if (this.resType == "H")
+    this.TTC = Math.round((this.TP * this.H_HPB / this.HI_I) * 100)/100 || 0
+    if (this.resType == "S")
+    this.TTC = this.TP * this.S_NSB
+    if (this.resType == "I")
+    this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
+
+    this.H_CTB = this.TTC+this.H_DHC
+    this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
+    this.I_TPT=Math.round(this.TTC * this.I_TIC * 100)/100
+    this.MCB = Math.round(+this.MTB * this.MCH * 100)/100
+    
+    //change
+    if (this.resType == "H")
+    this.TCB = this.H_CTB+this.MCB
+    if (this.resType == "S")
+    this.TCB = this.TTC+this.MCB
+    if (this.resType == "I")
+    this.TCB = this.I_TPT+this.MCB
+
+    this.TCB = Math.round(this.TCB * 100)/100
+    
+    this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
+    this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
+    
+              
               switch (insertBrandName.trim().toUpperCase()){
                   case 'SUMOCHAM FLAT HEAD': case 'SUMOCHAM CHAMDRILL LINE': case 'SUMOCHAMIQ':
                     insertType = 'Sumo'
