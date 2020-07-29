@@ -45,6 +45,7 @@ export class clsHelpProp {
     itemType:string[]=[];
     itemTypeRes:string;
     GroupText:string[]=[];
+    GroupID:number[]=[];
     desgFieldName:string[]=[];
     info:string[]=[];
 

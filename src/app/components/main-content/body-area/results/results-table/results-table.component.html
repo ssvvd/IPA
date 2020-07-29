@@ -33,19 +33,22 @@
                                  <label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
                             </td>
                        </tr> -->
+                       
+                       <!-- ((dtResultsObjectsHelp[row.index].CatalogNo[PrtNum] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)|| -->
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: 'asc':sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0" >
                        <td>
                         <img src="{{arrResultImgsItem[row.index]}}"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
                        <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
-                           <span  *ngFor="let prty of col.slice().reverse(); let PrtNum = index"
+                           <span  *ngFor="let prty of col; let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
-                           ((dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)||
-                           (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && prty.value == '' ))
-                           ? 'd-none' : 'd-block'">
+                              (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
+                              ? 'd-none' : 'd-block'" 
+                           >
                             <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
-                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupText.length - PrtNum - 1] | translate }}:&nbsp;</label>{{prty.value}}</span>
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] | translate }}:&nbsp;</label>{{prty.value}}
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label></span>
                          </td>
                          <td>
 <!--  -->

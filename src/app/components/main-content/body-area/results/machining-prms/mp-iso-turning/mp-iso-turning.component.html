@@ -43,8 +43,46 @@
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
 
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='860' || srv_StMng.SecApp=='960'">
+        <div class="col-4">{{'Tool cutting edge angle' | translate }}</div>
+        <div class="col-3">KAPR</div>
+        <div class="col-3 grayDiv text-center">{{KAPR}}</div>
+        <div class="col-2">°</div>
+      </div>
 
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Cutting speed' | translate }}</div>
+        <div class="col-3">v<sub>c</sub></div>
+        <div class="col-3 grayDiv text-center">{{Vc}}</div>
+        <div class="col-2">m/min</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Feed per rev' | translate }}</div>
+        <div class="col-3">f<sub>r</sub></div>
+        <div class="col-3 grayDiv text-center">{{fr}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Axial depth of cut' | translate }}</div>
+        <div class="col-3">a<sub>p</sub></div>
+        <div class="col-3 grayDiv text-center">{{ap}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Number of axial passes' | translate }}</div>
+        <div class="col-3">NOPP</div>
+        <div class="col-3 grayDiv text-center">{{NOPP}}</div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Material removal rate' | translate }}</div>
+        <div class="col-3">MRR</div>
+        <div class="col-3 grayDiv text-center">{{MRR}}</div>
+        <div class="col-2">cm<sup>3</sup>/min</div>
+      </div>
 
+<br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Tool Assembly Data' | translate}}</div>
 
 
 
