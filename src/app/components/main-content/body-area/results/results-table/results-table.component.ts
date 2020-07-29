@@ -16,6 +16,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
 import {ResultPpDownloadComponent} from 'src/app/components/main-content/body-area/results/result-pp-download/result-pp-download.component';
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
+import { ResultPpInventoryComponent } from 'src/app/components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
 
 @Component({
   selector: 'app-results-table',
@@ -61,10 +62,7 @@ export class ResultsTableComponent implements OnInit {
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
     private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService) { }
 
-
-
   ngOnInit() {
-
      this.dtOptions = {
       pagingType: 'full_numbers',
        "searching": false,
@@ -78,13 +76,12 @@ export class ResultsTableComponent implements OnInit {
         "zeroRecords": "",
         "infoEmpty": "",
         "info": ""
-      } 
-            
-      }; 
+      }           
+  }; 
 
-      this.lasTypeFeed == 'BothFeed';
-      this.sortProp = 'index';
-    this.GetResult();
+  this.lasTypeFeed == 'BothFeed';
+  this.sortProp = 'index';
+  this.GetResult();
   }
 
   GetResult() 
@@ -917,13 +914,10 @@ filterRecommended(prop:clsHelpProp){
 }
 
 
-viewInfo(index:number){
-
+viewInfo(index:number)
+{
   this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]]})
-
-
 }
-
 
 getPropWithoutUnits(pr:string){
   let indexOfU:number = pr.lastIndexOf('(')
@@ -933,6 +927,11 @@ getPropWithoutUnits(pr:string){
   else{
     return pr;
   }
+}
+
+DownLoadPDF()
+{  
+    this.srv_down.DownLoadData('PDF') ;      
 }
 
 DownLoadData()
@@ -948,5 +947,12 @@ DownLoadData()
   });
 }
 
+viewInventory(index:number)
+{
+  alert(this.dtResultsObjectsHelp[index]);
+  const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
+  modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];
+  //this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]]})
+}
 }
 

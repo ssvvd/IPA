@@ -11,9 +11,9 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <div>
+                   <!--  <div>
                         <img [src]="environment.ImageInputPath + '780_1.png'" >
-                    </div>
+                    </div> -->
                     <div class="pl-2">
                     <div class="custom-control custom-radio custom-control">
                             <input type="radio" class="custom-control-input" id="optThroughSolid" name="HoleTypeSolid" checked (change)="changeSolidHole('Solid_Through')" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypeSolid').value" value="Through">
@@ -26,9 +26,9 @@
                     </div>
                 </div> 
                 <div class="col-6">
-                    <div>
+                   <!--  <div>
                         <img [src]="environment.ImageInputPath + '780_2.png'" >
-                    </div> 
+                    </div>  -->
                     <div class="pl-2">
                         <div class="custom-control custom-radio custom-control">
                                 <input type="radio" class="custom-control-input" id="optThroughHole" name="HoleTypeHole"  (change)="changeSolidHole('Hole_Through')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Through">

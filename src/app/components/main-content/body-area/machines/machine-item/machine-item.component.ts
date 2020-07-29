@@ -129,7 +129,7 @@ export class MachineItemComponent implements OnInit {
       if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
       if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
       if(this.machHeader.MachineType =='Machining center') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg"; 
-      if(this.machHeader.MachineType =='swiss type') this.imgNameMachine =environment.ImagePath +"SwissType.svg";
+      if(this.machHeader.MachineType =='Swiss type') this.imgNameMachine =environment.ImagePath +"SwissType.svg";
       if(this.machHeader.MachineType =='Multi spindle') this.imgNameMachine =environment.ImagePath +"MultiSpindle.svg";                     
   }
  

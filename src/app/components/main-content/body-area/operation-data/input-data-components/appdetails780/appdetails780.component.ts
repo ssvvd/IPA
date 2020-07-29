@@ -15,6 +15,7 @@ export class Appdetails780Component implements OnInit {
   ImageName:string='';
   InFocus:boolean=false;
   HoleType:string='Solid';
+  HoleType1:string='Solid_Through';
   environment=environment;
 
   @Input() events: Observable<void>;
@@ -33,11 +34,8 @@ export class Appdetails780Component implements OnInit {
 
  ngOnInit() {
     this.SetIPLMandatory();
-    if( this.HoleType=='Solid') 
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
-    else
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_0.png";
-
+    this.SetImageApp();  
+  
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value!='') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value!='') this.HoleType="PreHole";   
@@ -56,15 +54,20 @@ export class Appdetails780Component implements OnInit {
   onfocusoutfield()
   {  
     this.InFocus=false;
-    if( this.HoleType=='Solid') 
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
-    else
-      this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_0.png";
+    this.SetImageApp();  
   }
   
+  SetImageApp()
+  {
+    if( this.HoleType1=='Solid_Through') this.ImageName= environment.ImageInputPath + '780_1.png';
+    if( this.HoleType1=='Solid_Blind') this.ImageName= environment.ImageInputPath + '780.png';
+    if( this.HoleType1=='Hole_Through') this.ImageName= environment.ImageInputPath + '780_1-PreHole.png';
+    if( this.HoleType1=='Hole_Blind') this.ImageName= environment.ImageInputPath + '780-PreHole.png';
+  }
   changeSolidHole(val)
   {
     this.changeinputimage(val);
+    this.HoleType1=val;
     if(val=="Solid_Through" || val=="Solid_Blind") 
       {
         this.srv_StMng.IPL.GetItem('D2Min').required=true;
@@ -86,7 +89,8 @@ export class Appdetails780Component implements OnInit {
        
         this.srv_StMng.IPL.GetItem('HoleTypeSolid').value='';        
         this.HoleType='PreHole';
-      }                  
+      }    
+      this.SetImageApp();               
  } 
 
  changeinputimage(val)

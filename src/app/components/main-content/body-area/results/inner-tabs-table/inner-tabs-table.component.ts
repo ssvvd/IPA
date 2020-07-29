@@ -16,7 +16,6 @@ export class InnerTabsTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   ngOnChanges(changes:SimpleChanges) {
     if (this.viewParamsChanged && changes.viewParamsChanged){
       this.selectedOption = this.viewParamsChanged.Res[0]
