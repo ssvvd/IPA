@@ -28,8 +28,11 @@ export class MpIsoTurningComponent implements OnInit {
   ap:number
   NOPP:number 
   MRR:number
+  O:number
+  AW:number
+  P:number
 
-  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService) { }
+  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
   ngOnInit(): void {
   }
@@ -117,6 +120,10 @@ export class MpIsoTurningComponent implements OnInit {
               this.MRR= +value
               break;
             }
+            case 'PowerConsumption':{
+              this.P = +value
+              break;
+            }
           }
     
         if (pr.property.Field.toLowerCase().includes('catalogno')){
@@ -124,9 +131,21 @@ export class MpIsoTurningComponent implements OnInit {
           this.selectedRes[i].forEach(function (value) {
             pr = value
     if (pr.value.trim().length == 7){
-    
-    
             this.catalogNo.push(pr.value.trim());
+
+            this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
+              let prmLta:string = JSON.parse(res); 
+              if (prmLta != '9999'){
+                this.O = Math.round((this.O + +prmLta) * 100)/100
+              }
+            })
+      
+            this.srv_Results.GetRatioLD(pr.value,this.srv_appsetting.Units).subscribe((res: any) => {
+              let prmRatioLD:string = JSON.parse(res); 
+              if (prmRatioLD != '0'){
+                this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
+              }
+            })
 
 
           }
@@ -156,6 +175,9 @@ export class MpIsoTurningComponent implements OnInit {
     this.ap = 0
     this.NOPP = 0
     this.MRR = 0
+    this.O = 0
+    this.AW = 0
+    this.P = 0
   }
 
 }

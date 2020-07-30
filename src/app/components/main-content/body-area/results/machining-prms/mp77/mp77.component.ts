@@ -277,9 +277,10 @@ if (pr.value.trim().length == 7){
         let _k:number = 0
         let insertType:string = "StraightEdge"
         let insertBrandName:string = ""
+        let kappaLeadAngel:number = this.selectedHelp.kappaLeadAngle || 90
 
 //(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
-        this.srv_Results.GetMPowerParams77(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,this.selectedHelp.kappaLeadAngle,
+        this.srv_Results.GetMPowerParams77(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,
         this.Flutes,+this.fr,this.catalogNo.toString()).subscribe((res: any) => {
           let paramsValues:string = JSON.parse(res); 
           var splitted = paramsValues.split(","); 
