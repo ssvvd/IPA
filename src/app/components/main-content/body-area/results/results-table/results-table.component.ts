@@ -137,7 +137,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   var rowsCount = this.dtRsults.length
 
   this.dtResultsObjects = []
-  var groupsOrder:number [] =[]
+  // var groupsOrder:number [] =[]
   let index:number = 0;
   for(var i: number = 0; i < rowsCount; i++) {
       this.dtResultsObjects[i] = [];
@@ -147,6 +147,10 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
       for(var j: number = 0; j< columnsCount; j++) {
         
         //Build Helper
+
+        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
+           this.dtPropertiesTable[j].IsVisible = false
+
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage')
         this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
 
@@ -183,7 +187,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         }
 
 
-        if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+        if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] != '-'){
           let catNo:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
           this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);  
           this.dtResultsObjectsHelp[i].GroupText.push(this.dtPropertiesTable[j].GroupText); 
@@ -270,15 +274,13 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         // }
         
 
-        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade'){
-          this.dtResultsObjectsHelp[i].Grade[this.dtResultsObjectsHelp[i].CatalogNo.length - 1] =  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
-        }
+
         
 
         if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
         this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
-        if (this.dtPropertiesTable[j].Field.toLowerCase().includes('designation') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+        if (this.dtPropertiesTable[j].Field.toLowerCase().includes('designation') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]  && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] != '-'){
           this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
           this.dtResultsObjectsHelp[i].desgFieldName.push(this.dtPropertiesTable[j].Field)
         }
@@ -319,8 +321,8 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         //End Build Helper
         if (this.dtPropertiesTable[j].IsVisible){
 
-          if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && i == 0 && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
-              groupsOrder.push(this.dtPropertiesTable[j].GroupID)
+          if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]  && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]!= '-' ){
+            this.dtResultsObjectsHelp[i].GroupID.push(this.dtPropertiesTable[j].GroupID)
             }  
 
 
@@ -380,6 +382,16 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
         // }
       }
+
+
+      if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade'){
+        // this.dtPropertiesTable[j].IsVisible = false
+        let gradeIndex:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(this.dtPropertiesTable[j].GroupID)
+        if (gradeIndex != -1)
+        this.dtResultsObjectsHelp[i].Grade[gradeIndex] =  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
+      }
+
+
         // if (this.dtPropertiesTable[j].FieldDescriptionSmall.includes('Family')  && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
         //   let family:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim();
           
@@ -415,15 +427,17 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
       this.dtResultsObjects3d[i][index] = []
       index3 = 0
      
-      if (this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == 'Brand Name'){
+      if (this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == 'Brand Name' || this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice')){
         let grpID:number = this.dtResultsObjects[i][col1].property.GroupID
-        let order:number = groupsOrder.indexOf(grpID, 0)
+        let order:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(grpID, 0)
         index3 = order
         for(var brandNamePos: number = 0; brandNamePos < index3; brandNamePos++) {
           this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+          this.dtResultsObjects3d[i][index][brandNamePos].value = ''
         }
-        for(var brandNamePos: number = index3 + 1; brandNamePos < groupsOrder.length; brandNamePos++) {
+        for(var brandNamePos: number = index3 + 1; brandNamePos < this.dtResultsObjectsHelp[i].GroupID.length; brandNamePos++) {
           this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+          this.dtResultsObjects3d[i][index][brandNamePos].value = ''
         }
       }
       this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col1]
@@ -443,9 +457,9 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
     // {
     //   groupsOrder.push(this.dtResultsObjects[i][col2].property.GroupID)
     // }
-    if (this.dtResultsObjects[i][col2].property.FieldDescriptionSmall == 'Brand Name'){
+    if (this.dtResultsObjects[i][col2].property.FieldDescriptionSmall == 'Brand Name'  || this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice')){
       let grpID:number = this.dtResultsObjects[i][col2].property.GroupID
-      let order:number = groupsOrder.indexOf(grpID, 0)
+      let order:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(grpID, 0)
       index3 = order
     }
     this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col2] 

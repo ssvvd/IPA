@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { ResultsService} from 'src/app/services/results.service' ;
+import {clsHelpProp} from 'src/app/models/results/help-prop';
+import {clsPropertyValue} from 'src/app/models/results/property-value';
 import { throws } from 'assert';
 
 @Component({
@@ -10,6 +13,8 @@ import { throws } from 'assert';
 })
 export class MpIsoTurningComponent implements OnInit {
 
+  @Input() selectedRes:clsPropertyValue[][];
+  @Input() selectedHelp:clsHelpProp;
 
   Di:number
   LP:number
@@ -17,12 +22,32 @@ export class MpIsoTurningComponent implements OnInit {
   DPT:number
   Df:number
   LA:number
+  KAPR:number
+  Vc:number
+  fr:number
+  ap:number
+  NOPP:number 
+  MRR:number
+  O:number
+  AW:number
+  P:number
 
-  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService) { }
+  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
   ngOnInit(): void {
   }
 
+
+
+  
+  ngOnChanges(changes:SimpleChanges) {
+
+    if (this.selectedRes && changes.selectedRes){
+      this.fillParams()
+    }
+  }
+
+  
   fillParams(){
     this.reset()
 
@@ -51,6 +76,89 @@ export class MpIsoTurningComponent implements OnInit {
     else if (this.srv_StMng.SecApp=='880')
       this.LA = +this.srv_StMng.IPL.GetItem('DepthRadial').value
 
+    this.KAPR = this.selectedHelp.KAPR || 0
+
+
+        //output
+        for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
+          var pr:clsPropertyValue = this.selectedRes[i][0];
+          var value:string = '0'
+          this.selectedRes[i].forEach(function (v) {
+            if (v.value != '' && v.value != '0')
+              value = v.value
+              if (v.property)
+              switch (v.property.Field){
+              case 'DetailsListPrice':{
+
+                 break;
+               }
+               case 'HeaderListPrice':{
+
+                 break;
+               }
+              }
+          }.bind(this));  
+          if (pr && pr.property){
+          switch (pr.property.Field){
+            case 'CuttingSpeed':{
+              this.Vc = +value
+              break;
+            }
+            case 'Feed':{
+              this.fr = +value
+              break;
+            }
+            case 'DepthOfCutPerPass':{
+              this.ap = +value
+              break;
+            }
+            case 'NumberOfPassesDepth':{
+              this.NOPP = +value
+              break;
+            }
+            case 'MetalRemovalRate':{
+              this.MRR= +value
+              break;
+            }
+            case 'PowerConsumption':{
+              this.P = +value
+              break;
+            }
+          }
+    
+        if (pr.property.Field.toLowerCase().includes('catalogno')){
+    
+          this.selectedRes[i].forEach(function (value) {
+            pr = value
+    if (pr.value.trim().length == 7){
+            this.catalogNo.push(pr.value.trim());
+
+            this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
+              let prmLta:string = JSON.parse(res); 
+              if (prmLta != '9999'){
+                this.O = Math.round((this.O + +prmLta) * 100)/100
+              }
+            })
+      
+            this.srv_Results.GetRatioLD(pr.value,this.srv_appsetting.Units).subscribe((res: any) => {
+              let prmRatioLD:string = JSON.parse(res); 
+              if (prmRatioLD != '0'){
+                this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
+              }
+            })
+
+
+          }
+          }.bind(this));
+    
+    
+    
+        }
+          
+    
+    
+        }
+      }
 
 
   }
@@ -61,7 +169,15 @@ export class MpIsoTurningComponent implements OnInit {
     this.DPT = 0
     this.Df = 0
     this.LA = 0
-
+    this.KAPR = 0
+    this.Vc = 0
+    this.fr = 0
+    this.ap = 0
+    this.NOPP = 0
+    this.MRR = 0
+    this.O = 0
+    this.AW = 0
+    this.P = 0
   }
 
 }

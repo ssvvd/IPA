@@ -329,9 +329,9 @@ let thickSecondParam = ''
 let cutForceFirts:string = ''
 let cutForceSecond:string = ''
 let cutForceThird:string = ''
-
+let kappaLeadAngel:number = this.selectedHelp.kappaLeadAngle || 90
 //(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String,families)
-this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,this.selectedHelp.kappaLeadAngle,
+this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,
 this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toString()).subscribe((res: any) => {
   let paramsValues:string = JSON.parse(res); 
   var splitted = paramsValues.split(","); 
@@ -349,14 +349,14 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
         else
         {
           insertType = 'StraightEdge'
-          thickFirstParam = this.selectedHelp.kappaLeadAngle.toString()  
-          cutForceFirts = this.selectedHelp.kappaLeadAngle.toString()
+          thickFirstParam = kappaLeadAngel.toString()  
+          cutForceFirts = kappaLeadAngel.toString()
         } 
       }
       else if (this.selectedHelp.SecondaryAppOrig1 == '700'){
         insertType = 'FastFeed'
-        thickSecondParam = this.selectedHelp.kappaLeadAngle.toString()
-        cutForceFirts = this.selectedHelp.kappaLeadAngle.toString()
+        thickSecondParam = kappaLeadAngel.toString()
+        cutForceFirts = kappaLeadAngel.toString()
       }
       else if (GFSCOD > 0){
         insertType = 'Extflutemillingcutter'
