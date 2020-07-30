@@ -28,11 +28,14 @@ export class AppComponent implements OnInit {
     else{
       environment.internal = false;
     }
-    // console.log(location.path());
+    
   }
 
 ngOnInit()
 {
+/*   $.get("http://ip-api.com/json", function(response) {
+    alert(response.country);}, "jsonp"); */
+
   //LogIn
   let token:string='';
   const url = window.location.href;    

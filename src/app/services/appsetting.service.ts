@@ -131,9 +131,16 @@ export class AppsettingService {
     this.mCountry = c;
    } */
 
+  private mCurrency:string;
+  get Currency():string {
+    return this.mCurrency;
+    }
+  set Currency(c:string) {  
+    this.mCurrency = c;
+   }
+   
    FillLanguage(lan:string)
    {
-     return this.srv_DataLayer.dictionarygetlinelanguage(lan);
-    
+     return this.srv_DataLayer.dictionarygetlinelanguage(lan);    
    }
 }

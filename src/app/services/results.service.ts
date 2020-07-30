@@ -160,6 +160,14 @@ export class ResultsService {
     });
   }
 
+  public  GetAvailabilityByCatalogNos(catalogs:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE  + 'GetAvailabilityByCatalogNos/' +catalogs).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
   // public  checkItemImgExists()
   // {        
   //   return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists' ).catch((err: HttpErrorResponse) => {      

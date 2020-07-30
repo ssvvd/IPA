@@ -17,5 +17,6 @@ export class MachineFilter{
   AdaptationType:string;
   AdaptationSize:string;
   IsMostRecommended:boolean;
+  ShowOnlyFavorites:boolean;
 }
 

@@ -340,7 +340,9 @@ UpdateStateSelectedMachine(MachineID: number) {
         || m.Power.toString().indexOf(filter.SearchText.toUpperCase()) > -1
         || m.Torque.toString().indexOf(filter.SearchText.toUpperCase()) > -1
         || m.SpindleSpeed.toString().indexOf(filter.SearchText.toUpperCase()) > -1
-        ) && 
+        ) &&
+        ((filter.ShowOnlyFavorites && m.isFavorite) || (!filter.ShowOnlyFavorites))  
+        && 
         ((filter.IsMostRecommended && (m.isFavorite || m.IsMostRecommended)) || (!filter.IsMostRecommended))) 
         ;
     this.srv_statemanage.SelectMachineFilter = filter;

@@ -1,13 +1,23 @@
 <div class="modal-header">
-    <h4 class="modal-title siteTitle">{{'Stock Availabality' | translate}}</h4>
+    <h4 class="modal-title siteTitle pt-2 pl-2">{{'Stock Availability' | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <div class="form-group">
-      <div  *ngFor="let cat of objHelpProp.CatalogNo">{{cat}}</div>
-    </div>
+  <div class="modal-body">    
+      <div class="row">
+        <div class="col-6"></div>
+        <div class="col-2">US</div>
+        <div class="col-2">EU</div>
+        <div class="col-2">E.Asia</div>
+      </div>
+      <div class="pt-2"  *ngFor="let v of arrviewinvertory">
+        <div class="row">
+            <div class="col-6">{{v.GroupName}}</div>            
+            <div class="col-2"><i  [ngClass]="v.Avai_USA ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
+            <div class="col-2"><i  [ngClass]="v.Avai_EU ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
+            <div class="col-2"><i  [ngClass]="v.Avai_FarEast ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
+        </div>        
   </div>
   <div class="modal-footer">       
    <!--  <button type="button" class="btn btn-select-cancel" (click)="this.activeModal.close('cancel')"  >Cancel</button>        

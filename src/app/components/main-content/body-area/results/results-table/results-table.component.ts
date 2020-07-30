@@ -936,8 +936,7 @@ DownLoadData()
 }
 
 viewInventory(index:number)
-{
-  alert(this.dtResultsObjectsHelp[index]);
+{    
   const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
   modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];
   //this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]]})

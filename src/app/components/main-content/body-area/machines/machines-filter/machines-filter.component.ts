@@ -25,8 +25,6 @@ export class AdaptationSize
   templateUrl: './machines-filter.component.html',
   styleUrls: ['./machines-filter.component.scss']
 })
-
-
   
 export class MachinesFilterComponent implements OnInit {
   
@@ -180,6 +178,7 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.AdaptationSize ='';
 
     this.machFilter.IsMostRecommended=true;
+    this.machFilter.ShowOnlyFavorites=false;
   }
 
   FilterChange(event: ChangeContext ) {          
@@ -197,8 +196,10 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMachineTypeStandard=true;
     this.machFilter.IsMachineTypeHeavyDuty=true;
     this.machFilter.IsMachineTypeHighSpeed=true;
+    this.machFilter.ShowOnlyFavorites=false;
     this.curAdapType=this.arrAdapType[0]; 
     this.curAdapSize=this.arrAdapSize[0];
+    
     //this.MachineFilterClear.emit();
     this.MachineFilterChanged.emit({ filter: this.machFilter});   
   }
