@@ -433,9 +433,11 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         index3 = order
         for(var brandNamePos: number = 0; brandNamePos < index3; brandNamePos++) {
           this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+          this.dtResultsObjects3d[i][index][brandNamePos].value = ''
         }
         for(var brandNamePos: number = index3 + 1; brandNamePos < this.dtResultsObjectsHelp[i].GroupID.length; brandNamePos++) {
           this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+          this.dtResultsObjects3d[i][index][brandNamePos].value = ''
         }
       }
       this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col1]
