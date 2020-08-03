@@ -86,7 +86,7 @@ export class Mp760Component implements OnInit {
   TCB:number
   THeH_I:number
   He_Is:number
-  Flutes:number
+  // Flutes:number
   catalogNo:string[]=[]
   resType:string = ''
 
@@ -196,7 +196,7 @@ export class Mp760Component implements OnInit {
         }
         case 'Flutes':{
           this.NOF = +value
-          this.Flutes = +value
+          // this.Flutes = +value
           break;
         }
         case 'NoOfTeeth':{
@@ -331,8 +331,8 @@ let cutForceSecond:string = ''
 let cutForceThird:string = ''
 let kappaLeadAngel:number = this.selectedHelp.kappaLeadAngle || 90
 //(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String,families)
-this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,
-this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toString()).subscribe((res: any) => {
+this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,+this.DC,
++this.ae,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toString()).subscribe((res: any) => {
   let paramsValues:string = JSON.parse(res); 
   var splitted = paramsValues.split(","); 
     if (splitted.length == 4){
@@ -408,7 +408,7 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
 
   reset(){
 
-this.Flutes = 0
+// this.Flutes = 0
 this.DC	=	''
 this.D	=	0
 this.W	=	0

@@ -6,6 +6,19 @@ import {clsHelpProp} from 'src/app/models/results/help-prop';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
 import { throws } from 'assert';
 
+class ResRow {
+  Name: string;
+  Value: number;
+  Unit: string;
+}
+
+export class MPResult {
+  ResultRowList: Array<ResRow>;
+  Status: boolean;
+  ErrorDescription: string;
+  route: string;
+}
+
 @Component({
   selector: 'mp-iso-turning',
   templateUrl: './mp-iso-turning.component.html',
@@ -15,6 +28,8 @@ export class MpIsoTurningComponent implements OnInit {
 
   @Input() selectedRes:clsPropertyValue[][];
   @Input() selectedHelp:clsHelpProp;
+
+  catalogNo:string[]=[]
 
   Di:number
   LP:number
@@ -31,6 +46,7 @@ export class MpIsoTurningComponent implements OnInit {
   O:number
   AW:number
   P:number
+  T:number
 
   constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
@@ -161,8 +177,14 @@ export class MpIsoTurningComponent implements OnInit {
       }
 
 
+      //(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
+      // this.srv_Results.GetMPowerParams77(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,
+      // this.Flutes,+this.fr,this.catalogNo.toString()).subscribe((res: any) => {
+
+      // })
   }
   reset(){
+    this.catalogNo = []
     this.Di = 0
     this.LP = 0
     this.LR = 0
@@ -178,6 +200,7 @@ export class MpIsoTurningComponent implements OnInit {
     this.O = 0
     this.AW = 0
     this.P = 0
+    this.T = 0
   }
 
 }
