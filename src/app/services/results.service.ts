@@ -112,9 +112,9 @@ export class ResultsService {
     });
   }
 
-  public  GetMPowerParamsTurning(material:number,  Units:string,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
+  public  GetMPowerParamsTurning(Material:number,  Units:string,  Feed:number,  catalogNoList:String)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParamsTurning/' + material + '/' + Units + '/' + KappaLeadAngle + '/' + Flutes + '/' + Feed + '/' + catalogNoList).catch((err: HttpErrorResponse) => {      
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParamsTurning/' + Material + '/' + Units +  '/' + Feed + '/' + catalogNoList).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";
     });

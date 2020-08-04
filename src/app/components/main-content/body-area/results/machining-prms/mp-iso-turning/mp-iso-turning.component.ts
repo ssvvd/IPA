@@ -5,6 +5,7 @@ import { ResultsService} from 'src/app/services/results.service' ;
 import {clsHelpProp} from 'src/app/models/results/help-prop';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
 import { throws } from 'assert';
+import { runInThisContext } from 'vm';
 
 class ResRow {
   Name: string;
@@ -47,6 +48,8 @@ export class MpIsoTurningComponent implements OnInit {
   AW:number
   P:number
   T:number
+  Vf:number
+  n:number
 
   constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
@@ -140,6 +143,10 @@ export class MpIsoTurningComponent implements OnInit {
               this.P = +value
               break;
             }
+            case 'RPM':{
+              this.n = +value
+              break;
+            }
           }
     
         if (pr.property.Field.toLowerCase().includes('catalogno')){
@@ -177,11 +184,39 @@ export class MpIsoTurningComponent implements OnInit {
       }
 
 
-      //(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
-      // this.srv_Results.GetMPowerParams77(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,
-      // this.Flutes,+this.fr,this.catalogNo.toString()).subscribe((res: any) => {
+      this.Vf = this.fr * this.n
+      
+      let _Mc:number = 0 
+      let _Kc:number = 0      
+      let kappaLeadAngel:number = 90
 
-      // })
+      // (material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
+      this.srv_Results.GetMPowerParams77(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,
+      +this.fr,this.catalogNo.toString()).subscribe((res: any) => {
+        let paramsValues:string = JSON.parse(res); 
+        var splitted = paramsValues.split(","); 
+          if (splitted.length == 3){
+            _Mc = +splitted[0]
+            _Kc = +splitted[1]
+            kappaLeadAngel = +splitted[2]
+
+            if (this.srv_StMng.SecApp!='960' && !(this.srv_StMng.SecApp=='860' && this.selectedHelp.itemTypeRes == 'T') ){
+            //api/CalcReq/Power/Torque/Turning/StraightEdge/{DD}/{ap}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
+            this.srv_Results.GetTorqueTurning(this.Di,this.ap,this.fr,this.Vc,_Kc,_Mc,0,kappaLeadAngel).subscribe((res: any) => {
+              var result = res as MPResult;
+              this.T = Math.round(result.ResultRowList[0].Value * 100)/100
+            })
+          
+          }
+
+
+
+}      
+
+
+
+
+      })
   }
   reset(){
     this.catalogNo = []
@@ -201,6 +236,10 @@ export class MpIsoTurningComponent implements OnInit {
     this.AW = 0
     this.P = 0
     this.T = 0
+    this.Vf = 0
+    this.n = 0
+
+
   }
 
 }

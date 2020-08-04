@@ -324,7 +324,7 @@ let _FHA:number = 0
 let GFSCOD:number = 0
 let subApp:string = 'Shouldering'
 let insertType:string = ''
-let thickFirstParam = this.ap
+let thickFirstParam = ''
 let thickSecondParam = ''
 let cutForceFirts:string = ''
 let cutForceSecond:string = ''
@@ -357,6 +357,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
         insertType = 'FastFeed'
         thickSecondParam = kappaLeadAngel.toString()
         cutForceFirts = kappaLeadAngel.toString()
+        thickFirstParam = this.ap
       }
       else if (GFSCOD > 0){
         insertType = 'Extflutemillingcutter'
@@ -380,10 +381,17 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
   })
 
 
+  //old
   //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge        /{D}/{ae}/{fz}  /{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}  /{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}  /{ap}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}  /{ap}
+
+//new
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge/{D}/{ae}/{fz}/{k}		
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed/{D}/{ae}/{fz}/{ap}/{k}	
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{DC}/{ae}/{fz}	
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter/{DC}/{ae}/{fz}
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
       this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
