@@ -52,7 +52,7 @@
 
       <div class="row justify-content-start w-100">
         <div class="col-4">{{'Cutting speed' | translate }}</div>
-        <div class="col-3">v<sub>c</sub></div>
+        <div class="col-3">V<sub>c</sub></div>
         <div class="col-3 grayDiv text-center">{{Vc}}</div>
         <div class="col-2">m/min</div>
       </div>
@@ -108,7 +108,7 @@
     <div class="col-2">kW</div>
   </div>
 
-  <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='960' && !(this.srv_StMng.SecApp=='860' && this.selectedHelp.itemTypeRes == 'T')">
+  <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='960' && !(this.srv_StMng.SecApp=='860' && resType == 'T')">
     <div class="col-4">{{'Mean Torque' | translate }}</div>
     <div class="col-3">T</div>
     <div class="col-3 grayDiv text-center">{{T}}</div>
@@ -116,7 +116,7 @@
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Feed speed' | translate }}</div>
+    <div class="col-4">{{'Average feed speed' | translate }}</div>
     <div class="col-3">V<sub>f</sub></div>
     <div class="col-3 grayDiv text-center">{{Vf}}</div>
     <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
@@ -129,7 +129,141 @@
     <div class="col-2">rpm</div>
   </div>
 
-  
+  <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='960' && this.srv_StMng.SecApp!='860'">
+    <div class="col-4">{{'Tangential force' | translate }}</div>
+    <div class="col-3">F<sub>t</sub></div>
+    <div class="col-3 grayDiv text-center">{{Ft}}</div>
+    <div class="col-2">N</div>
+  </div> 
 
+  <br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
 
+<div class="row justify-content-start w-100">
+  <div class="col-4">{{'Machine cost (per hour)' | translate }}</div>
+  <div class="col-3">MCH</div>
+  <div class="col-3 grayDiv text-center">{{MCH}}</div>
+  <div class="col-2">€/hour</div>
+</div>
+<div class="row justify-content-start w-100">
+  <div class="col-4">{{'Batch size ' | translate }}</div>
+  <div class="col-3">B</div>
+  <div class="col-3 grayDiv text-center">{{B}}</div>
+  <div class="col-2">Parts</div>
+</div>
+
+<div class="row justify-content-start w-100">
+  <div class="col-4">{{'Cutting time per feature' | translate }}</div>
+  <div class="col-3">CTF</div>
+  <div class="col-3 grayDiv text-center">{{CTF}}</div>
+  <div class="col-2">mm:ss</div>
+</div>
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Tool life length' | translate }}</div>
+    <div class="col-3">TLL</div>
+    <div class="col-3 grayDiv text-center">{{TLL}}</div>
+    <div class="col-2">m</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Tool life time' | translate }}</div>
+    <div class="col-3">TLT</div>
+    <div class="col-3 grayDiv text-center">{{TLT}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+    <div class="col-4">{{'No. of Edges per Insert' | translate }}</div>
+    <div class="col-3">CEDC</div>
+    <div class="col-3 grayDiv text-center">{{CEDC}}</div>
+    <div class="col-2">Edges/Insert</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+    <div class="col-4">{{'Insert price' | translate }}</div>
+    <div class="col-3">IP</div>
+    <div class="col-3 grayDiv text-center">{{IP}}</div>
+    <div class="col-2">€</div>
+  </div>
+  <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+    <div class="col-4">{{'Tool price' | translate }}</div>
+    <div class="col-3">TP</div>
+    <div class="col-3 grayDiv text-center">{{TP}}</div>
+    <div class="col-2">€</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+    <div class="col-4">{{'Solid price' | translate }}</div>
+    <div class="col-3">SP</div>
+    <div class="col-3 grayDiv text-center">{{SP}}</div>
+    <div class="col-2">€</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'No. of features per cutting edge' | translate }}</div>
+    <div class="col-3">FCE</div>
+    <div class="col-3 grayDiv text-center">{{FCE}}</div>
+    <div class="col-2">pcs</div>
+  </div>   
+
+  <div class="row justify-content-start w-100" *ngIf="((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+    <div class="col-4">{{'Total no. of Solids' | translate }}</div>
+    <div class="col-3">SPB</div>
+    <div class="col-3 grayDiv text-center">{{SPB}}</div>
+    <div class="col-2">Tools/batch</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='850'  && resType == 'S'">
+    <div class="col-4">{{'Total Solids cost' | translate }}</div>
+    <div class="col-3">TSC</div>
+    <div class="col-3 grayDiv text-center">{{TSC}}</div>
+    <div class="col-2">€/batch</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+    <div class="col-4">{{'Total number of Inserts' | translate }}</div>
+    <div class="col-3">IPB</div>
+    <div class="col-3 grayDiv text-center">{{IPB}}</div>
+    <div class="col-2">Inserts/batch</div>
+  </div>
+  <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+      <div class="col-4">{{'Total number of Tools' | translate }}</div>
+      <div class="col-3">TPB</div>
+      <div class="col-3 grayDiv text-center">{{TPB}}</div>
+      <div class="col-2">Tools/batch</div>
+    </div>
+    <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+      <div class="col-4">{{'Total Inserts cost' | translate }}</div>
+      <div class="col-3">TIC</div>
+      <div class="col-3 grayDiv text-center">{{TIC}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100" *ngIf="!(srv_StMng.SecApp=='850' && resType == 'S')">
+      <div class="col-4">{{'Total Tools cost' | translate }}</div>
+      <div class="col-3">TTC</div>
+      <div class="col-3 grayDiv text-center">{{TTC}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
+      <div class="col-4">{{'Total Tooling cost' | translate }}</div>
+      <div class="col-3">TGC</div>
+      <div class="col-3 grayDiv text-center">{{TGC}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Machine cost ' | translate }}</div>
+      <div class="col-3">MCB</div>
+      <div class="col-3 grayDiv text-center">{{MCB}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Machine time per batch' | translate }}</div>
+      <div class="col-3">MTB</div>
+      <div class="col-3 grayDiv text-center">{{MTB}}</div>
+      <div class="col-2">mm:ss</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Total cost' | translate }}</div>
+      <div class="col-3">TCB</div>
+      <div class="col-3 grayDiv text-center">{{TCB}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
 </ng-container>

@@ -156,6 +156,14 @@ export class ResultsService {
     });
   }
 
+  //CalcReq/F-CuttingForces/Turning/StraightEdge/{ap}/{f}/{Kc}/{Mc}/{rake}/{k}
+  public  GetCuttingForcesTurning(ap:number,fr:number,Kc:number,Mc:number,rake:number,k:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Turning/StraightEdge/'  +  ap + '/' + fr + '/' + Kc + '/' + Mc + '/' + rake + '/' + k ).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge         /{D}/{ae}/{fz}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}/{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}/{ap}
@@ -177,9 +185,9 @@ export class ResultsService {
   }
 
   //api/CalcReq/Power/Torque/Turning/StraightEdge/{DD}/{ap}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
-  public  GetTorqueTurning(DD:number,ap:number,vc:number,kc:number,mc:number,rake:number,k:number)
+  public  GetTorqueTurning(DD:number,ap:number,f:number,vc:number,kc:number,mc:number,rake:number,k:number)
   {        
-    return  this.httpClient.get(environment.CalcReq_Host + 'Power/Torque/Turning/StraightEdge/'  + DD + '/' + ap + '/' +  vc + '/' + kc + '/' + mc + '/' + rake + '/' + k).catch((err: HttpErrorResponse) => {      
+    return  this.httpClient.get(environment.CalcReq_Host + 'Power/Torque/Turning/StraightEdge/'  + DD + '/' + ap + '/' + f + '/' +  vc + '/' + kc + '/' + mc + '/' + rake + '/' + k).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";
     });
