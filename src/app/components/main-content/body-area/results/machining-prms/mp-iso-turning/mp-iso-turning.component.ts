@@ -265,7 +265,7 @@ resType:string
           this.TPB = Math.ceil(this.IPB / this.I)
           this.TIC = Math.round(this.IP * this.IPB * 100)/100
           this.TTC = this.TP * this.TPB
-          this.TGC = this.TIC * this.TTC
+          this.TGC = this.TIC + this.TTC
           this.MTB = Math.round((this.B * this.CTF) * 100)/100
           this.MCB = Math.round((this.MTB / (60 * this.MCH)) * 10000)/10000
           this.TCB = Math.round((this.TGC + this.MCB) * 100)/100

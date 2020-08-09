@@ -81,6 +81,7 @@ import { Mp760Component } from './components/main-content/body-area/results/mach
 import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 import { ResultPpInventoryComponent } from './components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
 import { MpIsoTurningComponent } from './components/main-content/body-area/results/machining-prms/mp-iso-turning/mp-iso-turning.component';
+import { MpIsoTurningAxRaComponent } from './components/main-content/body-area/results/machining-prms/mp-iso-turning-ax-ra/mp-iso-turning-ax-ra.component';
 
 @NgModule({
   declarations: [   
@@ -145,7 +146,8 @@ import { MpIsoTurningComponent } from './components/main-content/body-area/resul
     Mp760Component,
     MachinesPpLoginComponent,
     ResultPpInventoryComponent,
-    MpIsoTurningComponent
+    MpIsoTurningComponent,
+    MpIsoTurningAxRaComponent
   ],
   imports: [
     FormsModule,
