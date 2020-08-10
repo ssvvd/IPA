@@ -110,12 +110,17 @@ CTP:number
     this.Di2 = +this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value
     this.LP2 = +this.srv_StMng.IPL.GetItem('GroovePositionRad').value
 
-    this.Df1 = this.Di - (2 * this.LR1)
-
-    if (this.srv_StMng.SecApp=='870')
-    this.Df2 = this.Di2 - (2 * this.LR2)
+    
+    if (this.srv_StMng.SecApp=='870'){
+      this.Df1 = this.Di + (2 * this.LR1)
+      this.Df2 = this.Di2 + (2 * this.LR2)
+    }  
     else
-    this.Df2 = this.Di - (2 * this.LR2)
+    {
+      this.Df1 = this.Di - (2 * this.LR1)
+      this.Df2 = this.Di - (2 * this.LR2)
+    }
+    
 
      //output
      for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {
@@ -134,75 +139,84 @@ CTP:number
             this.TP = +(value.split(' ')[0])
              break;
            }
+           case 'CuttingSpeed':{
+            this.Vc = +value
+            this.Vc2 = +value
+            break;
+          }
+          case 'CuttingSpeedG':{
+            this.Vc2 = +value
+            break;
+          }
+          case 'Feed':{
+            this.fr = +value
+            this.fr2 = +value
+            break;
+          }
+          case'FeedG':{
+            this.fr2 = +value
+            break;
+          }
+          case 'DepthOfCutPerPass':{
+            this.ap = +value
+            this.ap2 = +value
+            break;
+          }
+          case 'DepthOfCutPerPassG':{
+            this.ap2 = +value
+            break;
+          }
+          case 'NumberOfPassesDepth':{
+            this.NOPP = +value
+            this.NOPP2 = +value
+            break;
+          }
+          case 'NumberOfPassesDepthG':{
+            this.NOPP2 = +value
+            break;
+          }
+          case 'MetalRemovalRate':{
+            this.MRR= +value
+            this.MRR2= +value
+            break;
+          }
+          case 'MetalRemovalRateG':{
+            this.MRR2= +value
+            break;
+          }
+          case 'PowerConsumption':{
+            this.P = +value
+            this.P2 = +value
+            break;
+          }
+          case 'PowerConsumptionG':{
+            this.P2 = +value
+            break;
+          }
+          case 'RPM':{
+            this.n = value
+            this.n2 = value
+            break;
+          }
+          case 'RPMG':{
+            this.n2 = value
+            break;
+          }
+          case 'TotalCuttingTime':{
+            this.CTFa = +value
+            this.CTFr = +value
+            break;
+          }
+          case 'TotalCuttingTimeG':{
+            this.CTFr = +value
+            break;
+          }
           }
       }.bind(this));  
       if (pr && pr.property){
-      switch (pr.property.Field){
-        case 'CuttingSpeed':{
-          this.Vc = +value
-          break;
-        }
-        case 'CuttingSpeedG':{
-          this.Vc2 = +value
-          break;
-        }
-        case 'Feed':{
-          this.fr = +value
-          break;
-        }
-        case'FeedG':{
-          this.fr2 = +value
-          break;
-        }
-        case 'DepthOfCutPerPass':{
-          this.ap = +value
-          break;
-        }
-        case 'DepthOfCutPerPassG':{
-          this.ap2 = +value
-          break;
-        }
-        case 'NumberOfPassesDepth':{
-          this.NOPP = +value
-          break;
-        }
-        case 'NumberOfPassesDepthG':{
-          this.NOPP2 = +value
-          break;
-        }
-        case 'MetalRemovalRate':{
-          this.MRR= +value
-          break;
-        }
-        case 'MetalRemovalRateG':{
-          this.MRR2= +value
-          break;
-        }
-        case 'PowerConsumption':{
-          this.P = +value
-          break;
-        }
-        case 'PowerConsumptionG':{
-          this.P2 = +value
-          break;
-        }
-        case 'RPM':{
-          this.n = value
-          break;
-        }
-        case 'RPMG':{
-          this.n2 = value
-          break;
-        }
-        case 'TotalCuttingTime':{
-          this.CTFa = +value
-          break;
-        }
-        case 'TotalCuttingTimeG':{
-          this.CTFr = +value
-          break;
-        }
-      }
+      // switch (pr.property.Field){
+
+      // }
 
     if (pr.property.Field.toLowerCase().includes('catalogno')){
 
@@ -317,7 +331,15 @@ if (pr.value.trim().length == 7){
 
 
         //api/CalcReq/Power/Torque/Turning/StraightEdge/{DD}/{ap}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
-        this.srv_Results.GetTorqueTurning(this.Di2,this.ap2,this.fr2,this.Vc2,_Kc2,_Mc2,0,kappaLeadAngel2).subscribe((res: any) => {
+        let DiSelected:number = 0
+        if (this.srv_StMng.SecApp=='870'){
+          DiSelected = this.Di2
+        }  
+        else
+        {
+          DiSelected =this.Di 
+        }
+        this.srv_Results.GetTorqueTurning(DiSelected,this.ap2,this.fr2,this.Vc2,_Kc2,_Mc2,0,kappaLeadAngel2).subscribe((res: any) => {
           var result = res as MPResult;
           this.T2 = Math.round(result.ResultRowList[1].Value * 100)/100
         })
