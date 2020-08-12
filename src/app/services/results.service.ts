@@ -112,9 +112,17 @@ export class ResultsService {
     });
   }
 
-  public  GetMPowerParams760(material:number,  Units:string,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String,  fNoList:String)
+  public  GetMPowerParamsTurning(Material:number,  Units:string,  Feed:number,  catalogNoList:String)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParams760/' + material + '/' + Units + '/' + KappaLeadAngle + '/' + Flutes + '/' + Feed + '/' + catalogNoList + '/' + fNoList).catch((err: HttpErrorResponse) => {      
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParamsTurning/' + Material + '/' + Units +  '/' + Feed + '/' + catalogNoList).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+  public  GetMPowerParams760(material:number,  Units:string,  KappaLeadAngle:number,  toolD:number,  ae:number,  Feed:number,  catalogNoList:String,  fNoList:String)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParams760/' + material + '/' + Units + '/' + KappaLeadAngle + '/' + toolD + '/' + ae + '/' + Feed + '/' + catalogNoList + '/' + fNoList).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";
     });
@@ -148,6 +156,14 @@ export class ResultsService {
     });
   }
 
+  //CalcReq/F-CuttingForces/Turning/StraightEdge/{ap}/{f}/{Kc}/{Mc}/{rake}/{k}
+  public  GetCuttingForcesTurning(ap:number,fr:number,Kc:number,Mc:number,rake:number,k:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Turning/StraightEdge/'  +  ap + '/' + fr + '/' + Kc + '/' + Mc + '/' + rake + '/' + k ).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge         /{D}/{ae}/{fz}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}/{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}/{ap}
@@ -167,6 +183,17 @@ export class ResultsService {
       return "error";
     });
   }
+
+  //api/CalcReq/Power/Torque/Turning/StraightEdge/{DD}/{ap}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
+  public  GetTorqueTurning(DD:number,ap:number,f:number,vc:number,kc:number,mc:number,rake:number,k:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'Power/Torque/Turning/StraightEdge/'  + DD + '/' + ap + '/' + f + '/' +  vc + '/' + kc + '/' + mc + '/' + rake + '/' + k).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+
 
   // public  checkItemImgExists()
   // {        

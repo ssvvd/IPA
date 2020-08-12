@@ -1,0 +1,392 @@
+<ng-container >
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Cutting Data' | translate}}</div>
+
+    <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
+        <div class="col-4">{{'Initial diameter' | translate }}</div>
+        <div class="col-3">D<sub>i</sub></div>
+        <div class="col-3 grayDiv text-center">{{Di}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <br>
+<div class="row justify-content-start w-100"><u>{{'Axial' | translate}}</u></div>
+
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Initial diameter' | translate }}</div>
+        <div class="col-3">D<sub>i</sub>1</div>
+        <div class="col-3 grayDiv text-center">{{Di}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Penetration Length' | translate }}</div>
+        <div class="col-3">LP1</div>
+        <div class="col-3 grayDiv text-center">{{LP1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
+        <div class="col-4">{{'Axial length' | translate }}</div>
+        <div class="col-3">LA1</div>
+        <div class="col-3 grayDiv text-center">{{LA1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
+        <div class="col-4">{{'Radial length' | translate }}</div>
+        <div class="col-3">LR1</div>
+        <div class="col-3 grayDiv text-center">{{LR1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Cutting length' | translate }}</div>
+        <div class="col-3">LA1</div>
+        <div class="col-3 grayDiv text-center">{{LA1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Machining Depth' | translate }}</div>
+        <div class="col-3">LR1</div>
+        <div class="col-3 grayDiv text-center">{{LR1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Final diameter' | translate }}</div>
+        <div class="col-3">D<sub>f</sub>1</div>
+        <div class="col-3 grayDiv text-center">{{Df1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Cutting speed' | translate }}</div>
+        <div class="col-3">V<sub>c</sub></div>
+        <div class="col-3 grayDiv text-center">{{Vc}}</div>
+        <div class="col-2">m/min</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Feed per rev' | translate }}</div>
+        <div class="col-3">f<sub>r</sub></div>
+        <div class="col-3 grayDiv text-center">{{fr}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Depth of cut' | translate }}</div>
+        <div class="col-3">a<sub>p</sub></div>
+        <div class="col-3 grayDiv text-center">{{ap}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Number of passes' | translate }}</div>
+        <div class="col-3">NOPP</div>
+        <div class="col-3 grayDiv text-center">{{NOPP}}</div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Material removal rate' | translate }}</div>
+        <div class="col-3">MRR</div>
+        <div class="col-3 grayDiv text-center">{{MRR}}</div>
+        <div class="col-2">cm<sup>3</sup>/min</div>
+      </div>
+
+      <br>
+<div class="row justify-content-start w-100"><u>{{'Radial' | translate}}</u></div>
+
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Initial diameter' | translate }}</div>
+        <div class="col-3">D<sub>i</sub>2</div>
+        <div class="col-3 grayDiv text-center">{{Di2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Penetration Length' | translate }}</div>
+        <div class="col-3">LP2</div>
+        <div class="col-3 grayDiv text-center">{{LP2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
+        <div class="col-4">{{'Axial length' | translate }}</div>
+        <div class="col-3">LA2</div>
+        <div class="col-3 grayDiv text-center">{{LA2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
+        <div class="col-4">{{'Radial length' | translate }}</div>
+        <div class="col-3">LR2</div>
+        <div class="col-3 grayDiv text-center">{{LR2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Machining Depth' | translate }}</div>
+        <div class="col-3">LR2</div>
+        <div class="col-3 grayDiv text-center">{{LR2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
+        <div class="col-4">{{'Cutting length' | translate }}</div>
+        <div class="col-3">LA2</div>
+        <div class="col-3 grayDiv text-center">{{LA2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Final diameter' | translate }}</div>
+        <div class="col-3">D<sub>f</sub>2</div>
+        <div class="col-3 grayDiv text-center">{{Df2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Cutting speed' | translate }}</div>
+        <div class="col-3">V<sub>c</sub></div>
+        <div class="col-3 grayDiv text-center">{{Vc2}}</div>
+        <div class="col-2">m/min</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Feed per rev' | translate }}</div>
+        <div class="col-3">f<sub>r</sub></div>
+        <div class="col-3 grayDiv text-center">{{fr2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Depth of cut' | translate }}</div>
+        <div class="col-3">a<sub>p</sub></div>
+        <div class="col-3 grayDiv text-center">{{ap2}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Number of passes' | translate }}</div>
+        <div class="col-3">NOPP</div>
+        <div class="col-3 grayDiv text-center">{{NOPP2}}</div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Material removal rate' | translate }}</div>
+        <div class="col-3">MRR</div>
+        <div class="col-3 grayDiv text-center">{{MRR2}}</div>
+        <div class="col-2">cm<sup>3</sup>/min</div>
+      </div>
+<br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Tool Assembly Data' | translate}}</div>
+
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Overhang' | translate }}</div>
+    <div class="col-3">O</div>
+    <div class="col-3 grayDiv text-center">{{O}}</div>
+    <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Assembly weight' | translate }}</div>
+    <div class="col-3">AW</div>
+    <div class="col-3 grayDiv text-center">{{AW}}</div>
+    <div class="col-2">kg</div>
+  </div>
+
+
+<br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
+
+<br>
+<div class="row justify-content-start w-100"><u>{{'Axial' | translate}}</u></div>
+
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Mean Power' | translate }}</div>
+    <div class="col-3">P</div>
+    <div class="col-3 grayDiv text-center">{{P}}</div>
+    <div class="col-2">kW</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Mean Torque' | translate }}</div>
+    <div class="col-3">T</div>
+    <div class="col-3 grayDiv text-center">{{T}}</div>
+    <div class="col-2">Nm</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Average feed speed' | translate }}</div>
+    <div class="col-3">V<sub>f</sub></div>
+    <div class="col-3 grayDiv text-center">{{Vf}}</div>
+    <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Spindle speed' | translate }}</div>
+    <div class="col-3">n</div>
+    <div class="col-3 grayDiv text-center">{{n}}</div>
+    <div class="col-2">rpm</div>
+  </div>
+
+  <div class="row justify-content-start w-100" >
+    <div class="col-4">{{'Tangential force' | translate }}</div>
+    <div class="col-3">F<sub>t</sub></div>
+    <div class="col-3 grayDiv text-center">{{Ft}}</div>
+    <div class="col-2">N</div>
+  </div> 
+
+  <br>
+<div class="row justify-content-start w-100"><u>{{'Radial' | translate}}</u></div>
+
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Mean Power' | translate }}</div>
+    <div class="col-3">P</div>
+    <div class="col-3 grayDiv text-center">{{P2}}</div>
+    <div class="col-2">kW</div>
+  </div>
+
+  <div class="row justify-content-start w-100" >
+    <div class="col-4">{{'Mean Torque' | translate }}</div>
+    <div class="col-3">T</div>
+    <div class="col-3 grayDiv text-center">{{T2}}</div>
+    <div class="col-2">Nm</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Average feed speed' | translate }}</div>
+    <div class="col-3">V<sub>f</sub></div>
+    <div class="col-3 grayDiv text-center">{{Vf2}}</div>
+    <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Spindle speed' | translate }}</div>
+    <div class="col-3">n</div>
+    <div class="col-3 grayDiv text-center">{{n2}}</div>
+    <div class="col-2">rpm</div>
+  </div>
+
+  <div class="row justify-content-start w-100" >
+    <div class="col-4">{{'Tangential force' | translate }}</div>
+    <div class="col-3">F<sub>t</sub></div>
+    <div class="col-3 grayDiv text-center">{{Ft2}}</div>
+    <div class="col-2">N</div>
+  </div> 
+
+  <br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
+
+<div class="row justify-content-start w-100">
+  <div class="col-4">{{'Machine cost (per hour)' | translate }}</div>
+  <div class="col-3">MCH</div>
+  <div class="col-3 grayDiv text-center">{{MCH}}</div>
+  <div class="col-2">€/hour</div>
+</div>
+<div class="row justify-content-start w-100">
+  <div class="col-4">{{'Batch size ' | translate }}</div>
+  <div class="col-3">B</div>
+  <div class="col-3 grayDiv text-center">{{B}}</div>
+  <div class="col-2">Parts</div>
+</div>
+
+<div class="row justify-content-start w-100">
+  <div class="col-4">{{'Axial - Cutting time per feature' | translate }}</div>
+  <div class="col-3">CTF<sub>a</sub></div>
+  <div class="col-3 grayDiv text-center">{{CTFa}}</div>
+  <div class="col-2">mm:ss</div>
+</div>
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Radial - Cutting time per feature' | translate }}</div>
+    <div class="col-3">CTF<sub>r</sub></div>
+    <div class="col-3 grayDiv text-center">{{CTFr}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Cutting time per part' | translate }}</div>
+    <div class="col-3">CTP</div>
+    <div class="col-3 grayDiv text-center">{{CTP}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Tool life length' | translate }}</div>
+    <div class="col-3">TLL</div>
+    <div class="col-3 grayDiv text-center">{{TLL}}</div>
+    <div class="col-2">m</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Tool life time' | translate }}</div>
+    <div class="col-3">TLT</div>
+    <div class="col-3 grayDiv text-center">{{TLT}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'No. of Edges per Insert' | translate }}</div>
+    <div class="col-3">CEDC</div>
+    <div class="col-3 grayDiv text-center">{{CEDC}}</div>
+    <div class="col-2">Edges/Insert</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Insert price' | translate }}</div>
+    <div class="col-3">IP</div>
+    <div class="col-3 grayDiv text-center">{{IP}}</div>
+    <div class="col-2">€</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Tool price' | translate }}</div>
+    <div class="col-3">TP</div>
+    <div class="col-3 grayDiv text-center">{{TP}}</div>
+    <div class="col-2">€</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'No. of parts per cutting edge' | translate }}</div>
+    <div class="col-3">PCE</div>
+    <div class="col-3 grayDiv text-center">{{PCE}}</div>
+    <div class="col-2">pcs</div>
+  </div>   
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Total number of Inserts' | translate }}</div>
+    <div class="col-3">IPB</div>
+    <div class="col-3 grayDiv text-center">{{IPB}}</div>
+    <div class="col-2">Inserts/batch</div>
+  </div>
+  <div class="row justify-content-start w-100" >
+      <div class="col-4">{{'Total number of Tools' | translate }}</div>
+      <div class="col-3">TPB</div>
+      <div class="col-3 grayDiv text-center">{{TPB}}</div>
+      <div class="col-2">Tools/batch</div>
+    </div>
+    <div class="row justify-content-start w-100" >
+      <div class="col-4">{{'Total Inserts cost' | translate }}</div>
+      <div class="col-3">TIC</div>
+      <div class="col-3 grayDiv text-center">{{TIC}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100" >
+      <div class="col-4">{{'Total Tools cost' | translate }}</div>
+      <div class="col-3">TTC</div>
+      <div class="col-3 grayDiv text-center">{{TTC}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100" >
+      <div class="col-4">{{'Total Tooling cost' | translate }}</div>
+      <div class="col-3">TGC</div>
+      <div class="col-3 grayDiv text-center">{{TGC}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Machine cost ' | translate }}</div>
+      <div class="col-3">MCB</div>
+      <div class="col-3 grayDiv text-center">{{MCB}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Machine time per batch' | translate }}</div>
+      <div class="col-3">MTB</div>
+      <div class="col-3 grayDiv text-center">{{MTB}}</div>
+      <div class="col-2">mm:ss</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Total cost' | translate }}</div>
+      <div class="col-3">TCB</div>
+      <div class="col-3 grayDiv text-center">{{TCB}}</div>
+      <div class="col-2">€/batch</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Cost per unit' | translate }}</div>
+      <div class="col-3">CPU</div>
+      <div class="col-3 grayDiv text-center">{{CPU}}</div>
+      <div class="col-2">€/unit</div>
+    </div>
+</ng-container>
+

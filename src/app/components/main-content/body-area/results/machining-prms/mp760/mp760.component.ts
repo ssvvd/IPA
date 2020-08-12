@@ -86,7 +86,7 @@ export class Mp760Component implements OnInit {
   TCB:number
   THeH_I:number
   He_Is:number
-  Flutes:number
+  // Flutes:number
   catalogNo:string[]=[]
   resType:string = ''
 
@@ -196,7 +196,7 @@ export class Mp760Component implements OnInit {
         }
         case 'Flutes':{
           this.NOF = +value
-          this.Flutes = +value
+          // this.Flutes = +value
           break;
         }
         case 'NoOfTeeth':{
@@ -324,15 +324,15 @@ let _FHA:number = 0
 let GFSCOD:number = 0
 let subApp:string = 'Shouldering'
 let insertType:string = ''
-let thickFirstParam = this.ap
+let thickFirstParam = ''
 let thickSecondParam = ''
 let cutForceFirts:string = ''
 let cutForceSecond:string = ''
 let cutForceThird:string = ''
 let kappaLeadAngel:number = this.selectedHelp.kappaLeadAngle || 90
 //(material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String,families)
-this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,
-this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toString()).subscribe((res: any) => {
+this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,kappaLeadAngel,+this.DC,
++this.ae,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toString()).subscribe((res: any) => {
   let paramsValues:string = JSON.parse(res); 
   var splitted = paramsValues.split(","); 
     if (splitted.length == 4){
@@ -357,6 +357,7 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
         insertType = 'FastFeed'
         thickSecondParam = kappaLeadAngel.toString()
         cutForceFirts = kappaLeadAngel.toString()
+        thickFirstParam = this.ap
       }
       else if (GFSCOD > 0){
         insertType = 'Extflutemillingcutter'
@@ -380,10 +381,17 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
   })
 
 
+  //old
   //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge        /{D}/{ae}/{fz}  /{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}  /{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}  /{ap}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}  /{ap}
+
+//new
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge/{D}/{ae}/{fz}/{k}		
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed/{D}/{ae}/{fz}/{ap}/{k}	
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{DC}/{ae}/{fz}	
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter/{DC}/{ae}/{fz}
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
       this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
@@ -408,7 +416,7 @@ this.Flutes,+this.fz,this.catalogNo.toString(),this.selectedHelp.Families.toStri
 
   reset(){
 
-this.Flutes = 0
+// this.Flutes = 0
 this.DC	=	''
 this.D	=	0
 this.W	=	0

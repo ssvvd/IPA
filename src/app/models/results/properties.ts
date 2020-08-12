@@ -2,6 +2,7 @@ export class clsProperties {
     FieldDescriptionSmall:string;
     FieldDescription:string;
     Field:string;
+    FieldIDInfo:string;
     IsAscending:boolean;
     NumberOfChars:number;
     IsVisible:boolean;
