@@ -51,7 +51,7 @@
                               ? 'd-none' : 'd-block'" 
                            >
                             <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
-                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] | translate }}:&nbsp;</label>{{prty.value}}
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>{{prty.value}}
                               <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label></span>
                          </td>
                          <td>

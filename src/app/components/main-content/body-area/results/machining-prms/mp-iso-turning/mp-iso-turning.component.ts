@@ -72,6 +72,7 @@ export class MpIsoTurningComponent implements OnInit {
   MTB:number
   TCB:number
 resType:string
+CPU:number
 
   constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
@@ -215,7 +216,7 @@ resType:string
       }
 
 
-      this.Vf = Math.round((this.fr * (Math.abs(+this.n.split('-')[1] - +this.n.split('-')[0])/2) || 0) * 100)/100
+      this.Vf = Math.round((this.fr * ((+this.n.split('-')[1] + +this.n.split('-')[0])/2) || 0) * 100)/100
 
       let _Mc:number = 0 
       let _Kc:number = 0      
@@ -267,8 +268,9 @@ resType:string
           this.TTC = this.TP * this.TPB
           this.TGC = this.TIC + this.TTC
           this.MTB = Math.round((this.B * this.CTF) * 100)/100
-          this.MCB = Math.round((this.MTB / (60 * this.MCH)) * 10000)/10000
+          this.MCB = Math.round(((this.MTB / 60) * this.MCH) * 10000)/10000
           this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
+          this.CPU = Math.round((this.TCB / this.B) * 100)/100
 
 }      
 
@@ -324,6 +326,7 @@ resType:string
     this.MTB = 0
     this.TCB = 0
 this.resType = ''
+this.CPU = 0
   }
 
 }
