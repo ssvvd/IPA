@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Language} from 'src/app/models/applications/applications';
+import { Language,Country} from 'src/app/models/applications/applications';
 import { User} from 'src/app/models/users/user';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { CookiesService } from 'src/app/services/cookies.service';
@@ -81,24 +81,16 @@ export class AppsettingService {
 
    ChangeUnits(units:string)
    {
-      if(units=='M')
-        {
-          this.Units="M";
-          //this.UnitslengthDesc="mm";                     
-        }
-      else
-        {
-          this.Units="I";
-          //this.UnitslengthDesc="inch"; 
-        }
+      if(units=='M')        
+          this.Units="M";                         
+      else        
+          this.Units="I";         
    }
+
    get UnitslengthDesc():string {
       if(this.Units=="M") return "mm";
       if(this.Units=="I") return "inch";      
     }
- /*  set UnitslengthDesc(u:string) {  
-    this.mUnitslengthDesc = u;
-   } */
 
   get lstLanguages():Language[] {
     return this.marrLanguages;
@@ -106,7 +98,7 @@ export class AppsettingService {
   set lstLanguages(l:Language[]) {  
     this.marrLanguages = l;
    }
-  private mLanguages:Language;
+  
   get SelectedLanguage():Language {
     return this.mLanguages;
     }
@@ -114,6 +106,7 @@ export class AppsettingService {
     this.mLanguages = l;
    }
 
+  private mLanguages:Language;
   get Lang():string
   {    
     return this.mLanguages.LanguageCode;
@@ -121,8 +114,19 @@ export class AppsettingService {
 
   dictionarygetlanguage()
   {
-    return this.srv_DataLayer.dictionarygetlanguage()
+    return this.srv_DataLayer.dictionarygetlanguage();
   }
+
+  getcountries()
+  {
+    return this.srv_DataLayer.GetCountryLangBrifData();
+  }
+ 
+  getexchangerate(currency:string)
+  {
+    return this.srv_DataLayer.exchangerate(currency);
+  }
+
  /*  private mCountry:string;
   get Country():string {
     return this.mCountry;
@@ -131,16 +135,37 @@ export class AppsettingService {
     this.mCountry = c;
    } */
 
-  private mCurrency:string;
+  private mCurrency:string ='USD';
   get Currency():string {
     return this.mCurrency;
     }
   set Currency(c:string) {  
     this.mCurrency = c;
    }
-   
+    
+   private mCurrRate:number =1;
+   get CurrRate():number {
+     return this.mCurrRate;
+     }
+   set CurrRate(r:number) {  
+     this.mCurrRate = r;
+    }
+
+  private mCountry:Country;
+  get Country():Country {
+    return this.mCountry;
+    }
+  set Country(c:Country) {  
+    this.mCountry = c;
+   }
+
    FillLanguage(lan:string)
    {
      return this.srv_DataLayer.dictionarygetlinelanguage(lan);    
+   }
+
+   getGEOLocation():any
+   {
+    return this.srv_DataLayer.getGEOLocation();
    }
 }

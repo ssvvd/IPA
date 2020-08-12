@@ -23,7 +23,7 @@ export class Appdetails790Component implements OnInit {
   
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
-
+  CostPerHourByRate:number;
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
   
  ngOnInit() { 
@@ -37,6 +37,8 @@ export class Appdetails790Component implements OnInit {
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value=='Solid') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole') this.HoleType="PreHole";   
     this.changeinputimage(this.HoleType);
+
+    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
   }
 
   ngOnDestroy() {

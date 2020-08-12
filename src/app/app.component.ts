@@ -47,7 +47,21 @@ ngOnInit()
   }
   
   this.srv_login.LogIn(token).subscribe(res=>{
-   
+     if(this.srv_appsetting.UserID=='')
+     {
+      this.srv_appsetting.getGEOLocation().subscribe((d:any)=> 
+        {
+          //todo:
+          //console.log(d);
+          //alert(d[0].country);
+
+        });
+     }
+     else
+     {
+
+     }
+
     }
    );
      

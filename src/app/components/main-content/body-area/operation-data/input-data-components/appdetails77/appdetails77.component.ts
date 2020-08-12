@@ -29,6 +29,7 @@ export class Appdetails77Component implements OnInit {
   public arrdiameter:DiameterHole[]=[];
   public IsLoaded:Boolean=false;
   public SelectedDia:DiameterHole;
+  public CostPerHourByRate:number;
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
@@ -51,7 +52,8 @@ export class Appdetails77Component implements OnInit {
       if(this.srv_StMng.SecAppSelected.MenuID=='71') this.srv_StMng.IPL.GetItem('IsRotating').value='0';      
       }
       )
-    );   
+    );  
+    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
   }
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();

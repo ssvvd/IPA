@@ -1,22 +1,27 @@
 <div class="modal-header">
     <h4 class="modal-title siteTitle pt-2 pl-2">{{'Stock Availability' | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
-      <span aria-hidden="true">&times;</span>
+      <span aria-hidden="true" class="span_x">&times;</span>
     </button>
   </div>
   <div class="modal-body">    
       <div class="row">
-        <div class="col-6"></div>
+        <div class="col-4"></div>
         <div class="col-2">US</div>
         <div class="col-2">EU</div>
-        <div class="col-2">E.Asia</div>
+        <div class="col-4">Asia</div>
       </div>
       <div class="pt-2"  *ngFor="let v of arrviewinvertory">
         <div class="row">
-            <div class="col-6">{{v.GroupName}}</div>            
-            <div class="col-2"><i  [ngClass]="v.Avai_USA ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
-            <div class="col-2"><i  [ngClass]="v.Avai_EU ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
-            <div class="col-2"><i  [ngClass]="v.Avai_FarEast ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
+            <div class="col-4">{{v.GroupName}}</div>     
+                   
+            <!-- <div class="col-2"><i  [ngClass]="v.Avai_USA ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div> -->
+            <div class="col-2"><img [src]="v.Avai_USA ?  environment.ImagePath+'icon_availble.svg' : environment.ImagePath+'icon_not availble.svg'" class= "icon-inventory"></div>
+            <div class="col-2"><img [src]="v.Avai_EU ?  environment.ImagePath+'icon_availble.svg' : environment.ImagePath+'icon_not availble.svg'" class= "icon-inventory"></div>
+            <div class="col-2"><img [src]="v.Avai_FarEast ?  environment.ImagePath+'icon_availble.svg' : environment.ImagePath+'icon_not availble.svg'" class= "icon-inventory"></div>
+
+          <!--   <div class="col-2"><i  [ngClass]="v.Avai_EU ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div>
+            <div class="col-4"><i  [ngClass]="v.Avai_FarEast ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div> -->
         </div>        
   </div>
   <div class="modal-footer">       

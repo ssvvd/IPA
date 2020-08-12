@@ -24,8 +24,9 @@ export class Appdetails890Component implements OnInit {
 
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
-  private s:SurfacequalityService;
+  //private s:SurfacequalityService;
   UnitsSurf:string;
+  CostPerHourByRate:number;
 
   N:number;
   Ra:number;
@@ -56,6 +57,8 @@ export class Appdetails890Component implements OnInit {
       this.UnitsSurf='μm';    
     else
       this.UnitsSurf='microinch';
+
+    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
   }
  
   onfocusfield(field:string)

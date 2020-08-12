@@ -17,7 +17,8 @@ export class Appdetails59Component implements OnInit {
   
    @Input() events: Observable<void>;
   private eventsSubscription: Subscription;
-  
+  CostPerHourByRate:number;
+
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
@@ -27,6 +28,8 @@ export class Appdetails59Component implements OnInit {
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     this.SetIPLMandatory();    
     this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+
+    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;
   }
       
   ngOnDestroy() {

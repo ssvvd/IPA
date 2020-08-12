@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Language} from 'src/app/models/applications/applications';
+import { Country,Language} from 'src/app/models/applications/applications';
 import { LoginService } from 'src/app/services/login.service';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
-import { DownloadresultService} from 'src/app/services/downloadresult.service';
 
 @Component({
   selector: 'app-header',
@@ -17,24 +16,28 @@ import { DownloadresultService} from 'src/app/services/downloadresult.service';
 
 export class HeaderComponent implements OnInit {  
   
-  //tableElement: ElementRef ;
   environment = environment;
   menuisshown:boolean=false;
   isMetric:boolean;
   lstLanguage:Language[] =[];
   isLoadingLang:boolean =false;
   SelectedLang:Language;
-  
+  lstcountry:Country[]=[];
+  IsLoaded:boolean=false;
+  CurrentCountryName:string='';
+
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
   userdes:string='Log In';
-  // /dictionarygetlanguage
+
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
-              private srv_appsetting:AppsettingService, private router:Router,
-              private srv_login:LoginService,private srv_down:DownloadresultService) { }
+              public srv_appsetting:AppsettingService, private router:Router,
+              private srv_login:LoginService) { }
 
   ngOnInit() {   
-  
+       
+       
+
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>{if(u=='') this.userdes='Log In'; else this.userdes=u});   
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
@@ -49,13 +52,24 @@ export class HeaderComponent implements OnInit {
       this.SelectedLang.LanguageName="English";
       this.SelectedLang.LanguageEnName="English";
       this.srv_appsetting.SelectedLanguage=this.SelectedLang;
-    }
+    }  
+    
+    //this.srv_appsetting.getGEOLocation().subscribe((d:any)=> {console.log(d);alert(d);});
+    
   } 
-  
+  LogOut()
+  {
+    this.srv_login.LogOut();
+    this.userdes='Log In';     
+  }
+
   LogIn()
-  {    
-      this.SpinnerService.show();
-      this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();});    
+  {   
+      if(this.srv_appsetting.UserID=='')
+      {
+        this.SpinnerService.show();
+        this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();});
+      }        
   }
 
   GetLanguages()
@@ -66,27 +80,100 @@ export class HeaderComponent implements OnInit {
       this.lstLanguage = JSON.parse(data); 
       this.srv_appsetting.lstLanguages =this.lstLanguage;
       this.isLoadingLang=true;
+      this.BuildCountryData();
       });                            
     }
     else
     {
        this.lstLanguage=this.srv_appsetting.lstLanguages;
+       this.BuildCountryData();
     }
   }
+  
+  BuildCountryData()
+  {
+    this.srv_appsetting.getcountries().subscribe((res: any) => {
+      for (const d of JSON.parse(res)) {       
+          if(this.lstcountry.filter (c=> c.CountryID==d.CountryId).length ==0)     
+          {
+            this.lstcountry.push({
+              CountryID:d.CountryId,
+              CountryName: d.CountryName.trim(),
+              CountryID_IscarCom: d.CountryID_IscarCom,   
+              CountryGlobalId:d.CountryGlobalId,
+              LanguageID: [d.CATLAN] ,
+              LanguageName: [d.CATLAN],
+              BrifName:d.BrifName,
+              Currency:d.Currency, 
+              CountryFlag:''                           
+            })  ;
+            if(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN).length >0)
+            {
+              this.lstcountry[this.lstcountry.length-1].LanguageName = [this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN)[0].LanguageName];
+            }
+          }                                            
+          else  
+          {
+            let c:Country;              
+            if(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN).length >0)
+            {
+              c=this.lstcountry.filter (c=> c.CountryID==d.CountryId)[0];
+              if(c.LanguageID.filter(l=> l==d.CATLAN).length ==0)
+              {
+                c.LanguageID.push(d.CATLAN);
+                c.LanguageName.push(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN)[0].LanguageName);
+              }             
+            }            
+          }
+      }
 
-  onChangeLanguage(lan:Language)
-  {     
+      if(this.srv_appsetting.Country===undefined)      
+      {
+        //this.srv_appsetting.Country=this.lstcountry.find (c=> c.CountryID==35);
+        this.CurrentCountryName = 'headquarters';
+      }               
+      else
+        {
+          this.srv_appsetting.Country=this.srv_appsetting.Country;
+          this.CurrentCountryName = this.srv_appsetting.Country.CountryName;
+          this.srv_appsetting.Currency=this.srv_appsetting.Country.Currency;
+          this.SetExchangeRate();     
+        }               
+      this.IsLoaded=true;     
+      });   
+  }
+
+  SetExchangeRate()
+  {
+    this.srv_appsetting.getexchangerate(this.srv_appsetting.Country.Currency).subscribe((res: any) =>
+          { 
+            if(res.length>0)
+            {
+              let rate :any=JSON.parse(res)[0].Exchange; 
+              this.srv_appsetting.CurrRate=rate;
+            }            
+            //alert(rate);
+          });
+  }
+
+  SelectCountryAndLang(c:Country,LanguageID:string)
+  {
+    let lan:Language;
+    lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
     this.srv_appsetting.SelectedLanguage =lan;    
     this.SelectedLang=lan;
     if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
       this.translate.use(lan.LanguageCode);
     else
-      this.translate.use(this.translate.getDefaultLang());
-      
-   this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {
-    //const fs = require('fs');      
-    //fs.writeFileSync(environment.LanguagePath + "/" + lan.LanguageCode + ".json", data);
-     });       
+      this.translate.use(this.translate.getDefaultLang()); 
+        
+    this.srv_appsetting.Country=c;      
+    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;
+    this.srv_appsetting.Currency=this.srv_appsetting.Country.Currency;
+    
+    this.SetExchangeRate();
+    this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {   
+     });    
   }
   
   UnitsChanged(event)

@@ -21,7 +21,7 @@ export class Appdetails54Component implements OnInit {
   
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
-
+  CostPerHourByRate:number;
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
@@ -42,7 +42,7 @@ export class Appdetails54Component implements OnInit {
     }
     else      
        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png"; */
-
+    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;   
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }
   ngOnDestroy() {

@@ -1,3 +1,10 @@
+@import "bootstrap";
+
+.btn-lang
+{
+  border:0;
+}
+
 .logoImg{
 height: 50px;
 cursor:pointer;
@@ -84,9 +91,13 @@ cursor:pointer;
 } 
 
 .calc-table-top{
-    transform: translate(-140px, 40px) !important;
-    margin-left: -70px;
+    //transform: translate(-140px, 40px) !important;
+    //margin-left: -70px;
     width: 250px;
+}
+.menu-logout
+{
+  border-radius: 0;
 }
 
 .nav-top-header

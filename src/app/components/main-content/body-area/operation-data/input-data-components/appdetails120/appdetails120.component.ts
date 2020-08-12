@@ -74,7 +74,7 @@ export class Appdetails120Component implements OnInit {
   threadtype:string='';
   pitch_units:string =''; 
   isLoaded:boolean =false;
-
+  CostPerHourByRate:number;
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() {    
@@ -135,7 +135,7 @@ export class Appdetails120Component implements OnInit {
         ));      
     }         
 )); 
-    
+this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
 }
 
 onfocusfield(field:string)
