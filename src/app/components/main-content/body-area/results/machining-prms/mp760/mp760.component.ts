@@ -86,6 +86,7 @@ export class Mp760Component implements OnInit {
   TCB:number
   THeH_I:number
   He_Is:number
+  COOL:string
   // Flutes:number
   catalogNo:string[]=[]
   resType:string = ''
@@ -317,6 +318,13 @@ if (value.trim().length == 7){
 // if (this.resType == "H")
 // this.TCB = this.H_TGC + this.MCB
 
+let mat:number = +this.srv_StMng.IPL.GetItem('Material').value
+
+if (mat >= 21 && mat <= 37)
+  this.COOL = 'WET'
+  else
+  this.COOL = 'DRY'
+
 
 let _Mc:number = 0 
 let _Kc:number = 0      
@@ -474,6 +482,7 @@ this.MCB	=	0
 this.MTB	=	0
 this.TCB	=	0
 this.catalogNo=[]
+this.COOL =''
   }
 
 }
