@@ -63,8 +63,8 @@
                 <div class="form-group row pt-2" *ngIf="!(MachineType=='Lathe' || MachineType=='swiss type' || MachineType=='Multi spindle') && !(MachineType=='Multi task' && spindle.SpindleType=='M')">
                     <label for="txtFaceCont" class="col-sm-7">{{'Face Contact Connection' | translate}}</label>
                     <div class="custom-control custom-checkbox custom-control-inline ml-3">
-                        <input type="checkbox" class="custom-control-input"  [attr.id]="'optFaceContact' + spindle.RecordID"  name="optFaceContact"  [(ngModel)]="spindle.FaceContact">
-                        <label class="custom-control-label" [attr.for]="'optFaceContact' + spindle.RecordID"></label>
+                        <input type="checkbox" class="custom-control-input"  [attr.id]="'optFaceContact' + spindle.SpindleType"  name="optFaceContact"  [(ngModel)]="spindle.FaceContact">
+                        <label class="custom-control-label" [attr.for]="'optFaceContact' + spindle.SpindleType"></label>
                     </div>
                 </div>  
              </div>                       
@@ -138,14 +138,14 @@
                     <label for="txtMQL" class="col-7 col-sm-7">MQL</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2 ">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLExt' + spindle.RecordID"  name="optMQL" [(ngModel)]="spindle.ExtMQL">
-                            <label class="custom-control-label" [attr.for]="'optMQLExt' + spindle.RecordID"></label>
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLExt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.ExtMQL">
+                            <label class="custom-control-label" [attr.for]="'optMQLExt' + spindle.SpindleType"></label>
                         </div>
                     </div>
                     <div  class="col-2 col-sm-2 col-lg-2 col-xl-2">                    
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLInt' + spindle.RecordID"  name="optMQL" [(ngModel)]="spindle.IntMQL">
-                            <label class="custom-control-label"  [attr.for]="'optMQLInt' + spindle.RecordID"></label> 
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLInt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.IntMQL">
+                            <label class="custom-control-label"  [attr.for]="'optMQLInt' + spindle.SpindleType"></label> 
                         </div>
                     </div>        
                 </div> 
@@ -153,14 +153,14 @@
                     <label for="txtAirBlast" class="col-7 col-sm-7 ">{{'Air Blast' | translate}}</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optAirBlastExt'+spindle.RecordID"  name="AirBlast" [(ngModel)]="spindle.ExtAirBlast">
-                            <label class="custom-control-label" [attr.for]="'optAirBlastExt' + spindle.RecordID"></label>
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optAirBlastExt'+spindle.SpindleType"  name="AirBlast" [(ngModel)]="spindle.ExtAirBlast">
+                            <label class="custom-control-label" [attr.for]="'optAirBlastExt' + spindle.SpindleType"></label>
                         </div>
                     </div>
                     <div  class="col-2 col-sm-2 col-lg-2 col-xl-2">                    
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" [attr.id]="'optAirBlastInt' + spindle.RecordID"  name="AirBlast" [(ngModel)]="spindle.IntAirBlast">
-                            <label class="custom-control-label" [attr.for]="'optAirBlastInt' + spindle.RecordID"></label> 
+                            <input type="checkbox" class="custom-control-input" [attr.id]="'optAirBlastInt' + spindle.SpindleType"  name="AirBlast" [(ngModel)]="spindle.IntAirBlast">
+                            <label class="custom-control-label" [attr.for]="'optAirBlastInt' + spindle.SpindleType"></label> 
                         </div>
                     </div>        
                 </div> 
@@ -168,14 +168,14 @@
                     <label for="txtEmultion" class="col-7 col-sm-7 ">{{'Emulsion' | translate}}</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
                         <div class="custom-control custom-checkbox custom-control-inline ">
-                            <input type="checkbox" class="custom-control-input" name="Emultion" [attr.id]="'chkEmultionExt' + spindle.RecordID"   [(ngModel)]="spindle.ExtEmultion">
-                            <label class="custom-control-label" [attr.for]="'chkEmultionExt' + spindle.RecordID"></label>
+                            <input type="checkbox" class="custom-control-input" name="Emultion" [attr.id]="'chkEmultionExt' + spindle.SpindleType"   [(ngModel)]="spindle.ExtEmultion">
+                            <label class="custom-control-label" [attr.for]="'chkEmultionExt' + spindle.SpindleType"></label>
                         </div>
                     </div>
                     <div  class="col-3 col-sm-3 col-lg-2 col-xl-2">                    
                         <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input"  name="Emultion" [attr.id]="'chkEmultionInt' + spindle.RecordID"  [(ngModel)]="spindle.IntEmultion">
-                            <label class="custom-control-label"  [attr.for]="'chkEmultionInt' + spindle.RecordID"></label> 
+                            <input type="checkbox" class="custom-control-input"  name="Emultion" [attr.id]="'chkEmultionInt' + spindle.SpindleType"  [(ngModel)]="spindle.IntEmultion">
+                            <label class="custom-control-label"  [attr.for]="'chkEmultionInt' + spindle.SpindleType"></label> 
                         </div>
                     </div>        
                 </div>

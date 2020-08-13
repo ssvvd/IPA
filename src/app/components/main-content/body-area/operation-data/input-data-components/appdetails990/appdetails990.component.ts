@@ -26,7 +26,8 @@ export class Appdetails990Component implements OnInit {
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   private s:SurfacequalityService;
   UnitsSurf:string;
-
+  CostPerHourByRate:number;
+  
   N:number;
   Ra:number;
   Rt:number;
@@ -56,6 +57,8 @@ export class Appdetails990Component implements OnInit {
       this.UnitsSurf='μm';    
     else
       this.UnitsSurf='microinch';
+
+      this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
   }
 
   ngOnDestroy() {

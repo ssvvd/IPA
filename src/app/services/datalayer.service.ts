@@ -26,6 +26,16 @@ export class DatalayerService {
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionary-get-language');
   }
+
+  public  getcountries()
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-countries');
+  }
+  public  GetCountryLangBrifData()
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-lang-brif');
+  }
+  
   public  dictionarygetlinelanguage(lang:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionaty-get-lines/'+lang);
@@ -81,4 +91,43 @@ export class DatalayerService {
         return "error";
       });  
   } 
+
+  public  exchangerate(currency:string)
+  {   
+    if(currency=='')  currency="all"            
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-exchange-rate/'+currency);
+  }
+
+/*   getGEOLocation() {
+    let d:any;
+    d=this.httpClient
+    .get('https://api.ipify.org/?format=json').subscribe ((d:any)=>
+    {       
+      let url = "https://api.ipgeolocation.io/ipgeo?apiKey=AIzaSyBBVxlnKCe7SziM_y46iFQjR80LGCJMH6k&ip="+d.ip; 
+      alert(url);
+      return this.httpClient
+            .get(url);
+    });     
+  }  */
+
+  getGEOLocation() {    
+    return this.httpClient
+    .get('http://ip-api.com/json');    
+  } 
+  
+  public  countrybyglobalname(countryglobalname:string)
+  {                 
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-by-globalname/'+countryglobalname);
+  }
+ /*  public getGEOLocation1() {
+
+
+    // Update your api key to get from https://ipgeolocation.io
+    let url = "https://api.ipgeolocation.io/ipgeo?apiKey=YourAPIKEY&ip="+this.getIpAddress(); 
+      return this.httpClient
+            .get(url)
+            .pipe(
+              //catchError(this.handleError)
+            );
+    }   */ 
 }

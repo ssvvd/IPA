@@ -24,4 +24,15 @@ export class Language {
   LanguageEnName: string ; 
 }
 
+export class Country {
+  CountryID:number;
+  CountryName: string ;
+  CountryID_IscarCom: number ;   
+  CountryGlobalId:number;
+  LanguageID: string [];
+  LanguageName: string [];
+  BrifName:string;
+  Currency:string; 
+  CountryFlag:string; 
+}
 

@@ -95,11 +95,22 @@ else
       let ms:Machinespindle;
       mainspindletype='M';
       
-      this.srv_StMng.IPL.GetItem('MachCostPerHour').value = this.srv_StMng.SelectedMachine.CostPerHour + "";
-      if(this.srv_appsetting.User.country!='')
+      this.srv_StMng.IPL.GetItem('MachCostPerHour').value = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100 + "";
+      //Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;
+      if(this.srv_appsetting.Country!==undefined)
+      {
+        this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.Country.CountryID.toString();
+      }
+      else
+      {
+        this.srv_StMng.IPL.GetItem('Country').value ='35';
+      }
+     /*  if(this.srv_appsetting.User.country!='')
         this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.User.country;
       else
-        this.srv_StMng.IPL.GetItem('Country').value ='35';  //NU
+        this.srv_StMng.IPL.GetItem('Country').value ='35';  //NU */
+        
+      this.srv_StMng.IPL.GetItem('Currency').value = this.srv_appsetting.Currency;
 
       if(this.srv_StMng.SelectedMachine.MachineType=='Multi task')
       {
@@ -151,10 +162,9 @@ else
     if(this.srv_StMng.GetMaterialSelected().HardnessHBValue!==undefined)
       this.srv_StMng.IPL.GetItem('HardnessHB').value = String(this.srv_StMng.GetMaterialSelected().HardnessHBValue);
 
-    //this.srv_StMng.IPL=this.Ipl; 
     let listparams: { name: string, value: string }[]=[];
     let str:string='';
-    
+
     if(this.srv_StMng.SecApp=='119' || this.srv_StMng.SecApp=='120')        
     {
       this.srv_StMng.IPL.GetItem('Size').value= this.srv_StMng.IPL.GetItem('Size').value.toString().replace('"', '***');
@@ -201,5 +211,7 @@ else
         this.FillDataInputParamAndRouteToResult();
       }));     
     }            
-  }    
+  } 
+  
+ 
 }

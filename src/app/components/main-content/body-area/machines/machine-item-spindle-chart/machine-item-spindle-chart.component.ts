@@ -69,10 +69,10 @@ export class MachineItemSpindleChartComponent implements OnInit {
   FilldataChart()
   {
     this.chartdata=new ChartData();    
-   /*  this.chartdata.PoinX_1 =this.spindle.N1;
+     this.chartdata.PoinX_1 =this.spindle.N1;
     this.chartdata.PoinX_2 =this.spindle.N2;
     this.chartdata.PoinX_3 =this.spindle.N3;
-    this.chartdata.PoinX_4 =this.spindle.N4; */
+    this.chartdata.PoinX_4 =this.spindle.N4; 
     
     if(this.typeChart=='torque')
       {
