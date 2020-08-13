@@ -521,7 +521,7 @@ switch(this.srv_StMng.SecApp.toString()){
     case '760':  case '770': case '780': case '790': case '57': case '119': case '120':
       switch(field){
         case 'HolderDesignation' :
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Adaptor'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
           break;
         case 'HolderDesignationCollet':
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Collet'
@@ -607,7 +607,7 @@ switch(this.srv_StMng.SecApp.toString()){
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Blade'
               break;
             case 'ADAPTER':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Adaptor'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
               break;
           }
         })
@@ -633,7 +633,7 @@ switch(this.srv_StMng.SecApp.toString()){
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Blade'
               break;
             case 'ADAPTER':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Adaptor'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
               break;
             case 'BORING BAR':
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
