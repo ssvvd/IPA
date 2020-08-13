@@ -253,8 +253,8 @@ if (pr.value.trim().length == 7){
     }
   }
 
-  this.Vf = Math.round((this.fr * ((+this.n.split('-')[1] + +this.n.split('-')[0])/2) || 0) * 100)/100
-  this.Vf2 = Math.round((this.fr2 * ((+this.n2.split('-')[1] + +this.n2.split('-')[0])/2) || 0) * 100)/100
+  this.Vf = Math.round((this.fr * (((+this.n.split('-')[1] || +this.n.split('-')[0]) + +this.n.split('-')[0])/2) || 0) * 100)/100
+  this.Vf2 = Math.round((this.fr2 * (((+this.n2.split('-')[1] || +this.n2.split('-')[0]) + +this.n2.split('-')[0])/2) || 0) * 100)/100
 
 
 
