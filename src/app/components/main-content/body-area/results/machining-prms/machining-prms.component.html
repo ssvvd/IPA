@@ -11,7 +11,7 @@
             <div class="row">
 <div class="col-xs-6 col-sm-6 col-md-6">
 <mp77 *ngIf = "srv_StMng.SecApp=='77'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp77>
-<mp760 *ngIf = "srv_StMng.SecApp=='760'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp760>
+<mp760 *ngIf = "srv_StMng.MainAppSelected.MainApp=='ML'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp760>
 <mp-iso-turning *ngIf = "srv_StMng.MainAppSelected.MainApp=='IS' && srv_StMng.SecApp!='970' && srv_StMng.SecApp!='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning>
 <mp-iso-turning-ax-ra *ngIf = "srv_StMng.SecApp=='970' || srv_StMng.SecApp=='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning-ax-ra>
 </div>

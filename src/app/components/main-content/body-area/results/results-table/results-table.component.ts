@@ -179,7 +179,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         
 
         if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
-        this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+        this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i]['SecondaryAppOrig1'];
 
 
        if (this.dtPropertiesTable[j].Field == 'ItemType'){
