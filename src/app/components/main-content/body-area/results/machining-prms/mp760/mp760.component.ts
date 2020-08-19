@@ -331,7 +331,7 @@ if (this.selectedHelp.itemTypeRes == 'S'){
 }
 
 this.TCB = Math.round(this.TCB * 100)/100
-this.CPU = this.TCB / this.B
+this.CPU = Math.round((this.TCB / this.B) * 100)/100
 // let itemIndex:number = 0
   this.selectedHelp.CatalogNo.forEach(function (value) {
 if (value.trim().length == 7){
