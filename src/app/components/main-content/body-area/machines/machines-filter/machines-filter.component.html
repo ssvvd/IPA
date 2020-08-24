@@ -165,20 +165,20 @@
 <div class="pt-3"> 
     <div class="border-bottom pl-3">
     </div>
-    <div class="pr-2 mt-0 pl-2">    
+    <div class="pt-2 pr-2 mt-0 pl-2">    
+        <label class="pt-4">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}</label>    
+        <div class="custom-slider ng5-slider pt-0 mt-0" >
+            <ng5-slider [(value)]="machFilter.PowerMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.PowerMax" [options]="options_power"></ng5-slider>
+        </div>
+    </div>  
+    <div class="pr-2 mt-0 pl-2 pt-2">    
         <label class="pt-4">{{'Rotating Speed (rpm)' | translate}}</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider  [(value)]="machFilter.SpeedMin"  class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.SpeedMax" [options]="options_speed"></ng5-slider>
         </div> 
-    </div>  
-     <div class="pt-2 pr-2 mt-0 pl-2">    
-        <label class="pt-4">{{'Power (kW)' | translate}}</label>    
-        <div class="custom-slider ng5-slider pt-0 mt-0" >
-            <ng5-slider [(value)]="machFilter.PowerMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.PowerMax" [options]="options_power"></ng5-slider>
-        </div>
-    </div>     
-     <div  class="pt-2 pr-2 mt-0 pl-2">    
-        <label class="pt-4">{{'Torque (Nm)'| translate}}</label>    
+    </div>        
+     <div  class="pt-2 pr-2 mt-0 pl-2 pb-4">    
+        <label class="pt-4">{{'Torque' | translate}}{{ srv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider [(value)]="machFilter.TorqueMin" class="form-control-sm" (userChangeEnd)="FilterChange($event)" [(highValue)]="machFilter.TorqueMax" [options]="options_torque"></ng5-slider>
         </div>

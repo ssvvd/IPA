@@ -75,9 +75,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
           
        this.isDtInitializedFunc();
        this.SpinnerService.hide();
-
-    });
- 
+    }); 
   }
 
   isDtInitializedFunc(){

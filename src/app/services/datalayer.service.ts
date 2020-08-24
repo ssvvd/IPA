@@ -31,9 +31,10 @@ export class DatalayerService {
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-countries');
   }
-  public  GetCountryLangBrifData()
+  public  GetCountryLangBrifData(countrycode:string)
   {           
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-lang-brif');
+    if(countrycode=='') countrycode='all'
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-lang-brif/' + countrycode);
   }
   
   public  dictionarygetlinelanguage(lang:string)
@@ -119,15 +120,9 @@ export class DatalayerService {
   {                 
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-by-globalname/'+countryglobalname);
   }
- /*  public getGEOLocation1() {
-
-
-    // Update your api key to get from https://ipgeolocation.io
-    let url = "https://api.ipgeolocation.io/ipgeo?apiKey=YourAPIKEY&ip="+this.getIpAddress(); 
-      return this.httpClient
-            .get(url)
-            .pipe(
-              //catchError(this.handleError)
-            );
-    }   */ 
+  
+  public  getcurrencyeciw(brifname:string)
+  {                 
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-currency-eciw/'+brifname);
+  }
 }

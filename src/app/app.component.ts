@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
 
 ngOnInit()
 {
-/*   $.get("http://ip-api.com/json", function(response) {
-    alert(response.country);}, "jsonp"); */
+
+   
 
   //LogIn
   let token:string='';
@@ -49,13 +49,7 @@ ngOnInit()
   this.srv_login.LogIn(token).subscribe(res=>{
      if(this.srv_appsetting.UserID=='')
      {
-      this.srv_appsetting.getGEOLocation().subscribe((d:any)=> 
-        {
-          //todo:
-          //console.log(d);
-          //alert(d[0].country);
-
-        });
+        
      }
      else
      {
@@ -69,14 +63,11 @@ ngOnInit()
   'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
   this.translate.setDefaultLang(this.srv_appsetting.LangName);
 
-  //check with HTTPS:// -TODO:
-  //this.srv_appsetting.Country ="35";
-
   cssVars({
   onlyLegacy: false,
   watch: true,
   onComplete(cssText, styleNode, cssVariables) {
-    //console.log(cssText);
+   
   }});
   
 }

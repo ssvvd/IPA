@@ -185,7 +185,7 @@ export class Appdetails990Component implements OnInit {
     if( this.srv_StMng.SecApp=='960')
     {
       this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('CutLengthRadial',"DPT:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('DepthAxial',"DPT:",this.srv_appsetting.UnitslengthDesc);
       
     }  
     if(this.strMandatory.length>0)

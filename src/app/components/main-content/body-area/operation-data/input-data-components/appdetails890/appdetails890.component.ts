@@ -227,13 +227,13 @@ export class Appdetails890Component implements OnInit {
     {
       this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('GroovePosition',"LP:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('DepthAxial',"LPD:",this.srv_appsetting.UnitslengthDesc);            
+      this.AddTostrMandatoryParam('DepthAxial',"DPT:",this.srv_appsetting.UnitslengthDesc);            
     } 
     if( this.srv_StMng.SecApp=='850')
     {
       this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('GroovePosition',"LP:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('DepthAxial',"LPD:",this.srv_appsetting.UnitslengthDesc);            
+      this.AddTostrMandatoryParam('DepthAxial',"DPT:",this.srv_appsetting.UnitslengthDesc);            
     } 
     if(this.strMandatory.length>0)
       this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);

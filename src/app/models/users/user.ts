@@ -6,4 +6,5 @@ export class User {
     country:string;
     companyName:string;
     isImc:string;
+    CountryCode:string;
 }

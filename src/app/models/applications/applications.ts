@@ -33,6 +33,7 @@ export class Country {
   LanguageName: string [];
   BrifName:string;
   Currency:string; 
-  CountryFlag:string; 
+  CountryFlag:string;
+  CountryCode:string; 
 }
 

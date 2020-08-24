@@ -2,11 +2,13 @@
 <div class="pt-2 pb-2 border-top-gray border-bottom-gray" >
  <ul class="nav nav-fill" >               
     <li (click)="onSelectMainApp(mainapp);"  class="nav-item li-item" *ngFor="let mainapp of arrMainApps" >
-        <div data-toggle="tooltip" title="tooltip"  class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
+        <div   class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
                     'div-app':mainapp.MenuID!=SelectedMainAppID && SelectedMainAppID!='','div-app-open':SelectedMainAppID==''}">                                                                         
-            <img src="{{mainapp.MenuImage}}" [ngClass]="mainapp.IsActive?'app-image cursor-pointer ':' app-image cursor-not-allowed img-not-allowed'">                                                                                                               
-            <div  class="form-group mb-0 pb-0">                    
-                <label  [ngClass]="mainapp.IsActive?'siteTitle cursor-pointer':'siteTitle cursor-not-allowed'">{{mainapp.MenuName |translate }}</label>                    
+            <img src="{{mainapp.MenuImage}}" data-toggle="tooltip" title="{{mainapp.IsActive?'':'Operation doesn’t match the selected machine'}}" [ngClass]="mainapp.IsActive?'app-image cursor-pointer ':' app-image cursor-not-allowed img-not-allowed'">                                                                                                               
+            <div>
+                <div  class="form-group mb-0 pb-0" data-toggle="tooltip"  title="{{mainapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
+                    <label  [ngClass]="mainapp.IsActive?'siteTitle cursor-pointer':'siteTitle cursor-not-allowed'">{{mainapp.MenuName |translate }}</label>                    
+                </div>
             </div>                                                                          
         </div>       
     </li>          
@@ -17,13 +19,13 @@
     <li  (click)="onFilterSecApp(secapp)" class="nav-item li-item pt-1" (click)="ToOperationData(secapp)" *ngFor="let secapp of arrSelectedSecApp1">
         <div  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
                     'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">                                                  
-            <img src="{{secapp.MenuImage}}"  [ngClass]="secapp.IsActive?'secapp-image cursor-pointer':'secapp-image cursor-not-allowed img-not-allowed'">                                                                                                  
+            <img src="{{secapp.MenuImage}}" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" [ngClass]="secapp.IsActive?'secapp-image cursor-pointer':'secapp-image cursor-not-allowed img-not-allowed'">                                                                                                  
             <div>
-                <div class="form-group mb-0 pb-0 cursor-pointer" >                    
+                <div class="form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
                     <label  [ngClass]="secapp.IsActive?'siteTitle cursor-pointer':'siteTitle cursor-not-allowed div-app'">{{secapp.MenuName  |translate }}</label>                    
                  </div>                                                              
             </div>
-            <div *ngIf="secapp.ApplicationITAID!='0'"  class="pt-2">
+            <div *ngIf="secapp.ApplicationITAID!='0'" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" class="pt-2">
                <button [ngClass]="secapp.IsActive?'btn btn-select cursor-pointer visible':'btn btn-select cursor-not-allowed div-app invisible'"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="isToOperationData && secapp.IsActive?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
             </div> 
         </div>

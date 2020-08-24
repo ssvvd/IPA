@@ -17,12 +17,12 @@ export class DownloadresultService {
   
   environment=environment;
   axial_y:number=0;
- 
+
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService) { }
-  options_svg_pdf: object = {
+ /*  options_svg_pdf: object = {
     width: 20,
     height :15
-  };
+  }; */
 
   DownLoadData(format:string) : any
   {
@@ -34,7 +34,7 @@ export class DownloadresultService {
   }
 
   public downloadPDF():any {
- 
+  
     var doc = new jsPDF('l');       
     let mat_desc;
     let desc_machine;
@@ -50,28 +50,15 @@ export class DownloadresultService {
     mach=this.srv_statemanage.SelectedMachine;
     desc_machine= mach.MachineType + ' ' + mach.MachineName + ' ' +  mach.AdaptationType + ' ' + mach.AdaptationSize;
     
-
- /*    var svg = document.getElementById('container-iscar-svg').innerHTML;
-    if (svg)
-      svg = svg.replace(/\r?\n|\r/g, '').trim(); 
-    doc.addSVG(svg,0,0,this.options_svg_pdf) ;  */
-
-    /* var canvas = document.createElement('canvas');    
-    canvg(canvas, (new XMLSerializer).serializeToString(document.getElementById("imglogisvg"))); 
-    var imgData = canvas.toDataURL('image/png');   
-    doc.addImage(imgData, 'PNG', 0, 0, 20, 15); */
-    
     doc.setFontSize(14);
-    //doc=this.addTextWithBackGround(doc,0,0,200,15,246,246,247,'ITA Report');
-    
+   
     let img = new Image()
     img.src = environment.ImagePath + 'ISCAR_Logo.png'
     doc.addImage(img, 'png', 5, 5, 40, 15)
     doc.setFontSize(16);
-    //doc.text(80, 20, 'ITA Recommendation Report');
+    
     doc.text(80, 20, this.translate.instant('ITA Recommendation Report'));
     
-
     this.axial_y=15;
 
     doc.setFontSize(12);
@@ -126,7 +113,7 @@ BuildResult(doc:jsPDF):any
           doc.addImage(canvas, 'PNG', 0,(adjust)*r+30, imgWidth, imgHeight);     
         if(r<extraNo-1) doc.addPage();
       }
-                     
+                   
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations.pdf');

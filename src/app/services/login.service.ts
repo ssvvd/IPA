@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { CookiesService } from  'src/app/services/cookies.service' ;
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { Country,Language} from 'src/app/models/applications/applications';
+import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/users/user';
 import { Observable,of} from 'rxjs';
 
@@ -12,7 +14,7 @@ import { Observable,of} from 'rxjs';
 export class LoginService {
 
   constructor(private srv_cook:CookiesService,private srv_DataLayer:DatalayerService,
-              private srv_appsetting:AppsettingService) { }
+              public srv_appsetting:AppsettingService,public translate: TranslateService,) { }
   
   GetToken():any
   {
@@ -26,9 +28,7 @@ export class LoginService {
   }
 
   LogIn(token:string):Observable<any>
-  { 
-    //this.srv_cook.delete_cookie('units');
-    //localStorage.setItem("units",null);
+  {     
     if(token!='')
     {      
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
@@ -42,8 +42,9 @@ export class LoginService {
             givenName: d[0].givenName,
             email: d[0].email,
             country:d[0].country,
-            companyName:d[0].companyName,
-            isImc:d[0].isImc}
+            companyName:d[0].companyName,            
+            isImc:d[0].isImc,
+            CountryCode:d[0].CountryCode}
             localStorage.setItem("displayName",d[0].displayName);
             localStorage.setItem("surname",d[0].surname);
             localStorage.setItem("givenName",d[0].givenName);
@@ -80,8 +81,50 @@ export class LoginService {
       u.country=country;
       u.companyName=companyName;
       u.isImc=isImc;
+      if(country=='')
+        this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
+        {       
+          {   
+            //alert(d.countryCode) ;          
+            this.srv_DataLayer.GetCountryLangBrifData(d.countryCode).subscribe((d:any)=>
+            {
+              let data = JSON.parse(d);
+              if(data.length>0)
+              {   
+                let c:Country =new Country;
+                c.BrifName =data[0].BrifName;
+                c.CountryFlag ='';
+                c.CountryGlobalId = 0;
+                c.CountryID = data[0].CountryId;
+                c.CountryName =data[0].CountryName;              
+                c.LanguageID =data[0].CATLAN;
+                c.CountryCode =data[0].CountryCode;
+                this.srv_appsetting.Country=c;
+                this.SetExchangeRate1(c.BrifName);
+             /*    this.srv_DataLayer.getcurrencyeciw(c.BrifName).subscribe((cur:any)=>
+                {
+                  if(JSON.parse(cur).length>0)       
+                    if(JSON.parse(cur)[0].ECUR=='') 
+                      c.Currency='USD';
+                    else
+                      c.Currency= JSON.parse(cur)[0].ECUR;              
+                  else      
+                    c.Currency='USD'; 
+                    
+                  this.srv_appsetting.Country=c;
+                  this.srv_appsetting.Currency=c.Currency;
+                });    */                          
+              }
+              
+            }
+            );
+          }
+        }
+        );
+
+    
       this.srv_appsetting.User=u;  
-      this.srv_appsetting.isLoggedIn=true;     
+      this.srv_appsetting.isLoggedIn=true;              
     } 
     this.srv_appsetting.isLoggedIn=true;       
     return of('ok'); 
@@ -108,4 +151,94 @@ export class LoginService {
     this.srv_appsetting.User=u;  
     this.srv_appsetting.isLoggedIn=true;
   }
+
+ /*  GetCurrencyByBrifName(brifname:string):any 
+  {
+    this.srv_DataLayer.getcurrencyeciw(brifname).subscribe((cur:any)=>
+    {
+      let currency:string;
+      if(JSON.parse(cur).length>0)       
+        if(JSON.parse(cur)[0].ECUR=='') 
+          currency='USD';
+        else
+        currency= JSON.parse(cur)[0].ECUR;              
+      else      
+        currency='USD'; 
+        
+      this.srv_appsetting.Country.Currency=currency;
+      this.srv_appsetting.Currency=currency;
+    });     
+  } */
+
+  SelectCountryAndLang(c:Country,LanguageID:string) :any
+  {
+    let lan:Language;
+    lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
+    this.srv_appsetting.SelectedLanguage =lan;       
+    if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
+      this.translate.use(lan.LanguageCode);
+    else
+      this.translate.use(this.translate.getDefaultLang()); 
+        
+    this.srv_appsetting.Country=c;          
+    this.SetExchangeRate1 (c.BrifName);
+    /* this.srv_DataLayer.getcurrencyeciw(c.BrifName).subscribe((cur:any)=>
+    {
+      if(JSON.parse(cur).length>0)       
+        if(JSON.parse(cur)[0].ECUR=='') 
+          c.Currency='USD';
+        else
+          c.Currency= JSON.parse(cur)[0].ECUR;              
+      else      
+        c.Currency='USD'; 
+        
+      this.srv_appsetting.Country=c;
+      this.srv_appsetting.Currency=c.Currency;
+
+      this.SetExchangeRate();
+    });    
+     */
+    this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {   
+     });    
+  }
+
+  SetExchangeRate()
+  {
+    this.srv_appsetting.getexchangerate(this.srv_appsetting.Currency).subscribe((res: any) =>
+    { 
+      if(res.length>0)
+      {
+        let rate :any=JSON.parse(res)[0].Exchange; 
+        this.srv_appsetting.CurrRate=rate;
+      }            
+      //alert(rate);
+    });
+  }
+
+  SetExchangeRate1(BrifName:string)
+  {
+    this.srv_DataLayer.getcurrencyeciw(BrifName).subscribe((cur:any)=>
+    {
+      let c:string;
+      if(JSON.parse(cur).length>0)       
+        if(JSON.parse(cur)[0].ECUR=='') 
+          c='USD';
+        else
+          c= JSON.parse(cur)[0].ECUR;              
+      else      
+        c='USD'; 
+        
+      this.srv_appsetting.Country.Currency=c;
+      this.srv_appsetting.Currency=c;
+      this.srv_appsetting.getexchangerate(this.srv_appsetting.Currency).subscribe((res: any) =>
+      { 
+        if(res.length>0)
+        {
+          let rate :any=JSON.parse(res)[0].Exchange; 
+          this.srv_appsetting.CurrRate=rate;
+        }            
+        //alert(rate);
+        });
+     });
+    }
 }
