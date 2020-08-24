@@ -216,7 +216,7 @@ CPU:number
       }
 
 
-      this.Vf = Math.round((this.fr * ((+this.n.split('-')[1] + +this.n.split('-')[0])/2) || 0) * 100)/100
+      this.Vf = Math.round((this.fr * (((+this.n.split('-')[1] || +this.n.split('-')[0]) + +this.n.split('-')[0])/2) || 0) * 100)/100
 
       let _Mc:number = 0 
       let _Kc:number = 0      

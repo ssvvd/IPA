@@ -8,22 +8,40 @@
           <div class="col-3 grayDiv text-center">{{DC}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
+        <div class="row justify-content-start w-100" *ngIf="PreHole">
+          <div class="col-4">{{'Pre Hole Diameter' | translate }}</div>
+          <div class="col-3">DPH</div>
+          <div class="col-3 grayDiv text-center">{{DPH}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+        </div>
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
+          <div class="col-4">{{'Hole Diameter' | translate }}</div>
+          <div class="col-3">DH</div>
+          <div class="col-3 grayDiv text-center">{{DH}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+        </div>
         <div class="row justify-content-start w-100">
           <div class="col-4">{{'Depth' | translate }}</div>
           <div class="col-3">D</div>
           <div class="col-3 grayDiv text-center">{{D}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
-        <div class="row justify-content-start w-100"> 
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'"> 
           <div class="col-4">{{'Width' | translate }}</div>
           <div class="col-3">W</div>
           <div class="col-3 grayDiv text-center">{{W}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
-        <div class="row justify-content-start w-100">
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
           <div class="col-4">{{'Length' | translate }}</div>
           <div class="col-3">L</div>
           <div class="col-3 grayDiv text-center">{{L}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+        </div>
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='790'">
+          <div class="col-4">{{'Corner Radius' | translate }}</div>
+          <div class="col-3">CR</div>
+          <div class="col-3 grayDiv text-center">{{CR}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100">
@@ -38,47 +56,83 @@
           <div class="col-3 grayDiv text-center">{{fz}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/tooth</div>
         </div>
-          <div class="row justify-content-start w-100">
+        <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='780'">
+          <div class="col-4">{{'Tool Course Diameter' | translate }}</div>
+          <div class="col-3">D<sub>vf</sub></div>
+          <div class="col-3 grayDiv text-center">{{Dvf}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+        </div>
+        <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='780'">
+          <div class="col-4">{{'Ramp Down Angle' | translate }}</div>
+          <div class="col-3">RMPX</div>
+          <div class="col-3 grayDiv text-center">{{RMPX}}</div>
+          <div class="col-2">°</div>
+        </div>
+        <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='780'">
+          <div class="col-4">{{'Pitch' | translate }}</div>
+          <div class="col-3">PITCH</div>
+          <div class="col-3 grayDiv text-center">{{PITCH}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+        </div>
+          <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Axial depth of cut' | translate }}</div>
             <div class="col-3">a<sub>p</sub></div>
             <div class="col-3 grayDiv text-center">{{ap}}</div>
             <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
           </div>
-          <div class="row justify-content-start w-100">
+          <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Number of axial passes' | translate }}</div>
             <div class="col-3">NOPP</div>
             <div class="col-3 grayDiv text-center">{{NOPP}}</div>
             <div class="col-2"></div>
           </div>
-          <div class="row justify-content-start w-100">
+          <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Radial width of cut' | translate }}</div>
             <div class="col-3">a<sub>e</sub></div>
             <div class="col-3 grayDiv text-center">{{ae}}</div>
             <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
           </div>
-          <div class="row justify-content-start w-100">
+          <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Number of radial passes' | translate }}</div>
             <div class="col-3">NOPE</div>
             <div class="col-3 grayDiv text-center">{{NOPE}}</div>
             <div class="col-2"></div>
           </div>
-          <div class="row justify-content-start w-100">
+          <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Avarage chip thickness' | translate }}</div>
             <div class="col-3">h<sub>m</sub></div>
             <div class="col-3 grayDiv text-center">{{hm}}</div>
             <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
           </div>
-          <div class="row justify-content-start w-100">
+          <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Maximal chip thickness' | translate }}</div>
             <div class="col-3">MCT</div>
             <div class="col-3 grayDiv text-center">{{MCT}}</div>
             <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
           </div>
-        <div class="row justify-content-start w-100">
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='790' || (PreHole && srv_StMng.SecApp=='790')">
             <div class="col-4">{{'Material removal rate' | translate }}</div>
             <div class="col-3">MRR</div>
             <div class="col-3 grayDiv text-center">{{MRR}}</div>
             <div class="col-2">cm<sup>3</sup>/min</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
+            <div class="col-4">{{'Material removal rate 1' | translate }}</div>
+            <div class="col-3">MRR1</div>
+            <div class="col-3 grayDiv text-center">{{MRR1}}</div>
+            <div class="col-2">cm<sup>3</sup>/min</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
+            <div class="col-4">{{'Material removal rate 2' | translate }}</div>
+            <div class="col-3">MRR2</div>
+            <div class="col-3 grayDiv text-center">{{MRR2}}</div>
+            <div class="col-2">cm<sup>3</sup>/min</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-4">{{'Coolant' | translate }}</div>
+            <div class="col-3">COOL</div>
+            <div class="col-3 grayDiv text-center">{{COOL}}</div>
+            <div class="col-2"></div>
           </div>
   
   <br>
@@ -115,10 +169,16 @@
           <div class="col-3 grayDiv text-center">{{T}}</div>
           <div class="col-2">Nm</div>
         </div>
-        <div class="row justify-content-start w-100">
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
           <div class="col-4">{{'Feed speed' | translate }}</div>
           <div class="col-3">v<sub>f</sub></div>
           <div class="col-3 grayDiv text-center">{{Vf}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+        </div>
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
+          <div class="col-4">{{'Tool Center Feed' | translate }}</div>
+          <div class="col-3">V<sub>f</sub>(D<sub>vf</sub>)</div>
+          <div class="col-3 grayDiv text-center">{{VfDvf}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
         </div>
         <div class="row justify-content-start w-100">
@@ -127,13 +187,13 @@
           <div class="col-3 grayDiv text-center">{{n}}</div>
           <div class="col-2">rpm</div>
         </div>
-        <div class="row justify-content-start w-100">
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
           <div class="col-4">{{'Bending force' | translate }}</div>
           <div class="col-3">F<sub>b</sub></div>
           <div class="col-3 grayDiv text-center">{{Fb}}</div>
           <div class="col-2">N</div>
         </div>
-        <div class="row justify-content-start w-100">
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
             <div class="col-4">{{'Bending moment' | translate }}</div>
             <div class="col-3">M<sub>b</sub></div>
             <div class="col-3 grayDiv text-center">{{mb}}</div>
@@ -288,13 +348,13 @@
             <div class="col-4">{{'Total no. of Solid Heads' | translate }}</div>
             <div class="col-3">SHB</div>
             <div class="col-3 grayDiv text-center">{{H_SHB}}</div>
-            <div class="col-2">Inserts/batch</div>
+            <div class="col-2">Heads/batch</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-4">{{'Total no. of Shanks' | translate }}</div>
             <div class="col-3">SKB</div>
             <div class="col-3 grayDiv text-center">{{H_SKB}}</div>
-            <div class="col-2">Tools/batch</div>
+            <div class="col-2">Shanks/batch</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-4">{{'Total Solid Heads cost' | translate }}</div>
@@ -357,6 +417,12 @@
           <div class="col-3">TCB</div>
           <div class="col-3 grayDiv text-center">{{TCB}}</div>
           <div class="col-2">€/batch</div>
+        </div>
+        <div class="row justify-content-start w-100">
+          <div class="col-4">{{'Cost per Unit' | translate }}</div>
+          <div class="col-3">CPU</div>
+          <div class="col-3 grayDiv text-center">{{CPU}}</div>
+          <div class="col-2">€/unit</div>
         </div>
       </ng-container>
   

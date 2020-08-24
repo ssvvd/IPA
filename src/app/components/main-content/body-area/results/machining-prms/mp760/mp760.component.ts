@@ -29,9 +29,12 @@ export class Mp760Component implements OnInit {
   @Input() selectedHelp:clsHelpProp;
 
   DC:string
+  DPH:number
+  DH:number
   D:number
   W:number
   L:number
+  CR:number
   Vc:string
   fz:string
   ap:string
@@ -41,6 +44,8 @@ export class Mp760Component implements OnInit {
   hm:number
   MCT:number
   MRR:string
+  MRR1:string
+  MRR2:string
   O:number
   AW:number
   P:number
@@ -86,6 +91,13 @@ export class Mp760Component implements OnInit {
   TCB:number
   THeH_I:number
   He_Is:number
+  COOL:string
+  PreHole:boolean
+  Dvf:number
+  RMPX:number
+  PITCH:number
+  VfDvf:number
+  CPU:number
   // Flutes:number
   catalogNo:string[]=[]
   resType:string = ''
@@ -94,7 +106,7 @@ export class Mp760Component implements OnInit {
 
 
 
-  constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
+  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
   ngOnInit(): void {
   }
@@ -110,8 +122,23 @@ export class Mp760Component implements OnInit {
   fillParams(){
     this.reset()
 
+if (this.srv_StMng.SecApp=='780' && this.srv_StMng.IPL.GetItem('HoleTypePreHole').value!='')
+    this.PreHole = true
+if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole')
+    this.PreHole = true
 
+    if (this.srv_StMng.SecApp=='780')
+    if (this.PreHole)
+      this.DH = +this.srv_StMng.IPL.GetItem('D2').value
+    else
+      this.DH = +this.srv_StMng.IPL.GetItem('D2Min').value
+
+    this.CR = +this.srv_StMng.IPL.GetItem('RToleranceMin').value
+    if (this.srv_StMng.SecApp=='780')
+    this.D = +this.srv_StMng.IPL.GetItem('Depth').value
+    else
     this.D = +this.srv_StMng.IPL.GetItem('DepthOfShoulder_ap').value
+    this.DPH = +this.srv_StMng.IPL.GetItem('D3').value
     this.W = +this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value
     this.L = +this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value
     this.MCH = this.srv_StMng.SelectedMachine.CostPerHour
@@ -129,6 +156,7 @@ export class Mp760Component implements OnInit {
           case 'DetailsListPrice':{
             this.H_SHP = +(value.split(' ')[0])
              this.THe_IP = +(value.split(' ')[0])
+             this.S_SP = +(value.split(' ')[0])
              break;
            }
            case 'HeaderListPrice':{
@@ -154,7 +182,7 @@ export class Mp760Component implements OnInit {
           this.fz = value
           break;
         }
-        case 'DMin':{
+        case 'DMin': case 'Tool_D':{
           this.DC = value
           break;
         }
@@ -176,6 +204,12 @@ export class Mp760Component implements OnInit {
         }
         case 'MetalRemovalRate':{
           this.MRR = value
+          this.MRR1 = value
+          break;
+        }
+        case 'MetalRemovalRateG':{
+          this.MRR = value
+          this.MRR2 = value
           break;
         }
         case 'PowerConsumption':{
@@ -201,16 +235,35 @@ export class Mp760Component implements OnInit {
         }
         case 'NoOfTeeth':{
           this.THe_CICT = +value
+          if (this.NOF == 0)
+            this.NOF = +value
           break;
         }
         case 'NoOfCorners':{
           this.THe_CEDC = +value
           break;
         }
-        // case 'Flutes':{
-          
-        //   break;
-        // }
+        case 'Dvf1':{
+          this.Dvf = +value
+          break;
+        }
+        case 'RpDown1':{
+          this.RMPX = +value
+          break;
+        }
+        case 'Pitch':{
+          this.PITCH = +value
+          break;
+        }
+        case 'Vf1':{
+          this.VfDvf = +value
+          break;
+        }
+        case 'TotalCuttingTime':{
+          if (this.srv_StMng.SecApp=='780')
+            this.CTF = +value
+          break;
+        }
       }
  
 
@@ -219,10 +272,13 @@ export class Mp760Component implements OnInit {
   }
 
 
+  if (this.srv_StMng.SecApp=='790')
+  this.Vf = Math.round((+this.fz * this.n * this.NOF)*100)/100
 
 this.B = 100
 this.He_Is = 100
 this.THeH_I = 110
+if (this.srv_StMng.SecApp!='780')
 this.CTF = Math.round((+this.NOPE * +this.NOPP * this.L / this.Vf) * 100)/100 //NOPE * NOPP * L / Vf
 this.TLL = 50
 this.TLT = 50
@@ -231,7 +287,7 @@ this.THe_IPB = Math.ceil((this.B / this.FCE / this.THe_CEDC) * this.THe_CICT)
 this.T_TPB = Math.ceil(this.B / this.FCE / this.THe_CEDC / this.THeH_I)
 this.He_TPB = this.T_TPB
 this.He_THH = Math.ceil(this.He_TPB / this.He_Is)
-this.THe_TIC = this.THe_IP * this.THe_IPB
+this.THe_TIC = Math.round((this.THe_IP * this.THe_IPB) * 100)/100
 this.He_THSC = (this.He_HP * this.He_TPB) + (this.He_HHP * this.He_THH)
 this.T_TTC = this.T_TP * this.T_TPB
 this.T_TGC =  Math.ceil(this.THe_TIC + this.T_TTC * 100)/100
@@ -239,7 +295,7 @@ this.He_TGC =  Math.ceil(this.THe_TIC + this.He_THSC * 100)/100
 this.S_SPB = Math.ceil(this.B / this.FCE)
 this.S_TSC = this.S_SP * this.S_SPB
 this.H_SHB = Math.ceil(this.B / this.FCE)
-this.H_SKB = this.H_SHB
+this.H_SKB = Math.ceil(this.B / this.FCE / this.THeH_I)
 this.H_TSHC = this.H_SHP * this.H_SHB
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC =  Math.ceil(this.H_TSHC + this.H_TSKC * 100)/100
@@ -274,7 +330,8 @@ if (this.selectedHelp.itemTypeRes == 'S'){
 }
 }
 
-
+this.TCB = Math.round(this.TCB * 100)/100
+this.CPU = Math.round((this.TCB / this.B) * 100)/100
 // let itemIndex:number = 0
   this.selectedHelp.CatalogNo.forEach(function (value) {
 if (value.trim().length == 7){
@@ -317,6 +374,13 @@ if (value.trim().length == 7){
 // if (this.resType == "H")
 // this.TCB = this.H_TGC + this.MCB
 
+let mat:number = +this.srv_StMng.IPL.GetItem('Material').value
+
+if (mat >= 21 && mat <= 37)
+  this.COOL = 'WET'
+  else
+  this.COOL = 'DRY'
+
 
 let _Mc:number = 0 
 let _Kc:number = 0      
@@ -341,7 +405,9 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
        _FHA = +splitted[2]
       GFSCOD = +splitted[3]
 
-      if (this.selectedHelp.SecondaryAppOrig1 == '59'){
+
+
+      if (this.selectedHelp.SecondaryAppOrig1 == '59' || this.selectedHelp.SecondaryAppOrig1 == '61' || ((this.srv_StMng.SecApp == '57' || this.selectedHelp.SecondaryAppOrig1 == '750') && GFSCOD == 0)){
         if (this.selectedHelp.itemType.includes('S')){
           insertType = 'Solidcarbidecutter'
           cutForceFirts = _FHA.toString()
@@ -353,7 +419,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
           cutForceFirts = kappaLeadAngel.toString()
         } 
       }
-      else if (this.selectedHelp.SecondaryAppOrig1 == '700'){
+      else if (this.selectedHelp.SecondaryAppOrig1 == '700' || this.selectedHelp.SecondaryAppOrig1 == '710'  || this.selectedHelp.SecondaryAppOrig1 == '740'){
         insertType = 'FastFeed'
         thickSecondParam = kappaLeadAngel.toString()
         cutForceFirts = kappaLeadAngel.toString()
@@ -418,6 +484,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 
 // this.Flutes = 0
 this.DC	=	''
+this.DPH = 0
 this.D	=	0
 this.W	=	0
 this.L	=	0
@@ -430,6 +497,8 @@ this.NOPE	=	''
 this.hm	=	0
 this.MCT	=	0
 this.MRR	=	''
+this.MRR1	=	''
+this.MRR2	=	''
 this.O	=	0
 this.AW	=	0
 this.P	=	0
@@ -474,6 +543,15 @@ this.MCB	=	0
 this.MTB	=	0
 this.TCB	=	0
 this.catalogNo=[]
+this.COOL =''
+this.PreHole = false
+this.DH = 0
+this.CR = 0
+this.Dvf = 0
+this.RMPX = 0
+this.PITCH = 0
+this.VfDvf = 0
+this.CPU = 0
   }
 
 }
