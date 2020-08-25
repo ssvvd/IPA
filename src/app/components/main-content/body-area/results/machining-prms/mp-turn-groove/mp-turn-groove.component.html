@@ -1,0 +1,59 @@
+<ng-container >
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Cutting Data' | translate}}</div>
+
+    <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='10' || srv_StMng.SecApp=='51'">
+        <div class="col-4">{{'Outer Diameter' | translate }}</div>
+        <div class="col-3">OD</div>
+        <div class="col-3 grayDiv text-center">{{OD}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='51'">
+        <div class="col-4">{{'Inner Diameter' | translate }}</div>
+        <div class="col-3">ID</div>
+        <div class="col-3 grayDiv text-center">{{ID}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Initial Workpiece Diameter' | translate }}</div>
+        <div class="col-3">D<sub>wi</sub></div>
+        <div class="col-3 grayDiv text-center">{{DWI}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Groove Position' | translate }}</div>
+        <div class="col-3">LP</div>
+        <div class="col-3 grayDiv text-center">{{LP}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Depth of Groove' | translate }}</div>
+        <div class="col-3">DPT</div>
+        <div class="col-3 grayDiv text-center">{{DPT}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Final Workpiece Diameter ' | translate }}</div>
+        <div class="col-3">D<sub>wf</sub></div>
+        <div class="col-3 grayDiv text-center">{{DWF}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='54' || srv_StMng.SecApp=='188'">
+        <div class="col-4">{{'Outer Diameter' | translate }}</div>
+        <div class="col-3">D</div>
+        <div class="col-3 grayDiv text-center">{{D}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='54' || srv_StMng.SecApp=='10'">
+        <div class="col-4">{{'Outer Depth' | translate }}</div>
+        <div class="col-3">DOD</div>
+        <div class="col-3 grayDiv text-center">{{DOD}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+</ng-container>
