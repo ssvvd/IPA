@@ -82,12 +82,9 @@ import { MachinesPpLoginComponent } from './components/main-content/body-area/ma
 import { ResultPpInventoryComponent } from './components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
 import { MpIsoTurningComponent } from './components/main-content/body-area/results/machining-prms/mp-iso-turning/mp-iso-turning.component';
 import { MpIsoTurningAxRaComponent } from './components/main-content/body-area/results/machining-prms/mp-iso-turning-ax-ra/mp-iso-turning-ax-ra.component';
-<<<<<<< HEAD
 import { MpTurnGrooveComponent } from './components/main-content/body-area/results/machining-prms/mp-turn-groove/mp-turn-groove.component';
-=======
 import { HeaderPpUnitsComponent } from './components/header/header-pp-units/header-pp-units.component';
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
->>>>>>> e01ae9de08e03809832f1f217fcd16dae7f97679
 
 @NgModule({
   declarations: [   
@@ -154,12 +151,9 @@ import { PpSuccessfullyComponent } from './components/maintenance/pp-successfull
     ResultPpInventoryComponent,
     MpIsoTurningComponent,
     MpIsoTurningAxRaComponent,
-<<<<<<< HEAD
-    MpTurnGrooveComponent
-=======
+    MpTurnGrooveComponent,
     HeaderPpUnitsComponent,
     PpSuccessfullyComponent
->>>>>>> e01ae9de08e03809832f1f217fcd16dae7f97679
   ],
   imports: [
     FormsModule,
