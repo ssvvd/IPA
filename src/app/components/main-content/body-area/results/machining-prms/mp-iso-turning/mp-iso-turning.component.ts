@@ -104,19 +104,30 @@ CPU:number
     else if (this.srv_StMng.SecApp=='880')
       this.LP = +this.srv_StMng.IPL.GetItem('GroovePositionRad').value
 
-      if (this.srv_StMng.SecApp=='890' || this.srv_StMng.SecApp=='850' || this.srv_StMng.SecApp=='990'){
+      if (this.srv_StMng.SecApp=='990'){
       this.LR = +this.srv_StMng.IPL.GetItem('DepthAxial').value
       this.Df = this.Di - (2 * this.LR)//Di - 2*LR
       }
-    else if (this.srv_StMng.SecApp=='880'  || this.srv_StMng.SecApp=='980'){
+    else if ( this.srv_StMng.SecApp=='980'){
       this.LR = +this.srv_StMng.IPL.GetItem('CutLengthRadial').value
       this.Df = this.Di - (2 * this.LR)//Di - 2*LR
     }
-    else if (this.srv_StMng.SecApp=='860'  || this.srv_StMng.SecApp=='960'){
+    else if (this.srv_StMng.SecApp=='960'){
       this.DPT = +this.srv_StMng.IPL.GetItem('DepthAxial').value
       this.Df = this.Di - (2 * this.DPT)//Di - 2*DPT
     }
-      
+      else if (this.srv_StMng.SecApp=='890' || this.srv_StMng.SecApp=='850'){
+        this.LR = +this.srv_StMng.IPL.GetItem('DepthAxial').value
+        this.Df = this.Di + (2 * this.LR)//Di - 2*LR
+        }
+      else if (this.srv_StMng.SecApp=='880'){
+        this.LR = +this.srv_StMng.IPL.GetItem('CutLengthRadial').value
+        this.Df = this.Di + (2 * this.LR)//Di - 2*LR
+      }
+      else if (this.srv_StMng.SecApp=='860'){
+        this.DPT = +this.srv_StMng.IPL.GetItem('DepthAxial').value
+        this.Df = this.Di + (2 * this.DPT)//Di - 2*DPT
+      }
     if (this.srv_StMng.SecApp=='890' || this.srv_StMng.SecApp=='990' || this.srv_StMng.SecApp=='850')
       this.LA = +this.srv_StMng.IPL.GetItem('CutLengthAxial').value
     else if (this.srv_StMng.SecApp=='980' || this.srv_StMng.SecApp=='880')
