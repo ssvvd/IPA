@@ -4,8 +4,8 @@
 <div class="col-12 banner-top d-flex justify-content-center" >
     <div class="col-11 pr-0">
         <div class="row float-right div-banner-images">
-            <div class="div-header-link pl-1 pt-1">
-                <label class="switch"><input type="checkbox" (change)="UnitsChanged($event)" [checked]="isMetric" id="togBtn">
+            <div class="div-header-link pl-1 pt-1" >
+                <label class="switch"><input type="checkbox" (click)="CheckAllowUnitsChange($event)"  [checked]="isMetric" id="togBtn">
                     <div class="slider round"></div>
                 </label>          
             </div>

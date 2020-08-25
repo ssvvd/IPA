@@ -4,8 +4,10 @@ import { User} from 'src/app/models/users/user';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { CookiesService } from 'src/app/services/cookies.service';
 import { BehaviorSubject } from 'rxjs';
+//import { unlink } from 'fs';
+//import { uniqueSort } from 'jquery';
 
-@Injectable({
+@Injectable({ 
   providedIn: 'root'
 })
 export class AppsettingService {
@@ -119,21 +121,13 @@ export class AppsettingService {
 
   getcountries()
   {
-    return this.srv_DataLayer.GetCountryLangBrifData();
+    return this.srv_DataLayer.GetCountryLangBrifData('');
   }
  
   getexchangerate(currency:string)
   {
     return this.srv_DataLayer.exchangerate(currency);
   }
-
- /*  private mCountry:string;
-  get Country():string {
-    return this.mCountry;
-    }
-  set Country(c:string) {  
-    this.mCountry = c;
-   } */
 
   private mCurrency:string ='USD';
   get Currency():string {
@@ -168,4 +162,13 @@ export class AppsettingService {
    {
     return this.srv_DataLayer.getGEOLocation();
    }
+
+   private mUseCookies:boolean=true;
+   get UseCookies():boolean{ 
+    return this.mUseCookies;
+  }
+  set UseCookies(u:boolean) {  
+    this.mUseCookies = u;
+   }
+
 }

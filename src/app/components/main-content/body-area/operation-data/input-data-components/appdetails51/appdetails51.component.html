@@ -35,7 +35,7 @@
                             <label class="pl-0 pt-3">{{'Part length (L)' | translate}}</label>                            
                         </div>
                         <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Width').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'" 
+                            <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Width').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Width').value" (change)="SetIPLMandatory()" (focus)="onfocusfield('Width')" (focusout)="onfocusoutfield()"> 
                         </div>
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">

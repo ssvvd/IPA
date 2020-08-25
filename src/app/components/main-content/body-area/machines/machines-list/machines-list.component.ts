@@ -9,11 +9,11 @@ import {MachinePpAddFavoriteComponent} from 'src/app/components/main-content/bod
 import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { LoginService } from 'src/app/services/login.service';
-//import { ENGINE_METHOD_DIGESTS } from 'constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-machines-list',
@@ -34,17 +34,19 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   MachineIDSelected = 0;
   datatableElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
-  //allSubs$: Subscription;
+
   private eventsSubscription: Subscription=new Subscription();
   isLoaded:boolean =false;
   countrow:string='';
   defaultmachine:number=0;
+  statusclick:number=0;
 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   
   eventsChangeFavorite: Subject<void> = new Subject<void>();
-
-  constructor(private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
+  eventsChangeMachineList: Subject<number[]> = new Subject<number[]>();
+ 
+  constructor(private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
@@ -65,7 +67,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         "infoEmpty": "",
         "info": "",
         },        
-        "order": [[ 11, 'desc' ],[ 10, 'asc' ]] ,
+        "order": [[ 10, 'desc' ],[ 9, 'asc' ]] ,
         responsive: true
     };    
     this.isLoaded =false;
@@ -123,14 +125,14 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   }
   sort_arr(a:Machineheader,b:Machineheader)
   {
-      if(a.IsSelected && !b.IsSelected) return -1;
-      if(!a.IsSelected && b.IsSelected) return 1;
-      
+          
       if(!a.IsSelected && !b.IsSelected)
       {
         if(a.isFavorite && !b.isFavorite) return -1;
         if(!a.isFavorite && b.isFavorite) return 1;
       }
+      if(a.IsSelected && !b.IsSelected) return -1;
+      if(!a.IsSelected && b.IsSelected) return 1;
       return 0;
   }
 
@@ -150,6 +152,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   
   SetDefault(MachineID:number)  
   {
+    this.statusclick=1;
     this.srv_cook.set_cookie("def_mach",MachineID.toString());
     this.defaultmachine=MachineID;
   }
@@ -183,6 +186,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   OnFavoriteMachine(mach: Machineheader)
   { 
+    this.statusclick=1;
     if(this.srv_appsetting.UserID=='')
     {
       //alert('Only for registered user');
@@ -283,7 +287,8 @@ UpdateStateSelectedMachine(MachineID: number) {
     }); 
   }
 
-  OnSelectMachine(mach: Machineheader) {
+  OnSelectDefaultMachine(mach: Machineheader) {
+    this.statusclick =1;
     this.srv_cook.set_cookie("sel_mach",mach.MachineID.toString());
     this.UpdateStateSelectedMachine(mach.MachineID);
     this.srv_statemanage.SelectedMachine = mach;
@@ -348,6 +353,25 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.srv_statemanage.SelectMachineFilter = filter;
     this.countrow =this.listmachines.length.toString(); 
     
+    let minPower:number=0;
+    let maxPower:number=0;
+    let minSpeed:number=0;
+    let maxSpeed:number=0;
+    let minTorque:number=0;
+    let maxTorque:number=0;
+    if(this.listmachines.length>0)
+    {
+      minPower = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
+      maxPower = Math.max.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      minSpeed = Math.min.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      maxSpeed = Math.max.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      minTorque = Math.min.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      maxTorque = Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))
+      let nn:number[]=[];
+      nn.push(minPower);nn.push(maxPower);nn.push(minSpeed);nn.push(maxSpeed);nn.push(minTorque);nn.push(maxTorque);
+      //this.eventsChangeMachineList.next(nn);
+    } 
+   
   }
 
   ApplyMostRecommended() {        
@@ -356,9 +380,31 @@ UpdateStateSelectedMachine(MachineID: number) {
         ((m.isFavorite || m.IsMostRecommended)))
         ;
     //this.srv_statemanage.SelectMachineFilter = filter;
-    this.countrow =this.listmachines.length.toString(); 
-    
+    this.countrow =this.listmachines.length.toString();   
   }
 
+  onclickrow(m:Machineheader)
+  {
+    if(this.statusclick ==0)
+    {
+    this.OnSelectMachine(m);
+    this.router.navigate(['/home/machine-item/' + m.MachineIDBase + '/' + m.MachineName]); 
+    }
+    else
+      this.statusclick =0;
+    //this.router.navigate(['/home/machine-item/', { id: m.MachineIDBase ,name:m.MachineName}]); 
+    //this.router.navigate(['/home/machine-item']); 
+  }
+
+  OnSelectMachine(mach: Machineheader) {         
+      this.srv_cook.set_cookie("sel_mach",mach.MachineID.toString());
+      if(mach.MachineID!=this.srv_statemanage.SelectedMachine.MachineID)
+      {
+        this.UpdateStateSelectedMachine(mach.MachineID);
+        this.srv_statemanage.SelectedMachine = mach;
+        this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
+        this.srv_statemanage.arrMachineSpindle =null;
+      }      
+  }
 }
 

@@ -5,6 +5,8 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachinePpAddFavoriteComponent} from 'src/app/components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
+import { PpSuccessfullyComponent} from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
+
 import { ActivatedRoute} from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +31,6 @@ export class MachineItemComponent implements OnInit {
   lstCurrency:string[]=[];
   CostPerHour:number;
 
-  //ClickSelectMachine:Subject<any> = new Subject();
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,
@@ -49,6 +50,7 @@ export class MachineItemComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    this.OnSelectMachine();
     this.eventsSubscription.unsubscribe();
   }
 
@@ -70,7 +72,7 @@ export class MachineItemComponent implements OnInit {
         {    
           this.arrMachineSpindle =this.srv_statemanage.arrMachineSpindle;
           this.FillImageMachineType(); 
-          //this.FillListCurrency();
+         
           this.isLoading =true;         
         }
       else
@@ -80,17 +82,16 @@ export class MachineItemComponent implements OnInit {
           this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
           this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
           this.FillImageMachineType();
+         
           
-          //this.FillListCurrency();
-          this.CostPerHour = Math.round(this.machHeader.CostPerHour / this.srv_appsetting.CurrRate*100)/100;
           this.isLoading =true;          
-        }));            
+        }));
+        this.CostPerHour = Math.round(this.machHeader.CostPerHour / this.srv_appsetting.CurrRate*100)/100;            
     }         
     if(this.machHeader==null)
     {
         this.FillMachineDataFromServer(this.MachineID); 
     } 
-    //this.FillListCurrency();
     this.innerheight = window.innerHeight-200;
   }
   
@@ -109,9 +110,11 @@ export class MachineItemComponent implements OnInit {
        this.MachineID,this.machHeader.MachineType,
        this.machHeader.MachineName, this.srv_appsetting.Units,
        this.machHeader.MachineType1,this.machHeader.CostPerHour,this.machHeader.Currency,s).subscribe((res: any) => {
-       //alert(res);       
-    }));            
-    console.log();
+                
+      const modalRef = this.modalService.open(PpSuccessfullyComponent, { centered: true });
+      modalRef.componentInstance.HeaderDescription = "My Machines";
+      modalRef.componentInstance.Text = "My Machines has been successfully saved";
+    }));               
   }
 
   OnFavoriteMachine(mach: Machineheader)
@@ -181,4 +184,5 @@ export class MachineItemComponent implements OnInit {
     this.srv_statemanage.SelectedMachine = this.machHeader; 
     this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;       
   } 
+  
 }

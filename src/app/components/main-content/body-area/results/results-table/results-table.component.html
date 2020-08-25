@@ -9,8 +9,9 @@
                <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle float-left cursor-pointer ml-4"  (click)="DownLoadData()">Download</h2>
             </div> -->
             <div class="pr-3 pl-4">
-               <img  data-toggle="tooltip" title="{{'Export To PDF' | translate}}" 
-                     class="cursor-pointer img-pdf"  [src] = "environment.ImagePath+'icon_PDF.svg'" (click) ="DownLoadPDF()">
+               <h2 data-toggle="tooltip" title="{{'Download PDF' | translate}}" class="siteTitle float-left cursor-pointer ml-4"  (click)="DownLoadPDF()">PDF</h2>
+               <!-- <img  data-toggle="tooltip" title="{{'Export To PDF' | translate}}" 
+                     class="cursor-pointer img-pdf"  [src] = "environment.ImagePath+'icon_PDF.svg'" (click) ="DownLoadPDF()"> -->
            </div>
          </div>
         <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >

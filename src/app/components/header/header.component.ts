@@ -4,9 +4,11 @@ import { Country,Language} from 'src/app/models/applications/applications';
 import { LoginService } from 'src/app/services/login.service';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import {HeaderPpUnitsComponent} from 'src/app/components/header/header-pp-units/header-pp-units.component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +34,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
               public srv_appsetting:AppsettingService, private router:Router,
-              private srv_login:LoginService) { }
+              private srv_login:LoginService,private modalService: NgbModal) { }
 
   ngOnInit() {   
        
@@ -53,9 +55,7 @@ export class HeaderComponent implements OnInit {
       this.SelectedLang.LanguageEnName="English";
       this.srv_appsetting.SelectedLanguage=this.SelectedLang;
     }  
-    
-    //this.srv_appsetting.getGEOLocation().subscribe((d:any)=> {console.log(d);alert(d);});
-    
+        
   } 
   LogOut()
   {
@@ -105,7 +105,8 @@ export class HeaderComponent implements OnInit {
               LanguageName: [d.CATLAN],
               BrifName:d.BrifName,
               Currency:d.Currency, 
-              CountryFlag:''                           
+              CountryFlag:'' ,
+              CountryCode:d.CountryCode                          
             })  ;
             if(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN).length >0)
             {
@@ -133,65 +134,102 @@ export class HeaderComponent implements OnInit {
         this.CurrentCountryName = 'headquarters';
       }               
       else
-        {
-          this.srv_appsetting.Country=this.srv_appsetting.Country;
+      {
+          //this.srv_appsetting.Country=this.srv_appsetting.Country;
           this.CurrentCountryName = this.srv_appsetting.Country.CountryName;
-          this.srv_appsetting.Currency=this.srv_appsetting.Country.Currency;
-          this.SetExchangeRate();     
-        }               
+          //this.srv_appsetting.Currency=this.srv_appsetting.Country.Currency;
+          //this.srv_login.SetExchangeRate();     
+      } 
+
       this.IsLoaded=true;     
       });   
   }
-
+/* 
   SetExchangeRate()
   {
     this.srv_appsetting.getexchangerate(this.srv_appsetting.Country.Currency).subscribe((res: any) =>
-          { 
-            if(res.length>0)
-            {
-              let rate :any=JSON.parse(res)[0].Exchange; 
-              this.srv_appsetting.CurrRate=rate;
-            }            
-            //alert(rate);
-          });
-  }
+    { 
+      if(res.length>0)
+      {
+        let rate :any=JSON.parse(res)[0].Exchange; 
+        this.srv_appsetting.CurrRate=rate;
+      }                      
+    });
+  } */
 
   SelectCountryAndLang(c:Country,LanguageID:string)
   {
-    let lan:Language;
-    lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
-    this.srv_appsetting.SelectedLanguage =lan;    
-    this.SelectedLang=lan;
-    if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
-      this.translate.use(lan.LanguageCode);
-    else
-      this.translate.use(this.translate.getDefaultLang()); 
-        
-    this.srv_appsetting.Country=c;      
-    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;
-    this.srv_appsetting.Currency=this.srv_appsetting.Country.Currency;
-    
-    this.SetExchangeRate();
-    this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {   
-     });    
+    this.srv_login.SelectCountryAndLang(c,LanguageID);
+    this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
+    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;      
   }
   
+  CheckAllowUnitsChange(event)
+  {  
+      event.preventDefault();      
+      const modalRef = this.modalService.open(HeaderPpUnitsComponent, { centered: true });
+                    
+      modalRef.result.then((result) => {
+        if(result=='cancel') {return;}
+        if(result=='change')
+        { 
+          if(this.isMetric)  
+          { 
+            this.srv_appsetting.ChangeUnits('I');
+            this.isMetric=false;
+          }
+          else
+          {
+            this.srv_appsetting.ChangeUnits('M');
+            this.isMetric=true;
+          }
+            
+          /* if(event.target.checked)        
+            this.srv_appsetting.ChangeUnits('M');                
+          else    
+            this.srv_appsetting.ChangeUnits('I'); */
+             
+        if (window.location.href.indexOf('machines')>-1)
+          {
+            this.srv_statemanage.ChangeUnits();        
+          }        
+        else
+          {
+            this.router.navigate(['/home/machines']);
+            this.srv_statemanage.ChangeUnits();        
+          }        
+        }});
+        
+      
+    
+  }
+
   UnitsChanged(event)
-  {       
-    if(event.target.checked)        
-      this.srv_appsetting.ChangeUnits('M');                
-    else    
-      this.srv_appsetting.ChangeUnits('I');
-         
-    if (window.location.href.indexOf('machines')>-1)
-      {
-        this.srv_statemanage.ChangeUnits();        
-      }        
-    else
-      {
-        this.router.navigate(['/home/machines']);
-        this.srv_statemanage.ChangeUnits();        
-      }       
+  {  
+      const modalRef = this.modalService.open(HeaderPpUnitsComponent, { centered: true });
+      //modalRef.componentInstance.MachineName = mach.MachineName;
+                    
+      modalRef.result.then((result) => {
+        if(result=='cancel') {this.isMetric = !this.isMetric;return;}
+        if(result=='change')
+        {     
+          if(event.target.checked)        
+          this.srv_appsetting.ChangeUnits('M');                
+        else    
+          this.srv_appsetting.ChangeUnits('I');
+             
+        if (window.location.href.indexOf('machines')>-1)
+          {
+            this.srv_statemanage.ChangeUnits();        
+          }        
+        else
+          {
+            this.router.navigate(['/home/machines']);
+            this.srv_statemanage.ChangeUnits();        
+          }        
+        }});
+        
+      
   }
 
   showmenu()

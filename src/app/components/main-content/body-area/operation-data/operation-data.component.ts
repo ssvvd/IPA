@@ -171,7 +171,7 @@ else
     }
     
     //if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0' || x.value=='') && x.required).length==0)  
-    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' )) && x.required).length==0)    
+    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value=='') && x.required).length==0)    
       {
       this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {                                       
         str=str + '"' + p.name + '":"' + p.value +'",';
