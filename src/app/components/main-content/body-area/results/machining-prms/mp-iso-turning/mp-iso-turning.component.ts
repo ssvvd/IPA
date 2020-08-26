@@ -264,7 +264,7 @@ CPU:number
           
           }
 
-          this.MCH = this.srv_StMng.SelectedMachine.CostPerHour
+          this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
           this.B = 100
           this.I = 1000
           this.TLL = 50

@@ -93,7 +93,7 @@ resType:string = ''
 
 
     this.DOC = +this.srv_StMng.IPL.GetItem('Depth').value
-    this.MCH = this.srv_StMng.SelectedMachine.CostPerHour
+    this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
     this.DH = this.srv_StMng.IPL.GetItem('D_Hole').value
 
     //output

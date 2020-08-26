@@ -141,7 +141,7 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
     this.DPH = +this.srv_StMng.IPL.GetItem('D3').value
     this.W = +this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value
     this.L = +this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value
-    this.MCH = this.srv_StMng.SelectedMachine.CostPerHour
+    this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
 
     //output
     for(var i = 0; this.selectedRes && i < this.selectedRes.length; i++) {

@@ -120,6 +120,14 @@ export class ResultsService {
     });
   }
 
+  public  GetMPowerParamsGrooving(Material:number,  Units:string,  Feed:number,  FeedG:number,  catalogNoList:String)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParamsGrooving/' + Material + '/' + Units +  '/' + Feed +  '/' + FeedG + '/' + catalogNoList).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
   public  GetMPowerParams760(material:number,  Units:string,  KappaLeadAngle:number,  toolD:number,  ae:number,  Feed:number,  catalogNoList:String,  fNoList:String)
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetMPowerParams760/' + material + '/' + Units + '/' + KappaLeadAngle + '/' + toolD + '/' + ae + '/' + Feed + '/' + catalogNoList + '/' + fNoList).catch((err: HttpErrorResponse) => {      
@@ -164,6 +172,17 @@ export class ResultsService {
       return "error";
     });
   }
+
+
+  //GET api/CalcReq/F-CuttingForces/Grooving/StraightEdge/{w}/{f}/{Kc}/{Mc}/{rake}/{k}
+  public  GetCuttingForcesGrooving(w:number,f:number,Kc:number,Mc:number,rake:number,k:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'F-CuttingForces/Grooving/StraightEdge/'  +  w + '/' + f + '/' + Kc + '/' + Mc + '/' + rake + '/' + k ).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge         /{D}/{ae}/{fz}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}/{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}/{ap}
@@ -193,6 +212,14 @@ export class ResultsService {
     });
   }
 
+  //GET api/CalcReq/Power/Torque/GroovingPartingOff/StraightEdge/{DD}/{w}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
+  public  GetTorqueGrooving(DD:number,w:number,f:number,vc:number,kc:number,mc:number,rake:number,k:number)
+  {        
+    return  this.httpClient.get(environment.CalcReq_Host + 'Power/Torque/GroovingPartingOff/StraightEdge/'  + DD + '/' + w + '/' + f + '/' +  vc + '/' + kc + '/' + mc + '/' + rake + '/' + k).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
 
 
   // public  checkItemImgExists()
