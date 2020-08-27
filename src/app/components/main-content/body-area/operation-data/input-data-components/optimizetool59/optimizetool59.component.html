@@ -1,6 +1,8 @@
 <div class="p-0 m-0"> 
     <div class="pl-0 pt-4">
-      <span>{{'Coolant' | translate}}</span>  
+      <div>
+        <span>{{'Coolant' | translate}}</span>  
+      </div>
       <div class="custom-control custom-radio custom-control-inline">
           <input type="radio" class="custom-control-input" id="optCoolantW" name="Coolant" [(ngModel)] ="coolant" (change)="changeCoolant()"  value="Wet">
           <label class="custom-control-label" for="optCoolantW">{{'Wet' | translate}}</label>
