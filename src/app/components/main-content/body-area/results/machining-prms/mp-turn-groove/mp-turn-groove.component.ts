@@ -41,11 +41,11 @@ export class MpTurnGrooveComponent implements OnInit {
   W1:string
   DPT1:number
   CW:number
-  Vc:number
+  Vc:string
   fr:number
   NOP:number
   MRR:number
-  Vc1:number
+  Vc1:string
   fr1:number
   NOP1:number
   MRR1:number
@@ -275,7 +275,8 @@ export class MpTurnGrooveComponent implements OnInit {
 
 
                 //GET api/CalcReq/Power/Torque/GroovingPartingOff/StraightEdge/{DD}/{w}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
-                this.srv_Results.GetTorqueGrooving(this.OD,this.CW,this.fr,this.Vc,_KcG,_Mc,0,0).subscribe((res: any) => {
+                let vcAvg = (((+this.Vc.split('-')[1] || +this.Vc.split('-')[0]) + +this.Vc.split('-')[0])/2) || 0
+                this.srv_Results.GetTorqueGrooving(this.OD,this.CW,this.fr,vcAvg,_KcG,_Mc,0,0).subscribe((res: any) => {
                   var result = res as MPResult;
                   this.T = Math.round(result.ResultRowList[1].Value * 100)/100
                 })
@@ -289,7 +290,8 @@ export class MpTurnGrooveComponent implements OnInit {
                 })
               
                 //GET api/CalcReq/Power/Torque/GroovingPartingOff/StraightEdge/{DD}/{w}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
-                this.srv_Results.GetTorqueGrooving(this.OD,this.CW,this.fr1,this.Vc1,_Kc,_Mc,0,0).subscribe((res: any) => {
+                let vcAvg1 = (((+this.Vc1.split('-')[1] || +this.Vc1.split('-')[0]) + +this.Vc1.split('-')[0])/2) || 0
+                this.srv_Results.GetTorqueGrooving(this.OD,this.CW,this.fr1,vcAvg1,_Kc,_Mc,0,0).subscribe((res: any) => {
                   var result = res as MPResult;
                   this.T1 = Math.round(result.ResultRowList[1].Value * 100)/100
                 })
@@ -348,11 +350,11 @@ export class MpTurnGrooveComponent implements OnInit {
     this.W1 = ''
     this.DPT1 = 0
     this.CW = 0
-    this.Vc = 0
+    this.Vc = ''
     this.fr = 0
     this.NOP = 0
     this.MRR = 0
-    this.Vc1 = 0
+    this.Vc1 = ''
     this.fr1 = 0.2
     this.NOP1 = 0
     this.MRR1 = 0
