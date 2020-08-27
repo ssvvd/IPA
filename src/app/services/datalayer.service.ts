@@ -125,4 +125,10 @@ export class DatalayerService {
   {                 
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-currency-eciw/'+brifname);
   }
+
+  
+  public  mailsend(name:string,email:string,country:string,company:string,message:string)
+  {                 
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email + '/' + country + '/' + company + '/' +message );
+  }
 }

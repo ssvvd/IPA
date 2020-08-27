@@ -85,6 +85,7 @@ import { MpIsoTurningAxRaComponent } from './components/main-content/body-area/r
 import { MpTurnGrooveComponent } from './components/main-content/body-area/results/machining-prms/mp-turn-groove/mp-turn-groove.component';
 import { HeaderPpUnitsComponent } from './components/header/header-pp-units/header-pp-units.component';
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
+import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
 
 @NgModule({
   declarations: [   
@@ -153,7 +154,8 @@ import { PpSuccessfullyComponent } from './components/maintenance/pp-successfull
     MpIsoTurningAxRaComponent,
     MpTurnGrooveComponent,
     HeaderPpUnitsComponent,
-    PpSuccessfullyComponent
+    PpSuccessfullyComponent,
+    ContactusComponent
   ],
   imports: [
     FormsModule,

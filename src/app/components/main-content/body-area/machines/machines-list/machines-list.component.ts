@@ -139,9 +139,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   UpdateListBySelectedMachineValues(list:Machineheader[])
   {
     let mach:Machineheader;
+    
+    mach=list.find(m=> m.MachineID == this.srv_statemanage.SelectedMachine.MachineID);
     if(typeof (mach) !== 'undefined')
     {
-      mach=list.find(m=> m.MachineID == this.srv_statemanage.SelectedMachine.MachineID);
       mach.AdaptationType=this.srv_statemanage.SelectedMachine.AdaptationType;
       mach.AdaptationSize=this.srv_statemanage.SelectedMachine.AdaptationSize;
       mach.Power=this.srv_statemanage.SelectedMachine.Power;
@@ -177,7 +178,11 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         m_id= '53' ; 
       else        
         m_id= this.srv_cook.get_cookie("def_mach");                                    
-      this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID.toString() == m_id);           
+      this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID.toString() == m_id); 
+      if(this.srv_statemanage.SelectedMachine.MachineID==null)
+      {
+        this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID.toString() == '53'); 
+      }          
     } 
     this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);       
     this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr(a,b));
@@ -295,7 +300,8 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
   }
 
-  onMachineFilterChanged($event) {     
+  onMachineFilterChanged($event) {    
+   
     this.isLoaded=true;
     this.MachineFilter = $event.filter;            
     this.ApplyFilter($event.filter);      
@@ -325,11 +331,11 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);    
   }
 
-  ApplyFilter(filter: MachineFilter) {        
+  ApplyFilter(filter: MachineFilter) {            
     this.listmachines = this.listmachines_sorted.filter(
-      m => m.SpindleSpeed >= filter.SpeedMin && m.SpindleSpeed <= filter.SpeedMax &&
-        m.Power >= filter.PowerMin && m.Power <= filter.PowerMax &&
-        m.Torque >= filter.TorqueMin && m.Torque <= filter.TorqueMax &&
+      m => ((m.SpindleSpeed >= filter.SpeedMin && m.SpindleSpeed <= filter.SpeedMax && filter.IsSliderSpeed ) || !filter.IsSliderSpeed)  &&
+        ((m.Power >= filter.PowerMin && m.Power <= filter.PowerMax && filter.IsSliderPower ) || !filter.IsSliderPower) &&
+        ((m.Torque >= filter.TorqueMin && m.Torque <= filter.TorqueMax && filter.IsSliderTorque ) ||  !filter.IsSliderTorque ) &&
         ((!filter.IsMachiningCenter && m.MachineType != "Machining center") || filter.IsMachiningCenter) &&
         ((!filter.IsLathe && m.MachineType != "Lathe") || filter.IsLathe) &&
         ((!filter.IsMultiTask && m.MachineType != "Multi task") || filter.IsMultiTask) &&
@@ -369,7 +375,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       maxTorque = Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))
       let nn:number[]=[];
       nn.push(minPower);nn.push(maxPower);nn.push(minSpeed);nn.push(maxSpeed);nn.push(minTorque);nn.push(maxTorque);
-      //this.eventsChangeMachineList.next(nn);
+      this.eventsChangeMachineList.next(nn);
     } 
    
   }
@@ -397,7 +403,9 @@ UpdateStateSelectedMachine(MachineID: number) {
   }
 
   OnSelectMachine(mach: Machineheader) {         
-      this.srv_cook.set_cookie("sel_mach",mach.MachineID.toString());
+      //this.srv_cook.set_cookie("sel_mach",mach.MachineID.toString());
+      this.srv_cook.set_cookie("def_mach",mach.MachineID.toString());
+      
       if(mach.MachineID!=this.srv_statemanage.SelectedMachine.MachineID)
       {
         this.UpdateStateSelectedMachine(mach.MachineID);

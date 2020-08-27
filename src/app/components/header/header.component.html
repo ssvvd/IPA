@@ -153,11 +153,8 @@
                     </div>
                 </div>
                 <div class="div-header-link pl-1">
-                    <a><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg" title="{{'Help' | translate}}"></a>
-                </div>
-             <!--    <div class="div-header-link pl-1">
-                    <a><img [src]="environment.ImagePath+'icon_Favorite1.svg'" (click)="menuisshown=false;openfavorite()" class="MenuImg" title="{{'Favorites' | translate}}"></a>                            
-                </div> -->
+                    <a  [routerLink]="['/home/contactus']"><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg" title="{{'Help' | translate}}"></a>
+                </div>            
             </div>
         </div>                
     </div>

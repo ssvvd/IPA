@@ -18,5 +18,8 @@ export class MachineFilter{
   AdaptationSize:string;
   IsMostRecommended:boolean;
   ShowOnlyFavorites:boolean;
+  IsSliderPower:boolean;
+  IsSliderSpeed:boolean;
+  IsSliderTorque:boolean;
 }
 
