@@ -51,11 +51,11 @@ export class MpTurnGrooveComponent implements OnInit {
   MRR1:number
   O:number
   AW:number
-  P:number
+  P:string
   T:number
   n:string
   Ft:number
-  P1:number
+  P1:string
   T1:number
   n1:string
   Ft1:number
@@ -129,82 +129,97 @@ export class MpTurnGrooveComponent implements OnInit {
                     // this.SP = +(value.split(' ')[0])
                      break;
                    }
+                   case 'WInsert':{
+                    if (this.CW == 0)
+                    this.CW = +value
+                    break;
+                  }
+                  case 'WInsert1':{
+                    if (this.CW == 0)
+                    this.CW = +value
+                    break;
+                  }
+                  case 'WInsert2':{
+                    if (this.CW == 0)
+                    this.CW = +value
+                    break;
+                  }
                    case 'DetailsWInsert':{
                     this.CW = +value
+                    break;
+                  }
+                  case 'TotalCuttingTime': {
+                    this.CTFt = +value
+                    break;
+                  }
+                  case 'TotalCuttingTimeG':{
+                    this.CTF = +value
+                    this.CTFg = +value
+                    this.CTFt = +value
+                    break;
+                  }
+                  case 'CuttingSpeed':{
+                    this.Vc1 = +value
+                    break;
+                  }
+                  case 'CuttingSpeedG':{
+                    this.Vc = +value
+                    this.Vc1 = +value
+                    break;
+                  }
+                  case 'Feed':{
+                    this.fr1 = +value
+                    break;
+                  }
+                  case'FeedG':{
+                    this.fr = +value
+                    this.fr1 = +value
+                    break;
+                  }
+                  case 'DepthOfCutPerPassG':{
+                    this.W1 = value
+                    break;
+                  }
+                  case 'NumberOfPassesDepth':{
+                    this.NOP1 = +value
+                    break;
+                  }
+                  case 'NumberOfPassesDepthG':{
+                    this.NOP = +value
+                    this.NOP1 = +value
+                    break;
+                  }
+                  case 'MetalRemovalRateG':{
+                    this.MRR= +value
+                    this.MRR1= +value
+                    break;
+                  }
+                  case 'MetalRemovalRate':{
+                    this.MRR1= +value
+                    break;
+                  }
+                  case 'PowerConsumption': {
+                    this.P1 = value
+                    break;
+                  }
+                  case 'PowerConsumptionG':{
+                    this.P = value
+                    this.P1 = value
+                    break;
+                  }
+                  case 'RPM':{
+                    this.n1 = value
+                    break;
+                  }
+                  case 'RPMG':{
+                    this.n = value
+                    this.n1 = value
                     break;
                   }
                   }
               }.bind(this));  
               if (pr && pr.property){
               switch (pr.property.Field){
-                case 'CuttingSpeed':{
-                  this.Vc1 = +value
-                  break;
-                }
-                case 'CuttingSpeedG':{
-                  this.Vc = +value
-                  this.Vc1 = +value
-                  break;
-                }
-                case 'Feed':{
-                  this.fr1 = +value
-                  break;
-                }
-                case'FeedG':{
-                  this.fr = +value
-                  this.fr1 = +value
-                  break;
-                }
-                case 'DepthOfCutPerPassG':{
-                  this.W1 = value
-                  break;
-                }
-                case 'NumberOfPassesDepth':{
-                  this.NOP1 = +value
-                  break;
-                }
-                case 'NumberOfPassesDepthG':{
-                  this.NOP = +value
-                  this.NOP1 = +value
-                  break;
-                }
-                case 'MetalRemovalRateG':{
-                  this.MRR= +value
-                  this.MRR1= +value
-                  break;
-                }
-                case 'MetalRemovalRate':{
-                  this.MRR1= +value
-                  break;
-                }
-                case 'PowerConsumption': {
-                  this.P1 = +value
-                  break;
-                }
-                case 'PowerConsumptionG':{
-                  this.P = +value
-                  this.P1 = +value
-                  break;
-                }
-                case 'RPM':{
-                  this.n1 = value
-                  break;
-                }
-                case 'RPMG':{
-                  this.n = value
-                  this.n1 = value
-                  break;
-                }
-                case 'TotalCuttingTime': {
-                  this.CTFt = +value
-                  break;
-                }
-                case 'TotalCuttingTimeG':{
-                  this.CTF = +value
-                  this.CTFg = +value
-                  this.CTFt = +value
-                  break;
-                }
                 case 'NoOfCorners':{
                   this.CEDC = +value
                   break;
@@ -290,7 +305,7 @@ export class MpTurnGrooveComponent implements OnInit {
               this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
               this.B = 100
               this.I = 1000
-              this.CTP = this.CTFg + this.CTFt
+              this.CTP = Math.round((this.CTFg + this.CTFt) * 100)/100
               this.TLL = 50
               this.TLT = 50
               this.FCE = Math.round((this.TLT / this.CTF) * 100)/100
@@ -343,11 +358,11 @@ export class MpTurnGrooveComponent implements OnInit {
     this.MRR1 = 0
     this.O = 0
     this.AW = 0
-    this.P = 0
+    this.P = ''
     this.T = 0
     this.n = ''
     this.Ft = 0
-    this.P1 = 0
+    this.P1 = ''
     this.T1 = 0
     this.n1 = ''
     this.Ft1 = 0
