@@ -42,7 +42,7 @@ export class MachinesFilterComponent implements OnInit {
    maxSpeed:number=0;
    minTorque:number=0;
    maxTorque:number=0;
-
+   isslider:boolean=false;
   machFilter:MachineFilter;
   environment=environment;
  
@@ -211,12 +211,12 @@ export class MachinesFilterComponent implements OnInit {
       this.curAdapSize=this.arrAdapSizeFilter[0];
       this.machFilter.AdaptationType =this.curAdapType.AdaptationType;
       this.machFilter.AdaptationSize ='';
-      this.FilterChange (null);  
+      this.FilterChange (null,false,false,false);  
   }
   changeadapsize()
   {  
     this.machFilter.AdaptationSize=this.curAdapSize.AdaptationSize;
-    this.FilterChange (null);       
+    this.FilterChange (null,false,false,false);       
   }
   InitFilter()
   {
@@ -245,9 +245,15 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMostRecommended=true;
     this.isMostRecom='1';
     this.machFilter.ShowOnlyFavorites=false;    
+    this.machFilter.IsSliderPower=false;
+    this.machFilter.IsSliderSpeed=false;
+    this.machFilter.IsSliderTorque=false;
   }
 
-  FilterChange(event: ChangeContext ) {          
+  FilterChange(event: ChangeContext ,issliderP:boolean,issliderS:boolean,issliderT:boolean) {  
+    this.machFilter.IsSliderPower =issliderP;        
+    this.machFilter.IsSliderSpeed =issliderS;        
+    this.machFilter.IsSliderTorque =issliderT;        
     this.MachineFilterChanged.emit({ filter: this.machFilter});   
   }
 
@@ -264,6 +270,9 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMachineTypeHighSpeed=true;
     this.machFilter.ShowOnlyFavorites=false;
     this.machFilter.IsMostRecommended=true;
+    this.machFilter.IsSliderPower=false;
+    this.machFilter.IsSliderSpeed=false;
+    this.machFilter.IsSliderTorque=false;
     this.isMostRecom='1';
     this.curAdapType=this.arrAdapType[0]; 
     this.curAdapSize=this.arrAdapSize[0];

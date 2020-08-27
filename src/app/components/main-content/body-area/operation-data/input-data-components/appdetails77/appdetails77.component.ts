@@ -104,6 +104,7 @@ export class Appdetails77Component implements OnInit {
     this.strMandatory='';
     this.AddTostrMandatoryParam('D_Hole',"DH:",this.srv_appsetting.UnitslengthDesc);
     this.AddTostrMandatoryParam('Depth',"DPT:",this.srv_appsetting.UnitslengthDesc);
+    this.AddTostrMandatoryParam('DiameterBoring',"DPH:",this.srv_appsetting.UnitslengthDesc);
     if(this.strMandatory.length>0)
       this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
   }

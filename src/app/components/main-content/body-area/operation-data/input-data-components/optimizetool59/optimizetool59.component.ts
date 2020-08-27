@@ -1,6 +1,8 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { PpSuccessfullyComponent} from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Options } from 'ng5-slider';
 import { Observable ,Subscription} from 'rxjs';
 
@@ -15,8 +17,9 @@ export class Optimizetool59Component implements OnInit {
   private eventsSubscription: Subscription;
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
-  
-  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
+  coolant:string='0';
+  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+              private modalService: NgbModal) { }
   
    options_dc: Options = {
     floor: 0,
@@ -55,11 +58,48 @@ export class Optimizetool59Component implements OnInit {
 
   ngOnInit() {
      this.eventsSubscription = this.events.subscribe(() => this.ClearData());
+     if(this.srv_StMng.IPL.GetItem('Coolant').value=='2' )
+        if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
+            || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )
+        {
+          this.coolant="Dry";
+          this.srv_StMng.IPL.GetItem('Coolant').value='0'; 
+        }
+        else
+        {
+          this.coolant="Wet";
+          this.srv_StMng.IPL.GetItem('Coolant').value='1';
+        }
+      else
+      {
+         if(this.srv_StMng.IPL.GetItem('Coolant').value=='0') this.coolant ="Dry";
+         if(this.srv_StMng.IPL.GetItem('Coolant').value=='1') this.coolant ="Wet";
+      }
+         
   }
   
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
+  
+  changeCoolant()
+  {
+    if(this.coolant=="Wet")  
+      {
+        if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
+            || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )                 
+          this.srv_StMng.IPL.GetItem('Coolant').value='1'; 
+          const modalRef = this.modalService.open(PpSuccessfullyComponent, { centered: true });
+          modalRef.componentInstance.HeaderDescription = "Coolant";
+          modalRef.componentInstance.Text = "Applying Wet Coolant is Possible but will Reduce Tool Life by up to 50%"; 
+                                  
+      };
+    if(this.coolant=="Dry") 
+    {       
+        this.srv_StMng.IPL.GetItem('Coolant').value='0';                       
+       
+    }
+  } 
 
   ClearData()
   {

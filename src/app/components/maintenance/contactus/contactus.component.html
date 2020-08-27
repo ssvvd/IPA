@@ -1,0 +1,61 @@
+<div class="container" class="p-0 m-0 pt-2 border">
+    <div class="pl-4">
+        <div class="pt-2">                                       
+            <label  class="siteTitle col-form-label">{{'Contact Us' | translate}}</label> 
+        </div> 
+        <div class="form-group">    
+            <div class="row col-12 pt-0">
+                <label class="pl-0 pt-3">{{'Name' | translate}}</label>
+                <label class="pl-2 asterisk-red pt-3">*</label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12  pt-1 pl-0">
+                <input  required [className]="Name==''? 'form-control  input-min-width':'form-control input-min-width'"   
+                [(ngModel)]="Name"> 
+            </div>  
+        </div> 
+        <div class="form-group">    
+            <div class="row col-12 pt-0">
+                <label class="pl-0 pt-3">{{'Email' | translate}}</label>
+                <label class="pl-2 asterisk-red pt-3">*</label>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12  pt-1 pl-0">
+                <input type="email"  required [className]="Email==''? 'form-control  input-min-width':'form-control input-min-width'"   
+                [(ngModel)]="Email"> 
+            </div>  
+        </div>   
+        <div class="form-group">    
+            <div class="row col-12 pt-0">
+                <label class="pl-0 pt-3">{{'Country' | translate}}</label>
+               
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12  pt-1 pl-0">
+                <input   [className]="Country==''? 'form-control  input-min-width':'form-control input-min-width'"   
+                [(ngModel)]="Country"> 
+            </div>  
+        </div>  
+        <div class="form-group">    
+            <div class="row col-12 pt-0">
+                <label class="pl-0 pt-3">{{'Company Name' | translate}}</label>
+                
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12  pt-1 pl-0">
+                <input    [className]="CompanyName==''? 'form-control  input-min-width':'form-control input-min-width'"   
+                [(ngModel)]="CompanyName"> 
+            </div>  
+        </div> 
+        <div class="form-group">    
+            <div class="row col-12 pt-0">
+                <label class="pl-0 pt-3">{{'Message' | translate}}</label>                
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12  pt-1 pl-0">
+                <textarea   rows="8" [className]="Message==''? 'form-control  input-min-width':'form-control input-min-width'"   
+                [(ngModel)]="Message"></textarea>
+            </div>  
+        </div> 
+        <div class="form-group">   
+            <div class="text-center pb-4 pt-4 col-xl-4 col-lg-4 col-md-12 col-sm-12  pt-1 pl-0">                     
+                <button class="btn btn-select"  (click)="Submit()">{{'Submit'| translate}}</button>                                                              
+            </div>
+        </div>    
+    </div>
+</div>

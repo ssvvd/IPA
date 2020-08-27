@@ -1,4 +1,15 @@
 <div class="p-0 m-0"> 
+    <div class="pl-0 pt-4">
+      <span>{{'Coolant' | translate}}</span>  
+      <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" class="custom-control-input" id="optCoolantW" name="Coolant" [(ngModel)] ="coolant" (change)="changeCoolant()"  value="Wet">
+          <label class="custom-control-label" for="optCoolantW">{{'Wet' | translate}}</label>
+      </div>                              
+      <div class="custom-control custom-radio custom-control-inline">
+          <input type="radio" class="custom-control-input" id="optCoolantD" name="Coolant" [(ngModel)] ="coolant"  (change)="changeCoolant()"   value="Dry">
+          <label class="custom-control-label" for="optCoolantD">{{'Dry' | translate}}</label>
+      </div> 
+    </div> 
     <div class="pt-3 mt-2">                
       <span>DC - </span><span>{{'Cutting Diameter' | translate}}</span>    
       <div class="custom-slider pt-0 mt-4">
