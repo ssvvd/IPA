@@ -1,0 +1,364 @@
+<ng-container >
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Cutting Data' | translate}}</div>
+
+    <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='10' || srv_StMng.SecApp=='51'">
+        <div class="col-4">{{'Outer Diameter' | translate }}</div>
+        <div class="col-3">OD</div>
+        <div class="col-3 grayDiv text-center">{{OD}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='51'">
+        <div class="col-4">{{'Inner Diameter' | translate }}</div>
+        <div class="col-3">ID</div>
+        <div class="col-3 grayDiv text-center">{{ID}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Initial Workpiece Diameter' | translate }}</div>
+        <div class="col-3">D<sub>wi</sub></div>
+        <div class="col-3 grayDiv text-center">{{DWI}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Groove Position' | translate }}</div>
+        <div class="col-3">LP</div>
+        <div class="col-3 grayDiv text-center">{{LP}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Depth of Groove' | translate }}</div>
+        <div class="col-3">DPT</div>
+        <div class="col-3 grayDiv text-center">{{DPT}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Final Workpiece Diameter ' | translate }}</div>
+        <div class="col-3">D<sub>wf</sub></div>
+        <div class="col-3 grayDiv text-center">{{DWF}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='54' || srv_StMng.SecApp=='188'">
+        <div class="col-4">{{'Outer Diameter' | translate }}</div>
+        <div class="col-3">D</div>
+        <div class="col-3 grayDiv text-center">{{D}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+      
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='54' || srv_StMng.SecApp=='10'">
+        <div class="col-4">{{'Outer Depth' | translate }}</div>
+        <div class="col-3">DOD</div>
+        <div class="col-3 grayDiv text-center">{{DOD}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='10' && srv_StMng.SecApp!='51'">
+        <div class="col-4">{{'Width of Groove' | translate }}</div>
+        <div class="col-3">W</div>
+        <div class="col-3 grayDiv text-center">{{W}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='54' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='188'">
+        <div class="col-4">{{'W first pass' | translate }}</div>
+        <div class="col-3">W1</div>
+        <div class="col-3 grayDiv text-center">{{W1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='188'">
+        <div class="col-4">{{'Outer Depth' | translate }}</div>
+        <div class="col-3">DPT</div>
+        <div class="col-3 grayDiv text-center">{{DPT1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Cutting Width' | translate }}</div>
+        <div class="col-3">CW</div>
+        <div class="col-3 grayDiv text-center">{{CW}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'"><br><u>{{'Grooving' | translate}}</u></div>
+
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Cutting speed' | translate }}</div>
+        <div class="col-3">V<sub>c</sub></div>
+        <div class="col-3 grayDiv text-center">{{Vc}}</div>
+        <div class="col-2">m/min</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Feed per rev' | translate }}</div>
+        <div class="col-3">f<sub>r</sub></div>
+        <div class="col-3 grayDiv text-center">{{fr}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='10'">
+        <div class="col-4">{{'Number of radial passes' | translate }}</div>
+        <div class="col-3">NOP</div>
+        <div class="col-3 grayDiv text-center">{{NOP}}</div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Material removal rate' | translate }}</div>
+        <div class="col-3">MRR</div>
+        <div class="col-3 grayDiv text-center">{{MRR}}</div>
+        <div class="col-2">cm<sup>3</sup>/min</div>
+      </div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'"><br><u>{{'Turning' | translate}}</u></div>
+
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Cutting speed' | translate }}</div>
+        <div class="col-3">V<sub>c</sub></div>
+        <div class="col-3 grayDiv text-center">{{Vc1}}</div>
+        <div class="col-2">m/min</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Feed per rev' | translate }}</div>
+        <div class="col-3">f<sub>r</sub></div>
+        <div class="col-3 grayDiv text-center">{{fr1}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Number of radial passes' | translate }}</div>
+        <div class="col-3">NOP</div>
+        <div class="col-3 grayDiv text-center">{{NOP1}}</div>
+        <div class="col-2"></div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Material removal rate' | translate }}</div>
+        <div class="col-3">MRR</div>
+        <div class="col-3 grayDiv text-center">{{MRR1}}</div>
+        <div class="col-2">cm<sup>3</sup>/min</div>
+      </div>
+
+      <br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Tool Assembly Data' | translate}}</div>
+
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Overhang' | translate }}</div>
+    <div class="col-3">O</div>
+    <div class="col-3 grayDiv text-center">{{O}}</div>
+    <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Assembly weight' | translate }}</div>
+    <div class="col-3">AW</div>
+    <div class="col-3 grayDiv text-center">{{AW}}</div>
+    <div class="col-2">kg</div>
+  </div>
+
+
+<br>
+<div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
+
+<div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'"><br><u>{{'Grooving' | translate}}</u></div>
+<div class="row justify-content-start w-100">
+    <div class="col-4">{{'Mean Power' | translate }}</div>
+    <div class="col-3">P</div>
+    <div class="col-3 grayDiv text-center">{{P}}</div>
+    <div class="col-2">kW</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='54' && this.srv_StMng.SecApp!='10' && this.srv_StMng.SecApp!='188'">
+    <div class="col-4">{{'Mean Torque' | translate }}</div>
+    <div class="col-3">T</div>
+    <div class="col-3 grayDiv text-center">{{T}}</div>
+    <div class="col-2">Nm</div>
+  </div>
+
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Spindle speed' | translate }}</div>
+    <div class="col-3">n</div>
+    <div class="col-3 grayDiv text-center">{{n}}</div>
+    <div class="col-2">rpm</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='54' && this.srv_StMng.SecApp!='10' && this.srv_StMng.SecApp!='188'">
+    <div class="col-4">{{'Tangential force' | translate }}</div>
+    <div class="col-3">F<sub>t</sub></div>
+    <div class="col-3 grayDiv text-center">{{Ft}}</div>
+    <div class="col-2">N</div>
+  </div> 
+
+
+<div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'"><br><u>{{'Turning' | translate}}</u></div>
+<div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Mean Power' | translate }}</div>
+    <div class="col-3">P</div>
+    <div class="col-3 grayDiv text-center">{{P1}}</div>
+    <div class="col-2">kW</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Mean Torque' | translate }}</div>
+    <div class="col-3">T</div>
+    <div class="col-3 grayDiv text-center">{{T1}}</div>
+    <div class="col-2">Nm</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Spindle speed' | translate }}</div>
+    <div class="col-3">n</div>
+    <div class="col-3 grayDiv text-center">{{n1}}</div>
+    <div class="col-2">rpm</div>
+  </div>
+
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Tangential force' | translate }}</div>
+    <div class="col-3">F<sub>t</sub></div>
+    <div class="col-3 grayDiv text-center">{{Ft1}}</div>
+    <div class="col-2">N</div>
+  </div> 
+
+
+
+  <br>
+  <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
+  
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Machine cost (per hour)' | translate }}</div>
+    <div class="col-3">MCH</div>
+    <div class="col-3 grayDiv text-center">{{MCH}}</div>
+    <div class="col-2">€/hour</div>
+  </div>
+  <div class="row justify-content-start w-100">
+    <div class="col-4">{{'Batch size ' | translate }}</div>
+    <div class="col-3">B</div>
+    <div class="col-3 grayDiv text-center">{{B}}</div>
+    <div class="col-2">Parts</div>
+  </div>
+  
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Grooving - Cutting Time per Feature' | translate }}</div>
+    <div class="col-3">CTF<sub>g</sub></div>
+    <div class="col-3 grayDiv text-center">{{CTFg}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Turning - Cutting Time per Feature' | translate }}</div>
+    <div class="col-3">CTF<sub>t</sub></div>
+    <div class="col-3 grayDiv text-center">{{CTFt}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+    <div class="col-4">{{'Cutting time per part' | translate }}</div>
+    <div class="col-3">CTP</div>
+    <div class="col-3 grayDiv text-center">{{CTP}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='1' && srv_StMng.SecApp!='10' && srv_StMng.SecApp!='50'">
+    <div class="col-4">{{'Cutting time per feature' | translate }}</div>
+    <div class="col-3">CTF</div>
+    <div class="col-3 grayDiv text-center">{{CTF}}</div>
+    <div class="col-2">mm:ss</div>
+  </div>
+  <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Tool life length' | translate }}</div>
+      <div class="col-3">TLL</div>
+      <div class="col-3 grayDiv text-center">{{TLL}}</div>
+      <div class="col-2">m</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Tool life time' | translate }}</div>
+      <div class="col-3">TLT</div>
+      <div class="col-3 grayDiv text-center">{{TLT}}</div>
+      <div class="col-2">mm:ss</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'No. of Edges per Insert' | translate }}</div>
+      <div class="col-3">CEDC</div>
+      <div class="col-3 grayDiv text-center">{{CEDC}}</div>
+      <div class="col-2">Edges/Insert</div>
+    </div>
+  
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Insert price' | translate }}</div>
+      <div class="col-3">IP</div>
+      <div class="col-3 grayDiv text-center">{{IP}}</div>
+      <div class="col-2">€</div>
+    </div>
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Tool price' | translate }}</div>
+      <div class="col-3">TP</div>
+      <div class="col-3 grayDiv text-center">{{TP}}</div>
+      <div class="col-2">€</div>
+    </div>
+  
+    <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp!='1' && srv_StMng.SecApp!='10' && srv_StMng.SecApp!='50'">
+      <div class="col-4">{{'No. of features per cutting edge' | translate }}</div>
+      <div class="col-3">FCE</div>
+      <div class="col-3 grayDiv text-center">{{FCE}}</div>
+      <div class="col-2">pcs</div>
+    </div>   
+  
+    <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
+        <div class="col-4">{{'Number of Parts per Cutting Edge' | translate }}</div>
+        <div class="col-3">PCE</div>
+        <div class="col-3 grayDiv text-center">{{PCE}}</div>
+        <div class="col-2">pcs</div>
+      </div>
+
+    <div class="row justify-content-start w-100">
+      <div class="col-4">{{'Total number of Inserts' | translate }}</div>
+      <div class="col-3">IPB</div>
+      <div class="col-3 grayDiv text-center">{{IPB}}</div>
+      <div class="col-2">Inserts/batch</div>
+    </div>
+    <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Total number of Tools' | translate }}</div>
+        <div class="col-3">TPB</div>
+        <div class="col-3 grayDiv text-center">{{TPB}}</div>
+        <div class="col-2">Tools/batch</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Total Inserts cost' | translate }}</div>
+        <div class="col-3">TIC</div>
+        <div class="col-3 grayDiv text-center">{{TIC}}</div>
+        <div class="col-2">€/batch</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Total Tools cost' | translate }}</div>
+        <div class="col-3">TTC</div>
+        <div class="col-3 grayDiv text-center">{{TTC}}</div>
+        <div class="col-2">€/batch</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Total Tooling cost' | translate }}</div>
+        <div class="col-3">TGC</div>
+        <div class="col-3 grayDiv text-center">{{TGC}}</div>
+        <div class="col-2">€/batch</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Machine cost ' | translate }}</div>
+        <div class="col-3">MCB</div>
+        <div class="col-3 grayDiv text-center">{{MCB}}</div>
+        <div class="col-2">€/batch</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Machine time per batch' | translate }}</div>
+        <div class="col-3">MTB</div>
+        <div class="col-3 grayDiv text-center">{{MTB}}</div>
+        <div class="col-2">mm:ss</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Total cost' | translate }}</div>
+        <div class="col-3">TCB</div>
+        <div class="col-3 grayDiv text-center">{{TCB}}</div>
+        <div class="col-2">€/batch</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-4">{{'Cost per unit' | translate }}</div>
+        <div class="col-3">CPU</div>
+        <div class="col-3 grayDiv text-center">{{CPU}}</div>
+        <div class="col-2">€/unit</div>
+      </div>
+
+</ng-container>

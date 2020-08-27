@@ -14,6 +14,7 @@
 <mp760 *ngIf = "srv_StMng.MainAppSelected.MainApp=='ML'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp760>
 <mp-iso-turning *ngIf = "srv_StMng.MainAppSelected.MainApp=='IS' && srv_StMng.SecApp!='970' && srv_StMng.SecApp!='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning>
 <mp-iso-turning-ax-ra *ngIf = "srv_StMng.SecApp=='970' || srv_StMng.SecApp=='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning-ax-ra>
+<!-- <mp-turn-groove  *ngIf = "srv_StMng.MainAppSelected.MainApp=='TG'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-turn-groove> -->
 </div>
 
 <div class="col-xs-6 col-sm-6 col-md-6">
