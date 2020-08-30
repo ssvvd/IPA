@@ -21,11 +21,11 @@
           <tbody>   
               <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{material.id}}</th>         
-                  <td><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
-                  <td>{{material.description}}</td>
-                  <td>{{material.Condition}}</td>
-                  <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' }}</td>
-                  <td>
+                  <td (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
+                  <td (click)="matDetailClick(material)">{{material.description}}</td>
+                  <td (click)="matDetailClick(material)">{{material.Condition}}</td>
+                  <td (click)="openEditParamsM(material)"><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' }}</td>
+                  <td class="d-none">
 
                     <img src="{{environment.ImgView}}" (click)="matDetailClick(material)" title="View materials and standards"  class="icon-grid">
 

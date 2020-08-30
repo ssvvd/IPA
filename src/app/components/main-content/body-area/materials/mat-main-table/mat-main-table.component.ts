@@ -189,6 +189,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
   }
   matDetailClick(material: clsMaterial) {
+    this.OnSelectMaterial(material)
     this.matDetailSelectedEv.emit(material);
   }
 
