@@ -8,7 +8,7 @@
           <label class="custom-control-label" for="optCoolantW">{{'Wet' | translate}}</label>
       </div>                              
       <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" class="custom-control-input" id="optCoolantD" name="Coolant" [(ngModel)] ="coolant"  (change)="changeCoolant()"   value="Dry">
+          <input type="radio" class="custom-control-input" id="optCoolantD"  [attr.disabled]="isDisabledState" name="Coolant" [(ngModel)] ="coolant"  (change)="changeCoolant()"   value="Dry">
           <label class="custom-control-label" for="optCoolantD">{{'Dry' | translate}}</label>
       </div> 
     </div> 

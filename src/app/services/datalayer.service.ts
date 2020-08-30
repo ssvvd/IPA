@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient,HttpErrorResponse} from '@angular/common/http';
 import 'rxjs/add/operator/catch'
+import { stringify } from 'querystring';
   
 @Injectable({
   providedIn: 'root'
@@ -112,10 +113,16 @@ export class DatalayerService {
   }  */
 
   getGEOLocation() {    
-    return this.httpClient
-    .get('http://ip-api.com/json');    
+    return this.httpClient.get('http://ip-api.com/json');    
   } 
-  
+
+  getcountryNamebycountryCode(code:string) {    
+   return this.httpClient.get('https://restcountries.eu/rest/v2/alpha/' +code)
+   .catch((err: HttpErrorResponse) => {      
+        return "e";
+    });   
+  }
+
   public  countrybyglobalname(countryglobalname:string)
   {                 
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-by-globalname/'+countryglobalname);
@@ -128,7 +135,12 @@ export class DatalayerService {
 
   
   public  mailsend(name:string,email:string,country:string,company:string,message:string)
-  {                 
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email + '/' + country + '/' + company + '/' +message );
+  {     
+    let strpar:string='';
+    if (country!='')strpar=strpar + '/'+ country;
+    if (company!='')strpar=strpar + '/'+ company;
+    if (message!='')strpar=strpar + '/'+ message;
+
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email + strpar);
   }
 }

@@ -223,6 +223,14 @@ export class StateManagerService {
   set IsTabToolDataOpen(v:boolean) {  
     this.mIsTabToolDataOpen = v;
    }
+  
+   mTabOpen:number;
+   get TabOpen():number {
+    return this.mTabOpen;
+    }
+  set TabOpen(t:number) {  
+    this.mTabOpen = t;
+   }
 
    ChangeUnits()
    {

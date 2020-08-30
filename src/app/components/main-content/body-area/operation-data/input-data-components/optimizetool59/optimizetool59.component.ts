@@ -18,6 +18,7 @@ export class Optimizetool59Component implements OnInit {
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   coolant:string='0';
+  isDisabledState:boolean=false;
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
               private modalService: NgbModal) { }
   
@@ -63,7 +64,7 @@ export class Optimizetool59Component implements OnInit {
             || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )
         {
           this.coolant="Dry";
-          this.srv_StMng.IPL.GetItem('Coolant').value='0'; 
+          this.srv_StMng.IPL.GetItem('Coolant').value='0';           
         }
         else
         {
@@ -75,7 +76,8 @@ export class Optimizetool59Component implements OnInit {
          if(this.srv_StMng.IPL.GetItem('Coolant').value=='0') this.coolant ="Dry";
          if(this.srv_StMng.IPL.GetItem('Coolant').value=='1') this.coolant ="Wet";
       }
-         
+      if(this.srv_StMng.GetMaterialSelected().id>20 && this.srv_StMng.GetMaterialSelected().id<38)               
+            this.isDisabledState=true;
   }
   
   ngOnDestroy() {
