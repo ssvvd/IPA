@@ -358,6 +358,16 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
                 this.dtResultsObjectsHelp[i].NOF = value;
               }
               break;
+
+              case 'TGC': case 'MCB': case 'TCB':
+                this.dtPropertiesTable[j].FieldDescriptionSmall = this.dtPropertiesTable[j].FieldDescriptionSmall + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/batch)'
+                // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
+              break;
+              case 'CPU':
+                this.dtPropertiesTable[j].FieldDescriptionSmall = this.dtPropertiesTable[j].FieldDescriptionSmall + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/unit)'
+                // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
+              break;
+
           }
 
           this.dtResultsObjects[i][index] = new clsPropertyValue()
@@ -427,7 +437,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
       this.dtResultsObjects3d[i][index] = []
       index3 = 0
      
-      if (this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == 'Brand Name' || this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice')){
+      if (this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice')){
         let grpID:number = this.dtResultsObjects[i][col1].property.GroupID
         let order:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(grpID, 0)
         index3 = order
@@ -457,7 +467,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
     // {
     //   groupsOrder.push(this.dtResultsObjects[i][col2].property.GroupID)
     // }
-    if (this.dtResultsObjects[i][col2].property.FieldDescriptionSmall == 'Brand Name'  || this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice')){
+    if (this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice')){
       let grpID:number = this.dtResultsObjects[i][col2].property.GroupID
       let order:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(grpID, 0)
       index3 = order

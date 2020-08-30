@@ -69,9 +69,10 @@ MCB:number
 MTB:string
 TCB:number
 Flutes:number
+CPU:number
  catalogNo:string[]=[]
 resType:string = ''
-  constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
+  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
   ngOnInit(): void {
 
@@ -337,7 +338,7 @@ if (pr.value.trim().length == 7){
     
     this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
     this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
-    
+    this.CPU = Math.round((this.TCB / this.B) * 100)/100
               
               switch (insertBrandName.trim().toUpperCase()){
                   case 'SUMOCHAM FLAT HEAD': case 'SUMOCHAM CHAMDRILL LINE': case 'SUMOCHAMIQ':
@@ -408,6 +409,7 @@ if (pr.value.trim().length == 7){
   this.MTB=''
   this.TCB=0
   this.Flutes=0
+  this.CPU =0
   this.catalogNo=[]
 
 

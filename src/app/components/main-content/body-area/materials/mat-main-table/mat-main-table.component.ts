@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter, OnDestroy,ViewChild  } from '@angular/core';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MaterialService } from 'src/app/services/material.service'
+import { MaterialsmService } from 'src/app/services/materialsm.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
@@ -38,7 +39,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
+  constructor(private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
     ,private router: ActivatedRoute ) { 
       this.eventsSubscription.add(this.router.params.subscribe(params => {
         this.lang = params["lang"];
@@ -87,21 +88,17 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
 
   fillMainTable(){
-    this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
-    .subscribe((data: any) => {
-      this.materialsResult = JSON.parse(data);
-      this.materialsResultSorted = this.materialsResult;
-      this.materialsResultFilterd = this.materialsResult;
-      // this.filterTable();
-      if (this.srv_statemanage.GetMaterialSelected()== null)
-          this.OnSelectMaterial(this.materialsResult[6]);
-       else
-          this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
-          
-       this.isDtInitializedFunc();
+    if (this.servsm.checkCategoryTableExists(this.lang,this.selectedCategory)){
+      this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory))
+    }
+    else{
+      this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
+      .subscribe((data: any) => {
+        this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
+        this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory)) 
+      });
+    }
 
-
-    });
 
     // this.serv.getmaterialsbygrp('EN',this.selectedCategory).subscribe((res:any)=>{
     //   this.materialsResult=JSON.parse(res);
@@ -113,6 +110,21 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     //       this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
     // })
   }
+
+  setResults(data:clsMaterial[]){
+    this.materialsResult = data;
+    this.materialsResultSorted = this.materialsResult;
+    this.materialsResultFilterd = this.materialsResult;
+    // this.filterTable();
+    if (this.srv_statemanage.GetMaterialSelected()== null)
+        this.OnSelectMaterial(this.materialsResult[6]);
+     else
+        this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
+        
+     this.isDtInitializedFunc();
+
+  }
+
 
   isDtInitializedFunc(){
     if (this.isDtInitialized){
@@ -141,6 +153,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.allSubsMat$)
     this.allSubsMat$.unsubscribe();
   }
 
@@ -176,6 +189,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
   }
   matDetailClick(material: clsMaterial) {
+    this.OnSelectMaterial(material)
     this.matDetailSelectedEv.emit(material);
   }
 
@@ -208,7 +222,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   openEditParamsM(mat:clsMaterial) {
     if (!mat.HardnessOrigin)
       mat.HardnessOrigin = mat.Hardness;
-    const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true });
+    const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true,backdrop: 'static' });
     modalRef.componentInstance.modal_mat_id = mat.id;
     modalRef.componentInstance.modal_group = mat.Category + mat.group;
     modalRef.componentInstance.origin_hardness = mat.HardnessOrigin;
