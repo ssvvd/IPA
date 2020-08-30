@@ -19,8 +19,7 @@ export class LoginService {
   GetToken():any
   {
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      let s='https://sign.ssl.imc-companies.com/signin?t=' +res;
-      //localStorage.setItem('token_login', res);
+      let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
       window.open(s,'_self');
       return 'ok'    
     });
@@ -28,34 +27,41 @@ export class LoginService {
   }
 
   LogIn(token:string):Observable<any>
-  {     
+  {         
     if(token!='')
     {      
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
-      {    
-        console.log(data);         
-        let d=JSON.parse(data);                                                         
-        let u:User=
+      { 
+          let d=JSON.parse(data);          
+          this.srv_DataLayer.getcountryNamebycountryCode(d[0].countryCode).subscribe((rr:any)=>
           {
+            let cn:string='';
+            if(rr!='e') cn=rr.name;                                                     
+            let u:User=
+            {
             displayName:d[0].displayName,
             surname: d[0].surname,
             givenName: d[0].givenName,
             email: d[0].email,
-            country:d[0].country,
+            country:d[0].country,            
             companyName:d[0].companyName,            
             isImc:d[0].isImc,
-            CountryCode:d[0].CountryCode}
+            CountryCode:d[0].CountryCode,
+            CountryName:cn}
             localStorage.setItem("displayName",d[0].displayName);
             localStorage.setItem("surname",d[0].surname);
             localStorage.setItem("givenName",d[0].givenName);
             localStorage.setItem("email",d[0].email);
             localStorage.setItem("country",d[0].country);
             localStorage.setItem("companyName",d[0].companyName);
-            localStorage.setItem("isImc",d[0].isImc);     
+            localStorage.setItem("isImc",d[0].isImc); 
+            localStorage.setItem("countryCode",d[0].isImc);
+            localStorage.setItem("countryName",cn);
             this.srv_appsetting.User=u;  
             this.srv_appsetting.isLoggedIn=true;               
-      });    
-      return of('ok');  
+            });    
+            return of('ok');
+        });                              
     }
     else
     {  
@@ -67,6 +73,8 @@ export class LoginService {
       let country:string='';
       let companyName:string='';
       let isImc:string='';
+      let countrycode:string='';
+      let countryname:string='';
       if(localStorage.getItem("displayName")!=null) displayName=localStorage.getItem("displayName");
       if(localStorage.getItem("surname")!=null) surname=localStorage.getItem("surname");
       if(localStorage.getItem("givenName")!=null) givenName=localStorage.getItem("givenName");
@@ -74,6 +82,8 @@ export class LoginService {
       if(localStorage.getItem("country")!=null) country=localStorage.getItem("country");
       if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
       if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
+      if(localStorage.getItem("countryCode")!=null) countrycode=localStorage.getItem("countryCode"); 
+      if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName");
       u.displayName=displayName;
       u.surname=surname;
       u.givenName=givenName;
@@ -81,11 +91,12 @@ export class LoginService {
       u.country=country;
       u.companyName=companyName;
       u.isImc=isImc;
+      u.CountryCode=countrycode;
+      u.CountryName=countryname;
       if(country=='')
         this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
         {       
-          {   
-            //alert(d.countryCode) ;          
+          {         
             this.srv_DataLayer.GetCountryLangBrifData(d.countryCode).subscribe((d:any)=>
             {
               let data = JSON.parse(d);

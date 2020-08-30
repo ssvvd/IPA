@@ -39,7 +39,6 @@ export class OperationDataComponent implements OnInit {
 
   ngOnInit() {  
     
-
     if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
         {
           this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
@@ -104,11 +103,7 @@ else
       else
       {
         this.srv_StMng.IPL.GetItem('Country').value ='35';
-      }
-     /*  if(this.srv_appsetting.User.country!='')
-        this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.User.country;
-      else
-        this.srv_StMng.IPL.GetItem('Country').value ='35';  //NU */
+      }    
         
       this.srv_StMng.IPL.GetItem('Currency').value = this.srv_appsetting.Currency;
 
@@ -137,27 +132,14 @@ else
       if(ms.FaceContact + ""=='true')
         this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "1";
       else
-        this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "0";
-      
-
-           //todo: temp for check results
-      /* if(this.srv_StMng.MainAppSelected.MainApp=='IS' || this.srv_StMng.MainAppSelected.MainApp=='TG')
-      {
-       this.srv_StMng.IPL.GetItem('AdaptorType').value="SQUARE";
-       this.srv_StMng.IPL.GetItem('AdaptorSize').value="25";
-       
-      this.srv_StMng.IPL.GetItem('PW_AX').value = '20'; 
-      this.srv_StMng.IPL.GetItem('PW_BX').value = '200';
-      this.srv_StMng.IPL.GetItem('PW_CX').value = '7000';
-
-      this.srv_StMng.IPL.GetItem('PW_AY').value = '1'; 
-      this.srv_StMng.IPL.GetItem('PW_BY').value = '15';
-      this.srv_StMng.IPL.GetItem('PW_CY').value = '15'; 
-      } */
+        this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "0";    
   }
   
   FillDataInputParamAndRouteToResult()
   {
+
+    this.FillCoolant();
+    
     this.srv_StMng.IPL.GetItem('Material').value = String(this.srv_StMng.GetMaterialSelected().id);
     if(this.srv_StMng.GetMaterialSelected().HardnessHBValue!==undefined)
       this.srv_StMng.IPL.GetItem('HardnessHB').value = String(this.srv_StMng.GetMaterialSelected().HardnessHBValue);
@@ -187,14 +169,29 @@ else
       this.router.navigate(['/home/results']);
       }    
   }
-
+ FillCoolant()
+ {
+  if(this.srv_StMng.SecAppSelected.ApplicationITAID=='57' || this.srv_StMng.SecAppSelected.ApplicationITAID =='760' || this.srv_StMng.SecAppSelected.ApplicationITAID =='770'
+    || this.srv_StMng.SecAppSelected.ApplicationITAID =='780' || this.srv_StMng.SecAppSelected.ApplicationITAID =='790')
+    {
+      if(this.srv_StMng.IPL.GetItem('Coolant').value=='2')    
+      if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
+      || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )
+      {
+        this.srv_StMng.IPL.GetItem('Coolant').value='0';
+      }
+      else
+      {
+        this.srv_StMng.IPL.GetItem('Coolant').value='1';
+      }
+    }
+ }
   GetResult()
   {        
-    //this.parentSubject.next('some value');
-        
+    //this.parentSubject.next('some value');        
     this.srv_StMng.IPL.GetItem('MainApplication').value = this.srv_StMng.MainAppSelected.MainApp;
     this.srv_StMng.IPL.GetItem('SecondaryApplication').value = this.srv_StMng.SecAppSelected.ApplicationITAID;
-    this.srv_StMng.IPL.GetItem('Units').value = this.srv_appsetting.Units;
+    this.srv_StMng.IPL.GetItem('Units').value = this.srv_appsetting.Units;  
 
     let arrMachineSpindle: Machinespindle[];     
     if(this.srv_StMng.arrMachineSpindle != null && typeof(this.srv_StMng.arrMachineSpindle) !== 'undefined') 

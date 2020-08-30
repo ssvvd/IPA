@@ -9,7 +9,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
+import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
+//C:\ITA\ITA Angular\ITA\src\app\components\maintenance\contactus\contactus.component.ts
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -247,10 +248,9 @@ export class HeaderComponent implements OnInit {
     //this.srv_down.DownLoadResult('');
   }
 
-  openfavorite()
+  contactus()
   {
-    this.srv_login.LogOut();
-    this.router.navigate(['/home/machines']);    
+    const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});
+                    
   }
-
 }

@@ -157,7 +157,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (focus)="onfocusfield('BatchSize')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (change)="SetIPLMandatory()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{'units' | translate}}</label>

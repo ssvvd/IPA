@@ -84,16 +84,19 @@ export class MainMenuComponent implements OnInit {
  InputParamSelected(s:string)
  {
   this.Tabs[3].SelectedItemDesc=s;
+  this.srv_statemanage.TabOpen =3;
  }
   SelectedMachine(arr:string[])
   {         
     if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc = arr[0] + ': '; 
-    if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc1 = arr[1];    
+    if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc1 = arr[1];
+    this.srv_statemanage.TabOpen =1;    
   }
   
   SelectedMaterial(arr:string[])
   {       
     this.Tabs[1].SelectedItemDesc = arr[0]; 
+    this.srv_statemanage.TabOpen =2;  
   }
 
   SelectedSecApp(arr:string[])
@@ -124,6 +127,10 @@ export class MainMenuComponent implements OnInit {
    {
     // /[routerLink]="tab.isDisabled? null:tab.RouteName"
     if(!tab.isDisabled)
+    {
+      this.srv_statemanage.TabOpen =tab.TabID ;
       this.router.navigate([tab.RouteName]);
+    }
+      
    }
 }

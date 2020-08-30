@@ -2,18 +2,47 @@
     <div class="row">
         <div class="col-xl-6 col-lg-6 col-md-7 col-sm-12 col-12 ">    
             <div class="row">
-                <div class="col-6">
+                <div class="col-4">
+
+                </div>
+                <div class="col-4 text-center">
                     <label class="pl-0 pt-1 pl-2">{{'Solid Material' | translate}}</label>
                 </div> 
-                <div class="col-6">
+                <div class="col-4 text-center">
                     <label class="pl-0 pt-1 pl-2">{{'Pre Hole' | translate}}</label>
                 </div>   
             </div>
             <div class="row">
-                <div class="col-6">
-                   <!--  <div>
-                        <img [src]="environment.ImageInputPath + '780_1.png'" >
-                    </div> -->
+                <div class="col-4 pl-0">                  
+                    <div>                   
+                        <label>{{'Through hole' | translate}}</label>
+                    </div>            
+                    <div class="pt-2">                           
+                        <label>{{'Blind hole' | translate}}</label>
+                    </div>      
+                </div>
+                <div class="col-4  text-center">                    
+                        <div class="custom-control custom-radio custom-control">
+                                <input type="radio" class="custom-control-input" id="optThroughSolid" name="HoleTypeSolid" checked (change)="changeSolidHole('Solid_Through')" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypeSolid').value" value="Through">
+                                <label class="custom-control-label" for="optThroughSolid"></label>
+                        </div>            
+                            <div class="custom-control custom-radio custom-control">
+                                <input type="radio" class="custom-control-input" id="optBlindSolid" name="HoleTypeSolid" (change)="changeSolidHole('Solid_Blind')" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypeSolid').value" value="Blind">
+                                <label class="custom-control-label" for="optBlindSolid"></label>
+                            </div>                               
+                    </div>
+                    <div class="col-4  text-center"> 
+                        <div class="custom-control custom-radio custom-control">
+                            <input type="radio" class="custom-control-input" id="optThroughHole" name="HoleTypeHole"  (change)="changeSolidHole('Hole_Through')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Through">
+                            <label class="custom-control-label" for="optThroughHole"></label>
+                    </div>            
+                    <div class="custom-control custom-radio custom-control">
+                            <input type="radio" class="custom-control-input" id="optBlindHole" name="HoleTypeHole" (change)="changeSolidHole('Hole_Blind')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Blind">
+                            <label class="custom-control-label" for="optBlindHole"></label>
+                    </div>        
+                    </div> 
+              
+     <!--            <div class="col-2">                  
                     <div class="pl-2">
                     <div class="custom-control custom-radio custom-control">
                             <input type="radio" class="custom-control-input" id="optThroughSolid" name="HoleTypeSolid" checked (change)="changeSolidHole('Solid_Through')" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypeSolid').value" value="Through">
@@ -25,10 +54,7 @@
                         </div>      
                     </div>
                 </div> 
-                <div class="col-6">
-                   <!--  <div>
-                        <img [src]="environment.ImageInputPath + '780_2.png'" >
-                    </div>  -->
+                <div class="col-2">               
                     <div class="pl-2">
                         <div class="custom-control custom-radio custom-control">
                                 <input type="radio" class="custom-control-input" id="optThroughHole" name="HoleTypeHole"  (change)="changeSolidHole('Hole_Through')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Through">
@@ -39,7 +65,7 @@
                                 <label class="custom-control-label" for="optBlindHole">{{'Blind hole' | translate}}</label>
                         </div>      
                     </div>
-                </div>   
+                </div>  -->  
             </div>
             <div class="row" *ngIf="HoleType=='Solid'">               
                  <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-2">
@@ -141,7 +167,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (focus)="onfocusfield('BatchSize')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (change)="SetIPLMandatory()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{'units' | translate}}</label>
