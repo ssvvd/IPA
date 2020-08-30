@@ -72,7 +72,7 @@ Flutes:number
 CPU:number
  catalogNo:string[]=[]
 resType:string = ''
-  constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
+  constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
   ngOnInit(): void {
 

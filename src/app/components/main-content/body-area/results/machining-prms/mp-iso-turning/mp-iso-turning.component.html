@@ -143,7 +143,7 @@
   <div class="col-4">{{'Machine cost (per hour)' | translate }}</div>
   <div class="col-3">MCH</div>
   <div class="col-3 grayDiv text-center">{{MCH}}</div>
-  <div class="col-2">€/hour</div>
+  <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/hour</div>
 </div>
 <div class="row justify-content-start w-100">
   <div class="col-4">{{'Batch size ' | translate }}</div>
@@ -181,20 +181,20 @@
     <div class="col-4">{{'Insert price' | translate }}</div>
     <div class="col-3">IP</div>
     <div class="col-3 grayDiv text-center">{{IP}}</div>
-    <div class="col-2">€</div>
+    <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
     <div class="col-4">{{'Tool price' | translate }}</div>
     <div class="col-3">TP</div>
     <div class="col-3 grayDiv text-center">{{TP}}</div>
-    <div class="col-2">€</div>
+    <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
     <div class="col-4">{{'Solid price' | translate }}</div>
     <div class="col-3">SP</div>
     <div class="col-3 grayDiv text-center">{{SP}}</div>
-    <div class="col-2">€</div>
+    <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
   </div>
 
   <div class="row justify-content-start w-100">
@@ -215,7 +215,7 @@
     <div class="col-4">{{'Total Solids cost' | translate }}</div>
     <div class="col-3">TSC</div>
     <div class="col-3 grayDiv text-center">{{TSC}}</div>
-    <div class="col-2">€/batch</div>
+    <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
@@ -234,25 +234,25 @@
       <div class="col-4">{{'Total Inserts cost' | translate }}</div>
       <div class="col-3">TIC</div>
       <div class="col-3 grayDiv text-center">{{TIC}}</div>
-      <div class="col-2">€/batch</div>
+      <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100" *ngIf="!(srv_StMng.SecApp=='850' && resType == 'S')">
       <div class="col-4">{{'Total Tools cost' | translate }}</div>
       <div class="col-3">TTC</div>
       <div class="col-3 grayDiv text-center">{{TTC}}</div>
-      <div class="col-2">€/batch</div>
+      <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
       <div class="col-4">{{'Total Tooling cost' | translate }}</div>
       <div class="col-3">TGC</div>
       <div class="col-3 grayDiv text-center">{{TGC}}</div>
-      <div class="col-2">€/batch</div>
+      <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100">
       <div class="col-4">{{'Machine cost ' | translate }}</div>
       <div class="col-3">MCB</div>
       <div class="col-3 grayDiv text-center">{{MCB}}</div>
-      <div class="col-2">€/batch</div>
+      <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100">
       <div class="col-4">{{'Machine time per batch' | translate }}</div>
@@ -264,12 +264,12 @@
       <div class="col-4">{{'Total cost' | translate }}</div>
       <div class="col-3">TCB</div>
       <div class="col-3 grayDiv text-center">{{TCB}}</div>
-      <div class="col-2">€/batch</div>
+      <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100">
       <div class="col-4">{{'Cost per unit' | translate }}</div>
       <div class="col-3">CPU</div>
       <div class="col-3 grayDiv text-center">{{CPU}}</div>
-      <div class="col-2">€/unit</div>
+      <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/unit</div>
     </div>
 </ng-container>
