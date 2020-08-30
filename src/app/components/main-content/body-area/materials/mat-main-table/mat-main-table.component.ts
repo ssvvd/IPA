@@ -222,7 +222,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   openEditParamsM(mat:clsMaterial) {
     if (!mat.HardnessOrigin)
       mat.HardnessOrigin = mat.Hardness;
-    const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true });
+    const modalRef = this.modalService.open(PpEditParamsComponent, { centered: true,backdrop: 'static' });
     modalRef.componentInstance.modal_mat_id = mat.id;
     modalRef.componentInstance.modal_group = mat.Category + mat.group;
     modalRef.componentInstance.origin_hardness = mat.HardnessOrigin;

@@ -87,6 +87,6 @@ export class MaterialsComponent implements OnInit {
   }
 
   openRequestMatM() {
-    const modalRef = this.modalService.open(PpRequestMaterialComponent, { centered: true,windowClass:"customModalClass" });
+    const modalRef = this.modalService.open(PpRequestMaterialComponent, { centered: true,windowClass:"customModalClass",backdrop: 'static' });
   }
 }
