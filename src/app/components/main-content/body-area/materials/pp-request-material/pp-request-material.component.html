@@ -33,6 +33,7 @@
             <option selected value="">Choose</option>
             <option *ngFor="let grp of materialsResult" 
                 [value]="grp.group" >
+                <!-- [value]="grp.group.concat(': ',grp.description)" -->
              {{grp.group}}: {{grp.description}}
           </option>
           </select>
