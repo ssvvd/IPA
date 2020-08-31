@@ -7,7 +7,8 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="modal-body">
     <div class="form-group row">
-      <label for="email" class="col-sm-3 ">Email<label *ngIf="environment.internal">&nbsp;(or <a href="#">Login</a> Now)</label> <label class="text-danger">&nbsp;*</label></label>
+      <!-- <label *ngIf="environment.internal">&nbsp;(or <a href="#">Login</a> Now)</label> -->
+      <label for="email" class="col-sm-3 ">Email<label class="text-danger">&nbsp;*</label></label>
       <div class="col-sm-9">
         <input type="text" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
