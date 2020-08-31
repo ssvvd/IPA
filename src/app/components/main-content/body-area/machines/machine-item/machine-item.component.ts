@@ -185,4 +185,17 @@ export class MachineItemComponent implements OnInit {
     this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;       
   } 
   
+  Reset()
+  {
+    this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
+      this.arrMachineSpindle = JSON.parse(res);      
+      this.machSpindleMain = this.arrMachineSpindle[0]; 
+      this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
+      this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
+      this.FillImageMachineType();
+           
+      this.isLoading =true;          
+    }));
+  }
+
 }
