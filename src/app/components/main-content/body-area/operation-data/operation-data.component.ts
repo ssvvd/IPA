@@ -151,9 +151,9 @@ else
     {
       this.srv_StMng.IPL.GetItem('Size').value= this.srv_StMng.IPL.GetItem('Size').value.toString().replace('"', '***');
     }
-    
-    //if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || x.value=='0' || x.value=='') && x.required).length==0)  
-    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value=='') && x.required).length==0)    
+       
+    //let r=  this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required);
+    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required).length==0)    
       {
       this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {                                       
         str=str + '"' + p.name + '":"' + p.value +'",';

@@ -946,7 +946,7 @@ DownLoadPDF()
     this.srv_down.DownLoadData('PDF') ;      
 }
 
-DownLoadData()
+/* DownLoadData()
 {
   const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
@@ -957,13 +957,12 @@ DownLoadData()
     //todo:with subscribe 
     //this.SpinnerService.hide();                      
   });
-}
+} */
 
-viewInventory(index:number)
-{    
-  const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
-  modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];
-  //this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]]})
-}
+  viewInventory(index:number)
+  {    
+    const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
+    modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
+  }
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener} from '@angular/core';
+import { Component, OnInit, HostListener, Input} from '@angular/core';
 import { MachineService } from 'src/app/services/machine.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
@@ -30,6 +30,8 @@ export class MachineItemComponent implements OnInit {
   isLoading:boolean =false;
   lstCurrency:string[]=[];
   CostPerHour:number;
+  @Input() pr_MachineID:number=0;
+  @Input() pr_MachineName:string='';
 
   private eventsSubscription: Subscription=new Subscription();
 
@@ -64,7 +66,9 @@ export class MachineItemComponent implements OnInit {
      }
     }));
   }
-  ngOnInit() {                              
+  ngOnInit() {  
+    if(this.pr_MachineID!=0)      this.MachineID=this.pr_MachineID;
+    if(this.pr_MachineName!='')   this.MachineName=this.pr_MachineName;                                 
     if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
     {
       this.machHeader=this.srv_statemanage.SelectedMachine;

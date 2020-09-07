@@ -139,10 +139,10 @@
                             <input type="radio" class="custom-control-input" id="optStable"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Stable" name="Clamping" checked>
                             <label class="custom-control-label" for="optStable">{{'Stable' | translate}}</label>
                         </div>            
-                        <div class="custom-control custom-radio custom-control-inline">
+                       <!--  <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optNormal" name="Clamping" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Normal">
                             <label class="custom-control-label" for="optNormal">{{'Normal' | translate}}</label>
-                        </div>            
+                        </div>    -->         
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optUnstable" name="Clamping" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Unstable">
                             <label class="custom-control-label" for="optUnstable">{{'Unstable'| translate}}</label>
@@ -170,7 +170,7 @@
             <div class="pt-3">     
                 <div class="form-group">
                     <div class="pl-0"> 
-                        <label>{{'Type Of Cut' | translate}}</label>
+                        <label>{{'Impact Load' | translate}}</label>
                     </div>
                     <div>
                         <div class="custom-control custom-radio custom-control-inline">

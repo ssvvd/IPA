@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-2">
                 <input type="number" class="form-control  pt-2 input-chart" [attr.id]="'txtX3' + typeChart" name="txtX3" [(ngModel)]="spindle.N3" 
-                    (ngModelChange)="chartdata.PoinX_3=$event ;CreateChart()" (change)="CheckRPMMax(spindle.N3,'N3')"> 
+                    (ngModelChange)="chartdata.PoinX_3=$event ;OnChangePoinX_3(); CreateChart()" (change)="CheckRPMMax(spindle.N3,'N3')"> 
                 </div>
             
                 <div *ngIf="typeChart=='power'" class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-0">

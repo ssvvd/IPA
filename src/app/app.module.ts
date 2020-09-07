@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 //import { SafePipeModule } from 'safe-pipe';
 import * as $ from "jquery";
 
@@ -86,6 +87,7 @@ import { MpTurnGrooveComponent } from './components/main-content/body-area/resul
 import { HeaderPpUnitsComponent } from './components/header/header-pp-units/header-pp-units.component';
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
+import { ResultsPdfComponent } from './components/main-content/body-area/results/results-pdf/results-pdf.component';
 
 @NgModule({
   declarations: [   
@@ -155,7 +157,8 @@ import { ContactusComponent } from './components/maintenance/contactus/contactus
     MpTurnGrooveComponent,
     HeaderPpUnitsComponent,
     PpSuccessfullyComponent,
-    ContactusComponent
+    ContactusComponent,
+    ResultsPdfComponent
   ],
   imports: [
     FormsModule,

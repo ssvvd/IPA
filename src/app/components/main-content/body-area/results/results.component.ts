@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
 import { ResultsTableComponent } from 'src/app/components/main-content/body-area/results/results-table/results-table.component';
-
+import {ResultPpDownloadComponent} from 'src/app/components/main-content/body-area/results/result-pp-download/result-pp-download.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DownloadresultService} from 'src/app/services/downloadresult.service';
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { NgxSpinnerService } from "ngx-spinner"; 
 
 @Component({
   selector: 'app-results',
@@ -14,19 +18,18 @@ filterChanged:any;
 viewParams:any;
 MainPage:boolean = true;
 active = 1;
+IsExport:boolean;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 
-  constructor() { }
+  constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
+    private srv_down:DownloadresultService) { }
   ngAfterViewInit() {
     console.log(this.resTable); 
   }
 
-
-
   ngOnInit() {
-    this.MainPage = true;
-    
+    this.MainPage = true;    
   }
 
   receiveFilterChange(value){
@@ -45,5 +48,42 @@ active = 1;
   switchPage(){
     this.MainPage = true;
   }
+  
+  dataCatalog1:string;
 
+  DownLoadData()
+{
+   const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
+      
+   modalRef.result.then((result) => {
+    //alert(result);
+    if(result=='cancel') return;
+    this.IsExport=true; 
+
+    //this.SpinnerService.show();
+    //window.print();    
+    //setTimeout( () => {this.SpinnerService.hide()},7000);
+
+    //setTimeout( () => {window.print();return;}, 10000 );
+    
+    setTimeout( () => {this.srv_down.DownLoadDataItem('PDF') ;}, 7000 );
+  /*   this.srv_DataLayer.gethtmlpage("ALL").subscribe ((data:any)=>
+    {
+      this.dataCatalog1= data.toString();    
+      this.srv_down.DownLoadDataItem('PDF');      
+    }); */
+    
+    //this.srv_down.DownLoadDataItem('PDF') ;   
+    
+    //this.SpinnerService.show();
+    //this.srv_down.DownLoadData(result) ;  
+    //todo:with subscribe 
+    //this.SpinnerService.hide();                      
+   });
+ }
+
+ PrintResult()
+ {
+    setTimeout( () => {window.print();}, 7000 );    
+ }
 }

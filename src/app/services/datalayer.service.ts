@@ -143,4 +143,12 @@ export class DatalayerService {
 
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email + strpar);
   }
+
+  public  gethtmlpage(url:string)
+  {                 
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-page-html/'+url)
+    .catch((err: HttpErrorResponse) => {      
+      return "e";
+  });
+  }
 }
