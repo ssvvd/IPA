@@ -159,12 +159,12 @@ export class MpTurnGrooveComponent implements OnInit {
                     break;
                   }
                   case 'CuttingSpeed':{
-                    this.Vc1 = +value
+                    this.Vc1 = value
                     break;
                   }
                   case 'CuttingSpeedG':{
-                    this.Vc = +value
-                    this.Vc1 = +value
+                    this.Vc = value
+                    this.Vc1 = value
                     break;
                   }
                   case 'Feed':{

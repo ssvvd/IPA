@@ -50,4 +50,24 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-search/' + mat);
   }
+  //"material-get-fav/{userID}//{FavoritName}/
+  public getMatFav(userID:string,  FavoritName:string){
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-get-fav/' + userID + '/' + FavoritName);
+  }
+
+
+  public DeleteMaterialFavorit( userID:string,  FavoritName:string){
+    this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-del-fav/' + userID + '/' + FavoritName);
+  }
+
+
+  public AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number)
+  {
+    this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-add-fav/' + userID + '/' + ISO+ '/' + Group+ '/' + FavoritName+ '/' + Standard+ '/' + Condetion+ '/' + Hardness+ '/' + HardnessUnits+ '/' + HardnessOrig);
+  }
+
+
+  public EditMaterialFavorit( userID:string,  OldFavoritName:string,  FavoritName:string,  Hardness:number,  HardnessUnits:string){
+    this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-edit-fav/' + userID + '/' + OldFavoritName+ '/' + FavoritName+ '/' + Hardness+ '/' + HardnessUnits);
+  }
 }
