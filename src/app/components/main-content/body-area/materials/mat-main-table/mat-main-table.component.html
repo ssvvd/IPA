@@ -19,7 +19,7 @@
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial)? 'tr-selected' : 'tr-not-selected'">
+              <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected' : 'tr-not-selected'">
                 <th scope="row" class="d-none">{{material.id}}</th>         
                   <td (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
                   <td (click)="matDetailClick(material)">{{material.description}}</td>
@@ -38,7 +38,7 @@
                   </td>
                   <td *ngIf="environment.internal">
                     <div>
-                    <button [className]="(material.group == selectedMaterial)? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
+                    <button [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
                     </div>
                   </td>     
                   <td class="d-none">{{material.Hardness}}</td>    

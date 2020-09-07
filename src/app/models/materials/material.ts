@@ -10,6 +10,7 @@ export class clsMaterial {
     Standard:string;
     HardnessUnits:string = 'HB';
     HardnessHBValue:number = this.Hardness;
+    FavName:string = '';
 
 
     constructor(public grp: string,public desc: string,public mat: string,public cat: string) { 

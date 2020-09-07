@@ -17,4 +17,15 @@
     </select>                                
 </div>
   <hr>
-  <div *ngIf="environment.internal" class="bg-light"><label class="bold font-weight-bold bg-light m-1">My Materials</label></div>
+  <div *ngIf="environment.internal" class="pl-2 pb-2 ">
+    <div class="row">
+        <div class="custom-control custom-checkbox cursor-pointer">
+            <input [checked]="MyMatCheked" type="checkbox" class="custom-control-input cursor-pointer" id="ShowOnlyFavorites" name="ShowOnlyFavorites" (change)= "ShowMyMaterials($event)">
+            <label class="custom-control-label cursor-pointer" for="ShowOnlyFavorites"></label>
+        </div>
+        <div class="pr-4  pl-0 pb-2">
+            <label for="ShowOnlyFavorites" class="form-check-label text-nowrap">Show Only My Materials</label>
+        </div>
+    </div>
+</div>
+  <!-- <div *ngIf="environment.internal" class="bg-light"><label class="bold font-weight-bold bg-light m-1">My Materials</label></div> -->

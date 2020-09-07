@@ -77,6 +77,18 @@ export class MaterialsComponent implements OnInit {
     
   }
 
+  showMyMaterials(checked:boolean){
+    if (checked){
+      this.curComponent = "5";
+      this.selectedCateg = "All";
+      this.breadCrumb = [];
+    }
+    else{
+      this.curComponent = "1";
+      this.selectedCateg = "P";
+    }
+
+  }
 /*   reciveClearSearch() {
     this.searchText = "";
   } */

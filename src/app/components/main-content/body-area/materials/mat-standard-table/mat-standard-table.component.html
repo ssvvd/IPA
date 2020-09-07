@@ -32,7 +32,7 @@
                         <!-- <div>{{obj}}</div> -->
                         <td *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)"  (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(col,obj[col]) : false"
                            [routerLink]="(environment.internal && obj[col].indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"  attr.data-value={{obj[col]}}
-                           [ngClass]="{'td-selected' : mySplit(col,0) == this.selectedMatOrGrp || (obj[col] == this.selectedMatOrGrp && mySplit(col,0) == this.selectedMaterial.group)}">
+                           [ngClass]="{'td-selected' : this.selectedMaterial.FavName == '' && (mySplit(col,0) == this.selectedMatOrGrp || (obj[col] == this.selectedMatOrGrp && mySplit(col,0) == this.selectedMaterial.group))}">
                            {{obj[col]}} </td>             
                      </tr>
                   </tbody>

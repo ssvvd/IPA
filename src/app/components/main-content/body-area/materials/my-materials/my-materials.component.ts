@@ -9,13 +9,15 @@ import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/m
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
 import { Subject, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { AppsettingService} from 'src/app/services/appsetting.service';
 
 @Component({
-  selector: 'app-mat-search',
-  templateUrl: './mat-search.component.html',
-  styleUrls: ['./mat-search.component.scss','../materials.component.scss']
+  selector: 'my-materials',
+  templateUrl: './my-materials.component.html',
+  styleUrls: ['./my-materials.component.scss','../materials.component.scss']
 })
-export class MatSearchComponent implements OnInit, OnDestroy {
+export class MyMaterialsComponent implements OnInit, OnDestroy {
+
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
@@ -24,16 +26,14 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   materialsResultFilterd:clsMaterial[]=[];
   materialsResultSorted:clsMaterial[]=[];
   selectedMaterial:string;
-  FavName:String;
   environment = environment;
   dtTriggerMat: Subject<any> = new Subject();
   allSubsMat$: Subscription;
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
   _timeout: any = null;
-  @Input() filterSearchTextInput: string;
-
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService) { }
+  
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,public srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     let myColumns1 = [6,7];
@@ -59,25 +59,22 @@ export class MatSearchComponent implements OnInit, OnDestroy {
             
       }; 
 
+      this.fillMainTable();
+
   }
 
 
   fillMainTable(){
     this.SpinnerService.show();
-    this.allSubsMat$ = this.serv.searchmaterial(this.filterSearchTextInput)
+    this.allSubsMat$ = this.serv.getMatFav(this.srv_appsetting.UserID || 'HIBAHAWARI')
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
       this.materialsResultSorted = this.materialsResult;
       this.materialsResultFilterd = this.materialsResult;
-      if (this.srv_statemanage.GetMaterialSelected()== null){
-        this.selectedMaterial = "";
-        this.FavName = ""
-      }    
-       else{
-        this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().material;
-        this.FavName = this.srv_statemanage.GetMaterialSelected().FavName;
-       }
-          
+      if (this.srv_statemanage.GetMaterialSelected()== null)
+          this.selectedMaterial = "";
+       else
+          this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().FavName;
           
        this.isDtInitializedFunc();
        this.SpinnerService.hide();
@@ -97,51 +94,25 @@ export class MatSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnChanges(changes:SimpleChanges) {
-      // this._timeout  = null;
-      if(this._timeout){ //if there is already a timeout in process cancel it
-        window.clearTimeout(this._timeout);
-      }
-      this._timeout = window.setTimeout(() => {
-         this._timeout = null;
-         this.fillMainTable();
-      },1000);
-   }
+  // ngOnChanges(changes:SimpleChanges) {
+  //     if(this._timeout){ //if there is already a timeout in process cancel it
+  //       window.clearTimeout(this._timeout);
+  //     }
+  //     this._timeout = window.setTimeout(() => {
+  //        this._timeout = null;
+  //        this.fillMainTable();
+  //     },1000);
+  //  }
 
   ngOnDestroy() {
     this.allSubsMat$.unsubscribe();
   }
 
-  // filterTable(){
-  //   var searchText = this.filterSearchTextInput;
-  //   if (searchText == null || searchText == ''){
-  //     this.materialsResultSorted = this.materialsResult;
-  //   }
-        
-  //   else
-  //        this.materialsResultSorted = this.materialsResult.filter(_ => 
-  //         (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-  //         (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-  //         (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-  //         (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
-  //         ); 
-
-  // }
-
   OnSelectMaterial(mat:clsMaterial)
   {   
-    this.selectedMaterial = mat.material;
-    this.FavName = ""
+    this.selectedMaterial = mat.FavName;
     this.srv_statemanage.SelectMaterial(mat);
 
-  }
-
-  addToFavorites(){
-    let a =0;
-  }
-  
-  setAsDefault(){
-    let a =0;
   }
 
   openAddToFavM(mat:clsMaterial) {

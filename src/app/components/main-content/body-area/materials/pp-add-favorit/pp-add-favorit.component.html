@@ -8,11 +8,11 @@
     <div class="form-group row">
       <label for="MaterialName" class="col-sm-2">Name:</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="MaterialName" >
+        <input type="text" class="form-control" id="MaterialName" [(ngModel)]="favName" >
       </div>
     </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Cancel</button>
-    <button type="button" class="btn btn-select" (click)="activeModal.close('Close click')">Save</button>
+    <button type="button" class="btn btn-select" (click)="AddToFav()">Save</button>
   </div>

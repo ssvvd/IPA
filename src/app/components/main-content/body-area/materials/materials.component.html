@@ -2,7 +2,7 @@
 <div class="border-left-gray border-right-gray">
     <div class="row">
       <div class="col col-20">
-        <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)"></app-mat-filter>
+        <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)" (MyMaterials)="showMyMaterials($event)"></app-mat-filter>
       </div>
       <div [ngSwitch]="curComponent" class="col col-80 pl-2 border-left-gray">
         <div class="row">
@@ -22,6 +22,7 @@
         <app-mat-details *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
         <app-mat-standard-table *ngSwitchCase="3" [selectedCateg]="selectedCateg" [selectedStandard]="selectedSatnd"></app-mat-standard-table>
         <app-mat-search *ngSwitchCase="4"  [filterSearchTextInput]="searchText"></app-mat-search>
+        <!-- <my-materials *ngSwitchCase="5"></my-materials> -->
       </div>
     </div>
   </div>

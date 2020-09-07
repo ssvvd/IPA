@@ -19,10 +19,13 @@ export class MatFilterComponent implements OnInit {
   searchText:String;
   environment=environment;
   selectDisabled:boolean;
+  MyMatCheked:boolean;
+  favSelected:string = '';
 
   @Output() categEvent = new EventEmitter<string>();
   @Output() standardEvent = new EventEmitter<string>();
   @Output() MaterialSearchChanged = new EventEmitter<String>();
+  @Output() MyMaterials = new EventEmitter<boolean>();
   // @Output() MaterialSearchClear = new EventEmitter();
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
@@ -34,8 +37,16 @@ export class MatFilterComponent implements OnInit {
     this.filTabs();
     this.curSelectedCategory = 'P';
     this.standardSelected = '';
+    this.MyMatCheked = false;
     this.categClick(this.curSelectedCategory);
     this.srv_statemanage.CurrentMaterialSelected.subscribe(arr => this.SelectedMaterial(arr));
+    if (this.srv_statemanage.GetMaterialSelected()== null)
+    this.favSelected = "";
+ else{
+  this.favSelected = this.srv_statemanage.GetMaterialSelected().FavName;
+  this.ShowMyMaterials1(true);
+ }
+    
   }
   
   filTabs(){
@@ -59,11 +70,13 @@ export class MatFilterComponent implements OnInit {
     this.standardSelected = '';
     this.searchText = '';
     this.selectDisabled = false;
+    this.MyMatCheked = false;
   }
 
   onStandardChange(standardValue:string) {
     console.log(standardValue);
     this.searchText = '';
+    this.MyMatCheked = false;
     if (standardValue == ''){
       this.categClick(this.curSelectedCategory);
     }
@@ -75,10 +88,16 @@ export class MatFilterComponent implements OnInit {
 
 SelectedMaterial(arr:string[])
 {    
+  // if (this.favSelected != "")
+  // {
+  //   this.MyMatCheked = true
+  // }
+  // else{
   if (arr[0]){
     let cat = arr[0].substring(0,1);
     this.categClick(cat);
   }
+// }
 }
 
 FilterChange(event: ChangeContext ) {      
@@ -95,6 +114,24 @@ FilterChange(event: ChangeContext ) {
   }
       this.standardSelected = '';
       this.MaterialSearchChanged.emit(this.searchText);   
+}
+
+ShowMyMaterials(event){
+this.ShowMyMaterials1(event.target.checked)
+}
+ShowMyMaterials1(isChecked:boolean){
+  this.MyMatCheked = isChecked;
+  if(this.MyMatCheked){
+    this.curSelectedCategory = "All";
+    this.selectDisabled = true;
+  }
+  else{
+    this.curSelectedCategory = "P";
+    this.selectDisabled = false;
+  }
+  this.standardSelected = '';
+  this.MyMaterials.emit(this.MyMatCheked);
+
 }
 
 }

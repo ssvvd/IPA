@@ -27,6 +27,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   materialsResultFilterd:clsMaterial[]=[];
   materialsResultSorted:clsMaterial[]=[];
   selectedMaterial:string;
+  FavMat:String;
   environment = environment;
   dtTriggerMat: Subject<any> = new Subject();
   allSubsMat$: Subscription;
@@ -118,8 +119,11 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     // this.filterTable();
     if (this.srv_statemanage.GetMaterialSelected()== null)
         this.OnSelectMaterial(this.materialsResult[6]);
-     else
-        this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
+     else{
+      this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
+      this.FavMat = this.srv_statemanage.GetMaterialSelected().FavName
+     }
+        
         
      this.isDtInitializedFunc();
 
@@ -196,6 +200,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   OnSelectMaterial(mat:clsMaterial)
   {   
     this.selectedMaterial = mat.group;
+    this.FavMat = '';
     this.srv_statemanage.SelectMaterial(mat);
 
   }
@@ -217,6 +222,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   openAddToFavM(mat:clsMaterial) {
     const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
     modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
+    modalRef.componentInstance.selectedMat = mat;
   }
 
   openEditParamsM(mat:clsMaterial) {
