@@ -148,8 +148,8 @@
                 </div>
                 <div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="optNormal" name="MachiningStability" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Normal">
-                        <label class="custom-control-label" for="optNormal">{{'Normal' | translate}}</label>
+                        <input type="radio" class="custom-control-input" id="optNormal" name="MachiningStability" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Stable">
+                        <label class="custom-control-label" for="optNormal">{{'Stable' | translate}}</label>
                     </div>            
                     <div class="custom-control custom-radio custom-control-inline">
                         <input type="radio" class="custom-control-input" id="optUnstable" name="MachiningStability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Clamping').value" value="Unstable">

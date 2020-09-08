@@ -96,7 +96,7 @@ export class MachinesFilterComponent implements OnInit {
         
         //this.eventsSubscription.add( this.onChangeFavorite.subscribe(() => this.ChangeFavorite())); 
         this.eventsSubscription.add( this.onChangeMachineList.subscribe((d) => this.ChangeMachineList(d)));                       
-        this.eventsSubscription.add(this.serv.getmachineadaptationtype().subscribe((res: any) => {
+        this.eventsSubscription.add(this.serv.getmachineadaptationtype('').subscribe((res: any) => {
           this.arrAdapType = JSON.parse(res); 
           this.arrAdapType.unshift( { AdaptationType:''});      
           this.curAdapType=this.arrAdapType[0];                          

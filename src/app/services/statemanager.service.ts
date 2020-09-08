@@ -79,7 +79,10 @@ export class StateManagerService {
     let desc:string; 
     if(typeof(m)!=='undefined' && m!==null) 
     {
-      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " kW";
+      if(m.AdaptationType=='SQUARE') 
+        desc="SHANK - " + m.AdaptationSize.toString() +" / " + m.Power + " kW";
+      else
+        desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " kW";
       this.CheckTabOperationalDataEnable();   
       this.obsMachineSelected.next([m.MachineName,desc]); 
     }              

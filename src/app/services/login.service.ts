@@ -46,7 +46,7 @@ export class LoginService {
             country:d[0].country,            
             companyName:d[0].companyName,            
             isImc:d[0].isImc,
-            CountryCode:d[0].CountryCode,
+            CountryCode:d[0].usageLocation,
             CountryName:cn}
             localStorage.setItem("displayName",d[0].displayName);
             localStorage.setItem("surname",d[0].surname);
@@ -55,7 +55,7 @@ export class LoginService {
             localStorage.setItem("country",d[0].country);
             localStorage.setItem("companyName",d[0].companyName);
             localStorage.setItem("isImc",d[0].isImc); 
-            localStorage.setItem("countryCode",d[0].isImc);
+            localStorage.setItem("countryCode",d[0].usageLocation);
             localStorage.setItem("countryName",cn);
             this.srv_appsetting.User=u;  
             this.srv_appsetting.isLoggedIn=true;               

@@ -67,7 +67,10 @@ export class ContactusComponent implements OnInit {
       if(res=='ok')
         resmessage ="Email send successfully";
       else
+      {
         resmessage=res;
+        console.log(res);
+      }
       
    /*    const modalRef = this.modalService.open(PpSuccessfullyComponent, { centered: true });
       modalRef.componentInstance.HeaderDescription = "Send Mail";

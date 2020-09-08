@@ -25,7 +25,7 @@
                     <label for="txtAdaptationType" class="col-sm-7" >{{'Adaptation Type' | translate}}</label>
                     <div class="col-sm-4" *ngIf="isLoadingAdSize">            
                         <select class="form-control-sm" name="slcApatType" [(ngModel)]="curAdapType" (change)="changeadaptype()" >
-                            <option  *ngFor="let adaptype of arrAdapType"  [ngValue]="adaptype">{{adaptype.AdaptationType}}</option>
+                            <option  *ngFor="let adaptype of arrAdapType"  [ngValue]="adaptype">{{adaptype.AdaptationType=='SQUARE'?'SHANK':adaptype.AdaptationType}}</option>
                         </select>                    
                     </div>
                 </div>  
@@ -192,11 +192,11 @@
 
 <div class="form-group row ml-0 pl-0 pt-2">
     <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6 border-right">
-        <app-item-machine-spindle-chart [events]="eventsSubject.asObservable()" [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Torque]=spindle.Torque  [typeChart]="'torque'" [spindle]=spindle (N1Changed)="onSpindleSpeedChanged($event)" 
+        <app-item-machine-spindle-chart [events]="eventsSubject.asObservable()" [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Torque]=spindle.Torque  [typeChart]="'torque'" [spindle]=spindle (N3Changed)="onSpindleSpeedChanged($event)" 
          (P2T1Changed)="onPTChanged($event)" (SpindelChanged)="onSpindleChanged($event)">torque</app-item-machine-spindle-chart>
     </div>
     <div class="col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6">
-        <app-item-machine-spindle-chart [events]="eventsSubject.asObservable()" [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Power]=spindle.Power  [typeChart]="'power'" [spindle]=spindle  (N1Changed)="onSpindleSpeedChanged($event)" 
+        <app-item-machine-spindle-chart [events]="eventsSubject.asObservable()" [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Power]=spindle.Power  [typeChart]="'power'" [spindle]=spindle  (N3Changed)="onSpindleSpeedChanged($event)" 
          (P2T1Changed)="onPTChanged($event)" (SpindelChanged)="onSpindleChanged($event)">power</app-item-machine-spindle-chart>
     </div>
 </div>

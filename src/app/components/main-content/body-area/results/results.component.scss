@@ -27,3 +27,16 @@
     font-size: 18px !important;
     font-family: "Oswald",Calibri,Arial !important;
 }
+
+.printme {
+	display: none;
+}     
+@media print {
+	.no-printme  {
+		display: none;
+	}
+	.printme  {
+		display: block;
+	}
+}
+

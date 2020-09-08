@@ -116,4 +116,10 @@ export class Appdetails77Component implements OnInit {
     
   }
 
+  SlopeChange(n:number)
+  {
+    if(n==1) this.msrv_StMng.IPL.GetItem('Slope').value='<=6';
+    if(n==2) this.msrv_StMng.IPL.GetItem('Slope').value='>6<=12';
+    if(n==3) this.msrv_StMng.IPL.GetItem('Slope').value='>12';
+  }
 }

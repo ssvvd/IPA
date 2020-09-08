@@ -52,7 +52,7 @@
                       </a>
                     </td> -->
                    <td data-sort="image1">
-                      <a data-toggle="tooltip" title="{{'Add To My Machine' | translate}}" class="cursor-pointer">
+                      <a data-toggle="tooltip" title="{{ mach.isFavorite  ? 'Delete My Machine' : 'Add To My Machine' | translate}}" class="cursor-pointer">
                         <img [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(mach)" >
                       </a>
                     </td>

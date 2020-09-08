@@ -42,7 +42,8 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() AdaptationType:string;
   @Input() AdaptationSize:number;
 
-  @Output() N1Changed = new EventEmitter<{value: number}>();  
+  //@Output() N1Changed = new EventEmitter<{value: number}>();  
+  @Output() N3Changed = new EventEmitter<{value: number}>();  
 /*   @Output() T1Changed = new EventEmitter<{value: number}>();
   @Output() P1Changed = new EventEmitter<{value: number}>(); */
   @Output() P2T1Changed = new EventEmitter<{P2: number,T1: number}>();
@@ -68,11 +69,11 @@ export class MachineItemSpindleChartComponent implements OnInit {
   
   FilldataChart()
   {
-    this.chartdata=new ChartData();    
-     this.chartdata.PoinX_1 =this.spindle.N1;
-    this.chartdata.PoinX_2 =this.spindle.N2;
-    this.chartdata.PoinX_3 =this.spindle.N3;
-    this.chartdata.PoinX_4 =this.spindle.N4; 
+      this.chartdata=new ChartData();    
+      this.chartdata.PoinX_1 =this.spindle.N1;
+      this.chartdata.PoinX_2 =this.spindle.N2;
+      this.chartdata.PoinX_3 =this.spindle.N3;
+      this.chartdata.PoinX_4 =this.spindle.N4; 
     
     if(this.typeChart=='torque')
       {
@@ -105,27 +106,43 @@ export class MachineItemSpindleChartComponent implements OnInit {
     this.chartType = 'line';
     if(this.typeChart=='power') 
     {
+      if(this.spindle.N3==this.spindle.N4)
+          this.chartDatasets= [      
+            { lineTension: 0,     
+              data: [this.spindle.P1, this.spindle.P2, this.spindle.P3]
+              }     
+          ];
+      else
       this.chartDatasets= [      
         { lineTension: 0,     
           data: [this.spindle.P1, this.spindle.P2, this.spindle.P3, this.spindle.P4]
-           }     
-      ];
+          }     
+      ]; 
     } 
     else
     {
+      if(this.spindle.N3==this.spindle.N4)
+        this.chartDatasets= [      
+          { lineTension: 0,     
+            data: [this.spindle.T1, this.spindle.T2, this.spindle.T3]
+            }     
+        ];
+      else
       this.chartDatasets= [      
         { lineTension: 0,     
           data: [this.spindle.T1, this.spindle.T2, this.spindle.T3, this.spindle.T4]
-           }     
+          }     
       ];
+        
     }    
-   /*  this.chartDatasets= [      
-      { lineTension: 0,     
-        data: [this.chartdata.PoinY_1, this.chartdata.PoinY_2, this.chartdata.PoinY_3, this.chartdata.PoinY_4]
-         }     
-    ]; */
+
     
-    this.chartLabels = [this.chartdata.PoinX_1, this.chartdata.PoinX_2, this.chartdata.PoinX_3, this.chartdata.PoinX_4];
+    //this.chartLabels = [this.chartdata.PoinX_1, this.chartdata.PoinX_2, this.chartdata.PoinX_3, this.chartdata.PoinX_4];
+    if(this.spindle.N3==this.spindle.N4)
+      this.chartLabels = [this.spindle.N1, this.spindle.N2, this.spindle.N3];
+    else
+    this.chartLabels = [this.spindle.N1, this.spindle.N2, this.spindle.N3, this.spindle.N4];
+
     this.chartColors = [
       {
         backgroundColor:'rgba(255,255,255, 0.3)' ,
@@ -216,16 +233,23 @@ export class MachineItemSpindleChartComponent implements OnInit {
 
      OnChangePoinX_1()
      { 
-       this.N1Changed.emit({ value: this.chartdata.PoinX_1});
+       //this.N1Changed.emit({ value: this.chartdata.PoinX_1});
+     }
+
+     OnChangePoinX_3()
+     { 
+       this.N3Changed.emit({ value: this.chartdata.PoinX_3});
      }
 
      OnChangePoinY_1()
-     {      
-      /* let coeff:number;
-      let v:number;
-      if(this.srv_appsetting.Units=='M') coeff=9550;
-      if(this.srv_appsetting.Units=='I') coeff=5252; */    
-       if(this.typeChart=="power")  
+     {         
+      if(this.typeChart=="power")          
+        this.spindle.P1=this.chartdata.PoinY_1;                         
+          else          
+        this.spindle.T1=this.chartdata.PoinY_1;
+      this.CreateChart();  
+
+      /*  if(this.typeChart=="power")  
         { 
           this.spindle.P1=this.chartdata.PoinY_1;                  
           this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.CalculateTByP(this.spindle.N1,this.spindle.P1)});              
@@ -235,7 +259,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
           this.spindle.T1=this.chartdata.PoinY_1;                        
           this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T1});      
         }
-        this.CreateChart();    
+        this.CreateChart();     */
      }
 
     OnChangePoinY_2()
@@ -254,12 +278,24 @@ export class MachineItemSpindleChartComponent implements OnInit {
     }
 
      OnChangePoinY_3()
-    {        
-      if(this.typeChart=="power")          
+    { 
+      if(this.typeChart=="power")  
+      { 
+        this.spindle.P3=this.chartdata.PoinY_3;                  
+        this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.CalculateTByP(this.spindle.N3,this.spindle.P3)});              
+      }
+     else 
+      { 
+        this.spindle.T3=this.chartdata.PoinY_3;                        
+        this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T3});      
+      }
+      this.CreateChart();    
+
+     /*  if(this.typeChart=="power")          
         this.spindle.P3=this.chartdata.PoinY_3;                         
       else          
         this.spindle.T3=this.chartdata.PoinY_3;
-        this.CreateChart();                                           
+        this.CreateChart();   */                                         
     }
 
      OnChangePoinY_4()
@@ -276,7 +312,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
           for (let property in changes) {
               if (property === 'SpindleSpeed') {                
                 //this.chartdata.PoinX_1 = changes[property].currentValue;
-                this.spindle.N1 = changes[property].currentValue;
+                this.spindle.N3 = changes[property].currentValue;
                 this.CreateChart();            
               } 
               if (property === 'Power') 

@@ -7,8 +7,7 @@
 <p>{{ErrMsg}}</p> -->
 
 
-
-<div class="border-left-gray border-right-gray">
+<div class="border-left-gray border-right-gray ">
     <div class="row" [hidden]="!MainPage">
       <div class="col col-20">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
@@ -21,25 +20,28 @@
     </div>
 
     <div class="row" [hidden]="MainPage">
-      <div class="container-fluid">
-      
-        <div class="mt-0 ml-0 pl-0 mt-0 pt-2" >
+      <div class="container-fluid">              
+        <div class="mt-0 ml-0 pl-0 mt-0 pt-2 row container-fluid" >
           <nav class="ml-0 pl-0 mt-0 pl-0 pt-0" aria-label="breadcrumb">
              <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
                  <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">All</a></li>
                  <li class="breadcrumb-item active text-secondary"  aria-current="page">Result Information</li> 
              </ol>
            </nav>
-     </div>  
-
+        <!--    <div class="float-left pt-2">
+            <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle cursor-pointer float-left ml-4" (click)= "DownLoadData()">Download</h2>            
+          </div> -->
+         
+        </div>  
+        
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
-
-          <li [ngbNavItem]="1" class="navli">
-            <a ngbNavLink class="siteTitle">Machining Parameters</a>
+          <li [ngbNavItem]="1" class="navli" id="dataitem1">
+            <a ngbNavLink class="siteTitle" >Machining Parameters</a>
             <ng-template ngbNavContent>
               <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>
             </ng-template>
+          
           </li>
 
           <li [ngbNavItem]="2" class="navli">
@@ -97,7 +99,23 @@
           <ngb-tab [disabled]="true"></ngb-tab>
                      
         </ngb-tabset> -->
-        </div>
-    </div>
+        <!-- <div *ngIf="IsExport"  id="pdfdata" style="visibility :hidden"> -->
+                      
+    </div>    
   </div> 
-
+ 
+  <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;">                               
+          <div class="top" >
+          <app-machineitem [pr_MachineID]="53"  [pr_MachineName]="'My Machine'"></app-machineitem>
+          <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>           
+        </div>      
+  </div>
+      
+  <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+  bdOpacity ="0.05"
+  size="medium"
+  color="#676767"
+  type="ball-circus">    
+  <p style="color:#676767">Please wait while ITA is processing your request. </p> 
+  </ngx-spinner>  
+  </div>

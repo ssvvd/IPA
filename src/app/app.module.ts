@@ -8,6 +8,7 @@ import { HttpClient } from '@angular/common/http';
 import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 //import { SafePipeModule } from 'safe-pipe';
 import * as $ from "jquery";
 
@@ -86,7 +87,11 @@ import { MpTurnGrooveComponent } from './components/main-content/body-area/resul
 import { HeaderPpUnitsComponent } from './components/header/header-pp-units/header-pp-units.component';
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
+<<<<<<< HEAD
 import { MyMaterialsComponent } from './components/main-content/body-area/materials/my-materials/my-materials.component';
+=======
+import { ResultsPdfComponent } from './components/main-content/body-area/results/results-pdf/results-pdf.component';
+>>>>>>> de790bb11f5bd6b6f766ed9db448021c13900de4
 
 @NgModule({
   declarations: [   
@@ -157,7 +162,11 @@ import { MyMaterialsComponent } from './components/main-content/body-area/materi
     HeaderPpUnitsComponent,
     PpSuccessfullyComponent,
     ContactusComponent,
+<<<<<<< HEAD
     MyMaterialsComponent
+=======
+    ResultsPdfComponent
+>>>>>>> de790bb11f5bd6b6f766ed9db448021c13900de4
   ],
   imports: [
     FormsModule,
