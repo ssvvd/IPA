@@ -68,7 +68,7 @@ export class MaterialService {
   }
 
 
-  public EditMaterialFavorit( userID:string,  OldFavoritName:string,  FavoritName:string,  Hardness:number,  HardnessUnits:string){
-    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-edit-fav/' + userID + '/' + OldFavoritName+ '/' + FavoritName+ '/' + Hardness+ '/' + HardnessUnits);
+  public EditMaterialFavorit( userID:string,  OldFavoritName:string,  FavoritName:string,  Hardness:number,  HardnessUnits:string,HardnessHBValue:number){
+    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-edit-fav/' + userID + '/' + OldFavoritName+ '/' + FavoritName+ '/' + Hardness+ '/' + HardnessUnits + '/' + HardnessHBValue);
   }
 }

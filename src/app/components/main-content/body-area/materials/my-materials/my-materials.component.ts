@@ -49,6 +49,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
        "autoWidth":false,
        "scrollY": '65vh',
        "scrollCollapse" : true,
+       "aaSorting": [],
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal ? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal ? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ 5 ] }],
        "language": {
         "emptyTable": "No data available in table",
@@ -65,8 +66,9 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
 
 
   fillMainTable(){
+    if (this.srv_appsetting.UserID != ''){
     this.SpinnerService.show();
-    this.allSubsMat$ = this.serv.getMatFav(this.srv_appsetting.UserID || 'HIBAHAWARI')
+    this.allSubsMat$ = this.serv.getMatFav(this.srv_appsetting.UserID)
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
       this.materialsResultSorted = this.materialsResult;
@@ -78,7 +80,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
           
        this.isDtInitializedFunc();
        this.SpinnerService.hide();
-    }); 
+    }); }
   }
 
   isDtInitializedFunc(){
@@ -105,6 +107,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
   //  }
 
   ngOnDestroy() {
+    if(this.allSubsMat$)
     this.allSubsMat$.unsubscribe();
   }
 
@@ -119,6 +122,15 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
     modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
     modalRef.componentInstance.selectedMat = mat;
+    modalRef.componentInstance.edit = true;
+    modalRef.result.then((result) => {
+      if (result) {
+      console.log(result);
+        if(result == 'refresh'){
+          this.fillMainTable();
+        }
+      }
+      }, () => console.log('Rejected!'));
   }
 
   openEditParamsM(mat:clsMaterial) {
@@ -138,9 +150,13 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
           mat.Hardness = spletter[0];
           mat.HardnessUnits = spletter[1];
           mat.HardnessHBValue = spletter[2];
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-            this.dtTriggerMat.next();
+          this.SpinnerService.show();
+          this.serv.EditMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  mat.FavName,  mat.FavName ,  mat.Hardness,   mat.HardnessUnits || 'HB',mat.HardnessHBValue || mat.Hardness).subscribe((data: any) => {
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+              dtInstance.destroy();
+              this.dtTriggerMat.next();
+            });
+            this.SpinnerService.hide();
           });
         }
       }

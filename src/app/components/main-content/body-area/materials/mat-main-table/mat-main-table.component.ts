@@ -4,6 +4,7 @@ import { MaterialService } from 'src/app/services/material.service'
 import { MaterialsmService } from 'src/app/services/materialsm.service'
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { CookiesService } from 'src/app/services/cookies.service';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
@@ -11,6 +12,9 @@ import { ActivatedRoute} from '@angular/router';
 import {PpSetDefaultComponent} from 'src/app/components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
+import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
+import { NgxSpinnerService } from "ngx-spinner"; 
+import { LoginService } from 'src/app/services/login.service';
 import { Subject, Subscription } from 'rxjs';
 
 @Component({
@@ -34,6 +38,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
   lang:string;
+  DefaultMat:number = 0;
   @Input() selectedCategory: string ;
   @Input() filterSearchTextInput: string;
   @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
@@ -41,7 +46,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
-    ,private router: ActivatedRoute ) { 
+    ,private router: ActivatedRoute ,private srv_login:LoginService,private SpinnerService: NgxSpinnerService,private srv_cook:CookiesService) { 
       this.eventsSubscription.add(this.router.params.subscribe(params => {
         this.lang = params["lang"];
         if (!this.lang){
@@ -67,6 +72,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
        "autoWidth":false,
        "scrollY": '65vh',
        "scrollCollapse" : true,
+       "order": [[ 0, 'asc' ]],
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal ? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal ? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ 4 ] }],
        "language": {
         "emptyTable": "",
@@ -76,6 +82,10 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       } 
             
       }; 
+
+
+      if(this.srv_cook.get_cookie("def_mat")!='')
+      this.DefaultMat =+this.srv_cook.get_cookie("def_mat"); 
 
   }
 
@@ -90,13 +100,13 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
   fillMainTable(){
     if (this.servsm.checkCategoryTableExists(this.lang,this.selectedCategory)){
-      this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory))
+      this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),false)
     }
     else{
       this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
       .subscribe((data: any) => {
         this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
-        this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory)) 
+        this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
       });
     }
 
@@ -112,20 +122,37 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     // })
   }
 
-  setResults(data:clsMaterial[]){
-    this.materialsResult = data;
-    this.materialsResultSorted = this.materialsResult;
-    this.materialsResultFilterd = this.materialsResult;
+  clearData(){
+    this.materialsResult = [];
+    this.materialsResultSorted = [];
+    this.materialsResultFilterd = [];
+  }
+  setResults(data:clsMaterial[],initTable:boolean){
+    this.clearData();
+    this.materialsResult = data.slice();
+    this.materialsResultSorted = this.materialsResult.slice();
+    this.materialsResultFilterd = this.materialsResult.slice();
     // this.filterTable();
-    if (this.srv_statemanage.GetMaterialSelected()== null)
-        this.OnSelectMaterial(this.materialsResult[6]);
+    if (this.srv_statemanage.GetMaterialSelected()== null){
+      
+      if (this.DefaultMat != 0){
+        let defMat:clsMaterial = this.materialsResult.find(x => x.id === this.DefaultMat)
+        if(defMat)
+          this.OnSelectMaterial(defMat);
+          else
+          this.OnSelectMaterial(this.materialsResult[6]);
+      }
+      else
+      this.OnSelectMaterial(this.materialsResult[6]);
+    }
+        
      else{
       this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
-      this.FavMat = this.srv_statemanage.GetMaterialSelected().FavName
+      this.FavMat = this.srv_statemanage.GetMaterialSelected().FavName || ''
      }
         
-        
-     this.isDtInitializedFunc();
+        if(initTable)
+            this.isDtInitializedFunc();
 
   }
 
@@ -213,16 +240,38 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     let a =0;
   }
   openSetDefaultModal(mat:clsMaterial) {
-    const modalRef = this.modalService.open(PpSetDefaultComponent, { centered: true });
-    modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
-/*     modalRef.componentInstance.my_modal_title = 'I your title';
-    modalRef.componentInstance.my_modal_content = 'I am your content'; */
+    this.srv_cook.set_cookie("def_mat",mat.id.toString());
+    this.DefaultMat=mat.id;
+
+    mat.isDefault = true;
+    this.OnSelectMaterial(mat);
+    // const modalRef = this.modalService.open(PpSetDefaultComponent, { centered: true });
+    // modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
   }
 
   openAddToFavM(mat:clsMaterial) {
+    if(this.srv_appsetting.UserID=='')
+    {
+      //alert('Only for registered user');
+      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
+      modalRef.componentInstance.title = "Add To My Materials";
+      modalRef.componentInstance.Msg = 'Please login to add the material to "My Materials"';
+      modalRef.result.then((result) => {
+        if(result=='cancel') return;
+        if(result=='login')
+        {
+          this.SpinnerService.show();
+          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
+          return;
+        }});
+      
+    } 
+    else{
     const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
     modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
     modalRef.componentInstance.selectedMat = mat;
+    modalRef.componentInstance.edit = false;
+  }
   }
 
   openEditParamsM(mat:clsMaterial) {

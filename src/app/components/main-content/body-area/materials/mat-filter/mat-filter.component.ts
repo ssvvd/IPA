@@ -44,6 +44,7 @@ export class MatFilterComponent implements OnInit {
     this.favSelected = "";
  else{
   this.favSelected = this.srv_statemanage.GetMaterialSelected().FavName;
+  if (this.favSelected && this.favSelected!="")
   this.ShowMyMaterials1(true);
  }
     

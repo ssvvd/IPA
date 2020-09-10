@@ -1,6 +1,6 @@
 <div class="modal-header"> 
   <div>
-    <h4 class="pt-2 modal-title siteTitle">{{'Add To My Machines' | translate}}</h4>
+    <h4 class="pt-2 modal-title siteTitle">{{title | translate}}</h4>
   </div> 
     <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
       <span aria-hidden="true" class="span_x">&times;</span>
@@ -8,7 +8,7 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label>{{'Please login to add the machine to "My Machines"' | translate}}</label>        
+      <label>{{Msg | translate}}</label>        
     </div>
   </div>
   <div class="modal-footer text-center ">  

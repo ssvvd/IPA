@@ -19,7 +19,7 @@
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResultSorted" [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected' : 'tr-not-selected'">
+              <tr *ngFor="let material of materialsResultSorted " [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected' : 'tr-not-selected'" [hidden]="selectedCategory != material.Category">
                 <th scope="row" class="d-none">{{material.id}}</th>         
                   <td (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
                   <td (click)="matDetailClick(material)">{{material.description}}</td>
@@ -34,7 +34,7 @@
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to my materials" class="icon-grid">
                   </td>
                   <td *ngIf="environment.internal">                    
-                        <img src="{{environment.ImgDefault}}" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid">
+                        <img [src]="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid">
                   </td>
                   <td *ngIf="environment.internal">
                     <div>

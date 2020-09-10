@@ -1,6 +1,8 @@
 import { Component, OnInit,Input,SimpleChanges,ViewChild,DoCheck } from '@angular/core';
 import { MaterialService } from 'src/app/services/material.service';
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
+import { MaterialsmService } from 'src/app/services/materialsm.service'
 import { clsMaterial } from 'src/app/models/materials/material'
 import { environment } from 'src/environments/environment';
 import { DataTableDirective } from 'angular-datatables';
@@ -31,7 +33,7 @@ export class MatStandardTableComponent implements OnInit,DoCheck {
   @Input() selectedCateg: string ;
   @Input() selectedStandard: string ;
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
+  constructor(private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     this.dtOptionsMat = {
@@ -100,8 +102,8 @@ export class MatStandardTableComponent implements OnInit,DoCheck {
 
   OnSelectMaterial(selCol:string,mat:string)
   {   
-    
-    this.selectedMaterial= new clsMaterial(this.mySplit(selCol,0),this.mySplit(selCol,1),mat,this.selectedCateg);
+    let matGroup:clsMaterial = this.servsm.getCategoryTable(this.srv_appsetting.Lang || "EN",this.selectedCateg).find(x => x.id === +this.mySplit(selCol,0))
+    this.selectedMaterial= new clsMaterial(this.mySplit(selCol,0),this.mySplit(selCol,1),mat,this.selectedCateg,matGroup.HardnessHBValue || matGroup.Hardness);
     this.srv_statemanage.SelectMaterial(this.selectedMaterial);
 
   }

@@ -8,7 +8,10 @@ import { DataTableDirective } from 'angular-datatables';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
 import { Subject, Subscription } from 'rxjs';
+import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { LoginService } from 'src/app/services/login.service';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 
 @Component({
   selector: 'app-mat-search',
@@ -33,7 +36,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   _timeout: any = null;
   @Input() filterSearchTextInput: string;
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService) { }
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,private srv_login:LoginService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     let myColumns1 = [6,7];
@@ -145,9 +148,30 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   }
 
   openAddToFavM(mat:clsMaterial) {
-    const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
-    modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
-    modalRef.componentInstance.selectedMat = mat;
+    if(this.srv_appsetting.UserID=='')
+    {
+      //alert('Only for registered user');
+      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
+      modalRef.componentInstance.title = "Add To My Materials";
+      modalRef.componentInstance.Msg = 'Please login to add the material to "My Materials"';
+      //modalRef.componentInstance.MachineName = mach.MachineName;
+      modalRef.result.then((result) => {
+        if(result=='cancel') return;
+        if(result=='login')
+        {
+          this.SpinnerService.show();
+          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
+          return;
+        }});
+      
+    } 
+    else{
+      const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
+      modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
+      modalRef.componentInstance.selectedMat = mat;
+      modalRef.componentInstance.edit = false;
+    }
+
   }
 
   openEditParamsM(mat:clsMaterial) {

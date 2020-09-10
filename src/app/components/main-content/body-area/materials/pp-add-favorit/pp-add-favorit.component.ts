@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MaterialService } from 'src/app/services/material.service'
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { NgxSpinnerService } from "ngx-spinner"; 
 
 @Component({
   selector: 'app-pp-add-favorit',
@@ -13,25 +14,49 @@ export class PpAddFavoritComponent implements OnInit {
 
   @Input() modal_group;
   @Input() selectedMat:clsMaterial;
+  @Input() edit:boolean;
   favName:string = ''
 
-  constructor(public activeModal: NgbActiveModal,private serv: MaterialService,public srv_appsetting:AppsettingService) { }
+  constructor(public activeModal: NgbActiveModal,private serv: MaterialService,public srv_appsetting:AppsettingService,private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
-    this.favName = ''
+    if (this.edit)
+      this.favName = this.selectedMat.FavName
+    else
+      this.favName = ''
   }
 
 
 
   AddToFav(){
-    let FavoritName:string = this.modal_group
-    if (this.favName != '')
-    FavoritName = this.favName + '-' + FavoritName
-    //AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number)
+    if (!this.edit){
+      let FavoritName:string = this.modal_group
+      if (this.favName != '')
+      FavoritName = this.favName + '-' + FavoritName
+      //AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number)
+  
+      this.serv.AddMaterialFavorit(this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.Category,  this.selectedMat.id,  FavoritName, this.selectedMat.Standard || '-',  this.selectedMat.Condition,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',  this.selectedMat.HardnessOrigin || this.selectedMat.Hardness,this.selectedMat.HardnessHBValue || this.selectedMat.Hardness, this.selectedMat.material || '').subscribe((data: any) => {}); 
+  
+      this.activeModal.close()
+    }
+    else{
+      this.SpinnerService.show();
+      this.serv.EditMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.FavName,  this.favName ,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',this.selectedMat.HardnessHBValue || this.selectedMat.Hardness).subscribe((data: any) => {
+        this.SpinnerService.hide();
+        this.activeModal.close('refresh')
+      });
+  
+    }
 
-    this.serv.AddMaterialFavorit(this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.Category,  this.selectedMat.id,  FavoritName, this.selectedMat.Standard || '-',  this.selectedMat.Condition,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',  this.selectedMat.HardnessOrigin || this.selectedMat.Hardness,this.selectedMat.HardnessHBValue || this.selectedMat.Hardness, this.selectedMat.material || '').subscribe((data: any) => {}); 
+  }
 
-    this.activeModal.close()
+  Delete(){
+    this.SpinnerService.show();
+    this.serv.DeleteMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.FavName).subscribe((data: any) => {
+      this.SpinnerService.hide();
+      this.activeModal.close('refresh')
+    });
+    
   }
 
 }
