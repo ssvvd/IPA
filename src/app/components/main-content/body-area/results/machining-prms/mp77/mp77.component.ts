@@ -109,6 +109,8 @@ resType:string = ''
           case 'DetailsListPrice':{
             this.H_DHP = +(value.split(' ')[0])
             this.I_IP = +(value.split(' ')[0])
+            if (this.TP == 0)
+              this.TP = +(value.split(' ')[0])
              break;
            }
            case 'HeaderListPrice':{

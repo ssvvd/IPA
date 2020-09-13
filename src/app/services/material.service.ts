@@ -64,7 +64,7 @@ export class MaterialService {
   public AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number,HardnessHBValue:number,matOrig:string)
   {
     if(matOrig!='')  matOrig='/' + matOrig;
-    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-add-fav/' + userID + '/' + ISO+ '/' + Group+ '/' + FavoritName+ '/' + Standard+ '/' + Condetion+ '/' + Hardness+ '/' + HardnessUnits+ '/' + HardnessOrig + '/' + HardnessHBValue + matOrig);
+    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-add-fav/' + userID + '/' + ISO+ '/' + Group+ '/' + FavoritName+ '/' + Standard.replace("/", "+.+")+ '/' + Condetion+ '/' + Hardness+ '/' + HardnessUnits+ '/' + HardnessOrig + '/' + HardnessHBValue + matOrig);
   }
 
 

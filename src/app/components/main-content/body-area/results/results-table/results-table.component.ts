@@ -13,6 +13,7 @@ import { Subject, Subscription, forkJoin } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
 import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
 import {ResultPpDownloadComponent} from 'src/app/components/main-content/body-area/results/result-pp-download/result-pp-download.component';
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
@@ -51,9 +52,10 @@ export class ResultsTableComponent implements OnInit {
   arrResultImgsItem:string[]=[];
   arrResultImgsFamily:string[]=[];
   arrResultImgsAll:any;
-  ErrMsg:string="";
+  ErrMsg:boolean=false;
   lasTypeFeed:string="";
   sortProp:string="";
+  countrow:number=0;
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
@@ -81,6 +83,8 @@ export class ResultsTableComponent implements OnInit {
 
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
+  this.ErrMsg = false
+  this.countrow = 0
   this.GetResult();
   }
 
@@ -116,7 +120,8 @@ getShowTable(){
 
 
 renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
-  if (res1 == 'Error'){
+  if (res1 == 'Error' || res1.length == 0){
+    this.ErrMsg = true
     this.SpinnerService.hide();
     return;
   }
@@ -483,7 +488,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   }
   
 }
-
+this.countrow = this.dtResultsObjects3d.length
 this.headersOrig = JSON.parse(JSON.stringify(this.headers));
 this.dtTrigger.next();
 this.SpinnerService.hide();
@@ -963,6 +968,13 @@ DownLoadPDF()
   {    
     const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
     modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
+  }
+
+
+  contactus()
+  {
+    const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});
+                    
   }
 }
 
