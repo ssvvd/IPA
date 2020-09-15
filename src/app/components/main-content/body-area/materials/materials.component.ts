@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy, ViewChild } from '@angular/core';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsMaterial } from 'src/app/models/materials/material';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PpRequestMaterialComponent } from './pp-request-material/pp-request-material.component';
 import { Location } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
+import { MatFilterComponent } from './mat-filter/mat-filter.component';
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -11,8 +13,9 @@ import { Location } from '@angular/common';
   templateUrl: './materials.component.html',
   styleUrls: ['./materials.component.scss']
 })
-export class MaterialsComponent implements OnInit {
-
+export class MaterialsComponent implements OnInit,OnDestroy {
+  @ViewChild('myChildFilter') private myChildFilter: MatFilterComponent;
+  
   internal:boolean;
   selectedCateg: string;
   selectedMatDeials:clsMaterial;
@@ -20,12 +23,46 @@ export class MaterialsComponent implements OnInit {
   selectedSatnd:string;
   breadCrumb:string[]=[];
   searchText:String
+  navigationSubscription;
   // environment = environment;
 
-  constructor(private statemng:StateManagerService,private modalService: NgbModal,location: Location ) {
+  constructor(private statemng:StateManagerService,private modalService: NgbModal,location: Location , private router: Router) {
     // if(location.path().toLowerCase() == '/materials'){
     //   environment.internal = false;
     // }
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (e instanceof NavigationEnd) {
+        this.initialiseInvites();
+      }
+    });
+  }
+  
+  initialiseInvites() {
+    // Set default values and re-fetch any data you need.
+
+
+    // this.ngOnInit()
+    // this.clrSearch = false;
+    if(this.myChildFilter){
+    var selCateg = "P"
+    if (this.statemng.GetMaterialSelected()!= null){
+      var selMat = this.statemng.GetMaterialSelected();
+      selCateg = selMat.Category;
+    }
+    this.myChildFilter.categClick(selCateg)
+  }
+    // this.receiveCategory(selCateg)
+    // this.clrSearch = true;
+  }
+
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we  
+    // don't then we will continue to run our initialiseInvites()   
+    // method on every navigationEnd event.
+    if (this.navigationSubscription) {  
+       this.navigationSubscription.unsubscribe();
+    }
   }
   
   receiveCategory(category:string) {

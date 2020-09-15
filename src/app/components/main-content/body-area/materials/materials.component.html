@@ -2,7 +2,7 @@
 <div class="border-left-gray border-right-gray">
     <div class="row">
       <div class="col col-20">
-        <app-mat-filter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)" (MyMaterials)="showMyMaterials($event)"></app-mat-filter>
+        <app-mat-filter #myChildFilter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)" (MyMaterials)="showMyMaterials($event)"></app-mat-filter>
       </div>
       <div [ngSwitch]="curComponent" class="col col-80 pl-2 border-left-gray">
         <div class="row">

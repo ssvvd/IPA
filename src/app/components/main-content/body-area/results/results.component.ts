@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-results',
@@ -19,11 +20,35 @@ viewParams:any;
 MainPage:boolean = true;
 active = 1;
 IsExport:boolean;
+navigationSubscription;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 
   constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
-    private srv_down:DownloadresultService) { }
+    private srv_down:DownloadresultService , private router: Router) {
+
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+        // If it is a NavigationEnd event re-initalise the component
+        if (e instanceof NavigationEnd) {
+          this.initialiseInvites();
+        }
+      });
+
+     }
+
+     initialiseInvites() {
+      this.MainPage = true;
+     }
+
+     ngOnDestroy() {
+      // avoid memory leaks here by cleaning up after ourselves. If we  
+      // don't then we will continue to run our initialiseInvites()   
+      // method on every navigationEnd event.
+      if (this.navigationSubscription) {  
+         this.navigationSubscription.unsubscribe();
+      }
+    }
+
   ngAfterViewInit() {
     console.log(this.resTable); 
   }
