@@ -120,7 +120,7 @@ getShowTable(){
 
 
 renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
-  if (res1 == 'Error' || res1.length == 0){
+  if (res1 == 'Error' || res1.length < 3){
     this.ErrMsg = true
     this.SpinnerService.hide();
     return;
