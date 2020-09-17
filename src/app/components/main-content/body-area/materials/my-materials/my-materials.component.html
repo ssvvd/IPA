@@ -26,7 +26,7 @@
                   <td>{{material.Condition}}</td>
                   <td><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit" (click)="openEditParamsM(material)" class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' }}</td>
                   <td *ngIf="environment.internal">
-                         <img src="{{environment.ImgFavorite}}" (click)="openAddToFavM(material)" title="Edit My Materials" class="icon-grid">
+                         <img src="{{environment.ImgFavorite}}" (click)="openAddToFavM(material)" title="Edit My Material" class="icon-grid">
                   </td>
                   <td *ngIf="environment.internal">
                     <div>
