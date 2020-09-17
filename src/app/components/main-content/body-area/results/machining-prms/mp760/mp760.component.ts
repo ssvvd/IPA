@@ -374,9 +374,9 @@ if (value.trim().length == 7){
 // if (this.resType == "H")
 // this.TCB = this.H_TGC + this.MCB
 
-let mat:number = +this.srv_StMng.IPL.GetItem('Material').value
-
-if (mat >= 21 && mat <= 37)
+// let mat:number = +this.srv_StMng.IPL.GetItem('Material').value
+let coolValue = this.srv_StMng.IPL.GetItem('Coolant').value
+if (coolValue == '1')
   this.COOL = 'WET'
   else
   this.COOL = 'DRY'

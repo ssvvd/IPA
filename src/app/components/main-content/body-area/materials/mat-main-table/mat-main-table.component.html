@@ -31,7 +31,7 @@
 
               </td>
                   <td *ngIf="environment.internal">
-                         <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to my materials" class="icon-grid">
+                         <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to My Materials" class="icon-grid">
                   </td>
                   <td *ngIf="environment.internal">                    
                         <img [src]="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid">

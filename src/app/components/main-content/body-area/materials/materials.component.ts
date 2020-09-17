@@ -65,6 +65,11 @@ export class MaterialsComponent implements OnInit,OnDestroy {
     }
   }
   
+  GoToMyMaterials(event){
+    this.myChildFilter.MyMatCheked = true;
+    this.showMyMaterials(true)
+  }
+
   receiveCategory(category:string) {
     if (category != "All"){
       this.selectedCateg = category;

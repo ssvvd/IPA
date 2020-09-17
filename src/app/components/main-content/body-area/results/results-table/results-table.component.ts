@@ -56,6 +56,7 @@ export class ResultsTableComponent implements OnInit {
   lasTypeFeed:string="";
   sortProp:string="";
   countrow:number=0;
+  showingrows:number=0;
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
@@ -426,7 +427,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
     }
 
-
+  this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
   var visColumnsCount = this.dtResultsObjects[0].length
   this.dtResultsObjects3d = []
   let index3:number = 0;
@@ -917,6 +918,8 @@ ngOnChanges(changes:SimpleChanges) {
     
       
     }
+
+    this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
     if (this.filterChangedRec.control == 'TypeFeed')
       this.lasTypeFeed = this.filterChangedRec.Res;
   }

@@ -42,6 +42,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   @Input() selectedCategory: string ;
   @Input() filterSearchTextInput: string;
   @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
+  @Output() myMaterialClickEv = new EventEmitter<clsMaterial>();
 
   private eventsSubscription: Subscription=new Subscription();
 
@@ -224,6 +225,10 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     this.matDetailSelectedEv.emit(material);
   }
 
+  goToMyMaterial(){
+    this.myMaterialClickEv.emit();
+  }
+
   OnSelectMaterial(mat:clsMaterial)
   {   
     this.selectedMaterial = mat.group;
@@ -271,6 +276,13 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.modal_group = this.selectedCategory + mat.group;
     modalRef.componentInstance.selectedMat = mat;
     modalRef.componentInstance.edit = false;
+    //GoToMyMaterials
+    modalRef.result.then((result) => {
+      if(result=='GoToMyMaterials')
+      {
+        this.goToMyMaterial();
+        return;
+      }});
   }
   }
 

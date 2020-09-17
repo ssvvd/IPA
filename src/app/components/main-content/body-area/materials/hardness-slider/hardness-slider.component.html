@@ -1,4 +1,4 @@
-<div class="row"> 
+<div class="row" style="margin-left: -40px !important;"> 
     <div class="radio radio-inline" *ngFor="let item of radioList">
         <input type="radio" id="rb{{item}}" name="radio1" value="{{item}}" [(ngModel)]="curRadioChecked" (click)="onRadioButtonClick(item)" >
         <label  for="rb{{item}}">
