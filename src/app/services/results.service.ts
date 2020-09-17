@@ -221,6 +221,25 @@ export class ResultsService {
     });
   }
 
+  public  getiteminfoparamvalues(catalogno:string,units:string, lang:string)
+  {     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-item-info-param-values/'+catalogno + '/' +units + '/' +lang );
+  }
+  public  getiteminfoparamheader(lang:string,family:string,units:string)
+  {     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-item-info-param-header/'+lang + '/' +family + '/' +units  );
+  }  
+  
+  public  getfamilydata(family:string,units:string,lang:string)
+  {     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-family-data/'+family + '/' +units + '/' +lang  );
+  }
+  
+  public  getbrandnamebyfamily(family:string)
+  {     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-brandname-byfamily/'+family );
+  }
+
 
   // public  checkItemImgExists()
   // {        

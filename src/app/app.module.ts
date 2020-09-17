@@ -88,6 +88,7 @@ import { HeaderPpUnitsComponent } from './components/header/header-pp-units/head
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
 import { ResultsPdfComponent } from './components/main-content/body-area/results/results-pdf/results-pdf.component';
+import { ResultItemInfoComponent } from './components/main-content/body-area/results/result-item-info/result-item-info.component';
 
 @NgModule({
   declarations: [   
@@ -158,7 +159,8 @@ import { ResultsPdfComponent } from './components/main-content/body-area/results
     HeaderPpUnitsComponent,
     PpSuccessfullyComponent,
     ContactusComponent,
-    ResultsPdfComponent
+    ResultsPdfComponent,
+    ResultItemInfoComponent
   ],
   imports: [
     FormsModule,

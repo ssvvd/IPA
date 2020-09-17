@@ -57,7 +57,8 @@ export class ResultsTableComponent implements OnInit {
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
-  
+  loadingPDF:boolean=false;
+
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
     private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService) { }
@@ -943,26 +944,13 @@ getPropWithoutUnits(pr:string){
 
 DownLoadPDF()
 {  
-    this.srv_down.DownLoadData('PDF') ;      
+    this.srv_down.DownLoadData('PDF');      
 }
 
-/* DownLoadData()
-{
-  const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
-      
-  modalRef.result.then((result) => {
-    if(result=='cancel') return;
-    //this.SpinnerService.show();
-    this.srv_down.DownLoadData(result) ;  
-    //todo:with subscribe 
-    //this.SpinnerService.hide();                      
-  });
-} */
-
-  viewInventory(index:number)
-  {    
-    const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
-    modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
-  }
+viewInventory(index:number)
+{    
+  const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
+  modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
+}
 }
 

@@ -130,33 +130,17 @@ export class HeaderComponent implements OnInit {
       }
 
       if(this.srv_appsetting.Country===undefined)      
-      {
-        //this.srv_appsetting.Country=this.lstcountry.find (c=> c.CountryID==35);
+      {       
         this.CurrentCountryName = 'headquarters';
       }               
       else
-      {
-          //this.srv_appsetting.Country=this.srv_appsetting.Country;
-          this.CurrentCountryName = this.srv_appsetting.Country.CountryName;
-          //this.srv_appsetting.Currency=this.srv_appsetting.Country.Currency;
-          //this.srv_login.SetExchangeRate();     
+      {          
+          this.CurrentCountryName = this.srv_appsetting.Country.CountryName;            
       } 
 
       this.IsLoaded=true;     
       });   
   }
-/* 
-  SetExchangeRate()
-  {
-    this.srv_appsetting.getexchangerate(this.srv_appsetting.Country.Currency).subscribe((res: any) =>
-    { 
-      if(res.length>0)
-      {
-        let rate :any=JSON.parse(res)[0].Exchange; 
-        this.srv_appsetting.CurrRate=rate;
-      }                      
-    });
-  } */
 
   SelectCountryAndLang(c:Country,LanguageID:string)
   {
@@ -183,12 +167,7 @@ export class HeaderComponent implements OnInit {
           {
             this.srv_appsetting.ChangeUnits('M');
             this.isMetric=true;
-          }
-            
-          /* if(event.target.checked)        
-            this.srv_appsetting.ChangeUnits('M');                
-          else    
-            this.srv_appsetting.ChangeUnits('I'); */
+          }                   
              
         if (window.location.href.indexOf('machines')>-1)
           {

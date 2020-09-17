@@ -132,6 +132,27 @@ export class OptimizetoolFilterComponent implements OnInit {
       case "BRAND": {
           //"M/1/1/760/"
           param=this.srv_appsetting.Units + "/1/1/" + this.srv_StMng.SecApp + "/"; 
+
+          if(this.srv_StMng.IPL.GetItem('TD_IT_InsertTool').value=='True') 
+            param=param+ '1/';
+          else
+            param=param+ '0/';
+
+          if(this.srv_StMng.IPL.GetItem('TD_IT_InsertHead').value=='True') 
+            param=param+ '1/';
+          else
+            param=param+ '0/';
+
+          if(this.srv_StMng.IPL.GetItem('TD_IT_SolidTool').value=='True') 
+            param=param+ '1/';
+          else
+            param=param+ '0/';
+
+         if(this.srv_StMng.IPL.GetItem('TD_IT_SolidHead').value=='True') 
+            param=param+ '1/';
+          else
+            param=param+ '0/';
+
           str_param=param + str_s + "/" + t;
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-brandname-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 

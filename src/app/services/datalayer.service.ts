@@ -155,4 +155,6 @@ export class DatalayerService {
   {     
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send-req-mat/'+email + '/' +Description + '/' +Group + '/' +Standard + '/' +Condition + '/' +Hardness + '/' +Manufacture);
   }
+
+  
 }

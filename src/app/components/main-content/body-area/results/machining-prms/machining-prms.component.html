@@ -17,7 +17,7 @@
 <mp-turn-groove  *ngIf = "srv_StMng.MainAppSelected.MainApp=='TG'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-turn-groove>
 </div>
 
-<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF">
       <img [src]="environment.ImageInputPath + srv_StMng.SecApp + '.png'" class="input-image">   
 </div>
             </div></div>

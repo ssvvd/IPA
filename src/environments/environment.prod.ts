@@ -24,5 +24,8 @@ export const environment = {
   IscarSite:"http://intranet.imc.co.il",
   MachiningCalculatorSite:"https://mpwr.iscar.com/MachiningPower",
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
-  eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/"
+  eCatFamilyPictures:"http://intranet.imc.co.il/eCatalog/Ecat/datafile/PICTURE/",
+  //eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
+  eCatFamilyDrawing:"http://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
+  eCatLogo: "http://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/"
 };

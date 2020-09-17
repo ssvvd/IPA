@@ -36,7 +36,13 @@
                     </div>
             </div> -->
             <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
-                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
+                <!-- <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div> -->
+                <div *ngIf ="srv_appsetting.Country===undefined" ngbDropdownToggle id="calc">
+                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
+                </div>
+                <div *ngIf ="srv_appsetting.Country!==undefined" ngbDropdownToggle id="calc">
+                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
+                </div>    
                     <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
                         <div *ngFor="let c of lstcountry" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{c.CountryName}} >  
                             <div (click)="SelectCountryAndLang(c,c.LanguageID[0])">                                                                                                                                                             

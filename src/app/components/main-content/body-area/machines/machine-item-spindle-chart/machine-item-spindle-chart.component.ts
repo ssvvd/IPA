@@ -42,13 +42,11 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Input() AdaptationType:string;
   @Input() AdaptationSize:number;
 
-  //@Output() N1Changed = new EventEmitter<{value: number}>();  
   @Output() N3Changed = new EventEmitter<{value: number}>();  
-/*   @Output() T1Changed = new EventEmitter<{value: number}>();
-  @Output() P1Changed = new EventEmitter<{value: number}>(); */
   @Output() P2T1Changed = new EventEmitter<{P2: number,T1: number}>();
   @Output() SpindelChanged = new EventEmitter<null>();
-  
+  @Input() exportPDF:boolean=false;
+
   chartdata:ChartData;
   chartLabels: Array<any>;
   public chartDatasets: Array<any>;
