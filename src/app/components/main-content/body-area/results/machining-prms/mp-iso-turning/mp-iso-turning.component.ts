@@ -266,7 +266,7 @@ CPU:number
           }
 
           this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
-          this.B = 100
+          this.B = this.srv_StMng.IPL.GetItem('BatchSize').value
           this.I = 1000
           this.TLL = 50
           this.TLT = 50

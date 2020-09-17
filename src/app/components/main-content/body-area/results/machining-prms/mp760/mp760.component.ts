@@ -275,7 +275,7 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
   if (this.srv_StMng.SecApp=='790')
   this.Vf = Math.round((+this.fz * this.n * this.NOF)*100)/100
 
-this.B = 100
+this.B = this.srv_StMng.IPL.GetItem('BatchSize').value
 this.He_Is = 100
 this.THeH_I = 110
 if (this.srv_StMng.SecApp!='780')
