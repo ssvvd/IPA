@@ -300,7 +300,7 @@ if (pr.value.trim().length == 7){
 
 
     //calc
-    this.B = this.srv_StMng.IPL.GetItem('BatchSize').value;
+    this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value;
     this.HPP = 1;
     this.HI_I = 30;
     this.TLL = 50;

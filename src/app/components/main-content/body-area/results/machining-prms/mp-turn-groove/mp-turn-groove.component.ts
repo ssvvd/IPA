@@ -305,7 +305,7 @@ export class MpTurnGrooveComponent implements OnInit {
                 })
     
               this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
-              this.B = this.srv_StMng.IPL.GetItem('BatchSize').value
+              this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
               this.I = 1000
               this.CTP = Math.round((this.CTFg + this.CTFt) * 100)/100
               this.TLL = 50
