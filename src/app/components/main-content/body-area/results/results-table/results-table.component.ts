@@ -169,7 +169,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   let index:number = 0;
   for(var i: number = 0; i < rowsCount; i++) {
       this.dtResultsObjects[i] = [];
-      this.dtResultsObjectsHelp[i] = new clsHelpProp(this.srv_Results,i);           
+      this.dtResultsObjectsHelp[i] = new clsHelpProp(this.srv_Results,i,this.srv_StMng);           
       index = 0
 
       for(var j: number = 0; j< columnsCount; j++) {
@@ -745,12 +745,13 @@ ngOnChanges(changes:SimpleChanges) {
             }
           }
           else{
-            if (this.dtResultsObjectsHelp[i].DesgS.filter(s => !s.startsWith('MM')).length > 0){
-              if (!this.filterChangedRec.Res)
-                  this.dtResultsObjectsHelp[i].isHidden++
-              else
-                  this.dtResultsObjectsHelp[i].isHidden--
-             }  
+            this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
+            // if (this.dtResultsObjectsHelp[i].DesgS.filter(s => !s.startsWith('MM')).length > 0){
+            //   if (!this.filterChangedRec.Res)
+            //       this.dtResultsObjectsHelp[i].isHidden++
+            //   else
+            //       this.dtResultsObjectsHelp[i].isHidden--
+            //  }  
           }    
           break;
        case 'SH':
@@ -764,12 +765,14 @@ ngOnChanges(changes:SimpleChanges) {
           }
         }
         else{
-          if (this.dtResultsObjectsHelp[i].DesgS.filter(s => s.startsWith('MM')).length > 0){
-            if (!this.filterChangedRec.Res)
-                this.dtResultsObjectsHelp[i].isHidden++
-            else
-                this.dtResultsObjectsHelp[i].isHidden--
-          }}
+          this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
+          // if (this.dtResultsObjectsHelp[i].DesgS.filter(s => s.startsWith('MM')).length > 0){
+          //   if (!this.filterChangedRec.Res)
+          //       this.dtResultsObjectsHelp[i].isHidden++
+          //   else
+          //       this.dtResultsObjectsHelp[i].isHidden--
+          // }
+        }
           break;
         case 'IT':
           if (this.srv_StMng.SecApp == '77'){
