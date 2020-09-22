@@ -78,7 +78,8 @@ export class MainMenuComponent implements OnInit {
  
  OperationDataEnable(isenable:boolean)
  {    
-   this.Tabs[3].isDisabled=!isenable;  
+   this.Tabs[3].isDisabled=!isenable; 
+   this.Tabs[4].isDisabled=!isenable; 
  }
 
  InputParamSelected(s:string)
@@ -120,9 +121,9 @@ export class MainMenuComponent implements OnInit {
           obj.isDisabled =false;
         }
       }  
-      if(RouteName!="/home/results"){
+     /*  if(RouteName!="/home/results"){
         this.Tabs[4].isDisabled = true;
-      }              
+      }   */            
     });
    }    
   

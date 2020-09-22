@@ -7,10 +7,6 @@
     max-width: 80%;
 }
 
-// .navul{
-
-// }
-
 .navli{
     background-color: #f0f2f4;
     width:20%;
@@ -28,15 +24,39 @@
     font-family: "Oswald",Calibri,Arial !important;
 }
 
-.printme {
-	display: none;
-}     
-@media print {
-	.no-printme  {
-		display: none;
-	}
-	.printme  {
-		display: block;
-	}
+.div-machineitem1
+{
+    min-height:1110px;
+}
+
+.div-machineitem2
+{
+    min-height:1500px;
+}
+
+.div-material
+{
+    height:120px!important;
+}
+.PDFDescription
+{
+    font-size: 32px !important;
+}
+.PDFTitle{
+    color:white !important;
+    font-weight: bold !important;
+    font-size: 24px !important;
+    font-family: var(--family-font-h) !important  ;
+    margin-left: 3px;
+  }
+
+.PDFTitlediv
+{
+    height:40px;
+    background-color: var(--btn-bg-gray-color) ;         
+}
+
+.logoImg{
+    height: 60px;
 }
 

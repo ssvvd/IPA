@@ -15,9 +15,9 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
 import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
-import {ResultPpDownloadComponent} from 'src/app/components/main-content/body-area/results/result-pp-download/result-pp-download.component';
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
 import { ResultPpInventoryComponent } from 'src/app/components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
+import { MachineService } from 'src/app/services/machine.service' ;
 
 @Component({
   selector: 'app-results-table',
@@ -61,10 +61,11 @@ export class ResultsTableComponent implements OnInit {
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
-  
+  loadingPDF:boolean=false;
+
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
-    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService) { }
+    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,private srv_machine: MachineService) { }
 
   ngOnInit() {
      this.dtOptions = {
@@ -91,18 +92,37 @@ export class ResultsTableComponent implements OnInit {
   this.GetResult();
   }
 
+  //remove Sveta
+  /*  GetResult() 
+  {      
+      this.getShowTable();      
+  } */
+
   GetResult() 
-  {
-       
-      this.getShowTable()
+  {  
+    if(this.srv_StMng.arrMachineSpindle == null || typeof(this.srv_StMng.arrMachineSpindle) == 'undefined') 
+    {   
+    this.allSubs$= this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
+      { 
+        this.srv_StMng.arrMachineSpindle= JSON.parse(res);               
+        this.srv_StMng.FillInputParameters(this.srv_StMng.arrMachineSpindle);
+        this.getShowTable();      
+      });     
+    } 
+    else
+    {
+      this.srv_StMng.FillInputParameters(this.srv_StMng.arrMachineSpindle);
+      this.getShowTable();
+    }          
   }
 
 getShowTable(){
   this.SpinnerService.show(); 
+
   if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged))
   {
     this.srv_ResultsStore.setParams(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged)
-  this.allSubs$ = forkJoin(
+    this.allSubs$ = forkJoin(
           this.srv_Results.getresults(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getoolproperties(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getgroups(this.srv_StMng.SecApp),
@@ -966,33 +986,19 @@ getPropWithoutUnits(pr:string){
 
 DownLoadPDF()
 {  
-    this.srv_down.DownLoadData('PDF') ;      
+    this.srv_down.DownLoadData('PDF');      
 }
 
-/* DownLoadData()
+viewInventory(index:number)
+{    
+  const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
+  modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
+}
+
+
+contactus()
 {
-  const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
-      
-  modalRef.result.then((result) => {
-    if(result=='cancel') return;
-    //this.SpinnerService.show();
-    this.srv_down.DownLoadData(result) ;  
-    //todo:with subscribe 
-    //this.SpinnerService.hide();                      
-  });
-} */
-
-  viewInventory(index:number)
-  {    
-    const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
-    modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
-  }
-
-
-  contactus()
-  {
-    const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});
-                    
-  }
+  const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});                  
+}
 }
 

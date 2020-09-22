@@ -49,8 +49,6 @@ export class MachineService {
   }
   public  machine_update(machineid:number,machinetype:string,machinename:string,units:string,machinetype1:string,costperhour :number,currency:string,inputparam:string) //todo:
   {      
-    //ByVal MachineID As String, ByVal MachineType As String, ByVal MachineName As String, ByVal Units As String, ByVal MachineType1 As String, ByVal CostPerHour As Decimal, _
-    //ByVal Currency As Decimal
     return  this.httpClient.post(environment.API_HOST + this.API_ROUTE +  'machines-update/' + machineid +
       '/'+ machinetype +'/' +machinename +'/' +units +'/'+ machinetype1 + '/' + costperhour +'/' + currency, inputparam ).catch((err: HttpErrorResponse) => {   
       console.error('An error occurred:', err.error);   

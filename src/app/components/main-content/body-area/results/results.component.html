@@ -21,17 +21,20 @@
 
     <div class="row" [hidden]="MainPage">
       <div class="container-fluid">              
-        <div class="mt-0 ml-0 pl-0 mt-0 pt-2 row container-fluid" >
+        <div class="mt-0 ml-0 pl-0 mt-0 pt-2 row" >
+          <div class="col-10">
           <nav class="ml-0 pl-0 mt-0 pl-0 pt-0" aria-label="breadcrumb">
              <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
                  <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">All</a></li>
                  <li class="breadcrumb-item active text-secondary"  aria-current="page">Result Information</li> 
              </ol>
-           </nav>
-        <!--    <div class="float-left pt-2">
-            <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle cursor-pointer float-left ml-4" (click)= "DownLoadData()">Download</h2>            
-          </div> -->
-         
+           </nav> 
+          </div>        
+          <div class="float-right pt-2 col-2 pr-0">
+              <h2 data-toggle="tooltip"  title="{{'PDF' | translate}}" class="siteTitle cursor-pointer float-right" (click)= "CreateComponentsForPDF()">Download
+                <i class="fa fa-spinner fa-spin" *ngIf="loadingPDF"></i>
+              </h2>            
+            </div> 
         </div>  
         
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
@@ -103,12 +106,86 @@
                       
     </div>    
   </div> 
- 
-  <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;">                               
-          <div class="top" >
-          <app-machineitem [pr_MachineID]="53"  [pr_MachineName]="'My Machine'"></app-machineitem>
-          <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>           
-        </div>      
+  
+  <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;position:absolute;top:-5000px"> 
+        <div class="row pb-2 ml-2 pr-0 mr-0 pb-3">
+          <div class="col-2 pt-4">
+            <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg">
+          </div>
+          <div class="col-8 text-center pt-4">
+            <label class="siteTitle PDFDescription pt-2">{{'ITA Recommendation' | translate}}</label>
+          </div>
+          <div class="col-2 pt-4">            
+          </div>
+        </div>  
+      <div class="pt-3" [ngClass]="srv_statemanage.SelectedMachine.MachineType=='Multi task' || srv_statemanage.SelectedMachine.MachineType=='Multi spindle' || srv_statemanage.SelectedMachine.MachineType=='Swiss type' ?'div-machineitem2':  'div-machineitem1' ">   
+        <div  class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0 pt-4">
+          <label class="PDFTitle ml-2">{{'Machine' | translate}}</label>
+        </div>
+        <div class="pt-2" >
+          <app-machineitem [exportPDF]="true" [pr_MachineID]="srv_statemanage.SelectedMachine.MachineID"  [pr_MachineName]="srv_statemanage.SelectedMachine.MachineName"></app-machineitem>
+        </div> 
+      </div>
+        
+      <div class="pb-2 div-material" >
+          <div class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0">
+            <label class="PDFTitle ml-2">{{'Material' | translate}}</label>
+          </div>
+          <div>
+            <label class="pt-2">{{mat_desc}}</label>
+          </div>
+      </div>
+        
+        <div class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0">
+          <label class="PDFTitle ml-2">{{'Operation Data' | translate}}</label>
+        </div>
+              
+        <div class="form-group">
+          <div class="row">
+            <div class="pr-2 pl-2 pt-2">
+              <label class="siteTitle">{{srv_statemanage.MainAppSelected.MenuName}}</label>
+            </div>
+            <div class="pt-2">
+              <label class="siteTitle">{{srv_statemanage.SecAppSelected.MenuName}}</label>
+            </div>
+          </div> 
+          <div  style="min-height:500px">       
+              <app-appdetails59  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='760'||srv_statemanage.SecApp=='770'||srv_statemanage.SecApp=='57')"></app-appdetails59>
+              <app-appdetails780  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='780'"  ></app-appdetails780>
+              <app-appdetails790  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='790'"  ></app-appdetails790>
+              <app-appdetails77  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='77'"  ></app-appdetails77>
+              <appdetails120  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='120' || srv_statemanage.SecApp=='119')" ></appdetails120> 
+              <appdetails990  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='990' || srv_statemanage.SecApp=='980' || srv_statemanage.SecApp=='970' || srv_statemanage.SecApp=='960')" ></appdetails990>   
+              <appdetails890  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='890' || srv_statemanage.SecApp=='880' || srv_statemanage.SecApp=='870' || srv_statemanage.SecApp=='860' || srv_statemanage.SecApp=='850')" ></appdetails890>                 
+              <appdetails52   [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='52' || srv_statemanage.SecApp=='53' || srv_statemanage.SecApp=='50')" ></appdetails52>   
+              <appdetails1   [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='1'"></appdetails1> 
+              <appdetails51  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='51'" ></appdetails51>               
+              <appdetails54  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='54' || srv_statemanage.SecApp=='10'  || srv_statemanage.SecApp=='188')"></appdetails54>                    
+          </div> 
+        </div>    
+        <div class="PDFTitlediv row pt-4 pb-2 ml-2 pr-0 mr-0">
+          <label class="PDFTitle ml-2">{{'Results' | translate}}</label>
+        </div>
+        <div class="pt-2  pl-3">
+           <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
+        </div>
+        <div class="PDFTitlediv row pt-2 pb-2 ml-2 pr-0 mr-0  pl-3">
+          <label class="PDFTitle ml-2">{{'Machining Parameters' | translate}}</label>
+        </div>
+        <div class="pt-2" >
+          <machining-prms [exportPDF]="true"  [viewParamsChangedMP]="viewParams"></machining-prms> 
+        </div> 
+        <div class="PDFTitlediv row pt-4 pb-2 ml-2 pr-0 mr-0  pl-3">
+          <label class="PDFTitle ml-2">{{'Product Information' | translate}}</label>
+        </div>
+        <div class="pt-2">
+          <div *ngFor="let row of viewParams.Res[0]?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">        
+            <label class="siteTitle font-weight-bold pt-2 pl-3">{{viewParams.Res[0].GroupText[PrtNum]}}:</label>          
+            <div class="pl-3 pt-2">        
+              <result-item-info [viewParamsChanged]="viewParams" [ItemDesignation]="viewParams.Res[0].Designation[PrtNum]" [Family]="viewParams.Res[0].Families[PrtNum]" [CatalogNo]="viewParams.Res[0].CatalogNo[PrtNum]"></result-item-info>
+            </div>                      
+          </div>
+      </div>                          
   </div>
       
   <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  

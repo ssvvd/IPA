@@ -23,11 +23,8 @@ export class DownloadresultService {
               private httpClient: HttpClient,private srv_DataLayer:DatalayerService) { }
 
   DownLoadData(format:string) : any
-  {
-    /* switch (format) {
-      case 'PDF': */
-        return this.downloadListPDF();
-    /*  }  */  
+  {   
+    return this.downloadListPDF();     
   }
 
   GetHTMLData(url:string) 
@@ -37,29 +34,6 @@ export class DownloadresultService {
 
   DownLoadDataItem(format:string) : any
   {
-
-    /*  this.srv_DataLayer.gethtmlpage("ALL").subscribe ((data:any)=>
-     {
-       alert(data);
-     }); */
-
-    /* const httpOptions = {
-      headers: new HttpHeaders({
-      "Access-Control-Allow-Origin" : "*" 
-      })}; 
-     
-     this.httpClient.get("http://localhost:42023/iframe.html", httpOptions ).subscribe(function(response) {
-      alert(response);
-    });
-    
-
-
-     
-    var url = "http://localhost:42023/iframe.html?callback=JSON_CALLBACK";
-      this.httpClient.jsonp(url,'callback').subscribe(function(response) {
-       alert(response)});
-     
- */
     switch (format) {
       case 'PDF':
         return this.downloadItemPDF();
@@ -103,7 +77,6 @@ export class DownloadresultService {
        
     this.axial_y =90;
     this.BuildOperationData(doc);    
-    //this.axial_y=this.axial_y+10; 
     doc.addPage();
     doc.setFontSize(12);
     this.addTextWithBackGround(doc,0,0,400,10,246,246,247,'ITA Recommended:' );
@@ -112,37 +85,37 @@ export class DownloadresultService {
     return this.BuildResult(doc,'tbresult');
 }
 
+ingDownloaded:any;
 public downloadItemPDF():any {
   
   var doc = new jsPDF('l');  
-       
- /*  doc.setFontSize(14);
  
-  let img = new Image()
-  img.src = environment.ImagePath + 'ISCAR_Logo.png'
-  doc.addImage(img, 'png', 5, 5, 40, 15)
-  doc.setFontSize(16);
-  
-  doc.text(80, 20, this.translate.instant('ITA Recommendation Report'));
-  
-  this.axial_y=15; */
+  //doc.addPage();  
 
-  doc.setFontSize(12);
- /*  this.addTextWithBackGround(doc,0,15,400,10,246,246,247,'Machining operation: ' + this.srv_statemanage.MainAppSelected.MenuName + ' ' + this.srv_statemanage.SecAppSelected.MenuName);         
-  this.addTextWithBackGround(doc,0,30,400,10,246,246,247,"Material: " + mat_desc);    
-  this.addTextWithBackGround(doc,0,45,400,10,246,246,247,'Machine: ' + desc_machine);    
-  this.addTextWithBackGround(doc,0,60,400,10,246,246,247,'Operation Data:' );
-      */
- /*  this.axial_y =90;
-  this.BuildOperationData(doc);    
-  //this.axial_y=this.axial_y+10;  */
-  doc.addPage();
-  /* doc.setFontSize(12);
-  this.addTextWithBackGround(doc,0,0,400,10,246,246,247,'ITA Recommended:' );
-  this.axial_y=5; */
-  
-  return this.BuildResult(doc,'pdfdata');
-  //return this.BuildResult(doc,'pdfdata');
+  //ָָָָָָָָָָָָָָָָָָָָָָָָ*******************TEST SET IMAGE FROM ANOTHER DOMAIN***********************************
+ /*  let img = new Image();
+  this.ingDownloaded=new Image();
+  let imageURL = "https://www.iscar.com/Ecat/JPG2D/3106680.jpg"; 
+  this.ingDownloaded.crossOrigin = 'anonymous';    
+  this.ingDownloaded.addEventListener("load", this.imageReceived(), false);
+  img.src = imageURL;
+  return; */
+//*****************************************************************************************
+  return this.BuildResultItem(doc,'pdfdata');
+}
+
+toDataURL(url, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    var reader = new FileReader();
+    reader.onloadend = function() {
+      callback(reader.result);
+    };
+    reader.readAsDataURL(xhr.response);
+  };
+  xhr.open("GET", url);
+  xhr.responseType = "blob";
+  xhr.send();
 }
 
 BuildResult(doc:jsPDF,controlname:string):any
@@ -154,11 +127,11 @@ BuildResult(doc:jsPDF,controlname:string):any
       scale: 3
     };
     
-    html2canvas(document.getElementById(controlname), {
+    /* html2canvas(document.getElementById(controlname), {
       onclone: function (clonedDoc) {
     
          // I made the div hidden and here I am changing it to visible
-        clonedDoc.getElementById(controlname).style.visibility = 'visible';
+        //clonedDoc.getElementById(controlname).style.visibility = 'visible';
       }
     }).then(canvas => {
       // The following code is to create a pdf file for the taken screenshot
@@ -169,7 +142,7 @@ BuildResult(doc:jsPDF,controlname:string):any
       return  'ok'; 
     });
 
-    return; 
+    return;  */
 
     html2canvas(div, options).then((canvas) => {
 
@@ -202,6 +175,47 @@ BuildResult(doc:jsPDF,controlname:string):any
     });   
 }
 
+BuildResultItem(doc:jsPDF,controlname:string):any
+{
+    const options = {
+      background: 'white',
+      scale: 3
+    };
+    
+    html2canvas(document.getElementById(controlname), {useCORS: true,allowTaint : true,
+      onclone: function (clonedDoc) {    
+        //I made the div hidden and here I am changing it to visible              
+        clonedDoc.getElementById(controlname).style.visibility = 'visible';        
+      }
+    }).then(canvas => {
+      // The following code is to create a pdf file for the taken screenshot
+      var img = canvas.toDataURL("image/PNG");     
+      document.getElementById(controlname).style.visibility = 'hidden';
+      // Add image Canvas to PDF
+      const bufferX = 5;   
+      const imgProps = (<any>doc).getImageProperties(img);
+      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
+   
+      var imgWidth = 295;     
+      var imgHeight = canvas.height * imgWidth / canvas.width;     
+      var adjust = -210; //1050 is my assupmtion of how many pixels each page holds vertically
+      var extraNo=Math.ceil((imgHeight+30)/210); //Lets me know how many page are needed to accommodate this image
+      
+      for(let r:number=0;r<extraNo;r++){
+        if(r==0)
+          doc.addImage(canvas, 'PNG', 0,0, imgWidth, imgHeight);
+        else        
+          doc.addImage(canvas, 'PNG', 0,(adjust)*r+30, imgWidth, imgHeight);     
+        if(r<extraNo-1) doc.addPage();
+      }
+                   
+      return doc;
+       }).then((doc) => {
+      doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
+      return  'ok'; 
+    });                        
+}
 BuildOperationData(doc:jsPDF)
   {     
     //add operation data
@@ -244,6 +258,28 @@ BuildOperationData(doc:jsPDF)
     else
       doc.text(10, top+y+7, txt);      
     doc.setFillColor(255, 255, 255);   
+  }
+
+ imageReceived() {
+    let canvas = document.createElement("canvas");
+    let context = canvas.getContext("2d");
+  
+    canvas.width = this.ingDownloaded.width;
+    canvas.height = this.ingDownloaded.height;
+   
+    context.drawImage(this.ingDownloaded, 0, 0);
+   
+    try {
+      //localStorage.setItem("saved-image-example", canvas.toDataURL("image/png"));
+      
+      var imgData =canvas.toDataURL("image/png");
+      let doc = new jsPDF('l');
+      doc.addImage(imgData, 0, 0, (canvas.width), (canvas.height));
+      doc.save('testimage.pdf');
+    }
+    catch(err) {
+      console.log("Error: " + err);
+    }  
   }
 
   getBase64ImageFromURL(url: string) {

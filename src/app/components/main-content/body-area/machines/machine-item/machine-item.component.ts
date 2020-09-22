@@ -32,7 +32,8 @@ export class MachineItemComponent implements OnInit {
   CostPerHour:number;
   @Input() pr_MachineID:number=0;
   @Input() pr_MachineName:string='';
-
+  @Input() exportPDF:boolean=false;
+  
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,

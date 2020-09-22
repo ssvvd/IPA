@@ -12,6 +12,8 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 export class MachiningPrmsComponent implements OnInit {
 
   @Input() viewParamsChangedMP: any ;
+  @Input() exportPDF:boolean=false;
+  
   selectedOptionMP:clsPropertyValue[][];
   selectedOptionMPHelp:clsHelpProp;
   environment = environment;

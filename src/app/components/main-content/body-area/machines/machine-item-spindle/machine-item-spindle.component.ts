@@ -28,7 +28,8 @@ export class MachineItemSpindleComponent implements OnInit
 
   @Input() spindle:Machinespindle;   
   @Input() MachineType:string;
-   
+  @Input() exportPDF:boolean=false;
+  
   DescSpindle:string;  
   arrAdapType:AdaptationType[]=[];
   arrAdapSize:AdaptationSize[]=[];

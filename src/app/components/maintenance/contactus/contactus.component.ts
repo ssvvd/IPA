@@ -71,17 +71,7 @@ export class ContactusComponent implements OnInit {
         resmessage=res;
         console.log(res);
       }
-      
-   /*    const modalRef = this.modalService.open(PpSuccessfullyComponent, { centered: true });
-      modalRef.componentInstance.HeaderDescription = "Send Mail";
-      modalRef.componentInstance.Text = resmessage;      */ 
     }); 
-    this.activeModal.close('cancel');
-   /*  if(this.srv_statemanage.TabOpen==1) this.router.navigate(['/home/machines']);
-    if(this.srv_statemanage.TabOpen==2) this.router.navigate(['/home/materials']);
-    if(this.srv_statemanage.TabOpen==3) this.router.navigate(['/home/operationdata']);
-    if(this.srv_statemanage.TabOpen==4) this.router.navigate(['/home/results']); */    
-  }
-
-  
+    this.activeModal.close('cancel');    
+  }  
 }

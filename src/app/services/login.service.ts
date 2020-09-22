@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CookiesService } from  'src/app/services/cookies.service' ;
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Country,Language} from 'src/app/models/applications/applications';
@@ -13,7 +12,7 @@ import { Observable,of} from 'rxjs';
 
 export class LoginService {
 
-  constructor(private srv_cook:CookiesService,private srv_DataLayer:DatalayerService,
+  constructor(private srv_DataLayer:DatalayerService,
               public srv_appsetting:AppsettingService,public translate: TranslateService,) { }
   
   GetToken():any
@@ -25,6 +24,28 @@ export class LoginService {
     });
     return'ok';
   }
+  
+  UpdateCurrentCountry(countrycode:string)
+  {
+    this.srv_DataLayer.GetCountryLangBrifData(countrycode).subscribe((d:any)=>
+    {
+      let data = JSON.parse(d);
+      if(data.length>0)
+      {   
+        let c:Country =new Country;
+        c.BrifName =data[0].BrifName;
+        c.CountryFlag ='';
+        c.CountryGlobalId = 0;
+        c.CountryID = data[0].CountryId;
+        c.CountryName =data[0].CountryName;              
+        c.LanguageID =data[0].CATLAN;
+        c.CountryCode =data[0].CountryCode;
+        this.srv_appsetting.Country=c;
+        this.SetExchangeRate1(c.BrifName);
+                              
+      }      
+    });
+  }
 
   LogIn(token:string):Observable<any>
   {         
@@ -33,7 +54,7 @@ export class LoginService {
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
       { 
           let d=JSON.parse(data);          
-          this.srv_DataLayer.getcountryNamebycountryCode(d[0].countryCode).subscribe((rr:any)=>
+          this.srv_DataLayer.getcountryNamebycountryCode(d[0].usageLocation).subscribe((rr:any)=>
           {
             let cn:string='';
             if(rr!='e') cn=rr.name;                                                     
@@ -58,8 +79,11 @@ export class LoginService {
             localStorage.setItem("countryCode",d[0].usageLocation);
             localStorage.setItem("countryName",cn);
             this.srv_appsetting.User=u;  
+            if(d[0].usageLocation!='' && d[0].usageLocation!=null)
+              this.UpdateCurrentCountry(d[0].usageLocation);
             this.srv_appsetting.isLoggedIn=true;               
-            });    
+            });  
+              
             return of('ok');
         });                              
     }
@@ -93,46 +117,20 @@ export class LoginService {
       u.isImc=isImc;
       u.CountryCode=countrycode;
       u.CountryName=countryname;
-      if(country=='')
+      if(u.CountryCode=='')
         this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
         {       
-          {         
-            this.srv_DataLayer.GetCountryLangBrifData(d.countryCode).subscribe((d:any)=>
-            {
-              let data = JSON.parse(d);
-              if(data.length>0)
-              {   
-                let c:Country =new Country;
-                c.BrifName =data[0].BrifName;
-                c.CountryFlag ='';
-                c.CountryGlobalId = 0;
-                c.CountryID = data[0].CountryId;
-                c.CountryName =data[0].CountryName;              
-                c.LanguageID =data[0].CATLAN;
-                c.CountryCode =data[0].CountryCode;
-                this.srv_appsetting.Country=c;
-                this.SetExchangeRate1(c.BrifName);
-             /*    this.srv_DataLayer.getcurrencyeciw(c.BrifName).subscribe((cur:any)=>
-                {
-                  if(JSON.parse(cur).length>0)       
-                    if(JSON.parse(cur)[0].ECUR=='') 
-                      c.Currency='USD';
-                    else
-                      c.Currency= JSON.parse(cur)[0].ECUR;              
-                  else      
-                    c.Currency='USD'; 
-                    
-                  this.srv_appsetting.Country=c;
-                  this.srv_appsetting.Currency=c.Currency;
-                });    */                          
-              }
-              
-            }
-            );
+          {   
+            this.UpdateCurrentCountry(d.countryCode);     
+            
           }
+          
         }
         );
-
+      else
+      {
+        this.UpdateCurrentCountry(u.CountryCode);
+      }
     
       this.srv_appsetting.User=u;  
       this.srv_appsetting.isLoggedIn=true;              
@@ -157,8 +155,9 @@ export class LoginService {
     localStorage.setItem("email",'');
     localStorage.setItem("country",'');
     localStorage.setItem("companyName",'');
-    localStorage.setItem("isImc",'');
-    localStorage.setItem("displayName",'');     
+    localStorage.setItem("isImc",''); 
+    localStorage.setItem("countryCode",'');
+    localStorage.setItem("countryName",'');   
     this.srv_appsetting.User=u;  
     this.srv_appsetting.isLoggedIn=true;
   }

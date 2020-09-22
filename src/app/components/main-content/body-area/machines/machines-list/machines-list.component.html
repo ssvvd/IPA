@@ -10,13 +10,13 @@
                                 (MachineFilterClear)="onMachineFilterClear()" [onChangeMachineList]="eventsChangeMachineList.asObservable()" [onChangeFavorite]="eventsChangeFavorite.asObservable()"></app-machines-filter>
           </div>
       </div>
-      <div class="col col-80 mt-2 mr-0 pl-2 pr-2">                                
+      <div class="col col-80 mt-2 mr-0 pl-2 pr-2">                                       
           <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" >
             <div class="col-6 pt-4 pl-0">  
               <h3 class="siteTitle pl-0 pb-0">Select Machine</h3>
             </div>
             <div class="float-right col-6 text-right pt-4">
-              <label class="pl-2 pb-0">{{'Number of machines ' | translate}} : {{countrow}}</label>
+              <label class="pl-2 pb-0">{{'Found Machines ' | translate}} : {{countrow}} {{'out of '| translate}} {{countallrow}}</label>
             </div>
           </div>           
           <div class="div-datatable">              

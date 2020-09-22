@@ -30,9 +30,12 @@ export const environment = {
   IscarSite:"http://intranet.imc.co.il",
   MachiningCalculatorSite:"https://eiplb.iscar.com/MachiningPwr/",
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
-  eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
+  eCatFamilyPictures:"http://intranet.imc.co.il/eCatalog/Ecat/datafile/PICTURE/",
+  //eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
   eCatItemRedPage:"http://intranet.imc.co.il/ecat/eHiba.asp?cat=",
-  eCatItemPage:"http://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat="
+  eCatItemPage:"http://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat=",
+  eCatFamilyDrawing:"http://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
+  eCatLogo: "http://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/"
 };
 
     

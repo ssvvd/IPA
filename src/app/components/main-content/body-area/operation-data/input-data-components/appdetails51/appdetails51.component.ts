@@ -21,7 +21,7 @@ export class Appdetails51Component implements OnInit {
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public CostPerHourByRate:number;
-  
+
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {  
@@ -65,6 +65,22 @@ export class Appdetails51Component implements OnInit {
     this.AddTostrMandatoryParam('Width',"L:",this.srv_appsetting.UnitslengthDesc);
     if(this.strMandatory.length>0)
       this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
+  }
+
+  ChangeLenght()
+  {    
+    let maxL:number;
+    var l: number = +this.srv_StMng.IPL.GetItem('Width').value;
+    if(this.srv_appsetting.Units=='M') 
+      maxL=9999;
+    else
+      maxL=393.664;
+
+    if(l>maxL) 
+    {
+      alert('Values above ' + maxL.toString() + '(' + this.srv_appsetting.UnitslengthDesc +   ') are not valid');
+      this.srv_StMng.IPL.GetItem('Width').value='';
+    }
   }
 
   AddTostrMandatoryParam(name:string,desc:string,units:string)
