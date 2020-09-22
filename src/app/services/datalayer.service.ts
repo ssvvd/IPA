@@ -18,9 +18,14 @@ export class DatalayerService {
   {                
   }
 
-   public  getinputparameters(secapp:string,units:string)
-  {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters/' + secapp + '/' + units);
+   public  getinputparameters(secapp:string,units:string,machinetype:string)
+  { 
+    let pmachinetype:string;
+    if( machinetype=='Multi spindle' || machinetype=='Swiss type')
+      pmachinetype='ST_MS';
+    else
+      pmachinetype='all';
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters/' + secapp + '/' + units +'/' +pmachinetype);
   }
 
   public  dictionarygetlanguage()
