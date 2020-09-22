@@ -5,6 +5,8 @@ import { MachineFilter } from 'src/app/models/machines/machinefilter';
 import { clsMaterial } from 'src/app/models/materials/material'
 import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
 import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+import { AppsettingService} from 'src/app/services/appsetting.service';
+import { MachineService } from 'src/app/services/machine.service' ;
 //import { User } from 'src/app/models/users/user';
 import { BehaviorSubject } from 'rxjs';
 
@@ -17,8 +19,7 @@ export class StateManagerService {
   //private lstMachineHeader:Machineheader[]; 
   private mMachineFilter:MachineFilter;
   private mSelectedMachine:Machineheader;
-  private marrMachineSpindle:Machinespindle[];
- 
+  private marrMachineSpindle:Machinespindle[]; 
 
   private obsMachineSelected = new BehaviorSubject<string[]>([]);
   CurrentMachineSelected = this.obsMachineSelected.asObservable();   
@@ -39,13 +40,13 @@ export class StateManagerService {
   private obsReloadMachineTab = new BehaviorSubject<boolean>(false);
   ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
 
- 
-
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 
  
   //private mUnits:string='M'; //todo:
   private mIsTabToolDataOpen:boolean =false;
+  
+  constructor(private srv_appsetting:AppsettingService,private srv_machine: MachineService) { }
 
   CheckTabOperationalDataEnable()
   {   
@@ -68,12 +69,20 @@ export class StateManagerService {
   }
   set SelectedMachine(m:Machineheader) { 
     if(typeof(this.SelectedMachine)!=='undefined' && this.SelectedMachine!==null)      
-      if(m.MachineID!=this.mSelectedMachine.MachineID)
+      /* if(m.MachineID!=this.mSelectedMachine.MachineID)
       {
         this.mMainAppSelected = null;
         this.mSecondaryAppSelected = null; 
         this.MenuIDLevel1="";
         this.MenuIDLevel2 ="";          
+      } */
+      if(m.MachineType!=this.mSelectedMachine.MachineType)
+      {
+        this.mMainAppSelected = null;
+        this.mSecondaryAppSelected = null; 
+        this.MenuIDLevel1="";
+        this.MenuIDLevel2 ="";  
+        this.obsOperationDataEnable.next(false);          
       }
     this.mSelectedMachine = Object.assign({}, m);
     let desc:string; 
@@ -262,6 +271,129 @@ export class StateManagerService {
     this.mopttool_selectedfamily = arr;
    }
 
+   FillMachineData(arrMachineSpindle: Machinespindle[])
+   {
+       let mainspindletype:string;
+       let ms:Machinespindle;
+       mainspindletype='M';
+       
+       this.IPL.GetItem('MachCostPerHour').value = Math.round(this.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100 + "";
+      
+       if(this.srv_appsetting.Country!==undefined)
+       {
+         this.IPL.GetItem('Country').value =this.srv_appsetting.Country.CountryID.toString();
+       }
+       else
+       {
+         this.IPL.GetItem('Country').value ='35';
+       }    
+         
+       this.IPL.GetItem('Currency').value = this.srv_appsetting.Currency;
  
+       if(this.SelectedMachine.MachineType=='Multi task')
+       {
+         if(this.MainAppSelected.MainApp=='ML') mainspindletype='T';
+         if(this.MainAppSelected.MainApp=='TH') mainspindletype='T';
+         //todo:drilling
+         
+         ms = arrMachineSpindle.filter(x=> x.SpindleType ==mainspindletype)[0];
+       }
+       else 
+         ms = arrMachineSpindle[0];
+        
+       this.IPL.GetItem('AdaptorType').value =ms.AdaptationType;
+       this.IPL.GetItem('AdaptorSize').value =ms.AdaptationSize;
+ 
+       this.IPL.GetItem('PW_AX').value = ms.N1+""; 
+       this.IPL.GetItem('PW_BX').value = ms.N2+"";
+       this.IPL.GetItem('PW_CX').value = ms.N3+"";
+ 
+       this.IPL.GetItem('PW_AY').value = ms.P1 +""; 
+       this.IPL.GetItem('PW_BY').value = ms.P2 +"";
+       this.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
+ 
+       if(ms.FaceContact + ""=='true')
+         this.IPL.GetItem('ADAPTOR_FaceContact').value = "1";
+       else
+         this.IPL.GetItem('ADAPTOR_FaceContact').value = "0";    
+   }
+   
+  
+  FillCoolant()
+  {
+  if(this.SecAppSelected.ApplicationITAID=='57' || this.SecAppSelected.ApplicationITAID =='760' || this.SecAppSelected.ApplicationITAID =='770'
+    || this.SecAppSelected.ApplicationITAID =='780' || this.SecAppSelected.ApplicationITAID =='790')
+    {
+      if(this.IPL.GetItem('Coolant').value=='2')    
+        if((this.GetMaterialSelected().id>=1 && this.GetMaterialSelected().id<=20) 
+        || (this.GetMaterialSelected().id>=38 && this.GetMaterialSelected().id<=41) )
+        {
+          this.IPL.GetItem('Coolant').value='0';
+        }
+      else
+      {
+        this.IPL.GetItem('Coolant').value='1';
+      }
+    }
+ }
+
+ FillDataInputParam()
+  {
+
+    this.FillCoolant();
+    
+    this.IPL.GetItem('Material').value = String(this.GetMaterialSelected().id);
+    if(this.GetMaterialSelected().HardnessHBValue!==undefined)
+      this.IPL.GetItem('HardnessHB').value = String(this.GetMaterialSelected().HardnessHBValue);
+
+    let listparams: { name: string, value: string }[]=[];
+    let str:string='';
+
+    if(this.SecApp=='119' || this.SecApp=='120')        
+    {
+      this.IPL.GetItem('Size').value= this.IPL.GetItem('Size').value.toString().replace('"', '***');
+    }
+           
+    if (this.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required).length==0)    
+      {
+      this.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {                                       
+        str=str + '"' + p.name + '":"' + p.value +'",';
+        listparams.push(
+        {  
+          "name": p.name,
+          "value": p.value
+        })
+      });
+      str=str.substr (0,str.length-1);
+      str="{" + str + "}";     
+      this.IPLChanged = str;                  
+      }    
+  }
+
+   FillInputParameters(arrMachineSpindle: Machinespindle[])
+   {                   
+     this.IPL.GetItem('MainApplication').value = this.MainAppSelected.MainApp;
+     this.IPL.GetItem('SecondaryApplication').value = this.SecAppSelected.ApplicationITAID;
+     this.IPL.GetItem('Units').value = this.srv_appsetting.Units;  
+    
+     this.FillMachineData(arrMachineSpindle);        
+     this.FillDataInputParam();
+
+     //let arrMachineSpindle: Machinespindle[];     
+     /* if(this.arrMachineSpindle != null && typeof(this.arrMachineSpindle) !== 'undefined') 
+     {   
+       this.FillMachineData(this.arrMachineSpindle);        
+       this.FillDataInputParamAndRouteToResult();
+     }
+     else
+     {
+       this.eventsSubscription.add( this.srv_machine.getmachinedetailed(this.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
+        { 
+         arrMachineSpindle = JSON.parse(res);         
+         this.FillMachineData(arrMachineSpindle); 
+         this.FillDataInputParamAndRouteToResult();
+       }));     
+     }      */       
+   } 
 }
  

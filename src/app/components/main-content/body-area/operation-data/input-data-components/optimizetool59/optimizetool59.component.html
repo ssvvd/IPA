@@ -8,7 +8,7 @@
           <label class="custom-control-label" for="optCoolantW">{{'Wet' | translate}}</label>
       </div>                              
       <div class="custom-control custom-radio custom-control-inline">
-          <input type="radio" class="custom-control-input" id="optCoolantD"  [attr.disabled]="isDisabledState" name="Coolant" [(ngModel)] ="coolant"  (change)="changeCoolant()"   value="Dry">
+          <input type="radio" class="custom-control-input" id="optCoolantD"  [disabled]="isDisabledState" name="Coolant" [(ngModel)] ="coolant"  (change)="changeCoolant()"   value="Dry">
           <label class="custom-control-label" for="optCoolantD">{{'Dry' | translate}}</label>
       </div> 
     </div> 
@@ -40,11 +40,12 @@
       </div>             
     </div>
     <div class="pt-3 mt-2">
-      <span>DCX - </span><span>{{'Cutting Diameter Maximum' | translate}}</span>   
-      <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_DCXMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_DCXMax').value" [options]="options_dc"></ng5-slider>
-      </div>  
-
+      <div *ngIf="msrv_StMng.SecApp=='770'">
+        <span>DCX - </span><span>{{'Cutting Diameter Maximum' | translate}}</span>   
+        <div class="custom-slider pt-0 mt-4" >
+            <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_DCXMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_DCXMax').value" [options]="options_dc"></ng5-slider>
+        </div>  
+     </div>
       <div class="row pt-4">
           <div class="col-6 pl-0 row">
               <div class="col-8 pl-0">

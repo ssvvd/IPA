@@ -236,7 +236,26 @@ export class MachineItemSpindleChartComponent implements OnInit {
 
      OnChangePoinX_3()
      { 
+       if(this.chartdata.PoinX_4<this.chartdata.PoinX_3)
+       {
+        this.spindle.N4=this.chartdata.PoinX_3;
+        this.chartdata.PoinX_4=this.chartdata.PoinX_3;
+       }
        this.N3Changed.emit({ value: this.chartdata.PoinX_3});
+
+     }
+     
+     
+     OnChangePoinX_4()
+     { 
+      if(this.chartdata.PoinX_4<this.chartdata.PoinX_3)
+      {
+       this.spindle.N3=this.chartdata.PoinX_4;
+       this.chartdata.PoinX_3=this.chartdata.PoinX_4;
+      }
+
+       this.N3Changed.emit({ value: this.chartdata.PoinX_3});
+
      }
 
      OnChangePoinY_1()

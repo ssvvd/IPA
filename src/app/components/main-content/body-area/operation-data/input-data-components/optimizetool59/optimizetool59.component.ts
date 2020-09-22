@@ -59,6 +59,12 @@ export class Optimizetool59Component implements OnInit {
 
   ngOnInit() {
      this.eventsSubscription = this.events.subscribe(() => this.ClearData());
+     if(this.srv_StMng.GetMaterialSelected().id>20 && this.srv_StMng.GetMaterialSelected().id<38)               
+        this.isDisabledState=true;
+     else
+        this.isDisabledState=false;
+      
+       // this.setCoolant();
      if(this.srv_StMng.IPL.GetItem('Coolant').value=='2' )
         if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
             || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )
@@ -71,15 +77,35 @@ export class Optimizetool59Component implements OnInit {
           this.coolant="Wet";
           this.srv_StMng.IPL.GetItem('Coolant').value='1';
         }
-      else
+    else
       {
          if(this.srv_StMng.IPL.GetItem('Coolant').value=='0') this.coolant ="Dry";
          if(this.srv_StMng.IPL.GetItem('Coolant').value=='1') this.coolant ="Wet";
-      }
-      if(this.srv_StMng.GetMaterialSelected().id>20 && this.srv_StMng.GetMaterialSelected().id<38)               
-            this.isDisabledState=true;
+      } 
+     
   }
   
+  setCoolant()
+  {
+    if(this.srv_StMng.IPL.GetItem('Coolant').value=='2' )
+      if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
+          || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )
+      {
+        this.coolant="Dry";
+        this.srv_StMng.IPL.GetItem('Coolant').value='0';           
+      }
+      else
+      {
+        this.coolant="Wet";
+        this.srv_StMng.IPL.GetItem('Coolant').value='1';
+      }
+  else
+    {
+      if(this.srv_StMng.IPL.GetItem('Coolant').value=='0') this.coolant ="Dry";
+      if(this.srv_StMng.IPL.GetItem('Coolant').value=='1') this.coolant ="Wet";
+    }
+  }
+
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
@@ -119,6 +145,8 @@ export class Optimizetool59Component implements OnInit {
     this.srv_StMng.IPL.GetItem('MinChamferRange').value = this.srv_StMng.IPL.GetItem('MinChamferRange').valuedefault;
     this.srv_StMng.IPL.GetItem('MaxChamferRange').value = this.srv_StMng.IPL.GetItem('MaxChamferRange').valuedefault;
     
+    this.srv_StMng.IPL.GetItem('Coolant').value='2';
+    this.setCoolant();
 
   }
 }

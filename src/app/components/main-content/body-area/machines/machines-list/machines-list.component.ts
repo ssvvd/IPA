@@ -38,6 +38,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   private eventsSubscription: Subscription=new Subscription();
   isLoaded:boolean =false;
   countrow:string='';
+  countallrow:string='';
   defaultmachine:number=0;
   statusclick:number=0;
 
@@ -95,7 +96,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {               
         this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
-                
+        this.countallrow=this.listmachines_sorted.length.toString();        
         this.myMachineSettings();
         if(this.srv_statemanage.SelectedMachine!=null)
         {

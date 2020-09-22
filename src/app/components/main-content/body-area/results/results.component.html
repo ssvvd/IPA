@@ -31,7 +31,7 @@
            </nav> 
           </div>        
           <div class="float-right pt-2 col-2 pr-0">
-              <h2 data-toggle="tooltip"  title="{{'PDF' | translate}}" class="siteTitle cursor-pointer float-right" (click)= "CreateComponents()">Download
+              <h2 data-toggle="tooltip"  title="{{'PDF' | translate}}" class="siteTitle cursor-pointer float-right" (click)= "CreateComponentsForPDF()">Download
                 <i class="fa fa-spinner fa-spin" *ngIf="loadingPDF"></i>
               </h2>            
             </div> 
@@ -142,10 +142,10 @@
               
         <div class="form-group">
           <div class="row">
-            <div class="pr-2 pl-2">
+            <div class="pr-2 pl-2 pt-2">
               <label class="siteTitle">{{srv_statemanage.MainAppSelected.MenuName}}</label>
             </div>
-            <div>
+            <div class="pt-2">
               <label class="siteTitle">{{srv_statemanage.SecAppSelected.MenuName}}</label>
             </div>
           </div> 

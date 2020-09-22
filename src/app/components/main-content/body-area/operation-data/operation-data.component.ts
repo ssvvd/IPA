@@ -95,7 +95,7 @@ else
       mainspindletype='M';
       
       this.srv_StMng.IPL.GetItem('MachCostPerHour').value = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100 + "";
-      //Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;
+     
       if(this.srv_appsetting.Country!==undefined)
       {
         this.srv_StMng.IPL.GetItem('Country').value =this.srv_appsetting.Country.CountryID.toString();
@@ -135,7 +135,7 @@ else
         this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "0";    
   }
   
-  FillDataInputParamAndRouteToResult()
+ /*  FillDataInputParamAndRouteToResult()
   {
 
     this.FillCoolant();
@@ -151,8 +151,7 @@ else
     {
       this.srv_StMng.IPL.GetItem('Size').value= this.srv_StMng.IPL.GetItem('Size').value.toString().replace('"', '***');
     }
-       
-    //let r=  this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required);
+           
     if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required).length==0)    
       {
       this.srv_StMng.IPL.items.filter(x=> x.valuedefault!=x.value).forEach(p=> {                                       
@@ -168,8 +167,18 @@ else
       this.srv_StMng.IPLChanged = str;            
       this.router.navigate(['/home/results']);
       }    
+  } */
+  
+  GoToResult()
+  {
+    let r:any;
+    r=this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required);
+    
+    if (this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required).length==0)    
+      this.router.navigate(['/home/results']);
   }
- FillCoolant()
+  
+ /* FillCoolant()
  {
   if(this.srv_StMng.SecAppSelected.ApplicationITAID=='57' || this.srv_StMng.SecAppSelected.ApplicationITAID =='760' || this.srv_StMng.SecAppSelected.ApplicationITAID =='770'
     || this.srv_StMng.SecAppSelected.ApplicationITAID =='780' || this.srv_StMng.SecAppSelected.ApplicationITAID =='790')
@@ -185,10 +194,9 @@ else
         this.srv_StMng.IPL.GetItem('Coolant').value='1';
       }
     }
- }
-  GetResult()
-  {        
-    //this.parentSubject.next('some value');        
+ } */
+ /*  GetResult()
+  {           
     this.srv_StMng.IPL.GetItem('MainApplication').value = this.srv_StMng.MainAppSelected.MainApp;
     this.srv_StMng.IPL.GetItem('SecondaryApplication').value = this.srv_StMng.SecAppSelected.ApplicationITAID;
     this.srv_StMng.IPL.GetItem('Units').value = this.srv_appsetting.Units;  
@@ -209,6 +217,6 @@ else
       }));     
     }            
   } 
-  
+   */
  
 }

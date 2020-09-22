@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CookiesService } from  'src/app/services/cookies.service' ;
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Country,Language} from 'src/app/models/applications/applications';
@@ -13,7 +12,7 @@ import { Observable,of} from 'rxjs';
 
 export class LoginService {
 
-  constructor(private srv_cook:CookiesService,private srv_DataLayer:DatalayerService,
+  constructor(private srv_DataLayer:DatalayerService,
               public srv_appsetting:AppsettingService,public translate: TranslateService,) { }
   
   GetToken():any
