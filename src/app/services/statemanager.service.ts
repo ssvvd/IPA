@@ -290,7 +290,7 @@ export class StateManagerService {
          
        this.IPL.GetItem('Currency').value = this.srv_appsetting.Currency;
  
-       if(this.SelectedMachine.MachineType=='Multi task')
+       if(this.SelectedMachine.MachineType=='Multi task' || this.SelectedMachine.MachineType=='Multi spindle' || this.SelectedMachine.MachineType=='Swiss type')
        {
          if(this.MainAppSelected.MainApp=='ML') mainspindletype='T';
          if(this.MainAppSelected.MainApp=='TH') mainspindletype='T';

@@ -49,7 +49,7 @@ export class OperationDataComponent implements OnInit {
     
     if (this.srv_StMng.IPL== null)    
     {
-      this.eventsSubscription.add(this.srv_DataLayer.getinputparameters(this.SecApp, this.srv_appsetting.Units).subscribe((data: any)=> {
+      this.eventsSubscription.add(this.srv_DataLayer.getinputparameters(this.SecApp, this.srv_appsetting.Units,this.srv_StMng.SelectedMachine.MachineType).subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                                       
               Ipl.items.push({
                 name:d.name,
@@ -88,7 +88,7 @@ else
     this.eventsSubject.next();
   }
 
-  FillMachineData(arrMachineSpindle: Machinespindle[])
+ /*  FillMachineData(arrMachineSpindle: Machinespindle[])
   {
       let mainspindletype:string;
       let ms:Machinespindle;
@@ -134,7 +134,7 @@ else
       else
         this.srv_StMng.IPL.GetItem('ADAPTOR_FaceContact').value = "0";    
   }
-  
+   */
  /*  FillDataInputParamAndRouteToResult()
   {
 

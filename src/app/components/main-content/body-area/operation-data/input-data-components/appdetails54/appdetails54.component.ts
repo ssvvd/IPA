@@ -51,9 +51,10 @@ export class Appdetails54Component implements OnInit {
   
   SetImageSecAppByAppType(apptype:string)
   {
+    this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     if( this.srv_StMng.SecApp=='54' ||  this.srv_StMng.SecApp=='10')
     {
-      if(apptype=='1')       
+    if(apptype=='1')       
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
       else
         this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
@@ -63,9 +64,7 @@ export class Appdetails54Component implements OnInit {
       if(apptype=='1') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";      
       if(apptype=='2') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";  
       if(apptype=='3') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_2.png";            
-    }
-    else      
-       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    }                 
   }
 
   onfocusfield(field:string)
