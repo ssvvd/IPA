@@ -57,6 +57,7 @@ export class ResultsTableComponent implements OnInit {
   sortProp:string="";
   countrow:number=0;
   showingrows:number=0;
+  lastTypeMainFilter:string="";
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
@@ -87,6 +88,7 @@ export class ResultsTableComponent implements OnInit {
   this.sortProp = 'index';
   this.ErrMsg = false
   this.countrow = 0
+  this.lastTypeMainFilter = "FilterRec"
   this.GetResult();
   }
 
@@ -869,6 +871,9 @@ ngOnChanges(changes:SimpleChanges) {
                 if (this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden++
                   this.sortProp = 'AverageUse';
+                  if(this.lastTypeMainFilter == "FilterRec" && this.dtResultsObjectsHelp[i].IsExpand == "False"){
+                    this.dtResultsObjectsHelp[i].isHidden--
+                  }
                 break;
             }
             break;   
@@ -942,6 +947,12 @@ ngOnChanges(changes:SimpleChanges) {
     this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
     if (this.filterChangedRec.control == 'TypeFeed')
       this.lasTypeFeed = this.filterChangedRec.Res;
+    
+      if (this.filterChangedRec.control == 'optFilter')
+      this.lastTypeMainFilter = this.filterChangedRec.Res;
+
+      if (this.filterChangedRec.control == 'ClearAll')
+      this.lastTypeMainFilter = "FilterRec"
   }
   
 }
@@ -949,8 +960,12 @@ ngOnChanges(changes:SimpleChanges) {
 filterRecommended(prop:clsHelpProp){
     if (prop.IsExpand == "False")
         prop.isHidden++
-    else
-        prop.isHidden--
+    // else
+    //     prop.isHidden--
+
+        if(this.lastTypeMainFilter == "FilterSeller" && prop.AverageUse < 1){
+          prop.isHidden--
+        }
 }
 
 
