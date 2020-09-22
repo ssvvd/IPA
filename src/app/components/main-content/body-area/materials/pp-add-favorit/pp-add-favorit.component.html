@@ -1,18 +1,20 @@
 <div class="modal-header">
-    <h4 class="modal-title siteTitle">Add {{modal_group}} to my materials:</h4>
+    <h4 class="modal-title siteTitle" [hidden]="edit">Add {{modal_group}} to My Materials:</h4>
+    <h4 class="modal-title siteTitle" [hidden]="!edit">My Material:</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true" class="span_x">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="form-group row">
-      <label for="MaterialName" class="col-sm-2">Name:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="MaterialName" >
+      <label for="MaterialName" class="col-sm-2 pl-0">Name:</label>
+      <div class="col-sm-10 pl-0">
+        <input type="text" class="form-control" id="MaterialName" [(ngModel)]="favName" >
       </div>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" style="padding-right:29px;">
     <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Cancel</button>
-    <button type="button" class="btn btn-select" (click)="activeModal.close('Close click')">Save</button>
+    <button type="button" class="btn btn-select-cancel" [hidden]="!edit" (click)="Delete()">Delete</button>
+    <button type="button" class="btn btn-select" (click)="AddToFav()">Save</button>
   </div>

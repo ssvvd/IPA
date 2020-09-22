@@ -38,7 +38,7 @@ export class MpIsoTurningComponent implements OnInit {
   Df:number
   LA:number
   KAPR:number
-  Vc:number
+  Vc:string
   fr:number
   ap:number
   NOPP:number 
@@ -159,7 +159,7 @@ CPU:number
           if (pr && pr.property){
           switch (pr.property.Field){
             case 'CuttingSpeed':case 'CuttingSpeedG':{
-              this.Vc = +value
+              this.Vc = value
               break;
             }
             case 'Feed': case'FeedG':{
@@ -248,7 +248,8 @@ CPU:number
 
             if (this.srv_StMng.SecApp!='960' && !(this.srv_StMng.SecApp=='860' && this.selectedHelp.itemTypeRes == 'T') ){
             //api/CalcReq/Power/Torque/Turning/StraightEdge/{DD}/{ap}/{f}/{vc}/{Kc}/{Mc}/{rake}/{k}
-            this.srv_Results.GetTorqueTurning(this.Di,this.ap,this.fr,this.Vc,_Kc,_Mc,0,kappaLeadAngel).subscribe((res: any) => {
+            let meanVC = (((+this.Vc.split('-')[1] || +this.Vc.split('-')[0]) + +this.Vc.split('-')[0])/2) 
+            this.srv_Results.GetTorqueTurning(this.Di,this.ap,this.fr,meanVC,_Kc,_Mc,0,kappaLeadAngel).subscribe((res: any) => {
               var result = res as MPResult;
               this.T = Math.round(result.ResultRowList[1].Value * 100)/100
             })
@@ -265,7 +266,7 @@ CPU:number
           }
 
           this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
-          this.B = 100
+          this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
           this.I = 1000
           this.TLL = 50
           this.TLT = 50
@@ -279,7 +280,7 @@ CPU:number
           this.TTC = this.TP * this.TPB
           this.TGC = this.TIC + this.TTC
           this.MTB = Math.round((this.B * this.CTF) * 100)/100
-          this.MCB = Math.round(((this.MTB / 60) * this.MCH) * 10000)/10000
+          this.MCB = Math.round(((this.MTB / 60) * this.MCH) * 100)/100
           this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
           this.CPU = Math.round((this.TCB / this.B) * 100)/100
 
@@ -303,7 +304,7 @@ CPU:number
     this.Df = 0
     this.LA = 0
     this.KAPR = 0
-    this.Vc = 0
+    this.Vc = ''
     this.fr = 0
     this.ap = 0
     this.NOPP = 0

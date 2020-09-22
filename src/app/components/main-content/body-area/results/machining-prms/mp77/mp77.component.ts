@@ -109,6 +109,8 @@ resType:string = ''
           case 'DetailsListPrice':{
             this.H_DHP = +(value.split(' ')[0])
             this.I_IP = +(value.split(' ')[0])
+            if (this.TP == 0)
+              this.TP = +(value.split(' ')[0])
              break;
            }
            case 'HeaderListPrice':{
@@ -298,7 +300,7 @@ if (pr.value.trim().length == 7){
 
 
     //calc
-    this.B = 500;
+    this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value;
     this.HPP = 1;
     this.HI_I = 30;
     this.TLL = 50;

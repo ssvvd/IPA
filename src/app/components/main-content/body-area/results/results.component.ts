@@ -22,6 +22,7 @@ MainPage:boolean = true;
 active = 1;
 IsExport:boolean;
 environment = environment;  
+navigationSubscription;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 
@@ -58,17 +59,14 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   DownLoadData()
   {
-    this.srv_down.DownLoadDataItem('PDF') ;
-    
+    this.srv_down.DownLoadDataItem('PDF') ;    
   }
 
   mat_desc:string;
   loadingPDF:boolean=false;
 
-  CreateComponents()
-{
-  //if (this.IsExport) return;
-
+  CreateComponentsForPDF()
+{  
    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
    modalRef.result.then((result) => {
@@ -86,31 +84,8 @@ eventsSubject: Subject<void> = new Subject<void>();
     this.IsExport=true; 
 
     setTimeout( () => {this.DownLoadData();this.loadingPDF=false;}, 5000 );    
-    
-    //this.SpinnerService.show();
-    //window.print();    
-    //setTimeout( () => {this.SpinnerService.hide()},7000);
-
-    //setTimeout( () => {window.print();return;}, 10000 );
-    
-    //setTimeout( () => {this.srv_down.DownLoadDataItem('PDF') ;}, 15000 );
-    /*  this.srv_DataLayer.gethtmlpage("ALL").subscribe ((data:any)=>
-    {
-      this.dataCatalog1= data.toString();    
-      //this.srv_down.DownLoadDataItem('PDF');      
-    }); */ 
-    
-    //this.srv_down.DownLoadDataItem('PDF') ;   
-    
-    //this.SpinnerService.show();
-    //this.srv_down.DownLoadData(result) ;  
-    //todo:with subscribe 
-    //this.SpinnerService.hide();                      
+                     
    });
  }
 
- PrintResult()
- {
-    setTimeout( () => {window.print();}, 7000 );    
- }
 }

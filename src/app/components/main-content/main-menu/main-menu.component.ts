@@ -119,7 +119,10 @@ export class MainMenuComponent implements OnInit {
           obj.IsSelected=true; 
           obj.isDisabled =false;
         }
-      }               
+      }  
+      if(RouteName!="/home/results"){
+        this.Tabs[4].isDisabled = true;
+      }              
     });
    }    
   

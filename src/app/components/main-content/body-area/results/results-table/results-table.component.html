@@ -1,6 +1,14 @@
         <div>
-        <h4 class="siteTitle float-left">Results</h4>
-        
+           <div [hidden]="ErrMsg">
+        <!-- <h4 class="siteTitle float-left">Results</h4> -->
+        <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" >
+         <div class="col-6 pt-4 pl-0">  
+           <h3 class="siteTitle pl-0 pb-0">Results</h3>
+         </div>
+         <div class="float-right col-6 text-right pt-4">
+           <label class="pl-2 pb-0">{{'Found Results' | translate}} : {{showingrows}} {{'out of' | translate}} {{countrow}}</label>
+         </div>
+       </div> 
         <div Class="float-right pb-2 pr-3">
            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit">
         </div>
@@ -16,11 +24,11 @@
                     <tr id="dtOptions">
                      <th><label></label></th>  
                      <th *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
-                         <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate"></label>
+                         <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate"><span class="sort-icon ml-1"></span></label>
                         </th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
+                        <th class="no-sort"></th>
+                        <th class="no-sort"></th>
+                        <th class="no-sort"></th>
                     </tr>
                  </thead>
                  <tbody>
@@ -71,10 +79,21 @@
                     </tr>
                  </tbody>
       </table>
+   </div>
 
-<p>{{ErrMsg}}</p>
 
-
+      <div [hidden]="!ErrMsg">
+         <br><br>
+         <div class="col-12 d-flex justify-content-center pb-2 pt-2" >  
+            <p class="pr-2">A matching solution was not found. Please check your input parameters.</p>
+         </div>
+         <div class="col-12 d-flex justify-content-center pb-2 pt-2" >  
+            <p class="pr-2">You can contact:</p>
+            <a (click)="contactus()" style="text-decoration:underline;cursor: pointer;">ITA support</a> 
+            <p class="pr-2 pl-2">or</p>     
+            <a href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" style="text-decoration:underline">your local ISCAR support team.</a>    
+          </div>
+      </div>
 
 
 <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  

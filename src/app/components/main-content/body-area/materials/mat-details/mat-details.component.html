@@ -14,7 +14,7 @@
                                <td *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" attr.data-value={{obj[col]}} 
                                (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(obj[col]) : false" 
                                [routerLink]="(environment.internal && (obj[col] + '').indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"
-                               [ngClass]="{'td-selected' : obj[col] == this.selectedMatOrGrp}"
+                               [ngClass]="{'td-selected' : obj[col] == this.selectedMatOrGrp && this.selectedMaterialCls.FavName == ''}"
                                > {{obj[col].toString().replace('________','')}}
                                </td>
                             </tr>

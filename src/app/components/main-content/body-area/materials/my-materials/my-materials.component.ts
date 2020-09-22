@@ -8,17 +8,16 @@ import { DataTableDirective } from 'angular-datatables';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
 import { Subject, Subscription } from 'rxjs';
-import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 import { NgxSpinnerService } from "ngx-spinner"; 
-import { LoginService } from 'src/app/services/login.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 
 @Component({
-  selector: 'app-mat-search',
-  templateUrl: './mat-search.component.html',
-  styleUrls: ['./mat-search.component.scss','../materials.component.scss']
+  selector: 'my-materials',
+  templateUrl: './my-materials.component.html',
+  styleUrls: ['./my-materials.component.scss','../materials.component.scss']
 })
-export class MatSearchComponent implements OnInit, OnDestroy {
+export class MyMaterialsComponent implements OnInit, OnDestroy {
+
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective;
 
@@ -27,16 +26,14 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   materialsResultFilterd:clsMaterial[]=[];
   materialsResultSorted:clsMaterial[]=[];
   selectedMaterial:string;
-  FavName:String;
   environment = environment;
   dtTriggerMat: Subject<any> = new Subject();
   allSubsMat$: Subscription;
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
   _timeout: any = null;
-  @Input() filterSearchTextInput: string;
-
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,private srv_login:LoginService,private srv_appsetting:AppsettingService) { }
+  
+  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,public srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     let myColumns1 = [6,7];
@@ -52,6 +49,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
        "autoWidth":false,
        "scrollY": '65vh',
        "scrollCollapse" : true,
+       "aaSorting": [],
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal ? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal ? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ 5 ] }],
        "language": {
         "emptyTable": "No data available in table",
@@ -62,29 +60,28 @@ export class MatSearchComponent implements OnInit, OnDestroy {
             
       }; 
 
+      this.fillMainTable();
+
   }
 
 
   fillMainTable(){
+    if (this.srv_appsetting.UserID != ''){
     this.SpinnerService.show();
-    this.allSubsMat$ = this.serv.searchmaterial(this.filterSearchTextInput)
+    this.allSubsMat$ = this.serv.getMatFav(this.srv_appsetting.UserID)
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
       this.materialsResultSorted = this.materialsResult;
       this.materialsResultFilterd = this.materialsResult;
-      if (this.srv_statemanage.GetMaterialSelected()== null){
-        this.selectedMaterial = "";
-        this.FavName = ""
-      }    
-       else{
-        this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().material;
-        this.FavName = this.srv_statemanage.GetMaterialSelected().FavName;
-       }
-          
+      if (this.srv_statemanage.GetMaterialSelected()== null)
+          this.selectedMaterial = "";
+       else
+          this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().FavName;
           
        this.isDtInitializedFunc();
        this.SpinnerService.hide();
     }); 
+  }
   }
 
   isDtInitializedFunc(){
@@ -100,78 +97,41 @@ export class MatSearchComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnChanges(changes:SimpleChanges) {
-      // this._timeout  = null;
-      if(this._timeout){ //if there is already a timeout in process cancel it
-        window.clearTimeout(this._timeout);
-      }
-      this._timeout = window.setTimeout(() => {
-         this._timeout = null;
-         this.fillMainTable();
-      },1000);
-   }
+  // ngOnChanges(changes:SimpleChanges) {
+  //     if(this._timeout){ //if there is already a timeout in process cancel it
+  //       window.clearTimeout(this._timeout);
+  //     }
+  //     this._timeout = window.setTimeout(() => {
+  //        this._timeout = null;
+  //        this.fillMainTable();
+  //     },1000);
+  //  }
 
   ngOnDestroy() {
+    if(this.allSubsMat$)
     this.allSubsMat$.unsubscribe();
   }
 
-  // filterTable(){
-  //   var searchText = this.filterSearchTextInput;
-  //   if (searchText == null || searchText == ''){
-  //     this.materialsResultSorted = this.materialsResult;
-  //   }
-        
-  //   else
-  //        this.materialsResultSorted = this.materialsResult.filter(_ => 
-  //         (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-  //         (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-  //         (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
-  //         (_.Hardness.toUpperCase().indexOf(searchText.toUpperCase())>-1)
-  //         ); 
-
-  // }
-
   OnSelectMaterial(mat:clsMaterial)
   {   
-    this.selectedMaterial = mat.material;
-    this.FavName = ""
+    this.selectedMaterial = mat.FavName;
     this.srv_statemanage.SelectMaterial(mat);
 
   }
 
-  addToFavorites(){
-    let a =0;
-  }
-  
-  setAsDefault(){
-    let a =0;
-  }
-
   openAddToFavM(mat:clsMaterial) {
-    if(this.srv_appsetting.UserID=='')
-    {
-      //alert('Only for registered user');
-      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
-      modalRef.componentInstance.title = "Add To My Materials";
-      modalRef.componentInstance.Msg = 'Please login to add the material to "My Materials"';
-      //modalRef.componentInstance.MachineName = mach.MachineName;
-      modalRef.result.then((result) => {
-        if(result=='cancel') return;
-        if(result=='login')
-        {
-          this.SpinnerService.show();
-          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
-          return;
-        }});
-      
-    } 
-    else{
-      const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
-      modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
-      modalRef.componentInstance.selectedMat = mat;
-      modalRef.componentInstance.edit = false;
-    }
-
+    const modalRef = this.modalService.open(PpAddFavoritComponent, { centered: true });
+    modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
+    modalRef.componentInstance.selectedMat = mat;
+    modalRef.componentInstance.edit = true;
+    modalRef.result.then((result) => {
+      if (result) {
+      console.log(result);
+        if(result == 'refresh'){
+          this.fillMainTable();
+        }
+      }
+      }, () => console.log('Rejected!'));
   }
 
   openEditParamsM(mat:clsMaterial) {
@@ -191,9 +151,13 @@ export class MatSearchComponent implements OnInit, OnDestroy {
           mat.Hardness = spletter[0];
           mat.HardnessUnits = spletter[1];
           mat.HardnessHBValue = spletter[2];
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-            this.dtTriggerMat.next();
+          this.SpinnerService.show();
+          this.serv.EditMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  mat.FavName,  mat.FavName ,  mat.Hardness,   mat.HardnessUnits || 'HB',mat.HardnessHBValue || mat.Hardness).subscribe((data: any) => {
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+              dtInstance.destroy();
+              this.dtTriggerMat.next();
+            });
+            this.SpinnerService.hide();
           });
         }
       }

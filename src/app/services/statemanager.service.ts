@@ -202,7 +202,13 @@ export class StateManagerService {
       desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
     }
     else{
-      desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+      if (mat.FavName && mat.FavName != ''){
+        desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
+      }
+      else{
+        desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+      }
+      
     }       
     this.obsMaterialSelected.next([desc]);
   }

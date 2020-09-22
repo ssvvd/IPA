@@ -87,6 +87,7 @@ import { MpTurnGrooveComponent } from './components/main-content/body-area/resul
 import { HeaderPpUnitsComponent } from './components/header/header-pp-units/header-pp-units.component';
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
+import { MyMaterialsComponent } from './components/main-content/body-area/materials/my-materials/my-materials.component';
 import { ResultsPdfComponent } from './components/main-content/body-area/results/results-pdf/results-pdf.component';
 import { ResultItemInfoComponent } from './components/main-content/body-area/results/result-item-info/result-item-info.component';
 
@@ -160,7 +161,9 @@ import { ResultItemInfoComponent } from './components/main-content/body-area/res
     PpSuccessfullyComponent,
     ContactusComponent,
     ResultsPdfComponent,
-    ResultItemInfoComponent
+    ResultItemInfoComponent,
+    MyMaterialsComponent,
+    ResultsPdfComponent
   ],
   imports: [
     FormsModule,

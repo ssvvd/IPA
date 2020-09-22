@@ -13,10 +13,11 @@ import { Subject, Subscription, forkJoin } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
 import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
-import {ResultPpDownloadComponent} from 'src/app/components/main-content/body-area/results/result-pp-download/result-pp-download.component';
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
 import { ResultPpInventoryComponent } from 'src/app/components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
+import { MachineService } from 'src/app/services/machine.service' ;
 
 @Component({
   selector: 'app-results-table',
@@ -51,9 +52,11 @@ export class ResultsTableComponent implements OnInit {
   arrResultImgsItem:string[]=[];
   arrResultImgsFamily:string[]=[];
   arrResultImgsAll:any;
-  ErrMsg:string="";
+  ErrMsg:boolean=false;
   lasTypeFeed:string="";
   sortProp:string="";
+  countrow:number=0;
+  showingrows:number=0;
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
@@ -61,7 +64,7 @@ export class ResultsTableComponent implements OnInit {
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
-    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService) { }
+    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,private srv_machine: MachineService) { }
 
   ngOnInit() {
      this.dtOptions = {
@@ -82,21 +85,42 @@ export class ResultsTableComponent implements OnInit {
 
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
+  this.ErrMsg = false
+  this.countrow = 0
   this.GetResult();
   }
 
+  //remove Sveta
+  /*  GetResult() 
+  {      
+      this.getShowTable();      
+  } */
+
   GetResult() 
-  {
-       
-      this.getShowTable()
+  {  
+    if(this.srv_StMng.arrMachineSpindle == null || typeof(this.srv_StMng.arrMachineSpindle) == 'undefined') 
+    {   
+    this.allSubs$= this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
+      { 
+        this.srv_StMng.arrMachineSpindle= JSON.parse(res);               
+        this.srv_StMng.FillInputParameters(this.srv_StMng.arrMachineSpindle);
+        this.getShowTable();      
+      });     
+    } 
+    else
+    {
+      this.srv_StMng.FillInputParameters(this.srv_StMng.arrMachineSpindle);
+      this.getShowTable();
+    }          
   }
 
 getShowTable(){
   this.SpinnerService.show(); 
+
   if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged))
   {
     this.srv_ResultsStore.setParams(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged)
-  this.allSubs$ = forkJoin(
+    this.allSubs$ = forkJoin(
           this.srv_Results.getresults(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getoolproperties(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getgroups(this.srv_StMng.SecApp),
@@ -117,7 +141,8 @@ getShowTable(){
 
 
 renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
-  if (res1 == 'Error'){
+  if (res1 == 'Error' || res1.length < 3){
+    this.ErrMsg = true
     this.SpinnerService.hide();
     return;
   }
@@ -422,7 +447,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
     }
 
-
+  this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
   var visColumnsCount = this.dtResultsObjects[0].length
   this.dtResultsObjects3d = []
   let index3:number = 0;
@@ -484,7 +509,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   }
   
 }
-
+this.countrow = this.dtResultsObjects3d.length
 this.headersOrig = JSON.parse(JSON.stringify(this.headers));
 this.dtTrigger.next();
 this.SpinnerService.hide();
@@ -913,6 +938,8 @@ ngOnChanges(changes:SimpleChanges) {
     
       
     }
+
+    this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
     if (this.filterChangedRec.control == 'TypeFeed')
       this.lasTypeFeed = this.filterChangedRec.Res;
   }
@@ -951,6 +978,12 @@ viewInventory(index:number)
 {    
   const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
   modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
+}
+
+
+contactus()
+{
+  const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});                  
 }
 }
 
