@@ -82,8 +82,11 @@
    </div>
 
 
-      <div [hidden]="!ErrMsg">
-         <br><br>
+      <div [hidden]="!ErrMsg" style="padding-left:20%">
+         <br><br><br><br>
+         <div class="col-12 d-flex justify-content-center pb-2 pt-2">
+            <img [src]="environment.ImagePath+'no-resultICON.png'" class="icon-noResult">
+          </div>
          <div class="col-12 d-flex justify-content-center pb-2 pt-2" >  
             <p class="pr-2">A matching solution was not found. Please check your input parameters.</p>
          </div>

@@ -9,13 +9,13 @@
 
 <div class="border-left-gray border-right-gray ">
     <div class="row" [hidden]="!MainPage">
-      <div class="col col-20">
+      <div class="col col-20" [hidden]="_hideFilter">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
       <div class="col col-80 pl-2 border-left-gray">
         <div class="row">
         </div>
-        <app-results-table #resTable [filterChangedRec]="filterChanged" (goToViewEvent)="goToView($event)"></app-results-table>
+        <app-results-table #resTable [filterChangedRec]="filterChanged" (hideFilter)="hideFilter($event)" (goToViewEvent)="goToView($event)"></app-results-table>
       </div>
     </div>
 

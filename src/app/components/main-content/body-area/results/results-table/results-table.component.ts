@@ -61,6 +61,7 @@ export class ResultsTableComponent implements OnInit {
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
+  @Output() hideFilter = new EventEmitter<any>();
   loadingPDF:boolean=false;
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
@@ -144,6 +145,7 @@ getShowTable(){
 
 renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   if (res1 == 'Error' || res1.length < 3){
+    this.hideFilter.emit();
     this.ErrMsg = true
     this.SpinnerService.hide();
     return;
