@@ -30,9 +30,9 @@ export class PpAddFavoritComponent implements OnInit {
 
   AddToFav(){
     if (!this.edit){
+      this.SpinnerService.show();
       let FavoritName:string = this.modal_group
       if (this.favName != '')
-      this.SpinnerService.show();
       FavoritName = FavoritName + '-' +  this.favName 
       //AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number)
   
