@@ -1,24 +1,33 @@
         <div>
            <div [hidden]="ErrMsg">
         <!-- <h4 class="siteTitle float-left">Results</h4> -->
-        <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" >
-         <div class="col-6 pt-4 pl-0">  
+        <div class="pb-1 pt-0 mt-0 pt-4" >
+         <div class="pt-4 pl-0 row">  
            <h3 class="siteTitle pl-0 pb-0">Results</h3>
          </div>
-         <div class="float-right col-6 text-right pt-4">
-           <label class="pl-2 pb-0">{{'Found Results' | translate}} : {{showingrows}} {{'out of' | translate}} {{countrow}}</label>
+         <div class="pt-4 row">
+            <div class="col-6">
+               <label class="pb-0">{{'Found Results' | translate}} : {{showingrows}} {{'out of' | translate}} {{countrow}}</label>
+            </div>
+            <div class="col-6 float-right">
+               <h2 data-toggle="tooltip" title="{{'Download PDF' | translate}}" class="siteTitle float-left cursor-pointer ml-4"  (click)="DownLoadPDF()">
+                  Download
+                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadPDF()">
+                  <i class="fa fa-spinner fa-spin" *ngIf="loadingPDF"></i>
+               </h2> 
+            </div>
          </div>
        </div> 
         <div Class="float-right pb-2 pr-3">
            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit">
         </div>
-        <div class="float-right pb-2 pr-3 pl-4">            
+        <!-- <div class="float-right pb-2 pr-3 pl-4">            
             <div class="pr-3 pl-4">
                <h2 data-toggle="tooltip" title="{{'Download PDF' | translate}}" class="siteTitle float-left cursor-pointer ml-4"  (click)="DownLoadPDF()">PDF
                   <i class="fa fa-spinner fa-spin" *ngIf="loadingPDF"></i>
                </h2>              
            </div>
-         </div>
+         </div> -->
         <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
             <thead>
                     <tr id="dtOptions">
