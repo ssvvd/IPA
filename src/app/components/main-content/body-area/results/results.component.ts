@@ -24,6 +24,7 @@ active = 1;
 IsExport:boolean;
 environment = environment;  
 navigationSubscription;
+_hideFilter:boolean;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 
@@ -36,7 +37,8 @@ eventsSubject: Subject<void> = new Subject<void>();
   }
 
   ngOnInit() {
-    this.MainPage = true;    
+    this.MainPage = true;   
+    this._hideFilter = false; 
   }
 
   receiveFilterChange(value){
@@ -65,6 +67,10 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   mat_desc:string;
   processdownload:boolean=false;
+
+  hideFilter(event){
+    this._hideFilter = true;
+  }
 
   CreateComponentsForPDF()
   {  

@@ -1,4 +1,5 @@
 import { ResultsService} from 'src/app/services/results.service' ;
+import { StateManagerService} from 'src/app/services/statemanager.service' ;
 
 export class clsHelpProp {
     index:number;
@@ -51,7 +52,7 @@ export class clsHelpProp {
 
     private _isHidden:number;
 
-        constructor(private srv_Results:ResultsService, ind:number){
+        constructor(private srv_Results:ResultsService, ind:number,private srv_StMng:StateManagerService){
             this._isHidden = 0;
             this.index = ind;
             this.Promotion = false;
@@ -79,7 +80,7 @@ export class clsHelpProp {
         else{
             this._FzminF = []
             for (let entry of this.CatalogNoT) {
-                this.srv_Results.getfzminf(entry.trim(),this.SecondaryAppOrig1).subscribe((res: any) => {
+                this.srv_Results.getfzminf(entry.trim(),this.SecondaryAppOrig1 || this.srv_StMng.SecApp).subscribe((res: any) => {
                     this._FzminF.push(JSON.parse(res)); 
                     if (this._FzminF.length = this.CatalogNoT.length){
                         this.fZiminFCheckHidden(Res,control);
@@ -93,7 +94,7 @@ export class clsHelpProp {
     fZiminFCheckHidden(Res:boolean,control:string){
         switch (control){
             case 'IT':
-                if (this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0){
+                if (this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') == -1){
                   if (!Res)
                       this.isHidden++
                   else
@@ -101,13 +102,29 @@ export class clsHelpProp {
                 }
                   break;
                case 'IH':
-                if (this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0){
+                if (this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') == -1){
                   if (!Res)
                       this.isHidden++
                   else
                       this.isHidden--
                 }
                   break;   
+                case 'ST':
+                if (this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') != -1){
+                    if (!Res)
+                        this.isHidden++
+                    else
+                        this.isHidden--
+                }
+                    break;   
+                case 'SH':
+                if (this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') != -1){
+                    if (!Res)
+                        this.isHidden++
+                    else
+                        this.isHidden--
+                }
+                    break;   
         }
     }
 

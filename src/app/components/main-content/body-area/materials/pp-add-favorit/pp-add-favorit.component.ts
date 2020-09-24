@@ -30,14 +30,19 @@ export class PpAddFavoritComponent implements OnInit {
 
   AddToFav(){
     if (!this.edit){
-      let FavoritName:string = this.modal_group
+      this.SpinnerService.show();
+      let FavoritName:string = this.modal_group.trim()
       if (this.favName != '')
       FavoritName = FavoritName + '-' +  this.favName 
       //AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number)
   
-      this.serv.AddMaterialFavorit(this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.Category,  this.selectedMat.id,  FavoritName, this.selectedMat.Standard || '-',  this.selectedMat.Condition,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',  this.selectedMat.HardnessOrigin || this.selectedMat.Hardness,this.selectedMat.HardnessHBValue || this.selectedMat.Hardness, this.selectedMat.material || '').subscribe((data: any) => {}); 
+      this.serv.AddMaterialFavorit(this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.Category,  this.selectedMat.id,  FavoritName, this.selectedMat.Standard || '-',  this.selectedMat.Condition,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',  this.selectedMat.HardnessOrigin || this.selectedMat.Hardness,this.selectedMat.HardnessHBValue || this.selectedMat.Hardness, this.selectedMat.material || '').subscribe((data: any) => {
+        this.SpinnerService.hide();
+        this.activeModal.close('GoToMyMaterials')
+
+      }); 
   
-      this.activeModal.close('GoToMyMaterials')
+      
     }
     else{
       this.SpinnerService.show();

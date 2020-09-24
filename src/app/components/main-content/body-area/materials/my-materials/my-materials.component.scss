@@ -36,6 +36,9 @@ a:visited img {
     width: 7%;
 }
 
+.table td:nth-child(2){
+  padding-left: 25px !important;
+}
 .table td:nth-child(3), .table th:nth-child(3){
     width: 22%;
 }

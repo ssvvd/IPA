@@ -35,6 +35,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   firstInt:boolean = false;
   _timeout: any = null;
   @Input() filterSearchTextInput: string;
+  @Output() myMaterialClickEv = new EventEmitter<clsMaterial>();
 
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,private srv_login:LoginService,private srv_appsetting:AppsettingService) { }
 
@@ -170,8 +171,20 @@ export class MatSearchComponent implements OnInit, OnDestroy {
       modalRef.componentInstance.modal_group = mat.Category + mat.group + ' ' + mat.material;
       modalRef.componentInstance.selectedMat = mat;
       modalRef.componentInstance.edit = false;
+
+      modalRef.result.then((result) => {
+        if(result=='GoToMyMaterials')
+        {
+          this.goToMyMaterial();
+          return;
+        }});
+
     }
 
+  }
+
+  goToMyMaterial(){
+    this.myMaterialClickEv.emit();
   }
 
   openEditParamsM(mat:clsMaterial) {
