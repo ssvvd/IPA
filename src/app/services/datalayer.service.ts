@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient,HttpErrorResponse} from '@angular/common/http';
 import 'rxjs/add/operator/catch'
-import { stringify } from 'querystring';
+/* import {HttpResponse} from '@angular/common/http';
+import {Http, ResponseContentType} from '@angular/http'; */
+import {Observable} from 'rxjs';
   
 @Injectable({
   providedIn: 'root'
@@ -20,12 +22,8 @@ export class DatalayerService {
 
    public  getinputparameters(secapp:string,units:string,machinetype:string)
   { 
-    let pmachinetype:string;
-    if( machinetype=='Multi spindle' || machinetype=='Swiss type')
-      pmachinetype='ST_MS';
-    else
-      pmachinetype='all';
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters/' + secapp + '/' + units +'/' +pmachinetype);
+    
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'input-parameters/' + secapp + '/' + units +'/' +machinetype);
   }
 
   public  dictionarygetlanguage()
@@ -105,18 +103,6 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-exchange-rate/'+currency);
   }
 
-/*   getGEOLocation() {
-    let d:any;
-    d=this.httpClient
-    .get('https://api.ipify.org/?format=json').subscribe ((d:any)=>
-    {       
-      let url = "https://api.ipgeolocation.io/ipgeo?apiKey=AIzaSyBBVxlnKCe7SziM_y46iFQjR80LGCJMH6k&ip="+d.ip; 
-      alert(url);
-      return this.httpClient
-            .get(url);
-    });     
-  }  */
-
   getGEOLocation() {    
     return this.httpClient.get('http://ip-api.com/json');    
   } 
@@ -160,6 +146,13 @@ export class DatalayerService {
   {     
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send-req-mat/'+email + '/' +Description + '/' +Group + '/' +Standard + '/' +Condition + '/' +Hardness + '/' +Manufacture);
   }
-
   
+  
+  public  downloadp21file(scatalogno:string,units:string):Observable<any>
+  {  
+    let s:string;    
+    s=environment.API_HOST +  'api/export/download-p21-files/'+scatalogno + '/' +units;   
+    return  this.httpClient.get(s, {responseType: 'blob'});
+  }
+
 }
