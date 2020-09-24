@@ -65,6 +65,7 @@
                         <img src="{{arrResultImgsItem[row.index]}}"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
+                       <!--  (click)="viewInfo(row.index) -->
                        <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
                            <span  *ngFor="let prty of col; let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
@@ -72,8 +73,13 @@
                               ? 'd-none' : 'd-block'" 
                            >
                             <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
-                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>{{prty.value}}
-                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label></span>
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>
+                              <div style="display: inline;" [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
+                              (click)="prty.property && prty.property.Field.toLowerCase().includes('designation') && goToCatalog(row.index,dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)) ; $event.stopPropagation()">
+                              <label [ngClass]="{'btn sileLinks pt-0 pl-0 pr-0 pb-0': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}">{{prty.value}}</label>
+                              <label class="btn sileLinks pt-0 pl-0 pr-0 pb-0" *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label>
+                           </div>
+                           </span>
                          </td>
                          <td>
 <!--  -->

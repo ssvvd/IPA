@@ -65,3 +65,15 @@ table.dataTable thead th {
   .div-datatable{  
     background: var(--bg-gray);
 }
+
+.ulHover:hover *{
+  text-decoration: underline !important;
+}
+
+.ulHover:hover{
+  text-decoration: underline !important;
+}
+
+.ulHover > label {
+  border-width: 0px;
+}
