@@ -6,6 +6,7 @@ import { DownloadresultService} from 'src/app/services/downloadresult.service';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
+import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { Subject } from 'rxjs';
 
 @Component({
@@ -30,7 +31,7 @@ _hideFilter:boolean;
 eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
-    private srv_down:DownloadresultService, public srv_statemanage:StateManagerService) { }
+    private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService) { }
   ngAfterViewInit() {
     console.log(this.resTable); 
   }
@@ -56,42 +57,66 @@ eventsSubject: Subject<void> = new Subject<void>();
   switchPage(){
     this.MainPage = true;
   }
-  
-  dataCatalog1:string;
 
-  DownLoadData()
+
+  /* DownLoadData(format:string)
   {
-    this.srv_down.DownLoadDataItem('PDF') ;    
-  }
+     this.srv_down.DownLoadDataItem('PDF') ;          
+    
+  } */
 
   mat_desc:string;
-  loadingPDF:boolean=false;
+  processdownload:boolean=false;
 
   hideFilter(event){
     this._hideFilter = true;
   }
 
   CreateComponentsForPDF()
-{  
+  {  
    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
    modalRef.result.then((result) => {
-    //alert(result);
     if(result=='cancel') return;
+    
+    if (result=='PDF')
+    {
+      this.processdownload=true;
+      let m:any;        
+      m=this.srv_statemanage.GetMaterialSelected();
+      if (typeof ( m.material) !== 'undefined')
+        this.mat_desc=m.Category + m.group.toString() + " - " + m.material ;     
+      else
+        this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
+  
+      this.IsExport=true; 
+  
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');this.processdownload=false;}, 5000 );    
+      
+    }
+    
+    if(result=="P21") 
+    { 
+      this.processdownload =true;
+      let sCatalogNo:string ='';
+      for (let c of this.viewParams.Res[0].CatalogNo)
+      {
+        c=c.replace(/\s/g, "");
+        sCatalogNo = sCatalogNo +c + ',';
+      } 
 
-    this.loadingPDF=true;
-    let m:any;        
-    m=this.srv_statemanage.GetMaterialSelected();
-    if (typeof ( m.material) !== 'undefined')
-      this.mat_desc=m.Category + m.group.toString() + " - " + m.material ;     
-    else
-      this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
-
-    this.IsExport=true; 
-
-    setTimeout( () => {this.DownLoadData();this.loadingPDF=false;}, 5000 );    
-                     
+      if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);     
+      return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
+      {      
+        var downloadURL = window.URL.createObjectURL(response);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "P21.zip";
+        link.click();
+        this.processdownload =false;
+      }
+      );
+    }
    });
  }
-
 }

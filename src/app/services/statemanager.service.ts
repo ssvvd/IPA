@@ -300,7 +300,8 @@ export class StateManagerService {
        }
        else 
          ms = arrMachineSpindle[0];
-        
+       
+       this.IPL.GetItem('MachineType').value = this.SelectedMachine.MachineType;
        this.IPL.GetItem('AdaptorType').value =ms.AdaptationType;
        this.IPL.GetItem('AdaptorSize').value =ms.AdaptationSize;
  
@@ -377,23 +378,7 @@ export class StateManagerService {
      this.IPL.GetItem('Units').value = this.srv_appsetting.Units;  
     
      this.FillMachineData(arrMachineSpindle);        
-     this.FillDataInputParam();
-
-     //let arrMachineSpindle: Machinespindle[];     
-     /* if(this.arrMachineSpindle != null && typeof(this.arrMachineSpindle) !== 'undefined') 
-     {   
-       this.FillMachineData(this.arrMachineSpindle);        
-       this.FillDataInputParamAndRouteToResult();
-     }
-     else
-     {
-       this.eventsSubscription.add( this.srv_machine.getmachinedetailed(this.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
-        { 
-         arrMachineSpindle = JSON.parse(res);         
-         this.FillMachineData(arrMachineSpindle); 
-         this.FillDataInputParamAndRouteToResult();
-       }));     
-     }      */       
+     this.FillDataInputParam();         
    } 
 }
  

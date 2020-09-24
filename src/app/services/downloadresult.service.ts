@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable,Observer,of} from 'rxjs';
 import { StateManagerService } from 'src/app/services/statemanager.service';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { clsMaterial } from '../models/materials/material';
 import { Machineheader } from '../models/machines/machineheader';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
-import { HttpClient,HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import 'jspdf-autotable'
+//import 'jspdf-autotable'
 
 @Injectable({
   providedIn: 'root'
@@ -20,23 +20,25 @@ export class DownloadresultService {
   axial_y:number=0;
 
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService,
-              private httpClient: HttpClient,private srv_DataLayer:DatalayerService) { }
+              private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) { }
 
   DownLoadData(format:string) : any
   {   
     return this.downloadListPDF();     
   }
-
+  
   GetHTMLData(url:string) 
   {
      this.srv_DataLayer.gethtmlpage("ALL");
   }
 
-  DownLoadDataItem(format:string) : any
+  DownLoadDataItem(format:string,data:string) : any
   {
     switch (format) {
       case 'PDF':
         return this.downloadItemPDF();
+      case 'P21':
+        return this.srv_DataLayer.downloadp21file(data,this.srv_appsetting.Units);
     }    
   }
 
@@ -126,23 +128,6 @@ BuildResult(doc:jsPDF,controlname:string):any
       background: 'white',
       scale: 3
     };
-    
-    /* html2canvas(document.getElementById(controlname), {
-      onclone: function (clonedDoc) {
-    
-         // I made the div hidden and here I am changing it to visible
-        //clonedDoc.getElementById(controlname).style.visibility = 'visible';
-      }
-    }).then(canvas => {
-      // The following code is to create a pdf file for the taken screenshot
-      var pdf = new jsPDF('l', 'pt', [canvas.width, canvas.height]);
-      var imgData = canvas.toDataURL("PNG", 1.0);
-      pdf.addImage(imgData, 0, 0, (canvas.width), (canvas.height));
-      pdf.save('converteddoc.pdf');
-      return  'ok'; 
-    });
-
-    return;  */
 
     html2canvas(div, options).then((canvas) => {
 
