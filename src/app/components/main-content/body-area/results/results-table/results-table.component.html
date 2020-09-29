@@ -60,7 +60,7 @@
                        </tr> -->
                        
                        <!-- ((dtResultsObjectsHelp[row.index].CatalogNo[PrtNum] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)|| -->
-                    <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: 'asc':sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected">
+                    <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected">
                        <td>
                         <img src="{{arrResultImgsItem[row.index]}}"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">

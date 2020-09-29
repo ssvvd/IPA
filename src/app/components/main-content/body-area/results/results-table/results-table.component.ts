@@ -55,6 +55,7 @@ export class ResultsTableComponent implements OnInit {
   ErrMsg:boolean=false;
   lasTypeFeed:string="";
   sortProp:string="";
+  sortType:string="";
   countrow:number=0;
   showingrows:number=0;
   lastTypeMainFilter:string="";
@@ -87,6 +88,7 @@ export class ResultsTableComponent implements OnInit {
 
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
+  this.sortType = 'asc';
   this.ErrMsg = false
   this.countrow = 0
   this.lastTypeMainFilter = "FilterRec"
@@ -864,6 +866,7 @@ ngOnChanges(changes:SimpleChanges) {
               case 'FilterRec':
                 this.filterRecommended(this.dtResultsObjectsHelp[i]);
                 this.sortProp = 'index';
+                this.sortType = 'asc';
                   // if (this.dtResultsObjectsHelp[i].IsExpand == "False")
                   // this.dtResultsObjectsHelp[i].isHidden++
                 break;
@@ -871,11 +874,13 @@ ngOnChanges(changes:SimpleChanges) {
                   if (this.dtResultsObjectsHelp[i].IsExpand == "False" || this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden--
                   this.sortProp = 'index';
+                  this.sortType = 'asc';
                 break;
               case 'FilterSeller':
                 if (this.dtResultsObjectsHelp[i].AverageUse < 1)
                   this.dtResultsObjectsHelp[i].isHidden++
                   this.sortProp = 'AverageUse';
+                  this.sortType = 'desc';
                   if(this.lastTypeMainFilter == "FilterRec" && this.dtResultsObjectsHelp[i].IsExpand == "False"){
                     this.dtResultsObjectsHelp[i].isHidden--
                   }
@@ -930,6 +935,7 @@ ngOnChanges(changes:SimpleChanges) {
                 case 'ClearAll':
                   this.dtResultsObjectsHelp[i].isHidden = 0;
                   this.sortProp = 'index';
+                  this.sortType = 'asc';
                   this.filterRecommended(this.dtResultsObjectsHelp[i]);
                   break;
 
