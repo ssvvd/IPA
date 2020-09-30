@@ -1,10 +1,14 @@
 <ng-container >
-    <div class="bold font-weight-bold row justify-content-start w-100">{{'Cutting Data' | translate}}</div>
-
+  <div class="row justify-content-start w-100">
+    <div class="col-3 bold font-weight-bold row justify-content-start">{{'Cutting Data' | translate}}</div>
+    <div class="col-2" ></div>
+    <div class="col-3 row text-center bold font-weight-bold">ITA Recommendation</div>
+    <div class="col-2" ></div>
+  </div>
     <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
-        <div class="col-4">{{'Initial diameter' | translate }}</div>
-        <div class="col-3">D<sub>i</sub></div>
-        <div class="col-3 grayDiv text-center">{{Di}}</div>
+        <div class="col-3 row">{{'Initial diameter' | translate }}</div>
+        <div class="col-2">D<sub>i</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Di}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
 
@@ -13,77 +17,77 @@
 
 
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Initial diameter' | translate }}</div>
-        <div class="col-3">D<sub>i</sub>1</div>
-        <div class="col-3 grayDiv text-center">{{Di}}</div>
+        <div class="col-3 row">{{'Initial diameter' | translate }}</div>
+        <div class="col-2">D<sub>i</sub>1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Di}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Penetration Length' | translate }}</div>
-        <div class="col-3">LP1</div>
-        <div class="col-3 grayDiv text-center">{{LP1}}</div>
+        <div class="col-3 row">{{'Penetration Length' | translate }}</div>
+        <div class="col-2">LP1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LP1}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
-        <div class="col-4">{{'Axial length' | translate }}</div>
-        <div class="col-3">LA1</div>
-        <div class="col-3 grayDiv text-center">{{LA1}}</div>
+        <div class="col-3 row">{{'Axial length' | translate }}</div>
+        <div class="col-2">LA1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LA1}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
-        <div class="col-4">{{'Radial length' | translate }}</div>
-        <div class="col-3">LR1</div>
-        <div class="col-3 grayDiv text-center">{{LR1}}</div>
+        <div class="col-3 row">{{'Radial length' | translate }}</div>
+        <div class="col-2">LR1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LR1}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Cutting length' | translate }}</div>
-        <div class="col-3">LA1</div>
-        <div class="col-3 grayDiv text-center">{{LA1}}</div>
+        <div class="col-3 row">{{'Cutting length' | translate }}</div>
+        <div class="col-2">LA1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LA1}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Machining Depth' | translate }}</div>
-        <div class="col-3">LR1</div>
-        <div class="col-3 grayDiv text-center">{{LR1}}</div>
+        <div class="col-3 row">{{'Machining Depth' | translate }}</div>
+        <div class="col-2">LR1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LR1}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
 
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Final diameter' | translate }}</div>
-        <div class="col-3">D<sub>f</sub>1</div>
-        <div class="col-3 grayDiv text-center">{{Df1}}</div>
+        <div class="col-3 row">{{'Final diameter' | translate }}</div>
+        <div class="col-2">D<sub>f</sub>1</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Df1}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
 
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Cutting speed' | translate }}</div>
-        <div class="col-3">V<sub>c</sub></div>
-        <div class="col-3 grayDiv text-center">{{Vc}}</div>
+        <div class="col-3 row">{{'Cutting speed' | translate }}</div>
+        <div class="col-2">V<sub>c</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vc}}</div>
         <div class="col-2">m/min</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Feed per rev' | translate }}</div>
-        <div class="col-3">f<sub>r</sub></div>
-        <div class="col-3 grayDiv text-center">{{fr}}</div>
+        <div class="col-3 row">{{'Feed per rev' | translate }}</div>
+        <div class="col-2">f<sub>r</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{fr}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Depth of cut' | translate }}</div>
-        <div class="col-3">a<sub>p</sub></div>
-        <div class="col-3 grayDiv text-center">{{ap}}</div>
+        <div class="col-3 row">{{'Depth of cut' | translate }}</div>
+        <div class="col-2">a<sub>p</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{ap}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Number of passes' | translate }}</div>
-        <div class="col-3">NOPP</div>
-        <div class="col-3 grayDiv text-center">{{NOPP}}</div>
+        <div class="col-3 row">{{'Number of passes' | translate }}</div>
+        <div class="col-2">NOPP</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{NOPP}}</div>
         <div class="col-2"></div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Material removal rate' | translate }}</div>
-        <div class="col-3">MRR</div>
-        <div class="col-3 grayDiv text-center">{{MRR}}</div>
+        <div class="col-3 row">{{'Material removal rate' | translate }}</div>
+        <div class="col-2">MRR</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR}}</div>
         <div class="col-2">cm<sup>3</sup>/min</div>
       </div>
 
@@ -92,93 +96,93 @@
 
 
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Initial diameter' | translate }}</div>
-        <div class="col-3">D<sub>i</sub>2</div>
-        <div class="col-3 grayDiv text-center">{{Di2}}</div>
+        <div class="col-3 row">{{'Initial diameter' | translate }}</div>
+        <div class="col-2">D<sub>i</sub>2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Di2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Penetration Length' | translate }}</div>
-        <div class="col-3">LP2</div>
-        <div class="col-3 grayDiv text-center">{{LP2}}</div>
+        <div class="col-3 row">{{'Penetration Length' | translate }}</div>
+        <div class="col-2">LP2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LP2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
-        <div class="col-4">{{'Axial length' | translate }}</div>
-        <div class="col-3">LA2</div>
-        <div class="col-3 grayDiv text-center">{{LA2}}</div>
+        <div class="col-3 row">{{'Axial length' | translate }}</div>
+        <div class="col-2">LA2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LA2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='970'">
-        <div class="col-4">{{'Radial length' | translate }}</div>
-        <div class="col-3">LR2</div>
-        <div class="col-3 grayDiv text-center">{{LR2}}</div>
+        <div class="col-3 row">{{'Radial length' | translate }}</div>
+        <div class="col-2">LR2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LR2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Machining Depth' | translate }}</div>
-        <div class="col-3">LR2</div>
-        <div class="col-3 grayDiv text-center">{{LR2}}</div>
+        <div class="col-3 row">{{'Machining Depth' | translate }}</div>
+        <div class="col-2">LR2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LR2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='870'">
-        <div class="col-4">{{'Cutting length' | translate }}</div>
-        <div class="col-3">LA2</div>
-        <div class="col-3 grayDiv text-center">{{LA2}}</div>
+        <div class="col-3 row">{{'Cutting length' | translate }}</div>
+        <div class="col-2">LA2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LA2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
 
 
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Final diameter' | translate }}</div>
-        <div class="col-3">D<sub>f</sub>2</div>
-        <div class="col-3 grayDiv text-center">{{Df2}}</div>
+        <div class="col-3 row">{{'Final diameter' | translate }}</div>
+        <div class="col-2">D<sub>f</sub>2</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Df2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
 
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Cutting speed' | translate }}</div>
-        <div class="col-3">V<sub>c</sub></div>
-        <div class="col-3 grayDiv text-center">{{Vc2}}</div>
+        <div class="col-3 row">{{'Cutting speed' | translate }}</div>
+        <div class="col-2">V<sub>c</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vc2}}</div>
         <div class="col-2">m/min</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Feed per rev' | translate }}</div>
-        <div class="col-3">f<sub>r</sub></div>
-        <div class="col-3 grayDiv text-center">{{fr2}}</div>
+        <div class="col-3 row">{{'Feed per rev' | translate }}</div>
+        <div class="col-2">f<sub>r</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{fr2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/rev</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Depth of cut' | translate }}</div>
-        <div class="col-3">a<sub>p</sub></div>
-        <div class="col-3 grayDiv text-center">{{ap2}}</div>
+        <div class="col-3 row">{{'Depth of cut' | translate }}</div>
+        <div class="col-2">a<sub>p</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{ap2}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Number of passes' | translate }}</div>
-        <div class="col-3">NOPP</div>
-        <div class="col-3 grayDiv text-center">{{NOPP2}}</div>
+        <div class="col-3 row">{{'Number of passes' | translate }}</div>
+        <div class="col-2">NOPP</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{NOPP2}}</div>
         <div class="col-2"></div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-4">{{'Material removal rate' | translate }}</div>
-        <div class="col-3">MRR</div>
-        <div class="col-3 grayDiv text-center">{{MRR2}}</div>
+        <div class="col-3 row">{{'Material removal rate' | translate }}</div>
+        <div class="col-2">MRR</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR2}}</div>
         <div class="col-2">cm<sup>3</sup>/min</div>
       </div>
 <br>
 <div class="bold font-weight-bold row justify-content-start w-100">{{'Tool Assembly Data' | translate}}</div>
 
 <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Overhang' | translate }}</div>
-    <div class="col-3">O</div>
-    <div class="col-3 grayDiv text-center">{{O}}</div>
+    <div class="col-3 row">{{'Overhang' | translate }}</div>
+    <div class="col-2">O</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{O}}</div>
     <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
   </div>
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Assembly weight' | translate }}</div>
-    <div class="col-3">AW</div>
-    <div class="col-3 grayDiv text-center">{{AW}}</div>
+    <div class="col-3 row">{{'Assembly weight' | translate }}</div>
+    <div class="col-2">AW</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{AW}}</div>
     <div class="col-2">kg</div>
   </div>
 
@@ -190,37 +194,37 @@
 <div class="row justify-content-start w-100"><u>{{'Axial' | translate}}</u></div>
 
 <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Mean Power' | translate }}</div>
-    <div class="col-3">P</div>
-    <div class="col-3 grayDiv text-center">{{P}}</div>
+    <div class="col-3 row">{{'Mean Power' | translate }}</div>
+    <div class="col-2">P</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P}}</div>
     <div class="col-2">kW</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Mean Torque' | translate }}</div>
-    <div class="col-3">T</div>
-    <div class="col-3 grayDiv text-center">{{T}}</div>
+    <div class="col-3 row">{{'Mean Torque' | translate }}</div>
+    <div class="col-2">T</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T}}</div>
     <div class="col-2">Nm</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Average feed speed' | translate }}</div>
-    <div class="col-3">V<sub>f</sub></div>
-    <div class="col-3 grayDiv text-center">{{Vf}}</div>
+    <div class="col-3 row">{{'Average feed speed' | translate }}</div>
+    <div class="col-2">V<sub>f</sub></div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf}}</div>
     <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Spindle speed' | translate }}</div>
-    <div class="col-3">n</div>
-    <div class="col-3 grayDiv text-center">{{n}}</div>
+    <div class="col-3 row">{{'Spindle speed' | translate }}</div>
+    <div class="col-2">n</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n}}</div>
     <div class="col-2">rpm</div>
   </div>
 
   <div class="row justify-content-start w-100" >
-    <div class="col-4">{{'Tangential force' | translate }}</div>
-    <div class="col-3">F<sub>t</sub></div>
-    <div class="col-3 grayDiv text-center">{{Ft}}</div>
+    <div class="col-3 row">{{'Tangential force' | translate }}</div>
+    <div class="col-2">F<sub>t</sub></div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Ft}}</div>
     <div class="col-2">N</div>
   </div> 
 
@@ -228,37 +232,37 @@
 <div class="row justify-content-start w-100"><u>{{'Radial' | translate}}</u></div>
 
 <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Mean Power' | translate }}</div>
-    <div class="col-3">P</div>
-    <div class="col-3 grayDiv text-center">{{P2}}</div>
+    <div class="col-3 row">{{'Mean Power' | translate }}</div>
+    <div class="col-2">P</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P2}}</div>
     <div class="col-2">kW</div>
   </div>
 
   <div class="row justify-content-start w-100" >
-    <div class="col-4">{{'Mean Torque' | translate }}</div>
-    <div class="col-3">T</div>
-    <div class="col-3 grayDiv text-center">{{T2}}</div>
+    <div class="col-3 row">{{'Mean Torque' | translate }}</div>
+    <div class="col-2">T</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T2}}</div>
     <div class="col-2">Nm</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Average feed speed' | translate }}</div>
-    <div class="col-3">V<sub>f</sub></div>
-    <div class="col-3 grayDiv text-center">{{Vf2}}</div>
+    <div class="col-3 row">{{'Average feed speed' | translate }}</div>
+    <div class="col-2">V<sub>f</sub></div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf2}}</div>
     <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Spindle speed' | translate }}</div>
-    <div class="col-3">n</div>
-    <div class="col-3 grayDiv text-center">{{n2}}</div>
+    <div class="col-3 row">{{'Spindle speed' | translate }}</div>
+    <div class="col-2">n</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n2}}</div>
     <div class="col-2">rpm</div>
   </div>
 
   <div class="row justify-content-start w-100" >
-    <div class="col-4">{{'Tangential force' | translate }}</div>
-    <div class="col-3">F<sub>t</sub></div>
-    <div class="col-3 grayDiv text-center">{{Ft2}}</div>
+    <div class="col-3 row">{{'Tangential force' | translate }}</div>
+    <div class="col-2">F<sub>t</sub></div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Ft2}}</div>
     <div class="col-2">N</div>
   </div> 
 
@@ -266,126 +270,126 @@
 <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
 
 <div class="row justify-content-start w-100">
-  <div class="col-4">{{'Machine cost (per hour)' | translate }}</div>
-  <div class="col-3">MCH</div>
-  <div class="col-3 grayDiv text-center">{{MCH}}</div>
+  <div class="col-3 row">{{'Machine cost (per hour)' | translate }}</div>
+  <div class="col-2">MCH</div>
+  <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MCH}}</div>
   <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/hour</div>
 </div>
 <div class="row justify-content-start w-100">
-  <div class="col-4">{{'Batch size ' | translate }}</div>
-  <div class="col-3">B</div>
-  <div class="col-3 grayDiv text-center">{{B}}</div>
+  <div class="col-3 row">{{'Batch size ' | translate }}</div>
+  <div class="col-2">B</div>
+  <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{B}}</div>
   <div class="col-2">Units</div>
 </div>
 
 <div class="row justify-content-start w-100">
-  <div class="col-4">{{'Axial - Cutting time per feature' | translate }}</div>
-  <div class="col-3">CTF<sub>a</sub></div>
-  <div class="col-3 grayDiv text-center">{{CTFa}}</div>
+  <div class="col-3 row">{{'Axial - Cutting time per feature' | translate }}</div>
+  <div class="col-2">CTF<sub>a</sub></div>
+  <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFa}}</div>
   <div class="col-2">mm:ss</div>
 </div>
 <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Radial - Cutting time per feature' | translate }}</div>
-    <div class="col-3">CTF<sub>r</sub></div>
-    <div class="col-3 grayDiv text-center">{{CTFr}}</div>
+    <div class="col-3 row">{{'Radial - Cutting time per feature' | translate }}</div>
+    <div class="col-2">CTF<sub>r</sub></div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFr}}</div>
     <div class="col-2">mm:ss</div>
   </div>
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Cutting time per part' | translate }}</div>
-    <div class="col-3">CTP</div>
-    <div class="col-3 grayDiv text-center">{{CTP}}</div>
+    <div class="col-3 row">{{'Cutting time per part' | translate }}</div>
+    <div class="col-2">CTP</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTP}}</div>
     <div class="col-2">mm:ss</div>
   </div>
 <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Tool life length' | translate }}</div>
-    <div class="col-3">TLL</div>
-    <div class="col-3 grayDiv text-center">{{TLL}}</div>
+    <div class="col-3 row">{{'Tool life length' | translate }}</div>
+    <div class="col-2">TLL</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLL}}</div>
     <div class="col-2">m</div>
   </div>
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Tool life time' | translate }}</div>
-    <div class="col-3">TLT</div>
-    <div class="col-3 grayDiv text-center">{{TLT}}</div>
+    <div class="col-3 row">{{'Tool life time' | translate }}</div>
+    <div class="col-2">TLT</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLT}}</div>
     <div class="col-2">mm:ss</div>
   </div>
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'No. of Edges per Insert' | translate }}</div>
-    <div class="col-3">CEDC</div>
-    <div class="col-3 grayDiv text-center">{{CEDC}}</div>
+    <div class="col-3 row">{{'No. of Edges per Insert' | translate }}</div>
+    <div class="col-2">CEDC</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CEDC}}</div>
     <div class="col-2">Edges/Insert</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Insert price' | translate }}</div>
-    <div class="col-3">IP</div>
-    <div class="col-3 grayDiv text-center">{{IP}}</div>
+    <div class="col-3 row">{{'Insert price' | translate }}</div>
+    <div class="col-2">IP</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IP}}</div>
     <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
   </div>
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Tool price' | translate }}</div>
-    <div class="col-3">TP</div>
-    <div class="col-3 grayDiv text-center">{{TP}}</div>
+    <div class="col-3 row">{{'Tool price' | translate }}</div>
+    <div class="col-2">TP</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TP}}</div>
     <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
   </div>
 
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'No. of parts per cutting edge' | translate }}</div>
-    <div class="col-3">PCE</div>
-    <div class="col-3 grayDiv text-center">{{PCE}}</div>
+    <div class="col-3 row">{{'No. of parts per cutting edge' | translate }}</div>
+    <div class="col-2">PCE</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{PCE}}</div>
     <div class="col-2">pcs</div>
   </div>   
   <div class="row justify-content-start w-100">
-    <div class="col-4">{{'Total number of Inserts' | translate }}</div>
-    <div class="col-3">IPB</div>
-    <div class="col-3 grayDiv text-center">{{IPB}}</div>
+    <div class="col-3 row">{{'Total number of Inserts' | translate }}</div>
+    <div class="col-2">IPB</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IPB}}</div>
     <div class="col-2">Inserts/batch</div>
   </div>
   <div class="row justify-content-start w-100" >
-      <div class="col-4">{{'Total number of Tools' | translate }}</div>
-      <div class="col-3">TPB</div>
-      <div class="col-3 grayDiv text-center">{{TPB}}</div>
+      <div class="col-3 row">{{'Total number of Tools' | translate }}</div>
+      <div class="col-2">TPB</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TPB}}</div>
       <div class="col-2">Tools/batch</div>
     </div>
     <div class="row justify-content-start w-100" >
-      <div class="col-4">{{'Total Inserts cost' | translate }}</div>
-      <div class="col-3">TIC</div>
-      <div class="col-3 grayDiv text-center">{{TIC}}</div>
+      <div class="col-3 row">{{'Total Inserts cost' | translate }}</div>
+      <div class="col-2">TIC</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TIC}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100" >
-      <div class="col-4">{{'Total Tools cost' | translate }}</div>
-      <div class="col-3">TTC</div>
-      <div class="col-3 grayDiv text-center">{{TTC}}</div>
+      <div class="col-3 row">{{'Total Tools cost' | translate }}</div>
+      <div class="col-2">TTC</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TTC}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100" >
-      <div class="col-4">{{'Total Tooling cost' | translate }}</div>
-      <div class="col-3">TGC</div>
-      <div class="col-3 grayDiv text-center">{{TGC}}</div>
+      <div class="col-3 row">{{'Total Tooling cost' | translate }}</div>
+      <div class="col-2">TGC</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TGC}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100">
-      <div class="col-4">{{'Machine cost ' | translate }}</div>
-      <div class="col-3">MCB</div>
-      <div class="col-3 grayDiv text-center">{{MCB}}</div>
+      <div class="col-3 row">{{'Machine cost ' | translate }}</div>
+      <div class="col-2">MCB</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MCB}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100">
-      <div class="col-4">{{'Machine time per batch' | translate }}</div>
-      <div class="col-3">MTB</div>
-      <div class="col-3 grayDiv text-center">{{MTB}}</div>
+      <div class="col-3 row">{{'Machine time per batch' | translate }}</div>
+      <div class="col-2">MTB</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MTB}}</div>
       <div class="col-2">mm:ss</div>
     </div>
     <div class="row justify-content-start w-100">
-      <div class="col-4">{{'Total cost' | translate }}</div>
-      <div class="col-3">TCB</div>
-      <div class="col-3 grayDiv text-center">{{TCB}}</div>
+      <div class="col-3 row">{{'Total cost' | translate }}</div>
+      <div class="col-2">TCB</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TCB}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
     <div class="row justify-content-start w-100">
-      <div class="col-4">{{'Cost per unit' | translate }}</div>
-      <div class="col-3">CPU</div>
-      <div class="col-3 grayDiv text-center">{{CPU}}</div>
+      <div class="col-3 row">{{'Cost per unit' | translate }}</div>
+      <div class="col-2">CPU</div>
+      <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CPU}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/unit</div>
     </div>
 </ng-container>

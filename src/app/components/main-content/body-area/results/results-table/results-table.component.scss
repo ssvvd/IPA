@@ -61,3 +61,19 @@ table.dataTable thead th {
   .icon-noResult{
     height: 200px;
   }
+
+  .div-datatable{  
+    background: var(--bg-gray);
+}
+
+.ulHover:hover *{
+  text-decoration: underline !important;
+}
+
+.ulHover:hover{
+  text-decoration: underline !important;
+}
+
+.ulHover > label {
+  border-width: 0px;
+}

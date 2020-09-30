@@ -1,21 +1,27 @@
 <ng-container >
 
-        <div *ngIf="selectedOption" class="row justify-content-start w-100 grayDiv ">
-          <div class="col-2">
+        <div *ngIf="selectedOption" class="row justify-content-start w-100 ">
+          <div style="min-width:21%;max-width:21%;">
              <img  src="{{selectedOption.itemImg}}"
-            (error) ="changeSource($event, selectedOption.familyImg)" class="img-grid"></div>
-          <div class="col-3">
+            (error) ="changeSource($event, selectedOption.familyImg)" class="img-grid mb-0"></div>
+          <div style="min-width:20%;">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Designation' | translate}}</div>
 
-            <div *ngFor="let row of selectedOption.Designation; ; let i = index;" [hidden]="row.trim() == '-' || row.trim() == ''">{{selectedOption.GroupText[i]}}: {{ row}} {{ selectedOption.Grade[i]}}</div>
+            <div *ngFor="let row of selectedOption.Designation; ; let i = index;" 
+            [hidden]="row.trim() == '-' || row.trim() == ''">
+              {{selectedOption.GroupText[i]}}: 
+              <div class="btn sileLinks pt-0 pl-0 pr-0 pb-0"  (click)="goToCatalog(i)">
+                {{ row}} {{ selectedOption.Grade[i]}}
+              </div>
+            </div>
           </div>
-          <div class="col-2 ">
+          <div style="min-width:20%;">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Catalog No.' | translate}}</div>
 
             <div *ngFor="let row of selectedOption.CatalogNo; ;" [hidden]="row.trim() == '-' || row.trim() == ''">{{row}}</div>
 
           </div>
-          <div class="col-5">
+          <div style="min-width:39%;max-width:39%;">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Comments' | translate}}</div>
 
             <div *ngFor="let row of selectedOption.info; ; ">{{row}}</div>
@@ -27,3 +33,4 @@
 
 
 </ng-container>
+<hr>

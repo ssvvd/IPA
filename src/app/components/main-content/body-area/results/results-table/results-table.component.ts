@@ -55,6 +55,7 @@ export class ResultsTableComponent implements OnInit {
   ErrMsg:boolean=false;
   lasTypeFeed:string="";
   sortProp:string="";
+  sortType:string="";
   countrow:number=0;
   showingrows:number=0;
   lastTypeMainFilter:string="";
@@ -89,6 +90,7 @@ export class ResultsTableComponent implements OnInit {
 
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
+  this.sortType = 'asc';
   this.ErrMsg = false
   this.countrow = 0
   this.lastTypeMainFilter = "FilterRec"
@@ -860,18 +862,21 @@ ngOnChanges(changes:SimpleChanges) {
               case 'FilterRec':
                 this.filterRecommended(this.dtResultsObjectsHelp[i]);
                 this.sortProp = 'index';
+                this.sortType = 'asc';
                   // if (this.dtResultsObjectsHelp[i].IsExpand == "False")
                   // this.dtResultsObjectsHelp[i].isHidden++
                 break;
               case 'FilteAllRes':
-                  if (this.dtResultsObjectsHelp[i].IsExpand == "False" || this.dtResultsObjectsHelp[i].AverageUse < 1)
+                  if (this.dtResultsObjectsHelp[i].IsExpand == "False")
                   this.dtResultsObjectsHelp[i].isHidden--
                   this.sortProp = 'index';
+                  this.sortType = 'asc';
                 break;
               case 'FilterSeller':
-                if (this.dtResultsObjectsHelp[i].AverageUse < 1)
-                  this.dtResultsObjectsHelp[i].isHidden++
+                // if (this.dtResultsObjectsHelp[i].AverageUse < 1)
+                //   this.dtResultsObjectsHelp[i].isHidden++
                   this.sortProp = 'AverageUse';
+                  this.sortType = 'desc';
                   if(this.lastTypeMainFilter == "FilterRec" && this.dtResultsObjectsHelp[i].IsExpand == "False"){
                     this.dtResultsObjectsHelp[i].isHidden--
                   }
@@ -926,6 +931,7 @@ ngOnChanges(changes:SimpleChanges) {
                 case 'ClearAll':
                   this.dtResultsObjectsHelp[i].isHidden = 0;
                   this.sortProp = 'index';
+                  this.sortType = 'asc';
                   this.filterRecommended(this.dtResultsObjectsHelp[i]);
                   break;
 
@@ -964,9 +970,9 @@ filterRecommended(prop:clsHelpProp){
     // else
     //     prop.isHidden--
 
-        if(this.lastTypeMainFilter == "FilterSeller" && prop.AverageUse < 1){
-          prop.isHidden--
-        }
+        // if(this.lastTypeMainFilter == "FilterSeller" && prop.AverageUse < 1){
+        //   prop.isHidden--
+        // }
 }
 
 
@@ -1002,6 +1008,23 @@ viewInventory(index:number)
 contactus()
 {
   const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});                  
+}
+
+goToCatalog(rowIndex:number,itemIndex:number){
+  // if (row.trim().length != 7){
+  //   return this.sanitizer.bypassSecurityTrustResourceUrl('')
+  // }
+  // let _index:number = this.selectedOption.CatalogNo.indexOf(row)
+  let mapp:string = 'IT'
+  if (this.dtResultsObjectsHelp[rowIndex].itemType[itemIndex].trim() != 'H'){
+    mapp = this.srv_StMng.SecAppSelected.MainApp
+  }
+
+  let url:string = environment.eCatItemPage + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim()  + '&fnum=' + this.dtResultsObjectsHelp[rowIndex].Families[itemIndex].trim()
+   + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang
+
+   window.open(url, "_blank");
+  // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 }
 

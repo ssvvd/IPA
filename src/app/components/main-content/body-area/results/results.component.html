@@ -9,10 +9,10 @@
 
 <div class="border-left-gray border-right-gray ">
     <div class="row" [hidden]="!MainPage">
-      <div class="col col-20" [hidden]="_hideFilter">
+      <div class="col col-20 mt-4" [hidden]="_hideFilter">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
-      <div class="col col-80 pl-2 border-left-gray">
+      <div class="col col-80 pl-2 border-left-gray mt-4">
         <div class="row">
         </div>
         <app-results-table #resTable [filterChangedRec]="filterChanged" (hideFilter)="hideFilter($event)" (goToViewEvent)="goToView($event)"></app-results-table>
@@ -22,7 +22,7 @@
     <div class="row" [hidden]="MainPage">
       <div class="container-fluid">              
         <div class="mt-0 ml-0 pl-0 mt-0 pt-2 row" >
-          <div class="col-10">
+          <div class="col-10 pl-0">
           <nav class="ml-0 pl-0 mt-0 pl-0 pt-0" aria-label="breadcrumb">
              <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
                  <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">All</a></li>
@@ -31,7 +31,13 @@
            </nav> 
           </div>        
           <div class="float-right pt-2 col-2 pr-0">
+<<<<<<< HEAD
               <h2 data-toggle="tooltip"  title="{{'Download Result' | translate}}" class="siteTitle cursor-pointer float-right" (click)= "DownLoadResults()">Download
+=======
+              <h2 data-toggle="tooltip"  title="{{'Download Result' | translate}}" class="siteTitle cursor-pointer float-right" (click)= "CreateComponentsForPDF()">
+                <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="CreateComponentsForPDF()">
+                Download
+>>>>>>> 48f89c9a6da78d2a751e19c8b86aa2c0201fd2f0
                 <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
               </h2>            
             </div> 
@@ -75,7 +81,7 @@
 
         </ul>
 
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        <div [ngbNavOutlet]="nav" class="mt-3"></div>
         <!-- <ngb-tabset [destroyOnHide]="false" type="pills" justify="fill">
           
           <ngb-tab title="Machining Parameters">
