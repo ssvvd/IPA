@@ -155,4 +155,13 @@ export class DatalayerService {
     return  this.httpClient.get(s, {responseType: 'blob'});
   }
 
+  public  downloadfilepackage(scatalogno:string,units:string):Observable<any>
+  {  
+    let s:string;    
+    s=environment.API_HOST +  'api/export/download-package-files/'+scatalogno + '/' +units;   
+    return  this.httpClient.get(s, {responseType: 'blob'});
+  }
+
+  
+
 }

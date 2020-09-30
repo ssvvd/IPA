@@ -146,7 +146,7 @@ export class Appdetails54Component implements OnInit {
     if(this.srv_StMng.SecApp=='54')
     {
       this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('DiameterInner',"W:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Width',"W:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('Depth',"DOD:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('DepthInner',"DID:",this.srv_appsetting.UnitslengthDesc);
     } 

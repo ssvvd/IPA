@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { BehaviorSubject } from 'rxjs';
 //import 'jspdf-autotable'
 
 @Injectable({
@@ -18,6 +19,9 @@ export class DownloadresultService {
   
   environment=environment;
   axial_y:number=0;
+  
+  private obsPDFListLoaded = new BehaviorSubject<any>(null);
+  PDFListLoaded = this.obsPDFListLoaded.asObservable();   
 
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService,
               private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) { }
@@ -39,6 +43,8 @@ export class DownloadresultService {
         return this.downloadItemPDF();
       case 'P21':
         return this.srv_DataLayer.downloadp21file(data,this.srv_appsetting.Units);
+      case "FP":
+        return this.srv_DataLayer.downloadfilepackage(data,this.srv_appsetting.Units);
     }    
   }
 
@@ -156,6 +162,7 @@ BuildResult(doc:jsPDF,controlname:string):any
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations.pdf');
+      this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });   
 }

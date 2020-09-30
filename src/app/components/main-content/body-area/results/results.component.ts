@@ -72,7 +72,7 @@ eventsSubject: Subject<void> = new Subject<void>();
     this._hideFilter = true;
   }
 
-  CreateComponentsForPDF()
+  DownLoadResults()
   {  
    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
@@ -95,7 +95,7 @@ eventsSubject: Subject<void> = new Subject<void>();
       
     }
     
-    if(result=="P21") 
+    if(result=="P21" || result=="FP") 
     { 
       this.processdownload =true;
       let sCatalogNo:string ='';
@@ -105,17 +105,29 @@ eventsSubject: Subject<void> = new Subject<void>();
         sCatalogNo = sCatalogNo +c + ',';
       } 
 
-      if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);     
-      return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
+      if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);
+      if(result=='P21')     
+        return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
+        {      
+          var downloadURL = window.URL.createObjectURL(response);
+          var link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = "P21.zip";
+          link.click();
+          this.processdownload =false;
+        }
+      );
+      if(result=='FP')     
+      return this.srv_DataLayer.downloadfilepackage(sCatalogNo,'M').subscribe( response=>       
       {      
         var downloadURL = window.URL.createObjectURL(response);
         var link = document.createElement('a');
         link.href = downloadURL;
-        link.download = "P21.zip";
+        link.download = "GTC.zip";
         link.click();
         this.processdownload =false;
       }
-      );
+    );
     }
    });
  }
