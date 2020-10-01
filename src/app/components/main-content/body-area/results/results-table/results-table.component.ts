@@ -63,13 +63,15 @@ export class ResultsTableComponent implements OnInit {
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
   @Output() hideFilter = new EventEmitter<any>();
-  loadingPDF:boolean=false;
+  processdownload:boolean=false;
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
     private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,private srv_machine: MachineService) { }
 
   ngOnInit() {
+    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;});
+    
      this.dtOptions = {
       pagingType: 'full_numbers',
        "searching": false,
@@ -94,13 +96,7 @@ export class ResultsTableComponent implements OnInit {
   this.lastTypeMainFilter = "FilterRec"
   this.GetResult();
   }
-
-  //remove Sveta
-  /*  GetResult() 
-  {      
-      this.getShowTable();      
-  } */
-
+ 
   GetResult() 
   {  
     if(this.srv_StMng.arrMachineSpindle == null || typeof(this.srv_StMng.arrMachineSpindle) == 'undefined') 
@@ -1004,8 +1000,9 @@ getPropWithoutUnits(pr:string){
 }
 
 DownLoadPDF()
-{  
-    this.srv_down.DownLoadData('PDF');      
+{   
+    this.processdownload =true;
+    setTimeout( () => {this.srv_down.DownLoadData('PDF');}, 1000 );      
 }
 
 viewInventory(index:number)

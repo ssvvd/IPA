@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { BehaviorSubject } from 'rxjs';
 //import 'jspdf-autotable'
 
 @Injectable({
@@ -18,6 +19,9 @@ export class DownloadresultService {
   
   environment=environment;
   axial_y:number=0;
+  
+  private obsPDFListLoaded = new BehaviorSubject<any>(null);
+  PDFListLoaded = this.obsPDFListLoaded.asObservable();   
 
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService,
               private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) { }
@@ -39,6 +43,8 @@ export class DownloadresultService {
         return this.downloadItemPDF();
       case 'P21':
         return this.srv_DataLayer.downloadp21file(data,this.srv_appsetting.Units);
+      case "FP":
+        return this.srv_DataLayer.downloadfilepackage(data,this.srv_appsetting.Units);
     }    
   }
 
@@ -90,19 +96,7 @@ export class DownloadresultService {
 ingDownloaded:any;
 public downloadItemPDF():any {
   
-  var doc = new jsPDF('l');  
- 
-  //doc.addPage();  
-
-  //ָָָָָָָָָָָָָָָָָָָָָָָָ*******************TEST SET IMAGE FROM ANOTHER DOMAIN***********************************
- /*  let img = new Image();
-  this.ingDownloaded=new Image();
-  let imageURL = "https://www.iscar.com/Ecat/JPG2D/3106680.jpg"; 
-  this.ingDownloaded.crossOrigin = 'anonymous';    
-  this.ingDownloaded.addEventListener("load", this.imageReceived(), false);
-  img.src = imageURL;
-  return; */
-//*****************************************************************************************
+  var doc = new jsPDF('l');    
   return this.BuildResultItem(doc,'pdfdata');
 }
 
@@ -156,6 +150,7 @@ BuildResult(doc:jsPDF,controlname:string):any
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations.pdf');
+      this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });   
 }
@@ -198,6 +193,7 @@ BuildResultItem(doc:jsPDF,controlname:string):any
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
+      this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });                        
 }

@@ -37,6 +37,7 @@ eventsSubject: Subject<void> = new Subject<void>();
   }
 
   ngOnInit() {
+    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;});
     this.MainPage = true;   
     this._hideFilter = false; 
   }
@@ -58,13 +59,6 @@ eventsSubject: Subject<void> = new Subject<void>();
     this.MainPage = true;
   }
 
-
-  /* DownLoadData(format:string)
-  {
-     this.srv_down.DownLoadDataItem('PDF') ;          
-    
-  } */
-
   mat_desc:string;
   processdownload:boolean=false;
 
@@ -72,7 +66,7 @@ eventsSubject: Subject<void> = new Subject<void>();
     this._hideFilter = true;
   }
 
-  CreateComponentsForPDF()
+  DownLoadResults()
   {  
    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
@@ -90,12 +84,12 @@ eventsSubject: Subject<void> = new Subject<void>();
         this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
   
       this.IsExport=true; 
-  
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');this.processdownload=false;}, 5000 );    
+
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');}, 5000 );    
       
     }
     
-    if(result=="P21") 
+    if(result=="P21" || result=="FP") 
     { 
       this.processdownload =true;
       let sCatalogNo:string ='';
@@ -105,17 +99,29 @@ eventsSubject: Subject<void> = new Subject<void>();
         sCatalogNo = sCatalogNo +c + ',';
       } 
 
-      if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);     
-      return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
+      if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);
+      if(result=='P21')     
+        return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
+        {      
+          var downloadURL = window.URL.createObjectURL(response);
+          var link = document.createElement('a');
+          link.href = downloadURL;
+          link.download = "P21.zip";
+          link.click();
+          this.processdownload =false;          
+        }
+      );
+      if(result=='FP')     
+      return this.srv_DataLayer.downloadfilepackage(sCatalogNo,'M').subscribe( response=>       
       {      
         var downloadURL = window.URL.createObjectURL(response);
         var link = document.createElement('a');
         link.href = downloadURL;
-        link.download = "P21.zip";
+        link.download = "GTC.zip";
         link.click();
         this.processdownload =false;
       }
-      );
+    );
     }
    });
  }

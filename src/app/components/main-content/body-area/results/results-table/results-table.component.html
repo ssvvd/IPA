@@ -13,7 +13,7 @@
                <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle cursor-pointer ml-4 mb-0"  (click)="DownLoadPDF()">
                   <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadPDF()">
                   Download
-                  <i class="fa fa-spinner fa-spin" *ngIf="loadingPDF"></i>
+                  <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
                </h2> 
             </div>
          </div>
@@ -24,7 +24,7 @@
         <!-- <div class="float-right pb-2 pr-3 pl-4">            
             <div class="pr-3 pl-4">
                <h2 data-toggle="tooltip" title="{{'Download PDF' | translate}}" class="siteTitle float-left cursor-pointer ml-4"  (click)="DownLoadPDF()">PDF
-                  <i class="fa fa-spinner fa-spin" *ngIf="loadingPDF"></i>
+                  <i class="fa fa-spinner fa-spin" *ngIf="flgloadingPDF"></i>
                </h2>              
            </div>
          </div> -->
