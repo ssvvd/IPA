@@ -96,19 +96,7 @@ export class DownloadresultService {
 ingDownloaded:any;
 public downloadItemPDF():any {
   
-  var doc = new jsPDF('l');  
- 
-  //doc.addPage();  
-
-  //ָָָָָָָָָָָָָָָָָָָָָָָָ*******************TEST SET IMAGE FROM ANOTHER DOMAIN***********************************
- /*  let img = new Image();
-  this.ingDownloaded=new Image();
-  let imageURL = "https://www.iscar.com/Ecat/JPG2D/3106680.jpg"; 
-  this.ingDownloaded.crossOrigin = 'anonymous';    
-  this.ingDownloaded.addEventListener("load", this.imageReceived(), false);
-  img.src = imageURL;
-  return; */
-//*****************************************************************************************
+  var doc = new jsPDF('l');    
   return this.BuildResultItem(doc,'pdfdata');
 }
 
@@ -205,6 +193,7 @@ BuildResultItem(doc:jsPDF,controlname:string):any
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
+      this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });                        
 }

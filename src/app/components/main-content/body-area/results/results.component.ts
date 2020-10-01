@@ -37,6 +37,7 @@ eventsSubject: Subject<void> = new Subject<void>();
   }
 
   ngOnInit() {
+    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;});
     this.MainPage = true;   
     this._hideFilter = false; 
   }
@@ -57,13 +58,6 @@ eventsSubject: Subject<void> = new Subject<void>();
   switchPage(){
     this.MainPage = true;
   }
-
-
-  /* DownLoadData(format:string)
-  {
-     this.srv_down.DownLoadDataItem('PDF') ;          
-    
-  } */
 
   mat_desc:string;
   processdownload:boolean=false;
@@ -90,8 +84,8 @@ eventsSubject: Subject<void> = new Subject<void>();
         this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
   
       this.IsExport=true; 
-  
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');this.processdownload=false;}, 5000 );    
+
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');}, 5000 );    
       
     }
     
@@ -114,7 +108,7 @@ eventsSubject: Subject<void> = new Subject<void>();
           link.href = downloadURL;
           link.download = "P21.zip";
           link.click();
-          this.processdownload =false;
+          this.processdownload =false;          
         }
       );
       if(result=='FP')     
