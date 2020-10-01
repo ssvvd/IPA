@@ -572,6 +572,14 @@ switch(this.srv_StMng.SecApp.toString()){
           switch(itemType){
             case 'T':
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+              for (let entry of this.dtResultsObjectsHelp[index].CatalogNoT) {
+              this.srv_Results.getfzminf(entry.trim(),this.dtResultsObjectsHelp[index].SecondaryAppOrig1).subscribe((res: any) => {
+                let _FzminF = JSON.parse(res)
+                if (_FzminF == '02,307-01,SAI' || _FzminF == '01,307-01,SAI'  && this.dtResultsObjectsHelp[index].itemType.indexOf('S') == -1){
+                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Head'
+                }     
+              })}
+              
             break;
             case 'H':
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Shank'
