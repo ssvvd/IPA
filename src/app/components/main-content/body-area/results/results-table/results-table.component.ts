@@ -571,7 +571,7 @@ switch(this.srv_StMng.SecApp.toString()){
               for (let entry of this.dtResultsObjectsHelp[index].CatalogNoT) {
               this.srv_Results.getfzminf(entry.trim(),this.dtResultsObjectsHelp[index].SecondaryAppOrig1).subscribe((res: any) => {
                 let _FzminF = JSON.parse(res)
-                if (_FzminF == '02,307-01,SAI' || _FzminF == '01,307-01,SAI'  && this.dtResultsObjectsHelp[index].itemType.indexOf('S') == -1){
+                if (_FzminF.trim().startsWith('02,307-01,') || _FzminF == '01,307-01,SAI'  && this.dtResultsObjectsHelp[index].itemType.indexOf('S') == -1){
                   this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Head'
                 }     
               })}
