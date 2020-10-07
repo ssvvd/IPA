@@ -29,7 +29,7 @@
             </div>
            <div class="form-group row  pr-0">
                <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 pl-0 pr-0">
-                    <label for="txtPoint1" class="col-sm col-form-label text-nowrap">Point 1</label>
+                    <label for="txtPoint1" class="col-sm col-form-label text-nowrap">{{ 'Point' | translate}} {{'1'}}</label>
                </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 pl-0 pr-2">
                     <input type="number" class="form-control input-chart " id="txtX1" name="txtX1" [(ngModel)]="spindle.N1"
@@ -48,7 +48,7 @@
           
               <div class="form-group row  pr-0">
                   <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 pl-0 pr-0">
-                <label for="txtPoint2" class="col-sm col-form-label  pt-2 text-nowrap">Point 2</label>
+                <label for="txtPoint2" class="col-sm col-form-label  pt-2 text-nowrap">{{'Point' | translate}}{{' 2'}}</label>
                   </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-2">
                     <input type="number" class="form-control input-chart" [attr.id]="'txtX2' + typeChart" name="txtX2" [(ngModel)]="spindle.N2" 
@@ -66,7 +66,7 @@
             </div>  
                <div class="form-group row  pr-0">
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 pl-0 pr-0">
-                    <label for="txtPoint3" class="col-sm col-form-label  pt-2 text-nowrap">Point 3</label>
+                    <label for="txtPoint3" class="col-sm col-form-label  pt-2 text-nowrap">{{'Point' | translate}}{{' 3'}}</label>
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-2">
                 <input type="number" class="form-control  pt-2 input-chart" [attr.id]="'txtX3' + typeChart" name="txtX3" [(ngModel)]="spindle.N3" 
@@ -84,7 +84,7 @@
             </div>  
             <div class="form-group row  pr-0">
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 pl-0 pr-0">
-                    <label for="txtPoint3" class="col-sm col-form-label  pt-2 text-nowrap">Point 4</label>
+                    <label for="txtPoint3" class="col-sm col-form-label  pt-2 text-nowrap">{{'Point' | translate}}{{' 4'}}</label>
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-2">
                     <input type="number" max='100000' class="form-control  pt-2 input-chart" [attr.id]="'txtX4' + typeChart" name="txtX4" [(ngModel)]="spindle.N4" 
