@@ -14,7 +14,7 @@
    <div  class="pl-0 pt-3 pb-2">
         <div class="custom-control custom-radio ">
             <input type="radio" class="custom-control-input" id="optmost1" name="most" [(ngModel)] ="isMostRecom" value="1"  (change)="changeismost();FilterChange($event,false,false,false)"  >
-            <label class="custom-control-label" for="optmost1">{{'Most recommended' | translate}}</label>
+            <label class="custom-control-label" for="optmost1">{{'Most Recommended' | translate}}</label>
         </div>                              
         <div class="custom-control custom-radio ">
             <input type="radio" class="custom-control-input" id="optmost2" name="most" [(ngModel)] ="isMostRecom" value="0" (change)="changeismost();FilterChange($event,false,false,false)">  
@@ -106,7 +106,7 @@
             <label class="custom-control-label cursor-pointer" for="IsMachineTypeStandard"></label>
         </div>
         <div class="pr-4  pl-0 ">
-            <label for="IsMachineTypeStandard" class="form-check-label text-nowrap">Standard</label>
+            <label for="IsMachineTypeStandard" class="form-check-label text-nowrap">{{'Standard' | translate}}</label>
         </div> 
     </div> 
     <div class="row">
@@ -115,7 +115,7 @@
             <label class="custom-control-label cursor-pointer" for="IsMachineTypeHeavyDuty"></label>
         </div>
         <div class="pr-4  pl-0 ">
-            <label for="IsMachineTypeHeavyDuty" class="form-check-label text-nowrap">Heavy Duty</label>
+            <label for="IsMachineTypeHeavyDuty" class="form-check-label text-nowrap">{{'Heavy Duty' | translate}}</label>
         </div> 
     </div> 
     <div class="row">
@@ -124,7 +124,7 @@
             <label class="custom-control-label cursor-pointer" for="IsMachineTypeHighSpeed"></label>
         </div>
         <div class="pr-4  pl-0 ">
-            <label for="IsMachineTypeHighSpeed" class="form-check-label text-nowrap">High speed</label>
+            <label for="IsMachineTypeHighSpeed" class="form-check-label text-nowrap">{{'High Speed' | translate}}</label>
         </div> 
     </div>   
 </div>
@@ -172,7 +172,7 @@
         </div>
     </div>  
     <div class="pr-2 mt-0 pl-2 pt-2">    
-        <label class="pt-4">{{'Rotating Speed (rpm)' | translate}}</label>    
+        <label class="pt-4">{{'Rotating Speed' | translate}}{{' (rpm)'}}</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
             <ng5-slider  [(value)]="machFilter.SpeedMin"  class="form-control-sm" (userChangeEnd)="FilterChange($event,false,true,false)" [(highValue)]="machFilter.SpeedMax" [options]="options_speed"></ng5-slider>
         </div> 

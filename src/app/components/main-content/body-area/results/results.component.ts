@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -31,7 +32,8 @@ _hideFilter:boolean;
 eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
-    private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService) { }
+    private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
+    private srv_appsetting:AppsettingService) { }
   ngAfterViewInit() {
     console.log(this.resTable); 
   }
@@ -125,4 +127,62 @@ eventsSubject: Subject<void> = new Subject<void>();
     }
    });
  }
+
+ CreateURLparamCNCProgram() :string
+{
+  let urlparam:string = '';
+ 
+    urlparam = urlparam + "&units=" + this.srv_statemanage.IPL.GetItem('Units').value ; //objParamList.Item(InpItemName.Units.ToString).Value.ToString
+    urlparam = urlparam + "&threadform=" + this.srv_statemanage.IPL.GetItem('ThreadForm').Value.ToString;
+    urlparam = urlparam + "&pitch=" +  this.srv_statemanage.IPL.GetItem('Pitch').Value;
+    urlparam = urlparam + "&majordiameter=" + this.srv_statemanage.IPL.GetItem('MajorDiameter').Value.ToString;
+
+    if (!this.srv_statemanage.IPL.GetItem('D_Hole').Value.ToString ==null && this.srv_statemanage.IPL.GetItem('D_Hole').Value.ToString != "" &&
+    this.srv_statemanage.IPL.GetItem('D_Hole.ToString').Value.ToString != "0")        
+      urlparam = urlparam + "&size=" + this.srv_statemanage.IPL.GetItem('D_Hole').Value.ToString;
+    else
+      urlparam = urlparam + "&size=" + this.srv_statemanage.IPL.GetItem('Size.ToString').Value.ToString;
+
+/*   if Not objParamList.Item(InpItemName.D_Hole.ToString).Value Is Nothing AndAlso objParamList.Item(InpItemName.D_Hole.ToString).Value.ToString <> "" And objParamList.Item(InpItemName.D_Hole.ToString).Value.ToString <> "0" Then
+      urlparam = urlparam + "&size=" + objParamList.Item(InpItemName.D_Hole.ToString).Value.ToString
+  Else
+      urlparam = urlparam + "&size=" + objParamList.Item(InpItemName.Size.ToString).Value.ToString
+  End If */
+
+  urlparam = urlparam + "&length=" + this.srv_statemanage.IPL.GetItem('LengthOfShoulder_L').Value.ToString;
+
+  //urlparam = urlparam + "&predrilldia=" + this.srv_statemanage.IPL.GetItem('DiameterInner').Value.ToString; todo:check
+  //urlparam = urlparam + "&predrilldia=" + objParamList.Item(InpItemName.DiameterInner.ToString).Value.ToString
+
+  urlparam = urlparam + "&material=" + this.srv_statemanage.IPL.GetItem('Material').Value.ToString;
+  //urlparam = urlparam + "&material=" + objParamList.Item(InpItemName.Material.ToString).Value.ToString
+  
+  urlparam = urlparam + "&sid=" + this.srv_statemanage.IPL.GetItem('SecondaryApplication').Value.ToString;
+  //urlparam = urlparam + "&sid=" + objParamList.Item(InpItemName.SecondaryApplication.ToString).Value.ToString
+
+  urlparam = urlparam + "&lang=" + this.srv_appsetting.Lang;
+
+  if (this.srv_statemanage.IPL.GetItem('ThreadForm').Value.ToString == 'M60' || this.srv_statemanage.IPL.GetItem('ThreadForm').Value.ToString == 'MJ60' )
+    this.srv_statemanage.IPL.GetItem('MachineType').Value='M';           
+ else
+    this.srv_statemanage.IPL.GetItem('MachineType').Value='I';
+
+  urlparam = urlparam + "&pitchunits=" + this.srv_statemanage.IPL.GetItem('MachineType').Value.ToString;
+  //urlparam = urlparam + "&pitchunits=" + objParamList.Item(InpItemName.MachineType.ToString).Value.ToString
+
+  urlparam = urlparam + "&minordiameter=" + this.srv_statemanage.IPL.GetItem('WorkpieceDiameterRad').Value.ToString;
+  
+   //window.open('GCodeCreator.aspx?opt=' + opt + "&catnumbers=" + catnumbers[opt] + "&cuttingspeed=" + cuttingspeed[opt] + "&rpm=" + rpm[opt] + "&feedtable=" + feedtable[opt] + "&feed1=" + feed1[opt] + "&feed=" + feed[opt] + "&rorl=" + rorl[opt] + "&itemtype=" + itemtype[opt] + parURL);            
+  //urlparam = urlparam + "&minordiameter=" + objParamList.Item(InpItemName.WorkpieceDiameterRad.ToString).Value.ToString
+
+  
+
+  return urlparam
+}
+
+CreateURLparamCNCProgramForItem() :string
+{
+  return "";
+
+}
 }

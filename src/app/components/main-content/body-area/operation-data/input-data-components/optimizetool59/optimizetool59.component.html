@@ -88,7 +88,7 @@
       </div>   
     </div>
     <div  *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='57'" class="pt-3 mt-2">
-      <span>RE - </span><span>{{'Corner radius' | translate}}</span>    
+      <span>RE - </span><span>{{'Corner Radius' | translate}}{{' (R)'}}</span>    
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinCornerRadius').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxCornerRadius').value" [options]="options_radius"></ng5-slider>
       </div>   

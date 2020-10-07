@@ -1,18 +1,5 @@
     <div class="container-fluid pl-0 pr-0 mr-0" >
-        <!-- <div class="form-group row" >
-           <label  class="siteTitle pl-4">{{DescSpindle | translate}}</label>
-        </div>   -->
-  <!--   <div class="row">
-        <div class="col-12 col-lg-4 col-xl-4 col-sm-12  p-2">
-            <label class="pl-3 pb-0 mb-0 bold font-weight-bold">{{'Spindle' | translate}} </label>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4 col-sm-12  p-2">
-            <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Speeds and Feeds' | translate}}</label>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4 col-sm-12  p-2">
-            <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Coolant' | translate}}</label>
-        </div>
-    </div>  -->
+   
     <div class="border-top">
         <label  class="siteTitle pl-4 pt-4">{{DescSpindle | translate}}</label>
      </div>
@@ -76,7 +63,7 @@
               <div class="pt-2">
                 <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Speeds and Feeds' | translate}}</label>
                 <div class="form-group row pt-3">
-                    <label for="txtSpindleSpeed" class="col-sm-7 ">{{'Spindle Speed (rpm)' | translate}}</label>
+                    <label for="txtSpindleSpeed" class="col-sm-7 ">{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
                     </div>                    
@@ -94,7 +81,7 @@
                     </div>
                 </div> 
                 <div class="form-group row pt-2">
-                    <label for="txtMaxRapidFeedSpeed" class="col-sm-7"><span>{{'Maximum rapid feed speed' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipm)' }}</span></label>
+                    <label for="txtMaxRapidFeedSpeed" class="col-sm-7"><span>{{'Maximum Rapid Feed Speed' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipm)' }}</span></label>
                     <div class="col-sm-4">
                         <input type="number" class="form-control" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
                     </div>
@@ -137,21 +124,7 @@
                         <label>{{'Internal' | translate}}</label>
                     </div>
                 </div> 
-                <div class="form-group row">
-                    <label for="txtMQL" class="col-7 col-sm-7">MQL</label>
-                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2 ">
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLExt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.ExtMQL">
-                            <label class="custom-control-label" [attr.for]="'optMQLExt' + spindle.SpindleType"></label>
-                        </div>
-                    </div>
-                    <div  class="col-2 col-sm-2 col-lg-2 col-xl-2">                    
-                        <div class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLInt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.IntMQL">
-                            <label class="custom-control-label"  [attr.for]="'optMQLInt' + spindle.SpindleType"></label> 
-                        </div>
-                    </div>        
-                </div> 
+               
                 <div class="form-group row">
                     <label for="txtAirBlast" class="col-7 col-sm-7 ">{{'Air Blast' | translate}}</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
@@ -182,6 +155,21 @@
                         </div>
                     </div>        
                 </div>
+                <div class="form-group row">
+                    <label for="txtMQL" class="col-7 col-sm-7">MQL</label>
+                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2 ">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLExt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.ExtMQL">
+                            <label class="custom-control-label" [attr.for]="'optMQLExt' + spindle.SpindleType"></label>
+                        </div>
+                    </div>
+                    <div  class="col-2 col-sm-2 col-lg-2 col-xl-2">                    
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLInt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.IntMQL">
+                            <label class="custom-control-label"  [attr.for]="'optMQLInt' + spindle.SpindleType"></label> 
+                        </div>
+                    </div>        
+                </div> 
                 <div class="pt-4">
 
                 </div> 

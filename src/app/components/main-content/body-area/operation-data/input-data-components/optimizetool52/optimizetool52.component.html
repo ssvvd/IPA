@@ -127,8 +127,8 @@
         <app-optimizetool-filter [events]="eventsSubject.asObservable()"   *ngIf="isLoad" [labeldescription]="'W Tolerance'"  [fieldname]="'InsertWidthTol'"     [funcname]="'WTOLERANCE'"    [fieldid]="'TD_WTolerance'"></app-optimizetool-filter>  
     </div>
     <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">        
-        <div *ngIf="msrv_StMng.SecApp!='51'"><span>R - </span><span>{{'Insert radius' | translate}}</span></div>
-        <div *ngIf="msrv_StMng.SecApp=='51'"><span>R - </span><span>{{'Corner radius' | translate}}</span></div>    
+        <div *ngIf="msrv_StMng.SecApp!='51'"><span>R - </span><span>{{'Insert Radius' | translate}}</span></div>
+        <div *ngIf="msrv_StMng.SecApp=='51'"><span>R - </span><span>{{'Corner Radius' | translate}}</span></div>    
         <div class="custom-slider pt-0 mt-4" >
             <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
         </div>   
@@ -154,7 +154,7 @@
         </div>   
     </div>
     <div *ngIf="msrv_StMng.SecApp=='51'">
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Max K lead angle'"  [fieldname]="'KappaLeadAngle'"     [funcname]="'KAPPALEADANGLE'"    [fieldid]="'TD_KappaLeadAngle'"></app-optimizetool-filter>
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'K Lead Angle'"  [fieldname]="'KappaLeadAngle'"     [funcname]="'KAPPALEADANGLE'"    [fieldid]="'TD_KappaLeadAngle'"></app-optimizetool-filter>
     </div>
     <div *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">
         <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'R Tolerance'"  [fieldname]="'CornerRadTol'"     [funcname]="'RTOLERANCE'"    [fieldid]="'TD_RTolerance'"></app-optimizetool-filter>
@@ -163,7 +163,7 @@
     <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Catalog No'"  [fieldname]="'CatalogNo'"     [funcname]="'GROOVEINSERTCATALOG'"    [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter>
     <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Insert Grade'"  [fieldname]="'CarbideGrade'"     [funcname]="'GROOVEGRADE'"    [fieldid]="'TD_Grade'"></app-optimizetool-filter>  
     <div *ngIf="msrv_StMng.SecApp=='53' ||  msrv_StMng.SecApp=='50' || msrv_StMng.SecApp=='188'">
-        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Shank diameter'"  [fieldname]="'ShankDiameter'"     [funcname]="'GROOVEINTDIAMETER'"    [fieldid]="'TD_DiameterFrom'"></app-optimizetool-filter>  
+        <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Shank Diameter'"  [fieldname]="'ShankDiameter'"     [funcname]="'GROOVEINTDIAMETER'"    [fieldid]="'TD_DiameterFrom'"></app-optimizetool-filter>  
     </div>
     
     <div *ngIf="msrv_StMng.SecApp=='52' ||  msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='1' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">

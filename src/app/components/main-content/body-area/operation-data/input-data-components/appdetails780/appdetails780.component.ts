@@ -116,8 +116,8 @@ export class Appdetails780Component implements OnInit {
     }
      if(val=='Hole_Blind')
     {     
-      this.srv_StMng.IPL.GetItem('D3').image='inpt_PH_Blindhole_PreholeDiameter720.png';
-      this.srv_StMng.IPL.GetItem('D2').image='inpt_PH_Blindhole_HoleDiameter720.png';
+      this.srv_StMng.IPL.GetItem('D3').image='inpt_PH_BlindHole_PreholeDiameter720.png';
+      this.srv_StMng.IPL.GetItem('D2').image='inpt_PH_BlindHole_HoleDiameter720.png';
       this.srv_StMng.IPL.GetItem('Depth').image='inpt_PH_Blindhole_Depth720.png';      
     }
  }
