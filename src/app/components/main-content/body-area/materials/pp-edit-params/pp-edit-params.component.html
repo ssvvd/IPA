@@ -1,6 +1,6 @@
 <div class="editPrmModal">
 <div class="modal-header">
-    <h4 class="modal-title siteTitle">Edit Parameters - {{modal_group}}</h4>
+    <h4 class="modal-title siteTitle">{{'Edit Parameters' | translate}} - {{modal_group}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.close('A')">
       <span aria-hidden="true" class="span_x">&times;</span>
     </button>
@@ -9,8 +9,8 @@
         <app-hardness-slider></app-hardness-slider>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-select-cancel" (click)="reset()">Reset</button>
-    <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">Cancel</button>
-    <button type="button" class="btn btn-select" (click)="set()">Set</button>
+    <button type="button" class="btn btn-select-cancel" (click)="reset()">{{'Reset' | translate}}</button>
+    <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
+    <button type="button" class="btn btn-select" (click)="set()">{{'Set' | translate}}</button>
   </div>
 </div>

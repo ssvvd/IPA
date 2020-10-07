@@ -7,12 +7,12 @@
          </div>
          <div class="pt-4 row">
             <div class="col-6 pl-0">
-               <label class="pb-0">{{'Found Results' | translate}} : {{showingrows}} {{'out of' | translate}} {{countrow}}</label>
+               <label class="pb-0">{{'Found Results' | translate}} : {{showingrows}} {{'Out of' | translate}} {{countrow}}</label>
             </div>
             <div class="col-6 float-right text-right">
                <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle cursor-pointer ml-4 mb-0"  (click)="DownLoadPDF()">
                   <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadPDF()">
-                  Download
+                  <!-- Download -->
                   <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
                </h2> 
             </div>
@@ -62,7 +62,7 @@
                        <!-- ((dtResultsObjectsHelp[row.index].CatalogNo[PrtNum] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)|| -->
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected">
                        <td>
-                          <img [src]="environment.ImagePath + 'Promotion.svg'" style="height: 35%; position: relative; top:-16px; left: -8px; z-index: 1;">
+                          <img [src]="environment.ImagePath + 'Promotion.svg'" style="height: 35%; position: relative; top:-16px; left: -8px; z-index: 1;" (click)="openPromotion()">
                         <img src="{{arrResultImgsItem[row.index]}}" style="position: relative; left:-50px;"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
@@ -110,13 +110,13 @@
             <img [src]="environment.ImagePath+'no-resultICON.png'" class="icon-noResult">
           </div>
          <div class="col-12 d-flex justify-content-center pb-2 pt-2" >  
-            <p class="pr-2">A matching solution was not found. Please check your input parameters.</p>
+            <p class="pr-2">{{'A Matching Solution Was Not Found. Please Check Your Input Parameters.' | translate }}</p>
          </div>
          <div class="col-12 d-flex justify-content-center pb-2 pt-2" >  
-            <p class="pr-2">You can contact:</p>
-            <a (click)="contactus()" style="text-decoration:underline;cursor: pointer;">ITA support</a> 
+            <p class="pr-2">{{'You Can Contact:' | translate }}</p>
+            <a (click)="contactus()" style="text-decoration:underline;cursor: pointer;">{{'ITA Support' | translate }}</a> 
             <p class="pr-2 pl-2">or</p>     
-            <a href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">your local ISCAR support team.</a>    
+            <a href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">{{'Your Local ISCAR Support Team.' | translate }}</a>    
           </div>
       </div>
 
@@ -126,6 +126,6 @@ bdOpacity ="0.05"
 size="medium"
 color="#676767"
 type="ball-circus">    
-<p style="color:#676767">Please wait while ITA is processing your request. </p> 
+<p style="color:#676767">{{'Please Wait While ITA is Processing Your Request.' | translate }} </p> 
 </ngx-spinner>  
 </div>
