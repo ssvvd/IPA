@@ -33,36 +33,28 @@
         </div>  
         <div class="row">
           <div class="col-6"></div>
-          <div class="col-6  float-right text-right pb-2" >
+          <div class="col-4  float-right text-right pb-2" >
             <div class="row">
-            <div *ngIf="srv_statemanage.SecApp=='119' || srv_statemanage.SecApp=='120'">
-        
-              <label class="shape-ellipse">
-                <div class="row">
-                    <div >
-                        <a href="#"><img [src] = "environment.ImagePath+'icon_NCGenerator.svg'" (click)="OpenCNGenerator()"  class="img-ellipse" title="{{'NC Generator' | translate}}"></a>                                               
-                    </div>
-                    <div class="mt-1 ml-1 mr-2 ">
-                        <label class="label-ellipse  cursor-pointer" (click)="OpenCNGenerator()">{{'NC Generator' | translate}}</label>           
-                    </div>
-                </div> 
-              </label>
-            </div>
-            <div>
-              <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-4 mb-0"  (click)="DownLoadResults()">
-                <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadResults()">              
-                <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
-              </h2>  
-            </div>
-          </div>
-          </div>
-          <!-- <div class="col-6 float-right text-right pb-2">                       
+              <div *ngIf="srv_statemanage.SecApp=='119' || srv_statemanage.SecApp=='120'">        
+                <label class="shape-ellipse">
+                  <div class="row">
+                      <div >
+                          <a href="#"><img [src] = "environment.ImagePath+'icon_NCGenerator.svg'" (click)="OpenCNGenerator()"  class="img-ellipse" title="{{'NC Generator' | translate}}"></a>                                               
+                      </div>
+                      <div class="mt-1 ml-1 mr-2 ">
+                          <label class="label-ellipse  cursor-pointer" (click)="OpenCNGenerator()">{{'NC Generator' | translate}}</label>           
+                      </div>
+                  </div> 
+                </label>
+              </div>
+              <div>
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-4 mb-0"  (click)="DownLoadResults()">
-                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadResults()">
-                  <!-- {{'Download' | translate}} -->
+                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadResults()">              
                   <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
-              </h2>                                    
-          </div> -->
+                </h2>  
+              </div>         
+            </div>  
+          </div>       
       </div>
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
           <li [ngbNavItem]="1" class="navli" id="dataitem1">

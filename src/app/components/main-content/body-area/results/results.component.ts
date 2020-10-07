@@ -92,9 +92,7 @@ eventsSubject: Subject<void> = new Subject<void>();
     }
     
     if(result=="P21" || result=="FP") 
-    { 
-
-      //todo:temp     
+    {      
       this.processdownload =true;
       let sCatalogNo:string ='';
       for (let c of this.viewParams.Res[0].CatalogNo)
@@ -133,98 +131,7 @@ eventsSubject: Subject<void> = new Subject<void>();
  OpenCNGenerator()
  {
    let strpar:string=this.srv_down.CreateURLparamCNCProgram(this.viewParams);
-   window.open('http://intranet.imc.co.il/ITA/GCodeCreator.aspx?' +strpar);   
+   window.open(this.environment.IscarSite + '/ITA/GCodeCreator.aspx?' +strpar);   
  }
 
- /* CreateURLparamCNCProgram() 
-{
-  let urlparam:string = '';
- 
-    urlparam = urlparam + "&units=" + this.srv_statemanage.IPL.GetItem('Units').value.toString() ; 
-    urlparam = urlparam + "&threadform=" + this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString();
-    urlparam = urlparam + "&pitch=" +  this.srv_statemanage.IPL.GetItem('Pitch').value.toString();
-    urlparam = urlparam + "&majordiameter=" + this.srv_statemanage.IPL.GetItem('MajorDiameter').value.toString();
-
-    if (!this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() ==null && this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "" &&
-    this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "0")        
-      urlparam = urlparam + "&size=" + this.srv_statemanage.IPL.GetItem('D_Hole').value.toString();
-    else
-      urlparam = urlparam + "&size=" + this.srv_statemanage.IPL.GetItem('Size').value.toString();
-
-  urlparam = urlparam + "&length=" + this.srv_statemanage.IPL.GetItem('LengthOfShoulder_L').value.toString();
-
-  //urlparam = urlparam + "&predrilldia=" + this.srv_statemanage.IPL.GetItem('DiameterInner').Value.ToString; todo:check
-  //urlparam = urlparam + "&predrilldia=" + objParamList.Item(InpItemName.DiameterInner.ToString).Value.ToString
-
-  urlparam = urlparam + "&material=" + this.srv_statemanage.IPL.GetItem('Material').value.toString();
-  
-  urlparam = urlparam + "&sid=" + this.srv_statemanage.IPL.GetItem('SecondaryApplication').value.toString();
-  
-  urlparam = urlparam + "&lang=" + this.srv_appsetting.Lang;
-
-  if (this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString() == 'M60' || this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString() == 'MJ60' )
-    this.srv_statemanage.IPL.GetItem('MachineType').value='M';           
- else
-    this.srv_statemanage.IPL.GetItem('MachineType').value='I';
-
-  urlparam = urlparam + "&pitchunits=" + this.srv_statemanage.IPL.GetItem('MachineType').value.toString(); 
-  urlparam = urlparam + "&minordiameter=" + this.srv_statemanage.IPL.GetItem('WorkpieceDiameterRad').value.toString();
-  
-  urlparam=this.CreateURLparamCNCProgramForItem() +urlparam ;
-   window.open('GCodeCreator.aspx?' +urlparam);            
-}
-
-CreateURLparamCNCProgramForItem() :string
-{
-  let strpar:string;
-  let catsnumber:string;
-  let cuttingspeed:string='0';
-  let feedtable:string='0';
-  let rpm:string='0';
-  let feed:string='0';
-  let feed1:string='0';
-  let rorl:string='R';
-
-  let cuttingspeedfieldname:string;
-  let FeedTablefieldname:string;
-  let Feedfieldname:string;
-  let FeedGfieldname:string;
-  if (this.srv_statemanage.IPL.GetItem('Units').value.toString() == "M")
-  {
-    cuttingspeedfieldname = "CuttingSpeed";
-    FeedTablefieldname = "FeedTable";
-    Feedfieldname = "Feed";
-    FeedGfieldname = "FeedG";
-  }
-  else
-  {
-    cuttingspeedfieldname = "CuttingSpeed_INCH";
-    FeedTablefieldname = "FeedTable_INCH";
-    Feedfieldname = "Feed_INCH";
-    FeedGfieldname = "FeedG_INCH";
-  }                  
-
-  catsnumber ="";
-  for (let c of this.viewParams.Res[0].CatalogNo)
-  {
-    c=c.replace(/\s/g, "");
-    catsnumber = catsnumber +c + '_';
-  } 
-  for (let d of this.viewParams.Res[1])
-  {
-    let f:any;
-    f=d[0].property.Field;
-    if(f==cuttingspeedfieldname) {if(d[0].value!== 'undefined')  cuttingspeed=d[0].value;}     
-    if(f=='RPM') {if(d[0].value!== 'undefined') rpm=d[0].value;}  
-    if(f==FeedTablefieldname)  {if(d[0].value!== 'undefined') feedtable=d[0].value }
-    if(f==Feedfieldname)  {if(d[0].value!== 'undefined') feed=d[0].value;}
-    if(f==FeedGfieldname)  {if(d[0].value!=='undefined') feed1=d[0].value;}
-    if(f=='RorL')  {if(d[0].value!== 'undefined') rorl=d[0].value;}    
-  }
-  
-  let itemtype:string;
-  itemtype=this.viewParams.Res[0].itemTypeRes;
-  strpar="&catnumbers=" + catsnumber + "&cuttingspeed=" + cuttingspeed + "&rpm=" + rpm + "&feedtable=" + feedtable + "&feed1=" + feed1 + "&feed=" + feed + "&rorl=" + rorl + "&itemtype=" + itemtype;
-  return strpar;
-} */
 }

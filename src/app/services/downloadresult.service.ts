@@ -303,35 +303,30 @@ CreateURLparamCNCProgram(viewParams:any) :string
 {
   let urlparam:string = '';
  
-    urlparam = urlparam + "&units=" + this.srv_statemanage.IPL.GetItem('Units').value.toString() ; 
-    urlparam = urlparam + "&threadform=" + this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString();
-    urlparam = urlparam + "&pitch=" +  this.srv_statemanage.IPL.GetItem('Pitch').value.toString();
-    urlparam = urlparam + "&majordiameter=" + this.srv_statemanage.IPL.GetItem('MajorDiameter').value.toString();
+    urlparam =  + "&units=" + this.srv_statemanage.IPL.GetItem('Units').value.toString() ; 
+    urlparam =  + "&threadform=" + this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString();
+    urlparam =  + "&pitch=" +  this.srv_statemanage.IPL.GetItem('Pitch').value.toString();
+    urlparam =  + "&majordiameter=" + this.srv_statemanage.IPL.GetItem('MajorDiameter').value.toString();
 
     if (!this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() ==null && this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "" &&
     this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "0")        
-      urlparam = urlparam + "&size=" + this.srv_statemanage.IPL.GetItem('D_Hole').value.toString();
+      urlparam =  + "&size=" + this.srv_statemanage.IPL.GetItem('D_Hole').value.toString();
     else
-      urlparam = urlparam + "&size=" + this.srv_statemanage.IPL.GetItem('Size').value.toString();
+      urlparam =  + "&size=" + this.srv_statemanage.IPL.GetItem('Size').value.toString();
 
-  urlparam = urlparam + "&length=" + this.srv_statemanage.IPL.GetItem('LengthOfShoulder_L').value.toString();
-
-  //urlparam = urlparam + "&predrilldia=" + this.srv_statemanage.IPL.GetItem('DiameterInner').Value.ToString; todo:check
-  //urlparam = urlparam + "&predrilldia=" + objParamList.Item(InpItemName.DiameterInner.ToString).Value.ToString
-
-  urlparam = urlparam + "&material=" + this.srv_statemanage.IPL.GetItem('Material').value.toString();
-  
-  urlparam = urlparam + "&sid=" + this.srv_statemanage.IPL.GetItem('SecondaryApplication').value.toString();
-  
-  urlparam = urlparam + "&lang=" + this.srv_appsetting.Lang;
+  urlparam =  + "&length=" + this.srv_statemanage.IPL.GetItem('LengthOfShoulder_L').value.toString();
+  urlparam =  + "&predrilldia=" + this.srv_statemanage.IPL.GetItem('DiameterInner').value.toString(); 
+  urlparam =  + "&material=" + this.srv_statemanage.IPL.GetItem('Material').value.toString();
+  urlparam =  + "&sid=" + this.srv_statemanage.IPL.GetItem('SecondaryApplication').value.toString();
+  urlparam =  + "&lang=" + this.srv_appsetting.Lang;
 
   if (this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString() == 'M60' || this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString() == 'MJ60' )
     this.srv_statemanage.IPL.GetItem('MachineType').value='M';           
  else
     this.srv_statemanage.IPL.GetItem('MachineType').value='I';
 
-  urlparam = urlparam + "&pitchunits=" + this.srv_statemanage.IPL.GetItem('MachineType').value.toString(); 
-  urlparam = urlparam + "&minordiameter=" + this.srv_statemanage.IPL.GetItem('WorkpieceDiameterRad').value.toString();
+  urlparam =  + "&pitchunits=" + this.srv_statemanage.IPL.GetItem('MachineType').value.toString(); 
+  urlparam =  + "&minordiameter=" + this.srv_statemanage.IPL.GetItem('WorkpieceDiameterRad').value.toString();
   
   urlparam=this.CreateURLparamCNCProgramForItem(viewParams) +urlparam ;
   return urlparam;          

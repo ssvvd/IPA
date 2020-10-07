@@ -362,6 +362,11 @@ ClearData()
                 if(arrFormColName_f[i].ItemID=='Minordiameterint') this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
 
             if(arrFormColName_f[i].ItemID=='Helixangle') this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
+
+            if(arrFormColName_f[i].ItemID=='Predrilldiameter') 
+            {
+                this.srv_StMng.IPL.GetItem('DiameterInner').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
+            }
         }  
     }      
   }
