@@ -7,11 +7,11 @@
   <div class="modal-body">
     <div class="form-group row">
         <img src="{{urlImglang}}" Class="clsPromotionImage" 
-        (click)="window.open('https://www.iscar.com/eCatalog/Ecat/datafile/PromotionM/0014.pdf');"
+        (click)="openPDF();"
         (error) ="changeSource($event, urlImg)">
 
         <div Class="clsPromotionDivClick"><a style="color: white;text-decoration:none;" 
-            href="javascript:window.open('https://www.iscar.com/eCatalog/Ecat/datafile/PromotionM/0014.pdf');">{{'Click to See Test Report... ►' | translate}}</a></div>
+            href="openPDF();">{{'Click to See Test Report... ►' | translate}}</a></div>
       <!-- <h4 class="modal-title siteTitle">Are you sure you want to set {{modal_group}} as default?</h4> -->
     </div>
   </div>
