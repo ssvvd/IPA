@@ -3,7 +3,7 @@
         <!-- <h4 class="siteTitle float-left">Results</h4> -->
         <div class="pb-2 pt-0 mt-0 pt-0" >
          <div class="pt-0 pl-0 row">  
-           <h3 class="siteTitle pl-0 pb-0 pt-0 mb-0">Results</h3>
+           <h3 class="siteTitle pl-0 pb-0 pt-0 mb-0">{{'Results' | translate}}</h3>
          </div>
          <div class="pt-4 row">
             <div class="col-6 pl-0">
@@ -32,7 +32,7 @@
         <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
             <thead>
                     <tr id="dtOptions">
-                     <th><label></label></th>  
+                     <th width="15%"><label></label></th>  
                      <th *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
                          <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate"><span class="sort-icon ml-1"></span></label>
                         </th>
@@ -62,7 +62,8 @@
                        <!-- ((dtResultsObjectsHelp[row.index].CatalogNo[PrtNum] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)|| -->
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected">
                        <td>
-                        <img src="{{arrResultImgsItem[row.index]}}"
+                          <img [src]="environment.ImagePath + 'Promotion.svg'" style="height: 35%; position: relative; top:-16px; left: -8px; z-index: 1;">
+                        <img src="{{arrResultImgsItem[row.index]}}" style="position: relative; left:-50px;"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
                        <!--  (click)="viewInfo(row.index) -->

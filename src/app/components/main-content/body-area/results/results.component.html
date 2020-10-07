@@ -25,8 +25,8 @@
           <div class="col-10 pl-0 ">
           <nav class="ml-0 pl-0 mt-0 pl-0 pt-0 " aria-label="breadcrumb">
              <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white pb-0 mb-0 " >
-                 <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">All</a></li>
-                 <li class="breadcrumb-item active text-secondary"  aria-current="page">Result Information</li> 
+                 <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">{{'All' | translate}}</a></li>
+                 <li class="breadcrumb-item active text-secondary"  aria-current="page">{{'Result Information' | translate}}</li> 
              </ol>
            </nav> 
           </div>                
@@ -43,7 +43,7 @@
       </div>
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
           <li [ngbNavItem]="1" class="navli" id="dataitem1">
-            <a ngbNavLink class="siteTitle" >Machining Parameters</a>
+            <a ngbNavLink class="siteTitle" >{{'Machining Parameters' | translate}}</a>
             <ng-template ngbNavContent>
               <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>
@@ -52,7 +52,7 @@
           </li>
 
           <li [ngbNavItem]="2" class="navli">
-            <a ngbNavLink class="siteTitle">Product Information</a>
+            <a ngbNavLink class="siteTitle">{{'Product Information' | translate}}</a>
             <ng-template ngbNavContent>
               <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA1'"></product-info>
@@ -60,7 +60,7 @@
           </li>
 
           <li [ngbNavItem]="3" class="navli">
-            <a ngbNavLink class="siteTitle">2D+3D Representation</a>
+            <a ngbNavLink class="siteTitle">{{'2D+3D Representation' | translate}}</a>
             <ng-template ngbNavContent>
               <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
               <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
@@ -147,10 +147,10 @@
         <div class="form-group">
           <div class="row">
             <div class="pr-2 pl-2 pt-2">
-              <label class="siteTitle">{{srv_statemanage.MainAppSelected.MenuName}}</label>
+              <label class="siteTitle">{{srv_statemanage.MainAppSelected.MenuName | translate}}</label>
             </div>
             <div class="pt-2">
-              <label class="siteTitle">{{srv_statemanage.SecAppSelected.MenuName}}</label>
+              <label class="siteTitle">{{srv_statemanage.SecAppSelected.MenuName | translate}}</label>
             </div>
           </div> 
           <div  style="min-height:500px">       
@@ -184,7 +184,7 @@
         </div>
         <div class="pt-2">
           <div *ngFor="let row of viewParams.Res[0]?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">        
-            <label class="siteTitle font-weight-bold pt-2 pl-3">{{viewParams.Res[0].GroupText[PrtNum]}}:</label>          
+            <label class="siteTitle font-weight-bold pt-2 pl-3">{{viewParams.Res[0].GroupText[PrtNum] | translate}}:</label>          
             <div class="pl-3 pt-2">        
               <result-item-info [viewParamsChanged]="viewParams" [ItemDesignation]="viewParams.Res[0].Designation[PrtNum]" [Family]="viewParams.Res[0].Families[PrtNum]" [CatalogNo]="viewParams.Res[0].CatalogNo[PrtNum]"></result-item-info>
             </div>                      
@@ -197,5 +197,5 @@
   size="medium"
   color="#676767"
   type="ball-circus">    
-  <p style="color:#676767">Please wait while ITA is processing your request. </p> 
+  <p style="color:#676767">{{'Please wait while ITA is processing your request.' | translate}} </p> 
   </ngx-spinner>  

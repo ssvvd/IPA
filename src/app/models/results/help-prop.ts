@@ -79,13 +79,26 @@ export class clsHelpProp {
             this.fZiminFCheckHidden(Res,control);
         else{
             this._FzminF = []
-            for (let entry of this.CatalogNoT) {
-                this.srv_Results.getfzminf(entry.trim(),this.SecondaryAppOrig1 || this.srv_StMng.SecApp).subscribe((res: any) => {
-                    this._FzminF.push(JSON.parse(res)); 
-                    if (this._FzminF.length = this.CatalogNoT.length){
-                        this.fZiminFCheckHidden(Res,control);
-                    }     
-                  })
+            if (this.itemType.indexOf('S') == -1)
+            {
+                for (let entry of this.CatalogNoT) {
+                    this.srv_Results.getfzminf(entry.trim(),this.SecondaryAppOrig1 || this.srv_StMng.SecApp).subscribe((res: any) => {
+                        this._FzminF.push(JSON.parse(res)); 
+                        if (this._FzminF.length = this.CatalogNoT.length){
+                            this.fZiminFCheckHidden(Res,control);
+                        }     
+                      })
+                }
+            }
+            else{
+                for (let entry of this.CatalogNoSI) {
+                    this.srv_Results.getfzminf(entry.trim(),this.SecondaryAppOrig1 || this.srv_StMng.SecApp).subscribe((res: any) => {
+                        this._FzminF.push(JSON.parse(res)); 
+                        if (this._FzminF.length = this.CatalogNoSI.length){
+                            this.fZiminFCheckHidden(Res,control);
+                        }     
+                      })
+                }
             }
             return this._FzminF;
         }
@@ -94,7 +107,9 @@ export class clsHelpProp {
     fZiminFCheckHidden(Res:boolean,control:string){
         switch (control){
             case 'IT':
-                if (this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') == -1){
+                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && !s.trim().startsWith('02,307-01,')).length > 0) ||
+                (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0))
+                 && this.itemType.indexOf('S') == -1){
                   if (!Res)
                       this.isHidden++
                   else
@@ -102,7 +117,9 @@ export class clsHelpProp {
                 }
                   break;
                case 'IH':
-                if (this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') == -1){
+                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim().startsWith('02,307-01,')).length > 0) 
+                || (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0))
+                 && this.itemType.indexOf('S') == -1){
                   if (!Res)
                       this.isHidden++
                   else
@@ -110,7 +127,9 @@ export class clsHelpProp {
                 }
                   break;   
                 case 'ST':
-                if (this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') != -1){
+                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim().startsWith('01,') && (s.trim().endsWith(',SAI') || s.trim().endsWith(',SPI'))).length < 1) ||
+                (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0))
+                 && this.itemType.indexOf('S') != -1){
                     if (!Res)
                         this.isHidden++
                     else
@@ -118,7 +137,9 @@ export class clsHelpProp {
                 }
                     break;   
                 case 'SH':
-                if (this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0 && this.itemType.indexOf('S') != -1){
+                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim().startsWith('01,') && (s.trim().endsWith(',SAI') || s.trim().endsWith(',SPI'))).length > 0) ||
+                (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0))
+                 && this.itemType.indexOf('S') != -1){
                     if (!Res)
                         this.isHidden++
                     else

@@ -321,8 +321,8 @@ if (this.selectedHelp.itemTypeRes == 'S'){
   this.TCB = this.T_TGC + this.MCB
   for (let entry of this.selectedHelp.CatalogNoT) {
     this.srv_Results.getfzminf(entry.trim(),this.selectedHelp.SecondaryAppOrig1).subscribe((res: any) => {
-        let _FzminF = JSON.parse(res)
-        if (_FzminF == '02,307-01,SAI' || _FzminF == '01,307-01,SAI'){
+        let _FzminF:string = JSON.parse(res)
+        if (_FzminF.trim().startsWith('02,307-01,') || _FzminF == '01,307-01,SAI'){
           this.resType = "He"
           this.TCB = this.He_TGC + this.MCB
         }     
