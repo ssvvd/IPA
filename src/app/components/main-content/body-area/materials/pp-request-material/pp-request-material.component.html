@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title siteTitle">Request a new material</h4>
+    <h4 class="modal-title siteTitle">{{'Request a New Material' | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true" class="span_x">&times;</span>
     </button>
@@ -8,29 +8,29 @@
   <div class="modal-body">
     <div class="form-group row">
       <!-- <label *ngIf="environment.internal">&nbsp;(or <a href="#">Login</a> Now)</label> -->
-      <label for="email" class="col-sm-3 ">Email<label class="text-danger">&nbsp;*</label></label>
+      <label for="email" class="col-sm-3 ">{{'Email' | translate}}<label class="text-danger">&nbsp;*</label></label>
       <div class="col-sm-9">
         <input type="text" formControlName="email" class="form-control" id="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
-            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+            <div *ngIf="f.email.errors.required">{{'Email is Required' | translate}}</div>
+            <div *ngIf="f.email.errors.email">{{'Email Must Be a Valid Email Address' | translate}}</div>
         </div>
       </div>
     </div>
     <div class="form-group row">
-        <label for="desc" class="col-sm-3 ">Description<label class="text-danger">&nbsp;*</label></label>
+        <label for="desc" class="col-sm-3 ">{{'Description' | translate}}<label class="text-danger">&nbsp;*</label></label>
         <div class="col-sm-9">
           <input type="text" formControlName="desc" class="form-control" id="desc" [ngClass]="{ 'is-invalid': submitted && f.desc.errors }">
           <div *ngIf="submitted && f.desc.errors" class="invalid-feedback">
-            <div *ngIf="f.desc.errors.required">Description is required</div>
+            <div *ngIf="f.desc.errors.required">{{'Description is Required' | translate}}</div>
         </div>
         </div>
       </div>
       <div class="form-group row">
-        <label for="grp" class="col-sm-3 ">Group</label>
+        <label for="grp" class="col-sm-3 ">{{'Group' | translate}}</label>
         <div class="col-sm-9">
           <select class="custom-select" formControlName="grp">
-            <option selected value="">Choose</option>
+            <option selected value="">{{'Choose' | translate}}</option>
             <option *ngFor="let grp of materialsResult" 
                 [value]="grp.group" >
                 <!-- [value]="grp.group.concat(': ',grp.description)" -->
@@ -40,10 +40,10 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="stndrd" class="col-sm-3 ">Standard</label>
+        <label for="stndrd" class="col-sm-3 ">{{'Standard' | translate}}</label>
         <div class="col-sm-9">
           <select class="custom-select" formControlName="stndrd">
-            <option selected value="">Standard Conversion</option>
+            <option selected value="">{{'Standard Conversion' | translate}}</option>
             <option *ngFor="let st of matStandard" 
                 [value]="st.GWCCNT" >
              {{st.GWCCNT}}
@@ -52,10 +52,10 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="cond" class="col-sm-3 ">Condition</label>
+        <label for="cond" class="col-sm-3 ">{{'Condition' | translate}}</label>
         <div class="col-sm-9">
             <select class="custom-select" formControlName="cond">
-                <option selected value="">Choose</option>
+                <option selected value="">{{'Choose' | translate}}</option>
                 <option *ngFor="let cond of ddlCondition" 
                     [value]="cond.Condition" >
                  {{cond.Condition}}
@@ -64,13 +64,13 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="hardness" class="col-sm-3 ">Hardness</label>
+        <label for="hardness" class="col-sm-3 ">{{'Hardness' | translate}}</label>
         <div class="col-sm-9">
           <app-hardness-slider ></app-hardness-slider>
         </div>
       </div>
       <div class="form-group row">
-        <label for="manf" class="col-sm-3 ">Manufacture/Other</label>
+        <label for="manf" class="col-sm-3 ">{{'Manufacture/Other' | translate}}</label>
         <div class="col-sm-9">
           <input type="text" class="form-control" formControlName="manf" >
         </div>
@@ -82,13 +82,13 @@
         <!-- <div class="row">
           <div class="span4"> -->
             <img src="{{environment.ImgStock}}" class="icon-grid"/>
-            <h4 class="desc-label-big-bold m-1 text-dark">Request sent and will be handled. Follow your email.</h4>
+            <h4 class="desc-label-big-bold m-1 text-dark">{{'Request Sent and Will Be Handled. Follow Your Email.' | translate}}</h4>
           <!-- </div>
         </div> -->
       </div>
       <ng-template  #elseBlock>
-        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">Cancel</button>
-        <button type="button" class="btn btn-select" (click)="onSubmit()">Send</button>
+        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('Close click')">{{'Cancel' | translate}}</button>
+        <button type="button" class="btn btn-select" (click)="onSubmit()">{{'Send' | translate}}</button>
       </ng-template>
   </div>
 </form>

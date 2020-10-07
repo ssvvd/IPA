@@ -1035,5 +1035,12 @@ goToCatalog(rowIndex:number,itemIndex:number){
    window.open(url, "_blank");
   // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
+
+
+openPromotion(){
+
+}
+
+
 }
 
