@@ -9,9 +9,9 @@
 
             <div *ngFor="let row of selectedOption.Designation; ; let i = index;" 
             [hidden]="row.trim() == '-' || row.trim() == ''">
-              {{selectedOption.GroupText[i]}}: 
+              {{selectedOption.GroupText[i] | translate}}: 
               <div class="btn sileLinks pt-0 pl-0 pr-0 pb-0"  (click)="goToCatalog(i)">
-                {{ row}} {{ selectedOption.Grade[i]}}
+                {{ row | translate}} {{ selectedOption.Grade[i]}}
               </div>
             </div>
           </div>

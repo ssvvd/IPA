@@ -1,6 +1,6 @@
 <div class="selectColsModal">
     <div class="modal-header">
-        <h4 class="modal-title siteTitle">Select the Columns (Maximum 5)</h4>
+        <h4 class="modal-title siteTitle">{{'Select the Columns (Maximum 5)' |  | translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close('A')">
           <span aria-hidden="true" class="span_x">&times;</span>
         </button>
@@ -16,12 +16,12 @@
           </div>
           </div>
       </div>
-      <h3 class="text-danger desc-label-big-bold pl-2">{{dangMsg}}</h3>
+      <h3 class="text-danger desc-label-big-bold pl-2">{{dangMsg | translate}}</h3>
       <div class="modal-footer">
             
-        <button type="button" class="btn btn-select-cancel" (click)="reset()">Reset</button>
-        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">Cancel</button>
-        <button type="button" class="btn btn-select" (click)="set()">Set</button>
+        <button type="button" class="btn btn-select-cancel" (click)="reset()">{{'Reset' | translate}}</button>
+        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
+        <button type="button" class="btn btn-select" (click)="set()">{{'Set' | translate}}</button>
       </div>
     </div>
     

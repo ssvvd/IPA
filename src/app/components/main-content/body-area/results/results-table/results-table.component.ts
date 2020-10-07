@@ -5,6 +5,7 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { clsGroups } from 'src/app/models/results/groups';
 import { clsProperties } from 'src/app/models/results/properties';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
+import {ClsPromorionFamilies} from 'src/app/models/results/cls-promorion-families';
 import {clsHelpProp} from 'src/app/models/results/help-prop';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,7 +39,7 @@ export class ResultsTableComponent implements OnInit {
   dtPropertiesTable:clsProperties[];
   dtPropertiesTableVisible:clsProperties[];
   dtGroups:clsGroups[];
-  promotionFamilies:string[]=[]
+  promotionFamilies:ClsPromorionFamilies[]=[]
   dtDefaultFields:string[]=[]
   arrCurShownFields:string[]=[]
   dtResultsObjects:clsPropertyValue[][];
@@ -153,8 +154,9 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   this.dtGroups = JSON.parse(res3);
   this.dtDefaultFields = JSON.parse(res4); 
   this.arrResultImgsAll = JSON.parse(res5);
-  var obj = JSON.parse(res6);
-  this.promotionFamilies = obj.map(ele=>ele.GFNUM);
+  // var obj = JSON.parse(res6);
+  // this.promotionFamilies = obj.map(ele=>ele.GFNUM);
+  this.promotionFamilies = JSON.parse(res6);
 
   if (this.dtRsults.length < 1){
     this.SpinnerService.hide();
@@ -200,7 +202,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         this.dtResultsObjectsHelp[i].info.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Family'){
-          if (this.promotionFamilies.indexOf(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]) > -1){
+          if (this.promotionFamilies.filter((obj) => obj.Familiy ==  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]).length > 0){
             this.dtResultsObjectsHelp[i].Promotion = true;
           }            
         }

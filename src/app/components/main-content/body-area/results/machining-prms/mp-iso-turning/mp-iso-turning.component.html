@@ -2,7 +2,7 @@
   <div class="row justify-content-start w-100">
     <div class="col-3 bold font-weight-bold row justify-content-start">{{'Cutting Data' | translate}}</div>
     <div class="col-2" ></div>
-    <div class="col-3 row text-center bold font-weight-bold">ITA Recommendation</div>
+    <div class="col-3 row text-center bold font-weight-bold">{{'ITA Recommendation' | translate}}</div>
     <div class="col-2" ></div>
   </div>
     <div class="row justify-content-start w-100">
@@ -153,7 +153,7 @@
   <div class="col-3 row">{{'Batch size ' | translate }}</div>
   <div class="col-2">B</div>
   <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{B}}</div>
-  <div class="col-2">Units</div>
+  <div class="col-2">{{'Units' | translate}}</div>
 </div>
 
 <div class="row justify-content-start w-100">
@@ -178,7 +178,7 @@
     <div class="col-3 row">{{'No. of Edges per Insert' | translate }}</div>
     <div class="col-2">CEDC</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CEDC}}</div>
-    <div class="col-2">Edges/Insert</div>
+    <div class="col-2">{{'Edges/Insert' | translate}}</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
@@ -205,14 +205,14 @@
     <div class="col-3 row">{{'No. of features per cutting edge' | translate }}</div>
     <div class="col-2">FCE</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{FCE}}</div>
-    <div class="col-2">pcs</div>
+    <div class="col-2">{{'pcs' | translate}}</div>
   </div>   
 
   <div class="row justify-content-start w-100" *ngIf="((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
     <div class="col-3 row">{{'Total no. of Solids' | translate }}</div>
     <div class="col-2">SPB</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{SPB}}</div>
-    <div class="col-2">Tools/batch</div>
+    <div class="col-2">{{'Tools/batch' | translate}}</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='850'  && resType == 'S'">
@@ -226,13 +226,13 @@
     <div class="col-3 row">{{'Total number of Inserts' | translate }}</div>
     <div class="col-2">IPB</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IPB}}</div>
-    <div class="col-2">Inserts/batch</div>
+    <div class="col-2">{{'Inserts/batch' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
       <div class="col-3 row">{{'Total number of Tools' | translate }}</div>
       <div class="col-2">TPB</div>
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TPB}}</div>
-      <div class="col-2">Tools/batch</div>
+      <div class="col-2">{{'Tools/batch' | translate}}</div>
     </div>
     <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
       <div class="col-3 row">{{'Total Inserts cost' | translate }}</div>
