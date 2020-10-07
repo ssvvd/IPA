@@ -18,6 +18,7 @@ export class clsHelpProp {
     Designation:string[]=[];
     CatalogNo:string[]=[];
     Promotion:boolean;
+    // PromotionFile:string
     Dconms:string[]=[];
     Grade:string[]=[];
     CCTMS:string[]=[]

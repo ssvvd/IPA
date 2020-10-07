@@ -90,6 +90,7 @@ import { ContactusComponent } from './components/maintenance/contactus/contactus
 import { MyMaterialsComponent } from './components/main-content/body-area/materials/my-materials/my-materials.component';
 import { ResultsPdfComponent } from './components/main-content/body-area/results/results-pdf/results-pdf.component';
 import { ResultItemInfoComponent } from './components/main-content/body-area/results/result-item-info/result-item-info.component';
+import { PpPromotionComponent } from './components/main-content/body-area/results/pp-promotion/pp-promotion.component';
 
 @NgModule({
   declarations: [   
@@ -163,7 +164,8 @@ import { ResultItemInfoComponent } from './components/main-content/body-area/res
     ResultsPdfComponent,
     ResultItemInfoComponent,
     MyMaterialsComponent,
-    ResultsPdfComponent
+    ResultsPdfComponent,
+    PpPromotionComponent
   ],
   imports: [
     FormsModule,

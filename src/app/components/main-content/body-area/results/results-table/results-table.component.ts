@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
 import {PpSelectColumnsComponent} from 'src/app/components/main-content/body-area/results/pp-select-columns/pp-select-columns.component';
+import {PpPromotionComponent} from 'src/app/components/main-content/body-area/results/pp-promotion/pp-promotion.component';
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
 import { ResultPpInventoryComponent } from 'src/app/components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
 import { MachineService } from 'src/app/services/machine.service' ;
@@ -1037,8 +1038,20 @@ goToCatalog(rowIndex:number,itemIndex:number){
 }
 
 
-openPromotion(){
+openPromotion(index:number){
 
+let families:string[] = this.dtResultsObjectsHelp[index].Families
+let img:string = "0014"
+for (let x in families) {
+  let index1 = this.promotionFamilies.findIndex(i => i.Familiy == families[x]);
+  if (index1 > -1){
+    img = this.promotionFamilies[index1].PromotionPDF
+    break;
+  }
+}
+
+  const modalRef = this.modalService.open(PpPromotionComponent, { centered: true });
+  modalRef.componentInstance.pdFile = img;
 }
 
 
