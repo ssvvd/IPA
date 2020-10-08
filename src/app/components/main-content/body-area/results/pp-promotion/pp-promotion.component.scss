@@ -1,7 +1,6 @@
 .clsPromotionDivClick {
     width: 100%;
     padding: 10px 0;
-    margin-left: -51%;
     color: white;
     background-color: red;
     border-radius: 10px;
@@ -14,9 +13,17 @@
 }
 
 .clsPromotionImage {
-    margin-left: -50%;
     margin-bottom: 10px;
     border: black 5px solid;
     border-radius: 10px;
-    width: 360px;
+    width: 100%;
+}
+
+.clsPromotionDivX {
+    position: absolute;
+    top: -10px;
+    left: 97%;
+    font-size: 40px;
+    width: 40px;
+    cursor: pointer !important;
 }

@@ -1,8 +1,10 @@
 
 <div class="modal-header">
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <div class="clsPromotionDivX">
+    <img src="https://www.iscar.com/MediaR/icons/close_btn.svg" (click)="activeModal.dismiss('Cross click')"> <!--✖--> </div>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
       <span aria-hidden="true" class="span_x">&times;</span>
-    </button>
+    </button> -->
   </div>
   <div class="modal-body">
     <div class="form-group row">
@@ -10,8 +12,9 @@
         (click)="openPDF();"
         (error) ="changeSource($event, urlImg)">
 
-        <div Class="clsPromotionDivClick"><a style="color: white;text-decoration:none;" 
-            href="openPDF();">{{'Click to See Test Report... ►' | translate}}</a></div>
+        <div Class="clsPromotionDivClick" (click)="openPDF();">
+          <a style="color: white;text-decoration:none;font-size: 22px; font-weight: bold;" 
+            href="javascript:void(0)">{{'Click to See Test Report... ►' | translate}}</a></div>
       <!-- <h4 class="modal-title siteTitle">Are you sure you want to set {{modal_group}} as default?</h4> -->
     </div>
   </div>
