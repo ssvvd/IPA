@@ -77,3 +77,9 @@ table.dataTable thead th {
 .ulHover > label {
   border-width: 0px;
 }
+
+::ng-deep .customModalClass .modal-content { 
+  background-color: transparent;
+  border:none;
+
+}

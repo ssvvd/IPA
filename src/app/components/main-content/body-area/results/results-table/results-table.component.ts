@@ -1041,17 +1041,18 @@ goToCatalog(rowIndex:number,itemIndex:number){
 openPromotion(index:number){
 
 let families:string[] = this.dtResultsObjectsHelp[index].Families
-let img:string = "0014"
+let img:string = ""
 for (let x in families) {
   let index1 = this.promotionFamilies.findIndex(i => i.Familiy == families[x]);
   if (index1 > -1){
     img = this.promotionFamilies[index1].PromotionPDF
+    const modalRef = this.modalService.open(PpPromotionComponent, { centered: true,windowClass:"customModalClass"});
+    modalRef.componentInstance.pdFile = img;
     break;
   }
 }
 
-  const modalRef = this.modalService.open(PpPromotionComponent, { centered: true });
-  modalRef.componentInstance.pdFile = img;
+
 }
 
 
