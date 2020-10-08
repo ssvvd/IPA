@@ -610,7 +610,7 @@ switch(this.srv_StMng.SecApp.toString()){
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
           break;
         case 'HeaderDesignation1':
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square Shank'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square shank'
           break;
         case 'DetailsDesignation':
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
@@ -646,7 +646,7 @@ switch(this.srv_StMng.SecApp.toString()){
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
         break;
       case 'HeaderDesignation1':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square Shank'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square shank'
         break;
       case 'HeaderDesignation2':
         this.srv_Results.GetFlatDataField('OperationType',catalogNo,this.srv_StMng.SecApp,this.srv_appsetting.Units).subscribe((res: any) => {

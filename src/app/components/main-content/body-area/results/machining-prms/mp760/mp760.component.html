@@ -49,7 +49,7 @@
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100">
-          <div class="col-3 row">{{'Cutting Speed' | translate }}</div>
+          <div class="col-3 row">{{'Cutting speed' | translate }}</div>
           <div class="col-2">v<sub>c</sub></div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vc}}</div>
           <div class="col-2">{{'m/min' | translate}}</div>
@@ -85,7 +85,7 @@
             <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
-            <div class="col-3 row">{{'Number of Axial Passes' | translate }}</div>
+            <div class="col-3 row">{{'Number of axial passes' | translate }}</div>
             <div class="col-2">NOPP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{NOPP}}</div>
             <div class="col-2"></div>
@@ -115,19 +115,19 @@
             <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
           </div>
         <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='790' || (PreHole && srv_StMng.SecApp=='790')">
-            <div class="col-3 row">{{'Material Removal Rate' | translate }}</div>
+            <div class="col-3 row">{{'Material removal rate' | translate }}</div>
             <div class="col-2">MRR</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR}}</div>
             <div class="col-2">{{'cm<sup>3</sup>/min' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
-            <div class="col-3 row">{{'Material Removal Rate 1' | translate }}</div>
+            <div class="col-3 row">{{'Material removal rate' | translate }}{{' 1'}}</div>
             <div class="col-2">MRR1</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR1}}</div>
             <div class="col-2">{{'cm<sup>3</sup>/min' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
-            <div class="col-3 row">{{'Material Removal Rate 2' | translate }}</div>
+            <div class="col-3 row">{{'Material removal rate' | translate }}{{' 2'}}</div>
             <div class="col-2">MRR2</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR2}}</div>
             <div class="col-2">{{'cm<sup>3</sup>/min' | translate}}</div>

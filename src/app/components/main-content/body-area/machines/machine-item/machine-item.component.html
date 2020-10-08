@@ -60,7 +60,8 @@
                 <div class="form-group row" *ngIf="isLoading">
                     <div class="row col-2 pt-2">                     
                         <div class="pt-2 pr-4">                     
-                            <a data-toggle="tooltip" title="{{ machHeader.isFavorite ? 'Delete My Machine' : 'Add To My Machine' | translate}}">
+                            <a data-toggle="tooltip" 
+                                 title="machHeader.isFavorite ? {{'Delete My Machine' | translate}} :{{'Add To My Machines' | translate}}">
                                 <img [src]="machHeader.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(machHeader)">
                             </a> 
                         </div>

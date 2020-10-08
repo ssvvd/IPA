@@ -184,7 +184,7 @@
       </div>   
     </div>
     <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='990' || msrv_StMng.SecApp=='870' || msrv_StMng.SecApp=='860' || msrv_StMng.SecApp=='850' || msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='970' || msrv_StMng.SecApp=='960'">    
-      <span>KAPR - </span><span>{{' Tool Cutting Edge Angle' | translate}}</span>       
+      <span>KAPR - </span><span>{{'Tool Cutting Edge Angle' | translate}}</span>       
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinAxialEntAngle').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxAxialEntAngle').value" [options]="options_Ang"></ng5-slider>
       </div>   
@@ -253,7 +253,7 @@
             <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_squarecatalogISO"  *ngIf="isLoad" [labeldescription]="'Square Catalog No'"  [fieldname]="'Tools'"     [funcname]="'TOOLCATALOGNOISO'"    [fieldid]="'TD_SquareCatalogNo'"></app-optimizetool-filter>               
         </div>
         <div *ngIf="msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='880' || msrv_StMng.SecApp=='870' || msrv_StMng.SecApp=='860' || msrv_StMng.SecApp=='850'">               
-            <app-optimizetool-filter [events]="eventsSubject.asObservable()"   *ngIf="isLoad" [labeldescription]="'Round holder designation'"  [fieldname]="'Designation'"     [funcname]="'INT_ISORHOLDER'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>            
+            <app-optimizetool-filter [events]="eventsSubject.asObservable()"   *ngIf="isLoad" [labeldescription]="'Round Holder Designation'"  [fieldname]="'Designation'"     [funcname]="'INT_ISORHOLDER'"    [fieldid]="'TD_SquareDesignation'"></app-optimizetool-filter>            
             <app-optimizetool-filter [events]="eventsSubject.asObservable()"  *ngIf="isLoad" [labeldescription]="'Tool Designation'"  [fieldname]="'Designation'"     [funcname]="'INT_ISOTOOL'"    [fieldid]="'TD_AdapterDesignation'"></app-optimizetool-filter>                
         </div>
     </div>    

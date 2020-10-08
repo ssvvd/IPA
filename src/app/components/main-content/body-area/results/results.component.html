@@ -31,9 +31,9 @@
            </nav> 
           </div>                
         </div>  
-        <div class="row">
-          <div class="col-6"></div>
-          <div class="col-4  float-right text-right pb-2" >
+        <div class="row" >
+          <div class="col-12 justify-content" >
+          <div class="float-right  pb-1" >
             <div class="row">
               <div *ngIf="srv_statemanage.SecApp=='119' || srv_statemanage.SecApp=='120'">        
                 <label class="shape-ellipse">
@@ -48,13 +48,14 @@
                 </label>
               </div>
               <div>
-                <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-4 mb-0"  (click)="DownLoadResults()">
-                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadResults()">              
+                <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="DownLoadResults()">
+                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >              
                   <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
                 </h2>  
               </div>         
             </div>  
-          </div>       
+          </div>
+        </div>       
       </div>
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
           <li [ngbNavItem]="1" class="navli" id="dataitem1">

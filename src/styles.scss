@@ -421,7 +421,7 @@ html, body{
 
 .label-ellipse
 {
- color: var(--btn-bg-select-color);
+ color: var(--btn-bg-select-color)!important;
  display: block;  
  white-space:nowrap;
  text-decoration: none;
