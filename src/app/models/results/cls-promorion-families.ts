@@ -2,6 +2,6 @@
 
 
 export class ClsPromorionFamilies {
-    Familiy:string;
+    Family:string;
     PromotionPDF:string;
 }

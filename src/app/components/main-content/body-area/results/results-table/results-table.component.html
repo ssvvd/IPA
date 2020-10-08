@@ -63,7 +63,7 @@
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected">
                        <td>
                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 35%; position: relative; top:-16px; left: -8px; z-index: 1;" (click)="openPromotion(row.index)">
-                        <img src="{{arrResultImgsItem[row.index]}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? 'left:-50px' : 'left:0px'}" style="position: relative;"
+                        <img src="{{arrResultImgsItem[row.index]}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-50px' : '0px'}" style="position: relative;"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
                        <!--  (click)="viewInfo(row.index) -->
