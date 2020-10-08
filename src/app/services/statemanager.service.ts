@@ -131,6 +131,7 @@ export class StateManagerService {
     this.mSecondaryAppSelected = sa;   
     this.CheckTabOperationalDataEnable();
     if(typeof(this.SelectedMachine)!=='undefined')
+    
     { 
       if(sa.ApplicationITAID == '53' || sa.ApplicationITAID == '50' || sa.ApplicationITAID == '188' || sa.ApplicationITAID == '890' || sa.ApplicationITAID == '880' || sa.ApplicationITAID == '870' || sa.ApplicationITAID == '860' || sa.ApplicationITAID == '850')                
         this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, "Int. " +sa.MenuName]);

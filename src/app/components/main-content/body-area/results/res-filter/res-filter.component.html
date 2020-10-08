@@ -26,15 +26,15 @@
             <!-- <label class="font-weight-bold">Filter By:</label>  -->
             <div class="custom-control custom-radio ">
                 <input type="radio" class="custom-control-input" id="optFilterRec" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterRec')" value="FilterRec">
-                <label class="custom-control-label" for="optFilterRec">Most Recommended</label>
+                <label class="custom-control-label" for="optFilterRec">{{'Most Recommended' | translate}}</label>
             </div> 
             <div class="custom-control custom-radio ">
                 <input  type="radio" class="custom-control-input" id="optFilteRes" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilteAllRes')" value="FilteAllRes">
-                <label class="custom-control-label" for="optFilteRes">View All Results</label>
+                <label class="custom-control-label" for="optFilteRes">{{'View All Results' | translate}}</label>
             </div> 
             <div class="custom-control custom-radio ">
                 <input  type="radio" class="custom-control-input" id="optFilterSeller" name="optFilter" [(ngModel)]="filterBy" (change)="change('optFilter','FilterSeller')" value="FilterSeller">
-                <label class="custom-control-label" for="optFilterSeller">Best Seller</label>
+                <label class="custom-control-label" for="optFilterSeller">{{'Best Seller' | translate}}</label>
             </div>                                      
         </div>
 
@@ -62,7 +62,7 @@
     <div class="row pt-4 " [hidden]="(srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_SolidHead').value!='True')
     || mainApp == 'IS' || mainApp == 'TG'">   
        <div *ngIf="srv_StMng.SecApp!='770'" class="pr-4 ">   
-           <label>Solid</label> 
+           <label>{{'Solid' | translate}}</label> 
             <div class="row   pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True'">               
                <div>
                    <div class="custom-control custom-checkbox">
@@ -94,7 +94,7 @@
     <div class="row" [hidden]="(srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_InsertHead').value!='True')
     || (mainApp == 'IS') || (mainApp == 'TG')"> 
          <div class="pl-0">
-            <label>{{mainApp=='DR'?'Indexable':'Indexable Insert' | translate}}</label>  
+            <label>{{mainApp=='DR'?'Indexable':'Indexable Insert'}}</label>  
             <div class="row pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True'">           
                 <div>
                     <div class="custom-control custom-checkbox">
@@ -143,10 +143,10 @@
 
     <div class="pr-2" >
         <res-filter-list #filterList (getListFields)="getListFields('BrandName')" (change)="changeList($event)" controlName="BrandName" [events]="eventsSubject.asObservable()" id="filter_brandname" [labeldescription]="'Brand Name'" [fieldname]="'BrandName'"  [funcname]="'BRAND'"  [fieldid]="'TD_BrandName'"></res-filter-list> 
-        <res-filter-list #filterList (getListFields)="getListFields('DesgT')" (change)="changeList($event)" controlName="DesgT" [events]="eventsSubject.asObservable()" id="filter_DesgT" [labeldescription]="'Tool designation'" [fieldname]="'DesgT'"  [funcname]="'DesgT'"  [fieldid]="'TD_DesgT'"></res-filter-list> 
-        <res-filter-list #filterList (getListFields)="getListFields('DesgSI')" (change)="changeList($event)" controlName="DesgSI" [events]="eventsSubject.asObservable()" id="filter_DesgSI" [labeldescription]="'Insert/Solid designation'" [fieldname]="'DesgSI'"  [funcname]="'DesgSI'"  [fieldid]="'TD_DesgSI'"></res-filter-list> 
-        <res-filter-list #filterList (getListFields)="getListFields('CatalogNoT')" (change)="changeList($event)" controlName="CatalogNoT" [events]="eventsSubject.asObservable()" id="filter_CatalogNoT" [labeldescription]="'Tool catalog no.'" [fieldname]="'CatalogNoT'"  [funcname]="'CatalogNoT'"  [fieldid]="'TD_CatalogNoT'"></res-filter-list> 
-        <res-filter-list #filterList (getListFields)="getListFields('CatalogNoSI')" (change)="changeList($event)" controlName="CatalogNoSI" [events]="eventsSubject.asObservable()" id="filter_CatalogNoSI" [labeldescription]="'Insert/Solid catalog no.'" [fieldname]="'CatalogNoSI'"  [funcname]="'CatalogNoSI'"  [fieldid]="'TD_CatalogNoSI'"></res-filter-list>
+        <res-filter-list #filterList (getListFields)="getListFields('DesgT')" (change)="changeList($event)" controlName="DesgT" [events]="eventsSubject.asObservable()" id="filter_DesgT" [labeldescription]="'Tool Designation'" [fieldname]="'DesgT'"  [funcname]="'DesgT'"  [fieldid]="'TD_DesgT'"></res-filter-list> 
+        <res-filter-list #filterList (getListFields)="getListFields('DesgSI')" (change)="changeList($event)" controlName="DesgSI" [events]="eventsSubject.asObservable()" id="filter_DesgSI" [labeldescription]="'Insert / Solid Designation'" [fieldname]="'DesgSI'"  [funcname]="'DesgSI'"  [fieldid]="'TD_DesgSI'"></res-filter-list> 
+        <res-filter-list #filterList (getListFields)="getListFields('CatalogNoT')" (change)="changeList($event)" controlName="CatalogNoT" [events]="eventsSubject.asObservable()" id="filter_CatalogNoT" [labeldescription]="'Tool Catalog No'" [fieldname]="'CatalogNoT'"  [funcname]="'CatalogNoT'"  [fieldid]="'TD_CatalogNoT'"></res-filter-list> 
+        <res-filter-list #filterList (getListFields)="getListFields('CatalogNoSI')" (change)="changeList($event)" controlName="CatalogNoSI" [events]="eventsSubject.asObservable()" id="filter_CatalogNoSI" [labeldescription]="'Insert / Solid Catalog No'" [fieldname]="'CatalogNoSI'"  [funcname]="'CatalogNoSI'"  [fieldid]="'TD_CatalogNoSI'"></res-filter-list>
         <res-filter-list #filterList (getListFields)="getListFields('Grade')" (change)="changeList($event)" controlName="Grade" [events]="eventsSubject.asObservable()" id="filter_Grade" [labeldescription]="'Grade'" [fieldname]="'Grade'"  [funcname]="'Grade'"  [fieldid]="'TD_Grade'"></res-filter-list> 
         
         
@@ -163,7 +163,7 @@
         <res-filter-scroll *ngIf="mainApp == 'ML'" [controlName]="'APMX'" [prm]="'APMX'" [prmDesc]="'Depth of Cut Maximum'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('APMX')" [maxValue]="getMax('APMX')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'DR'" [controlName]="'LU'" [prm]="'LU'" [prmDesc]="'Usable length'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('LU')" [maxValue]="getMax('LU')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'ML' || mainApp == 'DR'"  [controlName]="'NOF'" [prm]="'NOF'" [prmDesc]="'Number of effective flutes'" [units]="''" [minValue]="getMin('NOF')" [maxValue]="getMax('NOF')" [step]="1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
-        <res-filter-scroll *ngIf="mainApp == 'ML' || mainApp == 'IS'"  [controlName]="'RE'" [prm]="'RE'" [prmDesc]="'Corner radius'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('RE')" [maxValue]="getMax('RE')" [step]="0.05" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
+        <res-filter-scroll *ngIf="mainApp == 'ML' || mainApp == 'IS'"  [controlName]="'RE'" [prm]="'RE'" [prmDesc]="'Corner Radius'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('RE')" [maxValue]="getMax('RE')" [step]="0.05" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'ML'"  [controlName]="'CHW'" [prm]="'CHW'" [prmDesc]="'Corner chamfer width'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('CHW')" [maxValue]="getMax('CHW')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'IS'" [controlName]="'PSIR'" [prm]="'PSIR'" [prmDesc]="'Tool lead angle'" [units]="'°'" [minValue]="getMin('PSIR')" [maxValue]="getMax('PSIR')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'TG'" [controlName]="'CW'" [prm]="'CW'" [prmDesc]="'Cutting width'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('CW')" [maxValue]="getMax('CW')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>

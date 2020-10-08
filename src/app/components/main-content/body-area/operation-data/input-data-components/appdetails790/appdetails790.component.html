@@ -6,14 +6,14 @@
                     <div class="custom-control custom-radio custom-control">
                             <input type="radio" class="custom-control-input" id="optHoleTypeSolid" name="HoleType" checked (change)="changeSolidHole('Solid')" 
                             [(ngModel)]="HoleType" value="Solid">
-                            <label class="custom-control-label" for="optHoleTypeSolid">{{'Solid material' | translate}}</label>
+                            <label class="custom-control-label" for="optHoleTypeSolid">{{'Solid Material' | translate}}</label>
                     </div> 
                 </div> 
                 <div class="col-6">
                      <div class="custom-control custom-radio custom-control">
                             <input type="radio" class="custom-control-input" id="optHoleTypePreHole" name="HoleType" (change)="changeSolidHole('PreHole')"
                              [(ngModel)]="HoleType" value="PreHole">
-                            <label class="custom-control-label" for="optHoleTypePreHole">{{'Pre hole' | translate}}</label>
+                            <label class="custom-control-label" for="optHoleTypePreHole">{{'Pre Hole' | translate}}</label>
                         </div>
                 </div>   
             </div> 
@@ -33,7 +33,7 @@
             </div> 
              <div class="row" *ngIf="HoleType=='PreHole'">
                 <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                    <label class="pl-0 pt-3">{{'Pre hole diameter (DPH)' | translate}}</label>
+                    <label class="pl-0 pt-3">{{'Pre Hole Diameter' | translate}}{{' (DPH)' | translate}}</label>
                     <label class="pl-3 asterisk-red pt-3">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-0 pl-0">

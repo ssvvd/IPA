@@ -198,7 +198,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       //alert('Only for registered user');
       const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
       modalRef.componentInstance.title = "Add To My Machines";
-      modalRef.componentInstance.Msg = 'Please login to add the machine to "My Machines"';
+      modalRef.componentInstance.Msg = 'Please login to add the machine to My Machines';
       modalRef.result.then((result) => {
         if(result=='cancel') return;
         if(result=='login')

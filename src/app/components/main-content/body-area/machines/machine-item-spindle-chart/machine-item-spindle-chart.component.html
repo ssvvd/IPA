@@ -4,7 +4,7 @@
      <div class="form-group row ml-0 pl-0" >       
        <div class="pt-0 col-12 col-md-12 col-sm-12 col-xl-6 col-lg-6 pl-0 ml-0">
         <div class="d-flex justify-content-center">
-            <p>{{chartDesc}}</p>
+            <p>{{chartDesc | translate}}</p>
         </div>
           <canvas  baseChart 
               [datasets]="chartDatasets"
@@ -24,7 +24,7 @@
                     <label for="txtPoint2" class="col-form-label">N[rpm]</label>                
                 </div>
                 <div class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 d-flex justify-content-center" >
-                    <label for="txtPoint2" class="col-form-label">{{chartDescY}}</label>
+                    <label for="txtPoint2" class="col-form-label">{{chartDescY | translate}}</label>
                 </div>
             </div>
            <div class="form-group row  pr-0">
