@@ -202,8 +202,8 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         if (this.dtPropertiesTable[j].Field.toLowerCase().includes('info'))
         this.dtResultsObjectsHelp[i].info.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
-        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Family'){
-          if (this.promotionFamilies.filter((obj) => obj.Familiy ==  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]).length > 0){
+        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Family' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
+          if (this.promotionFamilies.filter((obj) => obj.Family ==  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]).length > 0){
             this.dtResultsObjectsHelp[i].Promotion = true;
           }            
         }
@@ -1043,7 +1043,7 @@ openPromotion(index:number){
 let families:string[] = this.dtResultsObjectsHelp[index].Families
 let img:string = ""
 for (let x in families) {
-  let index1 = this.promotionFamilies.findIndex(i => i.Familiy == families[x]);
+  let index1 = this.promotionFamilies.findIndex(i => i.Family == families[x]);
   if (index1 > -1){
     img = this.promotionFamilies[index1].PromotionPDF
     const modalRef = this.modalService.open(PpPromotionComponent, { centered: true,windowClass:"customModalClass"});
