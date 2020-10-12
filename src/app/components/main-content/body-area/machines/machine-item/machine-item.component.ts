@@ -6,10 +6,12 @@ import { Machineheader } from 'src/app/models/machines/machineheader';
 import { Machinespindle } from 'src/app/models/machines/machinespindle';
 import { MachinePpAddFavoriteComponent} from 'src/app/components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 import { PpSuccessfullyComponent} from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
-
+import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
+import { LoginService } from 'src/app/services/login.service';
 import { ActivatedRoute} from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from "ngx-spinner"; 
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -36,8 +38,8 @@ export class MachineItemComponent implements OnInit {
   
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,
-              private router: ActivatedRoute , private srv_statemanage:StateManagerService,private modalService: NgbModal) 
+  constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,private SpinnerService: NgxSpinnerService,
+              private router: ActivatedRoute ,private srv_login:LoginService, private srv_statemanage:StateManagerService,private modalService: NgbModal) 
   {           
     this.eventsSubscription.add(this.router.params.subscribe(params => {
     this.MachineID = parseInt(params["id"]);
@@ -122,12 +124,67 @@ export class MachineItemComponent implements OnInit {
     }));               
   }
 
+  OnFavoriteMachine1(mach: Machineheader)
+  { 
+    //this.statusclick=1;
+    if(this.srv_appsetting.UserID=='')
+    {    
+      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
+      modalRef.componentInstance.title = "Add To My Machines";
+      modalRef.componentInstance.Msg = 'Please login to add the machine to My Machines';
+      modalRef.result.then((result) => {
+        if(result=='cancel') return;
+        if(result=='login')
+        {
+          this.SpinnerService.show();
+          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
+          return;
+        }});
+      
+    }    
+    else
+    {
+      const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
+      modalRef.componentInstance.MachineName = mach.MachineName;
+      
+      if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
+          
+      modalRef.result.then((result) => {
+        if(result=='cancel') return;
+        if(mach.isFavorite && result=='delete')
+        {
+          mach.isFavorite =false;
+          this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
+          //this.Initializemachinelist(true);
+          //this.eventsChangeFavorite.next();
+        }
+        else         
+        {            
+          if(mach.isFavorite) 
+          {
+              //change only machine name
+              this.eventsSubscription.add(this.srv_machine.machine_update_name(
+                mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => { 
+                  //this.Initializemachinelist(true);
+                  //this.eventsChangeFavorite.next();               
+             }));  
+          }
+          else
+          {
+            this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+              //this.Initializemachinelist(true);
+              //this.eventsChangeFavorite.next();                   
+              }); 
+          }                    
+        }         
+    } );
+    }   
+
+} 
+
+
   OnFavoriteMachine(mach: Machineheader)
-  {    
-    //this.srv_cook.delete_cookie('fav_machine_user');
-    //this.srv_cook.delete_cookie('fav_machines');
-    //this.srv_cook.delete_all();
-    //return;
+  {       
     const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
     modalRef.componentInstance.MachineName = mach.MachineName;
     
@@ -197,10 +254,12 @@ export class MachineItemComponent implements OnInit {
       this.machSpindleMain = this.arrMachineSpindle[0]; 
       this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
       this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
+      if(!this.machHeader.isFavorite) this.CostPerHour = Math.round(100 / this.srv_appsetting.CurrRate*100)/100; 
       this.FillImageMachineType();
            
       this.isLoading =true;          
     }));
   }
-
+  
+  
 }
