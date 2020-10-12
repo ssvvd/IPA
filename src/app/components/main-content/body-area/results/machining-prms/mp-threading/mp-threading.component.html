@@ -1,0 +1,140 @@
+<ng-container >
+
+    <div class="row justify-content-start w-100">
+      <div class="col-3 bold font-weight-bold row justify-content-start">{{'Cutting Data' | translate}}</div>
+      <div class="col-2" ></div>
+      <div class="col-3 row text-center bold font-weight-bold">{{'ITA Recommendation' | translate}}</div>
+      <div class="col-2" ></div>
+    </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Cutting Diameter' | translate }}</div>
+            <div class="col-2">DC</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{DC}}</div>
+            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Thread Std.' | translate }}</div>
+            <div class="col-2">TS</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TS}}</div>
+            <div class="col-2"></div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Pitch' | translate }}</div>
+            <div class="col-2">P</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P}}</div>
+            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Nominal Size/Thread Dia.' | translate }}</div>
+            <div class="col-2">NS/Do</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{NSDo}}</div>
+            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Thread Length' | translate }}</div>
+            <div class="col-2">LTH</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LTH}}</div>
+            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Cutting Speed' | translate }}</div>
+            <div class="col-2">v<sub>c</sub></div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vc}}</div>
+            <div class="col-2">{{'m/min' | translate}}</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Feed per Tooth' | translate }}</div>
+            <div class="col-2">f<sub>z</sub></div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{fz}}</div>
+            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/tooth</div>
+          </div>
+  
+    <br>
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Tool Assembly Data' | translate}}</div>
+    
+    
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Overhang' | translate }}</div>
+            <div class="col-2">O</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{O}}</div>
+            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
+          </div>
+          <div class="row justify-content-start w-100">
+            <div class="col-3 row">{{'Assembly Weight' | translate }}</div>
+            <div class="col-2">AW</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{AW}}</div>
+            <div class="col-2">kg</div>
+          </div>
+    
+    
+    <br>
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
+    
+    <div class="row justify-content-start w-100">
+        <div class="col-3 row">{{'Spindle Speed' | translate }}</div>
+        <div class="col-2">n</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n}}</div>
+        <div class="col-2">rpm</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
+        <div class="col-3 row">{{'Circular Feed Rate' | translate }}</div>
+        <div class="col-2">F</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{F}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+      </div>
+      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
+        <div class="col-3 row">{{'Feed Speed' | translate }}</div>
+        <div class="col-2">v<sub>f</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf}}</div>
+        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+      </div>
+    
+    <br>
+    <div class="bold font-weight-bold row justify-content-start w-100">{{'Prices' | translate}}</div>
+    
+    
+          <div class="row justify-content-start w-100" *ngIf="resType=='I' || resType=='IH'">
+            <div class="col-3 row">{{'Insert Price' | translate }}</div>
+            <div class="col-2">IP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>  
+          <div class="row justify-content-start w-100" *ngIf="resType=='I'">
+            <div class="col-3 row">{{'Tool Price' | translate }}</div>
+            <div class="col-2">TP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="resType=='IH'">
+            <div class="col-3 row">{{'Head Price' | translate }}</div>
+            <div class="col-2">HP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{HP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="resType=='IH'">
+            <div class="col-3 row">{{'Shank Price' | translate }}</div>
+            <div class="col-2">HHP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{HHP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="resType=='S'">
+            <div class="col-3 row">{{'Solid Price' | translate }}</div>
+            <div class="col-2">SP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{SP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="resType=='SH'">
+            <div class="col-3 row">{{'Solid Head Price' | translate }}</div>
+            <div class="col-2">SHP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{SHP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>
+          <div class="row justify-content-start w-100" *ngIf="resType=='SH'">
+            <div class="col-3 row">{{'Shank Price' | translate }}</div>
+            <div class="col-2">SKP</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{SKP}}</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
+          </div>
+        </ng-container>
+    
+  
