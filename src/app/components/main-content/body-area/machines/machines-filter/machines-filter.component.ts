@@ -55,8 +55,8 @@ export class MachinesFilterComponent implements OnInit {
   };
 
   options_power: Options = {
-    floor: 0,
-    ceil: 200,
+    floor: 2,
+    ceil: 75,
     step: 1,
     showTicks: false
   };
@@ -95,6 +95,7 @@ export class MachinesFilterComponent implements OnInit {
         //this.srv_cook.MachineFavorite.subscribe(fav => this.ChangeFavorite());
         
         //this.eventsSubscription.add( this.onChangeFavorite.subscribe(() => this.ChangeFavorite())); 
+
         this.eventsSubscription.add( this.onChangeMachineList.subscribe((d) => this.ChangeMachineList(d)));                       
         this.eventsSubscription.add(this.serv.getmachineadaptationtype('').subscribe((res: any) => {
           this.arrAdapType = JSON.parse(res); 
@@ -103,16 +104,14 @@ export class MachinesFilterComponent implements OnInit {
           this.eventsSubscription.add(this.serv.getmachineadaptationsize(this.srv_appsetting.Units).subscribe((res: any) => {
           this.arrAdapSize = JSON.parse(res); 
           this.arrAdapSize.unshift( { AdaptationType:'',AdaptationSize:''});      
-          
-         
+                
           this.arrAdapSizeFilter=[];
           
           this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
           .subscribe((data: any) => {        
             this.arrMachines = JSON.parse(data); 
                //this.SetFavorites();  
-            
-           
+                       
             if(this.arrMachines.length>0)
             {
               this.minPower = Math.min.apply(Math,this.arrMachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
@@ -120,11 +119,16 @@ export class MachinesFilterComponent implements OnInit {
               this.minSpeed = Math.min.apply(Math,this.arrMachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
               this.maxSpeed = Math.max.apply(Math,this.arrMachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
               this.minTorque = Math.min.apply(Math,this.arrMachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-              this.maxTorque = Math.max.apply(Math,this.arrMachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))
+              this.maxTorque = Math.max.apply(Math,this.arrMachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))              
+              
+              //this.minPower=2;
+              //this.maxPower=75;
+              //alert(this.minPower);
+              //alert(this.maxPower);
               
               this.options_power = {
                 floor: this.minPower,
-                ceil: this.maxPower,
+                ceil: this.maxPower, 
                 step: 1,
                 showTicks: false
               };
@@ -164,6 +168,7 @@ export class MachinesFilterComponent implements OnInit {
   ChangeMachineList(s:number[])
   {
     this.machFilter.PowerMin=s[0];
+    //alert(this.machFilter.PowerMin);
     this.machFilter.PowerMax=s[1];
     this.machFilter.SpeedMin=s[2];
     this.machFilter.SpeedMax=s[3];
@@ -230,6 +235,7 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMachineTypeHeavyDuty=true;
     this.machFilter.IsMachineTypeHighSpeed=true;
     //todo:
+    
     this.machFilter.PowerMin = this.minPower;
     this.machFilter.PowerMax = this.maxPower;
 
@@ -253,10 +259,16 @@ export class MachinesFilterComponent implements OnInit {
   FilterChange(event: ChangeContext ,issliderP:boolean,issliderS:boolean,issliderT:boolean) {  
     this.machFilter.IsSliderPower =issliderP;        
     this.machFilter.IsSliderSpeed =issliderS;        
-    this.machFilter.IsSliderTorque =issliderT;        
+    this.machFilter.IsSliderTorque =issliderT; 
+           
     this.MachineFilterChanged.emit({ filter: this.machFilter});   
   }
-
+  
+  SetViewAllMachines()
+  {
+    this.machFilter.IsMostRecommended=false;
+    this.isMostRecom ='0';
+  }
   ClearFilter ()
   {    
     this.InitFilter();
@@ -270,6 +282,8 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMachineTypeHighSpeed=true;
     this.machFilter.ShowOnlyFavorites=false;
     this.machFilter.IsMostRecommended=true;
+
+   
     this.machFilter.IsSliderPower=false;
     this.machFilter.IsSliderSpeed=false;
     this.machFilter.IsSliderTorque=false;
@@ -278,7 +292,17 @@ export class MachinesFilterComponent implements OnInit {
     this.curAdapSize=this.arrAdapSize[0];
     
     //this.MachineFilterClear.emit();
-    this.MachineFilterChanged.emit({ filter: this.machFilter});   
+    this.MachineFilterChanged.emit({ filter: this.machFilter});
+    
+     this.machFilter.PowerMin = this.minPower;
+    this.machFilter.PowerMax = this.maxPower;
+
+    this.machFilter.SpeedMin = this.minSpeed; 
+    this.machFilter.SpeedMax = this.maxSpeed;
+        
+    this.machFilter.TorqueMin = this.minTorque;
+    this.machFilter.TorqueMax = this.maxTorque; 
+    
   }
 
 }

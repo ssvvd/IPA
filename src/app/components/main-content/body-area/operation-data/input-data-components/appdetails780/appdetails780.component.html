@@ -40,42 +40,14 @@
                             <input type="radio" class="custom-control-input" id="optBlindHole" name="HoleTypeHole" (change)="changeSolidHole('Hole_Blind')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Blind">
                             <label class="custom-control-label" for="optBlindHole"></label>
                     </div>        
-                    </div> 
-              
-     <!--            <div class="col-2">                  
-                    <div class="pl-2">
-                    <div class="custom-control custom-radio custom-control">
-                            <input type="radio" class="custom-control-input" id="optThroughSolid" name="HoleTypeSolid" checked (change)="changeSolidHole('Solid_Through')" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypeSolid').value" value="Through">
-                            <label class="custom-control-label" for="optThroughSolid">{{'Through hole' | translate}}</label>
-                    </div>            
-                        <div class="custom-control custom-radio custom-control">
-                            <input type="radio" class="custom-control-input" id="optBlindSolid" name="HoleTypeSolid" (change)="changeSolidHole('Solid_Blind')" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypeSolid').value" value="Blind">
-                            <label class="custom-control-label" for="optBlindSolid">{{'Blind hole' | translate}}</label>
-                        </div>      
-                    </div>
-                </div> 
-                <div class="col-2">               
-                    <div class="pl-2">
-                        <div class="custom-control custom-radio custom-control">
-                                <input type="radio" class="custom-control-input" id="optThroughHole" name="HoleTypeHole"  (change)="changeSolidHole('Hole_Through')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Through">
-                                <label class="custom-control-label" for="optThroughHole">{{'Through hole' | translate}}</label>
-                        </div>            
-                        <div class="custom-control custom-radio custom-control">
-                                <input type="radio" class="custom-control-input" id="optBlindHole" name="HoleTypeHole" (change)="changeSolidHole('Hole_Blind')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('HoleTypePreHole').value" value="Blind">
-                                <label class="custom-control-label" for="optBlindHole">{{'Blind hole' | translate}}</label>
-                        </div>      
-                    </div>
-                </div>  -->  
+                </div>                    
             </div>
             <div class="row" *ngIf="HoleType=='Solid'">               
                  <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-2">
                     <label class="pl-0 pt-4">{{'Hole Diameter (DH)' | translate}}</label>
                     <label class="pl-2 asterisk-red pt-4">*</label>
                 </div>
-                <div class="col-7 pt-3">
-                   <!--  <div class="custom-slider pt-0 mt-4">
-                        <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('D2Min').value"  class="form-control-sm  pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('D2Max').value" [options]="options_d2"></ng5-slider>
-                    </div>  -->  
+                <div class="col-7 pt-3">                   
                     <div class="row pt-2">
                         <div class="col-xl-5 col-lg-10 col-md-10 col-sm-10 col-10   pl-0 row">
                             <div class="col-4">
@@ -83,17 +55,16 @@
                             </div>
                             <div class="col-8 ">
                                     <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Min').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Min').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'"  
-                                    (change)="SetIPLMandatory()"  [(ngModel)]="msrv_StMng.IPL.GetItem('D2Min').value"  (focus)="onfocusfield('D2Min')" (focusout)="onfocusoutfield()"> 
+                                    (change)="SetIPLMandatory('D2Min')"  [(ngModel)]="msrv_StMng.IPL.GetItem('D2Min').value"  (focus)="onfocusfield('D2Min')" (focusout)="onfocusoutfield()"> 
                             </div>           
-                        </div>
-                            
+                        </div>                            
                         <div class="col-xl-5 col-lg-10 col-md-10 col-sm-10 col-10  row">
                             <div class="col-4">
                                 <label>{{'Max' | translate}}</label>
                             </div>
                             <div class="col-8">
-                                <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Min').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Max').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" 
-                                (change)="SetIPLMandatory()"   [(ngModel)]="msrv_StMng.IPL.GetItem('D2Max').value" (focus)="onfocusfield('D2Max')" (focusout)="onfocusoutfield()">
+                                <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Max').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2Max').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" 
+                                (change)="SetIPLMandatory('D2Max')"   [(ngModel)]="msrv_StMng.IPL.GetItem('D2Max').value" (focus)="onfocusfield('D2Max')" (focusout)="onfocusoutfield()">
                             </div>
                             
                         </div> 
@@ -110,7 +81,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
-                        (change)="SetIPLMandatory()"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
+                        (change)="SetIPLMandatory('D3')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -123,7 +94,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
-                        (change)="SetIPLMandatory()"(change)="SetIPLMandatory()"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value" (focus)="onfocusfield('D2')" (focusout)="onfocusoutfield()"> 
+                        (change)="SetIPLMandatory('D2')"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value" (focus)="onfocusfield('D2')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -136,7 +107,7 @@
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-2 pl-0">
                     <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
-                    (change)="SetIPLMandatory()"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
+                    (change)="SetIPLMandatory('Depth')"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-2 pl-0">
                     <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -167,7 +138,8 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (change)="SetIPLMandatory()"> 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  
+                                            (change)="SetIPLMandatory('BatchSize')"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{'units' | translate}}</label>

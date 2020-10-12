@@ -33,7 +33,7 @@ export class Appdetails780Component implements OnInit {
   };
 
  ngOnInit() {
-    this.SetIPLMandatory();
+    this.SetIPLMandatory('');
     this.SetImageApp();  
   
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
@@ -147,9 +147,51 @@ export class Appdetails780Component implements OnInit {
       }
   }
 
-  strMandatory:string='';
-  SetIPLMandatory()
+  CheckValuesFields(field:string)
   {
+    if(field=='D2Min' || field=='D2Max')
+    {
+      if(this.srv_StMng.IPL.GetItem('D2Min').value!=null && this.srv_StMng.IPL.GetItem('D2Min').value!='' &&
+        this.srv_StMng.IPL.GetItem('D2Max').value!=null && this.srv_StMng.IPL.GetItem('D2Max').value!='')
+        if(this.srv_StMng.IPL.GetItem('D2Min').value >this.srv_StMng.IPL.GetItem('D2Max').value)
+        {          
+          alert("D Hole Min diameter should be smaller than D Hole Max diameter");        
+          this.srv_StMng.IPL.GetItem(field).value=null;          
+        }
+    }
+    if(field=='D2' || field=='D3')
+    {
+      if(this.srv_StMng.IPL.GetItem('D2').value!=null && this.srv_StMng.IPL.GetItem('D2').value!='' &&
+        this.srv_StMng.IPL.GetItem('D3').value!=null && this.srv_StMng.IPL.GetItem('D3').value!='')
+        if(this.srv_StMng.IPL.GetItem('D3').value >this.srv_StMng.IPL.GetItem('D2').value)
+        {        
+          let v:string;
+          if(this.srv_appsetting.Units=='M') v='0.01';
+          if(this.srv_appsetting.Units=='I') v='0.004';
+          alert('Final diameter should be bigger than the pre hole in ' + v + this.srv_appsetting.UnitslengthDesc);        
+          this.srv_StMng.IPL.GetItem(field).value=null;          
+        }
+    }
+    if(field=='Depth')
+    {
+      if(this.srv_StMng.IPL.GetItem('Depth').value!=null && this.srv_StMng.IPL.GetItem('Depth').value!='')
+      {
+        if(Number(this.srv_StMng.IPL.GetItem('Depth').value )>400)
+        {
+          let v:string;
+          if(this.srv_appsetting.Units=='M') v='400';
+          if(this.srv_appsetting.Units=='I') v='16';
+          alert('Maximum value is ' + v);        
+          this.srv_StMng.IPL.GetItem(field).value=null;
+        }
+      }
+    }   
+  }
+
+  strMandatory:string='';
+  SetIPLMandatory(field:string)  
+  {
+    this.CheckValuesFields(field);
     this.strMandatory='';
     if( this.HoleType=='Solid') 
     {

@@ -194,8 +194,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   { 
     this.statusclick=1;
     if(this.srv_appsetting.UserID=='')
-    {
-      //alert('Only for registered user');
+    {    
       const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
       modalRef.componentInstance.title = "Add To My Machines";
       modalRef.componentInstance.Msg = 'Please login to add the machine to My Machines';
@@ -250,23 +249,6 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     }   
 
 } 
-
-/* BuildMachineUser(id:number,id_new:number,name_new:string) 
-{  
-    let m_old:Machineheader;
-    let m_new:Machineheader;
-    m_old=this.listmachines_sorted.find(a=> a.MachineID==id);
-    if(typeof (m_old) !== 'undefined')
-    {
-      m_new=Object.assign({}, m_old);
-      m_new.MachineIDBase = +id;
-      m_new.MachineID = +id_new;
-      m_new.MachineName = name_new;
-      m_new.isFavorite = true;
-      this.listmachines.push(m_new);  
-      this.listmachines_sorted.push(m_new); 
-    }
-  }  */ 
 
 ngOnDestroy() {
     this.eventsSubscription.unsubscribe();

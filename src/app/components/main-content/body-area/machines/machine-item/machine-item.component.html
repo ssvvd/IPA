@@ -61,8 +61,8 @@
                     <div class="row col-2 pt-2">                     
                         <div class="pt-2 pr-4">                     
                             <a data-toggle="tooltip" 
-                                 title="machHeader.isFavorite ? {{'Delete My Machine' | translate}} :{{'Add To My Machines' | translate}}">
-                                <img [src]="machHeader.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(machHeader)">
+                                 title="{{machHeader.isFavorite ? 'Delete My Machine' :'Add To My Machines' | translate}}"> 
+                                <img [src]="machHeader.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine1(machHeader)">
                             </a> 
                         </div>
                         <div class="pr-4 pt-2" *ngIf="machHeader.isFavorite">                                                                 
