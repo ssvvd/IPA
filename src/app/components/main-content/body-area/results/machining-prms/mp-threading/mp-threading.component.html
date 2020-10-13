@@ -76,13 +76,13 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n}}</div>
         <div class="col-2">rpm</div>
       </div>
-      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
+      <div class="row justify-content-start w-100">
         <div class="col-3 row">{{'Circular Feed Rate' | translate }}</div>
         <div class="col-2">F</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{F}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
       </div>
-      <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
+      <div class="row justify-content-start w-100">
         <div class="col-3 row">{{'Feed Speed' | translate }}</div>
         <div class="col-2">v<sub>f</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf}}</div>
