@@ -32,6 +32,7 @@ export class MpThreadingComponent implements OnInit {
   TS:string
   P:number
   NSDo:string
+  NSDoUnits:string
   LTH:number
   Vc:number
   fz:number
@@ -96,7 +97,13 @@ export class MpThreadingComponent implements OnInit {
     //input
     this.TS = this.srv_StMng.IPL.GetItem('ThreadForm').value
     this.P = +this.srv_StMng.IPL.GetItem('Pitch').value
-    this.NSDo = this.srv_StMng.IPL.GetItem('D_Hole').value  || this.srv_StMng.IPL.GetItem('Size').value
+    this.NSDo = this.srv_StMng.IPL.GetItem('D_Hole').value || this.srv_StMng.IPL.GetItem('Size').value
+    
+    if(this.srv_StMng.IPL.GetItem('D_Hole').value){
+      this.NSDoUnits = this.srv_appsetting.UnitslengthDesc
+      this.NSDo = this.NSDo.toString().replace('***', '"')
+    }
+    
     this.LTH = +this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value
 
  //output
@@ -216,5 +223,6 @@ this.n = Math.round(((this.Vc * 1000)/(Math.PI * this.DC)) * 100)/100
     this.SKP = 0
     this.catalogNo=[]
     this.resType = ''
+    this.NSDoUnits = ''
   }
 }
