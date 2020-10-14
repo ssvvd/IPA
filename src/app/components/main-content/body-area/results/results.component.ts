@@ -9,6 +9,7 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Subject } from 'rxjs';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-results',
@@ -33,7 +34,27 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
     private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
-    private srv_appsetting:AppsettingService) { }
+    private srv_appsetting:AppsettingService,private router: Router) { 
+      this.navigationSubscription = this.router.events.subscribe((e: any) => {
+        // If it is a NavigationEnd event re-initalise the component
+        if (e instanceof NavigationEnd) {
+          this.initialiseInvites();
+        }
+      });
+    }
+
+    initialiseInvites() {
+      this.MainPage = true;
+     }
+
+     ngOnDestroy() {
+      // avoid memory leaks here by cleaning up after ourselves. If we  
+      // don't then we will continue to run our initialiseInvites()   
+      // method on every navigationEnd event.
+      if (this.navigationSubscription) {  
+         this.navigationSubscription.unsubscribe();
+      }
+    }
   ngAfterViewInit() {
     console.log(this.resTable); 
   }

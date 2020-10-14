@@ -91,6 +91,7 @@ import { MyMaterialsComponent } from './components/main-content/body-area/materi
 import { ResultsPdfComponent } from './components/main-content/body-area/results/results-pdf/results-pdf.component';
 import { ResultItemInfoComponent } from './components/main-content/body-area/results/result-item-info/result-item-info.component';
 import { PpPromotionComponent } from './components/main-content/body-area/results/pp-promotion/pp-promotion.component';
+import { MpThreadingComponent } from './components/main-content/body-area/results/machining-prms/mp-threading/mp-threading.component';
 
 @NgModule({
   declarations: [   
@@ -165,7 +166,8 @@ import { PpPromotionComponent } from './components/main-content/body-area/result
     ResultItemInfoComponent,
     MyMaterialsComponent,
     ResultsPdfComponent,
-    PpPromotionComponent
+    PpPromotionComponent,
+    MpThreadingComponent
   ],
   imports: [
     FormsModule,
