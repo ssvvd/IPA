@@ -29,17 +29,17 @@ export class MachiningOperationComponent implements OnInit {
   SelectedMenuID1:string="";
   SelectedMenuID2:string="";
   isToOperationData:boolean=false;
+ 
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService,
               private srv_appsetting:AppsettingService,private router:Router) { }
   
   ngOnInit() {
-
     this.isToOperationData =this.srv_statemanage.CheckToOperationData();  
     let MachineType:string;
     MachineType=  this.srv_statemanage.SelectedMachine.MachineType;
-    this.eventsSubscription.add(this.srv_app.getmainapp(this.srv_appsetting.Lang,MachineType)
+    this.eventsSubscription.add(this.srv_app.getmainapp(this.srv_appsetting.Lang,MachineType,this.srv_statemanage.SelectedMachine.SpindleType)
       .subscribe((res: any)=> {
           for (const d of JSON.parse(res)) {                     
           if(d.ParentMenuID==0)
@@ -65,11 +65,18 @@ export class MachiningOperationComponent implements OnInit {
               if(d.ParentMenuID=='61') //drilling
               {
                 if(d.MenuID==71)  isadditem =false;
-                if(MachineType=='Multi task' || MachineType=='Swiss type' || MachineType=='Multi spindle')
+                if( MachineType=='Swiss type' || MachineType=='Multi spindle')
                 {
-                  if(d.MenuID==111 || d.MenuID ==112)  isadditem =true;                  
-                }
-                else
+                  //if(d.MenuID==111 || d.MenuID ==112)  isadditem =true; 
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='M' ) {
+                    if(d.MenuID==111) isadditem =false;
+                    if(d.MenuID==112) isadditem =true;
+                  }
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='T' ) {
+                    if(d.MenuID==111) isadditem =true;
+                    if(d.MenuID==112) isadditem =false;
+                  }                  
+                }                
                 { 
                   if(MachineType=='Lathe')
                   {
@@ -82,25 +89,61 @@ export class MachiningOperationComponent implements OnInit {
                     if(d.MenuID==112)  isadditem =false;                    
                   }                  
                 }
+                if(MachineType=='Multi task' )
+                {
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='T')
+                  {
+                    if(d.MenuID==111)  isadditem =true;
+                    if(d.MenuID==112)  isadditem =false; 
+                  }
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='M')
+                  {
+                    if(d.MenuID==111)  isadditem =false;
+                    if(d.MenuID==112)  isadditem =true;  
+                  }
+                }
               } 
               if(d.ParentMenuID=='110') //threading
               {
-                if(MachineType=='Lathe' )
+                if(MachineType=='Lathe' ) if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;               
+                if(MachineType=='Machining center' ) if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;  
+                //MachineType=='Multi task' || 
+                if(MachineType=='Swiss type' || MachineType=='Multi spindle')
                 {
-                  if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;                  
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='M')
+                  {
+                    if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;  
+                    if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;
+                  }
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='T')
+                  {
+                    if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =true;  
+                    if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;
+                  }
                 }
-                if(MachineType=='Machining center' )
+                if(MachineType=='Multi task' )
                 {
-                  if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;                  
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='T')
+                  {
+                    if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;  
+                    if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;
+                  }
+                  if(this.srv_statemanage.SelectedMachine.SpindleType=='M')
+                  {
+                    if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;  
+                    if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =true;
+                  }
                 }
               } 
+            
+
               if(isadditem)
                 {
                   this.arrSecApps.push({
                   MainApp:d.MainApp,
                   MenuID: d.MenuID,
                   MenuName: d.MenuName,
-                  MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png" ,
+                  MenuImage: (d.ApplicationITAID ==810 || d.ApplicationITAID ==820) ? environment.ImageApplicationsPath + d.MenuImage  + "_inprogress.png": environment.ImageApplicationsPath + d.MenuImage  + ".png",
                   ParentMenuID:d.ParentMenuID ,
                   ApplicationITAID: d.ApplicationITAID,
                   IsActive:isactive 
@@ -124,7 +167,6 @@ export class MachiningOperationComponent implements OnInit {
           {
             this.SelectedSecApp = sa;           
             this.SelectedSecAppID = sa.ApplicationITAID;
-
           }
         }        
         this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
@@ -204,9 +246,7 @@ export class MachiningOperationComponent implements OnInit {
   }
 
   ToOperationData(secapp:SecondaryApp)
-  {
-    //[routerLink]="isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive?['/home/operation-data']:null" 
-    //[routerLink]="isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive?['/home/operation-data']:null"
+  { 
     if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive)
       this.router.navigate(['/home/operation-data']);
   }

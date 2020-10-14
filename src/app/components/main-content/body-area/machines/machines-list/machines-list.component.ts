@@ -14,6 +14,7 @@ import { Subject, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { MyMaterialsComponent } from '../../materials/my-materials/my-materials.component';
 
 @Component({
   selector: 'app-machines-list',
@@ -73,20 +74,6 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     };    
     this.isLoaded =false;
     this.Initializemachinelist(false);
- /*    this.allSubs$ = this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
-      .subscribe((data: any) => {
-        console.log(data);
-        this.listmachines = JSON.parse(data);          
-        this.listmachines_sorted = JSON.parse(data);
-               
-        this.myMachineSettings();
-        if(this.srv_statemanage.SelectedMachine!=null)
-        {
-          this.UpdateListBySelectedMachineValues(this.listmachines);
-          this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
-        } 
-                             
-      });   */
        this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializemachinelist(false));  // todo: 
   }
   
@@ -145,10 +132,17 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     if(typeof (mach) !== 'undefined')
     {
       mach.AdaptationType=this.srv_statemanage.SelectedMachine.AdaptationType;
-      mach.AdaptationSize=this.srv_statemanage.SelectedMachine.AdaptationSize;
+      mach.AdaptationSize=this.srv_statemanage.SelectedMachine.AdaptationSize;     
       mach.Power=this.srv_statemanage.SelectedMachine.Power;
       mach.SpindleSpeed=this.srv_statemanage.SelectedMachine.SpindleSpeed;
       mach.Torque=this.srv_statemanage.SelectedMachine.Torque;
+
+      mach.AdaptationType1=this.srv_statemanage.SelectedMachine.AdaptationType1;
+      mach.AdaptationSize1=this.srv_statemanage.SelectedMachine.AdaptationSize1;      
+      mach.Power1=this.srv_statemanage.SelectedMachine.Power1;
+      mach.SpindleSpeed1=this.srv_statemanage.SelectedMachine.SpindleSpeed1;
+      mach.Torque1=this.srv_statemanage.SelectedMachine.Torque1;
+      mach.SpindleType=this.srv_statemanage.SelectedMachine.SpindleType;
     }    
   }
   
@@ -360,8 +354,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       let nn:number[]=[];
       nn.push(minPower);nn.push(maxPower);nn.push(minSpeed);nn.push(maxSpeed);nn.push(minTorque);nn.push(maxTorque);
       this.eventsChangeMachineList.next(nn);
-    } 
-   
+    }    
   }
 
   ApplyMostRecommended() {        
@@ -387,16 +380,48 @@ UpdateStateSelectedMachine(MachineID: number) {
   }
 
   OnSelectMachine(mach: Machineheader) {         
-      //this.srv_cook.set_cookie("sel_mach",mach.MachineID.toString());
-      this.srv_cook.set_cookie("def_mach",mach.MachineID.toString());
       
-      if(mach.MachineID!=this.srv_statemanage.SelectedMachine.MachineID)
-      {
-        this.UpdateStateSelectedMachine(mach.MachineID);
-        this.srv_statemanage.SelectedMachine = mach;
-        this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
-        this.srv_statemanage.arrMachineSpindle =null;
-      }      
+      this.srv_cook.set_cookie("def_mach",mach.MachineID.toString());          
+      this.UpdateStateSelectedMachine(mach.MachineID);
+      this.srv_statemanage.SelectedMachine = mach;
+      this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
+      this.srv_statemanage.arrMachineSpindle =null;
+        
   }
+
+  setspindletype(mach:Machineheader,type:string)
+  {
+    let mm=this.listmachines.find(m=> m.MachineID == mach.MachineID);
+    
+    mm.SpindleType=type;  
+    
+    let s=mm.SpindleSpeed1;
+    let p=mm.Power1;
+    let t=mm.Torque1;      
+    let at=mm.AdaptationType1;
+    let az=mm.AdaptationSize1;
+    mm.SpindleSpeed1=mm.SpindleSpeed;
+    mm.Power1=mm.Power;
+    mm.Torque1=mm.Torque;
+    mm.AdaptationType1=mm.AdaptationType;
+    mm.AdaptationSize1=mm.AdaptationSize;
+    
+    mm.SpindleSpeed=s;
+    mm.Power=p;
+    mm.Torque=t;
+    mm.AdaptationType=at;
+    mm.AdaptationSize=az;
+      
+    if(this.srv_statemanage.SelectedMachine!=null)
+    {
+      if(mm.MachineID==this.srv_statemanage.SelectedMachine.MachineID) 
+      {
+        //this.srv_statemanage.SelectedMachine.SpindleType=type;
+        this.srv_statemanage.SelectedMachine = mm;
+      }
+        
+    }      
+  }
+
 }
 

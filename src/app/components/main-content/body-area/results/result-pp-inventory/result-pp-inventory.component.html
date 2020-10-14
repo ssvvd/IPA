@@ -13,7 +13,7 @@
       </div>
       <div class="pt-2"  *ngFor="let v of arrviewinvertory">
         <div class="row">
-            <div class="col-4">{{v.GroupName}}</div>     
+            <div class="col-4">{{v.GroupName | translate}}</div>     
                    
             <!-- <div class="col-2"><i  [ngClass]="v.Avai_USA ? 'fa fa-check-circle-o icon-inventory' : 'fa fa-times-circle-o icon-inventory'"></i></div> -->
             <div class="col-2"><img [src]="v.Avai_USA ?  environment.ImagePath+'icon_availble.svg' : environment.ImagePath+'icon_not availble.svg'" class= "icon-inventory"></div>
