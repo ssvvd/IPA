@@ -392,35 +392,36 @@ UpdateStateSelectedMachine(MachineID: number) {
   setspindletype(mach:Machineheader,type:string)
   {
     let mm=this.listmachines.find(m=> m.MachineID == mach.MachineID);
-    
-    mm.SpindleType=type;  
-    
-    let s=mm.SpindleSpeed1;
-    let p=mm.Power1;
-    let t=mm.Torque1;      
-    let at=mm.AdaptationType1;
-    let az=mm.AdaptationSize1;
-    mm.SpindleSpeed1=mm.SpindleSpeed;
-    mm.Power1=mm.Power;
-    mm.Torque1=mm.Torque;
-    mm.AdaptationType1=mm.AdaptationType;
-    mm.AdaptationSize1=mm.AdaptationSize;
-    
-    mm.SpindleSpeed=s;
-    mm.Power=p;
-    mm.Torque=t;
-    mm.AdaptationType=at;
-    mm.AdaptationSize=az;
-      
-    if(this.srv_statemanage.SelectedMachine!=null)
+    if(mm.SpindleType!=type)
     {
-      if(mm.MachineID==this.srv_statemanage.SelectedMachine.MachineID) 
+      mm.SpindleType=type;  
+      
+      let s=mm.SpindleSpeed1;
+      let p=mm.Power1;
+      let t=mm.Torque1;      
+      let at=mm.AdaptationType1;
+      let az=mm.AdaptationSize1;
+      mm.SpindleSpeed1=mm.SpindleSpeed;
+      mm.Power1=mm.Power;
+      mm.Torque1=mm.Torque;
+      mm.AdaptationType1=mm.AdaptationType;
+      mm.AdaptationSize1=mm.AdaptationSize;
+      
+      mm.SpindleSpeed=s;
+      mm.Power=p;
+      mm.Torque=t;
+      mm.AdaptationType=at;
+      mm.AdaptationSize=az;
+      
+      if(this.srv_statemanage.SelectedMachine!=null)
       {
-        //this.srv_statemanage.SelectedMachine.SpindleType=type;
-        this.srv_statemanage.SelectedMachine = mm;
-      }
-        
-    }      
+        if(mm.MachineID==this.srv_statemanage.SelectedMachine.MachineID) 
+        {
+          //this.srv_statemanage.SelectedMachine.SpindleType=type;
+          this.srv_statemanage.SelectedMachine = mm;
+        }          
+      }    
+    }  
   }
 
 }

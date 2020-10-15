@@ -106,13 +106,13 @@ export class ResultsTableComponent implements OnInit {
     this.allSubs$= this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
       { 
         this.srv_StMng.arrMachineSpindle= JSON.parse(res);               
-        this.srv_StMng.FillInputParameters(this.srv_StMng.arrMachineSpindle);
+        this.srv_StMng.FillInputParameters();
         this.getShowTable();      
       });     
     } 
     else
     {
-      this.srv_StMng.FillInputParameters(this.srv_StMng.arrMachineSpindle);
+      this.srv_StMng.FillInputParameters();
       this.getShowTable();
     }          
   }

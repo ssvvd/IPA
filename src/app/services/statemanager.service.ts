@@ -101,21 +101,20 @@ export class StateManagerService {
     this.marrMachineSpindle = mf;
   }
   
-  mMachineSpindleMain:Machinespindle;
-  get MachineSpindleMain():Machinespindle {
-    return this.mMachineSpindleMain;
-  }
-  set MachineSpindleMain(ms:Machinespindle) {
-    this.mMachineSpindleMain = ms;
+  get SelectedMachineSpindle():Machinespindle {
+    if(this.arrMachineSpindle!==undefined && this.SelectedMachine!==undefined)         
+      return this.arrMachineSpindle.find(s=>s.SpindleType==this.SelectedMachine.SpindleType);  
+    else    
+      return null;       
   }
 
-  mMachineSpindleTool:Machinespindle;
+/*   mMachineSpindleTool:Machinespindle;
   get MachineSpindleTool():Machinespindle {
     return this.mMachineSpindleTool;
   }
   set MachineSpindleTool(ms:Machinespindle) {
     this.mMachineSpindleTool = ms;
-  }
+  } */
 
   get SecAppSelected():SecondaryApp {
     return this.mSecondaryAppSelected;
@@ -246,7 +245,7 @@ export class StateManagerService {
      this.SelectMachineFilter =null;
      this.mSelectedMachine =null;
      this.arrMachineSpindle=null;
-     this.MachineSpindleMain=null;
+     //this.MachineSpindleMain=null;
      this.mSecondaryAppSelected=null;
      this.MainAppSelected=null;
      this.MenuIDLevel1="";
@@ -265,57 +264,40 @@ export class StateManagerService {
     this.mopttool_selectedfamily = arr;
    }
 
-   FillMachineData(arrMachineSpindle: Machinespindle[])
+   FillMachineData()
    {
-       let mainspindletype:string;
-       let ms:Machinespindle;
-       mainspindletype='M';
-       
+       //let ms:Machinespindle;       
        this.IPL.GetItem('MachCostPerHour').value = Math.round(this.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100 + "";
       
-       if(this.srv_appsetting.Country!==undefined)
-       {
-         this.IPL.GetItem('Country').value =this.srv_appsetting.Country.CountryID.toString();
-       }
-       else
-       {
+       if(this.srv_appsetting.Country!==undefined)       
+         this.IPL.GetItem('Country').value =this.srv_appsetting.Country.CountryID.toString();       
+       else       
          this.IPL.GetItem('Country').value ='35';
-       }    
+           
          
        this.IPL.GetItem('Currency').value = this.srv_appsetting.Currency;
        
-       ms = arrMachineSpindle.filter(x=> x.SpindleType ==this.SelectedMachine.SpindleType)[0];
+       //ms = this.SelectedMachineSpindle;
 
-   /*     if(this.SelectedMachine.MachineType=='Multi task' || this.SelectedMachine.MachineType=='Multi spindle' || this.SelectedMachine.MachineType=='Swiss type')
-       {
-         if(this.MainAppSelected.MainApp=='ML') mainspindletype='T';
-         if(this.MainAppSelected.MainApp=='TH') mainspindletype='T';
-         //todo:drilling
-         
-         ms = arrMachineSpindle.filter(x=> x.SpindleType ==mainspindletype)[0];
-       }
-       else 
-         ms = arrMachineSpindle[0]; */
-       
        this.IPL.GetItem('MachineType').value = this.SelectedMachine.MachineType;
-       this.IPL.GetItem('AdaptorType').value =ms.AdaptationType;
-       this.IPL.GetItem('AdaptorSize').value =ms.AdaptationSize;
+       this.IPL.GetItem('AdaptorType').value =this.SelectedMachineSpindle.AdaptationType;
+       this.IPL.GetItem('AdaptorSize').value =this.SelectedMachineSpindle.AdaptationSize;
  
-       this.IPL.GetItem('PW_AX').value = ms.N1+""; 
-       this.IPL.GetItem('PW_BX').value = ms.N2+"";
-       this.IPL.GetItem('PW_CX').value = ms.N3+"";
+       this.IPL.GetItem('PW_AX').value = this.SelectedMachineSpindle.N1+""; 
+       this.IPL.GetItem('PW_BX').value = this.SelectedMachineSpindle.N2+"";
+       this.IPL.GetItem('PW_CX').value = this.SelectedMachineSpindle.N3+"";
  
-       this.IPL.GetItem('PW_AY').value = ms.P1 +""; 
-       this.IPL.GetItem('PW_BY').value = ms.P2 +"";
-       this.IPL.GetItem('PW_CY').value = ms.P3 + ""; 
+       this.IPL.GetItem('PW_AY').value = this.SelectedMachineSpindle.P1 +""; 
+       this.IPL.GetItem('PW_BY').value = this.SelectedMachineSpindle.P2 +"";
+       this.IPL.GetItem('PW_CY').value = this.SelectedMachineSpindle.P3 + ""; 
  
-       if(ms.FaceContact + ""=='true')
+       if(this.SelectedMachineSpindle.FaceContact + ""=='true')
          this.IPL.GetItem('ADAPTOR_FaceContact').value = "1";
        else
          this.IPL.GetItem('ADAPTOR_FaceContact').value = "0";    
    }
    
-  
+
   FillCoolant()
   {
   if(this.SecAppSelected.ApplicationITAID=='57' || this.SecAppSelected.ApplicationITAID =='760' || this.SecAppSelected.ApplicationITAID =='770'
@@ -367,13 +349,13 @@ export class StateManagerService {
       }    
   }
 
-   FillInputParameters(arrMachineSpindle: Machinespindle[])
+   FillInputParameters()
    {                   
      this.IPL.GetItem('MainApplication').value = this.MainAppSelected.MainApp;
      this.IPL.GetItem('SecondaryApplication').value = this.SecAppSelected.ApplicationITAID;
      this.IPL.GetItem('Units').value = this.srv_appsetting.Units;  
     
-     this.FillMachineData(arrMachineSpindle);        
+     this.FillMachineData();        
      this.FillDataInputParam();         
    } 
 
