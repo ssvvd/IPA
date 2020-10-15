@@ -1,13 +1,14 @@
 
   
     
- <div class="container-fluid pl-0 pr-0" id ="divhome"  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" >
+ <!-- <div class="container-fluid pl-0 pr-0" id ="divhome"  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" > -->
+    <div class="container-fluid pl-0 pr-0" id ="divhome"  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" >
         <div class="row justify-content-center">
             <div class="col-12 pl-0 pr-0"> 
                 <app-header></app-header>
             </div> 
         </div>     
-        <div *ngIf="msrv_appsetting.isLoggedIn" class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
+        <div *ngIf="msrv_appsetting.isLoggedIn"  class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
             <div class="col-11 pb-4 mb-4">
                 <app-main-content></app-main-content>
             </div>                          

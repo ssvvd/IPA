@@ -176,5 +176,19 @@
     min-width:150px;
     max-width: 150px;   
   }
+
+  .div-in-process {
+    position: relative;
+    display: inline;
+  }
+
+  .img-in-process {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width:200px;       
+    opacity: 50%;
+  }
  }
  
+

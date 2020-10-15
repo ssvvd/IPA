@@ -12,6 +12,8 @@ import { Observable,of} from 'rxjs';
 
 export class LoginService {
 
+  
+
   constructor(private srv_DataLayer:DatalayerService,
               public srv_appsetting:AppsettingService,public translate: TranslateService,) { }
   
@@ -192,24 +194,9 @@ export class LoginService {
         
     this.srv_appsetting.Country=c;          
     this.SetExchangeRate1 (c.BrifName);
-    /* this.srv_DataLayer.getcurrencyeciw(c.BrifName).subscribe((cur:any)=>
-    {
-      if(JSON.parse(cur).length>0)       
-        if(JSON.parse(cur)[0].ECUR=='') 
-          c.Currency='USD';
-        else
-          c.Currency= JSON.parse(cur)[0].ECUR;              
-      else      
-        c.Currency='USD'; 
-        
-      this.srv_appsetting.Country=c;
-      this.srv_appsetting.Currency=c.Currency;
 
-      this.SetExchangeRate();
-    });    
-     */
-    this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {   
-     });    
+    /* this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {   
+     });  */   
   }
 
   SetExchangeRate()

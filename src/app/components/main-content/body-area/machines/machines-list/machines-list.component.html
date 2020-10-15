@@ -1,16 +1,16 @@
 
-<div class="border-left-gray border-right-gray"> 
+<div class="border-left-gray border-right-gray" > 
     <div class="row">          
       <div class="col col-20 ml-0 pl-2 pr-0 pt-0 " > 
          <div class="pt-4 pb-0">
 
          </div>
-          <div class="pr-2 pt-0 border-right-gray">
+          <div class="pr-2 pt-0 border-right-gray" >
             <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
                                 (MachineFilterClear)="onMachineFilterClear()" [onChangeMachineList]="eventsChangeMachineList.asObservable()" [onChangeFavorite]="eventsChangeFavorite.asObservable()"></app-machines-filter>
           </div>
       </div>
-      <div class="col col-80 mt-2 mr-0 pl-2 pr-2">                                       
+      <div class="col col-80 mt-2 mr-0 pl-2 pr-2" >                                       
           <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" >
             <div class="col-6 pt-4 pl-0">  
               <h3 class="siteTitle pl-0 pb-0">Select Machine</h3>
@@ -26,6 +26,7 @@
                   <tr id="dtOptions">
                     <th class="d-none">ID</th>                                                                                           
                     <th><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                  
+                    <th><label>{{'Main Tool' | translate}}<span class="sort-icon ml-1" ></span></label></th>
                     <th><label>{{'Adaptation Type'| translate}}{{' '}}&{{' '}}{{'Size' | translate}}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Spindle Speed' | translate}}{{' (rpm)'}}<span class="sort-icon ml-1"></span></label></th>                
@@ -38,13 +39,27 @@
                   </tr>
                 </thead>
                 <tbody *ngIf="isLoaded">
-                  <tr  *ngFor="let mach of listmachines" (click)="onclickrow(mach)" [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
-                    <th scope="row" class="d-none">{{mach.MachineID}}</th>                                                                                         
-                    <td><div class="pl-2">{{mach.MachineName}}</div></td>
-                    <td><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
-                    <td><div class="pl-2">{{mach.Power}}</div></td>
-                    <td><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
-                    <td><div class="pl-2">{{mach.Torque}}</div></td>                   
+                  <tr  *ngFor="let mach of listmachines"  [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
+                    <th scope="row" class="d-none">{{mach.MachineID}} </th>                                                                                         
+                    <td (click)="onclickrow(mach)"><div class="pl-2" >{{mach.MachineName}}</div></td> 
+                    <td>
+                      <div class="pl-2">
+                        <div class="ml-0">
+                          <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" class="custom-control-input" [attr.id]="'optM'+ mach.MachineID" [attr.name]="'SpindleType'+ mach.MachineID"  [checked]="mach.SpindleType=='M'"  (click)="setspindletype(mach,'M')">
+                              <label class="custom-control-label" [attr.for]="'optM'+ mach.MachineID"></label>
+                          </div>            
+                          <div class="custom-control custom-radio custom-control-inline">
+                              <input type="radio" class="custom-control-input " [attr.id]="'optT'+ mach.MachineID"  [disabled]="mach.MachineType=='Machining center' || mach.MachineType=='Lathe'"   [checked]="mach.SpindleType=='T'"  [attr.name]="'SpindleType'+ mach.MachineID" (click)="setspindletype(mach,'T')" >
+                              <label class="custom-control-label" [attr.for]="'optT'+ mach.MachineID"></label>
+                          </div>                                        
+                      </div> 
+                      </div>
+                    </td>                                       
+                    <td (click)="onclickrow(mach)"><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
+                    <td (click)="onclickrow(mach)"><div class="pl-2">{{mach.Power}}</div></td>
+                    <td (click)="onclickrow(mach)"><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
+                    <td (click)="onclickrow(mach)"><div class="pl-2">{{mach.Torque}}</div></td>                   
                     <!-- <td>
                       <a data-toggle="tooltip" title="{{ 'View Machine Details' | translate}}">
                         <img src="{{environment.ImgView}}"                          

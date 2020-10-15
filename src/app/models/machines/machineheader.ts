@@ -9,15 +9,24 @@ export class Machineheader {
     public Currency:string;
     public SpindleSpeed:number;
     public Power:number;
-    public Torque:number;
-    public IsSelected:boolean=false;  
+    public Torque:number;      
     public AdaptationType:string;
     public AdaptationSize:string;
+
+    public SpindleSpeed1:number;
+    public Power1:number;
+    public Torque1:number;      
+    public AdaptationType1:string;
+    public AdaptationSize1:string;
+
     public DescSelect:string="Select";    
     public isFavorite:boolean = false;
     public IsMostRecommended:boolean = false;
+    public SpindleType:string;
+    public SpindleTypeDefault:string
+    public IsSelected:boolean=false;
     constructor( )
-        {
-            this.DescSelect="Select";
-        }
+    {
+        this.DescSelect="Select";
+    }
 }

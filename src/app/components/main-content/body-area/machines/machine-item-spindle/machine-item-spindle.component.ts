@@ -46,7 +46,7 @@ export class MachineItemSpindleComponent implements OnInit
   ngOnInit() 
   {    
     if(this.spindle.SpindleType=="M")  this.DescSpindle="Main Spindle";
-    if(this.spindle.SpindleType=="T")  this.DescSpindle="Tool Spindle";
+    if(this.spindle.SpindleType=="T")  this.DescSpindle="Tool Spindle - ATC";
     this.eventsSubscription.add(this.serv.getmachineadaptationtype(this.MachineType).subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
         this.curAdapType=this.arrAdapType.find(e=> e.AdaptationType == this.spindle.AdaptationType );                   

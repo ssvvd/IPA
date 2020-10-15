@@ -68,14 +68,7 @@ export class StateManagerService {
     return this.mSelectedMachine;
   }
   set SelectedMachine(m:Machineheader) { 
-    if(typeof(this.SelectedMachine)!=='undefined' && this.SelectedMachine!==null)      
-      /* if(m.MachineID!=this.mSelectedMachine.MachineID)
-      {
-        this.mMainAppSelected = null;
-        this.mSecondaryAppSelected = null; 
-        this.MenuIDLevel1="";
-        this.MenuIDLevel2 ="";          
-      } */
+    if(typeof(this.SelectedMachine)!=='undefined' && this.SelectedMachine!==null)            
       if(m.MachineType!=this.mSelectedMachine.MachineType)
       {
         this.mMainAppSelected = null;
@@ -87,7 +80,7 @@ export class StateManagerService {
     this.mSelectedMachine = Object.assign({}, m);
     let desc:string; 
     if(typeof(m)!=='undefined' && m!==null) 
-    {      
+    {           
       desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " kW";
       this.CheckTabOperationalDataEnable();   
       this.obsMachineSelected.next([m.MachineName,desc]); 
@@ -290,8 +283,10 @@ export class StateManagerService {
        }    
          
        this.IPL.GetItem('Currency').value = this.srv_appsetting.Currency;
- 
-       if(this.SelectedMachine.MachineType=='Multi task' || this.SelectedMachine.MachineType=='Multi spindle' || this.SelectedMachine.MachineType=='Swiss type')
+       
+       ms = arrMachineSpindle.filter(x=> x.SpindleType ==this.SelectedMachine.SpindleType)[0];
+
+   /*     if(this.SelectedMachine.MachineType=='Multi task' || this.SelectedMachine.MachineType=='Multi spindle' || this.SelectedMachine.MachineType=='Swiss type')
        {
          if(this.MainAppSelected.MainApp=='ML') mainspindletype='T';
          if(this.MainAppSelected.MainApp=='TH') mainspindletype='T';
@@ -300,7 +295,7 @@ export class StateManagerService {
          ms = arrMachineSpindle.filter(x=> x.SpindleType ==mainspindletype)[0];
        }
        else 
-         ms = arrMachineSpindle[0];
+         ms = arrMachineSpindle[0]; */
        
        this.IPL.GetItem('MachineType').value = this.SelectedMachine.MachineType;
        this.IPL.GetItem('AdaptorType').value =ms.AdaptationType;
@@ -381,5 +376,9 @@ export class StateManagerService {
      this.FillMachineData(arrMachineSpindle);        
      this.FillDataInputParam();         
    } 
+
+   
+
+    
 }
  

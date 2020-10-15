@@ -12,6 +12,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppsettingService {
 
+  
+  public innerheightmaincontent:number;
+  public innerheightmaincontent1:number;
   constructor(private srv_DataLayer:DatalayerService,private srv_cook:CookiesService) { }
   
   private mUnits:string =''; //todo:
