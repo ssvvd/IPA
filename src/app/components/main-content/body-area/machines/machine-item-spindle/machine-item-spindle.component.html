@@ -9,31 +9,40 @@
 
             </div>                           
              <div class="border-right pt-2">
-                <label class="pl-3 pb-0 mb-0 bold font-weight-bold">{{'Spindle' | translate}} </label>
-             
+                <div class="pt-2">
+                    <label class="pl-3 pb-0 mb-0 bold font-weight-bold">{{'Spindle' | translate}} </label>
+                </div>
                  <div class="form-group row pt-3">
-                    <label for="txtSpindleSpeed" class="col-sm-7 ">{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>
-                    <div class="col-sm-4">
+                    <div  class="pt-1 col-7">
+                        <label for="txtSpindleSpeed" class="">{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>
+                    </div>
+                    <div class="col-4 pt-1">
                         <input type="number" class="form-control" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
                     </div>                    
                 </div> 
 
                 <div class="form-group row pt-2">
-                    <label for="txtPower" class="col-sm-7"><span>{{'Power' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}</span></label>
-                    <div class="col-4">
+                    <div  class="pt-1 col-7">
+                        <label for="txtPower"><span>{{'Power' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}</span></label>
+                    </div>  
+                    <div class="col-4 pt-1">
                         <input type="number" class="form-control" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
                     </div>                    
                 </div>
                 <div class="form-group row pt-2">
-                    <label for="txtTorque" class="col-sm-7"><span>{{'Torque' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}</span></label>
-                    <div class="col-sm-4">
+                    <div  class="pt-1 col-7">
+                        <label for="txtTorque" ><span>{{'Torque' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}</span></label>
+                    </div>
+                    <div class="col-4 pt-1">
                         <input type="number" class="form-control" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
                     </div>
                 </div>                  
                          
                 <div class="form-group row pt-2" *ngIf="!(MachineType=='Lathe' || MachineType=='swiss type' || MachineType=='Multi spindle') && !(MachineType=='Multi task' && spindle.SpindleType=='M')">
-                    <label for="txtFaceCont" class="col-sm-7">{{'Face Contact Connection' | translate}}</label>
-                    <div class="custom-control custom-checkbox custom-control-inline ml-3">
+                    <div  class="pt-1 col-7">
+                        <label for="txtFaceCont">{{'Face Contact Connection' | translate}}</label>
+                    </div>
+                    <div class="custom-control custom-checkbox custom-control-inline ml-3 pt-1">
                         <input type="checkbox" class="custom-control-input"  [attr.id]="'optFaceContact' + spindle.SpindleType"  name="optFaceContact"  [(ngModel)]="spindle.FaceContact">
                         <label class="custom-control-label" [attr.for]="'optFaceContact' + spindle.SpindleType"></label>
                     </div>
@@ -42,8 +51,10 @@
 
                 </div>
                 <div class="form-group row pt-2">
-                    <label for="txtPartFixtureStability" class="col-sm-7">{{'Part Fixture Stability' | translate}}</label>
-                    <div class="col-sm-4">
+                    <div  class="pt-1 col-7">
+                        <label for="txtPartFixtureStability" >{{'Part Fixture Stability' | translate}}</label>
+                    </div>
+                    <div class="col-4 pt-1">
                         <select class="form-control-sm" [ngModel]="spindle.ClampingType" >
                             <option value='unrigid'>unrigid</option>
                             <option value='Fair'>Fair</option>                            
@@ -51,7 +62,7 @@
                         </select>                                
                     </div>
                 </div>
-                <div class="pt-2 pr-2 mr-2">
+                <div class="pt-1 pr-2 mr-2">
 
                 </div>  
              </div>                       
@@ -61,44 +72,48 @@
                 <label  class="siteTitle pl-3 pt-2">{{DescSpindle | translate}}</label>
              </div>
               <div class="pt-2">
-                <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Turret (Stationatry Tools)' | translate}}</label>
-                <!-- <div class="form-group row pt-3">
-                    <label for="txtSpindleSpeed" class="col-sm-7 ">{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>
-                    <div class="col-sm-4">
-                        <input type="number" class="form-control" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
-                    </div>                    
-                </div> -->
+                <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Turret (Stationatry Tools)' | translate}}</label>              
                 <div class="form-group row pt-3">
-                    <label for="txtAdaptationType" class="col-sm-7" >{{'Adaptation Type' | translate}}</label>
-                    <div class="col-sm-4" *ngIf="isLoadingAdSize">            
+                    <div  class="pt-1 col-8">
+                        <label for="txtAdaptationType"  >{{'Adaptation Type' | translate}}</label>
+                    </div>
+                    <div class="col-4 pt-1" *ngIf="isLoadingAdSize">            
                         <select class="form-control-sm" name="slcApatType" [(ngModel)]="curAdapType" (change)="changeadaptype()" >
                             <option  *ngFor="let adaptype of arrAdapType"  [ngValue]="adaptype">{{adaptype.AdaptationType}}</option>
                         </select>                    
                     </div>
                 </div>  
                 <div class="form-group row pt-2">
-                    <label for="txtAdaptationSize" class="col-sm-7" >{{'Adaptation Size' | translate}}</label>
-                    <div class="col-sm-4"  *ngIf="isLoadingAdSize">
+                    <div  class="pt-1 col-8">
+                        <label for="txtAdaptationSize" >{{'Adaptation Size' | translate}}</label>
+                    </div>
+                    <div class="col-4 pt-1"  *ngIf="isLoadingAdSize">
                         <select  class="form-control-sm"   [(ngModel)]="curAdapSize" (change)="changeadapsize()">
                             <option *ngFor="let adapsize of arrAdapSizeFilter" [ngValue]="adapsize">{{adapsize.AdaptationSize}}</option>
                         </select>                                
                     </div>
                 </div>
                 <div class="form-group row pt-2" *ngIf="MachineType!='Lathe'">
-                    <label for="txtMaxCutFeedSpeed" class="col-sm-7"><span>{{'Maximum Cutting Feed Speed' | translate }}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/rev)' : ' (ipm)' }}</span></label>
-                    <div class="col-sm-4">
+                    <div  class="pt-1 col-8">
+                        <label for="txtMaxCutFeedSpeed"><span>{{'Maximum Cutting Feed Speed' | translate }}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/rev)' : ' (ipm)' }}</span></label>
+                    </div>
+                    <div class="col-4 pt-1">
                         <input type="number" class="form-control" id="txtMaxCutFeedSpeed" name="txtMaxCutFeedSpeed" [(ngModel)]="spindle.MaxCutFeedSpeed" > 
                     </div>
                 </div> 
                 <div class="form-group row pt-2" *ngIf="MachineType=='Lathe'">
-                    <label  class="col-sm-7"><span>{{'Machine Feed Rate' | translate }}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipr)' }}</span></label>
-                    <div class="col-sm-4">
+                    <div  class="pt-1 col-8">
+                        <label><span>{{'Machine Feed Rate' | translate }}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipr)' }}</span></label>
+                    </div>
+                    <div class="col-4 pt-1">
                         <input type="number" class="form-control"  [(ngModel)]="spindle.MaxFeedRate" > 
                     </div>
                 </div> 
                 <div class="form-group row pt-2">
-                    <label for="txtMaxRapidFeedSpeed" class="col-sm-7"><span>{{'Maximum Rapid Feed Speed' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipm)' }}</span></label>
-                    <div class="col-sm-4">
+                    <div  class="pt-1 col-8">
+                        <label for="txtMaxRapidFeedSpeed" ><span>{{'Maximum Rapid Feed Speed' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (mm/min)' : ' (ipm)' }}</span></label>
+                    </div>
+                    <div class="col-4 pt-1">
                         <input type="number" class="form-control" id="txtMaxRapidFeedSpeed" name="txtMaxRapidFeedSpeed" [(ngModel)]="spindle.MaxRapidFeedSpeed" > 
                     </div>
                 </div> 
@@ -121,25 +136,33 @@
 
             </div>         
             <div class="pt-2  border-left">
-                <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Coolant' | translate}}</label>
+                <div  class="pt-2">
+                    <label class="pl-3 pb-0 mb-0 font-weight-bold">{{'Coolant' | translate}}</label>
+                </div>
                 <div class="form-group row pt-3">
-                    <label for="txtEmultionPressure" class="col-7 col-sm-7"><span>{{'Emulsion Pressure' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (bar)' : ' (Psi)' }}</span></label>
-                    <div class="col-4 col-sm-4">
+                    <div  class="pt-1 col-7 col-sm-7">
+                        <label for="txtEmultionPressure"><span>{{'Emulsion Pressure' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (bar)' : ' (Psi)' }}</span></label>
+                    </div>
+                    <div class="col-4 col-sm-4 pt-1">
                         <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
                     </div>
                 </div>
                 <div class="form-group row pt-2">
-                    <label for="txtEmultionFlowRate" class="col-7 col-sm-7"><span>{{'Emulsion Flow Rate' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (L/min)' : ' (Gpm)' }}</span></label>
-                    <div class="col-4 col-sm-4">
+                    <div  class="pt-1 col-7 col-sm-7">
+                        <label for="txtEmultionFlowRate"><span>{{'Emulsion Flow Rate' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (L/min)' : ' (Gpm)' }}</span></label>
+                    </div>
+                    <div class="col-4 col-sm-4 pt-1">
                         <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
                     </div>
                 </div>  
                 <div class="form-group row pt-2">
-                    <label  class="col-7 col-sm-7"></label>
-                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
+                    <div  class="pt-1 col-7 col-sm-7">
+                        <label ></label>
+                    </div>
+                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2 pt-1">
                         <label>{{'External' | translate}}</label>
                     </div>
-                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
+                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2 pt-1">
                         <label>{{'Internal' | translate}}</label>
                     </div>
                 </div> 

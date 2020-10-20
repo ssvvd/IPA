@@ -1,9 +1,9 @@
 export const environment = {
   production: true  ,
   //API_HOST: 'http://localhost:17586/',
-  //API_HOST: 'http://www.iscar.com/ITA_API/',
+  API_HOST: 'http://www.iscar.com/ITA_API/',
   internal: true ,
-  API_HOST: 'http://intranet.imc.co.il//ITA_API/',
+  //API_HOST: 'http://intranet.imc.co.il//ITA_API/',
   IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
   ImageInputPath:"assets/img/input_images/",
@@ -20,12 +20,15 @@ export const environment = {
   ImgArrowRight:"assets/img/arrows_right.png",
   ImgThreeDots:"assets/img/threeDots.jpg",
   ImgAssembly:"assets/img/icon_Assembly.svg",
-  ECatalogLink:"http://intranet.imc.co.il/ecatalog/Index.aspx",
-  IscarSite:"http://intranet.imc.co.il",
+  ECatalogLink:"https://www.iscar.com/eCatalog/Index.aspx",
+  IscarSite:"https://www.iscar.com",
   MachiningCalculatorSite:"https://mpwr.iscar.com/MachiningPower",
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
-  eCatFamilyPictures:"http://intranet.imc.co.il/eCatalog/Ecat/datafile/PICTURE/",
+  eCatFamilyPictures:"https://www.iscar.com/eCatalog/Ecat/datafile/PICTURE/",
   //eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
-  eCatFamilyDrawing:"http://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
-  eCatLogo: "http://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/"
+  eCatFamilyDrawing:"https://www.iscar.com/eCatalog/Ecat/illust_ISO",
+  eCatLogo: "https://www.iscar.com/eCatalog/Ecat/datafile/Logo/",
+  
+  CalcReq_Host: 'https://mpwr.iscar.com//MachiningPwrWs/api/CalcReq/',
+  eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat="
 };

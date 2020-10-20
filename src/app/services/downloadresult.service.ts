@@ -10,6 +10,7 @@ import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { BehaviorSubject } from 'rxjs';
+
 //import 'jspdf-autotable'
 
 @Injectable({
@@ -94,10 +95,9 @@ export class DownloadresultService {
 }
 
 ingDownloaded:any;
-public downloadItemPDF():any {
-  
+public downloadItemPDF():any {  
   var doc = new jsPDF('l');    
-  return this.BuildResultItem(doc,'pdfdata');
+  return this.BuildResultItemByTab(doc,'pdfdata');
 }
 
 toDataURL(url, callback) {
@@ -157,11 +157,10 @@ BuildResult(doc:jsPDF,controlname:string):any
 
 BuildResultItem(doc:jsPDF,controlname:string):any
 {
-    const options = {
+    /* const options = {
       background: 'white',
       scale: 3
-    };
-    
+    };   */  
     html2canvas(document.getElementById(controlname), {useCORS: true,allowTaint : true,
       onclone: function (clonedDoc) {    
         //I made the div hidden and here I am changing it to visible              
@@ -175,7 +174,7 @@ BuildResultItem(doc:jsPDF,controlname:string):any
       const bufferX = 5;   
       const imgProps = (<any>doc).getImageProperties(img);
       const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
+      //const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
    
       var imgWidth = 295;     
       var imgHeight = canvas.height * imgWidth / canvas.width;     
@@ -197,6 +196,39 @@ BuildResultItem(doc:jsPDF,controlname:string):any
       return  'ok'; 
     });                        
 }
+
+BuildResultItemByTab(doc:jsPDF,controlname:string):any
+{   
+    html2canvas(document.getElementById(controlname), {useCORS: true,allowTaint : true,
+      onclone: function (clonedDoc) {    
+        //I made the div hidden and here I am changing it to visible              
+        clonedDoc.getElementById(controlname).style.visibility = 'visible';        
+      }
+    }).then(canvas => {
+      // The following code is to create a pdf file for the taken screenshot       
+      document.getElementById(controlname).style.visibility = 'hidden';
+    
+      var imgWidth = 295;     
+      var imgHeight = canvas.height * imgWidth / canvas.width;     
+      var adjust = -210; //1050 is my assupmtion of how many pixels each page holds vertically
+      var extraNo=Math.ceil((imgHeight+30)/210); //Lets me know how many page are needed to accommodate this image
+      
+      for(let r:number=0;r<extraNo;r++){
+        if(r==0)
+          doc.addImage(canvas, 'PNG', 0,0, imgWidth, imgHeight);
+        else        
+          doc.addImage(canvas, 'PNG', 0,(adjust)*r+30, imgWidth, imgHeight);     
+        if(r<extraNo-1) doc.addPage();
+      }
+                   
+      return doc;
+       }).then((doc) => {
+      doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
+      this.obsPDFListLoaded.next(null);
+      return  'ok'; 
+    });                        
+}
+
 BuildOperationData(doc:jsPDF)
   {     
     //add operation data

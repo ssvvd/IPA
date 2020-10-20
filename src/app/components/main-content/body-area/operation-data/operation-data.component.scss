@@ -1,5 +1,5 @@
- @import "bootstrap"; 
- @import 'src/styles.scss';
+ //@import "bootstrap"; 
+ //@import 'src/styles.scss';
 .vertical-text
 {
 transform: rotate(270deg);
@@ -16,24 +16,27 @@ transform-origin: 70% 140%;
       flex: 0 0 5%;
       max-width: 5%;
   }
-  .col-cust-95 {
+  
+.col-cust-95 {
       flex: 0 0 95%;
       max-width: 95%;
   }
  
-.width-tooldata {
-    @extend .col-sm-12;
-    @extend .col-md-12;
-    @extend .col-lg-4;
-    @extend .col-xl-3;
+/* .width-tooldata {
+    @extend .col-lg-4 !optional;
+    @extend .col-xl-3 !optional;
+    @extend .col-sm-12 !optional;
+    @extend .col-md-12 !optional;
+    
 }
 
 .width-appdetails {
-    @extend .col-sm-12;
-    @extend .col-md-12;
-    @extend .col-lg-8;
-    @extend .col-xl-9;
-}
+   @extend .col-lg-8 !optional;
+   @extend .col-xl-9 !optional;
+    @extend .col-sm-12 !optional;
+    @extend .col-md-12 !optional;
+  
+} */
 
 
 /* @include media-breakpoint-up (xs){ 

@@ -1,10 +1,12 @@
 
 <div class="container-fluid ml-0 pl-0 mt-0  pr-0">   
      <div class="form-group row col-12">       
-        <div  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'width-tooldata  border-right-gray border-left-gray  pt-2' : 'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
-            <div class="pt-4"  >
+        <div  [ngClass]="msrv_StMng.IsTabToolDataOpen ?
+         'col-lg-4 col-xl-3 col-sm-12 col-md-12  border-right-gray border-left-gray  pt-2 ml-0 pl-0 pl-0 pr-0' :
+         'col-cust-5 border-right-gray border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
+            <div class="pt-4 pl-3 pr-3"  >
                 <div class="form-group">                     
-                    <a  [ngClass]="msrv_StMng.IsTabToolDataOpen ?'cursor-pointer float-right':'pl-3 cursor-pointer float-center'" (click)="showtooldata()">                        
+                    <a  [ngClass]="msrv_StMng.IsTabToolDataOpen ?'cursor-pointer float-right pt-1':'pt-1 pl-3 cursor-pointer float-center'" (click)="showtooldata()">                        
                         <i  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'fa fa-chevron-left icon-open' : 'fa fa-chevron-right icon-open'"></i>
                     </a>                            
                     <div>                    
@@ -18,7 +20,7 @@
                 </div>           
             </div> 
         </div>
-        <div [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'border-right-gray width-appdetails pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
+        <div [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'border-right-gray col-lg-8 col-xl-9 col-sm-12 col-md-12  pl-0 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
             <div class="form-group">
                 <div class="form-group row col-12"> 
                     <div  class= "float-left pl-3">                                       

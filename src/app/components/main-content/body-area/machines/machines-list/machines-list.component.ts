@@ -42,12 +42,13 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   countallrow:string='';
   defaultmachine:number=0;
   statusclick:number=0;
-
+ 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   
   eventsChangeFavorite: Subject<void> = new Subject<void>();
   eventsChangeMachineList: Subject<number[]> = new Subject<number[]>();
- 
+  
+  SortDesBySpindleType:string='asc';
   constructor(private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
@@ -69,7 +70,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         "infoEmpty": "",
         "info": "",
         },        
-        "order": [[ 10, 'desc' ],[ 9, 'asc' ]] ,
+        "order": [[ 11, 'desc' ],[ 10, 'asc' ]] ,
         responsive: true
     };    
     this.isLoaded =false;
@@ -122,6 +123,22 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       if(a.IsSelected && !b.IsSelected) return -1;
       if(!a.IsSelected && b.IsSelected) return 1;
       return 0;
+  }
+  
+  sort_arr_by_spidletype(a:Machineheader,b:Machineheader)
+  {    
+      if(this.SortDesBySpindleType=='asc')
+      {
+        //this.SortDesBySpindleType="DESC";
+        if(a.SpindleType > b.SpindleType) return -1;
+        return 1;
+      } 
+      else
+      {
+        //this.SortDesBySpindleType="ASC";
+        if(a.SpindleType > b.SpindleType) return 1;
+        return -1;
+      }         
   }
 
   UpdateListBySelectedMachineValues(list:Machineheader[])
@@ -322,8 +339,8 @@ UpdateStateSelectedMachine(MachineID: number) {
         ((!filter.IsMachineTypeStandard && m.MachineType1 != "Standard") || filter.IsMachineTypeStandard) &&
         ((!filter.IsMachineTypeHeavyDuty && m.MachineType1 != "Heavy Duty") || filter.IsMachineTypeHeavyDuty) &&
         ((!filter.IsMachineTypeHighSpeed && m.MachineType1 != "High speed") || filter.IsMachineTypeHighSpeed) && 
-        ((filter.AdaptationType !='' && m.AdaptationType ==filter.AdaptationType) || filter.AdaptationType =='') && 
-        ((filter.AdaptationSize !='' && m.AdaptationSize ==filter.AdaptationSize) || filter.AdaptationSize =='') &&
+        ((filter.AdaptationType !='' && (m.AdaptationType ==filter.AdaptationType || m.AdaptationType1 ==filter.AdaptationType)) || filter.AdaptationType =='') && 
+        ((filter.AdaptationSize !='' && (m.AdaptationSize ==filter.AdaptationSize || m.AdaptationSize1 ==filter.AdaptationSize)) || filter.AdaptationSize =='') &&
         (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1 || m.AdaptationType.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1 
         || m.AdaptationSize.toString().indexOf(filter.SearchText.toUpperCase()) > -1
         || m.Power.toString().indexOf(filter.SearchText.toUpperCase()) > -1
@@ -357,6 +374,43 @@ UpdateStateSelectedMachine(MachineID: number) {
     }    
   }
 
+  SortSpindleType()
+  {  
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      "searching": false,
+      "lengthChange": false,
+      "paging": false,       
+       "autoWidth":false,
+       "scrollY": '65vh',
+       "scrollCollapse" : true,
+        "language": {
+        "emptyTable": "",
+        "zeroRecords": "",
+        "infoEmpty": "",
+        "info": "",
+        },        
+        "order": [[ 2, this.SortDesBySpindleType ]] ,
+        responsive: true
+    };   
+    
+     this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr_by_spidletype(a,b));  
+    //this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_arr_by_spidletype(a,b));
+    if(this.SortDesBySpindleType=='asc') 
+      this.SortDesBySpindleType='desc';
+    else
+      this.SortDesBySpindleType='asc';
+ 
+    if (this.isDtInitialized) {
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.destroy();
+        this.dtTrigger.next();
+      });
+    } else {
+      this.isDtInitialized = true
+      this.dtTrigger.next();
+    }  
+  }
   ApplyMostRecommended() {        
     this.listmachines = this.listmachines_sorted.filter(
       m => 
@@ -416,8 +470,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       if(this.srv_statemanage.SelectedMachine!=null)
       {
         if(mm.MachineID==this.srv_statemanage.SelectedMachine.MachineID) 
-        {
-          //this.srv_statemanage.SelectedMachine.SpindleType=type;
+        {        
           this.srv_statemanage.SelectedMachine = mm;
         }          
       }    
