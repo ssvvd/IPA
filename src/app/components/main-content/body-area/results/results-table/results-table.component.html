@@ -33,10 +33,10 @@
             <thead>
                     <tr id="dtOptions">
                      <th width="15%"><label></label></th>  
-                     <th *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
+                     <th class="sorting" *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
                          <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">
-                            <span class="sort-icon ml-1"></span>
-                           </label>
+                            <!-- {{hd.FieldDescriptionSmall | translate}}<span class="sort-icon ml-1"></span> -->
+                           </label><span class="sort-icon ml-1"></span>
                         </th>
                         <th class="no-sort"></th>
                         <th class="no-sort text-center">

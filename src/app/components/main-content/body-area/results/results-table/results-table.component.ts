@@ -10,7 +10,7 @@ import {clsHelpProp} from 'src/app/models/results/help-prop';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
-import { Subject, Subscription, forkJoin } from 'rxjs';
+import { Subject, Subscription, forkJoin, combineLatest } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -27,13 +27,14 @@ import { MachineService } from 'src/app/services/machine.service' ;
   styleUrls: ['./results-table.component.scss']
 })
 export class ResultsTableComponent implements OnInit {
-  @ViewChild(DataTableDirective, {static: false})
-  dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
+  isDtInitialized:boolean = false;
 
   dtTrigger: Subject<any> = new Subject();
   allSubs$: Subscription;
   environment = environment;
   dtOptions: any = {};
+  // dtColumnDefs: any = {};
   dtRsults:object[];
   dtRsultsVisble:object[];
   dtFullTable:object[];
@@ -61,6 +62,7 @@ export class ResultsTableComponent implements OnInit {
   countrow:number=0;
   showingrows:number=0;
   lastTypeMainFilter:string="";
+  // spanSort:string = "<span class='sort-icon ml-1'></span>"
 
   @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
@@ -76,6 +78,7 @@ export class ResultsTableComponent implements OnInit {
     
      this.dtOptions = {
       pagingType: 'full_numbers',
+      // "columnDefs":[{ "type": "numeric-comma" }],
        "searching": false,
        "lengthChange": false ,
        "paging":false,  
@@ -90,6 +93,9 @@ export class ResultsTableComponent implements OnInit {
       }           
   }; 
 
+//   this.dtColumnDefs = [
+//     { targets: 33, type: 'num' } //0 is the column index
+//  ];
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
   this.sortType = 'asc';
@@ -98,6 +104,11 @@ export class ResultsTableComponent implements OnInit {
   this.lastTypeMainFilter = "FilterRec"
   this.GetResult();
   }
+
+  // ngOnDestroy(): void {
+  //   // Do not forget to unsubscribe the event
+  //   this.dtTrigger.unsubscribe();
+  // }
  
   GetResult() 
   {  
@@ -138,7 +149,39 @@ getShowTable(){
         });
       }
       else{
-        this.renderTable(this.srv_ResultsStore.getRes1(), this.srv_ResultsStore.getRes2(), this.srv_ResultsStore.getRes3(), this.srv_ResultsStore.getRes4(),this.srv_ResultsStore.getRes5(), this.srv_ResultsStore.getRes6())
+        this.srv_ResultsStore.Currentres1.subscribe(res=>{
+
+              let aaa = res;
+         }
+        );
+
+        var _arr = [];
+
+        _arr.push(this.srv_ResultsStore.Currentres1);
+        _arr.push(this.srv_ResultsStore.Currentres2);
+        _arr.push(this.srv_ResultsStore.Currentres3);
+        _arr.push(this.srv_ResultsStore.Currentres4);
+        _arr.push(this.srv_ResultsStore.Currentres5);
+        _arr.push(this.srv_ResultsStore.Currentres6);
+
+        this.allSubs$ = combineLatest(_arr).subscribe(resList=>{
+          //-- the response will be in array
+          this.renderTable(resList[0], resList[1], resList[2], resList[3],resList[4], resList[5])
+      });
+
+        // this.allSubs$ = forkJoin(
+        //   this.srv_ResultsStore.Currentres1,
+        //   this.srv_ResultsStore.Currentres2,
+        //   this.srv_ResultsStore.Currentres3,
+        //   this.srv_ResultsStore.Currentres4,
+        //   this.srv_ResultsStore.Currentres5,
+        //   this.srv_ResultsStore.Currentres6
+        // )
+        // .subscribe(([res1, res2, res3, res4,res5, res6]:[any,any,any,any,any,any]) => {
+        //   this.renderTable(res1, res2, res3, res4,res5, res6)
+        // // let a =0
+        // });
+        // this.renderTable(this.srv_ResultsStore.getRes1(), this.srv_ResultsStore.getRes2(), this.srv_ResultsStore.getRes3(), this.srv_ResultsStore.getRes4(),this.srv_ResultsStore.getRes5(), this.srv_ResultsStore.getRes6())
       }
 }
 
@@ -516,7 +559,20 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 }
 this.countrow = this.dtResultsObjects3d.length
 this.headersOrig = JSON.parse(JSON.stringify(this.headers));
-this.dtTrigger.next();
+//  this.dtTrigger.next();
+if(this.dtElement){
+if (this.dtElement.dtInstance) {
+  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+    dtInstance.destroy();
+    this.dtTrigger.next();
+  });
+} else {
+  this.isDtInitialized = true
+  this.dtTrigger.next();
+} }
+else{
+  this.dtTrigger = null
+}
 this.SpinnerService.hide();
 }
 // private async checkImgExists(image_url:string){
@@ -1052,6 +1108,12 @@ for (let x in families) {
   }
 }
 
+
+}
+
+columnName(colName:string){
+
+  return colName + '<span class="sort-icon ml-1"></span>'
 
 }
 

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,25 @@ export class ResultsStoreService {
   private res4:any;
   private res5:any;
   private res6:any;
+
+  private obsRes1 = new BehaviorSubject<any>(null);
+  Currentres1 = this.obsRes1.asObservable(); 
+
+  private obsRes2 = new BehaviorSubject<any>(null);
+  Currentres2 = this.obsRes2.asObservable(); 
+
+  private obsRes3 = new BehaviorSubject<any>(null);
+  Currentres3 = this.obsRes3.asObservable(); 
+
+  private obsRes4 = new BehaviorSubject<any>(null);
+  Currentres4 = this.obsRes4.asObservable(); 
+
+  private obsRes5 = new BehaviorSubject<any>(null);
+  Currentres5 = this.obsRes5.asObservable(); 
+
+  private obsRes6 = new BehaviorSubject<any>(null);
+  Currentres6 = this.obsRes6.asObservable(); 
+
 
   checkChanged(_secApp:string,_units:string,_inputParams:string):boolean{
 
@@ -43,29 +63,35 @@ else{
     this.res4 = _res4
     this.res5 = _res5
     this.res6 = _res6
+    this.obsRes1.next(_res1)
+    this.obsRes2.next(_res2)
+    this.obsRes3.next(_res3)
+    this.obsRes4.next(_res4)
+    this.obsRes5.next(_res5)
+    this.obsRes6.next(_res6)
   }
 
-  getRes1(){
+  getRes1():Observable<any> {
     return this.res1
   }
 
-  getRes2(){
+  getRes2():Observable<any>{
     return this.res2
   }
 
-  getRes3(){
+  getRes3():Observable<any>{
     return this.res3
   }
 
-  getRes4(){
+  getRes4():Observable<any>{
     return this.res4
   }
 
-  getRes5(){
+  getRes5():Observable<any>{
     return this.res5
   }
 
-  getRes6(){
+  getRes6():Observable<any>{
     return this.res6
   }
 

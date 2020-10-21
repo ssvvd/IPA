@@ -23,8 +23,7 @@ import { Subject, Subscription } from 'rxjs';
   styleUrls: ['./mat-main-table.component.scss','../materials.component.scss']
 })
 export class MatMainTableComponent implements OnInit, OnDestroy {
-  @ViewChild(DataTableDirective, {static: false})
-  dtElement: DataTableDirective;
+  @ViewChild(DataTableDirective, {static: false}) dtElement: DataTableDirective;
 
   dtOptionsMat: any = {};
   materialsResult:clsMaterial[]=[];
@@ -66,6 +65,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     let sortHardnessCol2 = 5;
 
     this.dtOptionsMat = {
+      destroy: true,
       pagingType: 'full_numbers',
        "searching": false,
        "lengthChange": false ,
