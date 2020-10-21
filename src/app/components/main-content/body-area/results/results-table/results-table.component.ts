@@ -1117,6 +1117,13 @@ columnName(colName:string){
 
 }
 
+getValue(col:clsPropertyValue[]){
+  let value:string = ''
+  for (var val of col) {
+    value = value + val.value
+  }
+  return value;
+}
 
 }
 

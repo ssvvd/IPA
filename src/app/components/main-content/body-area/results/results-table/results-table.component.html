@@ -69,7 +69,7 @@
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
                        </td>
                        <!--  (click)="viewInfo(row.index) -->
-                       <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
+                       <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
                            <span  *ngFor="let prty of col; let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
                               (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
