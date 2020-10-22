@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
     this.srv_login.LogOut();
     this.userdes='Log In';     
   }
-
+  
   LogIn()
   {   
       if(this.srv_appsetting.UserID=='')
@@ -72,7 +72,10 @@ export class HeaderComponent implements OnInit {
         this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();});
       }        
   }
-
+  FillListCountries()
+  {
+    this.isLoadingLang=true;
+  }
   GetLanguages()
   {
     if (typeof (this.srv_appsetting.lstLanguages)=== 'undefined')
@@ -80,7 +83,7 @@ export class HeaderComponent implements OnInit {
       this.srv_appsetting.dictionarygetlanguage().subscribe((data: any) => {
       this.lstLanguage = JSON.parse(data); 
       this.srv_appsetting.lstLanguages =this.lstLanguage;
-      this.isLoadingLang=true;
+      //this.isLoadingLang=true;
       this.BuildCountryData();
       });                            
     }

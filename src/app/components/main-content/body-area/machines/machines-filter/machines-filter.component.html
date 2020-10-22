@@ -25,7 +25,7 @@
     <div class="row">
         <div [ngClass]="machFilter.IsMachiningCenter?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-0 pt-2 pr-3 pb-2 pb-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   pl-0 pt-2 pr-3 pb-2 pb-2 div-opacity'">
             <div>
-                <img [src]="environment.ImagePath+'MachiningCenter.svg'" class="cursor-pointer" (click)="machFilter.IsMachiningCenter=!machFilter.IsMachiningCenter;FilterChange($event,false,false,false)">
+                <img  [src]="environment.ImagePath+'MachiningCenter.svg'" class="cursor-pointer" (click)="machFilter.IsMachiningCenter=!machFilter.IsMachiningCenter;FilterChange($event,false,false,false)">
             </div>
             <div class="d-flex justify-content-center" >
                 <div class="custom-control custom-checkbox cursor-pointer">
@@ -39,7 +39,7 @@
         </div>
         <div  [ngClass]="machFilter.IsLathe?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   p-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   p-2 div-opacity'" >   
             <div class="d-flex justify-content-center">       
-                <img [src]="environment.ImagePath + 'lathe.svg'" class="cursor-pointer img-fluid" (click)="machFilter.IsLathe=!machFilter.IsLathe;FilterChange($event,false,false,false)">           
+                <img   [src]="environment.ImagePath + 'lathe.svg'" class="cursor-pointer img-fluid" (click)="machFilter.IsLathe=!machFilter.IsLathe;FilterChange($event,false,false,false)">           
             </div>
             <div class="d-flex justify-content-center">
                  <div class="custom-control custom-checkbox cursor-pointer">
@@ -53,7 +53,7 @@
         </div>
             <div  [ngClass]="machFilter.IsMultiTask?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-3 pt-2 pr-0 pb-2 pb-2  div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 pl-3 pt-2 pr-0 pb-2 pb-2  div-opacity'">
                 <div>
-                    <img [src]="environment.ImagePath + 'MultiTask.svg'" class="cursor-pointer" (click)="machFilter.IsMultiTask=!machFilter.IsMultiTask;FilterChange($event,false,false,false)">
+                    <img  [src]="environment.ImagePath + 'MultiTask.svg'" class="cursor-pointer" (click)="machFilter.IsMultiTask=!machFilter.IsMultiTask;FilterChange($event,false,false,false)">
                 </div>
                 <div class="d-flex justify-content-center">
                     <div class="custom-control custom-checkbox cursor-pointer">
@@ -69,7 +69,7 @@
     <div class="row">
         <div [ngClass]="machFilter.IsMultiSpindle?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-1 pt-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2 div-opacity'">
             <div>
-                <img [src]="environment.ImagePath+'MultiSpindle.svg'" class="cursor-pointer" (click)="machFilter.IsMultiSpindle=!machFilter.IsMultiSpindle;FilterChange($event,false,false,false)"> 
+                <img  [src]="environment.ImagePath+'MultiSpindle.svg'" class="cursor-pointer" (click)="machFilter.IsMultiSpindle=!machFilter.IsMultiSpindle;FilterChange($event,false,false,false)"> 
             </div>
             <div class="d-flex justify-content-center">
                 <div class="custom-control custom-checkbox cursor-pointer">
@@ -83,7 +83,7 @@
         </div>
         <div [ngClass]="machFilter.IsSwissType?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2 div-opacity'">
             <div>
-                <img [src]="environment.ImagePath+'SwissType.svg'" class="cursor-pointer" (click)="machFilter.IsSwissType=!machFilter.IsSwissType;FilterChange($event,false,false,false)"> 
+                <img   [src]="environment.ImagePath+'SwissType.svg'" class="cursor-pointer" (click)="machFilter.IsSwissType=!machFilter.IsSwissType;FilterChange($event,false,false,false)"> 
             </div>
             <div class="d-flex justify-content-center">
                 <div class="custom-control custom-checkbox cursor-pointer">

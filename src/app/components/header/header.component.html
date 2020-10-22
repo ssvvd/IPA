@@ -1,5 +1,4 @@
-    <!-- logo -->  
-    <!-- <div class="container-fluid pt-2 pl-0 pr-0" style="background-color: yellow"> -->
+
 <div class="row justify-content-center">
 <div class="col-12 banner-top d-flex justify-content-center" >
     <div class="col-11 pr-0">
@@ -26,22 +25,13 @@
             <div class="border-right-gray pl-2">
             </div>   
                                                                        
-             <!-- <div class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
-                <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + SelectedLang.LanguageCode + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div>
-                    <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
-                        <div *ngFor="let lan of lstLanguage" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{lan.LanguageEnName}} (click)="onChangeLanguage(lan)">                                                                                                                                                               
-                            <img [src]="environment.ImagePath + 'flags/' + lan.LanguageCode + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >                                                                                                                                                                                                 
-                            <label class="mt-2" style="background-color:trasparent" >{{lan.LanguageName}}</label>                                                                                                                          
-                        </div>                                                                  
-                    </div>
-            </div> -->
             <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
-                <!-- <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}></div> -->
-                <div *ngIf ="srv_appsetting.Country===undefined" ngbDropdownToggle id="calc">
-                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
+               
+                <div *ngIf ="srv_appsetting.Country===undefined" ngbDropdownToggle id="calc" >
+                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
                 </div>
                 <div *ngIf ="srv_appsetting.Country!==undefined" ngbDropdownToggle id="calc">
-                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
+                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
                 </div>    
                     <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
                         <div *ngFor="let c of lstcountry" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{c.CountryName}} >  
@@ -62,22 +52,11 @@
                                     </div>
                                 </div>
                             </div> 
-                        </div>
+                        </div> 
                                                                                          
                     </div>
             </div>
-           <!--  <div  class="div-header-link pl-2 pt-1">
-                <label class="user-login" (click)="LogIn()">
-                    <div class="row">
-                        <div >
-                            <img [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="user-img" >
-                        </div>
-                        <div class="mt-1 ml-1 mr-2">
-                            <Label class="user-label">{{userdes}}</Label>           S
-                        </div>
-                    </div>              
-                </label>    
-            </div>     -->
+
             <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-0"  ngbDropdown role="group" > 
                 <div  class="div-header-link pl-2 pt-1"    ngbDropdownToggle id="login">
                     <label class="user-login" (click)="LogIn()">

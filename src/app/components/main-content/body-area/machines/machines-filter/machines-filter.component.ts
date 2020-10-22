@@ -9,6 +9,7 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { Subscription ,Observable} from 'rxjs';
 
+
 export class AdaptationType
 {
   AdaptationType:string;  

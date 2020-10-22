@@ -16,7 +16,7 @@
   --bg-mat-H:#888;
   --bg-hover:#ebedf2;
   --family-font-h: 'Oswald',Calibri,Arial;
-  --family-font: 'Roboto',Calibri,Arial;
+  --family-font: 'Roboto',Calibri,Arial;  
   --row-selected:#b5c4da;
   --background-color-menu:#e7e8e9;
   --border-color-gray:#bababa  ;
@@ -329,13 +329,6 @@ table.dataTable.no-footer{
   font-family: var(--family-font-h) !important  
 }
 
-// .siteContent{
-//   color:var(--content-color) !important;
-//   font-weight: normal !important;
-//   font-size: 14px !important;
-//   font-family: var(--family-font) !important;
-// }
-
 .breadcrumb-item.active{
   color:var(--content-color) !important;
 }
@@ -382,7 +375,6 @@ table.dataTable.no-footer{
     font-size: 14px; 
 }
 
-//todo:
 html, body{ 
   width: 100% !important;
   height: 100%!important;
@@ -390,8 +382,7 @@ html, body{
   display: flex!important;
   flex-direction: column!important;
   margin:0!important;  
-  //background-color:lightyellow;
-  //overflow: hidden;
+
 } 
 
 .grayDiv{
@@ -434,3 +425,4 @@ html, body{
     margin-left: -2px;
     margin-top:-2px
 }
+
