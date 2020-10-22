@@ -135,7 +135,6 @@ export class Appdetails890Component implements OnInit {
 
   ClearData()
   {
-    // alert(this.srv_StMng.SecApp);
     switch (this.srv_StMng.SecApp.toString())
     {     
       case '890' :

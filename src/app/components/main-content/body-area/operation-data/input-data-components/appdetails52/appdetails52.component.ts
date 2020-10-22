@@ -78,18 +78,9 @@ export class Appdetails52Component implements OnInit {
       this.AddTostrMandatoryParam('GroovePosition',"LP:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('Depth',"DPT:",this.srv_appsetting.UnitslengthDesc);   
       this.AddTostrMandatoryParam('Width',"W:",this.srv_appsetting.UnitslengthDesc);    
-    }
-  /*   if( this.srv_StMng.SecApp=='53')
-    {
-      this.AddTostrMandatoryParam('WorkpieceDiameter',"D:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('GroovePosition',"LP:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('DepthofGroove',"DPT:",this.srv_appsetting.UnitslengthDesc);   
-      this.AddTostrMandatoryParam('WidthofGroove',"W:",this.srv_appsetting.UnitslengthDesc);    
-    } */
+    }  
       if(this.strMandatory.length>0)
-        this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);
-
-    
+        this.msrv_StMng.IPLMMandatory=this.strMandatory.substring(0,this.strMandatory.length-2);    
   }
 
   AddTostrMandatoryParam(name:string,desc:string,units:string)

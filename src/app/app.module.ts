@@ -14,8 +14,8 @@ import * as $ from "jquery";
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component';
-import { SubMenuComponent } from './components/header/sub-menu/sub-menu.component';
+/* import { GlobalMenuComponent } from './components/header/global-menu/global-menu.component'; */
+/* import { SubMenuComponent } from './components/header/sub-menu/sub-menu.component'; */
 import { MaterialsComponent } from './components/main-content/body-area/materials/materials.component';
 import { MachiningOperationComponent } from './components/main-content/body-area/machining-operation/machining-operation.component';
 import { OperationDataComponent } from './components/main-content/body-area/operation-data/operation-data.component' //./components/main-content/body-area/operation-data/operation-data.component';
@@ -99,8 +99,8 @@ import { MpThreadingComponent } from './components/main-content/body-area/result
     MachinesListComponent, 
     HeaderComponent,
     FooterComponent,
-    GlobalMenuComponent,
-    SubMenuComponent,
+   /*  GlobalMenuComponent,
+    SubMenuComponent, */
     MaterialsComponent,
     MachiningOperationComponent,
     OperationDataComponent,

@@ -27,21 +27,7 @@ export class Appdetails54Component implements OnInit {
   ngOnInit() {  
     this.SetIPLMandatory();
     this.SetImageSecAppByAppType(this.TypeApp);
-    /* if( this.srv_StMng.SecApp=='54' ||  this.srv_StMng.SecApp=='10')
-    {
-      if(this.TypeApp=='1')       
-        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
-      else
-        this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";            
-    }
-    if (this.srv_StMng.SecApp=='188')
-    {
-      if(this.TypeApp=='1') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";      
-      if(this.TypeApp=='2') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_1.png";  
-      if(this.TypeApp=='3') this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + "_2.png";            
-    }
-    else      
-       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png"; */
+   
     this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;   
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }

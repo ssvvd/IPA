@@ -81,12 +81,10 @@ export class Appdetails120Component implements OnInit {
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     if(this.srv_StMng.SecApp=='120')
     {
-      //this.ImageName1 =environment.ImagePath +"internal_thread.PNG";
       this.threadtype="Internal";
     }
     else
     {
-      //this.ImageName1 =environment.ImagePath +"external_thread.PNG";
       this.threadtype="External";
     }
     let dia:string;

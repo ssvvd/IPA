@@ -284,13 +284,7 @@ ChangeField(field:string)
 }
 
 CheckInputFields(field) {     
-  //"Pre hole should be smaller than "
-  //"Corner radius should be bigger than half of pre hole diameter"  
-  //"Corner radius should be smaller than half of cavity width"  
-  //"Corner radius should be smaller than half of cavity length"  
-  //"Min bottom radius should be smaller or equal than Corner radius"  
-  //"Max bottom radius  should be bigger or equal than Min botton radius"
- 
+  
   var diameter = this.srv_StMng.IPL.GetItem('D3').value;
   var radius = this.srv_StMng.IPL.GetItem('RToleranceMin').value;
   var minradius = this.srv_StMng.IPL.GetItem('MinCornerRadius').value;

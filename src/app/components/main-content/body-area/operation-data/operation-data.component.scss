@@ -1,5 +1,4 @@
- //@import "bootstrap"; 
- //@import 'src/styles.scss';
+
 .vertical-text
 {
 transform: rotate(270deg);
@@ -22,42 +21,6 @@ transform-origin: 70% 140%;
       max-width: 95%;
   }
  
-/* .width-tooldata {
-    @extend .col-lg-4 !optional;
-    @extend .col-xl-3 !optional;
-    @extend .col-sm-12 !optional;
-    @extend .col-md-12 !optional;
-    
-}
-
-.width-appdetails {
-   @extend .col-lg-8 !optional;
-   @extend .col-xl-9 !optional;
-    @extend .col-sm-12 !optional;
-    @extend .col-md-12 !optional;
-  
-} */
-
-
-/* @include media-breakpoint-up (xs){ 
- .btn-select  
- { 
-    min-width:150px;
-    max-width: 150px;
-  
-}
-.btn-select-selected 
-  {    
-    min-width:150px;
-    max-width: 150px;   
-  }
-
-  .btn-select-selected:hover
-  {     
-    min-width:150px;
-    max-width: 150px;   
-  }
- } */
   
 
   

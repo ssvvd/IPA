@@ -65,7 +65,6 @@ export class Appdetails77Component implements OnInit {
   
   public ChangeDiameter()
   {
-    //alert(this.SelectedDia.Value.toString());
     this.srv_StMng.IPL.GetItem('D_Hole').value=this.SelectedDia.Value.toString(); 
   }
 

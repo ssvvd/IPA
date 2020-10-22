@@ -538,10 +538,7 @@ case "GROOVEGRADE": {
 }
 
 case "GROOVEHOLDER": {
-  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
-  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
-  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
-  //52/All/HOLDER/0/999/All/All/All/10
+
   let brandname:string =this.getvalueparambyname("TD_BrandName");  
   let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
   let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
@@ -556,13 +553,8 @@ case "GROOVEHOLDER": {
   break; 
 }
 
-
-
 case "GROOVESQUARE": {
-  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
-  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
-  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
-  //52/All/HOLDER/0/999/All/All/All/10
+
   let brandname:string =this.getvalueparambyname("TD_BrandName");  
   let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
   let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
@@ -577,10 +569,7 @@ case "GROOVESQUARE": {
   break; 
 }
 case "GROOVEADAPTOR": {
-  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
-  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
-  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
-  //52/All/HOLDER/0/999/All/All/All/10
+  
   let brandname:string =this.getvalueparambyname("TD_BrandName");  
   let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
   let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
@@ -595,10 +584,7 @@ case "GROOVEADAPTOR": {
   break; 
 }
 case "GROOVEBLADE": {
-  //get-groove-tool-designation/{pUnits}/{pGrooveBrandName}/{pPrecisionOrUtility}/{pRadiusMin}/{pRadiusMax}/{pWTolerance}/{pGrooveCuttingEdge}/{pGrooveInsertDesignation}/{pRTolerance}/{pCarbideGrade}/
-  //get-groove-tool-designation/M/             All/                All/                0/           999/       0/            999/All/All/All/All/All/
-  // {pSecondaryApp}/{pAdaptationType}/{pDesignation}/{pWMIN}/{pWMAX}/{pHolderType}/{pSquareType}/{Filter}/{Top}"  
-  //52/All/HOLDER/0/999/All/All/All/10
+  
   let brandname:string =this.getvalueparambyname("TD_BrandName");  
   let wtolerance:string=this.getvalueparambyname("TD_WTolerance");
   let rtolerance:string=this.getvalueparambyname("TD_RTolerance");
