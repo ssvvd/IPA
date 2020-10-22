@@ -30,7 +30,9 @@ export class MachinesFilterComponent implements OnInit {
   
   @Input() onChangeFavorite: Observable<void>;
   @Input() onChangeMachineList: Observable<number[]>;
-  
+
+ /*  @Input() machineslist:Machineheader[]; */
+
   private eventsSubscription: Subscription=new Subscription();
 
   @Output() MachineFilterChanged = new EventEmitter<{filter: MachineFilter}>();
@@ -91,11 +93,7 @@ export class MachinesFilterComponent implements OnInit {
   }
 
   Initializedata ()
-  {
-        //this.srv_cook.MachineFavorite.subscribe(fav => this.ChangeFavorite());
-        
-        //this.eventsSubscription.add( this.onChangeFavorite.subscribe(() => this.ChangeFavorite())); 
-
+  {        
         this.eventsSubscription.add( this.onChangeMachineList.subscribe((d) => this.ChangeMachineList(d)));                       
         this.eventsSubscription.add(this.serv.getmachineadaptationtype('').subscribe((res: any) => {
           this.arrAdapType = JSON.parse(res); 
@@ -109,8 +107,7 @@ export class MachinesFilterComponent implements OnInit {
           
           this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
           .subscribe((data: any) => {        
-            this.arrMachines = JSON.parse(data); 
-               //this.SetFavorites();  
+            this.arrMachines = JSON.parse(data);                 
                        
             if(this.arrMachines.length>0)
             {
@@ -119,12 +116,7 @@ export class MachinesFilterComponent implements OnInit {
               this.minSpeed = Math.min.apply(Math,this.arrMachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
               this.maxSpeed = Math.max.apply(Math,this.arrMachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
               this.minTorque = Math.min.apply(Math,this.arrMachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-              this.maxTorque = Math.max.apply(Math,this.arrMachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))              
-              
-              //this.minPower=2;
-              //this.maxPower=75;
-              //alert(this.minPower);
-              //alert(this.maxPower);
+              this.maxTorque = Math.max.apply(Math,this.arrMachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))                                
               
               this.options_power = {
                 floor: this.minPower,
@@ -183,23 +175,7 @@ export class MachinesFilterComponent implements OnInit {
     else
       {this.machFilter.IsMostRecommended =false;}
   }
-/*   SetFavorites()
-  {       
-    this.arrFavorites=[];
-    this.arrMachines.forEach(m=>{if(m.isFavorite) this.arrFavorites.push(m)} );                    
-  }  */
-  
- /*  ChangeFavorite()
-  { 
-    this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
-    .subscribe((data: any) => {        
-      this.arrMachines = JSON.parse(data); 
-      this.arrFavorites=[];
-      this.arrMachines.forEach(m=>{if(m.isFavorite) this.arrFavorites.push(m)} );           
-      this.isLoadingAdSize =true;
-    }));     
-  } */
-  
+
   changeadaptype()
   {        
     if(this.curAdapType.AdaptationType=='')

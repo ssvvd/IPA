@@ -82,12 +82,4 @@ export class Optimizetool52Component implements OnInit {
   ngOnInit() {     
     this.isLoad =true;     
   }
-
-  /* change(field:string)
-  {      
-      if(this.srv_StMng.IPL.GetItem(field).value=='True')
-        this.srv_StMng.IPL.GetItem(field).value='False';
-      else
-        this.srv_StMng.IPL.GetItem(field).value='True';                
-  }   */
 }
