@@ -9,7 +9,7 @@ export const environment = {
   //API_HOST: 'https://www.iscar.com/ITA_API/',
   //API_HOST: 'http://intranet.imc.co.il/ITA_API/',
   CalcReq_Host: 'https://cts02.iscar.com/MachiningPwrWs/api/CalcReq/',
-  IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
+  IscarLogo: 'http://intranet.imc.co.il/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
   LanguagePath:"assets/i18n/",
   ImageInputPath:"assets/img/input_images/",

@@ -102,7 +102,7 @@ export class StateManagerService {
   }
   
   get SelectedMachineSpindle():Machinespindle {
-    if(this.arrMachineSpindle!==undefined && this.SelectedMachine!==undefined)         
+    if(this.arrMachineSpindle!=null && this.SelectedMachine!=null)         
       return this.arrMachineSpindle.find(s=>s.SpindleType==this.SelectedMachine.SpindleType);  
     else    
       return null;       
