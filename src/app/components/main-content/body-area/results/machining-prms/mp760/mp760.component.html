@@ -206,9 +206,8 @@
   
   
   <br>
-  <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
-  
-  
+  <div *ngIf="exportPDF" style="min-height:320px"></div>
+  <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>    
         <div class="row justify-content-start w-100">
           <div class="col-3 row">{{'Machine Cost (per Hour)' | translate }}</div>
           <div class="col-2">MCH</div>
@@ -257,6 +256,7 @@
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{THe_CEDC}}</div>
           <div class="col-2">{{'Edges' | translate}}</div>
         </div>
+        
         <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
             <div class="col-3 row">{{'Insert Price' | translate }}</div>
             <div class="col-2">IP</div>
@@ -299,6 +299,7 @@
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_HHP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
+          
           <div class="row justify-content-start w-100">
             <div class="col-3 row">{{'No. of Features per Cutting Edge' | translate }}</div>
             <div class="col-2">FCE</div>

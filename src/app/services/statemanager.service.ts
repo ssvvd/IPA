@@ -318,7 +318,6 @@ export class StateManagerService {
 
  FillDataInputParam()
   {
-
     this.FillCoolant();
     
     this.IPL.GetItem('Material').value = String(this.GetMaterialSelected().id);
@@ -330,6 +329,10 @@ export class StateManagerService {
 
     if(this.SecApp=='119' || this.SecApp=='120')        
     {
+      this.IPL.GetItem('IsExternal').value='';
+      this.IPL.GetItem('IsInternal').value='';
+      if(this.SecApp=='119') this.IPL.GetItem('IsExternal').value='External';
+      if(this.SecApp=='120') this.IPL.GetItem('IsInternal').value='Internal';
       this.IPL.GetItem('Size').value= this.IPL.GetItem('Size').value.toString().replace('"', '***');
     }
            

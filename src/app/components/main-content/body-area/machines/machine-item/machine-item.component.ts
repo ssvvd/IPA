@@ -69,7 +69,8 @@ export class MachineItemComponent implements OnInit {
      }
     }));
   }
-  ngOnInit() {  
+  ngOnInit()
+   {  
     if(this.pr_MachineID!=0)      this.MachineID=this.pr_MachineID;
     if(this.pr_MachineName!='')   this.MachineName=this.pr_MachineName;                                 
     if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
@@ -102,6 +103,39 @@ export class MachineItemComponent implements OnInit {
     this.innerheight = window.innerHeight-200;
   }
   
+  FillMachineData()
+  {
+    if(this.pr_MachineID!=0)      this.MachineID=this.pr_MachineID;
+    if(this.pr_MachineName!='')   this.MachineName=this.pr_MachineName;                                 
+    if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
+    {
+      this.machHeader=this.srv_statemanage.SelectedMachine;
+      if(this.srv_statemanage.arrMachineSpindle!=null)      
+        {    
+          this.arrMachineSpindle =this.srv_statemanage.arrMachineSpindle;
+          this.FillImageMachineType(); 
+         
+          this.isLoading =true;         
+        }
+      else
+          this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
+          this.arrMachineSpindle = JSON.parse(res);      
+          this.machSpindleMain = this.arrMachineSpindle[0]; 
+          this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
+          this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
+          this.FillImageMachineType();
+         
+          
+          this.isLoading =true;          
+        }));
+        this.CostPerHour = Math.round(this.machHeader.CostPerHour / this.srv_appsetting.CurrRate*100)/100;            
+    }         
+    if(this.machHeader==null)
+    {
+        this.FillMachineDataFromServer(this.MachineID); 
+    } 
+    this.innerheight = window.innerHeight-200;
+  }
   ChangeMachineCost()
   {
     //cast from local currency to USD
@@ -171,7 +205,10 @@ export class MachineItemComponent implements OnInit {
           }
           else
           {
-            this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+            this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => { 
+              alert(newid); 
+              this.pr_MachineID =newid;
+              this.FillMachineData();   
               //this.Initializemachinelist(true);
               //this.eventsChangeFavorite.next();                   
               }); 

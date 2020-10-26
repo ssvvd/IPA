@@ -27,7 +27,7 @@ export class Mp760Component implements OnInit {
 
   @Input() selectedRes:clsPropertyValue[][];
   @Input() selectedHelp:clsHelpProp;
-
+  @Input() exportPDF : boolean; 
   DC:string
   DPH:number
   DH:number

@@ -26,18 +26,32 @@
 
 .div-machineitem1
 {
-    min-height:1110px;
+    min-height:950px;
+    height:950px;
+    max-height:950px;
+    border: 1px solid red;
 }
 
 .div-machineitem2
 {
-    min-height:1500px;
+    min-height:2170px;
 }
 
 .div-material
 {
     height:120px!important;
 }
+
+.div-machining-param1
+{
+    min-height:1230px;
+}
+
+.div-machining-param2
+{
+    min-height:2460px;
+}
+
 .PDFDescription
 {
     font-size: 32px !important;

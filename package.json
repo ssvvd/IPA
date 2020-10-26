@@ -38,6 +38,7 @@
     "datatables.net-responsive": "^2.2.3",
     "datatables.net-responsive-dt": "^2.2.3",
     "html2canvas": "^1.0.0-rc.5",
+    "html2pdf.js": "^0.9.0",
     "iframe-resizer": "^4.2.11",
     "jquery": "^3.5.0",
     "jspdf": "^1.5.3",

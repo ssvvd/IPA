@@ -28,7 +28,7 @@ export class MpIsoTurningComponent implements OnInit {
 
   @Input() selectedRes:clsPropertyValue[][];
   @Input() selectedHelp:clsHelpProp;
-
+  @Input() exportPDF : boolean; 
   catalogNo:string[]=[]
 
   Di:number

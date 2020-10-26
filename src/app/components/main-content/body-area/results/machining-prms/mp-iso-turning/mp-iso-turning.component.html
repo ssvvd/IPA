@@ -258,6 +258,7 @@
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MCB}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
     </div>
+    <div *ngIf="exportPDF" class="pt-4"></div>
     <div class="row justify-content-start w-100">
       <div class="col-3 row">{{'Machine Time per Batch' | translate }}</div>
       <div class="col-2">MTB</div>

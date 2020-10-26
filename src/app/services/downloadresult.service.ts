@@ -10,6 +10,7 @@ import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { BehaviorSubject } from 'rxjs';
+import html2pdf from 'html2pdf.js'
 
 //import 'jspdf-autotable'
 
@@ -96,7 +97,8 @@ export class DownloadresultService {
 
 ingDownloaded:any
 public downloadItemPDF():any {  
-  var doc = new jsPDF('l');    
+  var doc = new jsPDF('l');
+  
   return this.BuildResultItem(doc,'pdfdata');
   
   //return this.BuildResultItemByTab(doc,'div_pdf');
@@ -177,37 +179,62 @@ BuildResult(doc:jsPDF,controlname:string):any
 }
 
 BuildResultItem(doc:jsPDF,controlname:string):any
-{
-    html2canvas(document.getElementById(controlname), {useCORS: true,allowTaint : true,
+{     
+    html2canvas(document.getElementById(controlname),{scale:4, useCORS: true,allowTaint : true,
       onclone: function (clonedDoc) {    
         //I made the div hidden and here I am changing it to visible              
         clonedDoc.getElementById(controlname).style.visibility = 'visible';        
       }
     }).then(canvas => {
       // The following code is to create a pdf file for the taken screenshot
+    
       var img = canvas.toDataURL("image/PNG");     
-      document.getElementById(controlname).style.visibility = 'hidden';
-      // Add image Canvas to PDF
+      document.getElementById(controlname).style.visibility = 'hidden';  
       const bufferX = 5;   
-      const imgProps = (<any>doc).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      //const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
-   
+      //const imgProps = (<any>doc).getImageProperties(img);
+      //const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+    
       var imgWidth = 295;     
-      var imgHeight = canvas.height * imgWidth / canvas.width;     
+      var imgHeight = canvas.height * imgWidth / canvas.width;       
       var adjust = -210; //1050 is my assupmtion of how many pixels each page holds vertically
       var extraNo=Math.ceil((imgHeight+30)/210); //Lets me know how many page are needed to accommodate this image
       
-      for(let r:number=0;r<extraNo;r++){
+      for(let r:number=0;r<extraNo;r++)
+      {
         if(r==0)
           doc.addImage(canvas, 'PNG', 0,0, imgWidth, imgHeight);
         else        
-          doc.addImage(canvas, 'PNG', 0,(adjust)*r+30, imgWidth, imgHeight);     
+          doc.addImage(canvas, 'PNG', 0,(adjust)*r, imgWidth, imgHeight);     
         if(r<extraNo-1) doc.addPage();
-      }
-                   
+      } 
+      
+/*       const contentDataURL = canvas.toDataURL('image/png') ;
+      document.getElementById(controlname).style.visibility = 'hidden';  
+      var margin = 1;
+      var imgWidth = 295 ; 
+      var pageHeight = 210 - 2*margin;  
+      var imgHeight = canvas.height * imgWidth / canvas.width;
+      var heightLeft = imgHeight;
+
+      //var doc = new jsPDF('p', 'mm');
+      var position = 0;
+
+      doc.addImage(contentDataURL, 'PNG', 0, margin, imgWidth, imgHeight);
+
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        doc.addPage();
+        doc.addImage(contentDataURL, 'PNG', margin, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      } */
+
       return doc;
        }).then((doc) => {
+        
+      //var pageCount = doc.internal.getNumberOfPages();
+      //doc.deletePage(pageCount);              
       doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
       this.obsPDFListLoaded.next(null);
       return  'ok'; 

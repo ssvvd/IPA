@@ -108,7 +108,7 @@ eventsSubject: Subject<void> = new Subject<void>();
   
       this.IsExport=true; 
 
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');}, 5000 );    
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');}, 3000 );    
       
     }
     
