@@ -98,7 +98,20 @@ export class DownloadresultService {
 ingDownloaded:any
 public downloadItemPDF():any {  
   var doc = new jsPDF('l');
-  
+
+/*   document.getElementById('pdfdata').style.visibility = 'visible'
+  var opt = {
+    margin:       2,
+    filename:     'myfile.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 4, useCORS: true,allowTaint : true },
+    jsPDF:        { orientation: 'landscape' }
+  };
+
+  var element = document.getElementById('pdfdata');
+  html2pdf().set(opt).from(element).save();
+  return; */
+
   return this.BuildResultItem(doc,'pdfdata');
   
   //return this.BuildResultItemByTab(doc,'div_pdf');

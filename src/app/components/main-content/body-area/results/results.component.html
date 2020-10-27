@@ -6,7 +6,6 @@
 </li>
 <p>{{ErrMsg}}</p> -->
 
-
 <div class="border-left-gray border-right-gray ">
     <div class="row" [hidden]="!MainPage">
       <div class="col col-20 mt-4" [hidden]="_hideFilter">
@@ -127,7 +126,8 @@
     </div>    
   </div> 
   
-  <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;position:absolute;top:-5000px">       
+  <!-- <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;position:absolute;top:-5000px">  -->
+    <div *ngIf="IsExport"  id="pdfdata">        
       <div class="div_pdf" id="pdf_1">
           <div class="row pb-2 ml-2 pr-0 mr-0 pb-3">
             <div class="col-2 pt-4">
@@ -163,7 +163,7 @@
           </div> -->
       </div>
                     
-      <div class="form-group div_pdf" id='pdf_4' style="min-height:1210px;border:2px solid red">
+      <div class="form-group div_pdf" id='pdf_4' style="min-height:1210px;">
           <div class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0">
             <label class="PDFTitle ml-2">{{'Operation Data' | translate}}</label>
           </div>
@@ -207,7 +207,7 @@
         </div>   
         <div class="pt-4"></div>     
         <!-- <div class="pt-2 div_pdf" id='pdf_7' style="min-height:1220px;border:2px solid red"> -->
-        <div class="pt-2 div_pdf" id='pdf_7' style="min-height:1220px;border:2px solid red"> 
+        <div class="pt-2 div_pdf" id='pdf_7' style="min-height:1220px;"> 
           
           <div class="PDFTitlediv row pt-4 pb-2  pr-0 mr-0  pl-3">
             <label class="PDFTitle ml-2">{{'Product Information' | translate}}</label>
