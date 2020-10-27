@@ -17,7 +17,7 @@
                </h2> 
             </div>
          </div>
-       </div> 
+       </div>    
         <!-- <div Class="float-right pb-2 pr-3">
            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit">
         </div> -->
@@ -29,16 +29,16 @@
            </div>
          </div> -->
          <div class="div-datatable">
-        <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >
+        <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" style="width: 100%" >
             <thead>
                     <tr id="dtOptions">
-                     <th width="15%"><label></label></th>  
+                     <th ><label></label></th>  
                      <th class="sorting" *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
                          <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">
                             <!-- {{hd.FieldDescriptionSmall | translate}}<span class="sort-icon ml-1"></span> -->
                            </label><span class="sort-icon ml-1"></span>
                         </th>
-                        <th class="no-sort"></th>
+                        <th class="no-sort d-none"></th>
                         <th class="no-sort text-center">
                            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit">
                         </th>
@@ -63,13 +63,13 @@
                        
                        <!-- ((dtResultsObjectsHelp[row.index].CatalogNo[PrtNum] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)|| -->
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected">
-                       <td>
+                       <td >
                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 35%; position: relative; top:-16px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">
                         <img src="{{arrResultImgsItem[row.index]}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-50px' : '0px'}" style="position: relative;"
                         (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
-                       </td>
+                     </td>
                        <!--  (click)="viewInfo(row.index) -->
-                       <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
+                       <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
                            <span  *ngFor="let prty of col; let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
                               (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
@@ -84,14 +84,14 @@
                            </div>
                            </span>
                          </td>
-                         <td>
+                         <td class="d-none">
 <!--  -->
                            <img src="{{environment.ImgView}}" 
                            (click)="viewInfo(row.index)"
                            title="View info" class="icon-grid">
                             
                      </td>
-                        <td class="text-center">
+                        <td  class="text-center">
                            <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid">
                         </td>
                          <td class="d-none">

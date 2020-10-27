@@ -51,7 +51,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-       "scrollY": '65vh',
+       "scrollY": 'calc(100vh - 380px)',
        "scrollCollapse" : true,
        "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal ? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal ? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ 5 ] }],
        "language": {

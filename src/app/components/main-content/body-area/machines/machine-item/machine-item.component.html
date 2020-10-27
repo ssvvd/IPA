@@ -78,8 +78,8 @@
                               
     </div>                                              
 </div>  
-<div> 
-    <div  *ngFor="let spindle of arrMachineSpindle" class="pt-4">                                                                            
+<div style="overflow-y: auto; height: calc(100vh - 500px);">  
+    <div  *ngFor="let spindle of arrMachineSpindle" class="pt-4" >                                                                            
         <app-machine-item-spindle  [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>   
     </div>  
 </div>

@@ -15,6 +15,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 import { MyMaterialsComponent } from '../../materials/my-materials/my-materials.component';
+import { callbackify } from 'util';
 
 @Component({
   selector: 'app-machines-list',
@@ -62,7 +63,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       "lengthChange": false,
       "paging": false,       
        "autoWidth":false,
-       "scrollY": '65vh',
+       "scrollY": 'calc(100vh - 350px)',
        "scrollCollapse" : true,
         "language": {
         "emptyTable": "",

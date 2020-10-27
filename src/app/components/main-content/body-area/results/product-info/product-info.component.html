@@ -1,5 +1,6 @@
 
 
+<div class="scrollYInnerTabs">
 <div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
 
     <label class="bold font-weight-bold">{{selectedOption.GroupText[PrtNum] | translate}}:</label>
@@ -7,11 +8,8 @@
     <br>
     <!-- <iframe [src]="getUrl(environment.eCatItemRedPage + row.trim() + '&SRC=' + SRC)" style="width:71%;height:550px;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe> -->
-    <iframe [src]="getUrl1(row,PrtNum)" [style.height]="SRC == 'ITA1' ? '400px' : '550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
+    <iframe [src]="getUrl1(row,PrtNum)" [style.height]="SRC == 'ITA1' ? '400px' : '550px'" style="width:70%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe>
     <hr>
 </div>
-
-
-
-
+</div>

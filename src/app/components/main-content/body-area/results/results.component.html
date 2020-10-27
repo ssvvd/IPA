@@ -8,7 +8,7 @@
 
 <div class="border-left-gray border-right-gray ">
     <div class="row" [hidden]="!MainPage">
-      <div class="col col-20 mt-4" [hidden]="_hideFilter">
+      <div class="col col-20 mt-4 scrollYAutoFilter" [hidden]="_hideFilter">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
       <div class="col col-80 pl-2 border-left-gray mt-4">

@@ -78,3 +78,8 @@
     cursor: pointer;
     // margin-left:-20px;
     }
+
+.scrollYAutoFilter{
+overflow-y: auto !important;
+height: calc(100vh - 250px);
+    }

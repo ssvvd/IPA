@@ -12,6 +12,16 @@ table.dataTable thead th {
    white-space: nowrap;
  }
  
+//  .table thead th {
+//   padding-left: 0px !important;
+//   padding-right: 0px !important;
+//   }
+
+//   .table th, .table td {
+//     padding-left: 0px !important;
+//     padding-right: 0px !important;
+//   }
+
  table.dataTable thead span.sort-icon {
    display: inline-block;
    padding-left: 5px;
@@ -27,6 +37,32 @@ table.dataTable thead th {
  table.dataTable thead .sorting_asc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
  table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
  
+
+ .table td:nth-child(1), .table th:nth-child(1){
+  // min-width: 15% !important;
+  // max-width: 15% !important;
+  width: 10% !important;
+  white-space: nowrap;
+}
+ .table td:nth-child(2), .table th:nth-child(2){
+  // min-width: 24% !important;
+  // max-width: 24% !important;
+  width: 20% !important;
+  white-space: nowrap;
+}
+
+.table td:nth-child(n+3), .table th:nth-child(n+3){
+  // min-width: 24% !important;
+  // max-width: 24% !important;
+  width: 11% !important;
+  white-space: nowrap;
+}
+.table td:nth-last-child(3), .table th:nth-last-child(3){
+  // min-width: 24% !important;
+  // max-width: 24% !important;
+  width: 4% !important;
+  white-space: nowrap;
+}
 
 //  .table td:nth-child(2), .table th:nth-child(2){
 //   min-width: 100px
@@ -83,3 +119,14 @@ table.dataTable thead th {
   border:none;
 
 }
+
+// table.dataTable tbody th,
+// table.dataTable tbody td {
+//     white-space: nowrap;
+// }
+
+// table.dataTable td {
+//   -webkit-box-sizing: content-box;
+//   -moz-box-sizing: content-box;
+//   box-sizing: content-box;
+// }

@@ -79,5 +79,10 @@ table.dataTable thead .sorting_desc span { background: url('http://cdn.datatable
   
 table.dataTable thead .sorting_asc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
 table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
+
+.scrollYFilter{
+    overflow-y: auto;
+    height: calc(100vh - 230px);
+}
  
     

@@ -79,17 +79,22 @@ export class ResultsTableComponent implements OnInit {
      this.dtOptions = {
       pagingType: 'full_numbers',
       // "columnDefs":[{ "type": "numeric-comma" }],
+    //   "columnDefs": [{ "width": "15%", "targets": 0 }
+    //   ,{ "width": "15%", "targets": 1 }
+    // ,{ "width": "15%", "targets": 2 }],
        "searching": false,
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-      //  "scrollY": '65vh',
+      "scrollY": 'calc(100vh - 360px)',
+      // "scrollX": true,
        "scrollCollapse" : true,
        "language": {
         "emptyTable": "",
         "zeroRecords": "",
         "infoEmpty": "",
-        "info": ""
+        "info": "",
+        responsive: true
       }           
   }; 
 
@@ -103,13 +108,25 @@ export class ResultsTableComponent implements OnInit {
   this.countrow = 0
   this.lastTypeMainFilter = "FilterRec"
   this.GetResult();
+
   }
 
   // ngOnDestroy(): void {
   //   // Do not forget to unsubscribe the event
   //   this.dtTrigger.unsubscribe();
+  // // }
+  // ngAfterViewInit() {
+  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //     dtInstance.draw();
+  //   });
   // }
- 
+
+  // ngAfterViewChecked(){
+  //   // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  //   //   dtInstance.draw();
+  //   // });
+  // }
+
   GetResult() 
   {  
     if(this.srv_StMng.arrMachineSpindle == null || typeof(this.srv_StMng.arrMachineSpindle) == 'undefined') 
@@ -565,6 +582,7 @@ if (this.dtElement.dtInstance) {
   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
     dtInstance.destroy();
     this.dtTrigger.next();
+    // dtInstance.columns.adjust().draw();
   });
 } else {
   this.isDtInitialized = true
@@ -573,6 +591,14 @@ if (this.dtElement.dtInstance) {
 else{
   this.dtTrigger = null
 }
+
+if (this.dtElement.dtInstance) {
+  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+  dtInstance.columns.adjust().draw();
+  })
+}
+
+
 this.SpinnerService.hide();
 }
 // private async checkImgExists(image_url:string){
