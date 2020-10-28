@@ -429,3 +429,17 @@ html, body{
 .noScrollY{
   overflow-y: hidden !important;
 }
+
+.width-tooldata {
+  @extend .col-sm-12 ;
+  @extend .col-md-12 ;
+  @extend .col-lg-4 ;
+  @extend .col-xl-3 ;
+}
+
+.width-appdetails {
+  @extend .col-sm-12 ;
+  @extend .col-md-12;
+  @extend .col-lg-8 ;
+  @extend .col-xl-9;
+}
