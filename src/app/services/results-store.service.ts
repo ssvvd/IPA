@@ -71,6 +71,11 @@ else{
     this.obsRes6.next(_res6)
   }
 
+  setNewDefaultFields(_res:any){
+    this.res4 = _res
+    this.obsRes4.next(_res)
+  }
+
   getRes1():Observable<any> {
     return this.res1
   }
