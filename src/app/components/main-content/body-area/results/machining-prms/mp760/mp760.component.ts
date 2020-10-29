@@ -350,7 +350,7 @@ if (value.trim().length == 7){
       if (prmRatioLD != '0'){
         if (this.selectedHelp.itemType[this.selectedHelp.CatalogNo.indexOf(value,0)] == 'I' && this.THe_CICT != 0)
           prmRatioLD = (+prmRatioLD * this.THe_CICT).toString()
-        this.AW = Math.round((this.AW + +prmRatioLD) * 100)/100
+        this.AW = Math.round((this.AW + +prmRatioLD) * 1000)/1000
       }
     })
 
