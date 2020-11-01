@@ -1,11 +1,11 @@
 
 <div class="border-left-gray border-right-gray" > 
     <div class="row">          
-      <div class="col col-20 ml-0 pl-2 pr-0 pt-0 scrollYFilter"  > 
+      <div class="col col-20 ml-0 pl-2 pr-0 pt-0"  > 
          <div class="pt-4 pb-0">
 
          </div>
-          <div class="pr-2 pt-0 border-right-gray" >
+          <div class="pr-2 pt-0 border-right-gray scrollYFilter" >
             <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
             (MachineFilterClear)="onMachineFilterClear()" [onChangeMachineList]="eventsChangeMachineList.asObservable()" [onChangeFavorite]="eventsChangeFavorite.asObservable()"></app-machines-filter>
           </div>

@@ -86,7 +86,8 @@ export class ResultsTableComponent implements OnInit {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-      "scrollY": 'calc(100vh - 360px)',
+      "scrollY": 'calc(100vh - 336px)',
+      "info":false,
       // "scrollX": true,
        "scrollCollapse" : true,
        "language": {
