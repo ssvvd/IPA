@@ -39,7 +39,8 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-       "scrollY": 'calc(100vh - 380px)',
+       "scrollY": 'calc(100vh - 355px)',
+       "info":false,
        "scrollCollapse" : true,
        "language": {
         "emptyTable": "",

@@ -86,7 +86,8 @@ export class ResultsTableComponent implements OnInit {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-      "scrollY": 'calc(100vh - 360px)',
+      "scrollY": 'calc(100vh - 336px)',
+      "info":false,
       // "scrollX": true,
        "scrollCollapse" : true,
        "language": {
@@ -592,11 +593,11 @@ else{
   this.dtTrigger = null
 }
 
-if (this.dtElement.dtInstance) {
-  this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-  dtInstance.columns.adjust().draw();
-  })
-}
+// if (this.dtElement.dtInstance) {
+//   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+//   dtInstance.columns.adjust().draw();
+//   })
+// }
 
 
 this.SpinnerService.hide();
@@ -618,6 +619,8 @@ openSelectColumns(){
     console.log(result);
       if(result != 'A'){
          this.headers = result
+         let newDefaultFields = this.headers.reduce((a, o) => (o.IsShow && a.push(o.FieldDescriptionSmall), a), [])
+         this.srv_ResultsStore.setNewDefaultFields(JSON.stringify(newDefaultFields))
          this.cdr.detectChanges();
         // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         //   dtInstance.destroy();

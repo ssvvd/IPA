@@ -209,7 +209,7 @@ CPU:number
             this.srv_Results.GetRatioLD(pr.value,this.srv_appsetting.Units).subscribe((res: any) => {
               let prmRatioLD:string = JSON.parse(res); 
               if (prmRatioLD != '0'){
-                this.AW = Math.round((this.AW + +prmRatioLD) * 100000)/100000
+                this.AW = Math.round((this.AW + +prmRatioLD) * 1000)/1000
               }
             })
 

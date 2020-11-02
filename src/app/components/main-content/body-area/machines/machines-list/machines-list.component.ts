@@ -61,7 +61,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       "lengthChange": false,
       "paging": false,       
        "autoWidth":false,
-       "scrollY": 'calc(100vh - 350px)',
+       "scrollY": 'calc(100vh - 325px)',
+       "info": false,
        "scrollCollapse" : true,
         "language": {
         "emptyTable": "",

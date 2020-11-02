@@ -43,7 +43,8 @@ export class MatStandardTableComponent implements OnInit,DoCheck {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-       "scrollY": 'calc(100vh - 380px)',
+       "scrollY": 'calc(100vh - 355px)',
+       "info":false,
        "scrollCollapse" : true,
        "ordering": false,
        "language": {

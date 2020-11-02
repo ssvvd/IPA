@@ -1,6 +1,6 @@
 
 
-<div class="scrollYInnerTabs">
+<div class="">
 <div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
 
     <label class="bold font-weight-bold">{{selectedOption.GroupText[PrtNum] | translate}}:</label>

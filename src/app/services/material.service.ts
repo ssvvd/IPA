@@ -64,11 +64,11 @@ export class MaterialService {
   public AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number,HardnessHBValue:number,matOrig:string)
   {
     if(matOrig!='')  matOrig='/' + matOrig;
-    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-add-fav/' + userID + '/' + ISO+ '/' + Group+ '/' + FavoritName.trim() + '/' + Standard.replace("/", "aaabbbccc").trim() + '/' + Condetion.replace("/", "aaabbbccc").trim() + '/' + Hardness+ '/' + HardnessUnits+ '/' + HardnessOrig + '/' + HardnessHBValue + matOrig);
+    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-add-fav/' + userID + '/' + ISO+ '/' + Group+ '/' + FavoritName.trim() + '/' + Standard.replace("/", "aaabbbccc").trim() + '/' + Condetion.replace("/", "aaabbbccc").trim() + '/' + Hardness+ '/' + HardnessUnits.replace("/", "aaabbbccc").trim() + '/' + HardnessOrig + '/' + HardnessHBValue + matOrig);
   }
 
 
   public EditMaterialFavorit( userID:string,  OldFavoritName:string,  FavoritName:string,  Hardness:number,  HardnessUnits:string,HardnessHBValue:number){
-    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-edit-fav/' + userID + '/' + OldFavoritName+ '/' + FavoritName+ '/' + Hardness+ '/' + HardnessUnits + '/' + HardnessHBValue);
+    return this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-edit-fav/' + userID + '/' + OldFavoritName+ '/' + FavoritName+ '/' + Hardness+ '/' + HardnessUnits.replace("/", "aaabbbccc").trim() + '/' + HardnessHBValue);
   }
 }
