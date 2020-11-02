@@ -1,4 +1,4 @@
-<div class="container-fluid pt-5  ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray">
+<div class="pt-5  ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray" style="height: 100vh" >
 <div class="pt-2 pb-2 border-top-gray border-bottom-gray" >
  <ul class="nav nav-fill" >               
     <li (click)="onSelectMainApp(mainapp);"  class="nav-item li-item" *ngFor="let mainapp of arrMainApps" >
@@ -34,7 +34,8 @@
     </li>          
 </ul>
 </div>
-<div class="border-bottom-gray" *ngIf="arrSelectedSecApp2?.length >0">
+<!-- <div class="border-bottom-gray" *ngIf="arrSelectedSecApp2?.length >0"> -->
+<div  *ngIf="arrSelectedSecApp2?.length >0">
 <ul class="nav nav-fill pt-2 pb-2">               
     <li   (click)="onFilterSecApp1(secapp)"  class="nav-item li-item pt-1"  (click)="ToOperationData(secapp)"  *ngFor="let secapp of arrSelectedSecApp2">
         <div class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2 && SelectedMenuID2!='',
