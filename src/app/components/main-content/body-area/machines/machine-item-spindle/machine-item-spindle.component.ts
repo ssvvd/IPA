@@ -72,8 +72,8 @@ export class MachineItemSpindleComponent implements OnInit
     this.spindle.AdaptationType = this.curAdapType.AdaptationType;  
     this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);    
     this.curAdapSize=this.arrAdapSizeFilter[0];
-    this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;
-    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,'all');
+   /*  this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;
+    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,'all'); */
   }
   
   filladaptordata(at:string,az:string,st:string)
@@ -87,7 +87,7 @@ export class MachineItemSpindleComponent implements OnInit
   changeadapsize()
   {  
     this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;        
-    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);    
+    //this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,this.spindle.SpindleType);    
   }
 
   onSpindleSpeedChanged($event)
@@ -98,7 +98,6 @@ export class MachineItemSpindleComponent implements OnInit
   onPowerChanged($event)
   {       
     this.spindle.Power =$event.value; 
-    //this.eventsSubject.next();
   }
   onSpindleChanged($event)
   {
@@ -114,16 +113,4 @@ export class MachineItemSpindleComponent implements OnInit
     this.spindle.Torque =$event.T1;
     this.spindle.Power =$event.P2;
   }
-
- /*  ngOnChanges(changes: SimpleChanges) 
-  {      
-      for (let property in changes) {
-          if (property === 'clickedSelect') {   
-            if(changes[property].currentValue)
-            {                       
-              //alert(changes[property].currentValue);
-            }
-          }          
-      }
-  } */
 }

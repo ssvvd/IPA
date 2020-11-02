@@ -26,7 +26,7 @@
                   <tr id="dtOptions">
                     <th class="d-none">ID</th>                                                                                           
                     <th><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                                                   
-                    <th (click)="SortSpindleType()"><label><div class="text-center">{{'Spindle' | translate}}:{{'Main' | translate}} &nbsp;&nbsp; {{'Tool' | translate}}</div></label></th>
+                    <th (click)="SortSpindleType()"><label>{{'Main' | translate}} &nbsp;&nbsp; {{'Tool' | translate}}</label><span class="sort-icon ml-1" ></span></th>
                     <th><label>{{'Adaptation Type'| translate}}{{' '}}&{{' '}}{{'Size' | translate}}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th><label>{{'Spindle Speed' | translate}}{{' (rpm)'}}<span class="sort-icon ml-1"></span></label></th>                
@@ -72,8 +72,8 @@
                       </a>
                     </td>
                     <td data-sort="image2" class="cursor-pointer">
-                      <a data-toggle="tooltip" title="{{'Default Machine' | translate}}" class="cursor-pointer" (click)="SetDefault(mach.MachineID)"> 
-                        <img [src]="mach.MachineID==defaultmachine ?environment.ImgSetDefault: environment.ImgDefault"  class="icon-grid">
+                      <a data-toggle="tooltip" title="{{'Default Machine' | translate}}"> 
+                        <img  [src]="mach.IsMostRecommended || mach.isFavorite ?environment.ImgSetDefault: environment.ImgDefault"  class="icon-grid-no-pointer">                        
                       </a>
                     </td>
                     <td data-sort="image3" class="cursor-pointer">

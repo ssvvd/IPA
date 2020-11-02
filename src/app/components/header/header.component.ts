@@ -10,7 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
-//C:\ITA\ITA Angular\ITA\src\app\components\maintenance\contactus\contactus.component.ts
+import { Subject} from 'rxjs';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -32,15 +33,14 @@ export class HeaderComponent implements OnInit {
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
   userdes:string='Log In';
+  
+  eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
               public srv_appsetting:AppsettingService, private router:Router,
               private srv_login:LoginService,private modalService: NgbModal) { }
 
   ngOnInit() {   
-       
-       
-
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>{if(u=='') this.userdes='Log In'; else this.userdes=u});   
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
@@ -149,7 +149,8 @@ export class HeaderComponent implements OnInit {
   {
     this.srv_login.SelectCountryAndLang(c,LanguageID);
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
-    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;      
+    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
+    this.eventsSubject.next();    
   }
   
   CheckAllowUnitsChange(event)

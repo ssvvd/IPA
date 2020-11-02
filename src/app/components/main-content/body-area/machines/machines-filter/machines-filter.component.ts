@@ -53,7 +53,7 @@ export class MachinesFilterComponent implements OnInit {
    options_speed: Options = {
     floor: 0,
     ceil: 30000,
-    step: 1000,
+    step: 1,
     showTicks: false
   };
 
@@ -67,7 +67,7 @@ export class MachinesFilterComponent implements OnInit {
   options_torque: Options = {
     floor: 0,
     ceil: 12000,
-    step: 1000,
+    step: 1,
     showTicks: false
   };
    
@@ -86,13 +86,40 @@ export class MachinesFilterComponent implements OnInit {
 
   isLoadingAdSize:boolean=false;  
   
-  ngOnInit() {
+  IsMachiningCenter:boolean;
+  IsLathe:boolean; 
+  IsMultiTask:boolean;
+  IsMultiSpindle:boolean;
+  IsSwissType:boolean;
 
+  ngOnInit() {
     this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializedata());  // todo: 
     this.machFilter=new MachineFilter;
     this.Initializedata();
   }
-
+ 
+  InitialdataMachineTypeShowing()
+  {
+     if(this.machFilter.IsMachiningCenter && this.machFilter.IsLathe && this.machFilter.IsMultiTask
+      && this.machFilter.IsMultiSpindle && this.machFilter.IsSwissType)
+      {
+        this.IsMachiningCenter=false;
+        this.IsLathe=false;
+        this.IsMultiTask=false;
+        this.IsMultiSpindle=false;
+        this.IsSwissType=false;
+        this.MachineTypeAll=true;
+      }
+      else
+      {
+        this.IsMachiningCenter=this.machFilter.IsMachiningCenter;
+        this.IsLathe=this.machFilter.IsLathe;
+        this.IsMultiTask=this.machFilter.IsMultiTask;
+        this.IsMultiSpindle=this.machFilter.IsMultiSpindle;
+        this.IsSwissType=this.machFilter.IsSwissType;
+        this.MachineTypeAll=false;
+      }    
+  }
   Initializedata ()
   {        
         this.eventsSubscription.add( this.onChangeMachineList.subscribe((d) => this.ChangeMachineList(d)));                       
@@ -129,13 +156,13 @@ export class MachinesFilterComponent implements OnInit {
               this.options_speed = {
                 floor: this.minSpeed,
                 ceil: this.maxSpeed,
-                step: 100,
+                step: 1,
                 showTicks: false
               };    
               this.options_torque = {
                 floor:this.minTorque,
                 ceil: this.maxTorque,
-                step: 100,
+                step: 1,
                 showTicks: false
               };
             }        
@@ -150,7 +177,10 @@ export class MachinesFilterComponent implements OnInit {
                 this.curAdapSize = { AdaptationType:this.machFilter.AdaptationType,AdaptationSize:this.machFilter.AdaptationSize} ;
                 this.MachineFilterChanged.emit({ filter: this.machFilter});
             }
+            this.InitialdataMachineTypeShowing(); 
             
+            if(this.machFilter.IsMostRecommended) this.isMostRecom='1';
+            if(!this.machFilter.IsMostRecommended) this.isMostRecom='0'           
             this.isLoadingAdSize =true;
           }));     
           
@@ -193,12 +223,12 @@ export class MachinesFilterComponent implements OnInit {
       this.curAdapSize=this.arrAdapSizeFilter[0];
       this.machFilter.AdaptationType =this.curAdapType.AdaptationType;
       this.machFilter.AdaptationSize ='';
-      this.FilterChange (null,false,false,false);  
+      this.FilterChange (null,false,false,false,'');  
   }
   changeadapsize()
   {  
     this.machFilter.AdaptationSize=this.curAdapSize.AdaptationSize;
-    this.FilterChange (null,false,false,false);       
+    this.FilterChange (null,false,false,false,'');       
   }
   InitFilter()
   {
@@ -232,8 +262,65 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsSliderSpeed=false;
     this.machFilter.IsSliderTorque=false;
   }
+  MachineTypeAll:boolean;
 
-  FilterChange(event: ChangeContext ,issliderP:boolean,issliderS:boolean,issliderT:boolean) {  
+  FilterChange(event: ChangeContext ,issliderP:boolean,issliderS:boolean,issliderT:boolean,property:string) {
+    
+    if(this.MachineTypeAll && property=='IsMachiningCenter' &&  this.IsMachiningCenter)
+    {      
+      this.IsLathe =false;
+      this.IsMultiTask=false;
+      this.IsMultiSpindle=false; 
+      this.IsSwissType=false;
+    }
+    if(this.MachineTypeAll && property=='IsLathe' &&  this.IsLathe)
+    {      
+      this.IsMachiningCenter =false;
+      this.IsMultiTask=false;
+      this.IsMultiSpindle=false; 
+      this.IsSwissType=false;
+    }
+    if(this.MachineTypeAll && property=='IsMultiTask' &&  this.IsMultiTask)
+    {      
+      this.IsMachiningCenter =false;
+      this.IsLathe=false;
+      this.IsMultiSpindle=false; 
+      this.IsSwissType=false;
+    }
+    if(this.MachineTypeAll && property=='IsMultiSpindle' &&  this.IsMultiSpindle)
+    {      
+      this.IsMachiningCenter =false;
+      this.IsLathe=false;
+      this.IsMultiTask=false; 
+      this.IsSwissType=false;
+    }
+    if(this.MachineTypeAll && property=='IsSwissType' &&  this.IsSwissType)
+    {      
+      this.IsMachiningCenter =false;
+      this.IsLathe=false;
+      this.IsMultiTask=false; 
+      this.IsMultiSpindle=false;
+    }
+    if(!this.IsMachiningCenter && !this.IsLathe && !this.IsMultiTask
+      && !this.IsMultiSpindle && !this.IsSwissType)
+      {
+        this.machFilter.IsMachiningCenter=true;
+        this.machFilter.IsLathe=true;
+        this.machFilter.IsMultiTask=true;
+        this.machFilter.IsMultiSpindle=true;
+        this.machFilter.IsSwissType=true;
+        this.MachineTypeAll =true;
+      }
+      else
+      {
+        this.MachineTypeAll =false;
+        this.machFilter.IsMachiningCenter=this.IsMachiningCenter;
+        this.machFilter.IsLathe=this.IsLathe;
+        this.machFilter.IsMultiTask=this.IsMultiTask;
+        this.machFilter.IsMultiSpindle=this.IsMultiSpindle;
+        this.machFilter.IsSwissType=this.IsSwissType;
+      }   
+
     this.machFilter.IsSliderPower =issliderP;        
     this.machFilter.IsSliderSpeed =issliderS;        
     this.machFilter.IsSliderTorque =issliderT; 
@@ -249,6 +336,13 @@ export class MachinesFilterComponent implements OnInit {
   ClearFilter ()
   {    
     this.InitFilter();
+
+    this.IsMachiningCenter =false;
+    this.IsLathe =false;
+    this.IsMultiTask =false;
+    this.IsMultiSpindle =false;
+    this.IsSwissType =false; 
+
     this.machFilter.IsMachiningCenter =true;
     this.machFilter.IsLathe =true;
     this.machFilter.IsMultiTask =true;

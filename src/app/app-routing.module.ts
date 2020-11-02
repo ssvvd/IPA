@@ -19,7 +19,7 @@ const routes: Routes = [
 		{path:"machine-item/:id/:name", component: MachineItemComponent},
 		{path:"materials",component:MaterialsComponent},
 		{path:"materials/:lang",component:MaterialsComponent},
-		{path:"machining-operation",component:MachiningOperationComponent},
+		{path:"machining-operation",component:MachiningOperationComponent},		
 		{path:"operation-data",component:OperationDataComponent},
 		{path:"results",component:ResultsComponent}	,
 		{path:"contactus",component:ContactusComponent}		

@@ -125,7 +125,7 @@ export class MachiningOperationComponent implements OnInit {
                 {
                   if(this.srv_statemanage.SelectedMachine.SpindleType=='T')
                   {
-                    if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;  
+                    if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =true;  
                     if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;
                   }
                   if(this.srv_statemanage.SelectedMachine.SpindleType=='M')

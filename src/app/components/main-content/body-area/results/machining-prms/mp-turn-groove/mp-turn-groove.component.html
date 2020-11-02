@@ -161,6 +161,7 @@
 
 
 <br>
+<div *ngIf="exportPDF && (srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50')" class="break-page"></div>
 <div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
 
 <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'"><br><u>{{'Grooving' | translate}}</u></div>
@@ -225,6 +226,7 @@
 
 
   <br>
+  <div *ngIf="exportPDF && (srv_StMng.SecApp=='52' || srv_StMng.SecApp=='51' || srv_StMng.SecApp=='54' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='54')" class="break-page"></div>
   <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
   
   <div class="row justify-content-start w-100">

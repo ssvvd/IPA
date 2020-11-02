@@ -21,7 +21,7 @@ export class OperationDataComponent implements OnInit {
   MainApp:string;
   router:Router;
   isLoaded:boolean=false;
-  
+
    eventsSubject: Subject<void> = new Subject<void>();
   private eventsSubscription: Subscription=new Subscription();
   

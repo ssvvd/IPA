@@ -12,6 +12,7 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 export class InnerTabsTableComponent implements OnInit {
 
   @Input() viewParamsChanged: any ;
+  @Input() exportPDF: boolean;
   selectedOption:clsHelpProp;
   environment = environment;
 

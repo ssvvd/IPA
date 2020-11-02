@@ -14,8 +14,6 @@ import { Subject, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
-import { MyMaterialsComponent } from '../../materials/my-materials/my-materials.component';
-import { callbackify } from 'util';
 
 @Component({
   selector: 'app-machines-list',
@@ -438,9 +436,13 @@ UpdateStateSelectedMachine(MachineID: number) {
       
       this.srv_cook.set_cookie("def_mach",mach.MachineID.toString());          
       this.UpdateStateSelectedMachine(mach.MachineID);
-      this.srv_statemanage.SelectedMachine = mach;
+      if(this.srv_statemanage.SelectedMachine.MachineID != mach.MachineID)
+      {
+        this.srv_statemanage.SelectedMachine = mach;
+        this.srv_statemanage.arrMachineSpindle =null;
+      }      
       this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
-      this.srv_statemanage.arrMachineSpindle =null;
+      
         
   }
 

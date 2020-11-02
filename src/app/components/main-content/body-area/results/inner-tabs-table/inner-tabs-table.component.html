@@ -21,7 +21,7 @@
             <div *ngFor="let row of selectedOption.CatalogNo; ;" [hidden]="row.trim() == '-' || row.trim() == ''">{{row}}</div>
 
           </div>
-          <div style="min-width:39%;max-width:39%;">
+          <div [ngClass]="exportPDF?'div-comment-pdf':'div-comment'">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Comments' | translate}}</div>
 
             <div *ngFor="let row of selectedOption.info; ; ">{{row}}</div>

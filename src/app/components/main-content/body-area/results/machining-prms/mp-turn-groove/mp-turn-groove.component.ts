@@ -27,7 +27,8 @@ export class MpTurnGrooveComponent implements OnInit {
 
   @Input() selectedRes:clsPropertyValue[][];
   @Input() selectedHelp:clsHelpProp;
-
+  @Input() exportPDF:boolean;
+  
   catalogNo:string[]=[]
   OD:number
   ID:number

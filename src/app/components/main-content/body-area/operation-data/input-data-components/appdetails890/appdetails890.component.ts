@@ -18,7 +18,7 @@ export class Appdetails890Component implements OnInit {
   environment=environment;
   
    @Input() events: Observable<void>;
-
+   @Input() exportPDF: boolean;
   private eventsSubscription: Subscription;  
   eventsSubject: Subject<void> = new Subject<void>();
 

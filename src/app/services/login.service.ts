@@ -4,7 +4,8 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Country,Language} from 'src/app/models/applications/applications';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/users/user';
-import { Observable,of} from 'rxjs';
+import { Observable,of,Subject} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,6 @@ import { Observable,of} from 'rxjs';
 
 export class LoginService {
 
-  
 
   constructor(private srv_DataLayer:DatalayerService,
               public srv_appsetting:AppsettingService,public translate: TranslateService,) { }
@@ -164,24 +164,6 @@ export class LoginService {
     this.srv_appsetting.isLoggedIn=true;
   }
 
- /*  GetCurrencyByBrifName(brifname:string):any 
-  {
-    this.srv_DataLayer.getcurrencyeciw(brifname).subscribe((cur:any)=>
-    {
-      let currency:string;
-      if(JSON.parse(cur).length>0)       
-        if(JSON.parse(cur)[0].ECUR=='') 
-          currency='USD';
-        else
-        currency= JSON.parse(cur)[0].ECUR;              
-      else      
-        currency='USD'; 
-        
-      this.srv_appsetting.Country.Currency=currency;
-      this.srv_appsetting.Currency=currency;
-    });     
-  } */
-
   SelectCountryAndLang(c:Country,LanguageID:string) :any
   {
     let lan:Language;
@@ -193,10 +175,7 @@ export class LoginService {
       this.translate.use(this.translate.getDefaultLang()); 
         
     this.srv_appsetting.Country=c;          
-    this.SetExchangeRate1 (c.BrifName);
-
-    /* this.srv_appsetting.FillLanguage(lan.LanguageCode).subscribe((data: any)=> {   
-     });  */   
+    this.SetExchangeRate1 (c.BrifName); 
   }
 
   SetExchangeRate()
@@ -206,7 +185,7 @@ export class LoginService {
       if(res.length>0)
       {
         let rate :any=JSON.parse(res)[0].Exchange; 
-        this.srv_appsetting.CurrRate=rate;
+        this.srv_appsetting.CurrRate=rate;        
       }            
       //alert(rate);
     });
@@ -232,9 +211,8 @@ export class LoginService {
         if(res.length>0)
         {
           let rate :any=JSON.parse(res)[0].Exchange; 
-          this.srv_appsetting.CurrRate=rate;
-        }            
-        //alert(rate);
+          this.srv_appsetting.CurrRate=rate;          
+        }                    
         });
      });
     }

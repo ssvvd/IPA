@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-machineitem',
@@ -39,20 +40,20 @@ export class MachineItemComponent implements OnInit {
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,private SpinnerService: NgxSpinnerService,
-              private router: ActivatedRoute ,private srv_login:LoginService, private srv_statemanage:StateManagerService,private modalService: NgbModal) 
+              private activerouter: ActivatedRoute ,private router:Router,private srv_login:LoginService, private srv_statemanage:StateManagerService,private modalService: NgbModal) 
   {           
-    this.eventsSubscription.add(this.router.params.subscribe(params => {
+    this.eventsSubscription.add(this.activerouter.params.subscribe(params => {
     this.MachineID = parseInt(params["id"]);
     this.MachineName= params["name"];
     }));
   }
   public innerheight: any;
 
-  @HostListener('window:resize', ['$event'])
+ /*  @HostListener('window:resize', ['$event'])
   onResize(event) {  
       this.innerheight = window.innerHeight-400;
      
-  }
+  } */
 
   ngOnDestroy() {
     this.OnSelectMachine();
@@ -71,38 +72,19 @@ export class MachineItemComponent implements OnInit {
   }
   ngOnInit()
    {  
-    if(this.pr_MachineID!=0)      this.MachineID=this.pr_MachineID;
-    if(this.pr_MachineName!='')   this.MachineName=this.pr_MachineName;                                 
-    if(this.srv_statemanage.SelectedMachine!=null && this.srv_statemanage.SelectedMachine.MachineID==this.MachineID)
-    {
-      this.machHeader=this.srv_statemanage.SelectedMachine;
-      if(this.srv_statemanage.arrMachineSpindle!=null)      
-        {    
-          this.arrMachineSpindle =this.srv_statemanage.arrMachineSpindle;
-          this.FillImageMachineType(); 
-         
-          this.isLoading =true;         
-        }
-      else
-          this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
-          this.arrMachineSpindle = JSON.parse(res);      
-          this.machSpindleMain = this.arrMachineSpindle[0]; 
-          this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
-          this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
-          this.FillImageMachineType();
-         
-          
-          this.isLoading =true;          
-        }));
-        this.CostPerHour = Math.round(this.machHeader.CostPerHour / this.srv_appsetting.CurrRate*100)/100;            
-    }         
-    if(this.machHeader==null)
-    {
-        this.FillMachineDataFromServer(this.MachineID); 
-    } 
-    this.innerheight = window.innerHeight-200;
+    this.srv_appsetting.RateChange.subscribe(res=>(this.ChangeRate(res)));
+    this.FillMachineData();
   }
   
+  ChangeRate(prev_rate:number)
+  {
+    if(this.machHeader!==undefined)
+    {
+      this.machHeader.Currency=this.srv_appsetting.Currency;            
+      this.CostPerHour =  Math.round( this.CostPerHour* (Math.round(prev_rate*1000)/1000)/(Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;      
+    }    
+  }
+
   FillMachineData()
   {
     if(this.pr_MachineID!=0)      this.MachineID=this.pr_MachineID;
@@ -128,7 +110,7 @@ export class MachineItemComponent implements OnInit {
           
           this.isLoading =true;          
         }));
-        this.CostPerHour = Math.round(this.machHeader.CostPerHour / this.srv_appsetting.CurrRate*100)/100;            
+        this.CostPerHour = Math.round(this.machHeader.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;            
     }         
     if(this.machHeader==null)
     {
@@ -139,7 +121,7 @@ export class MachineItemComponent implements OnInit {
   ChangeMachineCost()
   {
     //cast from local currency to USD
-     this.machHeader.CostPerHour = Math.round(this.CostPerHour* this.srv_appsetting.CurrRate*100)/100;
+     this.machHeader.CostPerHour = Math.round(this.CostPerHour* ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
   }
 
   OnSaveMachine()
@@ -188,7 +170,9 @@ export class MachineItemComponent implements OnInit {
         if(mach.isFavorite && result=='delete')
         {
           mach.isFavorite =false;
-          this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
+          this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {
+            this.router.navigate(['/home/machines']);
+          });         
           //this.Initializemachinelist(true);
           //this.eventsChangeFavorite.next();
         }
@@ -198,7 +182,9 @@ export class MachineItemComponent implements OnInit {
           {
               //change only machine name
               this.eventsSubscription.add(this.srv_machine.machine_update_name(
-                mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => { 
+                mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => {  
+                  this.machHeader.MachineName= result;
+                  this.MachineName = this.machHeader.MachineName;                
                   //this.Initializemachinelist(true);
                   //this.eventsChangeFavorite.next();               
              }));  
@@ -208,6 +194,7 @@ export class MachineItemComponent implements OnInit {
             this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => { 
               alert(newid); 
               this.pr_MachineID =newid;
+              this.machHeader=null;
               this.FillMachineData();   
               //this.Initializemachinelist(true);
               //this.eventsChangeFavorite.next();                   
@@ -250,11 +237,11 @@ export class MachineItemComponent implements OnInit {
   FillImageMachineType()
   {
       this.imgNameMachine =environment.ImagePath +"no-image.svg";        
-      if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.svg";
-      if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.svg";
-      if(this.machHeader.MachineType =='Machining center') this.imgNameMachine =environment.ImagePath +"MachiningCenter.svg"; 
-      if(this.machHeader.MachineType =='Swiss type') this.imgNameMachine =environment.ImagePath +"SwissType.svg";
-      if(this.machHeader.MachineType =='Multi spindle') this.imgNameMachine =environment.ImagePath +"MultiSpindle.svg";                     
+      if(this.machHeader.MachineType =='Lathe') this.imgNameMachine =environment.ImagePath +"lathe.png";
+      if(this.machHeader.MachineType =='Multi task') this.imgNameMachine =environment.ImagePath +"MultiTask.png";
+      if(this.machHeader.MachineType =='Machining center') this.imgNameMachine =environment.ImagePath +"MachiningCenter.png"; 
+      if(this.machHeader.MachineType =='Swiss type') this.imgNameMachine =environment.ImagePath +"SwissType.png";
+      if(this.machHeader.MachineType =='Multi spindle') this.imgNameMachine =environment.ImagePath +"MultiSpindle.png";                     
   }
  
   FillMachineDataFromServer(MachineID:number)
@@ -280,6 +267,7 @@ export class MachineItemComponent implements OnInit {
     this.machHeader.Power =this.arrMachineSpindle[0].Power;
     this.machHeader.SpindleSpeed =this.arrMachineSpindle[0].SpindleSpeed;
     this.machHeader.Torque =this.arrMachineSpindle[0].Torque;   
+    this.machHeader.CostPerHour = Math.round(this.machHeader.CostPerHour *100)/100;  
     this.srv_statemanage.SelectedMachine = this.machHeader; 
     this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;       
   } 
@@ -291,7 +279,7 @@ export class MachineItemComponent implements OnInit {
       this.machSpindleMain = this.arrMachineSpindle[0]; 
       this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
       this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
-      if(!this.machHeader.isFavorite) this.CostPerHour = Math.round(100 / this.srv_appsetting.CurrRate*100)/100; 
+      if(!this.machHeader.isFavorite) this.CostPerHour = Math.round(100/( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100; 
       this.FillImageMachineType();
            
       this.isLoading =true;          

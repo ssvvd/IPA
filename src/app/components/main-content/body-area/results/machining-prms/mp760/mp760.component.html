@@ -158,6 +158,7 @@
   
   
   <br>
+  <div *ngIf="exportPDF" class="break-page"></div>
   <div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
   
   
@@ -205,8 +206,7 @@
           </div>
   
   
-  <br>
-  <div *ngIf="exportPDF" style="min-height:320px"></div>
+  <br>  
   <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>    
         <div class="row justify-content-start w-100">
           <div class="col-3 row">{{'Machine Cost (per Hour)' | translate }}</div>

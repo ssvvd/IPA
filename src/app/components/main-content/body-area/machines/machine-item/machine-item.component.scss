@@ -4,6 +4,15 @@
     min-width: 40px;
     }
 
+    .scroll-div
+    {
+        overflow-y: auto; 
+        height: calc(100vh - 500px);
+    }
+    .no-scroll-div
+    {
+        overflow-y: auto;       
+    }
 
 
 

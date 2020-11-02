@@ -1,9 +1,12 @@
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { isConstructorDeclaration } from 'typescript';
+
 export class MachineFilter{
-  IsMachiningCenter:boolean;
-  IsLathe:boolean;
-  IsMultiTask:boolean;
-  IsMultiSpindle:boolean;
-  IsSwissType:boolean;
+  IsMachiningCenter:boolean=true;
+  IsLathe:boolean=true;
+  IsMultiTask:boolean=true;
+  IsMultiSpindle:boolean=true;
+  IsSwissType:boolean=true;
   SpeedMin:number;
   SpeedMax:number;
   PowerMin:number;
@@ -21,5 +24,14 @@ export class MachineFilter{
   IsSliderPower:boolean;
   IsSliderSpeed:boolean;
   IsSliderTorque:boolean;
+
+  constructor() { 
+    this.IsMachiningCenter=true;
+    this.IsLathe=true;
+    this.IsMultiTask=true;
+    this.IsMultiSpindle=true;
+    this.IsSwissType=true;
+  }
 }
+ 
 

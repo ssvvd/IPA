@@ -4,6 +4,7 @@ import { User} from 'src/app/models/users/user';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { CookiesService } from 'src/app/services/cookies.service';
 import { BehaviorSubject } from 'rxjs';
+import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 //import { unlink } from 'fs';
 //import { uniqueSort } from 'jquery';
 
@@ -25,8 +26,11 @@ export class AppsettingService {
 
   
   private obsUserSelected = new BehaviorSubject<string>('');
-  CurrentUserSelected = this.obsUserSelected.asObservable(); 
-  
+  CurrentUserSelected = this.obsUserSelected.asObservable();
+
+  private obsRateChange = new BehaviorSubject<number>(0);
+  RateChange = this.obsRateChange.asObservable();
+
   private misLoggedIn:boolean;
   get isLoggedIn():boolean{   
     return this.misLoggedIn;
@@ -144,8 +148,11 @@ export class AppsettingService {
    get CurrRate():number {
      return this.mCurrRate;
      }
-   set CurrRate(r:number) {  
-     this.mCurrRate = r;
+
+   set CurrRate(r:number) {         
+     let prev_rate:number=  this.mCurrRate ;   
+     this.mCurrRate = r;  
+     if(prev_rate != r) this.obsRateChange.next(prev_rate);             
     }
 
   private mCountry:Country;

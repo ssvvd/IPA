@@ -1,7 +1,7 @@
 <div>
 <div class="container-fluid p-0 pl-2 pr-2 pt-0" >
     <div class="form-group row">
-        <input class="form-control" [(ngModel)]="machFilter.SearchText" (keyup)="FilterChange($event,false,false,false)" type="text" placeholder="Search" aria-label="Search">    
+        <input class="form-control" [(ngModel)]="machFilter.SearchText" (keyup)="FilterChange($event,false,false,false,'')" type="text" placeholder="Search" aria-label="Search">    
     </div>
     <div class="border-bottom pt-3"></div>
     <div class="row">
@@ -12,24 +12,24 @@
             <button type="button" class="btn btn-reset mb-0 pl-0 ml-0" (click)="ClearFilter()">{{'Reset' | translate}}</button>
         </div>
     </div> 
-   <div  class="pl-0 pt-3 pb-2">
+   <div  class="pl-0 pt-3 pb-2" *ngIf="isLoadingAdSize">
         <div class="custom-control custom-radio ">
-            <input type="radio" class="custom-control-input" id="optmost1" name="most" [(ngModel)] ="isMostRecom" value="1"  (change)="changeismost();FilterChange($event,false,false,false)"  >
+            <input type="radio" class="custom-control-input" id="optmost1" name="most" [(ngModel)] ="isMostRecom" value="1"  (change)="changeismost();FilterChange($event,false,false,false,'')"  >
             <label class="custom-control-label" for="optmost1">{{'Most Recommended' | translate}}</label>
         </div>                              
         <div class="custom-control custom-radio ">
-            <input type="radio" class="custom-control-input" id="optmost2" name="most" [(ngModel)] ="isMostRecom" value="0" (change)="changeismost();FilterChange($event,false,false,false)">  
+            <input type="radio" class="custom-control-input" id="optmost2" name="most" [(ngModel)] ="isMostRecom" value="0" (change)="changeismost();FilterChange($event,false,false,false,'')">  
             <label class="custom-control-label" for="optmost2">{{'View All Machines' | translate}}</label>
         </div>         
     </div>  
-    <div class="row">
-        <div [ngClass]="machFilter.IsMachiningCenter?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-0 pt-2 pr-3 pb-2 pb-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   pl-0 pt-2 pr-3 pb-2 pb-2 div-opacity'">
-            <div>
-                <img  [src]="environment.ImagePath+'MachiningCenter.svg'" class="cursor-pointer" (click)="machFilter.IsMachiningCenter=!machFilter.IsMachiningCenter;FilterChange($event,false,false,false)">
+    <div class="row" *ngIf="isLoadingAdSize">
+        <div [ngClass]="machFilter.IsMachiningCenter?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-0 pt-2 pr-3 pb-2 pb-2 ':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   pl-0 pt-2 pr-3 pb-2 pb-2 '">
+            <div [ngClass]="machFilter.IsMachiningCenter && !MachineTypeAll?'div-not-opacity':'div-opacity'">
+                <img  [src]="environment.ImagePath+'MachiningCenter.svg'" class="cursor-pointer" (click)="machFilter.IsMachiningCenter=!machFilter.IsMachiningCenter;FilterChange($event,false,false,false,'IsMachiningCenter')">
             </div>
             <div class="d-flex justify-content-center" >
                 <div class="custom-control custom-checkbox cursor-pointer">
-                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)"  [(ngModel)]="machFilter.IsMachiningCenter">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'IsMachiningCenter')"  [(ngModel)]="IsMachiningCenter">
                     <label class="custom-control-label cursor-pointer" for="chkMachiningCenter"></label>
                 </div>
             </div>
@@ -37,13 +37,13 @@
                 <label>{{'Machining Center' | translate}}</label>               
             </div>
         </div>
-        <div  [ngClass]="machFilter.IsLathe?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   p-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   p-2 div-opacity'" >   
-            <div class="d-flex justify-content-center">       
-                <img   [src]="environment.ImagePath + 'lathe.svg'" class="cursor-pointer img-fluid" (click)="machFilter.IsLathe=!machFilter.IsLathe;FilterChange($event,false,false,false)">           
+        <div  [ngClass]="machFilter.IsLathe?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   p-2':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   p-2'" >   
+            <div class="d-flex justify-content-center"  [ngClass]="machFilter.IsLathe && !MachineTypeAll?'div-not-opacity':'div-opacity'">       
+                <img   [src]="environment.ImagePath + 'lathe.svg'" class="cursor-pointer img-fluid" (click)="machFilter.IsLathe=!machFilter.IsLathe;FilterChange($event,false,false,false,'IsLathe')">           
             </div>
             <div class="d-flex justify-content-center">
                  <div class="custom-control custom-checkbox cursor-pointer">
-                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkLathe" name="chkLathe" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)" [(ngModel)]="machFilter.IsLathe">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkLathe" name="chkLathe" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'IsLathe')" [(ngModel)]="IsLathe">
                     <label class="custom-control-label cursor-pointer" for="chkLathe"></label>
                 </div>
             </div>
@@ -51,13 +51,13 @@
                 <label>{{'Lathe' | translate}}</label>
             </div>
         </div>
-            <div  [ngClass]="machFilter.IsMultiTask?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-3 pt-2 pr-0 pb-2 pb-2  div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 pl-3 pt-2 pr-0 pb-2 pb-2  div-opacity'">
-                <div>
-                    <img  [src]="environment.ImagePath + 'MultiTask.svg'" class="cursor-pointer" (click)="machFilter.IsMultiTask=!machFilter.IsMultiTask;FilterChange($event,false,false,false)">
+            <div  [ngClass]="machFilter.IsMultiTask?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-3 pt-2 pr-0 pb-2 pb-2 ':'col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 pl-3 pt-2 pr-0 pb-2 pb-2'">
+                <div [ngClass]="machFilter.IsMultiTask && !MachineTypeAll?'div-not-opacity':'div-opacity'">
+                    <img  [src]="environment.ImagePath + 'MultiTask.svg'" class="cursor-pointer" (click)="machFilter.IsMultiTask=!machFilter.IsMultiTask;FilterChange($event,false,false,false,'IsMultiTask')">
                 </div>
                 <div class="d-flex justify-content-center">
                     <div class="custom-control custom-checkbox cursor-pointer">
-                        <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMultiTask" name="chkMultiTask" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)" [(ngModel)]="machFilter.IsMultiTask">
+                        <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMultiTask" name="chkMultiTask" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'IsMultiTask')" [(ngModel)]="IsMultiTask">
                         <label class="custom-control-label cursor-pointer" for="chkMultiTask"></label>
                     </div>
                 </div>
@@ -67,13 +67,13 @@
             </div>
     </div>    
     <div class="row">
-        <div [ngClass]="machFilter.IsMultiSpindle?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-1 pt-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2 div-opacity'">
-            <div>
-                <img  [src]="environment.ImagePath+'MultiSpindle.svg'" class="cursor-pointer" (click)="machFilter.IsMultiSpindle=!machFilter.IsMultiSpindle;FilterChange($event,false,false,false)"> 
+        <div [ngClass]="machFilter.IsMultiSpindle?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-1 pt-2':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2'">
+            <div [ngClass]="machFilter.IsMultiSpindle && !MachineTypeAll?'div-not-opacity':'div-opacity'">
+                <img  [src]="environment.ImagePath+'MultiSpindle.svg'" class="cursor-pointer" (click)="machFilter.IsMultiSpindle=!machFilter.IsMultiSpindle;FilterChange($event,false,false,false,'IsMultiSpindle')"> 
             </div>
             <div class="d-flex justify-content-center">
                 <div class="custom-control custom-checkbox cursor-pointer">
-                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMultiSpindle" name="chkMultiSpindle" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)"  [(ngModel)]="machFilter.IsMultiSpindle">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMultiSpindle" name="chkMultiSpindle" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'IsMultiSpindle')"  [(ngModel)]="IsMultiSpindle">
                     <label class="custom-control-label cursor-pointer" for="chkMultiSpindle"></label>
                 </div>
             </div>
@@ -81,13 +81,13 @@
                 <label>{{'Multi Spindle' | translate}}</label>
             </div>
         </div>
-        <div [ngClass]="machFilter.IsSwissType?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2 div-not-opacity':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2 div-opacity'">
-            <div>
-                <img   [src]="environment.ImagePath+'SwissType.svg'" class="cursor-pointer" (click)="machFilter.IsSwissType=!machFilter.IsSwissType;FilterChange($event,false,false,false)"> 
+        <div [ngClass]="machFilter.IsSwissType?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12 pl-1 pt-2'">
+            <div  [ngClass]="machFilter&&machFilter.IsSwissType && !MachineTypeAll?'div-not-opacity':'div-opacity'">
+                <img   [src]="environment.ImagePath+'SwissType.svg'" class="cursor-pointer" (click)="machFilter.IsSwissType=!machFilter.IsSwissType;FilterChange($event,false,false,false,'IsSwissType')"> 
             </div>
             <div class="d-flex justify-content-center">
                 <div class="custom-control custom-checkbox cursor-pointer">
-                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkSwissType" name="chkSwissType" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)" [(ngModel)]="machFilter.IsSwissType">
+                    <input type="checkbox" class="custom-control-input cursor-pointer" id="chkSwissType" name="chkSwissType" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'IsSwissType')" [(ngModel)]="IsSwissType">
                     <label class="custom-control-label cursor-pointer" for="chkSwissType"></label>
                 </div>
             </div>
@@ -103,7 +103,7 @@
 <div class="pl-2 pb-2 ">
     <div class="row">
         <div class="custom-control custom-checkbox cursor-pointer">
-            <input type="checkbox" class="custom-control-input cursor-pointer" id="IsMachineTypeStandard" name="IsMachineTypeStandard" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)"  [(ngModel)]="machFilter.IsMachineTypeStandard">
+            <input type="checkbox" class="custom-control-input cursor-pointer" id="IsMachineTypeStandard" name="IsMachineTypeStandard" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'')"  [(ngModel)]="machFilter.IsMachineTypeStandard">
             <label class="custom-control-label cursor-pointer" for="IsMachineTypeStandard"></label>
         </div>
         <div class="pr-4  pl-0 ">
@@ -112,7 +112,7 @@
     </div> 
     <div class="row">
         <div class="custom-control custom-checkbox cursor-pointer">
-            <input type="checkbox" class="custom-control-input cursor-pointer" id="IsMachineTypeHeavyDuty" name="IsMachineTypeHeavyDuty" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)"  [(ngModel)]="machFilter.IsMachineTypeHeavyDuty">
+            <input type="checkbox" class="custom-control-input cursor-pointer" id="IsMachineTypeHeavyDuty" name="IsMachineTypeHeavyDuty" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'')"  [(ngModel)]="machFilter.IsMachineTypeHeavyDuty">
             <label class="custom-control-label cursor-pointer" for="IsMachineTypeHeavyDuty"></label>
         </div>
         <div class="pr-4  pl-0 ">
@@ -121,7 +121,7 @@
     </div> 
     <div class="row">
         <div class="custom-control custom-checkbox cursor-pointer">
-            <input type="checkbox" class="custom-control-input cursor-pointer" id="IsMachineTypeHighSpeed" name="IsMachineTypeHighSpeed" (change)= "SetViewAllMachines();FilterChange($event,false,false,false)"  [(ngModel)]="machFilter.IsMachineTypeHighSpeed">
+            <input type="checkbox" class="custom-control-input cursor-pointer" id="IsMachineTypeHighSpeed" name="IsMachineTypeHighSpeed" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'')"  [(ngModel)]="machFilter.IsMachineTypeHighSpeed">
             <label class="custom-control-label cursor-pointer" for="IsMachineTypeHighSpeed"></label>
         </div>
         <div class="pr-4  pl-0 ">
@@ -134,7 +134,7 @@
 <div class="pl-2 pb-2 ">
     <div class="row">
         <div class="custom-control custom-checkbox cursor-pointer pt-2">
-            <input type="checkbox" class="custom-control-input cursor-pointer" id="ShowOnlyFavorites" name="ShowOnlyFavorites" (change)= "FilterChange($event,false,false,false)"  [(ngModel)]="machFilter.ShowOnlyFavorites">
+            <input type="checkbox" class="custom-control-input cursor-pointer" id="ShowOnlyFavorites" name="ShowOnlyFavorites" (change)= "FilterChange($event,false,false,false,'')"  [(ngModel)]="machFilter.ShowOnlyFavorites">
             <label class="custom-control-label cursor-pointer" for="ShowOnlyFavorites"></label>
         </div>
         <div class="pr-4  pl-0 pb-2 pt-2">
@@ -169,19 +169,19 @@
     <div class="pt-2 pr-2 mt-0 pl-2" *ngIf="isLoadingAdSize">    
         <label class="pt-4">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
-            <ng5-slider [(value)]="machFilter.PowerMin" class="form-control-sm" (userChangeEnd)="SetViewAllMachines();FilterChange($event,true,false,false)" [(highValue)]="machFilter.PowerMax" [options]="options_power"></ng5-slider>
+            <ng5-slider [(value)]="machFilter.PowerMin" class="form-control-sm" (userChangeEnd)="SetViewAllMachines();FilterChange($event,true,false,false,'')" [(highValue)]="machFilter.PowerMax" [options]="options_power"></ng5-slider>
         </div>
     </div>  
     <div class="pr-2 mt-0 pl-2 pt-2" *ngIf="isLoadingAdSize">    
         <label class="pt-4">{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
-            <ng5-slider  [(value)]="machFilter.SpeedMin"  class="form-control-sm" (userChangeEnd)="SetViewAllMachines();FilterChange($event,false,true,false)" [(highValue)]="machFilter.SpeedMax" [options]="options_speed"></ng5-slider>
+            <ng5-slider  [(value)]="machFilter.SpeedMin"  class="form-control-sm" (userChangeEnd)="SetViewAllMachines();FilterChange($event,false,true,false,'')" [(highValue)]="machFilter.SpeedMax" [options]="options_speed"></ng5-slider>
         </div> 
     </div>        
      <div  class="pt-2 pr-2 mt-0 pl-2 pb-4" *ngIf="isLoadingAdSize">    
         <label class="pt-4">{{'Torque' | translate}}{{ srv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}</label>    
         <div class="custom-slider ng5-slider pt-0 mt-0" >
-            <ng5-slider [(value)]="machFilter.TorqueMin" class="form-control-sm" (userChangeEnd)="SetViewAllMachines();FilterChange($event,false,false,true)" [(highValue)]="machFilter.TorqueMax" [options]="options_torque"></ng5-slider>
+            <ng5-slider [(value)]="machFilter.TorqueMin" class="form-control-sm" (userChangeEnd)="SetViewAllMachines();FilterChange($event,false,false,true,'')" [(highValue)]="machFilter.TorqueMax" [options]="options_torque"></ng5-slider>
         </div>
     </div>   
 </div>

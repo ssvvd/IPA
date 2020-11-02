@@ -354,11 +354,11 @@ export class MachineItemSpindleChartComponent implements OnInit {
               } */                             
               if (property === 'AdaptationType' ) {              
                 //todo:get new graph             
-                this.CreateChart();              
+                //this.CreateChart();              
               }
               if (property === 'AdaptationSize' ) {                                           
                 //todo:get new graph
-                this.CreateChart();              
+                //this.CreateChart();              
               }
                if (property === 'spindle' ) {                 
                 this.FilldataChart();                                                          

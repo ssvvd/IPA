@@ -27,7 +27,7 @@ export class Mp77Component implements OnInit {
 
  @Input() selectedRes:clsPropertyValue[][];
  @Input() selectedHelp:clsHelpProp;
-
+ @Input() exportPDF:boolean;
 Vc:string
 fr:string
 DH:string
