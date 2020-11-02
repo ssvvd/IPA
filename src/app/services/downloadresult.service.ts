@@ -112,8 +112,8 @@ public downloadItemPDF():any {
     html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
     jsPDF:        { unit: 'mm',orientation: 'landscape'},
     pagebreak:    { before: '.break-page'},
-    width:295//,
-    //pdfCallback: this.pdfCallback (doc)    
+    width:295,
+    pdfCallback: this.pdfCallback    
   };
   
   var element = document.getElementById('pdfdata');
@@ -159,14 +159,15 @@ toDataURL(url, callback) {
 }
 
 pdfCallback(pdfObject) {
-  var number_of_pages = pdfObject.internal.getNumberOfPages()
+  //var number_of_pages = pdfObject.internal.getNumberOfPages();
+  //alert(number_of_pages);
   var pdf_pages = pdfObject.internal.pages
   var myFooter = "Footer info"
   for (var i = 1; i < pdf_pages.length; i++) {
       // We are telling our pdfObject that we are now working on this page
       pdfObject.setPage(i)
       // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
-      pdfObject.text(myFooter +' ' + i.toString, 10, 200)
+      pdfObject.text(myFooter +' ' + i.toString, 0, 0)
   }
 }
 
