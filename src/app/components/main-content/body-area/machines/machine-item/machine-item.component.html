@@ -1,7 +1,7 @@
 <!-- <div  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" style="height: 100%;"> -->
     <!-- <div   style="overflow-y: auto; height: calc(100vh - 220px);" > --> 
-        <div [ngClass]="exportPDF?'no-scroll-div': 'scroll-div'"> 
-<div class="container-fluid m-0 p-0 border-left-gray border-right-gray" > 
+        <div [ngClass]="exportPDF?'no-scroll-div border-right-gray': 'scroll-div border-right-gray'"> 
+<div class="container-fluid m-0 p-0 border-left-gray" > 
 <div class="mt-0 ml-0 pl-0 mt-0 pt-2" *ngIf="!exportPDF">
      <nav class="ml-0 pl-0 mt-0 pl-4 pt-0" aria-label="breadcrumb">
         <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
