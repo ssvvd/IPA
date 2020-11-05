@@ -23,7 +23,9 @@ const routes: Routes = [
 		{path:"operation-data",component:OperationDataComponent},
 		{path:"results",component:ResultsComponent}	,
 		{path:"contactus",component:ContactusComponent}		
-	],runGuardsAndResolvers: "always",}
+	],runGuardsAndResolvers: "always",},
+	
+	{ path: 'operation-data', loadChildren: () => import('./operation-data/operation-data.module').then(m => m.OperationDataModule) }
 	];
 
 @NgModule({

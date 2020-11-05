@@ -99,23 +99,17 @@ ingDownloaded:any
 public downloadItemPDF():any {  
   var doc = new jsPDF('l');
   
-   document.getElementById('pdfdata').style.visibility = 'visible';
-//alert(window.innerWidth);
-
-//var imgWidth = 295;     
-//var imgHeight = canvas.height * imgWidth / canvas.width;
+   //document.getElementById('pdfdata').style.visibility = 'visible';
 
   var opt = {
     margin: [4, 0, 4, 0],
     filename:     'ITAReport.pdf',
     image:        { type: 'jpeg', quality: 0.98 },
     html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
-    jsPDF:        { unit: 'mm',orientation: 'landscape'},
-    pagebreak:    { before: '.break-page'},
-    width:295,
-    pdfCallback: this.pdfCallback    
+    jsPDF:        { unit: 'mm',orientation: 'landscape',format: 'letter'},
+    pagebreak:    { before: '.break-page'}   
   };
-  
+ 
   var element = document.getElementById('pdfdata');
   html2pdf().set(opt).from(element).save().then(this.obsPDFListLoaded.next(null)); 
   return; 
@@ -158,26 +152,13 @@ toDataURL(url, callback) {
   xhr.send();
 }
 
-pdfCallback(pdfObject) {
-  //var number_of_pages = pdfObject.internal.getNumberOfPages();
-  //alert(number_of_pages);
-  var pdf_pages = pdfObject.internal.pages
-  var myFooter = "Footer info"
-  for (var i = 1; i < pdf_pages.length; i++) {
-      // We are telling our pdfObject that we are now working on this page
-      pdfObject.setPage(i)
-      // The 10,200 value is only for A4 landscape. You need to define your own for other page sizes
-      pdfObject.text(myFooter +' ' + i.toString, 0, 0)
-  }
-}
-
 BuildResult(doc:jsPDF,controlname:string):any
 {
   const div = document.getElementById(controlname); 
 
     const options = {
       background: 'white',
-      scale: 2
+      scale: 3
     };
 
     html2canvas(div, options).then((canvas) => {
