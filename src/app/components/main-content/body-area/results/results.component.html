@@ -127,7 +127,7 @@
   </div> 
   
   <!-- <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;position:absolute;top:-5000px">   -->
-    <div *ngIf="IsExport"  id="pdfdata" >           
+    <div *ngIf="IsExport"  id="pdfdata">           
       <div class="div_pdf" id="pdf_1">
           <div class="row pb-2 ml-2 pr-0 mr-0 pb-3">
             <div class="col-2 pt-2">
@@ -153,8 +153,9 @@
                 <app-machineitem [exportPDF]="true" [pr_MachineID]="srv_statemanage.SelectedMachine.MachineID"  [pr_MachineName]="srv_statemanage.SelectedMachine.MachineName"></app-machineitem>
               </div> 
           </div>
-      </div>                                
-      <div class="form-group div_pdf break-page" id='pdf_4'>
+      </div>  
+      <div class="pb"></div>                              
+      <div class="break-page form-group div_pdf " id='pdf_4'>
           <div class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0">
             <label class="PDFTitle ml-2">{{'Operation Data' | translate}}</label>
           </div>

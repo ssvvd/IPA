@@ -61,7 +61,7 @@ import { ResFilterListComponent } from './components/main-content/body-area/resu
 import { ResFilterScrollComponent } from './components/main-content/body-area/results/res-filter/res-filter-scroll/res-filter-scroll.component';
 import { Appdetails77Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails77/appdetails77.component';
 import { Appdetails120Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails120/appdetails120.component';
-import { NgSelectModule } from '@ng-select/ng-select';
+//import { NgSelectModule } from '@ng-select/ng-select';
 import { OptimizetoolFilterExtComponent } from './components/main-content/body-area/operation-data/input-data-components/optimizetool-filter-ext/optimizetool-filter-ext.component';
 import { Optimizetool120Component } from './components/main-content/body-area/operation-data/input-data-components/optimizetool120/optimizetool120.component';
 import { Appdetails990Component } from './components/main-content/body-area/operation-data/input-data-components/appdetails990/appdetails990.component';
@@ -182,7 +182,7 @@ import { MpThreadingComponent } from './components/main-content/body-area/result
     NgxSpinnerModule,
     BrowserAnimationsModule,
     NgpSortModule,
-    NgSelectModule,
+    //NgSelectModule,
   //  SafePipeModule,
     TranslateModule.forRoot({
       loader: {

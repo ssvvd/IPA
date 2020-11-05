@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@ng-select/ng-select/themes/default.theme.css";
+//@import "~@ng-select/ng-select/themes/default.theme.css";
 @import "bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 :root {
   --btn-bg-select-color: #204f96;
@@ -397,10 +398,11 @@ html, body{
 {
    font-size: 26px;
 }
-
-.ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
+/* 
+ .ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
  .ng-select-container.ng-has-value .ng-value-container 
- .ng-value{ visibility: visible; }
+ .ng-value{ visibility: visible; } */
+ 
 
  .shape-ellipse {  
   cursor: pointer;
@@ -412,7 +414,7 @@ html, body{
   transition: .4s;
   border-radius: 34px;
   border:1px solid var(--btn-bg-select-color);
-}
+ }
 
 .label-ellipse
 {

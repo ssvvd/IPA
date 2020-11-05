@@ -84,8 +84,11 @@ overflow-y: auto !important;
 height: calc(100vh - 239px);
     }
 
-    .scrollYAutoMParams{
-        overflow-y: auto !important;
-        height: calc(100vh - 327px);
-            }
-        
+.scrollYAutoMParams{
+    overflow-y: auto !important;
+    height: calc(100vh - 327px);
+        }
+
+        .break-page{
+            background-color: white;
+        }
