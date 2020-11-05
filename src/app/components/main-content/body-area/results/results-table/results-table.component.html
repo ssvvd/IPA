@@ -29,8 +29,8 @@
            </div>
          </div> -->
          <div class="div-datatable">
-        <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" style="width: 100%" >
-            <thead>
+        <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" style="width: 100%" >  
+         <thead>
                     <tr id="dtOptions">
                      <th ><label></label></th>  
                      <th class="sorting" *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">

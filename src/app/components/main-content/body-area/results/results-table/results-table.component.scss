@@ -42,12 +42,16 @@ table.dataTable thead th {
   // min-width: 15% !important;
   // max-width: 15% !important;
   width: 10% !important;
+  min-width: 10% !important;
+  max-width: 10% !important;
   white-space: nowrap;
 }
  .table td:nth-child(2), .table th:nth-child(2){
   // min-width: 24% !important;
   // max-width: 24% !important;
   width: 20% !important;
+  min-width: 20% !important;
+  max-width: 20% !important;
   white-space: nowrap;
 }
 
@@ -55,12 +59,16 @@ table.dataTable thead th {
   // min-width: 24% !important;
   // max-width: 24% !important;
   width: 11% !important;
+  min-width: 11% !important;
+  max-width: 11% !important;
   white-space: nowrap;
 }
 .table td:nth-last-child(3), .table th:nth-last-child(3){
   // min-width: 24% !important;
   // max-width: 24% !important;
   width: 4% !important;
+  min-width: 4% !important;
+  max-width: 4% !important;
   white-space: nowrap;
 }
 
@@ -120,6 +128,26 @@ table.dataTable thead th {
 
 }
 
+// .dataTables_scrollHeadInner{
+//   width: 100% !important;
+// }
+
+.table-stripe{
+  width: 100% !important;
+  table-layout: fixed;
+}
+
+::ng-deep .dataTables_scrollHeadInner{
+  width:100% !important;
+}
+.dataTables_scrollHeadInner table{
+  width:100% !important;
+}
+
+.dataTables_scrollHead div:nth-child(1){
+  width:100% !important;
+
+}
 // table.dataTable tbody th,
 // table.dataTable tbody td {
 //     white-space: nowrap;
