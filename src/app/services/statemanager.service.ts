@@ -362,7 +362,7 @@ export class StateManagerService {
      this.FillDataInputParam();         
    } 
 
-   
+   public flgPDFLoading:boolean=false;
 
     
 }

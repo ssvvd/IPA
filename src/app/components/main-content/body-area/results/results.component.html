@@ -48,8 +48,8 @@
               </div>
               <div>
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="DownLoadResults()">
-                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >              
-                  <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
+                  <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading"></i>
+                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >                                
                 </h2>  
               </div>         
             </div>  
@@ -127,36 +127,65 @@
   </div> 
   
   <!-- <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;position:absolute;top:-5000px">   -->
-    <div *ngIf="IsExport"  id="pdfdata">           
-      <div class="div_pdf" id="pdf_1">
-          <div class="row pb-2 ml-2 pr-0 mr-0 pb-3">
-            <div class="col-2 pt-2">
+    <div *ngIf="IsExport"  id="pdfdata"> 
+      <div>
+        <div class="header-pdf">    
+            <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
+            <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+        </div>
+        <div class="header-pdf1">
+            <div class="float-right pr-4">
+              <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>          
+            </div>
+        </div>
+      </div>         
+      <div> 
+      <div class="border-bottom-gray">
+          <label class="pl-2 siteTitle PDFDescription">{{'ITA Recommendation' | translate}}</label>
+      </div>       
+          <!-- <div class="row pb-2 ml-2 pr-0 mr-0 pb-3">
+            <div class="col-2 pt-2" >
               <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg">
             </div>
             <div class="col-8 text-center pt-2">
               <label class="siteTitle PDFDescription pt-2">{{'ITA Recommendation' | translate}}</label>
             </div>
-          </div>         
+          </div> -->         
           <div class="pt-2">  
-             <div class="PDFTitlediv row pb-2 pr-0 mr-0">
-              <label class="PDFTitle ml-2">{{'Material' | translate}}</label>
+             <div class="row pb-2 pr-0 mr-0 pt-2 border-bottom-gray">
+               <div >
+                  <label class="PDFTitle ml-2">{{'Material ' | translate}}</label>
+              </div>
+              <div>
+                <label class="pl-2">{{mat_desc}}</label>
+              </div>
             </div>
-            <div>
-              <label class="pt-2 pl-2">{{mat_desc}}</label>
-            </div>          
+                      
           </div>         
           <div class="pt-3">   
-              <div  class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0 pt-4">
-                <label class="PDFTitle ml-2">{{'Machine' | translate}}</label>
+              <div  class="row pb-2 ml-2 pr-0 mr-0 pt-4">
+                <label class="PDFTitle ml-2">{{'Machine ' | translate}}</label>
               </div>
               <div class="pt-2" >
                 <app-machineitem [exportPDF]="true" [pr_MachineID]="srv_statemanage.SelectedMachine.MachineID"  [pr_MachineName]="srv_statemanage.SelectedMachine.MachineName"></app-machineitem>
               </div> 
           </div>
-      </div>  
+      </div> 
+      
       <div class="pb"></div>                              
-      <div class="break-page form-group div_pdf " id='pdf_4'>
-          <div class="PDFTitlediv row pb-2 ml-2 pr-0 mr-0">
+      <div class="break-page form-group">
+        <div>
+          <div class="header-pdf">    
+              <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
+              <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+          </div>
+          <div class="header-pdf1">
+              <div class="float-right pr-4">
+                <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>          
+              </div>
+          </div>
+        </div>  
+          <div class="row pb-2 ml-2 pr-0 mr-0 pt-2 border-bottom-gray">
             <label class="PDFTitle ml-2">{{'Operation Data' | translate}}</label>
           </div>
           <div class="row">
@@ -181,13 +210,24 @@
               <appdetails54  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='54' || srv_statemanage.SecApp=='10'  || srv_statemanage.SecApp=='188')"></appdetails54>                    
           </div> 
         </div>           
-       <div class="pt-0 pl-0 div_pdf" id='pdf_5' [ngClass]="srv_statemanage.SecApp=='760' || srv_statemanage.SecApp=='770' || srv_statemanage.SecApp=='780' || srv_statemanage.SecApp=='790' || srv_statemanage.SecApp=='57'?'div-machining-param2 break-page':  'div-machining-param1 break-page' "> 
-          <div class="PDFTitlediv row pt-0 pb-2  pr-0 mr-0">
+       <div class="pt-0 pl-0" [ngClass]="srv_statemanage.SecApp=='760' || srv_statemanage.SecApp=='770' || srv_statemanage.SecApp=='780' || srv_statemanage.SecApp=='790' || srv_statemanage.SecApp=='57'?'div-machining-param2 break-page':  'div-machining-param1 break-page' "> 
+          <div>
+            <div class="header-pdf">    
+                <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
+                <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+            </div>
+            <div class="header-pdf1">
+                <div class="float-right pr-4">
+                  <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>          
+                </div>
+            </div>
+          </div>
+          <div class="row pb-2  pr-0 mr-0 pt-2 border-bottom-gray">
             <label class="PDFTitle ml-2">{{'Results' | translate}}</label>
           </div>
            <inner-tabs-table  [exportPDF]="true"  [viewParamsChanged]="viewParams"></inner-tabs-table>
-          <div class="pt-2 div_pdf" id='pdf_6'>
-            <div class="PDFTitlediv row pt-2 pb-2  pr-0 mr-0  pl-3">
+          <div class="pt-2">
+            <div class="row pb-2  pr-0 mr-0  pl-3 pt-2 border-bottom-gray">
               <label class="PDFTitle ml-2">{{'Machining Parameters' | translate}}</label>
             </div>
             <machining-prms [exportPDF]="true"  [viewParamsChangedMP]="viewParams"></machining-prms> 
@@ -195,15 +235,35 @@
         </div>   
        
         <!-- <div class="pt-2 div_pdf" id='pdf_7' style="min-height:1220px;border:2px solid red"> -->
-        <div class="pt-2 div_pdf break-page" id='pdf_7'> 
-          
-          <div class="PDFTitlediv row pt-0 pb-2  pr-0 mr-0  pl-3">
+        <div class="break-page">
+            <div class="header-pdf">    
+              <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
+              <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+          </div>
+          <div class="header-pdf1">
+              <div class="float-right pr-4">
+                <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>          
+              </div>
+          </div>          
+          <div class="row pt-2 pb-2  pr-0 mr-0  pl-3 border-bottom-gray">
             <label class="PDFTitle ml-2">{{'Product Information' | translate}}</label>
           </div>
           <div *ngFor="let row of viewParams.Res[0]?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7"> 
-            <div [ngClass]="PrtNum>0?'break-page':'pt-2'"></div>       
-            <label class="siteTitle font-weight-bold pt-2 pl-3">{{viewParams.Res[0].GroupText[PrtNum] | translate}}:</label>          
-            <div class="pl-3 pt-2">        
+           
+            <div [ngClass]="PrtNum>0?'break-page':'pt-0'"></div> 
+            <div *ngIf="PrtNum>0" class="pt-0">
+              <div class="header-pdf">    
+                  <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
+                  <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+              </div>
+              <div class="header-pdf1">
+                  <div class="float-right pr-4">
+                    <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>          
+                  </div>
+              </div>
+            </div>      
+            <label class="siteTitle pt-2 pl-3">{{viewParams.Res[0].GroupText[PrtNum] | translate}}:</label>          
+            <div class="pl-3 pt-0">        
               <result-item-info [viewParamsChanged]="viewParams" [ItemDesignation]="viewParams.Res[0].Designation[PrtNum]" [Family]="viewParams.Res[0].Families[PrtNum]" [CatalogNo]="viewParams.Res[0].CatalogNo[PrtNum]"></result-item-info>
             </div>                      
           </div>

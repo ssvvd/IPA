@@ -53,14 +53,15 @@
 
 .PDFDescription
 {
-    font-size: 24px !important;
+    font-size: 20px !important;
+    color:var(--btn-bg-select-color) !important;
 }
 .PDFTitle{
-    color:white !important;
-    font-weight: bold !important;
+    //color:white !important;    
     font-size: 18px !important;
     font-family: var(--family-font-h) !important  ;
     margin-left: 3px;
+    color:var(--btn-bg-select-color) !important;
   }
 
 .PDFTitlediv
@@ -70,7 +71,7 @@
 }
 
 .logoImg{
-    height: 60px;
+    height: 50px;
 }
 
 .icon-edit{
@@ -89,6 +90,23 @@ height: calc(100vh - 239px);
     height: calc(100vh - 327px);
         }
 
-        .break-page{
+      /*   .break-page{
             background-color: white;
-        }
+        } */
+
+.header-pdf
+{
+    background-color:var(--background-color-header);
+    height: 55px;
+}
+.header-pdf1
+{
+    background-color:var(--btn-bg-gray-color);
+    height: 25px;
+}
+
+
+.labelwhite{
+    color:white;
+    margin-right: 25px;
+  }

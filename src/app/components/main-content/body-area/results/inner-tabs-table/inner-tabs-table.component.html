@@ -1,7 +1,7 @@
 <ng-container >
 
         <div *ngIf="selectedOption" class="row justify-content-start w-100 ">
-          <div style="min-width:21%;max-width:21%;">
+          <div [ngClass]="exportPDF?'div-image-pdf':'div-image'">
              <img  src="{{selectedOption.itemImg}}"
             (error) ="changeSource($event, selectedOption.familyImg)" class="img-grid mb-0"></div>
           <div style="min-width:20%;">

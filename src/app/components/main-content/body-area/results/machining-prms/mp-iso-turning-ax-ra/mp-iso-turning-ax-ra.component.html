@@ -171,7 +171,6 @@
         <div class="col-2">{{'cm' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
       </div>
 <br>
-<div *ngIf="exportPDF" class="break-page"></div>
 <div class="bold font-weight-bold row justify-content-start w-100">{{'Tool Assembly Data' | translate}}</div>
 
 <div class="row justify-content-start w-100">
@@ -189,6 +188,17 @@
 
 
 <br>
+<div  class="pt-0 break-page pb-2" *ngIf="exportPDF" style="margin-left:-20px;">
+  <div class="header-pdf">    
+      <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-2">          
+      <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+  </div>
+  <div class="header-pdf1">
+      <div class="float-right pr-4">          
+          <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>           
+      </div>
+  </div>
+</div>
 <div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
 
 <br>
@@ -228,8 +238,11 @@
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Ft}}</div>
     <div class="col-2">N</div>
   </div> 
-
-  <br>
+  
+  <div  *ngIf="!exportPDF" >
+    <br>
+  </div>
+  
 <div class="row justify-content-start w-100"><u>{{'Radial' | translate}}</u></div>
 
 <div class="row justify-content-start w-100">
@@ -319,8 +332,7 @@
     <div class="col-2">CEDC</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CEDC}}</div>
     <div class="col-2">Edges/Insert</div>
-  </div>
-  <div *ngIf="exportPDF" class="break-page"></div>
+  </div> 
   <div class="row justify-content-start w-100">
     <div class="col-3 row">{{'Insert Price' | translate }}</div>
     <div class="col-2">IP</div>

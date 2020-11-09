@@ -161,7 +161,19 @@
 
 
 <br>
-<div *ngIf="exportPDF && (srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50')" class="break-page"></div>
+<div *ngIf="exportPDF && (srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50')" class="break-page">
+  <div  class="pt-0 pb-2"  style="margin-left:-20px;">
+    <div class="header-pdf">    
+        <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-2">          
+        <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+    </div>
+    <div class="header-pdf1">
+        <div class="float-right pr-4">              
+            <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>                
+        </div>
+    </div>
+  </div>
+</div>
 <div class="bold font-weight-bold row justify-content-start w-100">{{'Machine Data' | translate}}</div>
 
 <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'"><br><u>{{'Grooving' | translate}}</u></div>
@@ -226,7 +238,21 @@
 
 
   <br>
-  <div *ngIf="exportPDF && (srv_StMng.SecApp=='52' || srv_StMng.SecApp=='51' || srv_StMng.SecApp=='54' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='54')" class="break-page"></div>
+ 
+  <div *ngIf="exportPDF && (srv_StMng.SecApp=='52' || srv_StMng.SecApp=='51' || srv_StMng.SecApp=='54' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='54')" class="break-page">
+    <div  class="pt-0 pb-2"  style="margin-left:-20px;">
+      <div class="header-pdf">    
+          <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-2">          
+          <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+      </div>
+      <div class="header-pdf1">
+          <div class="float-right pr-4">              
+              <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>                
+          </div>
+      </div>
+    </div>
+  </div>
+  
   <div class="bold font-weight-bold row justify-content-start w-100">{{'Time and Cost' | translate}}</div>
   
   <div class="row justify-content-start w-100">

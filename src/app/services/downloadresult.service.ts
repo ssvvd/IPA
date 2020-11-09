@@ -26,7 +26,7 @@ export class DownloadresultService {
   PDFListLoaded = this.obsPDFListLoaded.asObservable();   
 
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService,
-              private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) { }
+              private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) {}
 
   DownLoadData(format:string) : any
   {   
@@ -38,11 +38,11 @@ export class DownloadresultService {
      this.srv_DataLayer.gethtmlpage("ALL");
   }
 
-  DownLoadDataItem(format:string,data:string) : any
+  DownLoadDataItem(format:string,data:string,srv:any) : any
   {
     switch (format) {
       case 'PDF':
-        return this.downloadItemPDF();
+        return this.downloadItemPDF(srv);
       case 'P21':
         return this.srv_DataLayer.downloadp21file(data,this.srv_appsetting.Units);
       case "FP":
@@ -96,23 +96,65 @@ export class DownloadresultService {
 }
 
 ingDownloaded:any
-public downloadItemPDF():any {  
-  var doc = new jsPDF('l');
+public downloadItemPDF(srv:any):any {  
+  var doc = new jsPDF('p');
   
    //document.getElementById('pdfdata').style.visibility = 'visible';
 
   var opt = {
-    margin: [4, 0, 4, 0],
+    margin: [0, 0, 2, 0],
     filename:     'ITAReport.pdf',
     image:        { type: 'jpeg', quality: 0.98 },
     html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
-    jsPDF:        { unit: 'mm',orientation: 'landscape',format: 'letter'},
-    pagebreak:    { before: '.break-page'}   
+    jsPDF:        { unit: 'mm',orientation: 'p',format: 'letter'},
+    pagebreak:    { before: '.break-page'} //,    
+    //pdfCallback: this.pdfCallback 
   };
  
   var element = document.getElementById('pdfdata');
-  html2pdf().set(opt).from(element).save().then(this.obsPDFListLoaded.next(null)); 
+  //html2pdf().set(opt).from(element).save().then(this.obsPDFListLoaded.next(null)); 
+  
+  var pdf = new jsPDF();
+  pdf.setDisplayMode(1);
+  srv.flgPDFLoading=false;
+  html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then(function (pdf) 
+  { 
+    var totalPages = pdf.internal.getNumberOfPages();
+    //alert(totalPages);
+    for (let i = 1; i <= totalPages; i++) {
+      pdf.setPage(i);
+      pdf.setFontSize(10);
+       pdf.setFillColor(221,221,221);
+
+     /*  todo: !!!!!
+      doc.addFileToVFS('Roboto-Regular.ttf', 'Oswald')
+      doc.addFileToVFS('Roboto-Bold.ttf', 'Oswald')
+      doc.addFont('Oswald-Regular.ttf', 'Oswald', 'normal')
+      doc.addFont('Oswald-Bold.ttf', 'Oswald', 'bold')
+      doc.setFont('Oswald') */
+          
+      pdf.rect(0, pdf.internal.pageSize.getHeight() - 18, 400, 10, "F");
+      pdf.setTextColor(32, 79, 150);    
+      pdf.setFontSize(14);  
+      pdf.text('Where Innovation Never Stops', 70, pdf.internal.pageSize.getHeight()-10);
+      pdf.setTextColor(33, 37, 41); 
+      pdf.setFontSize(10);
+      pdf.text('Page ' + i + ' / ' + totalPages, pdf.internal.pageSize.getWidth() - 115, pdf.internal.pageSize.getHeight() - 4);
+    } 
+ /*    <div class="header-pdf1">Page {{PrtNum+1}}</div>                        
+    <div class="header-pdf">Where Innovation Non Stop</div> */
+
+    srv.flgPDFLoading=false;        
+    window.open(pdf.output('bloburl'), '_blank');        
+    //this.obsPDFListLoaded.next(null);                   
+  }); 
+
+  /*  html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
+    window.open(pdf.output('bloburl'), '_blank');this.obsPDFListLoaded.next(null);
+  }); 
+ */
   return; 
+
 
   return this.BuildResultItem(doc,'pdfdata');
   
@@ -137,6 +179,7 @@ public downloadItemPDF():any {
   );
   
 }
+
 
 toDataURL(url, callback) {
   var xhr = new XMLHttpRequest();

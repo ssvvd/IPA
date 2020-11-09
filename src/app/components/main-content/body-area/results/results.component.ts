@@ -34,7 +34,7 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
     private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
-    private srv_appsetting:AppsettingService,private router: Router) { 
+    public srv_appsetting:AppsettingService,private router: Router) { 
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
@@ -99,6 +99,8 @@ eventsSubject: Subject<void> = new Subject<void>();
     if (result=='PDF')
     {
       this.processdownload=true;
+      this.srv_statemanage.flgPDFLoading=true;
+
       let m:any;        
       m=this.srv_statemanage.GetMaterialSelected();
       if (typeof ( m.material) !== 'undefined')
@@ -108,7 +110,7 @@ eventsSubject: Subject<void> = new Subject<void>();
   
       this.IsExport=true; 
 
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','');}, 3000 );    
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 3000 );    
       
     }
     

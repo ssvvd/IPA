@@ -14,7 +14,7 @@
 <mp760  [exportPDF]="exportPDF"  *ngIf = "srv_StMng.MainAppSelected.MainApp=='ML'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp760>
 <mp-iso-turning [exportPDF]="exportPDF"  *ngIf = "srv_StMng.MainAppSelected.MainApp=='IS' && srv_StMng.SecApp!='970' && srv_StMng.SecApp!='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning>
 <mp-iso-turning-ax-ra  [exportPDF]="exportPDF"  *ngIf = "srv_StMng.SecApp=='970' || srv_StMng.SecApp=='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning-ax-ra>
-<mp-turn-groove   [exportPDF]="exportPDF" *ngIf = "srv_StMng.MainAppSelected.MainApp=='TG'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-turn-groove>
+<mp-turn-groove   [exportPDF]="exportPDF"  *ngIf = "srv_StMng.MainAppSelected.MainApp=='TG'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-turn-groove>
 <mp-threading *ngIf = "srv_StMng.SecApp=='119' || srv_StMng.SecApp=='120'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-threading>
 </div>
 

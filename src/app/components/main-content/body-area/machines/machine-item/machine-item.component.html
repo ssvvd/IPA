@@ -75,12 +75,22 @@
                 </div>           
             <div class="form-group">
             </div>
-        </div>                                                         
+        </div>                                                       
     </div>                                              
 </div>  
-<div>  
-    <div  *ngFor="let spindle of arrMachineSpindle" class="pt-4" >                                                                            
-        <app-machine-item-spindle  [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>   
+<div>
+    
+    <div  *ngFor="let spindle of arrMachineSpindle; let PrtNum = index" class="pt-4"  >
+            <div *ngIf="!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==spindle.SpindleType)">                                                                                                                  
+                <app-machine-item-spindle  [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
+            </div>         
+            <!-- <div *ngIf="PrtNum>0 && exportPDF" style="height:1000px"></div> -->
+            
+            <!-- <div *ngIf="exportPDF">
+                <div style="min-height:130px;height:130px;background-color: red;"></div>
+                <div class="header-pdf1">Page {{PrtNum+1}}</div>                        
+                <div class="header-pdf">Where Innovation Non Stop</div>                                               
+            </div>      -->     
     </div>  
 </div>
 </div>
