@@ -60,7 +60,8 @@ eventsSubject: Subject<void> = new Subject<void>();
   }
 
   ngOnInit() {
-    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;});
+    //this.srv_down.PDFListLoaded.subscribe((res:any) => {this.SpinnerService.hide();this.processdownload =false;});
+    //this.srv_statemanage.onflgDownLoadPDF.subscribe(f => {alert(f); if(f==2) {this.SpinnerService.hide()};});
     this.MainPage = true;   
     this._hideFilter = false; 
   }
@@ -99,7 +100,7 @@ eventsSubject: Subject<void> = new Subject<void>();
     if (result=='PDF')
     {
       this.processdownload=true;
-      this.srv_statemanage.flgPDFLoading=true;
+      this.srv_statemanage.flgPDFLoading=1;
 
       let m:any;        
       m=this.srv_statemanage.GetMaterialSelected();
@@ -109,9 +110,9 @@ eventsSubject: Subject<void> = new Subject<void>();
         this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
   
       this.IsExport=true; 
-
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 3000 );    
       
+      //this.SpinnerService.show();
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 3000 );          
     }
     
     if(result=="P21" || result=="FP") 

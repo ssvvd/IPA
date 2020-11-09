@@ -116,7 +116,7 @@ public downloadItemPDF(srv:any):any {
   
   var pdf = new jsPDF();
   pdf.setDisplayMode(1);
-  srv.flgPDFLoading=false;
+  
   html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then(function (pdf) 
   { 
     var totalPages = pdf.internal.getNumberOfPages();
@@ -144,7 +144,7 @@ public downloadItemPDF(srv:any):any {
  /*    <div class="header-pdf1">Page {{PrtNum+1}}</div>                        
     <div class="header-pdf">Where Innovation Non Stop</div> */
 
-    srv.flgPDFLoading=false;        
+    srv.flgPDFLoading=2;        
     window.open(pdf.output('bloburl'), '_blank');        
     //this.obsPDFListLoaded.next(null);                   
   }); 
