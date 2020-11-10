@@ -194,7 +194,7 @@ export class MpThreadingComponent implements OnInit {
 
 
 
-this.n = Math.round(((this.Vc * 1000)/(Math.PI * this.DC)) * 100)/100
+this.n = Math.round((this.Vc * 1000)/(Math.PI * this.DC))
 
 
 
