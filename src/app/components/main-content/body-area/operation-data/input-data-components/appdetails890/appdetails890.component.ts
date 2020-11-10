@@ -33,12 +33,14 @@ export class Appdetails890Component implements OnInit {
   Rt:number;
   RMS:number;
 
-  constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_sq:SurfacequalityService) 
+
+  constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_sq:SurfacequalityService) 
   {   
     this.srv_sq.FillData(this.srv_appsetting.Units);
   }
 
-  ngOnInit() {  
+  ngOnInit() {
+    
     this.SetIPLMandatory();
     this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  

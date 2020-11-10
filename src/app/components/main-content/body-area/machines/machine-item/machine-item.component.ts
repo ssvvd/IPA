@@ -40,7 +40,7 @@ export class MachineItemComponent implements OnInit {
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,private SpinnerService: NgxSpinnerService,
-              private activerouter: ActivatedRoute ,private router:Router,private srv_login:LoginService, private srv_statemanage:StateManagerService,private modalService: NgbModal) 
+              private activerouter: ActivatedRoute ,private router:Router,private srv_login:LoginService, public srv_statemanage:StateManagerService,private modalService: NgbModal) 
   {           
     this.eventsSubscription.add(this.activerouter.params.subscribe(params => {
     this.MachineID = parseInt(params["id"]);

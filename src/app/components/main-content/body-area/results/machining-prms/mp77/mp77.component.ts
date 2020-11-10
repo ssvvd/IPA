@@ -4,6 +4,7 @@ import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { ResultsService} from 'src/app/services/results.service' ;
 import {clsHelpProp} from 'src/app/models/results/help-prop';
+import { environment } from 'src/environments/environment';
 
 class ResRow {
   Name: string;
@@ -28,6 +29,7 @@ export class Mp77Component implements OnInit {
  @Input() selectedRes:clsPropertyValue[][];
  @Input() selectedHelp:clsHelpProp;
  @Input() exportPDF:boolean;
+
 Vc:string
 fr:string
 DH:string
@@ -72,6 +74,8 @@ Flutes:number
 CPU:number
  catalogNo:string[]=[]
 resType:string = ''
+
+environment=environment;
   constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
   ngOnInit(): void {

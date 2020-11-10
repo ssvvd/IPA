@@ -4,6 +4,7 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { ResultsService} from 'src/app/services/results.service' ;
 import {clsHelpProp} from 'src/app/models/results/help-prop';
 import {clsPropertyValue} from 'src/app/models/results/property-value';
+import { environment } from 'src/environments/environment';
 import { throws } from 'assert';
 
 class ResRow {
@@ -29,6 +30,7 @@ export class MpIsoTurningComponent implements OnInit {
   @Input() selectedRes:clsPropertyValue[][];
   @Input() selectedHelp:clsHelpProp;
   @Input() exportPDF : boolean; 
+
   catalogNo:string[]=[]
 
   Di:number
@@ -72,10 +74,11 @@ export class MpIsoTurningComponent implements OnInit {
   MTB:number
   TCB:number
 resType:string
-CPU:number
+CPU:number;
 
+environment=environment;
   constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
-
+    
   ngOnInit(): void {
   }
 

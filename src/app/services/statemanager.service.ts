@@ -39,6 +39,9 @@ export class StateManagerService {
 
   private obsReloadMachineTab = new BehaviorSubject<boolean>(false);
   ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
+ 
+  private obsflgDownLoadPDF = new BehaviorSubject<number>(0);
+  onflgDownLoadPDF = this.obsflgDownLoadPDF.asObservable();
 
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 
@@ -362,8 +365,14 @@ export class StateManagerService {
      this.FillDataInputParam();         
    } 
 
-   
-
+   mflgPDFLoading:number=0;
+   get flgPDFLoading():number {
+    return this.mflgPDFLoading;
+    }
+  set flgPDFLoading(f:number) {  
+    this.mflgPDFLoading = f;
+    this.obsflgDownLoadPDF.next(f);
+   }
     
 }
  

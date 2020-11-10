@@ -1089,7 +1089,7 @@ getPropWithoutUnits(pr:string){
 
 DownLoadPDF()
 {   
-    this.processdownload =true;
+    this.processdownload =true;    
     setTimeout( () => {this.srv_down.DownLoadData('PDF');}, 1000 );      
 }
 

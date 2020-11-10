@@ -17,10 +17,11 @@ export class MachiningPrmsComponent implements OnInit {
   selectedOptionMP:clsPropertyValue[][];
   selectedOptionMPHelp:clsHelpProp;
   environment = environment;
-  
+ ;
   constructor(public srv_StMng:StateManagerService) { }
 
   ngOnInit(): void {
+
   }
 
   ngOnChanges(changes:SimpleChanges) {
