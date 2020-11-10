@@ -9,21 +9,26 @@ import { TranslateService } from '@ngx-translate/core';
 import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { BehaviorSubject } from 'rxjs';
 import html2pdf from 'html2pdf.js'
+import { Subject }    from 'rxjs/Subject';
 
 //import 'jspdf-autotable'
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class DownloadresultService {
   
   environment=environment;
   axial_y:number=0;
   
-  private obsPDFListLoaded = new BehaviorSubject<any>(null);
-  PDFListLoaded = this.obsPDFListLoaded.asObservable();   
+/*   private obsPDFListLoaded = new BehaviorSubject<any>(null);
+  PDFListLoaded = this.obsPDFListLoaded.asObservable();  */  
+
+  obsPDFListLoaded = new Subject();
+  PDFListLoaded = this.obsPDFListLoaded.asObservable();
+  
 
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService,
               private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) {}
@@ -142,21 +147,22 @@ public downloadItemPDF(srv:any):any {
       pdf.text('Page ' + i + ' / ' + totalPages, pdf.internal.pageSize.getWidth() - 115, pdf.internal.pageSize.getHeight() - 4);
     } 
  /*    <div class="header-pdf1">Page {{PrtNum+1}}</div>                        
-    <div class="header-pdf">Where Innovation Non Stop</div> */
-
-    srv.flgPDFLoading=2;        
-    window.open(pdf.output('bloburl'), '_blank');        
-    //this.obsPDFListLoaded.next(null);                   
+    <div class="header-pdf">Where Innovation Non Stop</div> */           
+    //window.open(pdf.output('bloburl'), '_blank');       
+    pdf.save('ITARecommendation.pdf');
+    srv.flgPDFLoading=2; 
+    this.obsPDFListLoaded.next();    
+    return  'ok';
+                       
   }); 
 
   /*  html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
     window.open(pdf.output('bloburl'), '_blank');this.obsPDFListLoaded.next(null);
   }); 
  */
-  return; 
+  
 
-
-  return this.BuildResultItem(doc,'pdfdata');
+ /*  return this.BuildResultItem(doc,'pdfdata');
   
   //return this.BuildResultItemByTab(doc,'div_pdf');
   var forPDF = document.querySelectorAll(".div_pdf");
@@ -176,7 +182,7 @@ public downloadItemPDF(srv:any):any {
       res.addPage();
     });
   }
-  );
+  ); */
   
 }
 
@@ -231,7 +237,7 @@ BuildResult(doc:jsPDF,controlname:string):any
       return doc;
        }).then((doc) => {
       doc.save('ITARecommendations.pdf');
-      this.obsPDFListLoaded.next(null);
+      //this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });   
 }

@@ -60,9 +60,9 @@ eventsSubject: Subject<void> = new Subject<void>();
   }
 
   ngOnInit() {
-    //this.srv_down.PDFListLoaded.subscribe((res:any) => {this.SpinnerService.hide();this.processdownload =false;});
-    //this.srv_statemanage.onflgDownLoadPDF.subscribe(f => {alert(f); if(f==2) {this.SpinnerService.hide()};});
-    this.MainPage = true;   
+    
+    //this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { if(f==2) {console.log('f==2'); setTimeout( () => {this.SpinnerService.hide();}, 3000 ); return;}});
+    this.MainPage = true;     
     this._hideFilter = false; 
   }
 
@@ -92,9 +92,14 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   DownLoadResults()
   {  
-   const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
+    this.srv_appsetting.curDate= new Date().toString(); 
+    //todo:
+    this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { if(f==2) {this.SpinnerService.hide(); return;}});
+    //this.srv_down.PDFListLoaded.subscribe((res:any) => {alert(res);this.SpinnerService.hide();this.processdownload =false;});
+
+    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
-   modalRef.result.then((result) => {
+    modalRef.result.then((result) => {
     if(result=='cancel') return;
     
     if (result=='PDF')
@@ -111,8 +116,9 @@ eventsSubject: Subject<void> = new Subject<void>();
   
       this.IsExport=true; 
       
-      //this.SpinnerService.show();
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 3000 );          
+      this.SpinnerService.show();
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 3000 );               
+      setTimeout(() => {this.SpinnerService.hide();}, 8000);
     }
     
     if(result=="P21" || result=="FP") 

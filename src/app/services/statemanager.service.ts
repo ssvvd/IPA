@@ -41,7 +41,7 @@ export class StateManagerService {
   ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
  
   private obsflgDownLoadPDF = new BehaviorSubject<number>(0);
-  onflgDownLoadPDF = this.obsflgDownLoadPDF.asObservable();
+  onflgDownLoadPDF = this.obsflgDownLoadPDF.asObservable(); 
 
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 

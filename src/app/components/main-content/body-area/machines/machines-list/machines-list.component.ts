@@ -75,7 +75,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     };    
     this.isLoaded =false;
     this.Initializemachinelist(false);
-       this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializemachinelist(false));  // todo: 
+    this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializemachinelist(false));  // todo: 
   }
   
   Initializemachinelist(withdestroy:boolean)
