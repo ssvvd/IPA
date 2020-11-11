@@ -56,4 +56,9 @@ checkedState(event, prty) {
           }
           
         }
+
+        getInnerHtml(n1:string,n2:string){
+          return n1 + ' - ' + n2
+
+        }
 }
