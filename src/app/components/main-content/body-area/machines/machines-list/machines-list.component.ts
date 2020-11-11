@@ -75,7 +75,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     };    
     this.isLoaded =false;
     this.Initializemachinelist(false);
-       this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializemachinelist(false));  // todo: 
+    this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);});  // todo: 
   }
   
   Initializemachinelist(withdestroy:boolean)
@@ -89,7 +89,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         if(this.srv_statemanage.SelectedMachine!=null)
         {
           this.UpdateListBySelectedMachineValues(this.listmachines);
-          this.UpdateListBySelectedMachineValues(this.listmachines_sorted);         
+          this.UpdateListBySelectedMachineValues(this.listmachines_sorted);   
+          
         } 
         
         this.isLoaded =true;

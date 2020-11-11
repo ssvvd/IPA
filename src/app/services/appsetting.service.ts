@@ -181,9 +181,13 @@ export class AppsettingService {
     this.mUseCookies = u;
    }
 
+   mcurDate:string;
    get curDate():string{      
-    return  new Date().toString();
+    //return  new Date().toString();
+    return this.mcurDate;
   }
-   
+  set curDate(u:string) {  
+    this.mcurDate = u;
+   }
 
 }

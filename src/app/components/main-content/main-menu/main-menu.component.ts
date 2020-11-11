@@ -88,7 +88,7 @@ export class MainMenuComponent implements OnInit {
   this.srv_statemanage.TabOpen =3;
  }
   SelectedMachine(arr:string[])
-  {         
+  {       
     if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc = arr[0] + ': '; 
     if(arr[0]!==undefined) this.Tabs[0].SelectedItemDesc1 = arr[1];
     this.srv_statemanage.TabOpen =1;    

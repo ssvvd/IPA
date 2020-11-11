@@ -69,12 +69,12 @@ export class ResultsTableComponent implements OnInit {
   @Output() hideFilter = new EventEmitter<any>();
   processdownload:boolean=false;
 
-  constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+  constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
     private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,private srv_machine: MachineService) { }
 
   ngOnInit() {
-    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;});
+    
     
      this.dtOptions = {
       pagingType: 'full_numbers',
@@ -1088,9 +1088,13 @@ getPropWithoutUnits(pr:string){
 }
 
 DownLoadPDF()
-{   
-    this.processdownload =true;    
-    setTimeout( () => {this.srv_down.DownLoadData('PDF');}, 1000 );      
+{    
+    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;}); 
+    this.processdownload =true; 
+    this.SpinnerService.show(); 
+    this.srv_appsetting.curDate= new Date().toString();   
+    setTimeout( () => {this.srv_down.DownLoadData('PDF');}, 1000 ); 
+    setTimeout( () => {this.SpinnerService.hide();}, 4000 );      
 }
 
 viewInventory(index:number)

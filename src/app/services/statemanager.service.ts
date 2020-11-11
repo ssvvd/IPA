@@ -41,7 +41,7 @@ export class StateManagerService {
   ReloadMachineTab = this.obsReloadMachineTab.asObservable(); 
  
   private obsflgDownLoadPDF = new BehaviorSubject<number>(0);
-  onflgDownLoadPDF = this.obsflgDownLoadPDF.asObservable();
+  onflgDownLoadPDF = this.obsflgDownLoadPDF.asObservable(); 
 
   private mSecondaryAppSelected:SecondaryApp;
   private mMainAppSelected:MainApp; 
@@ -83,8 +83,11 @@ export class StateManagerService {
     this.mSelectedMachine = Object.assign({}, m);
     let desc:string; 
     if(typeof(m)!=='undefined' && m!==null) 
-    {           
-      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + " kW";
+    {         
+      let u:string;
+      if(this.srv_appsetting.Units=='M') u=' kW';  
+      if(this.srv_appsetting.Units=='I') u=' HP';
+      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + u;
       this.CheckTabOperationalDataEnable();   
       this.obsMachineSelected.next([m.MachineName,desc]); 
     }              

@@ -48,7 +48,8 @@
               </div>
               <div>
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="DownLoadResults()">
-                  <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i>
+                  <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i> 
+                  <!-- <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>  -->                 
                   <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >                                
                 </h2>  
               </div>         
@@ -261,11 +262,3 @@
           </div>
       </div>                          
   </div>
-
-<!--    <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
-  bdOpacity ="0.05"
-  size="medium"
-  color="#676767"
-  type="ball-circus">    
-  <p style="color:#676767">{{'Please wait while ITA is processing your request.' | translate}} </p> 
-  </ngx-spinner>   --> 

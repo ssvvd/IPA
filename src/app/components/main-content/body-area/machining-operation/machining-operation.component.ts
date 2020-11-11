@@ -247,7 +247,7 @@ export class MachiningOperationComponent implements OnInit {
 
   ToOperationData(secapp:SecondaryApp)
   { 
-    if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive)
+    if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive && secapp.ApplicationITAID!='810' && secapp.ApplicationITAID!='820')
       this.router.navigate(['/home/operation-data']);
   }
 }
