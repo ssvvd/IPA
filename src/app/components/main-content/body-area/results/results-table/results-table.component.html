@@ -12,15 +12,15 @@
             <div class="col-6 float-right text-right">
                <h2 data-toggle="tooltip" title="{{'Download' | translate}}" class="siteTitle cursor-pointer ml-4 mb-0"  (click)="DownLoadPDF()">
                   <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
-                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit"   (click)="DownLoadPDF()">
+                  <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >
                   <!-- Download -->
                   
                </h2> 
             </div>
          </div>
        </div>    
-       <div class="div-datatable">
-        <table id='tbresult'   datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" style="width: 100%" >  
+       <div class="div-datatable"  id='tbresult'>        
+        <table  datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" style="width: 100%;" >  
          <thead>
                     <tr id="dtOptions">
                      <th ><label></label></th>  
@@ -113,12 +113,15 @@
           </div>
       </div>
 
+      <div  id="docheader" style="display:none">
+         <div class="header-pdf">    
+             <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
+             <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+         </div>
+         <div class="header-pdf1">
+             <div class="float-right pr-4">
+               <label class="labelwhite">{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}</label>          
+             </div>
+         </div>
+       </div> 
 
-<!-- <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
-bdOpacity ="0.05"
-size="medium"
-color="#676767"
-type="ball-circus">    
-<p style="color:#676767">{{'Please Wait While ITA is Processing Your Request.' | translate }} </p> 
-</ngx-spinner>  
-</div> -->

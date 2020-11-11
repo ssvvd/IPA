@@ -11,6 +11,7 @@ import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import html2pdf from 'html2pdf.js'
 import { Subject }    from 'rxjs/Subject';
+//import { NgxSpinnerService } from "ngx-spinner"; 
 
 //import 'jspdf-autotable'
 
@@ -28,7 +29,6 @@ export class DownloadresultService {
 
   obsPDFListLoaded = new Subject();
   PDFListLoaded = this.obsPDFListLoaded.asObservable();
-  
 
   constructor(private srv_statemanage: StateManagerService,public translate: TranslateService,
               private srv_DataLayer:DatalayerService,private srv_appsetting:AppsettingService) {}
@@ -38,10 +38,10 @@ export class DownloadresultService {
     return this.downloadListPDF();     
   }
   
-  GetHTMLData(url:string) 
+/*   GetHTMLData(url:string) 
   {
      this.srv_DataLayer.gethtmlpage("ALL");
-  }
+  } */
 
   DownLoadDataItem(format:string,data:string,srv:any) : any
   {
@@ -55,14 +55,16 @@ export class DownloadresultService {
     }    
   }
 
-  public downloadListPDF():any {
+   public downloadListPDF_old():any {
   
-    var doc = new jsPDF('l');  
+    var doc = new jsPDF('p');  
          
     let mat_desc;
     let desc_machine;
-    let m:clsMaterial;      
-  
+    let m:clsMaterial;  
+
+    doc.setDisplayMode(0.7);
+
     m=this.srv_statemanage.GetMaterialSelected();
     if (typeof ( m.material) !== 'undefined')
       mat_desc=m.Category + m.group.toString() + " - " + m.material ;     
@@ -98,6 +100,70 @@ export class DownloadresultService {
     this.axial_y=5;
    
     return this.BuildResult(doc,'tbresult');
+} 
+
+public downloadListPDF():any {
+  
+  var pdf = new jsPDF();
+  var opt = {
+    margin: [0, 0, 2, 0],
+    filename:     'ITAReport.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
+    jsPDF:        { unit: 'mm',orientation: 'p',format: 'letter'},
+    pagebreak:    { before: '.break-page'} 
+  };  
+  //document.getElementById('docheader').style.visibility = 'visible';
+  var element = document.getElementById('docheader').innerHTML;
+  pdf.setDisplayMode(1);
+  html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then( (pdf)=> 
+  {  
+    let m=this.srv_statemanage.GetMaterialSelected();
+    let mat_desc;
+    let desc_machine;
+   
+    if (typeof ( m.material) !== 'undefined')
+      mat_desc=m.Category + m.group.toString() + " - " + m.material ;     
+    else
+      mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
+  
+    let mach:Machineheader;
+    mach=this.srv_statemanage.SelectedMachine;
+    desc_machine= mach.MachineType + ' ' + mach.MachineName + ' ' +  mach.AdaptationType + ' ' + mach.AdaptationSize;
+    
+    pdf.setFontSize(14);
+   
+    //let img = new Image()
+    //img.src = environment.ImagePath + 'ISCAR_Logo.png'
+    //pdf.addImage(img, 'png', 5, 5, 40, 15)
+    //pdf.addImage(img, 'png', 5, 85, 40, 15);
+    pdf.setFontSize(16);
+    
+    //pdf.text(80, 20, this.translate.instant('ITA Recommendation Report'));
+    pdf.text(5, 20+10, this.translate.instant('ITA Recommendation Report'));
+    
+    this.axial_y=15+15;
+  
+    pdf.setFontSize(12);
+    this.addTextWithBackGround(pdf,0,15+15,400,10,246,246,247,'Machining operation: ' + this.srv_statemanage.MainAppSelected.MenuName + ' ' + this.srv_statemanage.SecAppSelected.MenuName);         
+    this.addTextWithBackGround(pdf,0,30+15,400,10,246,246,247,"Material: " + mat_desc);    
+    this.addTextWithBackGround(pdf,0,45+15,400,10,246,246,247,'Machine: ' + desc_machine);    
+    this.addTextWithBackGround(pdf,0,60+15,400,10,246,246,247,'Operation Data:' ); 
+       
+    this.axial_y =90+20;
+    this.BuildOperationData(pdf);    
+    pdf.addPage();
+    pdf.setFontSize(12);
+    this.addTextWithBackGround(pdf,0,15,400,10,246,246,247,'ITA Recommended' );
+    this.axial_y=5+35 +15;
+    var element = document.getElementById('docheader').innerHTML;
+    //pdf.setDisplayMode(1);
+    html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then( (pdf)=> 
+    {return this.BuildResult(pdf,'tbresult');});
+    
+  } );
+
+ 
 }
 
 ingDownloaded:any
@@ -122,22 +188,14 @@ public downloadItemPDF(srv:any):any {
   var pdf = new jsPDF();
   pdf.setDisplayMode(1);
   
-  html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then(function (pdf) 
+  html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then((pdf) => 
   { 
-    var totalPages = pdf.internal.getNumberOfPages();
-    //alert(totalPages);
+    this.AddPagingNumber(pdf);
+   /*  var totalPages = pdf.internal.getNumberOfPages();    
     for (let i = 1; i <= totalPages; i++) {
       pdf.setPage(i);
       pdf.setFontSize(10);
-       pdf.setFillColor(221,221,221);
-
-     /*  todo: !!!!!
-      doc.addFileToVFS('Roboto-Regular.ttf', 'Oswald')
-      doc.addFileToVFS('Roboto-Bold.ttf', 'Oswald')
-      doc.addFont('Oswald-Regular.ttf', 'Oswald', 'normal')
-      doc.addFont('Oswald-Bold.ttf', 'Oswald', 'bold')
-      doc.setFont('Oswald') */
-          
+       pdf.setFillColor(221,221,221);          
       pdf.rect(0, pdf.internal.pageSize.getHeight() - 18, 400, 10, "F");
       pdf.setTextColor(32, 79, 150);    
       pdf.setFontSize(14);  
@@ -145,44 +203,14 @@ public downloadItemPDF(srv:any):any {
       pdf.setTextColor(33, 37, 41); 
       pdf.setFontSize(10);
       pdf.text('Page ' + i + ' / ' + totalPages, pdf.internal.pageSize.getWidth() - 115, pdf.internal.pageSize.getHeight() - 4);
-    } 
- /*    <div class="header-pdf1">Page {{PrtNum+1}}</div>                        
-    <div class="header-pdf">Where Innovation Non Stop</div> */           
-    //window.open(pdf.output('bloburl'), '_blank');       
-    pdf.save('ITARecommendation.pdf');
+    }  */
+    
+    pdf.save('ITARecommendation.pdf');  
     srv.flgPDFLoading=2; 
+    
     this.obsPDFListLoaded.next();    
-    return  'ok';
-                       
+    return  'ok';                       
   }); 
-
-  /*  html2pdf().set(opt).from(element).toPdf().get('pdf').then(function (pdf) {
-    window.open(pdf.output('bloburl'), '_blank');this.obsPDFListLoaded.next(null);
-  }); 
- */
-  
-
- /*  return this.BuildResultItem(doc,'pdfdata');
-  
-  //return this.BuildResultItemByTab(doc,'div_pdf');
-  var forPDF = document.querySelectorAll(".div_pdf");
-  let count:number=0;
-  forPDF.forEach(d=>
-  {  
-    count=count+1;
-    this.BuildResultsItemByTag1(doc,d).subscribe(res=>
-      {alert(count);
-      if(count==forPDF.length)
-      {        
-        res.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
-        this.obsPDFListLoaded.next(null);        
-        return  'ok'; 
-      }  
-      else
-      res.addPage();
-    });
-  }
-  ); */
   
 }
 
@@ -203,45 +231,79 @@ toDataURL(url, callback) {
 
 BuildResult(doc:jsPDF,controlname:string):any
 {
-  const div = document.getElementById(controlname); 
+  const div = document.getElementById(controlname);
 
-    const options = {
+     const options = {
       background: 'white',
-      scale: 3
-    };
+      scale: 1,
+      useCORS: true,allowTaint : true      
+    }; 
 
     html2canvas(div, options).then((canvas) => {
 
       var img = canvas.toDataURL("image/PNG");     
-
-      // Add image Canvas to PDF
-      const bufferX = 5;   
-      const imgProps = (<any>doc).getImageProperties(img);
-      const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; 
-   
-      var imgWidth = 295;     
+      var imgWidth = 210;     
       var imgHeight = canvas.height * imgWidth / canvas.width;
      
-      var adjust = -210; //1050 is my assupmtion of how many pixels each page holds vertically
-      var extraNo=Math.ceil((imgHeight+30)/210); //Lets me know how many page are needed to accommodate this image
+      var adjust = -295; //1050 is my assupmtion of how many pixels each page holds vertically
+      var extraNo=Math.ceil((imgHeight+40)/295); //Lets me know how many page are needed to accommodate this image
       
       for(let r:number=0;r<extraNo;r++){
         if(r==0)
-          doc.addImage(canvas, 'PNG', 0,30, imgWidth, imgHeight);
+          doc.addImage(canvas, 'PNG', 0,40, imgWidth, imgHeight);
         else        
-          doc.addImage(canvas, 'PNG', 0,(adjust)*r+30, imgWidth, imgHeight);     
+          doc.addImage(canvas, 'PNG', 0,(adjust)*r+40, imgWidth, imgHeight);     
         if(r<extraNo-1) doc.addPage();
       }
                    
       return doc;
        }).then((doc) => {
+        this.AddPagingNumber(doc);
+        /* var totalPages = doc.internal.getNumberOfPages();       
+        for (let i = 1; i <= totalPages; i++) {
+          doc.setPage(i);
+          doc.setFontSize(10);
+          doc.setFillColor(221,221,221);                          
+          doc.rect(0, doc.internal.pageSize.getHeight() - 18, 400, 10, "F");
+          doc.setTextColor(32, 79, 150);    
+          doc.setFontSize(14);  
+          doc.text('Where Innovation Never Stops', 70, doc.internal.pageSize.getHeight()-10);
+          doc.setTextColor(33, 37, 41); 
+          doc.setFontSize(10);
+          doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
+        }  */
+        
       doc.save('ITARecommendations.pdf');
-      //this.obsPDFListLoaded.next(null);
+      this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });   
 }
 
+AddPagingNumber(doc:jsPDF)
+{
+  var totalPages = doc.internal.getNumberOfPages();
+  //alert(totalPages);
+  for (let i = 1; i <= totalPages; i++) {
+    doc.setPage(i);
+    doc.setFontSize(10);
+    doc.setFillColor(221,221,221);
+
+   /*  todo: !!!!!
+    doc.addFileToVFS('Roboto-Regular.ttf', 'Oswald')
+    doc.addFileToVFS('Roboto-Bold.ttf', 'Oswald')
+    doc.addFont('Oswald-Regular.ttf', 'Oswald', 'normal')
+    doc.addFont('Oswald-Bold.ttf', 'Oswald', 'bold')
+    doc.setFont('Oswald') */
+        
+    doc.rect(0, doc.internal.pageSize.getHeight() - 18, 400, 10, "F");
+    doc.setTextColor(32, 79, 150);    
+    doc.setFontSize(14);  
+    doc.text('Where Innovation Never Stops', 70, doc.internal.pageSize.getHeight()-10);
+    doc.setTextColor(33, 37, 41); 
+    doc.setFontSize(10);
+    doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
+  } 
+}
 BuildResultItem(doc:jsPDF,controlname:string):any
 {     
     html2canvas(document.getElementById(controlname),{scale:4, useCORS: true,allowTaint : true,
@@ -419,7 +481,7 @@ BuildOperationData(doc:jsPDF)
     //add operation data
     var img = new Image();
     img.src = environment.ImageInputPath + this.srv_statemanage.SecApp + ".png";   
-    doc.addImage(img, 'png', 150, this.axial_y-15, 100, 80);
+    doc.addImage(img, 'png', 80, this.axial_y-15, 100, 80);
 
     doc.setFontSize(10);
     this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails !='1').forEach(p=> {  
@@ -434,7 +496,7 @@ BuildOperationData(doc:jsPDF)
     if(this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails =='1' && x.valueall !=x.value && x.value!='Default').length >0)  
     {
       doc.setFontSize(12);
-      this.addTextWithBackGround(doc,5,this.axial_y-5,400,10,246,246,247,'Tool Data:' );     
+      this.addTextWithBackGround(doc,2,this.axial_y-5,400,10,246,246,247,'Tool Data:' );     
       this.axial_y=this.axial_y+20;
       doc.setFontSize(10);
       this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails =='1' && x.valueall !=x.value && x.value!='Default').forEach(p=> {                                               
@@ -454,7 +516,7 @@ BuildOperationData(doc:jsPDF)
     if(txt=='ITA Report')
       doc.text(60, top+y+7, txt);
     else
-      doc.text(10, top+y+7, txt);      
+      doc.text(5, top+y+7, txt);      
     doc.setFillColor(255, 255, 255);   
   }
 

@@ -94,8 +94,8 @@ eventsSubject: Subject<void> = new Subject<void>();
   {  
     this.srv_appsetting.curDate= new Date().toString(); 
     //todo:
-    this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { if(f==2) {this.SpinnerService.hide(); return;}});
-    //this.srv_down.PDFListLoaded.subscribe((res:any) => {alert(res);this.SpinnerService.hide();this.processdownload =false;});
+    this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { f=0; if(f==2) {this.SpinnerService.hide(); return;}});
+    //this.srv_down.PDFListLoaded.subscribe((res:any) => {alert(res);this.processdownload =false;});
 
     const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
       
