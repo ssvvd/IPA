@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable,Observer,of} from 'rxjs';
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { StateManagerService } from './statemanager.service';
+import { AppsettingService} from './appsetting.service';
 import { clsMaterial } from '../models/materials/material';
 import { Machineheader } from '../models/machines/machineheader';
 import { environment } from 'src/environments/environment';
@@ -11,9 +11,6 @@ import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import html2pdf from 'html2pdf.js'
 import { Subject }    from 'rxjs/Subject';
-//import { NgxSpinnerService } from "ngx-spinner"; 
-
-//import 'jspdf-autotable'
 
 @Injectable({
   providedIn: 'root'

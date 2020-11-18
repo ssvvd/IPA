@@ -1,5 +1,5 @@
 import { Component, OnInit ,HostListener } from '@angular/core';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { AppsettingService} from './../../services/appsetting.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

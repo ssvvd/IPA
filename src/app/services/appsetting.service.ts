@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Language,Country} from 'src/app/models/applications/applications';
-import { User} from 'src/app/models/users/user';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { CookiesService } from 'src/app/services/cookies.service';
-import { BehaviorSubject } from 'rxjs';
+import { Language,Country} from '../models/applications/applications';
+import { User} from '../models/users/user';
+import { DatalayerService} from './datalayer.service' ;
+import { CookiesService } from './cookies.service';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
-//import { unlink } from 'fs';
-//import { uniqueSort } from 'jquery';
 
 @Injectable({ 
   providedIn: 'root'
@@ -30,6 +28,9 @@ export class AppsettingService {
 
   private obsRateChange = new BehaviorSubject<number>(0);
   RateChange = this.obsRateChange.asObservable();
+
+  private obsLangChanged = new BehaviorSubject<string>(null);
+  LangChanged = this.obsLangChanged.asObservable();
 
   private misLoggedIn:boolean;
   get isLoggedIn():boolean{   
@@ -111,8 +112,11 @@ export class AppsettingService {
   get SelectedLanguage():Language {
     return this.mLanguages;
     }
-  set SelectedLanguage(l:Language) {  
+  set SelectedLanguage(l:Language) { 
+    //let f:boolean=false;
+    //if(l.LanguageCode!=this.mLanguages.LanguageCode) f=true; 
     this.mLanguages = l;
+    this.obsLangChanged.next(l.LanguageCode);
    }
 
   private mLanguages:Language;

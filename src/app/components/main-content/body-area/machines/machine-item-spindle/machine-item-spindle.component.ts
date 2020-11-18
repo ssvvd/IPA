@@ -1,7 +1,7 @@
 import { Component, OnInit ,Input,OnChanges, SimpleChanges} from '@angular/core';
-import { MachineService } from 'src/app/services/machine.service' ;
-import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { MachineService } from '../../../../../services/machine.service' ;
+import { Machinespindle } from '../../../../../models/machines/machinespindle';
+import { AppsettingService} from '../../../../../services/appsetting.service';
 import { Subscription ,Subject} from 'rxjs';
 
 export class AdaptationType

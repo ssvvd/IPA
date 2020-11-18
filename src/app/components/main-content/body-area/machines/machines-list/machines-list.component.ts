@@ -1,18 +1,18 @@
 import { Component, OnInit, OnDestroy,ViewChild  } from '@angular/core';
-import { Machineheader } from 'src/app/models/machines/machineheader';
-import { MachineFilter } from 'src/app/models/machines/machinefilter';
-import { MachineService } from 'src/app/services/machine.service';
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { CookiesService } from 'src/app/services/cookies.service';
-import { AppsettingService} from 'src/app/services/appsetting.service';
-import {MachinePpAddFavoriteComponent} from 'src/app/components/main-content/body-area/machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
-import {MachinesPpLoginComponent} from      'src/app/components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
-import { environment } from 'src/environments/environment';
+import { Machineheader } from '../../../../../models/machines/machineheader';
+import { MachineFilter } from '../../../../../models/machines/machinefilter';
+import { MachineService } from '../../../../../services/machine.service';
+import { StateManagerService } from '../../../../../services/statemanager.service';
+import { CookiesService } from '../../../../../services/cookies.service';
+import { AppsettingService} from '../../../../../services/appsetting.service';
+import { LoginService } from '../../../../../services/login.service';
+import {MachinePpAddFavoriteComponent} from '../machine-pp-add-favorite/machine-pp-add-favorite.component';
+import {MachinesPpLoginComponent} from      '../machines-pp-login/machines-pp-login.component';
+import { environment } from '../../../../../../environments/environment';
 import { DataTableDirective } from 'angular-datatables';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
-import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
 
 @Component({

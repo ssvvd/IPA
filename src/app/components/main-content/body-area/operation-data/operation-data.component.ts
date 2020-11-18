@@ -1,12 +1,12 @@
 import { Component, OnInit} from '@angular/core';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
-import { StateManagerService} from 'src/app/services/statemanager.service' ;
-import { MachineService } from 'src/app/services/machine.service' ;
-import { AppsettingService} from 'src/app/services/appsetting.service';
-import { Machinespindle } from 'src/app/models/machines/machinespindle';
+import { DatalayerService} from '../../../../services/datalayer.service' ;
+import { StateManagerService} from '../../../../services/statemanager.service' ;
+import { AppsettingService} from '../../../../services/appsetting.service';
+import { InputParameterlist } from '../../../../models/operational-data/inputparameterlist';
+
 import { Router } from '@angular/router';
 import { Subject ,Subscription} from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-operation-data',
@@ -27,8 +27,9 @@ export class OperationDataComponent implements OnInit {
   
   public msrv_StMng:StateManagerService =this.srv_StMng;
 
-  constructor(private srv_machine: MachineService,router:Router,private srv_DataLayer:DatalayerService,
-              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService) 
+  constructor(router:Router,private srv_DataLayer:DatalayerService,
+              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+              public translate:TranslateService) 
   {
     this.router=router;
    }
@@ -39,6 +40,8 @@ export class OperationDataComponent implements OnInit {
 
   ngOnInit() {  
     
+    //this.translate.use(this.srv_appsetting.Lang);
+    this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
     if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
         {
           this.SecApp = this.srv_StMng.SecAppSelected.ApplicationITAID;
@@ -80,7 +83,7 @@ else
 
   showtooldata()
   {
-    this.srv_StMng.IsTabToolDataOpen =!this.srv_StMng.IsTabToolDataOpen;    
+    this.srv_StMng.IsTabToolDataOpen =!this.srv_StMng.IsTabToolDataOpen;     
   }
   
   ClearDataChild()

@@ -6,6 +6,8 @@ import { PpRequestMaterialComponent } from './pp-request-material/pp-request-mat
 import { Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatFilterComponent } from './mat-filter/mat-filter.component';
+import { TranslateService } from '@ngx-translate/core';
+import { AppsettingService} from 'src/app/services/appsetting.service';
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -26,7 +28,13 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   navigationSubscription;
   // environment = environment;
 
-  constructor(private statemng:StateManagerService,private modalService: NgbModal,location: Location , private router: Router) {
+  constructor(private statemng:StateManagerService,private modalService: NgbModal,
+              location: Location , private router: Router,public translate: TranslateService,
+              private srv_appsetting:AppsettingService) {
+
+                
+              
+
     // if(location.path().toLowerCase() == '/materials'){
     //   environment.internal = false;
     // }
@@ -136,7 +144,8 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   } */
 
   ngOnInit() {
-    this.curComponent = "1";
+    this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
+    this.curComponent = "1";   
     //alert(this.statemng.GetMachineHeaderCur().CostPerHour);    
   }
 

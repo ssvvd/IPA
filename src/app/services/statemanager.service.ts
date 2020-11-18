@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Machineheader } from 'src/app/models/machines/machineheader';
-import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { MachineFilter } from 'src/app/models/machines/machinefilter';
-import { clsMaterial } from 'src/app/models/materials/material'
-import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
-import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
-import { AppsettingService} from 'src/app/services/appsetting.service';
-import { MachineService } from 'src/app/services/machine.service' ;
-//import { User } from 'src/app/models/users/user';
+import { Machineheader } from '../models/machines/machineheader';
+import { Machinespindle } from '../models/machines/machinespindle';
+import { MachineFilter } from '../models/machines/machinefilter';
+import { clsMaterial } from '../models/materials/material'
+import { MainApp,SecondaryApp } from '../models/applications/applications';
+import { InputParameterlist } from '../models/operational-data/inputparameterlist';
+import { AppsettingService} from './appsetting.service';
+//import { MachineService } from './machine.service' ;
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -49,7 +48,7 @@ export class StateManagerService {
   //private mUnits:string='M'; //todo:
   private mIsTabToolDataOpen:boolean =false;
   
-  constructor(private srv_appsetting:AppsettingService,private srv_machine: MachineService) { }
+  constructor(private srv_appsetting:AppsettingService) { }
 
   CheckTabOperationalDataEnable()
   {   

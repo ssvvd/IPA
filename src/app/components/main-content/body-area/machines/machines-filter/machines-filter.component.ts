@@ -1,11 +1,11 @@
 import { Component, OnInit ,Output,EventEmitter,Input} from '@angular/core';
 import { Options,ChangeContext } from 'ng5-slider';
-import { MachineFilter } from 'src/app/models/machines/machinefilter';
-import { StateManagerService } from 'src/app/services/statemanager.service' ;
-import { MachineService } from 'src/app/services/machine.service' ;
-import { CookiesService } from 'src/app/services/cookies.service';
-import { Machineheader } from 'src/app/models/machines/machineheader';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { MachineFilter } from '../../../../../models/machines/machinefilter';
+import { StateManagerService } from '../../../../../services/statemanager.service' ;
+import { MachineService } from '../../../../../services/machine.service' ;
+import { CookiesService } from '../../../../../services/cookies.service';
+import { Machineheader } from '../../../../../models/machines/machineheader';
+import { AppsettingService} from '../../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { Subscription ,Observable} from 'rxjs';
 

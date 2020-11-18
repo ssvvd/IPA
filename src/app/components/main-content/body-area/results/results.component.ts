@@ -10,6 +10,7 @@ import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Subject } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-results',
@@ -34,7 +35,8 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
     private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
-    public srv_appsetting:AppsettingService,private router: Router) { 
+    public srv_appsetting:AppsettingService,private router: Router,
+    public translate:TranslateService) { 
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
@@ -62,6 +64,7 @@ eventsSubject: Subject<void> = new Subject<void>();
   ngOnInit() {
     
     //this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { if(f==2) {console.log('f==2'); setTimeout( () => {this.SpinnerService.hide();}, 3000 ); return;}});
+    this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
     this.MainPage = true;     
     this._hideFilter = false; 
   }
@@ -117,8 +120,8 @@ eventsSubject: Subject<void> = new Subject<void>();
       this.IsExport=true; 
       
       this.SpinnerService.show();
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 3000 );               
-      setTimeout(() => {this.SpinnerService.hide();}, 8000);
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 6000 );               
+      setTimeout(() => {this.SpinnerService.hide();}, 12000);
     }
     
     if(result=="P21" || result=="FP") 

@@ -126,8 +126,7 @@
                       
     </div>    
   </div> 
-  
-  <!-- <div *ngIf="IsExport"  id="pdfdata" style="visibility:hidden;position:absolute;top:-5000px">   -->
+    
     <div *ngIf="IsExport"  id="pdfdata"> 
       <div>
         <div class="header-pdf">    
@@ -159,9 +158,9 @@
               <div  class="row pb-2 ml-2 pr-0 mr-0 pt-4">
                 <label class="PDFTitle ml-2">{{'Machine ' | translate}}</label>
               </div>
-              <div class="pt-2" >
+             <div class="pt-2" >
                 <app-machineitem [exportPDF]="true" [pr_MachineID]="srv_statemanage.SelectedMachine.MachineID"  [pr_MachineName]="srv_statemanage.SelectedMachine.MachineName"></app-machineitem>
-              </div> 
+              </div>  
           </div>
       </div> 
       
@@ -189,9 +188,9 @@
               <label class="siteTitle">{{srv_statemanage.SecAppSelected.MenuName | translate}}</label>
             </div>
           </div> 
-          <div>       
+          <div>    
               <app-appdetails59  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='760'||srv_statemanage.SecApp=='770'||srv_statemanage.SecApp=='57')"></app-appdetails59>
-              <app-appdetails780  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='780'"  ></app-appdetails780>
+             <app-appdetails780  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='780'"  ></app-appdetails780>
               <app-appdetails790  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='790'"  ></app-appdetails790>
               <app-appdetails77  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='77'"  ></app-appdetails77>
               <appdetails120  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='120' || srv_statemanage.SecApp=='119')" ></appdetails120> 
@@ -201,7 +200,7 @@
               <appdetails1   [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='1'"></appdetails1> 
               <appdetails51  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='51'" ></appdetails51>               
               <appdetails54  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='54' || srv_statemanage.SecApp=='10'  || srv_statemanage.SecApp=='188')"></appdetails54>                    
-          </div> 
+          </div>  
         </div>           
        <div class="pt-0 pl-0" [ngClass]="srv_statemanage.SecApp=='760' || srv_statemanage.SecApp=='770' || srv_statemanage.SecApp=='780' || srv_statemanage.SecApp=='790' || srv_statemanage.SecApp=='57'?'div-machining-param2 break-page':  'div-machining-param1 break-page' "> 
           <div>

@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { StateManagerService} from 'src/app/services/statemanager.service' ;
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { StateManagerService} from '../../../../../../services/statemanager.service' ;
+import { AppsettingService} from '../../../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { Observable ,Subscription} from 'rxjs';
 
@@ -26,8 +26,7 @@ export class Appdetails54Component implements OnInit {
 
   ngOnInit() {  
     this.SetIPLMandatory();
-    this.SetImageSecAppByAppType(this.TypeApp);
-   
+    this.SetImageSecAppByAppType(this.TypeApp);    
     this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;   
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());      
   }

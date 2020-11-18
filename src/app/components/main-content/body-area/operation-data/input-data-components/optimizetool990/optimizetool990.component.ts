@@ -1,7 +1,7 @@
 import { Component, OnInit,Input,SimpleChanges, SimpleChange,ViewChild } from '@angular/core';
-import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+//import { InputParameterlist } from 'src/app/models/operational-data/inputparameterlist';
+import { StateManagerService } from '../../../../../../services/statemanager.service';
+import { AppsettingService} from '../../../../../../services/appsetting.service';
 import { Observable, Subject} from 'rxjs';
 import { Options,ChangeContext } from 'ng5-slider';
 

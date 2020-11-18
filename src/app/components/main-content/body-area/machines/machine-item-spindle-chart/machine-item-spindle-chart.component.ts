@@ -1,6 +1,6 @@
 import { Component, OnInit ,Input, Output,EventEmitter,OnChanges, SimpleChanges} from '@angular/core';
-import { Machinespindle } from 'src/app/models/machines/machinespindle';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { Machinespindle } from '../../../../../models/machines/machinespindle';
+import { AppsettingService} from '../../../../../services/appsetting.service';
 import { Observable, Subscription} from 'rxjs';
 import 'chart.js';
 
