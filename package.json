@@ -44,6 +44,7 @@
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.5.6",
     "ng-bootstrap-dropdown": "^1.0.0",
+    "ng-lazyload-image": "^9.1.0",
     "ng2-charts": "^2.3.0",
     "ng5-slider": "^1.2.4",
     "ngp-sort-pipe": "0.0.4",

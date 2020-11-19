@@ -1,7 +1,7 @@
 import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { DatalayerService} from '../../../../../../services/datalayer.service' ;
+import { StateManagerService } from '../../../../../../services/statemanager.service';
+import { AppsettingService} from '../../../../../../services/appsetting.service';
 import { Observable ,Subscription} from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
 
@@ -90,7 +90,7 @@ export class OptimizetoolFilterComponent implements OnInit {
     for (let value of arr) {
         this.selitems.push({ RecordID:0,
                              Designation:value,
-                             Value:  value,
+                             Value:   (value).replace(/\s/g, ""),
                              Checked:true
                             });      
     }
@@ -725,13 +725,14 @@ case "GROOVEINTBLADE": {
     this.show_more = false;   
     let n:number=0;
     this.arrData =[];     
-    //add from post      
+    //add from post  
+    console.log(JSON.parse(data));    
     for (const d of JSON.parse(data)) {                                                     
             if(d[this.fieldname]!='All' && d[this.fieldname].replace(/\s/g, "")!='')                                     
               this.arrData.push({                
                                   RecordID:n++,
                                   Designation:d[this.fieldname],
-                                  Value:  d[this.fieldname],
+                                  Value:  (d[this.fieldname]).replace(/\s/g, ""),
                                   Checked:false
                                 })          
     }
@@ -743,8 +744,8 @@ case "GROOVEINTBLADE": {
       {
         this.arrData.unshift({                
                         RecordID:pp.RecordID,
-                        Designation:pp[this.fieldname],
-                        Value:  pp[this.fieldname],
+                        Designation:pp.Designation,
+                        Value:  (pp.Value).replace(/\s/g, ""),
                         Checked:true
                         }) 
       }
@@ -777,8 +778,8 @@ case "GROOVEINTBLADE": {
        let arr:string[];
        arr = this.srv_StMng.IPL.GetItem(this.fieldid).value.split(',');      
        for (let value of arr) {
-          if(this.arrDataF.filter(p=>p.Value==value).length>0)
-            this.arrData.filter(p=>p.Value==value)[0].Checked =true;
+          if(this.arrDataF.filter(p=>p.Value==value.replace(/\s/g, "")).length>0)
+            this.arrData.filter(p=>p.Value==value.replace(/\s/g, ""))[0].Checked =true;
       }     
     }
   }

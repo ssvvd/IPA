@@ -1,5 +1,5 @@
 import { Component, OnInit, } from '@angular/core';
-import { StateManagerService } from 'src/app/services/statemanager.service';
+import { StateManagerService } from '../../../../../../services/statemanager.service';
 import {  Subject } from 'rxjs';
 
 @Component({

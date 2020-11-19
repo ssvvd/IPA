@@ -13,13 +13,10 @@ import {Observable} from 'rxjs';
 export class DatalayerService {
 
   private API_ROUTE = 'api/datalayer/';
-  
-  //public aaa:Function;
-
   constructor(private httpClient: HttpClient) 
   {                
   }
-
+  
    public  getinputparameters(secapp:string,units:string,machinetype:string)
   { 
     

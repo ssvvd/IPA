@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MainApp,SecondaryApp } from 'src/app/models/applications/applications';
-import { ApplicationsService } from 'src/app/services/applications.service' ;
-import { StateManagerService} from 'src/app/services/statemanager.service' ;
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { MainApp,SecondaryApp } from '../../../../models/applications/applications';
+import { ApplicationsService } from '../../../../services/applications.service' ;
+import { StateManagerService} from '../../../../services/statemanager.service' ;
+import { AppsettingService} from '../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';

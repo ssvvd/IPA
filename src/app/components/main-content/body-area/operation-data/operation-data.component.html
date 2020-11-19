@@ -10,7 +10,7 @@
                     <div>                    
                         <label [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'siteTitle text-nowrap cursor-pointer':'cursor-pointer siteTitle text-nowrap vertical-text'" (click)="showtooldata()">{{'Tool Data' | translate}}</label>                    
                     </div>
-                    <div>
+                    <div *ngIf="msrv_StMng.IsTabToolDataOpen">
                         <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp!='IS' && MainApp!='TG'" ></app-optimizetool>
                         <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='IS'" ></app-optimizetool990>
                         <app-optimizetool52  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='TG'" ></app-optimizetool52>

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { Country,Language} from 'src/app/models/applications/applications';
-import { LoginService } from 'src/app/services/login.service';
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { AppsettingService} from 'src/app/services/appsetting.service';
-import {HeaderPpUnitsComponent} from 'src/app/components/header/header-pp-units/header-pp-units.component';
+import { Country,Language} from './../../models/applications/applications';
+import { LoginService } from './../../services/login.service';
+import { StateManagerService } from './../../services/statemanager.service';
+import { AppsettingService} from './../../services/appsetting.service';
+import {HeaderPpUnitsComponent} from './../../components/header/header-pp-units/header-pp-units.component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { ContactusComponent } from 'src/app/components/maintenance/contactus/contactus.component';
+import { ContactusComponent } from './../../components/maintenance/contactus/contactus.component';
 import { Subject} from 'rxjs';
 
 @Component({

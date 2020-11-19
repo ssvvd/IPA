@@ -1,7 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
-import { StateManagerService } from 'src/app/services/statemanager.service';
-import { AppsettingService} from 'src/app/services/appsetting.service';
+import { DatalayerService} from '../../../../../../services/datalayer.service' ;
+import { StateManagerService } from '../../../../../../services/statemanager.service';
+import { AppsettingService} from '../../../../../../services/appsetting.service';
 import { Observable ,Subscription} from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner"; 
 
