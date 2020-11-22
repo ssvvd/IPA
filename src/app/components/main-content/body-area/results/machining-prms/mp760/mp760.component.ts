@@ -421,7 +421,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
         } 
       }
       else if (this.selectedHelp.SecondaryAppOrig1 == '700' || this.selectedHelp.SecondaryAppOrig1 == '710'  || this.selectedHelp.SecondaryAppOrig1 == '740'){
-        insertType = 'FastFeed'
+        insertType = 'FastFeedInsertType'
         thickSecondParam = kappaLeadAngel.toString()
         cutForceFirts = kappaLeadAngel.toString()
         thickFirstParam = this.ap
@@ -436,7 +436,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 
 
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Extflutemillingcutter/{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{L}/{delta}/{alpha}
-  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FeedMillInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FastFeedInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/StraightEdge         /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Solidcarbidecutter   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{alpha}
   //GetCuttingForcesMilling(subApp:string,insertType:string,DD:number,ae:number,z:number,fz:number,ap:number,Kc:number,Mc:number,rake:number,k:number,delta:number,alpha:number)
@@ -450,13 +450,13 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 
   //old
   //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge        /{D}/{ae}/{fz}  /{k}
-//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}  /{ap}/{k}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeedInsertType             /{D}/{ae}/{fz}  /{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}  /{ap}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}  /{ap}
 
 //new
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge/{D}/{ae}/{fz}/{k}		
-// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed/{D}/{ae}/{fz}/{ap}/{k}	
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeedInsertType/{D}/{ae}/{fz}/{ap}/{k}	
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{DC}/{ae}/{fz}	
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter/{DC}/{ae}/{fz}
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
