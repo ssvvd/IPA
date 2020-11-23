@@ -294,10 +294,10 @@ this.T_TTC = Math.round(this.T_TP * this.T_TPB * 100)/100
 this.T_TGC =  Math.ceil(this.THe_TIC + this.T_TTC * 100)/100
 this.He_TGC =  Math.ceil(this.THe_TIC + this.He_THSC * 100)/100
 this.S_SPB = Math.ceil(this.B / this.FCE)
-this.S_TSC = this.S_SP * this.S_SPB
+this.S_TSC = Math.round(this.S_SP * this.S_SPB * 100)/100
 this.H_SHB = Math.ceil(this.B / this.FCE)
 this.H_SKB = Math.ceil(this.B / this.FCE / this.THeH_I)
-this.H_TSHC = this.H_SHP * this.H_SHB
+this.H_TSHC = Math.round(this.H_SHP * this.H_SHB * 100)/100
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC =  Math.ceil(this.H_TSHC + this.H_TSKC * 100)/100
 

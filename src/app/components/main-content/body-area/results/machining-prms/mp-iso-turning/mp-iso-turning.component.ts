@@ -275,7 +275,7 @@ environment=environment;
           this.TLT = 50
           this.FCE = Math.round((this.TLT / this.CTF) * 100)/100
           this.SPB = Math.ceil(this.B / this.FCE)
-          this.TSC = this.SP * this.SPB
+          this.TSC = Math.round(this.SP * this.SPB * 100)/100
     
           this.IPB = Math.ceil(this.B / (this.FCE * this.CEDC))
           this.TPB = Math.ceil(this.IPB / this.I)
