@@ -2,8 +2,8 @@
 
         <div *ngIf="selectedOption" class="row justify-content-start w-100 ">
           <div [ngClass]="exportPDF?'div-image-pdf':'div-image'">
-             <img  src="{{selectedOption.itemImg}}"
-            (error) ="changeSource($event, selectedOption.familyImg)" class="img-grid mb-0"></div>
+             <img  src="{{selectedOption.img}}"
+             class="img-grid mb-0"></div>
           <div style="min-width:20%;">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Designation' | translate}}</div>
 

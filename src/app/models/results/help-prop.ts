@@ -44,6 +44,7 @@ export class clsHelpProp {
     kappaLeadAngle:number;
     itemImg:string='';
     familyImg:string='';
+    img:string='';
     itemType:string[]=[];
     itemTypeRes:string;
     GroupText:string[]=[];

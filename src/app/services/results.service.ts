@@ -241,12 +241,12 @@ export class ResultsService {
   }
 
 
-  // public  checkItemImgExists()
-  // {        
-  //   return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists' ).catch((err: HttpErrorResponse) => {      
-  //     console.error('An error occurred:', err.error);
-  //     return "error";
-  //   });
-  // }
+  public  checkItemImgExists(item:string)
+  {        
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'checkItemPicExists/' + item ).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
 
 }

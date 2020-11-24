@@ -56,8 +56,8 @@
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
                        <td >
                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 35%; position: relative; top:-16px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">
-                        <img src="{{arrResultImgsItem[row.index]}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-50px' : '0px'}" style="position: relative;"
-                        (error) ="changeSource($event, arrResultImgsFamily[row.index])" (click)="viewInfo(row.index)" class="img-grid">
+                        <img src="{{dtResultsObjectsHelp[row.index].img}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-50px' : '0px'}" style="position: relative;"
+                         (click)="viewInfo(row.index)" class="img-grid">
                      </td>
                        <!--  (click)="viewInfo(row.index) -->
                        <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
