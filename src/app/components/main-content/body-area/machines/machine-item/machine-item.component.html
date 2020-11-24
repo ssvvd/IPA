@@ -24,7 +24,7 @@
                     <label class="desc-machine">{{machHeader?.MachineType}}</label>                                 
                 </div>
                 <div class="row pl-0 ml-0">
-                    <div class="col-2 pl-0 pt-1 m-0">    
+                    <div class="col-3 pl-0 pt-1 m-0">    
                         <label class="desc-machine" for="txtCostPerHour">{{'Cost Per Hour' | translate}}</label>           
                     </div>                    
                     <div class="col-2 pl-0 m-0">                                                               
@@ -38,19 +38,12 @@
                     </div>                    
                 </div>
                 <div class="row pl-0 ml-0 ">
-                    <div class="col-2 pt-1 m-0 pl-0">    
+                    <div class="col-3 pt-1 m-0 pl-0">    
                         <label class="desc-machine">{{'Machine Type' | translate}}</label>           
                     </div>                    
                     <div class="col-2 pl-0 pt-1 m-0">    
                         <label class="desc-machine" >{{machHeader.MachineType1}}</label>           
-                    </div> 
-                    <!--  <div class="col-2 pt-1 pl-0 m-0"> 
-                        <select class="form-control-sm"  *ngIf="isLoading"  [(ngModel)]="machHeader.MachineType1" >
-                            <option value='Standard'>Standard</option>
-                            <option value='High speed'>High speed</option>                            
-                            <option value='Heavy Duty'>Heavy Duty</option>                            
-                        </select>                                          
-                    </div>     -->                
+                    </div>                                 
                 </div>
                 <div class="form-group row" *ngIf="isLoading && !exportPDF">
                     <div class="row col-2 pt-2">                     

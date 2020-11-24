@@ -30,8 +30,16 @@ export class Machinespindle {
     public IntEmultion:boolean;
     public IntMQL:boolean;
     public ExtMQL:boolean ; 
-   
+
+    public ExtOil:boolean =true ; 
+    public IntOil:boolean =true ;
+
     public EmultionPressure:number;
     public EmultionFlowRate:number;
     public FaceContact:boolean;
+
+    constructor() { 
+             
+      }
 }
+

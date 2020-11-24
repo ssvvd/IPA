@@ -101,7 +101,7 @@ export class MachineItemComponent implements OnInit {
         }
       else
           this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
-          this.arrMachineSpindle = JSON.parse(res);      
+          this.arrMachineSpindle = JSON.parse(res);                   
           this.machSpindleMain = this.arrMachineSpindle[0]; 
           this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
           this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
@@ -184,9 +184,7 @@ export class MachineItemComponent implements OnInit {
               this.eventsSubscription.add(this.srv_machine.machine_update_name(
                 mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => {  
                   this.machHeader.MachineName= result;
-                  this.MachineName = this.machHeader.MachineName;                
-                  //this.Initializemachinelist(true);
-                  //this.eventsChangeFavorite.next();               
+                  this.MachineName = this.machHeader.MachineName;                                           
              }));  
           }
           else
@@ -195,9 +193,7 @@ export class MachineItemComponent implements OnInit {
               alert(newid); 
               this.pr_MachineID =newid;
               this.machHeader=null;
-              this.FillMachineData();   
-              //this.Initializemachinelist(true);
-              //this.eventsChangeFavorite.next();                   
+              this.FillMachineData();                               
               }); 
           }                    
         }         

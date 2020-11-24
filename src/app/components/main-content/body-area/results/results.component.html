@@ -142,26 +142,26 @@
       <div> 
       <div class="border-bottom-gray">
           <label class="pl-2 siteTitle PDFDescription">{{'ITA Recommendation' | translate}}</label>
-      </div>             
+      </div> 
+          <div class="pt-3 pb-2 border-bottom-gray">   
+            <div  class="row pb-2 ml-2 pr-0 mr-0 pt-4">
+              <label class="PDFTitle ml-2">{{'Machine ' | translate}}</label>
+            </div>
+            <div class="pt-2" >
+              <app-machineitem [exportPDF]="true" [pr_MachineID]="srv_statemanage.SelectedMachine.MachineID"  [pr_MachineName]="srv_statemanage.SelectedMachine.MachineName"></app-machineitem>
+            </div>  
+          </div>            
           <div class="pt-2">  
-             <div class="row pb-2 pr-0 mr-0 pt-2 border-bottom-gray">
+             <div class="row pb-2 pr-0 mr-0 pt-2">
                <div >
                   <label class="PDFTitle ml-2">{{'Material ' | translate}}</label>
               </div>
               <div>
-                <label class="pl-2">{{mat_desc}}</label>
+                <label class="pl-3 pt-1">{{mat_desc}}</label>
               </div>
-            </div>
-                      
+            </div>                      
           </div>         
-          <div class="pt-3">   
-              <div  class="row pb-2 ml-2 pr-0 mr-0 pt-4">
-                <label class="PDFTitle ml-2">{{'Machine ' | translate}}</label>
-              </div>
-             <div class="pt-2" >
-                <app-machineitem [exportPDF]="true" [pr_MachineID]="srv_statemanage.SelectedMachine.MachineID"  [pr_MachineName]="srv_statemanage.SelectedMachine.MachineName"></app-machineitem>
-              </div>  
-          </div>
+         
       </div> 
       
       <div class="pb"></div>                              
@@ -191,7 +191,7 @@
           <div>    
               <app-appdetails59  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='760'||srv_statemanage.SecApp=='770'||srv_statemanage.SecApp=='57')"></app-appdetails59>
              <app-appdetails780  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='780'"  ></app-appdetails780>
-              <app-appdetails790  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='790'"  ></app-appdetails790>
+              <app-appdetails790 [exportPDF]="true" [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='790'"  ></app-appdetails790>
               <app-appdetails77  [events]="eventsSubject.asObservable()" *ngIf = "srv_statemanage.SecApp=='77'"  ></app-appdetails77>
               <appdetails120  [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='120' || srv_statemanage.SecApp=='119')" ></appdetails120> 
               <appdetails990 [exportPDF]="true" [events]="eventsSubject.asObservable()" *ngIf = "(srv_statemanage.SecApp=='990' || srv_statemanage.SecApp=='980' || srv_statemanage.SecApp=='970' || srv_statemanage.SecApp=='960')" ></appdetails990>   

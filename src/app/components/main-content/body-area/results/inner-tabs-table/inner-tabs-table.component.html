@@ -16,9 +16,9 @@
             </div>
           </div>
           <div style="min-width:20%;">
-            <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Catalog No.' | translate}}</div>
+            <div class="bold font-weight-bold  justify-content-start w-100 mb-2 pl-1">{{'Catalog No.' | translate}}</div>
 
-            <div *ngFor="let row of selectedOption.CatalogNo; ;" [hidden]="row.trim() == '-' || row.trim() == ''">{{row}}</div>
+            <div class="pl-2" *ngFor="let row of selectedOption.CatalogNo; ;" [hidden]="row.trim() == '-' || row.trim() == ''">{{row}}</div>
 
           </div>
           <div [ngClass]="exportPDF?'div-comment-pdf':'div-comment'">

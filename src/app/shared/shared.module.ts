@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { MachineItemComponent } from './../components/main-content/body-area/machines/machine-item/machine-item.component';
 import { MachinesListComponent } from './../components/main-content/body-area/machines/machines-list/machines-list.component';
@@ -14,6 +15,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 @NgModule({
   declarations: [
     MachineItemComponent,
@@ -32,6 +34,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       MachinesFilterComponent
       ],
   imports: [
+    LazyLoadImageModule,
     DataTablesModule,
     Ng5SliderModule ,
     CommonModule,

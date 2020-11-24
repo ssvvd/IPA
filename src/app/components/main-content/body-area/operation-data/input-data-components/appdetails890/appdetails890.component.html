@@ -7,11 +7,11 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0" *ngIf="msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='860' || msrv_StMng.SecApp=='850'">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
                         (change)="SetIPLMandatory()"            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value"  (focus)="onfocusfield('WorkpieceDiameter')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0" *ngIf="msrv_StMng.SecApp=='880'">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
                         (change)="SetIPLMandatory()"             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value"  (focus)="onfocusfield('WorkpieceDiameterRad')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -24,7 +24,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtGroovePosition" name="txtGroovePosition" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtGroovePosition" name="txtGroovePosition" 
                         (change)="SetIPLMandatory()"            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value"  (focus)="onfocusfield('GroovePosition')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -37,7 +37,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtGroovePositionRad" name="txtGroovePositionRad" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtGroovePositionRad" name="txtGroovePositionRad" 
                         (change)="SetIPLMandatory()"               [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value"  (focus)="onfocusfield('GroovePositionRad')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -50,7 +50,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                         (change)="SetIPLMandatory()"               [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -63,7 +63,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthRadial1" name="txtDepthRadial1" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthRadial1" name="txtDepthRadial1" 
                         (change)="SetIPLMandatory()"                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -76,7 +76,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtCutLengthRadial1" name="txtCutLengthRadial1" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtCutLengthRadial1" name="txtCutLengthRadial1" 
                         (change)="SetIPLMandatory()"        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value"  (focus)="onfocusfield('CutLengthRadial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -89,7 +89,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthAxial" name="txtDepthAxial" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthAxial" name="txtDepthAxial" 
                         (change)="SetIPLMandatory()"              [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -101,7 +101,7 @@
                         <label for="txtCutLengthAxial" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>                                               
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null ? 'form-control  input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial" name="txtCutLengthAxial" 
+                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value=='0' ? 'form-control  input-min-width':'form-control input-min-width'"  id="txtCutLengthAxial" name="txtCutLengthAxial" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>    
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -144,7 +144,7 @@
                             <label class="pl-2 asterisk-red pt-3">*</label>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtWorkpieceDiameterRad" name="txtWorkpieceDiameterRad" 
                             (change)="SetIPLMandatory()"              [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value"  (focus)="onfocusfield('WorkpieceDiameter')" (focusout)="onfocusoutfield()"> 
                         </div>                   
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -157,7 +157,7 @@
                             <label class="pl-2 asterisk-red pt-3">*</label>
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'"
                             (change)="SetIPLMandatory()"           [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePosition').value"  (focus)="onfocusfield('GroovePosition')" (focusout)="onfocusoutfield()"> 
                         </div>                   
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -210,7 +210,7 @@
                             <label class="pl-2 asterisk-red pt-3">*</label>                       
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameterRad').value"  (focus)="onfocusfield('WorkpieceDiameterRad')" (focusout)="onfocusoutfield()"> 
                         </div>                   
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -223,7 +223,7 @@
                             <label class="pl-2 asterisk-red pt-3">*</label>                           
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GroovePositionRad').value"  (focus)="onfocusfield('GroovePositionRad')" (focusout)="onfocusoutfield()"> 
                         </div>                   
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -236,7 +236,7 @@
                             <label class="pl-2 asterisk-red pt-3">*</label>                          
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
                         </div>                   
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -249,7 +249,7 @@
                             <label class="pl-2 asterisk-red pt-3">*</label>                          
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthRadial').value"  (focus)="onfocusfield('CutLengthRadial')" (focusout)="onfocusoutfield()"> 
                         </div>                   
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -274,7 +274,7 @@
                 <label>{{'Surface Quality' | translate}}</label>                                                
             </div>
             <div class="form-group row">
-                <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
+                <div [ngClass]="exportPDF?'col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-0':'col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0'">
                     <div class="text-center">
                         <label class="pl-0 pt-3">N</label>
                     </div>
@@ -282,7 +282,7 @@
                         <input  type="number"  [(ngModel)]="N" class="form-control input-surf" (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeN()" id="txtN"> 
                     </div>
                 </div>                                               
-                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0 ">
+                 <div [ngClass]="exportPDF?'col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-0':'col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0'">
                      <div class="text-center">
                         <label class="pl-0 pt-3">Rt ({{UnitsSurf}})</label>
                      </div>
@@ -291,7 +291,7 @@
                                             [(ngModel)]="Rt" > 
                     </div>
                 </div>
-                 <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
+                 <div [ngClass]="exportPDF?'col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-0':'col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0'">
                      <div class="text-center">
                         <label class="pl-0 pt-3">Ra ({{UnitsSurf}})</label>
                     </div>
@@ -299,7 +299,7 @@
                         <input  type="number"  class="form-control input-surf"  id="txtRa"   [(ngModel)]="Ra"  (focus)="onfocusfield('surface')" (focusout)="onfocusoutfield()" (change)="onchangeRa()"> 
                     </div>
                 </div>
-                 <div clas="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12 pl-0">
+                 <div [ngClass]="exportPDF?'col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pl-0':'col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 pl-0'" >
                      <div class="text-center">
                         <label class="pl-0 pt-3">RMS ({{UnitsSurf}})</label>
                     </div>
@@ -387,7 +387,7 @@
                             <label for="txtBatchSize" class="pl-0 pt-3">{{'Batch Size For Cost Calculation' | translate}}</label>                    
                         </div>
                         <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
+                            <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (change)="SetIPLMandatory()"> 
                         </div>
                         <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
@@ -402,7 +402,7 @@
                             <input  type="number"  class="form-control input-min-width"  id="txtMachineCost" name="txtMachineCost" 
                                                value={{CostPerHourByRate}} readonly>  
                         </div>                    
-                        <div class="row col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <div class="row pt-0 pl-0">
                             <label class="pl-0 pt-2">{{msrv_appsetting.Currency}}</label>
                             <label class="pl-0 pt-2">/Hr</label>
                         </div>

@@ -10,6 +10,7 @@ import { HttpClientModule} from '@angular/common/http'
 import { HttpClient } from '@angular/common/http';
 import { Ng5SliderModule } from 'ng5-slider';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NgpSortModule } from "ngp-sort-pipe";
@@ -69,6 +70,7 @@ import { DataTablesModule } from 'angular-datatables';
   ],
  
   imports: [
+    LazyLoadImageModule,
     SharedModule,Shared1Module,
     DataTablesModule,
     ResultsRoutingModule,    

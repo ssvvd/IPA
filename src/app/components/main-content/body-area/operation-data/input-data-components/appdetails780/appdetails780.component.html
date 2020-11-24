@@ -80,7 +80,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
-                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
+                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
                         (change)="SetIPLMandatory('D3')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
@@ -93,7 +93,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
+                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
                         (change)="SetIPLMandatory('D2')"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value" (focus)="onfocusfield('D2')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-1 pl-0">
@@ -106,7 +106,7 @@
                     <label class="pl-2 asterisk-red pt-4">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-2 pl-0">
-                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
+                    <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
                     (change)="SetIPLMandatory('Depth')"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value" (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
                 </div>
                 <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-2 pl-0">
@@ -137,7 +137,7 @@
                         <label for="txtBatchSize" class="pl-0 pt-3">{{'Batch Size For Cost Calculation' | translate}}</label>                    
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  
                                             (change)="SetIPLMandatory('BatchSize')"> 
                     </div>
@@ -153,7 +153,7 @@
                         <input  type="number"  class="form-control input-min-width"  id="txtMachineCost" name="txtMachineCost" 
                                            value={{CostPerHourByRate}} readonly>  
                     </div>                    
-                    <div class="row col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="row pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.Currency}}</label>
                         <label class="pl-0 pt-2">/Hr</label>
                     </div>

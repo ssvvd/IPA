@@ -39,7 +39,7 @@
                         </div> 
                         <div class="row"> 
                             <div>                  
-                                <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null ? 'form-control input-empty input-dia-min-width':'form-control input-dia-min-width'"  id="txtSize" name="txtSize" 
+                                <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value=='0'? 'form-control input-empty input-dia-min-width':'form-control input-dia-min-width'"  id="txtSize" name="txtSize" 
                                    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D_Hole').value" (change)="ChangeDiameter();SetIPLMandatory()" (focus)="onfocusfield('D_Hole')" (focusout)="onfocusoutfield()" >                                                    
                                 </div>
                             <div>
@@ -68,7 +68,7 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-8 col-sm-8 col-8  pt-1 pl-0">                                                
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control input-empty input-min-width pr-0':'pr-0 form-control input-min-width'"  id="txtLength" name="txtLength" 
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value=='0'? 'form-control input-empty input-min-width pr-0':'pr-0 form-control input-min-width'"  id="txtLength" name="txtLength" 
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (change)="SetIPLMandatory()" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()" 
                                                 >                                                                        
                     </div>    
