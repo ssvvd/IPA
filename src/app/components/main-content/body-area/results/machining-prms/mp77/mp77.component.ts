@@ -323,7 +323,7 @@ if (pr.value.trim().length == 7){
     if (this.resType == "H")
     this.TTC = Math.round((this.TP * this.H_HPB / this.HI_I) * 100)/100 || 0
     if (this.resType == "S")
-    this.TTC = this.TP * this.S_NSB
+    this.TTC = Math.round(this.TP * this.S_NSB * 100)/100
     if (this.resType == "I")
     this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
 

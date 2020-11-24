@@ -307,7 +307,7 @@ if (pr.value.trim().length == 7){
       this.IPB = Math.ceil(this.B / (this.PCE * this.CEDC))
       this.TPB = Math.ceil(this.IPB / this.I)
       this.TIC = Math.round(this.IP * this.IPB * 100)/100
-      this.TTC = this.TP * this.TPB
+      this.TTC = Math.round(this.TP * this.TPB * 100)/100
       this.TGC = this.TIC + this.TTC
       this.MTB = Math.round((this.B * this.CTP) * 100)/100
       this.MCB = Math.round(((this.MTB / 60) * this.MCH) * 10000)/10000

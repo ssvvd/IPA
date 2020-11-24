@@ -290,14 +290,14 @@ this.He_TPB = this.T_TPB
 this.He_THH = Math.ceil(this.He_TPB / this.He_Is)
 this.THe_TIC = Math.round((this.THe_IP * this.THe_IPB) * 100)/100
 this.He_THSC = (this.He_HP * this.He_TPB) + (this.He_HHP * this.He_THH)
-this.T_TTC = this.T_TP * this.T_TPB
+this.T_TTC = Math.round(this.T_TP * this.T_TPB * 100)/100
 this.T_TGC =  Math.ceil(this.THe_TIC + this.T_TTC * 100)/100
 this.He_TGC =  Math.ceil(this.THe_TIC + this.He_THSC * 100)/100
 this.S_SPB = Math.ceil(this.B / this.FCE)
-this.S_TSC = this.S_SP * this.S_SPB
+this.S_TSC = Math.round(this.S_SP * this.S_SPB * 100)/100
 this.H_SHB = Math.ceil(this.B / this.FCE)
 this.H_SKB = Math.ceil(this.B / this.FCE / this.THeH_I)
-this.H_TSHC = this.H_SHP * this.H_SHB
+this.H_TSHC = Math.round(this.H_SHP * this.H_SHB * 100)/100
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC =  Math.ceil(this.H_TSHC + this.H_TSKC * 100)/100
 
@@ -421,7 +421,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
         } 
       }
       else if (this.selectedHelp.SecondaryAppOrig1 == '700' || this.selectedHelp.SecondaryAppOrig1 == '710'  || this.selectedHelp.SecondaryAppOrig1 == '740'){
-        insertType = 'FastFeed'
+        insertType = 'FastFeedInsertType'
         thickSecondParam = kappaLeadAngel.toString()
         cutForceFirts = kappaLeadAngel.toString()
         thickFirstParam = this.ap
@@ -436,7 +436,7 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 
 
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Extflutemillingcutter/{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{L}/{delta}/{alpha}
-  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FeedMillInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
+  //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/FastFeedInsertType   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/StraightEdge         /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{k}
   //GET api/CalcReq/F-CuttingForces/Milling/Shouldering/Solidcarbidecutter   /{DD}/{ae}/{z}/{fz}/{ap}/{Kc}/{Mc}/{rake}  /{alpha}
   //GetCuttingForcesMilling(subApp:string,insertType:string,DD:number,ae:number,z:number,fz:number,ap:number,Kc:number,Mc:number,rake:number,k:number,delta:number,alpha:number)
@@ -450,13 +450,13 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 
   //old
   //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge        /{D}/{ae}/{fz}  /{k}
-//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed             /{D}/{ae}/{fz}  /{ap}/{k}
+//GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeedInsertType             /{D}/{ae}/{fz}  /{ap}/{k}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}  /{ap}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}  /{ap}
 
 //new
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/StraightEdge/{D}/{ae}/{fz}/{k}		
-// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeed/{D}/{ae}/{fz}/{ap}/{k}	
+// GET api/CalcReq/H-ChipThickness/Milling/Shouldering/FastFeedInsertType/{D}/{ae}/{fz}/{ap}/{k}	
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{DC}/{ae}/{fz}	
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter/{DC}/{ae}/{fz}
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)

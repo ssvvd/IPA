@@ -289,6 +289,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
             let typeRes:object[] = JSON.parse(res)
             let type:string = typeRes[0]['ItemType'] || ''
             let family:string= typeRes[0]['Family'] || ''
+            let itemPicExists:boolean = typeRes[0]['picExists'] || false
             let catNoLoc:number = this.dtResultsObjectsHelp[index].CatalogNo.indexOf(catNo)
             this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type); 
             this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family); 
@@ -302,18 +303,29 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
                 this.dtResultsObjectsHelp[index].CatalogNoT.push(catNo);
                 this.dtResultsObjectsHelp[index].DesgT.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
 
-                var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
-                this.arrResultImgsItem.splice(index, 0,url);
-                this.dtResultsObjectsHelp[index].itemImg = url
-
-                let toolFamily = family.toString().trim()
+                if (itemPicExists){
+                  this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                }else{
+                  let toolFamily = family.toString().trim()
                 let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
-                if (curFamilyPic)
-                toolFamily = curFamilyPic['GFPIC'];
+                  if (curFamilyPic)
+                  toolFamily = curFamilyPic['GFPIC'];
+  
+                  this.dtResultsObjectsHelp[index].img = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
 
-                  var url:string = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
-                  this.arrResultImgsFamily.splice(index, 0,url);
-                  this.dtResultsObjectsHelp[index].familyImg = url
+                }
+                // var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                // this.arrResultImgsItem.splice(index, 0,url);
+                // this.dtResultsObjectsHelp[index].itemImg = url
+
+                // let toolFamily = family.toString().trim()
+                // let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
+                // if (curFamilyPic)
+                // toolFamily = curFamilyPic['GFPIC'];
+
+                //   var url:string = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
+                //   this.arrResultImgsFamily.splice(index, 0,url);
+                //   this.dtResultsObjectsHelp[index].familyImg = url
 
                 break;
                case 'I': 
@@ -328,19 +340,33 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
                   this.dtResultsObjectsHelp[index].DesgSI.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
                   this.dtResultsObjectsHelp[index].DesgS.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
                   
-                  if (this.arrResultImgsItem.length < index + 1){
-                    var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
-                    this.arrResultImgsItem.splice(index, 0,url);
-                    this.dtResultsObjectsHelp[index].itemImg = url
+                  // if (this.arrResultImgsItem.length < index + 1){
 
-                    let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
-                    if (curFamilyPic)
-                      family = curFamilyPic['GFPIC'];
+                    if (itemPicExists){
+                      this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                    }else{
+                      let toolFamily = family.toString().trim()
+                    let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
+                      if (curFamilyPic)
+                      toolFamily = curFamilyPic['GFPIC'];
+      
+                      this.dtResultsObjectsHelp[index].img = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
+    
+                    }
 
-                      var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
-                      this.arrResultImgsFamily.splice(index, 0,url);
-                      this.dtResultsObjectsHelp[index].familyImg = url
-                  }
+
+                    // var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                    // this.arrResultImgsItem.splice(index, 0,url);
+                    // this.dtResultsObjectsHelp[index].itemImg = url
+
+                    // let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
+                    // if (curFamilyPic)
+                    //   family = curFamilyPic['GFPIC'];
+
+                    //   var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
+                    //   this.arrResultImgsFamily.splice(index, 0,url);
+                    //   this.dtResultsObjectsHelp[index].familyImg = url
+                  // }
                   
                   // if (this.srv_StMng.SecApp == '57'){
                   //   this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Solid Head'
