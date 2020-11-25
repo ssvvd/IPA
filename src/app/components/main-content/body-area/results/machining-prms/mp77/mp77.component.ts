@@ -313,8 +313,8 @@ if (pr.value.trim().length == 7){
     this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
-    this.S_NSB=Math.round(this.B * this.HPP / this.S_HPS * 100)/100 || 0
-    this.H_HPB = Math.round((this.B * this.HPP / this.H_HDH) * 100)/100 || 0
+    this.S_NSB=Math.ceil(this.B * this.HPP / this.S_HPS) || 0
+    this.H_HPB = Math.ceil(this.B * this.HPP / this.H_HDH) || 0
     this.I_NIB=Math.ceil(this.B * this.HPP / (this.I_HPC * this.I_CEDC)) * this.I_CICT || 0
     this.H_DHC = Math.round(this.H_HPB * this.H_DHP * 100)/100
     this.I_TIC= Math.round(this.I_NIB * this.I_IP * 100)/100
