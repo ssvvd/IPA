@@ -9,7 +9,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-//import { LazyLoadImageModule } from 'ng-lazyload-image';
+
 
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -189,7 +189,7 @@ import { ContactusComponent } from './components/maintenance/contactus/contactus
   ],
   exports:[SharedModule],
   imports: [
-    //LazyLoadImageModule,
+  
     SharedModule,
     FormsModule,
     BrowserModule,

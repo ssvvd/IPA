@@ -9,7 +9,6 @@ import { AppsettingService} from '../../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
 import { Subscription ,Observable} from 'rxjs';
 
-
 export class AdaptationType
 {
   AdaptationType:string;  
@@ -31,6 +30,8 @@ export class MachinesFilterComponent implements OnInit {
   
   @Input() onChangeFavorite: Observable<void>;
   @Input() onChangeMachineList: Observable<number[]>;
+  
+  defimage:string;
 
  /*  @Input() machineslist:Machineheader[]; */
 
@@ -96,6 +97,8 @@ export class MachinesFilterComponent implements OnInit {
     this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializedata());  // todo: 
     this.machFilter=new MachineFilter;
     this.Initializedata();
+
+    this.defimage ="https://www.placecage.com/1000/1000";
   }
  
   InitialdataMachineTypeShowing()
@@ -377,3 +380,4 @@ export class MachinesFilterComponent implements OnInit {
   }
 
 }
+

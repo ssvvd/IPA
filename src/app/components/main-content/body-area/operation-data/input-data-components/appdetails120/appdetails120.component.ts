@@ -199,8 +199,14 @@ ClearData()
 
   AddTostrMandatoryParam(name:string,desc:string,units:string)
   {
+    
+
     if(this.srv_StMng.IPL.GetItem(name).value!=null && this.srv_StMng.IPL.GetItem(name).value!='')
-    this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
+    {
+        if(name=='Size')
+            this.srv_StMng.IPL.GetItem('Size').value= this.srv_StMng.IPL.GetItem('Size').value.toString().replace('***','"');
+        this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';    
+    }
     
   }
 
@@ -332,7 +338,7 @@ ClearData()
         let arrFormColName_f:FormColName[];
         this.arrDisplayData=[];
         this.srv_StMng.IPL.GetItem('D_Hole').value='';
-        
+                
         if (this.threadform == 'M60' || this.threadform == 'MJ60') 
             arrformatdata_f=this.arrformdata.filter(p=>p.FTDZ==this.size && p.Pitchmm==this.pitch);
         else

@@ -3,7 +3,6 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
 import { Appdetails59Component } from './../components/main-content/body-area/operation-data/input-data-components/appdetails59/appdetails59.component';
 import { Appdetails780Component } from './../components/main-content/body-area/operation-data/input-data-components/appdetails780/appdetails780.component';
 import { Appdetails790Component } from './../components/main-content/body-area/operation-data/input-data-components/appdetails790/appdetails790.component';
@@ -47,7 +46,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
      Appdetails51Component,
      Appdetails54Component
       ],
-  imports: [
+  imports: [  
     DataTablesModule,
     Ng5SliderModule ,
     CommonModule,

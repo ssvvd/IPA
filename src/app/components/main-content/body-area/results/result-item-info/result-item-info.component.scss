@@ -4,15 +4,41 @@
     max-width: 400px;        
 }
 
+.div-img-family
+{
+      
+    /* max-width: 400px; 
+    min-width: 400px; 
+    width: 400px; */
+    width: 100%;
+    
+    max-height: 150px;
+        
+}
+
+.div-img-drawing
+{ 
+    /* max-width: 250px;
+    min-width: 250px;
+    width: 250px; */
+    width: 100%;
+   
+    max-height: 150px;
+         
+}
+
 .img-family
 {
-    //width: 100%;    
-    max-width: 400px;    
-    min-width: 400px; 
+   max-height:140px;
+   margin:0;
+
+    //max-width: 400px; 
+    //width: 400px;   
+    //min-width: 400px; 
 }
 
 .img-drawing
 {
-    //width: 100%;    
-    max-width: 400px;    
+    max-height: 140px; 
+    margin:0; 
 }

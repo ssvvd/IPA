@@ -44,7 +44,17 @@ export class Appdetails77Component implements OnInit {
           
     this.eventsSubscription.add( this.events.subscribe(() => this.ClearData()));
     this.eventsSubscription.add(this.srv_DataLayer.holediameterdrilling(this.srv_appsetting.Units).subscribe((res: any) => {
-      this.arrdiameter= JSON.parse(res);    
+      this.arrdiameter= JSON.parse(res);
+      
+      if(this.msrv_StMng.SelectedMachine.MachineType=='Swiss type')
+      {
+        let maxd:number;
+        if(this.srv_appsetting.Units=='M') maxd=20;
+        if(this.srv_appsetting.Units=='I') maxd=0.787;
+        this.arrdiameter=this.arrdiameter.filter
+        (e=> Number(e.Value)<=maxd);
+      }      
+
       this.SelectedDia =  this.arrdiameter.find(v=> v.Description==this.srv_StMng.IPL.GetItem('D_Hole').value)
       this.IsLoaded=true;              
       if(this.srv_StMng.SecAppSelected.MenuID=='111') this.srv_StMng.IPL.GetItem('IsRotating').value='1';

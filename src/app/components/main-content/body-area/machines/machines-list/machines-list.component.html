@@ -59,19 +59,13 @@
                     <td (click)="onclickrow(mach)"><div class="pl-2 cursor-pointer">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
                     <td (click)="onclickrow(mach)"><div class="pl-2 cursor-pointer">{{mach.Power}}</div></td>
                     <td (click)="onclickrow(mach)"><div class="pl-2 cursor-pointer">{{mach.SpindleSpeed}}</div></td>                
-                    <td (click)="onclickrow(mach)"><div class="pl-2 cursor-pointer">{{mach.Torque}}</div></td>                   
-                    <!-- <td>
-                      <a data-toggle="tooltip" title="{{ 'View Machine Details' | translate}}">
-                        <img src="{{environment.ImgView}}"                          
-                          [routerLink]="['/home/machine-item/', mach.MachineIDBase, mach.MachineName ]" class="icon-grid">
-                      </a>
-                    </td> -->
+                    <td (click)="onclickrow(mach)"><div class="pl-2 cursor-pointer">{{mach.Torque}}</div></td>                                     
                    <td data-sort="image1" class="cursor-pointer">
                       <a data-toggle="tooltip" title="{{ mach.isFavorite  ? 'Delete My Machine' : 'Add To My Machines' | translate}}" class="cursor-pointer">
-                        <img [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(mach)" >
+                        <img   [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(mach)" >
                       </a>
                     </td>
-                    <td data-sort="image2" class="cursor-pointer">
+                    <td data-sort="image2">
                       <a data-toggle="tooltip" title="{{'Default Machine' | translate}}"> 
                         <img  [src]="mach.IsMostRecommended || mach.isFavorite ?environment.ImgSetDefault: environment.ImgDefault"  class="icon-grid-no-pointer">                        
                       </a>

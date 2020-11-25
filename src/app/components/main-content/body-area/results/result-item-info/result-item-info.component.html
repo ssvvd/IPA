@@ -7,7 +7,7 @@
         <div class="pr-2 pt-2">
             <label class="font-weight-bold">{{FamilyName}}</label>
         </div>
-        <div class="pt-2">
+        <div class="pt-2 pr-4">
             <label>{{FamilyDesc}}</label>
         </div>
     </div>
@@ -24,17 +24,14 @@
         </ul>
     </div>
 
-     <div class="form-group row col-8 pl-0">
-        <div class="col-6 pl-0 pt-2">
-            <div class="border pl-0 ml-0 pt-2">
-                <img [src] = "environment.eCatFamilyDrawing + srv_appsetting.Units + '/' + Family+ '.gif'"  class="img-family">                  
+     <div class="row pl-0">        
+            <div class="border col-7 pl-0 ml-0 mt-2 div-img-family" >
+                <img  [src] = "environment.eCatFamilyDrawing + srv_appsetting.Units + '/' + Family+ '.gif'"  class="img-family">              
+            </div>                
+            <div  class="border col-4 ml-2 mt-2 div-img-drawing" >            
+                <img  [src] = "environment.eCatFamilyPictures + Family + '.gif'"  class="img-drawing"> 
             </div>
-        </div>
-        <div class="col-6 pt-2">
-            <div  class="border ml-2 pt-2">            
-                <img [src] = "environment.eCatFamilyPictures + Family + '.gif'"  class="img-family">
-            </div>
-        </div>
+        
     </div>              
     <div class="form-group row">
         <div class="pr-2 pt-2">

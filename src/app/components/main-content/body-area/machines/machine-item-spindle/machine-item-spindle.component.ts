@@ -53,8 +53,20 @@ export class MachineItemSpindleComponent implements OnInit
         this.eventsSubscription.add(this.serv.getmachineadaptationsize(this.srv_appsetting.Units).subscribe((res: any) => {
         this.arrAdapSize = JSON.parse(res); 
         this.curAdapSize=this.arrAdapSize.find(e=> e.AdaptationType == this.spindle.AdaptationType 
-          && e.AdaptationSize === this.spindle.AdaptationSize);                      
-        this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.spindle.AdaptationType);               
+          && e.AdaptationSize === this.spindle.AdaptationSize);  
+
+        //this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.spindle.AdaptationType);               
+        if(this.MachineType=='Swiss type')
+        {
+          let maxd:number;
+          if(this.srv_appsetting.Units=='M') maxd=20;
+          if(this.srv_appsetting.Units=='I') maxd=0.787;
+          this.arrAdapSizeFilter=this.arrAdapSize.filter
+          (e=> e.AdaptationType == this.curAdapType.AdaptationType && Number(e.AdaptationSize)<=maxd);
+        }      
+        else
+          this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);
+
         this.isLoadingAdSize =true;
       }));         
     })); 
@@ -70,10 +82,18 @@ export class MachineItemSpindleComponent implements OnInit
   changeadaptype()
   {     
     this.spindle.AdaptationType = this.curAdapType.AdaptationType;  
-    this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);    
-    this.curAdapSize=this.arrAdapSizeFilter[0];
-   /*  this.spindle.AdaptationSize = this.curAdapSize.AdaptationSize;
-    this.filladaptordata(this.curAdapType.AdaptationType, this.curAdapSize.AdaptationSize,'all'); */
+    if(this.MachineType=='Swiss type')
+      {
+        let maxd:number;
+        if(this.srv_appsetting.Units=='M') maxd=20;
+        if(this.srv_appsetting.Units=='I') maxd=0.787;
+        this.arrAdapSizeFilter=this.arrAdapSize.filter
+        (e=> e.AdaptationType == this.curAdapType.AdaptationType && Number(e.AdaptationSize)<=maxd);
+      }      
+    else
+      this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);
+
+    this.curAdapSize=this.arrAdapSizeFilter[0];   
   }
   
   filladaptordata(at:string,az:string,st:string)

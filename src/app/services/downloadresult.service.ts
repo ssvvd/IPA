@@ -187,20 +187,7 @@ public downloadItemPDF(srv:any):any {
   
   html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then((pdf) => 
   { 
-    this.AddPagingNumber(pdf);
-   /*  var totalPages = pdf.internal.getNumberOfPages();    
-    for (let i = 1; i <= totalPages; i++) {
-      pdf.setPage(i);
-      pdf.setFontSize(10);
-       pdf.setFillColor(221,221,221);          
-      pdf.rect(0, pdf.internal.pageSize.getHeight() - 18, 400, 10, "F");
-      pdf.setTextColor(32, 79, 150);    
-      pdf.setFontSize(14);  
-      pdf.text('Where Innovation Never Stops', 70, pdf.internal.pageSize.getHeight()-10);
-      pdf.setTextColor(33, 37, 41); 
-      pdf.setFontSize(10);
-      pdf.text('Page ' + i + ' / ' + totalPages, pdf.internal.pageSize.getWidth() - 115, pdf.internal.pageSize.getHeight() - 4);
-    }  */
+    this.AddPagingNumber(pdf);   
     
     pdf.save('ITARecommendation.pdf');  
     srv.flgPDFLoading=2; 
@@ -588,7 +575,11 @@ CreateURLparamCNCProgram(viewParams:any) :string
     this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "0")        
       urlparam = urlparam  + "&size=" + this.srv_statemanage.IPL.GetItem('D_Hole').value.toString();
     else
+    {
+      this.srv_statemanage.IPL.GetItem('Size').value= this.srv_statemanage.IPL.GetItem('Size').value.toString().replace('***','"');
       urlparam = urlparam  + "&size=" + this.srv_statemanage.IPL.GetItem('Size').value.toString();
+    }
+      
 
   urlparam = urlparam + "&length=" + this.srv_statemanage.IPL.GetItem('LengthOfShoulder_L').value.toString();
   urlparam = urlparam + "&predrilldia=" + this.srv_statemanage.IPL.GetItem('DiameterInner').value.toString(); 

@@ -40,7 +40,7 @@
                     </div>
                 </div>                  
                          
-                <div class="form-group row pt-2" *ngIf="!(MachineType=='Lathe' || MachineType=='swiss type' || MachineType=='Multi spindle') && !(MachineType=='Multi task' && spindle.SpindleType=='M')">
+                <div class="form-group row pt-2" *ngIf="!(MachineType=='Lathe' || MachineType=='Swiss type' || MachineType=='Multi spindle') && !(MachineType=='Multi task' && spindle.SpindleType=='M')">
                     <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-8'">
                         <label for="txtFaceCont">{{'Face Contact Connection' | translate}}</label>
                     </div>
@@ -150,7 +150,7 @@
                     </div>
                 </div>  
                 <div class="form-group row pt-2">
-                    <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-8'">
+                    <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-7'">
                         <label ></label>
                     </div>
                     <div *ngIf="!exportPDF" class="col-2 col-sm-2 col-lg-2 col-xl-2 pt-1">
@@ -209,6 +209,21 @@
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLInt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.IntMQL">
                             <label class="custom-control-label"  [attr.for]="'optMQLInt' + spindle.SpindleType"></label> 
+                        </div>
+                    </div>        
+                </div> 
+                <div class="form-group row" *ngIf="(MachineType=='Swiss type' || MachineType=='Multi spindle')">
+                    <label for="txtOil" class="col-7 col-sm-7">Oil</label>
+                    <div class="col-2 col-sm-2 col-lg-2 col-xl-2 ">
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optOilExt' + spindle.SpindleType"  name="optOil" [(ngModel)]="spindle.ExtOil">
+                            <label class="custom-control-label" [attr.for]="'optOilExt' + spindle.SpindleType"></label>
+                        </div>
+                    </div>
+                    <div  class="col-2 col-sm-2 col-lg-2 col-xl-2">                    
+                        <div class="custom-control custom-checkbox custom-control-inline">
+                            <input type="checkbox" class="custom-control-input"  [attr.id]="'optOilInt' + spindle.SpindleType"  name="optOil" [(ngModel)]="spindle.IntOil">
+                            <label class="custom-control-label"  [attr.for]="'optOilInt' + spindle.SpindleType"></label> 
                         </div>
                     </div>        
                 </div> 
