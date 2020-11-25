@@ -22,7 +22,7 @@ export const environment = {
   ImgAssembly:"assets/img/icon_Assembly.svg",
   ECatalogLink:"https://www.iscar.com/eCatalog/Index.aspx",
   IscarSite:"https://www.iscar.com",
-  MachiningCalculatorSite:"https://mpwr.iscar.com/MachiningPower",
+  MachiningCalculatorSite:"https://www.iscar.com/mpwrapi/",
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
   eCatFamilyPictures:"https://www.iscar.com/eCatalog/Ecat/datafile/PICTURE/",
   //eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
