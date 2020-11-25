@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
 import { ActivatedRoute} from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import {PpSetDefaultComponent} from 'src/app/components/main-content/body-area/materials/pp-set-default/pp-set-default.component';
 import {PpAddFavoritComponent} from 'src/app/components/main-content/body-area/materials/pp-add-favorit/pp-add-favorit.component';
 import {PpEditParamsComponent} from 'src/app/components/main-content/body-area/materials/pp-edit-params/pp-edit-params.component';
@@ -45,7 +46,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
+  constructor(public translate: TranslateService,private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
     ,private router: ActivatedRoute ,private srv_login:LoginService,private SpinnerService: NgxSpinnerService,private srv_cook:CookiesService) { 
       this.eventsSubscription.add(this.router.params.subscribe(params => {
         this.lang = params["lang"];
