@@ -156,6 +156,10 @@ export class MpThreadingComponent implements OnInit {
         this.Vf = +value
         break;
       }
+      case 'RPM':{
+        this.n = +value
+        break;
+      }
     }
 
 
@@ -194,7 +198,7 @@ export class MpThreadingComponent implements OnInit {
 
 
 
-this.n = Math.round((this.Vc * 1000)/(Math.PI * this.DC))
+// this.n = Math.round((this.Vc * 1000)/(Math.PI * this.DC))
 
 
 

@@ -17,10 +17,12 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
   @Input() SRC: string ;
   selectedOption:clsHelpProp;
   environment = environment;
+  loadedFrames:string;
 
   constructor(private sanitizer: DomSanitizer,private srv_appsetting:AppsettingService,private srv_statemanage:StateManagerService) { }
 
   ngOnInit(): void {
+    this.loadedFrames = '';
   }
 
   ngOnChanges(changes:SimpleChanges) {
@@ -35,7 +37,7 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
     return this.sanitizer.bypassSecurityTrustResourceUrl(post);
   }
 
-  getUrl1(row:string,index:number)
+  getUrl1(row:string)
   {
     if (row.trim().length != 7){
       return this.sanitizer.bypassSecurityTrustResourceUrl('')
@@ -63,6 +65,15 @@ getConfiguredUrl(route: ActivatedRouteSnapshot): string {
         .filter(v => v.routeConfig)
         .map(v => v.routeConfig!.path)
         .join('/');
+}
+
+finishLoadingFrame(PrtNum:number){
+  if (PrtNum > -1)
+    this.loadedFrames = this.loadedFrames.concat(PrtNum.toString())
+}
+
+isLoaded(PrtNum:number){
+  return this.loadedFrames.includes(PrtNum.toString())
 }
 
 
