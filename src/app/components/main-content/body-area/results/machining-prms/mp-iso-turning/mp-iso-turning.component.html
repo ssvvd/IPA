@@ -58,7 +58,7 @@
         <div class="col-3 row"><Label>{{'Cutting speed' | translate }}</Label></div>
         <div class="col-2">V<sub>c</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vc}}</div>
-        <div class="col-2">m/min</div>
+        <div class="col-2">{{ srv_appsetting.Units =='M' ? 'mm/min' : 'SFM' }}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Feed per Rev' | translate }}</Label></div>
@@ -82,7 +82,7 @@
         <div class="col-3 row"><Label>{{'Material removal rate' | translate }}</Label></div>
         <div class="col-2">MRR</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR}}</div>
-        <div class="col-2">cm<sup>3</sup>/min</div>
+        <div class="col-2">{{ srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
       </div>
 <br>
 <div class="bold font-weight-bold row justify-content-start w-100"><Label class="font-weight-bold">{{'Tool Assembly Data' | translate}}</Label></div>
@@ -97,7 +97,7 @@
     <div class="col-3 row"><Label>{{'Assembly Weight' | translate }}</Label></div>
     <div class="col-2">AW</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{AW}}</div>
-    <div class="col-2">kg</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'kg' : 'Lb' | translate}}</div>
   </div>
 
 
@@ -108,14 +108,14 @@
     <div class="col-3 row"><Label>{{'Mean power' | translate }}</Label></div>
     <div class="col-2">P</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P}}</div>
-    <div class="col-2">kW</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'Kw' : 'HP' | translate}}</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='960' && !(this.srv_StMng.SecApp=='860' && resType == 'T')">
     <div class="col-3 row"><Label>{{'Mean Torque' | translate }}</Label></div>
     <div class="col-2">T</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T}}</div>
-    <div class="col-2">Nm</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}</div>
   </div>
 
   <div class="row justify-content-start w-100">
@@ -136,7 +136,7 @@
     <div class="col-3 row"><Label>{{'Tangential force' | translate }}</Label></div>
     <div class="col-2">F<sub>t</sub></div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Ft}}</div>
-    <div class="col-2">N</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'N' : 'Lb' | translate}}</div>
   </div> 
 
   <br>
@@ -176,7 +176,7 @@
     <div class="col-3 row"><Label>{{'Tool Life Length' | translate }}</Label></div>
     <div class="col-2">TLL</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLL}}</div>
-    <div class="col-2">m</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'm' : 'Feet' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100">
     <div class="col-3 row"><Label>{{'Tool Life Time' | translate }}</Label></div>

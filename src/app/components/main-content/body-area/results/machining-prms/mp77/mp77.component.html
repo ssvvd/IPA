@@ -38,13 +38,13 @@
         <div class="col-3 row"><Label>{{'Material removal rate' | translate }}</Label></div>
         <div class="col-2">MRR</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{MRR}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{'cm' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
+        <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Cutting speed' | translate }}</Label></div>
         <div class="col-2">v<sub>c</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{Vc}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{'m/min' | translate}}</div>
+        <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'mm/min' : 'SFM' }}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Feed per Rev' | translate }}</Label></div>
@@ -67,7 +67,7 @@
         <div class="col-3 row"><Label>{{'Assembly Weight' | translate }}</Label></div>
         <div class="col-2">AW</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{AW}}</div>
-        <div class="col-2" style="margin-left: 6%;">kg</div>
+        <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'kg' : 'Lb' | translate}}</div>
       </div>
 
 
@@ -79,13 +79,13 @@
         <div class="col-3 row"><Label>{{'Power' | translate }}</Label></div>
         <div class="col-2">P</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{P}}</div>
-        <div class="col-2" style="margin-left: 6%;">kW</div>
+        <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'Kw' : 'HP' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Torque' | translate }}</Label></div>
         <div class="col-2">T</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{T}}</div>
-        <div class="col-2" style="margin-left: 6%;">Nm</div>
+        <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
@@ -103,7 +103,7 @@
         <div class="col-3 row"><Label>{{'Axial Feed Force' | translate }}</Label></div>
         <div class="col-2">F<sub>ax</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{Fax}}</div>
-        <div class="col-2" style="margin-left: 6%;">N</div>
+        <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'N' : 'Lb' | translate}}</div>
       </div>
 <br>
 <!-- <div *ngIf="exportPDF" class="break-page"></div> -->
@@ -136,7 +136,7 @@
         <div class="col-3 row"><Label>{{'Tool Life Length' | translate }}</Label></div>
         <div class="col-2">TLL</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{TLL}}</div>
-        <div class="col-2" style="margin-left: 6%;">m</div>
+        <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'm' : 'Feet' | translate}}</div>
       </div>
       <div  class="pt-0 break-page pb-2" *ngIf="exportPDF" style="margin-left:-20px;">
         <div class="header-pdf">    
