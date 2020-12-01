@@ -176,13 +176,13 @@
     <div class="col-3 row"><Label>{{'Tool Life Length' | translate }}</Label></div>
     <div class="col-2">TLL</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLL}}</div>
-    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'm' : 'Feet' | translate}}</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'm' : 'inch' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100">
     <div class="col-3 row"><Label>{{'Tool Life Time' | translate }}</Label></div>
     <div class="col-2">TLT</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLT}}</div>
-    <div class="col-2">mm:ss</div>
+    <div class="col-2">min</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="!((srv_StMng.SecApp=='860' || srv_StMng.SecApp=='850' || srv_StMng.SecApp=='890') && resType == 'S')">
     <div class="col-3 row"><Label>{{'No. of Edges per Insert' | translate }}</Label></div>
