@@ -157,6 +157,26 @@ environment=environment;
           this.n = value
           break;
         }
+        case 'TCB': {
+          this.TCB = +value
+          break;
+        }
+        case 'TGC': {
+          this.H_CTB = +value
+          break;
+        }
+        case 'MCB': {
+          this.MCB = +value
+          break;
+        }
+        case 'CPU': {
+          this.CPU = +value
+          break;
+        }
+        case 'MTB': {
+          this.MTB = value
+          break;
+        }
         // case 'DetailsListPrice':{
         //   this.H_DHP = +(value.split(' ')[0])
         //   this.I_IP = +(value.split(' ')[0])
@@ -183,14 +203,16 @@ if (pr.value.trim().length == 7){
         this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
           let prmLta:string = JSON.parse(res); 
           if (prmLta != '9999'){
-            this.O = Math.round((this.O + +prmLta) * 100)/100
+            var roundDigits:number = this.srv_appsetting.Units == 'I' ? 100 : 10
+            this.O = Math.round((this.O + +prmLta) * roundDigits)/roundDigits
           }
         })
   
         this.srv_Results.GetRatioLD(pr.value,this.srv_appsetting.Units).subscribe((res: any) => {
           let prmRatioLD:string = JSON.parse(res); 
           if (prmRatioLD != '0'){
-            this.AW = Math.round((this.AW + +prmRatioLD) * 1000)/1000
+            var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100
+            this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
           }
         })
   
@@ -302,13 +324,17 @@ if (pr.value.trim().length == 7){
 
 
 
+              this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,+this.DH).subscribe((res: any) => {
+                var result:object[] = JSON.parse(res);
+                this.TLL = result[0]['TLL'] || '0'
+                this.TLT = result[0]['TLT'] || '0'
 
-    //calc
+                    //calc
     this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value;
     this.HPP = 1;
     this.HI_I = 30;
-    this.TLL = 50;
-    this.TLT = '50:00';
+    // this.TLL = 50;
+    // this.TLT = '50:00';
     this.H_HDH = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
@@ -327,24 +353,28 @@ if (pr.value.trim().length == 7){
     if (this.resType == "I")
     this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
 
-    this.H_CTB = Math.round(this.TTC+this.H_DHC * 100)/100
-    this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
+    // this.H_CTB = Math.round(this.TTC+this.H_DHC * 100)/100
+    // this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
     this.I_TPT=Math.round(this.TTC * this.I_TIC * 100)/100
-    this.MCB = Math.round(+this.MTB * this.MCH * 100)/100
+    // this.MCB = Math.round(+this.MTB * this.MCH * 100)/100
     
-    //change
-    if (this.resType == "H")
-    this.TCB = this.H_CTB+this.MCB
-    if (this.resType == "S")
-    this.TCB = this.TTC+this.MCB
-    if (this.resType == "I")
-    this.TCB = this.I_TPT+this.MCB
+    // //change
+    // if (this.resType == "H")
+    // this.TCB = this.H_CTB+this.MCB
+    // if (this.resType == "S")
+    // this.TCB = this.TTC+this.MCB
+    // if (this.resType == "I")
+    // this.TCB = this.I_TPT+this.MCB
 
-    this.TCB = Math.round(this.TCB * 100)/100
+    // this.TCB = Math.round(this.TCB * 100)/100
     
     this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
-    this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
-    this.CPU = Math.round((this.TCB / this.B) * 100)/100
+    // this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
+    // this.CPU = Math.round((this.TCB / this.B) * 100)/100
+    
+              })
+
+
               
               switch (insertBrandName.trim().toUpperCase()){
                   case 'SUMOCHAM FLAT HEAD': case 'SUMOCHAM CHAMDRILL LINE': case 'SUMOCHAMIQ':

@@ -485,6 +485,13 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
                 this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/unit)'
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
               break;
+              case 'List':
+                this.dtPropertiesTable[j].FieldDescriptionSmall = 'List Price' + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + ')'
+              break;
+              case 'Corner':
+                if ( this.dtPropertiesTable[j].FieldDescriptionSmall == 'Corner Price')
+                    this.dtPropertiesTable[j].FieldDescriptionSmall = 'Corner Price' + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + ')'
+                break;
 
           }
 

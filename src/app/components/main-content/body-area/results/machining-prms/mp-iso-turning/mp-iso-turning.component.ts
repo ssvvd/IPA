@@ -71,7 +71,7 @@ export class MpIsoTurningComponent implements OnInit {
   TTC:number
   TGC:number
   MCB:number
-  MTB:number
+  MTB:string
   TCB:number
 resType:string
 CPU:number;
@@ -193,6 +193,26 @@ environment=environment;
               this.CTF = +value
               break;
             }
+            case 'TCB': {
+              this.TCB = +value
+              break;
+            }
+            case 'TGC': {
+              this.TGC = +value
+              break;
+            }
+            case 'MCB': {
+              this.MCB = +value
+              break;
+            }
+            case 'CPU': {
+              this.CPU = +value
+              break;
+            }
+            case 'MTB': {
+              this.MTB = value
+              break;
+            }
           }
     
         if (pr.property.Field.toLowerCase().includes('catalogno')){
@@ -205,14 +225,16 @@ environment=environment;
             this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
               let prmLta:string = JSON.parse(res); 
               if (prmLta != '9999'){
-                this.O = Math.round((this.O + +prmLta) * 100)/100
+                var roundDigits:number = this.srv_appsetting.Units == 'I' ? 100 : 10
+                this.O = Math.round((this.O + +prmLta) * roundDigits)/roundDigits
               }
             })
       
             this.srv_Results.GetRatioLD(pr.value,this.srv_appsetting.Units).subscribe((res: any) => {
               let prmRatioLD:string = JSON.parse(res); 
               if (prmRatioLD != '0'){
-                this.AW = Math.round((this.AW + +prmRatioLD) * 1000)/1000
+                var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100
+                this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
               }
             })
 
@@ -271,21 +293,29 @@ environment=environment;
           this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
           this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
           this.I = 1000
-          this.TLL = 50
-          this.TLT = 50
-          this.FCE = Math.round((this.TLT / this.CTF) * 100)/100
-          this.SPB = Math.ceil(this.B / this.FCE)
-          this.TSC = Math.round(this.SP * this.SPB * 100)/100
-    
-          this.IPB = Math.ceil(this.B / (this.FCE * this.CEDC))
-          this.TPB = Math.ceil(this.IPB / this.I)
-          this.TIC = Math.round(this.IP * this.IPB * 100)/100
-          this.TTC = Math.round((this.TP * this.TPB) * 100)/100
-          this.TGC = Math.round((this.TIC + this.TTC) * 100)/100
-          this.MTB = Math.round((this.B * this.CTF) * 100)/100
-          this.MCB = Math.round(((this.MTB / 60) * this.MCH) * 100)/100
-          this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
-          this.CPU = Math.round((this.TCB / this.B) * 100)/100
+
+
+          this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,0).subscribe((res: any) => {
+            var result:object[] = JSON.parse(res);
+            this.TLL = result[0]['TLL'] || '0'
+            this.TLT = result[0]['TLT'] || '0'
+            var a:string[] = this.TLT.toString().split(':');
+            var TLTMin:number = +a[0] + (+a[1] / 60)
+            this.FCE = Math.round((TLTMin / this.CTF) * 100)/100
+            this.SPB = Math.ceil(this.B / this.FCE)
+            this.TSC = Math.round(this.SP * this.SPB * 100)/100
+      
+            this.IPB = Math.ceil(this.B / (this.FCE * this.CEDC))
+            this.TPB = Math.ceil(this.IPB / this.I)
+            this.TIC = Math.round(this.IP * this.IPB * 100)/100
+            this.TTC = Math.round((this.TP * this.TPB) * 100)/100
+            // this.TGC = Math.round((this.TIC + this.TTC) * 100)/100
+            // this.MTB = Math.round((this.B * this.CTF) * 100)/100
+            // this.MCB = Math.round(((this.MTB / 60) * this.MCH) * 100)/100
+            // this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
+            // this.CPU = Math.round((this.TCB / this.B) * 100)/100
+
+          })
 
 }      
 
@@ -338,7 +368,7 @@ environment=environment;
     this.TTC = 0
     this.TGC = 0
     this.MCB = 0
-    this.MTB = 0
+    this.MTB = ''
     this.TCB = 0
 this.resType = ''
 this.CPU = 0
