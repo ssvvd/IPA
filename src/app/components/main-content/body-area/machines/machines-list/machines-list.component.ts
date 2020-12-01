@@ -457,7 +457,8 @@ UpdateStateSelectedMachine(MachineID: number) {
       let p=mm.Power1;
       let t=mm.Torque1;      
       let at=mm.AdaptationType1;
-      let az=mm.AdaptationSize1;
+      let az=mm.AdaptationSize1;      
+
       mm.SpindleSpeed1=mm.SpindleSpeed;
       mm.Power1=mm.Power;
       mm.Torque1=mm.Torque;

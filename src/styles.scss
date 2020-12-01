@@ -42,6 +42,21 @@
 }
 
 @include media-breakpoint-up(xl){ 
+
+  html {
+    //font-size: 0.8rem;
+    font-weight:normal;
+  }
+   .div-main-content {
+    width: 91.66666667%!important;
+    padding-bottom:($spacer * 1.5) !important; 
+    margin-bottom: ($spacer * 1.5) !important;
+}  
+ .div-header
+ {
+  width: 91.66666667%!important;
+  padding-right:0!important;   
+ }
  .btn-select  
  { 
     min-width:150px;
@@ -194,11 +209,32 @@ html {
   font-weight:normal;
 }
 
+@include media-breakpoint-up(xs) {
+  html {
+    //font-size: 0.8rem;
+    font-weight:normal;
+  }
+   .div-main-content {
+    width: 100%!important;
+    padding-bottom:0!important; 
+    margin-bottom: 0!important;
+}  
+.div-header
+{
+  width: 100%!important;
+  padding-right:0!important;   
+} 
+}
 @include media-breakpoint-up(sm) {
   html {
     //font-size: 0.8rem;
     font-weight:normal;
   }
+   .div-main-content {
+    width: 100%!important;
+    padding-bottom:0!important; 
+    margin-bottom: 0!important;
+}  
 }
 
 @include media-breakpoint-up(md) {
@@ -206,6 +242,16 @@ html {
     //font-size: 0.8rem;
     font-weight:normal;
   }
+  .div-main-content {
+    width: 100%!important;
+    padding-bottom: 0 ;
+    margin-bottom: 0 ;
+} 
+.div-header
+{
+  width: 100%!important;
+ padding-right:0!important;   
+} 
 }
 
 @include media-breakpoint-up(lg) {
@@ -213,7 +259,20 @@ html {
     //font-size: 0.8rem;
     font-weight:normal;
   }
+  .div-main-content {
+    width: 91.66666667%!important;
+    padding-bottom:($spacer * 1.5) !important; 
+    margin-bottom: ($spacer * 1.5) !important; 
+}  
+.div-header
+{
+  width: 91.66666667%!important;
+ padding-right:0!important;   
+} 
 }
+
+
+
 
 .icon-grid{
 height: 35px;
@@ -450,3 +509,8 @@ html, body{
   @extend .col-lg-8 ;
   @extend .col-xl-9;
 }
+
+
+
+
+

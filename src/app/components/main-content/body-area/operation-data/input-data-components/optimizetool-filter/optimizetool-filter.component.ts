@@ -87,8 +87,9 @@ export class OptimizetoolFilterComponent implements OnInit {
   BuildSelectItems()
   {
     let arr = this.srv_StMng.IPL.GetItem(this.fieldid).value.split(",");   
+    let n:number=1000;
     for (let value of arr) {
-        this.selitems.push({ RecordID:0,
+        this.selitems.push({ RecordID:n++,
                              Designation:value,
                              Value:   (value).replace(/\s/g, ""),
                              Checked:true
@@ -157,6 +158,14 @@ export class OptimizetoolFilterComponent implements OnInit {
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-brandname-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       } 
+
+      case"BRANDNAMEGROOVE":  { 
+        //"get-grooove-brnadnamelist/{pUnits}/{pSecondaryApp}/{Filter}/{Top}"          
+        param= this.srv_appsetting.Units + "/" + this.srv_StMng.SecApp +"/";
+        str_param=param + str_s + "/" + t;
+        this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('get-grooove-brnadnamelist',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
+        break; 
+    }
       case"TOOL":  { 
           //"All/0/999/All/1/1/760/M/All/"          
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
@@ -737,17 +746,19 @@ case "GROOVEINTBLADE": {
                                 })          
     }
       //add selected
-      this.selitems.forEach(pp=>{
-      let a:ToolOptimizeItem[];
-      a=this.arrData.filter(p=>p.Designation==pp.Designation)
-      if(a.length==0)
-      {
-        this.arrData.unshift({                
+      this.selitems.forEach(pp=>
+        {
+          let a:ToolOptimizeItem[];     
+          a=this.arrData.filter(p=>p.Designation==pp.Designation)
+        if(a.length==0)
+        {
+          this.arrData.unshift({                
                         RecordID:pp.RecordID,
                         Designation:pp.Designation,
                         Value:  (pp.Value).replace(/\s/g, ""),
                         Checked:true
-                        }) 
+                        }); 
+                      
       }
       else    
         a[0].Checked=true;      

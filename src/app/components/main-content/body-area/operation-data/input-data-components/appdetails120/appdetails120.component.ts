@@ -48,8 +48,11 @@ export class Appdetails120Component implements OnInit {
   environment=environment;
   
   @Input() events: Observable<void>;
-  private eventsSubscription: Subscription;
-  
+  @Input () evGetResult: Observable<void>;
+
+  //private eventsSubscription: Subscription;
+  private eventsSubscription: Subscription=new Subscription();
+
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   
@@ -75,9 +78,13 @@ export class Appdetails120Component implements OnInit {
   pitch_units:string =''; 
   isLoaded:boolean =false;
   CostPerHourByRate:number;
+  IsGetResult:boolean=false;
+  IsSizeEmpty:boolean =false;
+
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
 
-  ngOnInit() {    
+  ngOnInit() { 
+       
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
     if(this.srv_StMng.SecApp=='120')
     {
@@ -90,7 +97,9 @@ export class Appdetails120Component implements OnInit {
     let dia:string;
     dia=this.srv_StMng.IPL.GetItem('D_Hole').value;
 
-    this.eventsSubscription = this.events.subscribe(() => this.ClearData());   
+    this.eventsSubscription.add(this.events.subscribe(() => this.ClearData()));  
+    this.eventsSubscription.add(this.evGetResult.subscribe(() => this.CheckMandatoryFiled()));
+
     this.eventsSubscription.add(this.srv_DataLayer.thread_form().subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                                                
                 this.arrThreadForm.push({
@@ -136,6 +145,13 @@ export class Appdetails120Component implements OnInit {
 this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
 }
 
+CheckMandatoryFiled()
+{
+    this.IsGetResult =true;
+    this.IsSizeEmpty=this.IsGetResult && (this.msrv_StMng.IPL.GetItem('Size').value==null || this.msrv_StMng.IPL.GetItem('Size').value=='0') 
+    && (this.msrv_StMng.IPL.GetItem('D_Hole').value==null || this.msrv_StMng.IPL.GetItem('D_Hole').value=='0');
+
+}
 onfocusfield(field:string)
 {
   this.InFocus=true;  

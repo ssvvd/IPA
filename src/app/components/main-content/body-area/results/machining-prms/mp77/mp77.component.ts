@@ -242,7 +242,7 @@ if (pr.value.trim().length == 7){
           if (prMax != '0'){
             this.MaxTol = Math.round((this.MaxTol + +prMax) * 100)/100
           }
-        })
+        })       
       }
       }.bind(this));
 
@@ -401,9 +401,6 @@ if (pr.value.trim().length == 7){
                 var result = res as MPResult;
                 this.Fax = Math.round(result.ResultRowList[0].Value * 100)/100
               })
-
-
-
             }
 
         })

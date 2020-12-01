@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit,HostListener} from '@angular/core';
 import { DatalayerService} from '../../../../services/datalayer.service' ;
 import { StateManagerService} from '../../../../services/statemanager.service' ;
 import { AppsettingService} from '../../../../services/appsetting.service';
@@ -9,8 +9,7 @@ import { Subject ,Subscription} from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-operation-data',
-  templateUrl: './operation-data.component.html',
+  selector: 'app-operation-data',  templateUrl: './operation-data.component.html',
   styleUrls: ['./operation-data.component.scss']
 })
 
@@ -23,9 +22,15 @@ export class OperationDataComponent implements OnInit {
   isLoaded:boolean=false;
 
    eventsSubject: Subject<void> = new Subject<void>();
+   evGetResult: Subject<void> = new Subject<void>();
   private eventsSubscription: Subscription=new Subscription();
   
   public msrv_StMng:StateManagerService =this.srv_StMng;
+  
+  @HostListener('window:keyup', ['$event'])
+  keyEvent(event: KeyboardEvent) {    
+    if (event.key == 'Enter') this.GoToResult();        
+  }
 
   constructor(router:Router,private srv_DataLayer:DatalayerService,
               private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
@@ -93,6 +98,7 @@ else
 
   GoToResult()
   {
+    this.evGetResult.next();
     let r:any;
     r=this.srv_StMng.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required);
     

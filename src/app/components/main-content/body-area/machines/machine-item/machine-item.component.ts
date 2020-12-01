@@ -257,15 +257,26 @@ export class MachineItemComponent implements OnInit {
   }
 
   OnSelectMachine()
-  {                 
-    this.machHeader.AdaptationType =this.arrMachineSpindle[0].AdaptationType;
+  {    
+    let ms=  this.arrMachineSpindle.find(s=> s.SpindleType == this.machHeader.SpindleType )   
+    this.machHeader.AdaptationType =ms.AdaptationType;
+    this.machHeader.AdaptationSize =ms.AdaptationSize; 
+    this.machHeader.Power =ms.Power;
+    this.machHeader.SpindleSpeed =ms.SpindleSpeed;
+    this.machHeader.Torque =ms.Torque;   
+    this.machHeader.ExtMQL =ms.ExtMQL;   
+    this.machHeader.IntMQL =ms.IntMQL; 
+    this.machHeader.CostPerHour = Math.round(this.machHeader.CostPerHour *100)/100;  
+    this.srv_statemanage.SelectedMachine = this.machHeader; 
+    this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;       
+  /*   this.machHeader.AdaptationType =this.arrMachineSpindle[0].AdaptationType;
     this.machHeader.AdaptationSize =this.arrMachineSpindle[0].AdaptationSize; 
     this.machHeader.Power =this.arrMachineSpindle[0].Power;
     this.machHeader.SpindleSpeed =this.arrMachineSpindle[0].SpindleSpeed;
     this.machHeader.Torque =this.arrMachineSpindle[0].Torque;   
     this.machHeader.CostPerHour = Math.round(this.machHeader.CostPerHour *100)/100;  
     this.srv_statemanage.SelectedMachine = this.machHeader; 
-    this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;       
+    this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;   */     
   } 
   
   Reset()
