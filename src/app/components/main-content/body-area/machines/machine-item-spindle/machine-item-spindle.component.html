@@ -6,11 +6,15 @@
        
      </div>
     <div class="row" *ngIf="isLoadingAdSize">        
-        <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-bottom  pt-2 pb-2 pr-0"> 
-            <div class="pt-4">
+        <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-bottom  pt-2 pb-2 pr-0">                     
+             <div class="pl-3">
+                <div class="custom-control custom-checkbox custom-control-inline ">                 
+                    <input type="checkbox" class="pt-1" [checked]="machHeader.SpindleType ==spindle.SpindleType" [(ngModel)]="IsSelectedSpindle" class="custom-control-input" name="TypeSindle" [attr.id]="'chkTypeSindle' + spindle.SpindleType" (change)= "ChangeMachineSpindleType()"  >
+                    <label class="custom-control-label siteTitle" [attr.for]="'chkTypeSindle' + spindle.SpindleType">{{DescSpindle | translate}}</label>
+                </div>
+            </div>
 
-            </div>                           
-             <div class="border-right pt-2">
+             <div class="border-right">
                 <div class="pt-2">
                     <label class="pl-3 pb-0 mb-0 bold font-weight-bold">{{'Spindle' | translate}} </label>
                 </div>
@@ -70,10 +74,13 @@
              </div>                       
         </div>        
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-bottom p-2">                          
-             <div class="text-center">
+             <!-- <div class="text-center">
                 <label  class="siteTitle pl-3 pt-2">{{DescSpindle | translate}}</label>
-             </div>
-              <div class="pt-2">
+             </div> -->
+             <div class="pt-4">
+
+            </div>
+              <div class="pt-3">
                 <label class="pl-3 pb-0 mb-0 font-weight-bold">{{spindle.SpindleType=='M'?'Turret (Stationary Tools)':'Tool Holder' | translate }}</label>              
                 <div class="form-group row pt-3">
                     <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-8'">
@@ -150,7 +157,7 @@
                     </div>
                 </div>  
                 <div class="form-group row pt-2">
-                    <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-7'">
+                    <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-8'">
                         <label ></label>
                     </div>
                     <div *ngIf="!exportPDF" class="col-2 col-sm-2 col-lg-2 col-xl-2 pt-1">
@@ -168,7 +175,7 @@
                 </div> 
                
                 <div class="form-group row">
-                    <label for="txtAirBlast" class="col-7 col-sm-7 ">{{'Air Blast' | translate}}</label>
+                    <label for="txtAirBlast" [ngClass]="exportPDF? 'col-7 col-sm-7' :'col-8 col-sm-8' ">{{'Air Blast' | translate}}</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input"  [attr.id]="'optAirBlastExt'+spindle.SpindleType"  name="AirBlast" [(ngModel)]="spindle.ExtAirBlast">
@@ -183,7 +190,7 @@
                     </div>        
                 </div> 
                 <div class="form-group row">
-                    <label for="txtEmultion" class="col-7 col-sm-7 ">{{'Emulsion' | translate}}</label>
+                    <label for="txtEmultion" [ngClass]="exportPDF? 'col-7 col-sm-7' :'col-8 col-sm-8'">{{'Emulsion' | translate}}</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2">
                         <div class="custom-control custom-checkbox custom-control-inline ">
                             <input type="checkbox" class="custom-control-input" name="Emultion" [attr.id]="'chkEmultionExt' + spindle.SpindleType"   [(ngModel)]="spindle.ExtEmultion">
@@ -198,7 +205,7 @@
                     </div>        
                 </div>
                 <div class="form-group row">
-                    <label for="txtMQL" class="col-7 col-sm-7">MQL</label>
+                    <label for="txtMQL" [ngClass]="exportPDF? 'col-7 col-sm-7' :'col-8 col-sm-8'">MQL</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2 ">
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input"  [attr.id]="'optMQLExt' + spindle.SpindleType"  name="optMQL" [(ngModel)]="spindle.ExtMQL">
@@ -213,7 +220,7 @@
                     </div>        
                 </div> 
                 <div class="form-group row" *ngIf="(MachineType=='Swiss type' || MachineType=='Multi spindle')">
-                    <label for="txtOil" class="col-7 col-sm-7">Oil</label>
+                    <label for="txtOil" [ngClass]="exportPDF? 'col-7 col-sm-7' :'col-8 col-sm-8'">Oil</label>
                     <div class="col-2 col-sm-2 col-lg-2 col-xl-2 ">
                         <div class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox" class="custom-control-input"  [attr.id]="'optOilExt' + spindle.SpindleType"  name="optOil" [(ngModel)]="spindle.ExtOil">

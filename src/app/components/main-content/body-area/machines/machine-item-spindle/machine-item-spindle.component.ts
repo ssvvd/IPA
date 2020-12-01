@@ -29,7 +29,7 @@ export class MachineItemSpindleComponent implements OnInit
   @Input() spindle:Machinespindle;   
   @Input() MachineType:string;
   @Input() exportPDF:boolean=false;
-  
+  @Input() machHeader:any;
   DescSpindle:string;  
   arrAdapType:AdaptationType[]=[];
   arrAdapSize:AdaptationSize[]=[];
@@ -38,7 +38,8 @@ export class MachineItemSpindleComponent implements OnInit
   curAdapType:AdaptationType;
   curAdapSize:AdaptationSize;
   isLoadingAdSize:boolean=false;
-  
+  IsSelectedSpindle:boolean;
+
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
   constructor(private serv: MachineService,private srv_appsetting:AppsettingService) {}
@@ -47,6 +48,11 @@ export class MachineItemSpindleComponent implements OnInit
   {    
     if(this.spindle.SpindleType=="M")  this.DescSpindle="Main Spindle";
     if(this.spindle.SpindleType=="T")  this.DescSpindle="Tool Spindle - ATC";
+    if(this.machHeader.SpindleType==this.spindle.SpindleType) 
+      this.IsSelectedSpindle=true;
+    else
+      this.IsSelectedSpindle=false;
+
     this.eventsSubscription.add(this.serv.getmachineadaptationtype(this.MachineType).subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
         this.curAdapType=this.arrAdapType.find(e=> e.AdaptationType == this.spindle.AdaptationType );                   
@@ -66,6 +72,8 @@ export class MachineItemSpindleComponent implements OnInit
         }      
         else
           this.arrAdapSizeFilter=this.arrAdapSize.filter(e=> e.AdaptationType == this.curAdapType.AdaptationType);
+        
+       
 
         this.isLoadingAdSize =true;
       }));         
@@ -133,4 +141,21 @@ export class MachineItemSpindleComponent implements OnInit
     this.spindle.Torque =$event.T1;
     this.spindle.Power =$event.P2;
   }
+  
+  ChangeMachineSpindleType()
+  {
+    if(this.IsSelectedSpindle)      
+        this.machHeader.SpindleType =this.spindle.SpindleType;      
+    else
+    {
+      if(this.spindle.SpindleType=='M')
+        this.machHeader.SpindleType ='T';
+      else
+      this.machHeader.SpindleType ='M';
+    } 
+  }
+  
+  
+
+  
 }

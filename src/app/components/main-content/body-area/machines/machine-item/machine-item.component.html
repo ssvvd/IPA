@@ -75,7 +75,7 @@
     
     <div  *ngFor="let spindle of arrMachineSpindle; let PrtNum = index" class="pt-4"  >
             <div *ngIf="!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==spindle.SpindleType)">                                                                                                                  
-                <app-machine-item-spindle  [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
+                <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
             </div>                        
     </div>  
 </div>

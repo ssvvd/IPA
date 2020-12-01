@@ -18,6 +18,9 @@ export class Machineheader {
     public Torque1:number;      
     public AdaptationType1:string;
     public AdaptationSize1:string;
+    
+    public ExtMQL:boolean;
+    public IntMQL:boolean;
 
     public DescSelect:string="Select";    
     public isFavorite:boolean = false;

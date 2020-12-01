@@ -1,5 +1,5 @@
 
-<div class="container-fluid ml-0 pl-0 mt-0  pr-0">   
+<div class="container-fluid ml-0 pl-0 mt-0  pr-0" (keyup.enter)="GoToResult()">   
      <div class="form-group row col-12">       
         <div  [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'width-tooldata   border-left-gray  pt-2' : 'col-cust-5  border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'">
             <div class="pt-4"  >
@@ -29,14 +29,14 @@
                     </div>
                  </div>
                 <div>
-                    <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">{{'Clear All'| translate}}</button>
+                    <button type="button" class="btn sileLinks pl-3" (click)="ClearDataChild()">{{'Reset'| translate}}</button>
                 </div> 
                 <div class="pt-0">         
                     <app-appdetails59 *ngIf = "isLoaded && (SecApp=='760'||SecApp=='770'||SecApp=='57')"  [events]="eventsSubject.asObservable()"></app-appdetails59>
                     <app-appdetails780 *ngIf = "isLoaded && SecApp=='780'"  [events]="eventsSubject.asObservable()"></app-appdetails780>
                     <app-appdetails790 *ngIf = "isLoaded && SecApp=='790'"  [events]="eventsSubject.asObservable()"></app-appdetails790>
                     <app-appdetails77 *ngIf = "isLoaded && SecApp=='77'"  [events]="eventsSubject.asObservable()"></app-appdetails77>
-                    <appdetails120 *ngIf = "isLoaded && (SecApp=='120' || SecApp=='119')"  [events]="eventsSubject.asObservable()"></appdetails120> 
+                    <appdetails120 *ngIf = "isLoaded && (SecApp=='120' || SecApp=='119')" [evGetResult]="evGetResult.asObservable()" [events]="eventsSubject.asObservable()"></appdetails120> 
                     <appdetails990 *ngIf = "isLoaded && (SecApp=='990' || SecApp=='980' || SecApp=='970' || SecApp=='960')"  [events]="eventsSubject.asObservable()"></appdetails990>   
                     <appdetails890 *ngIf = "isLoaded && (SecApp=='890' || SecApp=='880' || SecApp=='870' || SecApp=='860' || SecApp=='850')"  [events]="eventsSubject.asObservable()"></appdetails890>                 
                     <appdetails52  *ngIf = "isLoaded && (SecApp=='52' || SecApp=='53' || SecApp=='50')" [events]="eventsSubject.asObservable()"></appdetails52>   
@@ -46,5 +46,5 @@
                 </div>
             </div>
         </div>           
-     </div>
+     </div>  
 </div> 

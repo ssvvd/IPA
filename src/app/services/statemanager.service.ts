@@ -46,7 +46,7 @@ export class StateManagerService {
   private mMainAppSelected:MainApp; 
  
   //private mUnits:string='M'; //todo:
-  private mIsTabToolDataOpen:boolean =false;
+  private mIsTabToolDataOpen:boolean =true;
   
   constructor(private srv_appsetting:AppsettingService) { }
 
@@ -112,14 +112,6 @@ export class StateManagerService {
     else    
       return null;       
   }
-
-/*   mMachineSpindleTool:Machinespindle;
-  get MachineSpindleTool():Machinespindle {
-    return this.mMachineSpindleTool;
-  }
-  set MachineSpindleTool(ms:Machinespindle) {
-    this.mMachineSpindleTool = ms;
-  } */
 
   get SecAppSelected():SecondaryApp {
     return this.mSecondaryAppSelected;

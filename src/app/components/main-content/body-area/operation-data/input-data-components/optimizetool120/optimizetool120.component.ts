@@ -12,6 +12,8 @@ import { Observable ,Subscription} from 'rxjs';
 export class Optimizetool120Component implements OnInit {
     
   @Input() events: Observable<void>;
+ 
+
   private eventsSubscription: Subscription;
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
@@ -27,6 +29,7 @@ export class Optimizetool120Component implements OnInit {
 
   ngOnInit() {
      this.eventsSubscription = this.events.subscribe(() => this.ClearData());
+     
   }
   
   ngOnDestroy() {
