@@ -86,10 +86,11 @@ export class Mp760Component implements OnInit {
   T_TGC:number
   He_TGC:number
   H_TGC:number
+  TGC:number
   S_SPB:number
   S_TSC:number
   MCB:number
-  MTB:number
+  MTB:string
   TCB:number
   THeH_I:number
   He_Is:number
@@ -265,6 +266,26 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
             this.CTF = +value
           break;
         }
+        case 'TCB': {
+          this.TCB = +value
+          break;
+        }
+        case 'TGC': {
+          this.TGC = +value
+          break;
+        }
+        case 'MCB': {
+          this.MCB = +value
+          break;
+        }
+        case 'CPU': {
+          this.CPU = +value
+          break;
+        }
+        case 'MTB': {
+          this.MTB = value
+          break;
+        }
       }
  
 
@@ -297,18 +318,18 @@ this.He_THH = Math.ceil(this.He_TPB / this.He_Is)
 this.THe_TIC = Math.round((this.THe_IP * this.THe_IPB) * 100)/100
 this.He_THSC = (this.He_HP * this.He_TPB) + (this.He_HHP * this.He_THH)
 this.T_TTC = Math.round(this.T_TP * this.T_TPB * 100)/100
-this.T_TGC =  Math.ceil(this.THe_TIC + this.T_TTC * 100)/100
-this.He_TGC =  Math.ceil(this.THe_TIC + this.He_THSC * 100)/100
+this.T_TGC =  this.TGC
+this.He_TGC =  this.TGC
 this.S_SPB = Math.ceil(this.B / this.FCE)
 this.S_TSC = Math.round(this.S_SP * this.S_SPB * 100)/100
 this.H_SHB = Math.ceil(this.B / this.FCE)
 this.H_SKB = Math.ceil(this.B / this.FCE / this.THeH_I)
 this.H_TSHC = Math.round(this.H_SHP * this.H_SHB * 100)/100
 this.H_TSKC = this.H_SKP * this.H_SKB
-this.H_TGC =  Math.ceil(this.H_TSHC + this.H_TSKC * 100)/100
+this.H_TGC =  this.TGC
 
-this.MTB = Math.round(this.B * this.CTF * 100)/100
-this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100) / 100
+// this.MTB = Math.round(this.B * this.CTF * 100)/100
+// this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100) / 100
 
 
 
@@ -321,26 +342,26 @@ this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100) / 100
 
 if (this.selectedHelp.itemTypeRes == 'S'){
   this.resType = "S" //Solid
-  this.TCB = this.S_TSC + this.MCB
+  // this.TCB = this.S_TSC + this.MCB
 }else if (this.selectedHelp.itemTypeRes == 'H'){
   this.resType = "H" //MM
-  this.TCB = this.H_TGC + this.MCB
+  // this.TCB = this.H_TGC + this.MCB
 }else{
   this.resType = "T"
-  this.TCB = this.T_TGC + this.MCB
+  // this.TCB = this.T_TGC + this.MCB
   for (let entry of this.selectedHelp.CatalogNoT) {
     this.srv_Results.getfzminf(entry.trim(),this.selectedHelp.SecondaryAppOrig1).subscribe((res: any) => {
         let _FzminF:string = JSON.parse(res)
         if (_FzminF.trim().startsWith('02,307-01,') || _FzminF == '01,307-01,SAI'){
           this.resType = "He"
-          this.TCB = this.He_TGC + this.MCB
+          // this.TCB = this.He_TGC + this.MCB
         }     
       })
 }
 }
 
-this.TCB = Math.round(this.TCB * 100)/100
-this.CPU = Math.round((this.TCB / this.B) * 100)/100
+// this.TCB = Math.round(this.TCB * 100)/100
+// this.CPU = Math.round((this.TCB / this.B) * 100)/100
 
 })
 
@@ -353,7 +374,8 @@ if (value.trim().length == 7){
     this.srv_Results.GetItemParameterValueSpecial(value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
       let prmLta:string = JSON.parse(res); 
       if (prmLta != '9999'){
-        this.O = Math.round((this.O + +prmLta) * 100)/100
+        var roundDigits:number = this.srv_appsetting.Units == 'I' ? 100 : 10
+        this.O = Math.round((this.O + +prmLta) * roundDigits)/roundDigits
       }
     })
 
@@ -362,7 +384,8 @@ if (value.trim().length == 7){
       if (prmRatioLD != '0'){
         if (this.selectedHelp.itemType[this.selectedHelp.CatalogNo.indexOf(value,0)] == 'I' && this.THe_CICT != 0)
           prmRatioLD = (+prmRatioLD * this.THe_CICT).toString()
-        this.AW = Math.round((this.AW + +prmRatioLD) * 1000)/1000
+          var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100
+        this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
       }
     })
 
@@ -473,8 +496,9 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
       this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
-        this.hm = Math.round(result.ResultRowList[0].Value * 10000)/10000
-        this.MCT = Math.round(result.ResultRowList[1].Value * 10000)/10000
+        var roundDigits:number = this.srv_appsetting.Units == 'I' ? 10000 : 1000
+        this.hm = Math.round(result.ResultRowList[0].Value * roundDigits)/roundDigits
+        this.MCT = Math.round(result.ResultRowList[1].Value * roundDigits)/roundDigits
       })
 
 
@@ -549,10 +573,11 @@ this.H_TSKC	=	0
 this.T_TGC	=	0
 this.He_TGC	=	0
 this.H_TGC	=	0
+this.TGC	=	0
 this.S_SPB	=	0
 this.S_TSC	=	0
 this.MCB	=	0
-this.MTB	=	0
+this.MTB	=	''
 this.TCB	=	0
 this.catalogNo=[]
 this.COOL =''

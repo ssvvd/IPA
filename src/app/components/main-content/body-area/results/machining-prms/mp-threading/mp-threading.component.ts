@@ -180,14 +180,16 @@ export class MpThreadingComponent implements OnInit {
       this.srv_Results.GetItemParameterValueSpecial(value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {
         let prmLta:string = JSON.parse(res); 
         if (prmLta != '9999'){
-          this.O = Math.round((this.O + +prmLta) * 100)/100
+          var roundDigits:number = this.srv_appsetting.Units == 'I' ? 100 : 10
+          this.O = Math.round((this.O + +prmLta) * roundDigits)/roundDigits
         }
       })
   
       this.srv_Results.GetRatioLD(value,this.srv_appsetting.Units).subscribe((res: any) => {
         let prmRatioLD:string = JSON.parse(res); 
         if (prmRatioLD != '0'){
-          this.AW = Math.round((this.AW + +prmRatioLD) * 1000)/1000
+          var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100
+          this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
         }
       })
   
