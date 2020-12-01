@@ -311,24 +311,35 @@ export class MpTurnGrooveComponent implements OnInit {
               this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
               this.I = 1000
               this.CTP = Math.round((this.CTFg + this.CTFt) * 100)/100
-              this.TLL = 50
-              this.TLT = 50
-              this.FCE = Math.round((this.TLT / this.CTF) * 100)/100
-              this.PCE = Math.round((this.TLT / this.CTP) * 100)/100
-              if (this.srv_StMng.SecApp=='1' || this.srv_StMng.SecApp=='10' || this.srv_StMng.SecApp=='50'){
-                this.IPB = Math.ceil( this.B  / ( this.CEDC * this.PCE ))
-              }            
-              else{
-                this.IPB = Math.ceil( this.B  / ( this.CEDC * this.FCE ))
-              }
-              this.TPB = Math.ceil( this.IPB / this.I )
-              this.TIC = Math.round((this.IP * this.IPB) * 100)/100
-              this.TTC = Math.round((this.TP * this.TPB) * 100)/100
-              this.TGC = Math.round((this.TIC + this.TTC) * 100)/100
-              this.MTB = Math.round((this.B * this.CTP)  * 100)/100
-              this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100)/100
-              this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
-              this.CPU = Math.round((this.TCB / this.B) * 100)/100
+              // this.TLL = 50
+              // this.TLT = 50
+
+              this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,0).subscribe((res: any) => {
+                var result:object[] = JSON.parse(res);
+                this.TLL = result[0]['TLL'] || '0'
+                this.TLT = result[0]['TLT'] || '0'
+                var a:string[] = this.TLT.toString().split(':');
+                var TLTMin:number = +a[0] + (+a[1] / 60)
+                this.FCE = Math.round((TLTMin / this.CTF) * 100)/100
+                this.PCE = Math.round((TLTMin / this.CTP) * 100)/100
+                if (this.srv_StMng.SecApp=='1' || this.srv_StMng.SecApp=='10' || this.srv_StMng.SecApp=='50'){
+                  this.IPB = Math.ceil( this.B  / ( this.CEDC * this.PCE ))
+                }            
+                else{
+                  this.IPB = Math.ceil( this.B  / ( this.CEDC * this.FCE ))
+                }
+                this.TPB = Math.ceil( this.IPB / this.I )
+                this.TIC = Math.round((this.IP * this.IPB) * 100)/100
+                this.TTC = Math.round((this.TP * this.TPB) * 100)/100
+                this.TGC = Math.round((this.TIC + this.TTC) * 100)/100
+                this.MTB = Math.round((this.B * this.CTP)  * 100)/100
+                this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100)/100
+                this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
+                this.CPU = Math.round((this.TCB / this.B) * 100)/100
+
+              })
+
+
     
     }      
     

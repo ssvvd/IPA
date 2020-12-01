@@ -281,9 +281,15 @@ this.He_Is = 100
 this.THeH_I = 110
 if (this.srv_StMng.SecApp!='780')
 this.CTF = Math.round((+this.NOPE * +this.NOPP * this.L / this.Vf) * 100)/100 //NOPE * NOPP * L / Vf
-this.TLL = 50
-this.TLT = 50
-this.FCE = Math.round((this.TLT / this.CTF) * 100)/100
+// this.TLL = 50
+// this.TLT = 50
+this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,0).subscribe((res: any) => {
+  var result:object[] = JSON.parse(res);
+  this.TLL = result[0]['TLL'] || '0'
+  this.TLT = result[0]['TLT'] || '0'
+  var a:string[] = this.TLT.toString().split(':');
+  var TLTMin:number = +a[0] + (+a[1] / 60)
+  this.FCE = Math.round((TLTMin / this.CTF) * 100)/100
 this.THe_IPB = Math.ceil((this.B / this.FCE / this.THe_CEDC) * this.THe_CICT)
 this.T_TPB = Math.ceil(this.B / this.FCE / this.THe_CEDC / this.THeH_I)
 this.He_TPB = this.T_TPB
@@ -303,6 +309,8 @@ this.H_TGC =  Math.ceil(this.H_TSHC + this.H_TSKC * 100)/100
 
 this.MTB = Math.round(this.B * this.CTF * 100)/100
 this.MCB = Math.round((this.MTB / 60 * this.MCH) * 100) / 100
+
+
 
 
 /////TYPES
@@ -333,6 +341,9 @@ if (this.selectedHelp.itemTypeRes == 'S'){
 
 this.TCB = Math.round(this.TCB * 100)/100
 this.CPU = Math.round((this.TCB / this.B) * 100)/100
+
+})
+
 // let itemIndex:number = 0
   this.selectedHelp.CatalogNo.forEach(function (value) {
 if (value.trim().length == 7){

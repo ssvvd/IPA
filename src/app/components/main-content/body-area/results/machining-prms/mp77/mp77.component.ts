@@ -302,13 +302,17 @@ if (pr.value.trim().length == 7){
 
 
 
+              this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,+this.DH).subscribe((res: any) => {
+                var result:object[] = JSON.parse(res);
+                this.TLL = result[0]['TLL'] || '0'
+                this.TLT = result[0]['TLT'] || '0'
 
-    //calc
+                    //calc
     this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value;
     this.HPP = 1;
     this.HI_I = 30;
-    this.TLL = 50;
-    this.TLT = '50:00';
+    // this.TLL = 50;
+    // this.TLT = '50:00';
     this.H_HDH = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
     this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
@@ -345,6 +349,10 @@ if (pr.value.trim().length == 7){
     this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
     this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
     this.CPU = Math.round((this.TCB / this.B) * 100)/100
+    
+              })
+
+
               
               switch (insertBrandName.trim().toUpperCase()){
                   case 'SUMOCHAM FLAT HEAD': case 'SUMOCHAM CHAMDRILL LINE': case 'SUMOCHAMIQ':

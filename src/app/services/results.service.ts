@@ -249,4 +249,17 @@ export class ResultsService {
     });
   }
 
-}
+  public gettoolliferesults(units:string, SecApp:string, grade:string, material:string, itemtype:string, cuttingspeed:string, diameter:number){
+
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-toollife-results/' + units + '/' + SecApp + '/' + grade + '/' + material + '/' + itemtype + '/' + cuttingspeed + '/' + diameter).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
+
+  }
+
+
+
+
+
