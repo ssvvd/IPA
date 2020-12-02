@@ -28,7 +28,7 @@ export class ResultItemInfoComponent implements OnInit {
   @Input () Family:string;
   @Input () ItemDesignation:string;
 
-  @Input() viewParamsChanged:any;
+  //@Input() viewParamsChanged:any;
 
   FamilyName:string;
   FamilyDesc:string;

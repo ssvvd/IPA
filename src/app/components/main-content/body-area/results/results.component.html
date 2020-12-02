@@ -256,7 +256,8 @@
             </div>      
             <label class="siteTitle pt-2 pl-3">{{viewParams.Res[0].GroupText[PrtNum] | translate}}:</label>          
             <div class="pl-3 pt-0">        
-              <result-item-info [viewParamsChanged]="viewParams" [ItemDesignation]="viewParams.Res[0].Designation[PrtNum]" [Family]="viewParams.Res[0].Families[PrtNum]" [CatalogNo]="viewParams.Res[0].CatalogNo[PrtNum]"></result-item-info>
+              <!-- <result-item-info [viewParamsChanged]="viewParams" [ItemDesignation]="viewParams.Res[0].Designation[PrtNum]" [Family]="viewParams.Res[0].Families[PrtNum]" [CatalogNo]="viewParams.Res[0].CatalogNo[PrtNum]"></result-item-info> -->
+              <result-item-info  [ItemDesignation]="viewParams.Res[0].Designation[PrtNum]" [Family]="viewParams.Res[0].Families[PrtNum]" [CatalogNo]="viewParams.Res[0].CatalogNo[PrtNum]"></result-item-info>
             </div>                      
           </div>
       </div>                          
