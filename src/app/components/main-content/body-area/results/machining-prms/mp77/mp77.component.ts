@@ -325,7 +325,7 @@ if (pr.value.trim().length == 7){
 
 
               //this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,+this.DH).subscribe((res: any) => {
-              this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => {
+              this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => {
                 var result:object[] = JSON.parse(res);
                 this.TLL = result[0]['TLL'] || '0'
                 this.TLT = result[0]['TLT'] || '0'
