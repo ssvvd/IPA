@@ -19,16 +19,11 @@
     <br>
     <br>
    
-   <!--  <iframe 
-    (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
-    [src]="!isLoaded(PrtNum) ? getUrl1(row) : 'about:blank'" [style.height]="SRC == 'ITA1' ? '400px' : '550px'" style="width:70%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
-    </iframe> -->
     <iframe 
     (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
-    [src]="!isLoaded(PrtNum) ? getUrl1(row) : 'about:blank'" [style.height]="'550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
+    [src]="!isLoaded(PrtNum) ? getUrl1(row,PrtNum) : getUrl1('1',PrtNum)" [style.height]="'550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe>
     <hr>
 </div>
 </ng-template> 
- <!-- <iframe [src]="getUrl(environment.eCatItemRedPage + row.trim() + '&SRC=' + SRC)" style="width:71%;height:550px;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
-    </iframe> -->
+
