@@ -14,7 +14,7 @@
                             <label class="custom-control-label" for="opttype2">{{'Next to shaft' | translate}}</label>
                         </div>   
                         <div class="custom-control custom-radio custom-control-inline" *ngIf="msrv_StMng.SecApp=='54'" (click)="SetImageSecAppByAppType('3')">
-                            <input type="radio" class="custom-control-input" id="opttype3" name="ToolPos" [(ngModel)]="TypeApp" value="3" [attr.disabled]="true">
+                            <input type="radio" class="custom-control-input" id="opttype3" name="ToolPos" [(ngModel)]="TypeApp" value="3" [disabled]="true">
                             <label class="custom-control-label" for="opttype3">{{'Internal' | translate}}</label>
                         </div>  
                         <div class="custom-control custom-radio custom-control-inline" *ngIf="msrv_StMng.SecApp=='188'" (click)="SetImageSecAppByAppType('3')">

@@ -98,7 +98,8 @@ export class Appdetails120Component implements OnInit {
     dia=this.srv_StMng.IPL.GetItem('D_Hole').value;
 
     this.eventsSubscription.add(this.events.subscribe(() => this.ClearData()));  
-    this.eventsSubscription.add(this.evGetResult.subscribe(() => this.CheckMandatoryFiled()));
+    if(this.evGetResult!=null)
+        this.eventsSubscription.add(this.evGetResult.subscribe(() => this.CheckMandatoryFiled()));
 
     this.eventsSubscription.add(this.srv_DataLayer.thread_form().subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                                                
