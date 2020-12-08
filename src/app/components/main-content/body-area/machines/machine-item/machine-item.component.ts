@@ -72,7 +72,7 @@ export class MachineItemComponent implements OnInit {
   }
   ngOnInit()
    {  
-    this.srv_appsetting.RateChange.subscribe(res=>(this.ChangeRate(res)));
+    this.eventsSubscription.add(this.srv_appsetting.RateChange.subscribe(res=>(this.ChangeRate(res))));
     this.FillMachineData();
   }
   
@@ -134,7 +134,7 @@ export class MachineItemComponent implements OnInit {
        this.machHeader.MachineName, this.srv_appsetting.Units,
        this.machHeader.MachineType1,this.machHeader.CostPerHour,this.machHeader.Currency,s).subscribe((res: any) => {
                 
-      const modalRef = this.modalService.open(PpSuccessfullyComponent, { centered: true });
+      const modalRef = this.modalService.open(PpSuccessfullyComponent, { backdrop:'static',centered: true });
       modalRef.componentInstance.HeaderDescription = "My Machines";
       modalRef.componentInstance.Text = "My Machines has been successfully saved";
     }));               
@@ -145,7 +145,7 @@ export class MachineItemComponent implements OnInit {
     //this.statusclick=1;
     if(this.srv_appsetting.UserID=='')
     {    
-      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
+      const modalRef = this.modalService.open(MachinesPpLoginComponent, { backdrop:'static', centered: true });
       modalRef.componentInstance.title = "Add To My Machines";
       modalRef.componentInstance.Msg = 'Please login to add the machine to My Machines';
       modalRef.result.then((result) => {
@@ -153,14 +153,16 @@ export class MachineItemComponent implements OnInit {
         if(result=='login')
         {
           this.SpinnerService.show();
-          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
+
+          
+          this.eventsSubscription.add(this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();})); 
           return;
         }});
       
     }    
     else
     {
-      const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
+      const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { backdrop:'static',centered: true });
       modalRef.componentInstance.MachineName = mach.MachineName;
       
       if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
@@ -170,9 +172,9 @@ export class MachineItemComponent implements OnInit {
         if(mach.isFavorite && result=='delete')
         {
           mach.isFavorite =false;
-          this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {
+          this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {
             this.router.navigate(['/home/machines']);
-          });         
+          }));         
           //this.Initializemachinelist(true);
           //this.eventsChangeFavorite.next();
         }
@@ -189,12 +191,12 @@ export class MachineItemComponent implements OnInit {
           }
           else
           {
-            this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => { 
+            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => { 
               alert(newid); 
               this.pr_MachineID =newid;
               this.machHeader=null;
               this.FillMachineData();                               
-              }); 
+              })); 
           }                    
         }         
     } );
@@ -205,7 +207,7 @@ export class MachineItemComponent implements OnInit {
 
   OnFavoriteMachine(mach: Machineheader)
   {       
-    const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
+    const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { backdrop:'static',centered: true });
     modalRef.componentInstance.MachineName = mach.MachineName;
     
     if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
@@ -215,16 +217,16 @@ export class MachineItemComponent implements OnInit {
       if(mach.isFavorite && result=='delete')
       {
         mach.isFavorite =false;
-        this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
+        this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {}));         
         
       }
       else         
       {            
         //todo: with user
-        this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+        this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
           this.FillMachineDataFromServer(newid);
           //this.srv_cook.add_fav_machine(mach.MachineID);         
-        }); 
+        })); 
         
       }         
   } );

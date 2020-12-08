@@ -101,6 +101,10 @@ export class MachinesFilterComponent implements OnInit {
     this.defimage ="https://www.placecage.com/1000/1000";
   }
  
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
+  }
+  
   InitialdataMachineTypeShowing()
   {
      if(this.machFilter.IsMachiningCenter && this.machFilter.IsLathe && this.machFilter.IsMultiTask

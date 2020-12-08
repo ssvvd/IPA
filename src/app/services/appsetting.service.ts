@@ -87,6 +87,7 @@ export class AppsettingService {
     localStorage.setItem('units',u);
     this.mUnits = u;
     this.srv_cook.set_cookie('units',u);
+   
    }
 
    ChangeUnits(units:string)

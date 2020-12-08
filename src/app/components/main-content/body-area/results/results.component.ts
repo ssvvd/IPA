@@ -83,7 +83,7 @@ eventsSubject: Subject<void> = new Subject<void>();
   goToView(value){
     this.MainPage = false;
     this.viewParams = value;
-    this.active = 1;
+    this.active = 1;    
   }
 
   switchPage(){

@@ -117,7 +117,7 @@ export class Optimizetool59Component implements OnInit {
         if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
             || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )                 
           this.srv_StMng.IPL.GetItem('Coolant').value='1'; 
-          const modalRef = this.modalService.open(PpSuccessfullyComponent, { centered: true });
+          const modalRef = this.modalService.open(PpSuccessfullyComponent, {backdrop:'static', centered: true });
           modalRef.componentInstance.HeaderDescription = "Coolant";
           modalRef.componentInstance.Text = "Applying Wet Coolant is Possible but will Reduce Tool Life by up to 50%"; 
                                   

@@ -34,7 +34,7 @@ import { ResultPpInventoryComponent } from './result-pp-inventory/result-pp-inve
 import { MpIsoTurningComponent } from './machining-prms/mp-iso-turning/mp-iso-turning.component';
 import { MpIsoTurningAxRaComponent } from './machining-prms/mp-iso-turning-ax-ra/mp-iso-turning-ax-ra.component';
 import { MpTurnGrooveComponent } from './machining-prms/mp-turn-groove/mp-turn-groove.component';
-import { ResultsPdfComponent } from './results-pdf/results-pdf.component';
+/* import { ResultsPdfComponent } from './results-pdf/results-pdf.component'; */
 import { ResultItemInfoComponent } from './result-item-info/result-item-info.component';
 import { PpPromotionComponent } from './pp-promotion/pp-promotion.component';
 import { MpThreadingComponent } from './machining-prms/mp-threading/mp-threading.component';
@@ -62,9 +62,9 @@ import { DataTablesModule } from 'angular-datatables';
     MpIsoTurningComponent,
     MpIsoTurningAxRaComponent,
     MpTurnGrooveComponent,
-    ResultsPdfComponent,
+    //ResultsPdfComponent,
     ResultItemInfoComponent,
-    ResultsPdfComponent,
+    //ResultsPdfComponent,
     PpPromotionComponent,
     MpThreadingComponent
   ],

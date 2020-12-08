@@ -362,7 +362,7 @@ tr.tr-selected {
 
 .cursor-not-allowed
 {
-  cursor: not-allowed
+  cursor: not-allowed!important;
 }
 
 .table thead th {
@@ -458,6 +458,12 @@ html, body{
 {
    font-size: 26px;
 }
+
+.span_x
+{
+   font-size: 26px;
+}
+
 /* 
  .ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
  .ng-select-container.ng-has-value .ng-value-container 
@@ -508,6 +514,24 @@ html, body{
   @extend .col-md-12;
   @extend .col-lg-8 ;
   @extend .col-xl-9;
+}
+
+
+.feedback-modal .modal-dialog {
+  /* bottom: 0;
+  position: absolute;
+  right: 5px; */
+  /* display:flex;
+  
+  left: 1000px;
+  top: 1000px;  */
+  top: 200px;    
+  width: 620px!important;
+  height: 400px!important;
+  min-width: 620px!important;
+  min-height: 400px!important;
+  max-width: 620px!important;
+  max-height: 400px!important;
 }
 
 

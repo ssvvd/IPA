@@ -105,39 +105,55 @@
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="MenuImg" title="{{'Calculators' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
                         <div  class="row col-12 dropdown-item menuitem mt-2 mb-2">                                                                                                                                                               
-                            <a [href]="environment.MachiningCalculatorSite" target="_blank">
-                                <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                                                                                                                                                                              
+                            <a [href]="environment.MachiningCalculatorSite" target="_blank" class="pl-2 pb-2 pt-2">
+                                <!-- <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">  -->                                                                                                                                                                                             
                                 <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Machining Calculators' | translate}}</label>                                                                                                                          
                             </a>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" >                                                                                                                   
-                            <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                                                 
-                            <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>                                                                           
+                        <div class ="row col-12 dropdown-item menuitem" >
+                            <a target="_blank" class="pl-2 pb-2 pt-2">                                                                                                                   
+                            <!-- <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2"> -->                                                                 
+                                <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>             
+                            </a>                                                              
                         </div>
                         <div class ="row col-12 dropdown-item menuitem" > 
-                            <a [href]="environment.IscarSite +'/GeometryAnalyzer/?lang=' + msrv_appsetting.Lang" target="_blank">                                                                                   
-                                <img [src]="environment.ImagePath+'productive_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                      
+                            <a [href]="environment.IscarSite +'/GeometryAnalyzer/?lang=' + msrv_appsetting.Lang" target="_blank" class="pl-2 pb-2 pt-2">                                                                                   
+                                <!-- <img [src]="environment.ImagePath+'productive_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">   -->                                    
                                 <label class="siteTitle  mt-2" >{{'Productive Geometries' | translate}}</label>   
                             </a>                                                
                         </div>
                         <div class ="row col-12 dropdown-item menuitem" >                              
-                            <a [href]="'https://www.iscar.com/insertconvertor/?lang=' + msrv_appsetting.Lang" target="_blank">                                                                                
-                                <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                      
+                            <a [href]="'https://www.iscar.com/insertconvertor/?lang=' + msrv_appsetting.Lang" target="_blank" class="pl-2 pb-2 pt-2">                                                                                
+                                <!-- <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">   -->                                    
                                 <label class="siteTitle  mt-2" >{{'Grade Optimizer' | translate}}</label>
                             </a>                                                
                         </div>
                         <div class ="row col-12 dropdown-item menuitem" >                              
-                            <a [href]="'https://www.iscar.com/Products.aspx/CountryId/1/ProductId/12340'" target="_blank">                                                                                
-                                <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">                                      
+                            <a [href]="'https://www.iscar.com/Products.aspx/CountryId/1/ProductId/12340'" target="_blank" class="pl-2 pb-2 pt-2">                                                                                
+                                <!-- <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">       -->                                
                                 <label class="siteTitle  mt-2" >{{'Insert wear' | translate}}</label>
                             </a>                                                
                         </div>
                     </div>
                 </div>
-                <div class="div-header-link pl-1">
-                    <!-- <a  [routerLink]="['/home/contactus']"><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg" title="{{'Help' | translate}}"></a> -->
+                <!-- <div class="div-header-link pl-1">                   
                     <a (click)="contactus()"><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg" title="{{'Help' | translate}}"></a>
-                </div>            
+                </div> --> 
+                <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
+                    <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Help_Icon.svg'"  class="MenuImg" title="{{'Help' | translate}}"></div>
+                    <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
+                        <div  class ="row col-12 dropdown-item menuitem ml-4 mt-1 mb-1 mr-4 pl-4" >                                                                                                                                                               
+                            <a (click)="contactus()" target="_blank" class="pl-2 pb-2 pt-2">                                                                                                                               
+                                <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Contact Us' | translate}}</label>                                                                                                                          
+                            </a>
+                        </div>
+                        <div class ="row col-12 dropdown-item menuitem" (click)="feedback()" >
+                            <a (click)="feedback()" target="_blank" class="pl-2 pb-2 pt-2">                                                                        
+                                <label (click)="feedback()" class="siteTitle  mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>                                                                                                                          
+                            </a>
+                        </div>
+                    </div>                                                                     
+                </div>                   
             </div>
         </div>                
     </div>

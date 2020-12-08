@@ -12,6 +12,17 @@
     border-style:none!important;
 }
 
+.div-app-810
+{      
+    background-color:white; 
+    cursor: pointer;  
+    padding-right: 0px;
+    margin-right: 0px; 
+    opacity: 0.5;   
+    border-style:none!important;
+    cursor:not-allowed !important;
+}
+
 .div-app :hover
 {      
     background-color:var(--bg-hover);
@@ -64,7 +75,7 @@
 
 .img-not-allowed
 {
-   cursor: not-allowed;  
+   cursor: not-allowed !important;  
    opacity: 0.5;   
 }
 .app-image

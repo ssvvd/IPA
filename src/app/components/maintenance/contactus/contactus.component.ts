@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { PpSuccessfullyComponent} from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { StateManagerService } from 'src/app/services/statemanager.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -16,7 +12,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ContactusComponent implements OnInit {
 
   constructor(private srv_DataLayer:DatalayerService, public srv_appsetting:AppsettingService,public activeModal: NgbActiveModal,
-    private modalService: NgbModal,private formBuilder: FormBuilder,private router: Router,private srv_statemanage: StateManagerService) { }
+             private formBuilder: FormBuilder) { }
   
   Name:string='';
   Email:string='';

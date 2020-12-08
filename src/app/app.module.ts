@@ -100,6 +100,7 @@ import { MpThreadingComponent } from './components/main-content/body-area/result
 import { HeaderPpUnitsComponent } from './components/header/header-pp-units/header-pp-units.component';
 import { PpSuccessfullyComponent } from './components/maintenance/pp-successfully/pp-successfully.component';
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
+import { FeedbackComponent } from './components/maintenance/feedback/feedback.component';
 
 
 @NgModule({
@@ -185,6 +186,7 @@ import { ContactusComponent } from './components/maintenance/contactus/contactus
     HeaderPpUnitsComponent,
     PpSuccessfullyComponent,
     ContactusComponent,
+    FeedbackComponent,
     
   ],
   exports:[SharedModule],

@@ -75,7 +75,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     };    
     this.isLoaded =false;
     this.Initializemachinelist(false);
-    this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);});  // todo: 
+    this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 
   }
   
   Initializemachinelist(withdestroy:boolean)
@@ -207,7 +207,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     this.statusclick=1;
     if(this.srv_appsetting.UserID=='')
     {    
-      const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
+      const modalRef = this.modalService.open(MachinesPpLoginComponent, { backdrop:'static',centered: true });
       modalRef.componentInstance.title = "Add To My Machines";
       modalRef.componentInstance.Msg = 'Please login to add the machine to My Machines';
       modalRef.result.then((result) => {
@@ -215,14 +215,14 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         if(result=='login')
         {
           this.SpinnerService.show();
-          this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();}); 
+          this.eventsSubscription.add(this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();})); 
           return;
         }});
       
     }    
     else
     {
-      const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { centered: true });
+      const modalRef = this.modalService.open(MachinePpAddFavoriteComponent, { backdrop:'static',centered: true });
       modalRef.componentInstance.MachineName = mach.MachineName;
       
       if(mach.isFavorite) modalRef.componentInstance.IsDelete = true;
@@ -232,7 +232,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         if(mach.isFavorite && result=='delete')
         {
           mach.isFavorite =false;
-          this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {});         
+          this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {}));         
           this.Initializemachinelist(true);
           this.eventsChangeFavorite.next();
         }
@@ -249,10 +249,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
           }
           else
           {
-            this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
               this.Initializemachinelist(true);
               this.eventsChangeFavorite.next();                   
-              }); 
+              })); 
           }
           
           

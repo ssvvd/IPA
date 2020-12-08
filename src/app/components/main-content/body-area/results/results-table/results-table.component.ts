@@ -20,6 +20,8 @@ import {PpPromotionComponent} from 'src/app/components/main-content/body-area/re
 import { DownloadresultService} from 'src/app/services/downloadresult.service';
 import { ResultPpInventoryComponent } from 'src/app/components/main-content/body-area/results/result-pp-inventory/result-pp-inventory.component';
 import { MachineService } from 'src/app/services/machine.service' ;
+import { CookiesService } from 'src/app/services/cookies.service';
+import { FeedbackComponent } from 'src/app/components/maintenance/feedback/feedback.component';
 
 @Component({
   selector: 'app-results-table',
@@ -71,8 +73,13 @@ export class ResultsTableComponent implements OnInit {
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
-    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,private srv_machine: MachineService) { }
+    private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,
+    private srv_machine: MachineService,private srv_cook:CookiesService) { 
+      
+    }
+  
 
+    
   ngOnInit() {
     
     
@@ -147,8 +154,7 @@ export class ResultsTableComponent implements OnInit {
   }
 
 getShowTable(){
-  this.SpinnerService.show(); 
-
+  this.SpinnerService.show();   
   if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged))
   {
     this.srv_ResultsStore.setParams(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged)
@@ -162,7 +168,7 @@ getShowTable(){
         )
         .subscribe(([res1, res2, res3, res4,res5, res6]:[any,any,any,any,any,any]) => {
           this.srv_ResultsStore.setResults(res1, res2, res3, res4,res5, res6)
-          this.renderTable(res1, res2, res3, res4,res5, res6)
+          this.renderTable(res1, res2, res3, res4,res5, res6);          
         // let a =0
         });
       }
@@ -632,14 +638,14 @@ else{
 //   })
 // }
 
-
-this.SpinnerService.hide();
+  
+  this.SpinnerService.hide();
+  
+  if(this.srv_cook.get_cookie("notshowfeedback")=="")
+  {    
+    setTimeout(() => { this.feedback(); }, 40000);
+  }    
 }
-// private async checkImgExists(image_url:string){
-//   const data = await this.srv_Results.checkImgExists(image_url).toPromise();
-//   console.log("Data: " + JSON.stringify(data));
-
-// }
 
 changeSource(event, name) { event.target.src = name; }
 
@@ -1180,7 +1186,6 @@ for (let x in families) {
   }
 }
 
-
 }
 
 columnName(colName:string){
@@ -1227,6 +1232,14 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
       }
   }
   }
+feedback()
+{
+  const modalRef = this.modalService.open(FeedbackComponent,{ backdrop: 'static',centered: true, windowClass: 'feedback-modal' });
+  modalRef.result.then((result) => {
+    if(result=='cancel') return;
+    if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');    
+  });    
+} 
 
 }
 
