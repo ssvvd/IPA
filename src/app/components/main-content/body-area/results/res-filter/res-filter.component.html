@@ -192,7 +192,7 @@
         </div> 
         <div >                       
             <div class="custom-control custom-checkbox custom-control-inline mr-3">
-                <input type="checkbox" class="cursor-pointer" checked id="ICS" name="ICS" class="custom-control-input" (change)="checkItem('1',$event.target.checked,'CSP');checkItem('9999',$event,'CP');">
+                <input type="checkbox" class="cursor-pointer" checked id="ICS" name="ICS" class="custom-control-input" (change)="checkItem('1',$event.target.checked,'CSP');checkItem('',$event.target.checked,'CP',1000);">
                 <label  class="custom-control-label cursor-pointer" for="ICS">{{'Standard' | translate}}</label>
               </div>   
               <div class="custom-control custom-checkbox custom-control-inline mr-3">
@@ -200,7 +200,7 @@
                 <label  class="custom-control-label cursor-pointer" for="ICW">{{'Without' | translate}}</label>
               </div>      
               <div class="custom-control custom-checkbox custom-control-inline">
-                <input type="checkbox" class="cursor-pointer" checked id="ICH" name="ICH" class="custom-control-input" (change)="checkItem('9999',!$event.target.checked,'CP');">
+                <input type="checkbox" class="cursor-pointer" checked id="ICH" name="ICH" class="custom-control-input" (change)="checkItem('',!$event.target.checked,'CP');">
                 <label  class="custom-control-label cursor-pointer" for="ICH">{{'High Pressure' | translate}}</label>
               </div>                                                                   
         </div>

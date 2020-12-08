@@ -1,27 +1,6 @@
 
 
-<div class="" *ngIf="SRC == 'ITA2'">
-<div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
-
-    <label class="bold font-weight-bold">{{selectedOption.GroupText[PrtNum] | translate}}:</label>
-    <i class="fa fa-spinner fa-spin pl-2" *ngIf="!isLoaded(PrtNum)"></i>
-    <br>
-    <br>
-   
-   <!--  <iframe 
-    (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
-    [src]="!isLoaded(PrtNum) ? getUrl1(row) : 'about:blank'" [style.height]="SRC == 'ITA1' ? '400px' : '550px'" style="width:70%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
-    </iframe> -->
-    <iframe 
-    (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
-    [src]="!isLoaded(PrtNum) ? getUrl1(row) : 'about:blank'" [style.height]="'550px'" style="width:70%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
-    </iframe>
-    <hr>
-</div>
-</div> 
- <!-- <iframe [src]="getUrl(environment.eCatItemRedPage + row.trim() + '&SRC=' + SRC)" style="width:71%;height:550px;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
-    </iframe> -->
-<div *ngIf="SRC == 'ITA1'">
+<div *ngIf="SRC == 'ITA1'; else elseBlock">
         
     <div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
         <label class="siteTitle pt-2 pl-3">{{selectedOption.GroupText[PrtNum] | translate}}:</label>
@@ -31,3 +10,20 @@
         <div class="border-bottom pb-4 pr-4"></div>
     </div>
 </div>
+
+<ng-template #elseBlock>
+<div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
+
+    <label class="bold font-weight-bold">{{selectedOption.GroupText[PrtNum] | translate}}:</label>
+    <i class="fa fa-spinner fa-spin pl-2" *ngIf="!isLoaded(PrtNum)"></i>
+    <br>
+    <br>
+   
+    <iframe 
+    (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
+    [src]="!isLoaded(PrtNum) ? getUrl1(row,PrtNum) : getUrl1('1',PrtNum)" [style.height]="'550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
+    </iframe>
+    <hr>
+</div>
+</ng-template> 
+

@@ -269,43 +269,43 @@
           <div class="col-2">{{'Edges' | translate}}</div>
         </div>
         
-        <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
+        <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
             <div class="col-3 row"><Label>{{'Insert Price' | translate }}</Label></div>
             <div class="col-2">IP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{THe_IP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType=='T'">
+          <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='T'">
             <div class="col-3 row"><Label>{{'Tool Price' | translate }}</Label></div>
             <div class="col-2">TP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T_TP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType=='He'">
+          <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='He'">
             <div class="col-3 row"><Label>{{'Head Price' | translate }}</Label></div>
             <div class="col-2">HP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_HP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType=='S'">
+          <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='S'">
             <div class="col-3 row"><Label>{{'Solid Price' | translate }}</Label></div>
             <div class="col-2">SP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{S_SP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType=='H'">
+          <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Solid Head Price' | translate }}</Label></div>
             <div class="col-2">SHP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_SHP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType=='H'">
+          <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Shank Price' | translate }}</Label></div>
             <div class="col-2">SKP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_SKP}}</div>
             <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <div class="row justify-content-start w-100" *ngIf="resType=='He'">
+          <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='He'">
             <div class="col-3 row"><Label>{{'Shank Price' | translate }}</Label></div>
             <div class="col-2">HHP</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_HHP}}</div>

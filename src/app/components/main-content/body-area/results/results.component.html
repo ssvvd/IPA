@@ -46,7 +46,7 @@
                   </div> 
                 </label>
               </div>
-              <div>
+              <div [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="DownLoadResults()">
                   <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i> 
                   <!-- <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>  -->                 
@@ -79,7 +79,7 @@
             <a ngbNavLink class="siteTitle">{{'2D+3D Representation' | translate}}</a>
             <ng-template ngbNavContent>
               <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
-              <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
+              <product-info #productInfo [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
             </ng-template>
           </li>
 

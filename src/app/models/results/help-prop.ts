@@ -24,8 +24,8 @@ export class clsHelpProp {
     CCTMS:string[]=[]
     // CCFMS:string;
     BMC:string[]=[];
-    CSP:number;
-    CP:number;
+    // CSP:number;
+    // CP:number;
     DC:number;
     DCX:number;
     KAPR:number;
@@ -51,6 +51,7 @@ export class clsHelpProp {
     GroupID:number[]=[];
     desgFieldName:string[]=[];
     info:string[]=[];
+    [key: string]: any;
 
     private _isHidden:number;
 
@@ -148,6 +149,44 @@ export class clsHelpProp {
                         this.isHidden--
                 }
                     break;   
+        }
+    }
+
+
+
+        // switch (filed){
+        // case 'CSP':
+        //     if (this.CSP){
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     else{
+        //         //get CSP value
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     break;
+        // case 'CP':
+        //     if (this.CP){
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     else{
+        //         //get CSP value
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     break;
+        // }
+
+    
+
+    InternalCoolantFilter(filed:string,value:string,checked:string){
+        switch (checked){
+            case 'T':
+               if (this[filed] == value)
+                     this.isHidden--
+              break;
+            case 'F':
+               if (this[filed] == value)
+                   this.isHidden++
+              break;
         }
     }
 

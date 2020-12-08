@@ -11,6 +11,7 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Subject } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ProductInfoComponent } from './product-info/product-info.component';
 
 @Component({
   selector: 'app-results',
@@ -28,8 +29,10 @@ IsExport:boolean;
 environment = environment;  
 navigationSubscription;
 _hideFilter:boolean;
+// _showDownload:boolean;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
+@ViewChild('productInfo', {static: false}) productInfo: ProductInfoComponent;
 
 eventsSubject: Subject<void> = new Subject<void>();
 
@@ -67,6 +70,7 @@ eventsSubject: Subject<void> = new Subject<void>();
     this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
     this.MainPage = true;     
     this._hideFilter = false; 
+    // this._showDownload = true;
   }
 
   receiveFilterChange(value){
@@ -92,6 +96,11 @@ eventsSubject: Subject<void> = new Subject<void>();
   hideFilter(event){
     this._hideFilter = true;
   }
+
+  // showDownload1($event:boolean){
+  //   this._showDownload = $event;
+  // }
+
 
   DownLoadResults()
   {  
