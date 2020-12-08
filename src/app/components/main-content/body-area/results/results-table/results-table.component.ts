@@ -447,7 +447,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
           let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
           let value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           switch (fieldsmallSplit){
-            case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':case 'CSP':case 'CP':case 'ZEFF':
+            case 'DC': case 'DCX': case 'KAPR': case 'APMX':case 'RE':case 'CHW':case 'PSIR':case 'L':case 'IC':case 'CEDC':case 'CW':case 'ZEFF':
               if (value && value > 0){
               this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
               }
@@ -546,7 +546,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
 
     }
 
-  this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
+  this.countShowingRows()
   var visColumnsCount = this.dtResultsObjects[0].length
   this.dtResultsObjects3d = []
   let index3:number = 0;
@@ -1029,7 +1029,7 @@ ngOnChanges(changes:SimpleChanges) {
               // if (this.dtResultsObjectsHelp[i][field])
               switch (this.filterChangedRec.Res[2]){
                 case 'T': case 'F':
-                  this.dtResultsObjectsHelp[i].InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units)
+                  this.InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units,i)
                   // if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
                   //       this.dtResultsObjectsHelp[i].isHidden--
                   break;
@@ -1083,7 +1083,7 @@ ngOnChanges(changes:SimpleChanges) {
       
     }
 
-    this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
+    this.countShowingRows()
     if (this.filterChangedRec.control == 'TypeFeed')
       this.lasTypeFeed = this.filterChangedRec.Res;
     
@@ -1096,6 +1096,9 @@ ngOnChanges(changes:SimpleChanges) {
   
 }
 
+countShowingRows(){
+  this.showingrows = this.dtResultsObjectsHelp.filter((obj) => obj.isHidden < 1).length;
+}
 filterRecommended(prop:clsHelpProp){
     if (prop.IsExpand == "False")
         prop.isHidden++
@@ -1193,6 +1196,37 @@ getValue(col:clsPropertyValue[]){
   }
   return value;
 }
+
+
+InternalCoolant(filed:string,value:string,checked:string,units:string,index:number){
+
+  if (this.dtResultsObjectsHelp[index][filed]){
+      this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)
+       if(index == (this.dtResultsObjectsHelp.length - 1))
+       setTimeout(() => {
+        this.countShowingRows() 
+      }, 200)
+  }
+  else{
+      //get CSP/CP value
+      //CatalogNoT - Cool - EffZ
+      if (this.dtResultsObjectsHelp[index].CatalogNoT && this.dtResultsObjectsHelp[index].CatalogNoT[0].trim().length == 7){
+      this.srv_Results.GetFlatDataField(filed == 'CSP' ? 'Cool' : 'EffZ' ,this.dtResultsObjectsHelp[index].CatalogNoT[0].trim(),this.srv_StMng.SecApp,units).subscribe((res: any) => {
+          let fieldValue:string = JSON.parse(res)
+          this.dtResultsObjectsHelp[index][filed] = fieldValue
+          this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)
+          if(index == (this.dtResultsObjectsHelp.length - 1))
+          setTimeout(() => {
+            this.countShowingRows() 
+          }, 200)
+          
+          // (index == (this.dtResultsObjectsHelp.length - 1)) ? this.countShowingRows() : ''
+      })
+  }
+  else{
+      }
+  }
+  }
 
 }
 

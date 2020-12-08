@@ -148,7 +148,7 @@ else
   }
 
 
-  checkItem(value:string, event:boolean, controlName:string)
+  checkItem(value:string, event:boolean, controlName:string, timer: number = 0)
   {
 
     let checked:string;
@@ -157,7 +157,10 @@ else
     else
       checked = "F"
 
-    this.filterEvent.emit({control:'filterList',Res:[controlName,value,checked]});
+    
+    setTimeout(() => {
+      this.filterEvent.emit({control:'filterList',Res:[controlName,value,checked]});
+    }, timer)
          
   }
 
