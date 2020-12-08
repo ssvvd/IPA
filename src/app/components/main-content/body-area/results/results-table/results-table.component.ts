@@ -1026,15 +1026,18 @@ ngOnChanges(changes:SimpleChanges) {
             case 'filterList':
               let field:string = this.filterChangedRec.Res[0];
               let value:string = this.filterChangedRec.Res[1];
+              // if (this.dtResultsObjectsHelp[i][field])
               switch (this.filterChangedRec.Res[2]){
-                case 'T':
-                  if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
-                        this.dtResultsObjectsHelp[i].isHidden--
+                case 'T': case 'F':
+                  this.dtResultsObjectsHelp[i].InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units)
+                  // if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
+                  //       this.dtResultsObjectsHelp[i].isHidden--
                   break;
-                case 'F':
-                  if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
-                      this.dtResultsObjectsHelp[i].isHidden++
-                  break;
+                // case 'F':
+                //  this.dtResultsObjectsHelp[i].InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units)
+                //   // if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
+                //   //     this.dtResultsObjectsHelp[i].isHidden++
+                //   break;
                 case 'S':
                   if (this.dtResultsObjectsHelp[i][field].filter(s => !s.toUpperCase().includes(value)).length > 0)
                       this.dtResultsObjectsHelp[i].isHidden++

@@ -151,6 +151,59 @@ export class clsHelpProp {
         }
     }
 
+    InternalCoolant(filed:string,value:string,checked:string,units:string){
+
+        if (this[filed]){
+            this.InternalCoolantFilter(filed,value,checked)
+        }
+        else{
+            //get CSP/CP value
+            //CatalogNoT - Cool - EffZ
+            if (this.CatalogNoT && this.CatalogNoT[0].trim().length == 7)
+            this.srv_Results.GetFlatDataField(filed == 'CSP' ? 'Cool' : 'EffZ' ,this.CatalogNoT[0].trim(),this.srv_StMng.SecApp,units).subscribe((res: any) => {
+                let fieldValue:string = JSON.parse(res)
+                this[filed] = fieldValue
+                this.InternalCoolantFilter(filed,value,checked)
+            })
+            
+        }
+
+        // switch (filed){
+        // case 'CSP':
+        //     if (this.CSP){
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     else{
+        //         //get CSP value
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     break;
+        // case 'CP':
+        //     if (this.CP){
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     else{
+        //         //get CSP value
+        //         this.InternalCoolantFilter(filed,value,checked)
+        //     }
+        //     break;
+        // }
+
+    }
+
+    InternalCoolantFilter(filed:string,value:string,checked:string){
+        switch (checked){
+            case 'T':
+               if (this[filed].filter(s => s == value).length > 0)
+                     this.isHidden--
+              break;
+            case 'F':
+               if (this[filed].filter(s => s == value).length > 0)
+                   this.isHidden++
+              break;
+        }
+    }
+
 
 
 }
