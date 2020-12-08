@@ -1205,7 +1205,7 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
        if(index == (this.dtResultsObjectsHelp.length - 1))
        setTimeout(() => {
         this.countShowingRows() 
-      }, 200)
+      }, 100)
   }
   else{
       //get CSP/CP value
@@ -1218,7 +1218,7 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
           if(index == (this.dtResultsObjectsHelp.length - 1))
           setTimeout(() => {
             this.countShowingRows() 
-          }, 200)
+          }, 100)
           
           // (index == (this.dtResultsObjectsHelp.length - 1)) ? this.countShowingRows() : ''
       })
