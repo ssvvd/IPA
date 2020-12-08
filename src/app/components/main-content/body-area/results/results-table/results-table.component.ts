@@ -1202,6 +1202,36 @@ getValue(col:clsPropertyValue[]){
   return value;
 }
 
+
+InternalCoolant(filed:string,value:string,checked:string,units:string,index:number){
+
+  if (this.dtResultsObjectsHelp[index][filed]){
+      this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)
+       if(index == (this.dtResultsObjectsHelp.length - 1))
+       setTimeout(() => {
+        this.countShowingRows() 
+      }, 100)
+  }
+  else{
+      //get CSP/CP value
+      //CatalogNoT - Cool - EffZ
+      if (this.dtResultsObjectsHelp[index].CatalogNoT && this.dtResultsObjectsHelp[index].CatalogNoT[0].trim().length == 7){
+      this.srv_Results.GetFlatDataField(filed == 'CSP' ? 'Cool' : 'EffZ' ,this.dtResultsObjectsHelp[index].CatalogNoT[0].trim(),this.srv_StMng.SecApp,units).subscribe((res: any) => {
+          let fieldValue:string = JSON.parse(res)
+          this.dtResultsObjectsHelp[index][filed] = fieldValue
+          this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)
+          if(index == (this.dtResultsObjectsHelp.length - 1))
+          setTimeout(() => {
+            this.countShowingRows() 
+          }, 100)
+          
+          // (index == (this.dtResultsObjectsHelp.length - 1)) ? this.countShowingRows() : ''
+      })
+  }
+  else{
+      }
+  }
+  }
 feedback()
 {
   const modalRef = this.modalService.open(FeedbackComponent,{ backdrop: 'static',centered: true, windowClass: 'feedback-modal' });
