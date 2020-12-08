@@ -1,0 +1,24 @@
+.div-feedback
+{
+    /* min-width: 400px;*/
+    //min-height: 200px;  
+    max-height: 220px;    
+}
+
+button.close{
+    outline: none;
+    color: #fff !important; 
+    opacity: 1 !important;
+  }
+
+  .img-face{
+    height: 30px;
+    cursor:pointer;
+    }
+
+    .FeedbackTitle{
+      color:var(--btn-bg-select-color) !important;
+      font-weight: normal !important;
+      font-size: 24px !important;
+      font-family: var(--family-font-h) !important  
+    }

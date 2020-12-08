@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ContactusComponent } from './../../components/maintenance/contactus/contactus.component';
+import { FeedbackComponent } from './../../components/maintenance/feedback/feedback.component';
+import { CookiesService } from './../../services/cookies.service';
 import { Subject} from 'rxjs';
 
 @Component({
@@ -38,9 +40,10 @@ export class HeaderComponent implements OnInit {
 
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
               public srv_appsetting:AppsettingService, private router:Router,
-              private srv_login:LoginService,private modalService: NgbModal) { }
+              private srv_login:LoginService,private modalService: NgbModal,private srv_cook:CookiesService) { }
 
   ngOnInit() {   
+    
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>{if(u=='') this.userdes='Log In'; else this.userdes=u});   
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
@@ -55,8 +58,7 @@ export class HeaderComponent implements OnInit {
       this.SelectedLang.LanguageName="English";
       this.SelectedLang.LanguageEnName="English";
       this.srv_appsetting.SelectedLanguage=this.SelectedLang;
-    }  
-        
+    }      
   } 
   LogOut()
   {
@@ -156,7 +158,7 @@ export class HeaderComponent implements OnInit {
   CheckAllowUnitsChange(event)
   {  
       event.preventDefault();      
-      const modalRef = this.modalService.open(HeaderPpUnitsComponent, { centered: true });
+      const modalRef = this.modalService.open(HeaderPpUnitsComponent, {backdrop:'static', centered: true });
                     
       modalRef.result.then((result) => {
         if(result=='cancel') {return;}
@@ -182,15 +184,12 @@ export class HeaderComponent implements OnInit {
             this.router.navigate(['/home/machines']);
             this.srv_statemanage.ChangeUnits();        
           }        
-        }});
-        
-      
-    
+        }});                
   }
 
   UnitsChanged(event)
   {  
-      const modalRef = this.modalService.open(HeaderPpUnitsComponent, { centered: true });
+      const modalRef = this.modalService.open(HeaderPpUnitsComponent, {backdrop:'static', centered: true });
       //modalRef.componentInstance.MachineName = mach.MachineName;
                     
       modalRef.result.then((result) => {
@@ -233,7 +232,16 @@ export class HeaderComponent implements OnInit {
 
   contactus()
   {
-    const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});
-                    
+    const modalRef = this.modalService.open(ContactusComponent,{ backdrop:'static',size: 'lg' ,centered: true});                    
   }
+
+  feedback()
+  {
+    const modalRef = this.modalService.open(FeedbackComponent,{backdrop: 'static', centered: true, windowClass: 'feedback-modal' });
+    modalRef.result.then((result) => {
+      if(result=='cancel') return;
+      if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');    
+    });    
+  } 
+   
 }

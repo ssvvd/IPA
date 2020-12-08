@@ -1,5 +1,6 @@
 import { Component, OnInit ,HostListener } from '@angular/core';
 import { AppsettingService} from './../../services/appsetting.service';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,9 +24,11 @@ export class HomeComponent implements OnInit {
      this.innerheightmaincontent= window.innerHeight-140;   
      this.msrv_appsetting.innerheightmaincontent=this.innerheightmaincontent;
      this.msrv_appsetting.innerheightmaincontent1=this.innerheightmaincontent-15;  
+
+     
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize(event) {      
       this.innerheightmaincontent= window.innerHeight-140;
       this.msrv_appsetting.innerheightmaincontent=this.innerheightmaincontent;
