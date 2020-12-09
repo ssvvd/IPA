@@ -249,8 +249,13 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
            this.dtPropertiesTable[j].IsVisible = false
 
-        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage')
-        this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage'){
+          if (this.dtResultsObjectsHelp[i].AverageUse)
+          this.dtResultsObjectsHelp[i].AverageUse = this.dtResultsObjectsHelp[i].AverageUse + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+          else
+          this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+        }
+        
 
         if (this.dtPropertiesTable[j].Field.toLowerCase() == 'kappaleadangle')
         this.dtResultsObjectsHelp[i].kappaLeadAngle = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
