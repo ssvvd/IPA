@@ -9,7 +9,8 @@
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-bottom  pt-2 pb-2 pr-0">                     
              <div class="pl-3">
                 <div class="custom-control custom-checkbox custom-control-inline ">                 
-                    <input type="checkbox" class="pt-1" [checked]="machHeader.SpindleType ==spindle.SpindleType" [(ngModel)]="IsSelectedSpindle" class="custom-control-input" name="TypeSindle" [attr.id]="'chkTypeSindle' + spindle.SpindleType" (change)= "ChangeMachineSpindleType()"  >
+                    <input type="checkbox"   [disabled]="MachineType=='Machining center' || MachineType=='Lathe'"
+                    class="pt-1" [checked]="machHeader.SpindleType ==spindle.SpindleType" [(ngModel)]="IsSelectedSpindle" class="custom-control-input" name="TypeSindle" [attr.id]="'chkTypeSindle' + spindle.SpindleType" (change)= "ChangeMachineSpindleType()"  >
                     <label class="custom-control-label siteTitle" [attr.for]="'chkTypeSindle' + spindle.SpindleType">{{DescSpindle | translate}}</label>
                 </div>
             </div>
