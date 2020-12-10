@@ -512,7 +512,8 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
           this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = '';
           this.dtResultsObjects[i][index].value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
 
-          if (this.dtDefaultFields.indexOf(this.dtPropertiesTable[j].FieldDescriptionSmall) === -1){
+          // if (this.dtDefaultFields.indexOf(this.dtPropertiesTable[j].FieldDescriptionSmall) === -1){
+          if (this.dtPropertiesTable[j].IsDefault == 0){
             this.dtResultsObjects[i][index].property.IsShow = false;
           }
           else{

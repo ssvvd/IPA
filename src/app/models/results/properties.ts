@@ -13,5 +13,6 @@ export class clsProperties {
     Field_INCH:string;
     GroupText:string;
     IsShow:boolean;
+    IsDefault:number;
 
 }
