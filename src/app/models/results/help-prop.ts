@@ -110,8 +110,8 @@ export class clsHelpProp {
     fZiminFCheckHidden(Res:boolean,control:string){
         switch (control){
             case 'IT':
-                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && !s.trim().startsWith('02,307-01,')).length > 0) ||
-                (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0))
+                if ((((this.srv_StMng.MainAppSelected.MainApp=='ML' || this.srv_StMng.MainAppSelected.MainApp=='TH') && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && !s.trim().startsWith('02,307-01,')).length > 0) ||
+                ((this.srv_StMng.MainAppSelected.MainApp!='ML' && this.srv_StMng.MainAppSelected.MainApp!='TH') && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0))
                  && this.itemType.indexOf('S') == -1){
                   if (!Res)
                       this.isHidden++
@@ -120,8 +120,8 @@ export class clsHelpProp {
                 }
                   break;
                case 'IH':
-                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim().startsWith('02,307-01,')).length > 0) 
-                || (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0))
+                if ((((this.srv_StMng.MainAppSelected.MainApp=='ML' || this.srv_StMng.MainAppSelected.MainApp=='TH') && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim().startsWith('02,307-01,')).length > 0) 
+                || ((this.srv_StMng.MainAppSelected.MainApp!='ML' && this.srv_StMng.MainAppSelected.MainApp!='TH') && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0))
                  && this.itemType.indexOf('S') == -1){
                   if (!Res)
                       this.isHidden++
@@ -130,8 +130,8 @@ export class clsHelpProp {
                 }
                   break;   
                 case 'ST':
-                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim().startsWith('01,') && (s.trim().endsWith(',SAI') || s.trim().endsWith(',SPI'))).length < 1) ||
-                (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0))
+                if ((((this.srv_StMng.MainAppSelected.MainApp=='ML' || this.srv_StMng.MainAppSelected.MainApp=='TH') && this._FzminF.filter(s => s.trim().startsWith('01,') && (s.trim().endsWith(',SAI') || s.trim().endsWith(',SPI'))).length < 1) ||
+                ((this.srv_StMng.MainAppSelected.MainApp!='ML' && this.srv_StMng.MainAppSelected.MainApp!='TH') && this._FzminF.filter(s => s.trim() != '01,307-01,SAI' && s.trim() != '02,307-01,SAI').length > 0))
                  && this.itemType.indexOf('S') != -1){
                     if (!Res)
                         this.isHidden++
@@ -140,8 +140,8 @@ export class clsHelpProp {
                 }
                     break;   
                 case 'SH':
-                if (((this.srv_StMng.MainAppSelected.MainApp=='ML' && this._FzminF.filter(s => s.trim().startsWith('01,') && (s.trim().endsWith(',SAI') || s.trim().endsWith(',SPI'))).length > 0) ||
-                (this.srv_StMng.MainAppSelected.MainApp!='ML' && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0))
+                if ((((this.srv_StMng.MainAppSelected.MainApp=='ML' || this.srv_StMng.MainAppSelected.MainApp=='TH') && this._FzminF.filter(s => s.trim().startsWith('01,') && (s.trim().endsWith(',SAI') || s.trim().endsWith(',SPI'))).length > 0) ||
+                ((this.srv_StMng.MainAppSelected.MainApp!='ML' && this.srv_StMng.MainAppSelected.MainApp!='TH') && this._FzminF.filter(s => s.trim() == '01,307-01,SAI' || s.trim() == '02,307-01,SAI').length > 0))
                  && this.itemType.indexOf('S') != -1){
                     if (!Res)
                         this.isHidden++
