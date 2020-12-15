@@ -9,6 +9,7 @@ import { LoginService } from '../../../../../services/login.service';
 import {MachinePpAddFavoriteComponent} from '../machine-pp-add-favorite/machine-pp-add-favorite.component';
 import {MachinesPpLoginComponent} from      '../machines-pp-login/machines-pp-login.component';
 import { environment } from '../../../../../../environments/environment';
+import { MaterialService } from '../../../../../services/material.service'
 import { DataTableDirective } from 'angular-datatables';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
@@ -48,7 +49,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   eventsChangeMachineList: Subject<number[]> = new Subject<number[]>();
   
   SortDesBySpindleType:string='asc';
-  constructor(private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
+  constructor(private serv: MaterialService,private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
@@ -72,7 +73,13 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         },        
         "order": [[ 11, 'desc' ],[ 10, 'asc' ]] ,
         responsive: true
-    };    
+    };  
+    
+    this.serv.getmaterialsbygrp('EN','P')
+    .subscribe((data: any) => {
+      this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
+    });
+    
     this.isLoaded =false;
     this.Initializemachinelist(false);
     this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 
