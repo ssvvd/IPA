@@ -77,9 +77,9 @@ export class ResultsService {
     });
   }
 
-  public  GetPromotionFamilies()
+  public  GetPromotionFamilies(countryID:number)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetPromotionFamilies' ).catch((err: HttpErrorResponse) => {     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetPromotionFamilies/' + countryID ).catch((err: HttpErrorResponse) => {     
       console.error('An error occurred:', err.error); 
       return "error";
     });
