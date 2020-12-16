@@ -11,6 +11,7 @@ export class ResultsStoreService {
   private secApp:string='';
   private units:string='';
   private inputParams:string='';
+  private countryID:number=1;
 
   private res1:any;
   private res2:any;
@@ -38,9 +39,9 @@ export class ResultsStoreService {
   Currentres6 = this.obsRes6.asObservable(); 
 
 
-  checkChanged(_secApp:string,_units:string,_inputParams:string):boolean{
+  checkChanged(_secApp:string,_units:string,_inputParams:string, _countryID:number):boolean{
 
-if (this.secApp != _secApp || this.units != _units || this.inputParams != _inputParams){
+if (this.secApp != _secApp || this.units != _units || this.inputParams != _inputParams  || this.countryID != _countryID){
   return true;
 }
 else{

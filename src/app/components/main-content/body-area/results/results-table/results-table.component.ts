@@ -155,7 +155,7 @@ export class ResultsTableComponent implements OnInit {
 
 getShowTable(){
   this.SpinnerService.show();   
-  if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged))
+  if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged,this.srv_appsetting.Country.CountryID_IscarCom || 1))
   {
     this.srv_ResultsStore.setParams(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged)
     this.allSubs$ = forkJoin(
@@ -164,7 +164,7 @@ getShowTable(){
           this.srv_Results.getgroups(this.srv_StMng.SecApp),
           // this.srv_Results.getdefaultfields(this.srv_StMng.SecApp),
           this.srv_Results.Getfamilymovies(),
-          this.srv_Results.GetPromotionFamilies(this.srv_appsetting.Country.CountryID || 1)
+          this.srv_Results.GetPromotionFamilies(this.srv_appsetting.Country.CountryID_IscarCom || 1)
         )
         .subscribe(([res1, res2, res3,res5, res6]:[any,any,any,any,any]) => {
           this.srv_ResultsStore.setResults(res1, res2, res3,res5, res6)
