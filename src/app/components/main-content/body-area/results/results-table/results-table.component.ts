@@ -44,7 +44,7 @@ export class ResultsTableComponent implements OnInit {
   dtPropertiesTableVisible:clsProperties[];
   dtGroups:clsGroups[];
   promotionFamilies:ClsPromorionFamilies[]=[]
-  dtDefaultFields:string[]=[]
+  // dtDefaultFields:string[]=[]
   arrCurShownFields:string[]=[]
   dtResultsObjects:clsPropertyValue[][];
   dtResultsObjects3d:clsPropertyValue[][][];
@@ -155,20 +155,20 @@ export class ResultsTableComponent implements OnInit {
 
 getShowTable(){
   this.SpinnerService.show();   
-  if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged))
+  if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged,this.srv_appsetting.Country.CountryID_IscarCom || 1))
   {
     this.srv_ResultsStore.setParams(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged)
     this.allSubs$ = forkJoin(
           this.srv_Results.getresults(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getoolproperties(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged),
           this.srv_Results.getgroups(this.srv_StMng.SecApp),
-          this.srv_Results.getdefaultfields(this.srv_StMng.SecApp),
+          // this.srv_Results.getdefaultfields(this.srv_StMng.SecApp),
           this.srv_Results.Getfamilymovies(),
-          this.srv_Results.GetPromotionFamilies()
+          this.srv_Results.GetPromotionFamilies(this.srv_appsetting.Country.CountryID_IscarCom || 1)
         )
-        .subscribe(([res1, res2, res3, res4,res5, res6]:[any,any,any,any,any,any]) => {
-          this.srv_ResultsStore.setResults(res1, res2, res3, res4,res5, res6)
-          this.renderTable(res1, res2, res3, res4,res5, res6);          
+        .subscribe(([res1, res2, res3,res5, res6]:[any,any,any,any,any]) => {
+          this.srv_ResultsStore.setResults(res1, res2, res3,res5, res6)
+          this.renderTable(res1, res2, res3,res5, res6);          
         // let a =0
         });
       }
@@ -184,13 +184,13 @@ getShowTable(){
         _arr.push(this.srv_ResultsStore.Currentres1);
         _arr.push(this.srv_ResultsStore.Currentres2);
         _arr.push(this.srv_ResultsStore.Currentres3);
-        _arr.push(this.srv_ResultsStore.Currentres4);
+        // _arr.push(this.srv_ResultsStore.Currentres4);
         _arr.push(this.srv_ResultsStore.Currentres5);
         _arr.push(this.srv_ResultsStore.Currentres6);
 
         this.allSubs$ = combineLatest(_arr).subscribe(resList=>{
           //-- the response will be in array
-          this.renderTable(resList[0], resList[1], resList[2], resList[3],resList[4], resList[5])
+          this.renderTable(resList[0], resList[1], resList[2], resList[3],resList[4])
       });
 
         // this.allSubs$ = forkJoin(
@@ -210,7 +210,7 @@ getShowTable(){
 }
 
 
-renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
+renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
   if (res1 == 'Error' || res1.length < 3){
     this.hideFilter.emit();
     this.ErrMsg = true
@@ -220,7 +220,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
   this.dtRsults =JSON.parse(res1);
   this.dtPropertiesTable = JSON.parse(res2); 
   this.dtGroups = JSON.parse(res3);
-  this.dtDefaultFields = JSON.parse(res4); 
+  // this.dtDefaultFields = JSON.parse(res4); 
   this.arrResultImgsAll = JSON.parse(res5);
   // var obj = JSON.parse(res6);
   // this.promotionFamilies = obj.map(ele=>ele.GFNUM);
@@ -230,7 +230,7 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
     this.SpinnerService.hide();
     return;
   }
-  this.arrCurShownFields = this.dtDefaultFields 
+  // this.arrCurShownFields = this.dtDefaultFields 
   var columnsCount = this.dtPropertiesTable.length
   var rowsCount = this.dtRsults.length
 
@@ -249,8 +249,13 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
            this.dtPropertiesTable[j].IsVisible = false
 
-        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage')
-        this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+        if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Average Usage'){
+          if (this.dtResultsObjectsHelp[i].AverageUse)
+          this.dtResultsObjectsHelp[i].AverageUse = this.dtResultsObjectsHelp[i].AverageUse + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+          else
+          this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
+        }
+        
 
         if (this.dtPropertiesTable[j].Field.toLowerCase() == 'kappaleadangle')
         this.dtResultsObjectsHelp[i].kappaLeadAngle = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
@@ -507,7 +512,8 @@ renderTable(res1:any, res2:any, res3:any, res4:any,res5:any, res6:any){
           this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = '';
           this.dtResultsObjects[i][index].value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
 
-          if (this.dtDefaultFields.indexOf(this.dtPropertiesTable[j].FieldDescriptionSmall) === -1){
+          // if (this.dtDefaultFields.indexOf(this.dtPropertiesTable[j].FieldDescriptionSmall) === -1){
+          if (this.dtPropertiesTable[j].IsDefault == 0){
             this.dtResultsObjects[i][index].property.IsShow = false;
           }
           else{
@@ -658,8 +664,12 @@ openSelectColumns(){
     console.log(result);
       if(result != 'A'){
          this.headers = result
-         let newDefaultFields = this.headers.reduce((a, o) => (o.IsShow && a.push(o.FieldDescriptionSmall), a), [])
-         this.srv_ResultsStore.setNewDefaultFields(JSON.stringify(newDefaultFields))
+         let newDefaultFields = this.headers.reduce((a, o) => (o.IsShow && a.push(o.Field), a), [])
+         //update properties
+         for (let item of this.dtPropertiesTable) {
+          newDefaultFields.indexOf(item.Field) === -1 ? item.IsDefault = 0 : item.IsDefault = 1;
+         }
+         this.srv_ResultsStore.setNewDefaultFieldsProp(JSON.stringify(this.dtPropertiesTable))
          this.cdr.detectChanges();
         // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         //   dtInstance.destroy();

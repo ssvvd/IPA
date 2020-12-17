@@ -99,7 +99,7 @@ export class MpThreadingComponent implements OnInit {
     this.P = +this.srv_StMng.IPL.GetItem('Pitch').value
     this.NSDo = this.srv_StMng.IPL.GetItem('D_Hole').value || this.srv_StMng.IPL.GetItem('Size').value
     
-    if(this.srv_StMng.IPL.GetItem('D_Hole').value){
+    if(this.srv_StMng.IPL.GetItem('Size').value){
       this.NSDoUnits = this.srv_appsetting.UnitslengthDesc
       this.NSDo = this.NSDo.toString().replace('***', '"')
     }

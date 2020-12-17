@@ -11,11 +11,12 @@ export class ResultsStoreService {
   private secApp:string='';
   private units:string='';
   private inputParams:string='';
+  private countryID:number=1;
 
   private res1:any;
   private res2:any;
   private res3:any;
-  private res4:any;
+  // private res4:any;
   private res5:any;
   private res6:any;
 
@@ -28,8 +29,8 @@ export class ResultsStoreService {
   private obsRes3 = new BehaviorSubject<any>(null);
   Currentres3 = this.obsRes3.asObservable(); 
 
-  private obsRes4 = new BehaviorSubject<any>(null);
-  Currentres4 = this.obsRes4.asObservable(); 
+  // private obsRes4 = new BehaviorSubject<any>(null);
+  // Currentres4 = this.obsRes4.asObservable(); 
 
   private obsRes5 = new BehaviorSubject<any>(null);
   Currentres5 = this.obsRes5.asObservable(); 
@@ -38,9 +39,9 @@ export class ResultsStoreService {
   Currentres6 = this.obsRes6.asObservable(); 
 
 
-  checkChanged(_secApp:string,_units:string,_inputParams:string):boolean{
+  checkChanged(_secApp:string,_units:string,_inputParams:string, _countryID:number):boolean{
 
-if (this.secApp != _secApp || this.units != _units || this.inputParams != _inputParams){
+if (this.secApp != _secApp || this.units != _units || this.inputParams != _inputParams  || this.countryID != _countryID){
   return true;
 }
 else{
@@ -56,24 +57,24 @@ else{
     this.inputParams = _inputParams
   }
 
-  setResults(_res1:any, _res2:any, _res3:any, _res4:any,_res5:any, _res6:any){
+  setResults(_res1:any, _res2:any, _res3:any,_res5:any, _res6:any){
     this.res1 = _res1
     this.res2 = _res2
     this.res3 = _res3
-    this.res4 = _res4
+    // this.res4 = _res4
     this.res5 = _res5
     this.res6 = _res6
     this.obsRes1.next(_res1)
     this.obsRes2.next(_res2)
     this.obsRes3.next(_res3)
-    this.obsRes4.next(_res4)
+    // this.obsRes4.next(_res4)
     this.obsRes5.next(_res5)
     this.obsRes6.next(_res6)
   }
 
-  setNewDefaultFields(_res:any){
-    this.res4 = _res
-    this.obsRes4.next(_res)
+  setNewDefaultFieldsProp(_res:any){
+    this.res2 = _res
+    this.obsRes2.next(_res)
   }
 
   getRes1():Observable<any> {
@@ -88,9 +89,9 @@ else{
     return this.res3
   }
 
-  getRes4():Observable<any>{
-    return this.res4
-  }
+  // getRes4():Observable<any>{
+  //   return this.res4
+  // }
 
   getRes5():Observable<any>{
     return this.res5
