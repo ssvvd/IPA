@@ -39,12 +39,11 @@ export const environment = {
 
   LoginURLTokenUrl:"authapi-ariel.ssl.imc-companies.com",
   //LoginURLTokenUrl:"https://authapi-ariel.ssl.imc-companies.com/token/gettoken",
-  LoginURLRes:"sign-ariel.ssl.imc-companies.com",
+  LoginURLRes:"authapi-ariel.ssl.imc-companies.com",
   //LoginURLRes:"https://sign-ariel.ssl.imc-companies.com/user/getuserdetails"
   LoginURLCheckCookies:"https://sign-ariel.ssl.imc-companies.com/general" ,
   LoginURLogOut:"https://sign-ariel.ssl.imc-companies.com/signout"  
 };
-
     
 /*
  * For easier debugging in development mode, you can import the following file

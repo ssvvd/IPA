@@ -191,8 +191,7 @@ export class MachineItemComponent implements OnInit {
           }
           else
           {
-            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => { 
-              alert(newid); 
+            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {    
               this.pr_MachineID =newid;
               this.machHeader=null;
               this.FillMachineData();                               

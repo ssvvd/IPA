@@ -36,25 +36,30 @@ ngOnInit()
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   let token:string='';
-  let isLogIn:string;
+  let isLogIn:string='0'; //todo:!!!!!!
   const url = window.location.href;    
   if (url.includes('?')) {
     let paramValue:string='';
     const httpParams = new HttpParams({ fromString: url.split('?')[1] });
     paramValue = httpParams.get('T');      
     isLogIn=httpParams.get('v');  
-    if(paramValue!=null) token =paramValue;   
-    if(isLogIn =='1') this.srv_login.GetToken().subscribe(res=>{});                
+    if(paramValue!=null) token =paramValue;      
+    if(isLogIn =='1') this.srv_login.GetToken().subscribe(res=>{ this.srv_appsetting.isLoggedIn=true;});                
   }  
-    
-   this.srv_login.LogIn(token).subscribe(res=>{
-    this.srv_appsetting.AfterToken=true;
-    if(this.srv_appsetting.UserID=='')
-    {}
-    else{ }
-
-   }
-  );
+  if(isLogIn=='0') 
+  {
+     this.srv_appsetting.AfterToken=true;
+    this.srv_appsetting.isLoggedIn=true;
+    this.srv_login.FillDefaultUser();
+  }
+  if(isLogIn=='' || isLogIn==null)  
+    this.srv_login.LogIn(token).subscribe(res=>{
+      this.srv_appsetting.AfterToken=true;
+      if(this.srv_appsetting.UserID=='')
+      {}
+      else{ }
+    }
+    );
   
    /*  this.srv_login.LogIn(token).subscribe(res=>{
      if(this.srv_appsetting.UserID=='')

@@ -70,16 +70,16 @@
                         </div>              
                     </label>    
                 </div>    
-                <!-- <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
+                <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
+                    <div class="float-right mr-2">
+                        <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
+                    </div>
+                </div> 
+               <!--  <div  class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
                     <div class="float-right mr-2">
                         <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
                     </div>
                 </div> -->
-                <div  class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
-                    <div class="float-right mr-2">
-                        <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
