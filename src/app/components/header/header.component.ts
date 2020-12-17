@@ -68,6 +68,7 @@ export class HeaderComponent implements OnInit {
   
   LogIn()
   {   
+    //return; //TODO:
       if(this.srv_appsetting.UserID=='')
       {
         this.SpinnerService.show();

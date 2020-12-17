@@ -69,7 +69,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
   fillMainTable(){
     if (this.srv_appsetting.UserID != ''){
     this.SpinnerService.show();
-    this.allSubsMat$ = this.serv.getMatFav(this.srv_appsetting.UserID)
+    this.allSubsMat$ = this.serv.getMatFav(this.srv_appsetting.UserIDencode)
     .subscribe((data: any) => {
       this.materialsResult = JSON.parse(data);
       this.materialsResultSorted = this.materialsResult;
@@ -153,7 +153,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
           mat.HardnessUnits = spletter[1];
           mat.HardnessHBValue = spletter[2];
           this.SpinnerService.show();
-          this.serv.EditMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  mat.FavName,  mat.FavName ,  mat.Hardness,   mat.HardnessUnits || 'HB',mat.HardnessHBValue || mat.Hardness).subscribe((data: any) => {
+          this.serv.EditMaterialFavorit( this.srv_appsetting.UserIDencode || 'HIBAHAWARI',  mat.FavName,  mat.FavName ,  mat.Hardness,   mat.HardnessUnits || 'HB',mat.HardnessHBValue || mat.Hardness).subscribe((data: any) => {
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               dtInstance.destroy();
               this.dtTriggerMat.next();

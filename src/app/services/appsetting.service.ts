@@ -54,6 +54,15 @@ export class AppsettingService {
       else
         return this.User.email;
     }
+  
+    get UserIDencode():string{ 
+      if(typeof(this.User)=='undefined')  
+        return '';
+      else
+      {         
+        return encodeURIComponent(this.User.email).replace('.','***').replace('.','***').replace('.','***');                
+      }        
+    }
 
   get LangName():string{   
     return this.mLangName;
@@ -193,6 +202,15 @@ export class AppsettingService {
   }
   set curDate(u:string) {  
     this.mcurDate = u;
+   }
+
+   mAfterToken:boolean =false;
+   get AfterToken():boolean{      
+    //return  new Date().toString();
+    return this.mAfterToken;
+  }
+  set AfterToken(u:boolean) {  
+    this.mAfterToken = u;
    }
 
 }

@@ -32,21 +32,31 @@ export class AppComponent implements OnInit {
   }
 
 ngOnInit()
-{
-
-   
-
-  //LogIn
+{  
+  console.log('get token app component');
+  this.srv_appsetting.AfterToken=false;
   let token:string='';
+  let isLogIn:string;
   const url = window.location.href;    
   if (url.includes('?')) {
     let paramValue:string='';
     const httpParams = new HttpParams({ fromString: url.split('?')[1] });
     paramValue = httpParams.get('T');      
-    if(paramValue!=null) token =paramValue;                
-  }
+    isLogIn=httpParams.get('v');  
+    if(paramValue!=null) token =paramValue;   
+    if(isLogIn =='1') this.srv_login.GetToken().subscribe(res=>{});                
+  }  
+    
+   this.srv_login.LogIn(token).subscribe(res=>{
+    this.srv_appsetting.AfterToken=true;
+    if(this.srv_appsetting.UserID=='')
+    {}
+    else{ }
+
+   }
+  );
   
-  this.srv_login.LogIn(token).subscribe(res=>{
+   /*  this.srv_login.LogIn(token).subscribe(res=>{
      if(this.srv_appsetting.UserID=='')
      {
         
@@ -57,8 +67,8 @@ ngOnInit()
      }
 
     }
-   );
-     
+   ); */
+
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
   'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
   this.translate.setDefaultLang(this.srv_appsetting.LangName);
@@ -72,6 +82,11 @@ ngOnInit()
   
 }
 
+GetUserData()
+{
+  //this.srv_login.GetUserData();
+  
+}
 
 }
 

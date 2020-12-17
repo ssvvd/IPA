@@ -30,5 +30,8 @@ export const environment = {
   eCatLogo: "https://www.iscar.com/eCatalog/Ecat/datafile/Logo/",
   
   CalcReq_Host: 'https://mpwr.iscar.com//MachiningPwrWs/api/CalcReq/',
-  eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat="
+  eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat=",
+  signinURL:'https://sign.ssl.imc-companies.com/signin',
+  LoginURLTokenUrl:"https://authapi.ssl.imc-companies.com/token/gettoken",
+  LoginURLRes:"https://sign.ssl.imc-companies.com/user/getuserdetails"
 };

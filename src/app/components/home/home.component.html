@@ -2,22 +2,24 @@
   
     
  <!-- <div class="container-fluid pl-0 pr-0" id ="divhome"  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" > -->
-    <div class="container-fluid pl-0 pr-0" id ="divhome"  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" >
-        <div class="row justify-content-center">
-            <div class="col-12 pl-0 pr-0"> 
-                <app-header></app-header>
-            </div> 
-        </div>     
-        <div *ngIf="msrv_appsetting.isLoggedIn"  class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
-            <div class="div-main-content">
-                <app-main-content></app-main-content>
-            </div>                          
+    <div *ngIf="msrv_appsetting.AfterToken">
+        <div class="container-fluid pl-0 pr-0" id ="divhome"  [style.height.px]="innerheight" [style.max-height.px]="innerheight"  [style.min-height.px]="innerheight" >
+            <div class="row justify-content-center">
+                <div class="col-12 pl-0 pr-0"> 
+                    <app-header></app-header>
+                </div> 
+            </div>     
+            <div *ngIf="msrv_appsetting.isLoggedIn"  class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
+                <div class="div-main-content">
+                    <app-main-content></app-main-content>
+                </div>                          
+            </div>
+            
+            <div class="fixed-bottom">
+                <app-footer></app-footer>
+            </div>                              
         </div>
-           
-        <div class="fixed-bottom">
-            <app-footer></app-footer>
-        </div>                              
-    </div>
+    </div>  
     <!-- <div id="testdiv" style="background-color: red;width: 300px;height:200px;z-index: 3000!important;position: absolute;top:100px;left:100px;display:flex;">
 
     </div>
