@@ -32,15 +32,13 @@ export class FeedbackComponent implements OnInit {
   send()
   { 
     if(this.q1!=0 && this.q2!=0)
+    {
       this.srv_DataLayer.addfeedback(this.q1,this.q2,this.Message).subscribe((res:any)=>
       {
         //this.srv_cook.set_cookie("notshowfeedback",'1');
         this.activeModal.close('send'); 
-      }); 
-    else
-    {
-      
-    }   
+      });      
+    }       
   }  
 
   notshow()

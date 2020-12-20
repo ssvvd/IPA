@@ -33,6 +33,27 @@ export class LoginService {
     return'ok';
   }
   
+  GetTokenwithoutlogin():any
+  {
+    console.log('before token');
+    this.srv_appsetting.AfterToken=false;
+    return this.srv_DataLayer.get_token();
+  }
+
+  GetGeneralToken():any
+  {
+    console.log('before token');
+    this.srv_appsetting.AfterToken=false;
+    this.srv_DataLayer.get_token().subscribe((res: any)=>{
+      let s=environment.LoginURLCheckCookies + '?t=' +res;  
+      window.open(s,'_self');   
+      console.log('after token');
+      this.srv_appsetting.AfterToken=true;
+      return 'ok'    
+    });
+    return'ok';
+  }
+
   UpdateCurrentCountry(countrycode:string)
   {
     this.srv_DataLayer.GetCountryLangBrifData(countrycode).subscribe((d:any)=>
@@ -67,7 +88,7 @@ export class LoginService {
     let isImc:string='';
     let countrycode:string='';
     let countryname:string='';
-    if(localStorage.getItem("displayName")!=null) displayName=localStorage.getItem("displayName");
+   /*  if(localStorage.getItem("displayName")!=null) displayName=localStorage.getItem("displayName");
     if(localStorage.getItem("surname")!=null) surname=localStorage.getItem("surname");
     if(localStorage.getItem("givenName")!=null) givenName=localStorage.getItem("givenName");
     if(localStorage.getItem("email")!=null) email=localStorage.getItem("email");
@@ -75,7 +96,7 @@ export class LoginService {
     if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
     if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
     if(localStorage.getItem("countryCode")!=null) countrycode=localStorage.getItem("countryCode"); 
-    if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName");
+    if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName"); */
     u.displayName=displayName;
     u.surname=surname;
     u.givenName=givenName;
@@ -139,13 +160,14 @@ export class LoginService {
     }
     else
     {  
+      return;
       //check global cookies user       
-        if(environment.API_HOST.indexOf('localhost')==-1)    
+        /* if(environment.API_HOST.indexOf('localhost')==-1 && localStorage.getItem("isLogIn") =="1")
         this.srv_DataLayer.get_token().subscribe((res: any)=>{
             let s=environment.LoginURLCheckCookies + '?t=' +res;  
             window.open(s,'_self');           
           });   
-       
+        */
       let u=new User;  
       let displayName:string='';
       let surname:string='';
