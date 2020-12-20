@@ -98,7 +98,7 @@ export class LoginService {
     if(localStorage.getItem("countryCode")!=null) countrycode=localStorage.getItem("countryCode"); 
     if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName"); */
     u.displayName=displayName;
-    u.surname=surname;
+    u.surname=surname;   
     u.givenName=givenName;
     u.email=email;
     u.country=country;
