@@ -1,6 +1,6 @@
 <div class="selectColsModal">
     <div class="modal-header">
-        <h4 class="modal-title siteTitle">{{'Select the Columns (Maximum 5)' | translate}}</h4>
+        <h4 class="modal-title siteTitle">{{'Select the Columns (Maximum 6)' | translate}}</h4>
         <button type="button" class="close" aria-label="Close" (click)="activeModal.close('A')">
           <span aria-hidden="true" class="span_x">&times;</span>
         </button>
@@ -10,7 +10,7 @@
             <input type="checkbox" [checked]="col.IsShow"> {{col.FieldDescriptionSmall}}
           </div> -->
           <div *ngFor="let col of modal_columns_cur" class="container pl-20 pr-0">
-          <div class="custom-control custom-checkbox row" [hidden]="col.FieldDescriptionSmall == 'Brand Name' || col.Field.toLowerCase().includes('designation')">
+          <div class="custom-control custom-checkbox row" [hidden]="col.Field.toLowerCase().includes('designation')">
             <input type="checkbox" [checked]="col.IsShow" class="custom-control-input col-1 pl-0 pr-0" [id]="col.FieldDescriptionSmall" (change)="checkedState($event, col)">
             <label class="custom-control-label col-4  pl-0 pr-0" [for]="col.FieldDescriptionSmall" [innerHTML]="col.FieldDescriptionSmall | translate"></label>
             <label class="col-1  pl-0 pr-0">-</label>
