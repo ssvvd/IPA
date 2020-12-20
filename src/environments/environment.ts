@@ -35,9 +35,17 @@ export const environment = {
   eCatItemPage:"http://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat=",
   eCatFamilyDrawing:"http://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
   eCatLogo: "http://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/",
-  wsMaterials: "http://iscarsites/wsmaterials/service.asmx/"
-};
+  wsMaterials: "http://iscarsites/wsmaterials/service.asmx/",
 
+  signinURL:'https://sign-ariel.ssl.imc-companies.com/signin',
+
+  LoginURLTokenUrl:"authapi-ariel.ssl.imc-companies.com",
+  //LoginURLTokenUrl:"https://authapi-ariel.ssl.imc-companies.com/token/gettoken",
+  LoginURLRes:"authapi-ariel.ssl.imc-companies.com",
+  //LoginURLRes:"https://sign-ariel.ssl.imc-companies.com/user/getuserdetails"
+  LoginURLCheckCookies:"https://sign-ariel.ssl.imc-companies.com/general" ,
+  LoginURLogOut:"https://sign-ariel.ssl.imc-companies.com/signout"  
+};
     
 /*
  * For easier debugging in development mode, you can import the following file

@@ -5,6 +5,7 @@ import { Country,Language} from '../models/applications/applications';
 import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/users/user';
 import { Observable,of} from 'rxjs';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -19,9 +20,14 @@ export class LoginService {
   
   GetToken():any
   {
+    console.log('before token');
+    this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
+      //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
+      let s= environment.signinURL + '?t=' +res;  
       window.open(s,'_self');
+      console.log('after token');
+      this.srv_appsetting.AfterToken=true;
       return 'ok'    
     });
     return'ok';
@@ -48,7 +54,50 @@ export class LoginService {
       }      
     });
   }
-
+  
+  FillDefaultUser()
+  {
+    let u=new User;  
+    let displayName:string='';
+    let surname:string='';
+    let givenName:string='';
+    let email:string=''
+    let country:string='';
+    let companyName:string='';
+    let isImc:string='';
+    let countrycode:string='';
+    let countryname:string='';
+    if(localStorage.getItem("displayName")!=null) displayName=localStorage.getItem("displayName");
+    if(localStorage.getItem("surname")!=null) surname=localStorage.getItem("surname");
+    if(localStorage.getItem("givenName")!=null) givenName=localStorage.getItem("givenName");
+    if(localStorage.getItem("email")!=null) email=localStorage.getItem("email");
+    if(localStorage.getItem("country")!=null) country=localStorage.getItem("country");
+    if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
+    if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
+    if(localStorage.getItem("countryCode")!=null) countrycode=localStorage.getItem("countryCode"); 
+    if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName");
+    u.displayName=displayName;
+    u.surname=surname;
+    u.givenName=givenName;
+    u.email=email;
+    u.country=country;
+    u.companyName=companyName;
+    u.isImc=isImc;
+    u.CountryCode=countrycode;
+    u.CountryName=countryname;
+    if(u.CountryCode=='')
+      this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
+      {                
+        this.UpdateCurrentCountry(d.countryCode);                                     
+      }
+      );
+    else      
+      this.UpdateCurrentCountry(u.CountryCode);      
+  
+    this.srv_appsetting.User=u;  
+    this.srv_appsetting.isLoggedIn=true;
+  }
+  
   LogIn(token:string):Observable<any>
   {         
     if(token!='')
@@ -84,13 +133,19 @@ export class LoginService {
             if(d[0].usageLocation!='' && d[0].usageLocation!=null)
               this.UpdateCurrentCountry(d[0].usageLocation);
             this.srv_appsetting.isLoggedIn=true;               
-            });  
-              
+            });                
             return of('ok');
         });                              
     }
     else
     {  
+      //check global cookies user       
+        if(environment.API_HOST.indexOf('localhost')==-1)    
+        this.srv_DataLayer.get_token().subscribe((res: any)=>{
+            let s=environment.LoginURLCheckCookies + '?t=' +res;  
+            window.open(s,'_self');           
+          });   
+       
       let u=new User;  
       let displayName:string='';
       let surname:string='';
@@ -121,18 +176,12 @@ export class LoginService {
       u.CountryName=countryname;
       if(u.CountryCode=='')
         this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
-        {       
-          {   
-            this.UpdateCurrentCountry(d.countryCode);     
-            
-          }
-          
+        {                
+          this.UpdateCurrentCountry(d.countryCode);                                     
         }
         );
-      else
-      {
-        this.UpdateCurrentCountry(u.CountryCode);
-      }
+      else      
+        this.UpdateCurrentCountry(u.CountryCode);      
     
       this.srv_appsetting.User=u;  
       this.srv_appsetting.isLoggedIn=true;              
@@ -141,28 +190,51 @@ export class LoginService {
     return of('ok'); 
   } 
   
-  LogOut()
+   LogOut()
   {
-    let u=new User;  
-    u.displayName='';
-    u.surname='';
-    u.givenName='';
-    u.email=''
-    u.country='';
-    u.companyName='';
-    u.isImc='';
-    localStorage.setItem("displayName",'');
-    localStorage.setItem("surname",'');
-    localStorage.setItem("givenName",'');
-    localStorage.setItem("email",'');
-    localStorage.setItem("country",'');
-    localStorage.setItem("companyName",'');
-    localStorage.setItem("isImc",''); 
-    localStorage.setItem("countryCode",'');
-    localStorage.setItem("countryName",'');   
-    this.srv_appsetting.User=u;  
-    this.srv_appsetting.isLoggedIn=true;
+     this.srv_DataLayer.get_token().subscribe((res: any)=>{      
+      let s= environment.LoginURLogOut + '?t=' +res;  
+      window.open(s,'_self');
+      let u=new User;  
+      u.displayName='';
+      u.surname='';
+      u.givenName='';
+      u.email=''
+      u.country='';
+      u.companyName='';
+      u.isImc='';
+      localStorage.setItem("displayName",'');
+      localStorage.setItem("surname",'');
+      localStorage.setItem("givenName",'');
+      localStorage.setItem("email",'');
+      localStorage.setItem("country",'');
+      localStorage.setItem("companyName",'');
+      localStorage.setItem("isImc",''); 
+      localStorage.setItem("countryCode",'');
+      localStorage.setItem("countryName",'');   
+      this.srv_appsetting.User=u;  
+      this.srv_appsetting.isLoggedIn=true;         
+    });
+         
+   
   }
+  
+  GetUserData()
+  {
+    
+  }
+
+/* LogOut()
+  {    
+    this.srv_DataLayer.get_token().subscribe((res: any)=>{      
+      let s= environment.LoginURLogOut + '?t=' +res;  
+      window.open(s,'_self');
+      this.srv_appsetting.isLoggedIn=true;
+      return 'ok'    
+    });
+    this.srv_appsetting.isLoggedIn=true;
+    return'ok';        
+  } */
 
   SelectCountryAndLang(c:Country,LanguageID:string) :any
   {

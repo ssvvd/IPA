@@ -80,25 +80,48 @@ export class DatalayerService {
   {    
     //getToken/{LoginURLReq}/{LoginURLTokenUrl}/{LoginURLTokenID}/{LoginURLTokenSecret}/{siteType}  
     let sitetype:string;
-    if(environment.internal)    
-      sitetype ='local';   
+    if(environment.production)    
+      sitetype ='global';   
     else
-    sitetype ='global';
-    return  this.httpClient.get(environment.API_HOST +'api/login/getToken/' +sitetype) 
+      sitetype ='local';
+    let u:string;  
+    u=encodeURIComponent(environment.LoginURLTokenUrl).replace('.','***').replace('.','***').replace('.','***');
+    let s:string=environment.API_HOST +'api/login/getToken/' + u+ '/' +sitetype;
+    console.log(s);
+    return  this.httpClient.get(environment.API_HOST +'api/login/getToken/' + u+ '/' +sitetype) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  
-  }  
+  } 
+  
+  public  checkgeneraluser(token:string)
+  {    
+    //getToken/{LoginURLReq}/{LoginURLTokenUrl}/{LoginURLTokenID}/{LoginURLTokenSecret}/{siteType}  
+   /*  let sitetype:string;
+    if(environment.production)    
+      sitetype ='global';   
+    else
+      sitetype ='local'; */
+  
+    return  this.httpClient.get("https://sign-ariel.ssl.imc-companies.com/general/?t=" +token)
+    .catch((err: HttpErrorResponse) => {      
+        return "error";
+      });  
+  }
+
   public  login(token:any)
   {    
     //login/{LoginURLReq}/{LoginURLRes}/{token}/{siteType}    
     token='{ "token":"' + token + '"}';
     let sitetype:string;
-    if(environment.internal)    
-      sitetype ='local';   
+    if(environment.production)    
+      sitetype ='global';   
     else
-      sitetype ='global';
-    return  this.httpClient.post(environment.API_HOST +'api/login/login/'  +sitetype,token) 
+      sitetype ='local';
+
+    let u:string;  
+    u=encodeURIComponent(environment.LoginURLRes).replace('.','***').replace('.','***').replace('.','***');
+    return  this.httpClient.post(environment.API_HOST +'api/login/login/'+ u + '/' +sitetype,token) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  

@@ -36,7 +36,7 @@ export class PpAddFavoritComponent implements OnInit {
       FavoritName = FavoritName + '-' +  this.favName 
       //AddMaterialFavorit( userID:string,  ISO:string,  Group:number,  FavoritName:string,  Standard:string,  Condetion:string,  Hardness:number,  HardnessUnits:string,  HardnessOrig:number)
   
-      this.serv.AddMaterialFavorit(this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.Category,  this.selectedMat.id,  FavoritName, this.selectedMat.Standard || '-',  this.selectedMat.Condition,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',  this.selectedMat.HardnessOrigin || this.selectedMat.Hardness,this.selectedMat.HardnessHBValue || this.selectedMat.Hardness, this.selectedMat.material || '').subscribe((data: any) => {
+      this.serv.AddMaterialFavorit(this.srv_appsetting.UserIDencode || 'HIBAHAWARI',  this.selectedMat.Category,  this.selectedMat.id,  FavoritName, this.selectedMat.Standard || '-',  this.selectedMat.Condition,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',  this.selectedMat.HardnessOrigin || this.selectedMat.Hardness,this.selectedMat.HardnessHBValue || this.selectedMat.Hardness, this.selectedMat.material || '').subscribe((data: any) => {
         this.SpinnerService.hide();
         this.activeModal.close('GoToMyMaterials')
 
@@ -46,7 +46,7 @@ export class PpAddFavoritComponent implements OnInit {
     }
     else{
       this.SpinnerService.show();
-      this.serv.EditMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.FavName,  this.favName ,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',this.selectedMat.HardnessHBValue || this.selectedMat.Hardness).subscribe((data: any) => {
+      this.serv.EditMaterialFavorit( this.srv_appsetting.UserIDencode || 'HIBAHAWARI',  this.selectedMat.FavName,  this.favName ,  this.selectedMat.Hardness,  this.selectedMat.HardnessUnits || 'HB',this.selectedMat.HardnessHBValue || this.selectedMat.Hardness).subscribe((data: any) => {
         this.SpinnerService.hide();
         this.activeModal.close('refresh')
       });
@@ -57,7 +57,7 @@ export class PpAddFavoritComponent implements OnInit {
 
   Delete(){
     this.SpinnerService.show();
-    this.serv.DeleteMaterialFavorit( this.srv_appsetting.UserID || 'HIBAHAWARI',  this.selectedMat.FavName).subscribe((data: any) => {
+    this.serv.DeleteMaterialFavorit( this.srv_appsetting.UserIDencode || 'HIBAHAWARI',  this.selectedMat.FavName).subscribe((data: any) => {
       this.SpinnerService.hide();
       this.activeModal.close('refresh')
     });

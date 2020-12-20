@@ -7,6 +7,7 @@ import { CookiesService } from '../../../../../services/cookies.service';
 import { Machineheader } from '../../../../../models/machines/machineheader';
 import { AppsettingService} from '../../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
+
 import { Subscription ,Observable} from 'rxjs';
 
 export class AdaptationType
@@ -30,10 +31,6 @@ export class MachinesFilterComponent implements OnInit {
   
   @Input() onChangeFavorite: Observable<void>;
   @Input() onChangeMachineList: Observable<number[]>;
-  
-  defimage:string;
-
- /*  @Input() machineslist:Machineheader[]; */
 
   private eventsSubscription: Subscription=new Subscription();
 
@@ -97,8 +94,6 @@ export class MachinesFilterComponent implements OnInit {
     this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializedata());  // todo: 
     this.machFilter=new MachineFilter;
     this.Initializedata();
-
-    this.defimage ="https://www.placecage.com/1000/1000";
   }
  
   ngOnDestroy() {
@@ -138,9 +133,8 @@ export class MachinesFilterComponent implements OnInit {
           this.arrAdapSize = JSON.parse(res); 
           this.arrAdapSize.unshift( { AdaptationType:'',AdaptationSize:''});      
                 
-          this.arrAdapSizeFilter=[];
-          
-          this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
+          this.arrAdapSizeFilter=[];                
+          this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
           .subscribe((data: any) => {        
             this.arrMachines = JSON.parse(data);                 
                        

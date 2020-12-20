@@ -172,7 +172,7 @@ export class MachineItemComponent implements OnInit {
         if(mach.isFavorite && result=='delete')
         {
           mach.isFavorite =false;
-          this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {
+          this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserIDencode).subscribe((data: any) => {
             this.router.navigate(['/home/machines']);
           }));         
           //this.Initializemachinelist(true);
@@ -184,15 +184,14 @@ export class MachineItemComponent implements OnInit {
           {
               //change only machine name
               this.eventsSubscription.add(this.srv_machine.machine_update_name(
-                mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => {  
+                mach.MachineID.toString(),result,this.srv_appsetting.UserIDencode).subscribe((res: any) => {  
                   this.machHeader.MachineName= result;
                   this.MachineName = this.machHeader.MachineName;                                           
              }));  
           }
           else
           {
-            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => { 
-              alert(newid); 
+            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {    
               this.pr_MachineID =newid;
               this.machHeader=null;
               this.FillMachineData();                               

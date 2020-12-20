@@ -86,8 +86,12 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   }
   
   Initializemachinelist(withdestroy:boolean)
-  {            
-    this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserID)
+  {  
+    //let userid_enc:string="";
+    //if(this.srv_appsetting.UserID!='')userid_enc=this.srv_encrdecr.encryptData(this.srv_appsetting.UserID);              
+    //if(this.srv_appsetting.UserID!='') userid_enc=encodeURIComponent(this.srv_appsetting.UserID);
+    //userid_enc=userid_enc.replace('/\./g', '%2E'); 
+    this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
       .subscribe((data: any) => {               
         this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
@@ -239,7 +243,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         if(mach.isFavorite && result=='delete')
         {
           mach.isFavorite =false;
-          this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserID).subscribe((data: any) => {}));         
+          this.eventsSubscription.add(this.srv_machine.machine_delete(mach.MachineID.toString(),this.srv_appsetting.UserIDencode).subscribe((data: any) => {}));         
           this.Initializemachinelist(true);
           this.eventsChangeFavorite.next();
         }
@@ -249,14 +253,14 @@ export class MachinesListComponent implements OnInit, OnDestroy {
           {
               //change only machine name
               this.eventsSubscription.add(this.srv_machine.machine_update_name(
-                mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((res: any) => { 
+                mach.MachineID.toString(),result,this.srv_appsetting.UserIDencode).subscribe((res: any) => { 
                   this.Initializemachinelist(true);
                   this.eventsChangeFavorite.next();               
              }));  
           }
           else
           {
-            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserID).subscribe((newid: any) => {     
+            this.eventsSubscription.add(this.srv_machine.machine_add(mach.MachineID.toString(),result,this.srv_appsetting.UserIDencode).subscribe((newid: any) => {     
               this.Initializemachinelist(true);
               this.eventsChangeFavorite.next();                   
               })); 

@@ -251,6 +251,7 @@ export class StateManagerService {
      this.obsReloadMachineTab.next(true);
      this.mIPLMMandatory = "";
      this.obsInputParamSelected.next("");
+     this.obsSecondaryAppSelected.next(["", ""]);
    }
   
    private mopttool_selectedfamily:any[]=[];
