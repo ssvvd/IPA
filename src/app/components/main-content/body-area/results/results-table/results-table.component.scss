@@ -49,26 +49,26 @@ table.dataTable thead th {
  .table td:nth-child(2), .table th:nth-child(2){
   // min-width: 24% !important;
   // max-width: 24% !important;
-  width: 20% !important;
-  min-width: 20% !important;
-  max-width: 20% !important;
+  width: 22% !important;
+  min-width: 22% !important;
+  max-width: 22% !important;
   white-space: nowrap;
 }
 
 .table td:nth-child(n+3), .table th:nth-child(n+3){
   // min-width: 24% !important;
   // max-width: 24% !important;
-  width: 11% !important;
-  min-width: 11% !important;
-  max-width: 11% !important;
+  width: 10% !important;
+  min-width: 10% !important;
+  max-width: 10% !important;
   white-space: nowrap;
 }
 .table td:nth-last-child(3), .table th:nth-last-child(3){
   // min-width: 24% !important;
   // max-width: 24% !important;
-  width: 4% !important;
-  min-width: 4% !important;
-  max-width: 4% !important;
+  width: 8% !important;
+  min-width: 8% !important;
+  max-width: 8% !important;
   white-space: nowrap;
 }
 
