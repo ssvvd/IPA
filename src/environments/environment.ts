@@ -34,7 +34,8 @@ export const environment = {
   eCatItemRedPage:"http://intranet.imc.co.il/ecat/eHiba.asp?cat=",
   eCatItemPage:"http://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat=",
   eCatFamilyDrawing:"http://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
-  eCatLogo: "http://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/"
+  eCatLogo: "http://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/",
+  wsMaterials: "http://iscarsites/wsmaterials/service.asmx/"
 };
 
     

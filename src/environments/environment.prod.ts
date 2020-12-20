@@ -30,5 +30,6 @@ export const environment = {
   eCatLogo: "https://www.iscar.com/eCatalog/Ecat/datafile/Logo/",
   
   CalcReq_Host: 'https://mpwr.iscar.com//MachiningPwrWs/api/CalcReq/',
-  eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat="
+  eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat=",
+  wsMaterials: "http://www.iscar.com/wsmaterials/service.asmx/"
 };
