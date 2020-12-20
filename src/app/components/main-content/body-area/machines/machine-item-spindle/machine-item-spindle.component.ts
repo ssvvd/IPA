@@ -78,9 +78,18 @@ export class MachineItemSpindleComponent implements OnInit
         this.isLoadingAdSize =true;
       }));         
     })); 
-              
-    this.spindle.EmultionPressure = 25;//TODO:
-    this.spindle.EmultionFlowRate = 40;
+    
+    if(this.srv_appsetting.Units=='I')
+    {
+      this.spindle.EmultionPressure = 25 *14.5038;//TODO:
+      this.spindle.EmultionFlowRate = 40*0.2642;
+    }
+    else
+    {
+      this.spindle.EmultionPressure = 25;//TODO:
+      this.spindle.EmultionFlowRate = 40;
+    }
+    
   }
   
   ngOnDestroy() {

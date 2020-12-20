@@ -80,7 +80,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
         this.chartdata.PoinY_3 =this.spindle.T3;
         this.chartdata.PoinY_4 =this.spindle.T4; */
         this.chartDesc= "Torque";
-        this.srv_appsetting.Units=='M'?this.chartDescY="T[Nm]":this.chartDescY="P[Lbf]";
+        this.srv_appsetting.Units=='M'?this.chartDescY="T[Nm]":this.chartDescY="P[Lbf X Ft]";
         //this.chartDescY ="T"
       }
     if(this.typeChart=='power')
@@ -99,7 +99,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
     let labelaxisY:string;
 
     if(this.typeChart=='power') this.srv_appsetting.Units=='M'?labelaxisY="P[kW]":labelaxisY="P[HP]";
-    if(this.typeChart=='torque') this.srv_appsetting.Units=='M'?labelaxisY="T[Nm]":labelaxisY="P[Lbf]";
+    if(this.typeChart=='torque') this.srv_appsetting.Units=='M'?labelaxisY="T[Nm]":labelaxisY="P[Lbf X Ft]";
 
     this.chartType = 'line';
     if(this.typeChart=='power') 
