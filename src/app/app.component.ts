@@ -39,7 +39,7 @@ ngOnInit()
 
   //localStorage.setItem("isLogIn",null); //for test
 
-  let isLogIn:string='0'; //todo:!!!!!! -1!!!  
+  let isLogIn:string='-1'; //todo:!!!!!! -1!!!  
   const url = window.location.href;    
   if (url.includes('?')) {
     let paramValue:string='';
@@ -57,58 +57,37 @@ ngOnInit()
   {
     if(isLogIn =='0')
     {
-        this.srv_appsetting.AfterToken=true;
+        //this.srv_appsetting.AfterToken=true;
         this.srv_appsetting.isLoggedIn=true;
         this.srv_login.FillDefaultUser();
         localStorage.setItem("isLogIn",null);
-    } 
-    if(isLogIn =='1') this.srv_login.GetTokenwithoutlogin().subscribe(token=>
-        { 
-          this.srv_login.LogIn(token).subscribe(res=>{
-            this.srv_appsetting.isLoggedIn=true;
-            this.srv_appsetting.AfterToken=true; 
-            localStorage.setItem("isLogIn",null);           
-          }
-        );                      
-        });  
+    }     
+   /*  if(isLogIn =='1')
+    {
+      this.srv_login.SignIn(token);
+        //this.srv_appsetting.isLoggedIn=true;
+        //this.srv_appsetting.AfterToken=true; 
+        localStorage.setItem("isLogIn",null);           
+            
+    }   */                                              
   }
   else
   {
-    this.srv_login.GetGeneralToken().subscribe(res=>
-      { this.srv_appsetting.isLoggedIn=true;});
-    /* if(isLogIn=='-1' && (localStorage.getItem("isLogIn")==null || localStorage.getItem("isLogIn")=="null"))
+    if(token!='')
     {
-      this.srv_login.GetGeneralToken().subscribe(res=>
-        { this.srv_appsetting.isLoggedIn=true;});
-    }   
-      
-    if(isLogIn=='-1' && ( localStorage.getItem("isLogIn") =="1"))
-      this.srv_login.LogIn(token).subscribe(res=>{
-        this.srv_appsetting.isLoggedIn=true;
-        this.srv_appsetting.AfterToken=true;
-        if(this.srv_appsetting.UserID=='')
-        {}
-        else{ }
-      }
-    );     */
+        this.srv_login.LogIn(token).subscribe(res=>{
+          this.srv_appsetting.isLoggedIn=true;
+          //this.srv_appsetting.AfterToken=true;         
+        }
+      );   
+    }
+     else{
+      this.srv_login.GetGeneralToken();
+      this.srv_appsetting.isLoggedIn=true;
+    }
+    
   }
  
-  
- 
-  
-   /*  this.srv_login.LogIn(token).subscribe(res=>{
-     if(this.srv_appsetting.UserID=='')
-     {
-        
-     }
-     else
-     {
-
-     }
-
-    }
-   ); */
-
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
   'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
   this.translate.setDefaultLang(this.srv_appsetting.LangName);

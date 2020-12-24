@@ -309,7 +309,8 @@ this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.
   this.TLL = result[0]['TLL'] || '0'
   this.TLT = result[0]['TLT'] || '0'
   var a:string[] = this.TLT.toString().split(':');
-  var TLTMin:number = +a[0] + (+a[1] / 60)
+  //var TLTMin:number = +a[0] + (+a[1] / 60)
+  var TLTMin:number = +a[0] ;
   this.FCE = Math.round((TLTMin / this.CTF) * 100)/100
 this.THe_IPB = Math.ceil((this.B / this.FCE / this.THe_CEDC) * this.THe_CICT)
 this.T_TPB = Math.ceil(this.B / this.FCE / this.THe_CEDC / this.THeH_I)

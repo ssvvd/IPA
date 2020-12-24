@@ -30,7 +30,8 @@ export class HeaderComponent implements OnInit {
   SelectedLang:Language;
   lstcountry:Country[]=[];
   IsLoaded:boolean=false;
-  CurrentCountryName:string='';
+  CurrentCountryName:string='headquarters';
+  //CurrentCountryName:string='';
 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
@@ -44,7 +45,21 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {   
     
-    this.srv_appsetting.CurrentUserSelected.subscribe(u=>{if(u=='') this.userdes='Log In'; else this.userdes=u});   
+    this.srv_appsetting.CurrentUserSelected.subscribe(u=>
+      { if(u=='') 
+          this.userdes='Log In'; 
+        else 
+          this.userdes=u;
+
+          if(this.srv_appsetting.Country!==undefined)
+          this.CurrentCountryName = this.srv_appsetting.Country.CountryName; 
+      });
+
+      this.srv_appsetting.CurrentCountrySelected.subscribe(c=>
+        { if(c!='')                       
+              this.CurrentCountryName = c; 
+        });
+
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
     else

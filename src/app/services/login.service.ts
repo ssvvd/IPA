@@ -21,34 +21,46 @@ export class LoginService {
   GetToken():any
   {
     console.log('before token');
-    this.srv_appsetting.AfterToken=false;
+    //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
       //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
       let s= environment.signinURL + '?t=' +res;  
       window.open(s,'_self');
       console.log('after token');
-      this.srv_appsetting.AfterToken=true;
+      //this.srv_appsetting.AfterToken=true;
       return 'ok'    
     });
     return'ok';
   }
   
+  SignIn(token):any
+  {
+    console.log('before token');
+    //this.srv_appsetting.AfterToken=false;    
+    //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
+    let s= environment.signinURL + '?t=' +token;  
+    window.open(s,'_self');
+    console.log('after token');
+    //this.srv_appsetting.AfterToken=true;      
+    return'ok';
+  }
+
   GetTokenwithoutlogin():any
   {
     console.log('before token');
-    this.srv_appsetting.AfterToken=false;
+    //this.srv_appsetting.AfterToken=false;
     return this.srv_DataLayer.get_token();
   }
 
   GetGeneralToken():any
   {
     console.log('before token');
-    this.srv_appsetting.AfterToken=false;
+    //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
       let s=environment.LoginURLCheckCookies + '?t=' +res;  
       window.open(s,'_self');   
       console.log('after token');
-      this.srv_appsetting.AfterToken=true;
+      //this.srv_appsetting.AfterToken=true;
       return 'ok'    
     });
     return'ok';
@@ -117,6 +129,7 @@ export class LoginService {
   
     this.srv_appsetting.User=u;  
     this.srv_appsetting.isLoggedIn=true;
+    this.srv_appsetting.AfterToken=true;  
   }
   
   LogIn(token:string):Observable<any>
@@ -125,38 +138,45 @@ export class LoginService {
     {      
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
       { 
-          let d=JSON.parse(data);          
-          this.srv_DataLayer.getcountryNamebycountryCode(d[0].usageLocation).subscribe((rr:any)=>
+          let d=JSON.parse(data); 
+          if(d[0].usageLocation==undefined || d[0].email==undefined)   
           {
-            let cn:string='';
-            if(rr!='e') cn=rr.name;                                                     
-            let u:User=
+            this.FillDefaultUser();
+          }
+          else      
+            this.srv_DataLayer.getcountryNamebycountryCode(d[0].usageLocation).subscribe((rr:any)=>
             {
-            displayName:d[0].displayName,
-            surname: d[0].surname,
-            givenName: d[0].givenName,
-            email: d[0].email,
-            country:d[0].country,            
-            companyName:d[0].companyName,            
-            isImc:d[0].isImc,
-            CountryCode:d[0].usageLocation,
-            CountryName:cn}
-            localStorage.setItem("displayName",d[0].displayName);
-            localStorage.setItem("surname",d[0].surname);
-            localStorage.setItem("givenName",d[0].givenName);
-            localStorage.setItem("email",d[0].email);
-            localStorage.setItem("country",d[0].country);
-            localStorage.setItem("companyName",d[0].companyName);
-            localStorage.setItem("isImc",d[0].isImc); 
-            localStorage.setItem("countryCode",d[0].usageLocation);
-            localStorage.setItem("countryName",cn);
-            this.srv_appsetting.User=u;  
-            if(d[0].usageLocation!='' && d[0].usageLocation!=null)
-              this.UpdateCurrentCountry(d[0].usageLocation);
-            this.srv_appsetting.isLoggedIn=true;               
-            });                
-            return of('ok');
-        });                              
+              let cn:string='';
+              if(rr!='e') cn=rr.name;                                                     
+              let u:User=
+              {
+              displayName:d[0].displayName,
+              surname: d[0].surname,
+              givenName: d[0].givenName,
+              email: d[0].email,
+              country:d[0].country,            
+              companyName:d[0].companyName,            
+              isImc:d[0].isImc,
+              CountryCode:d[0].usageLocation,
+              CountryName:cn}
+              localStorage.setItem("displayName",d[0].displayName);
+              localStorage.setItem("surname",d[0].surname);
+              localStorage.setItem("givenName",d[0].givenName);
+              localStorage.setItem("email",d[0].email);
+              localStorage.setItem("country",d[0].country);
+              localStorage.setItem("companyName",d[0].companyName);
+              localStorage.setItem("isImc",d[0].isImc); 
+              localStorage.setItem("countryCode",d[0].usageLocation);
+              localStorage.setItem("countryName",cn);
+              this.srv_appsetting.User=u;  
+              if(d[0].usageLocation!='' && d[0].usageLocation!=null)
+                this.UpdateCurrentCountry(d[0].usageLocation);
+              this.srv_appsetting.isLoggedIn=true;
+              this.srv_appsetting.AfterToken=true;               
+              });  
+                       
+              return of('ok');
+          });                              
     }
     else
     {  

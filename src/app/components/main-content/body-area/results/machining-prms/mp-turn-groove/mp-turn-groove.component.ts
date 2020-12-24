@@ -341,7 +341,8 @@ export class MpTurnGrooveComponent implements OnInit {
                 this.TLL = result[0]['TLL'] || '0'
                 this.TLT = result[0]['TLT'] || '0'
                 var a:string[] = this.TLT.toString().split(':');
-                var TLTMin:number = +a[0] + (+a[1] / 60)
+                //var TLTMin:number = +a[0] + (+a[1] / 60)
+                var TLTMin:number = +a[0] ;
                 this.FCE = Math.round((TLTMin / this.CTF) * 100)/100
                 this.PCE = Math.round((TLTMin / this.CTP) * 100)/100
                 if (this.srv_StMng.SecApp=='1' || this.srv_StMng.SecApp=='10' || this.srv_StMng.SecApp=='50'){

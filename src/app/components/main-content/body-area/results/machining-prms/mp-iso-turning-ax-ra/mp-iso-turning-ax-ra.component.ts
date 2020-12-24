@@ -332,7 +332,8 @@ if (pr.value.trim().length == 7){
         this.TLT = result[0]['TLT'] || '0'
         this.CTP = Math.round((this.CTFa + this.CTFr)*100)/100
         var a:string[] = this.TLT.toString().split(':');
-        var TLTMin:number = +a[0] + (+a[1] / 60)
+        //var TLTMin:number = +a[0] + (+a[1] / 60)
+        var TLTMin:number = +a[0] ;
         this.PCE = Math.round((TLTMin / this.CTP) * 100)/100
         this.IPB = Math.ceil(this.B / (this.PCE * this.CEDC))
         this.TPB = Math.ceil(this.IPB / this.I)

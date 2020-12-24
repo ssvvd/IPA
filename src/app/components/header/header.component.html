@@ -28,10 +28,10 @@
             <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
                
                 <div *ngIf ="srv_appsetting.Country===undefined" ngbDropdownToggle id="calc" >
-                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
+                    <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
                 </div>
                 <div *ngIf ="srv_appsetting.Country!==undefined" ngbDropdownToggle id="calc">
-                    <img [src]="environment.ImagePath+'flags/' + srv_appsetting.Country.CountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
+                    <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
                 </div>    
                     <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
                         <div *ngFor="let c of lstcountry" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{c.CountryName}} >  
@@ -74,12 +74,7 @@
                     <div class="float-right mr-2">
                         <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
                     </div>
-                </div> 
-               <!--  <div  class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
-                    <div class="float-right mr-2">
-                        <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
-                    </div>
-                </div> -->
+                </div>              
             </div>
         </div>
     </div>
@@ -141,21 +136,15 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="div-header-link pl-1">                   
-                    <a (click)="contactus()"><img [src]="environment.ImagePath+'Help_Icon.svg'" (click)="menuisshown=false;openhelp()" class="MenuImg" title="{{'Help' | translate}}"></a>
-                </div> --> 
+              
                 <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Help_Icon.svg'"  class="MenuImg" title="{{'Help' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
-                        <div  class ="row col-12 dropdown-item menuitem ml-4 mt-1 mb-1 mr-4 pl-4" >                                                                                                                                                               
-                            <a (click)="contactus()" target="_blank" class="pl-2 pb-2 pt-2">                                                                                                                               
-                                <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Contact Us' | translate}}</label>                                                                                                                          
-                            </a>
+                        <div  class ="row col-12 dropdown-item menuitem ml-4 mt-1 mb-1 mr-4 pl-4" (click)="contactus()">                                                                                                                                                                                                                                                                                                                       
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Contact Us' | translate}}</label>                                                                                                                                                      
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="feedback()" >
-                            <a (click)="feedback()" target="_blank" class="pl-2 pb-2 pt-2">                                                                        
-                                <label (click)="feedback()" class="siteTitle  mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>                                                                                                                          
-                            </a>
+                        <div class ="row col-12 dropdown-item menuitem" (click)="feedback()" >                                                                                                  
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>                                                                                                                                                      
                         </div>
                     </div>                                                                     
                 </div>                   

@@ -28,6 +28,9 @@ export class AppsettingService {
 
   private obsRateChange = new BehaviorSubject<number>(0);
   RateChange = this.obsRateChange.asObservable();
+  
+  private obsCountrySelected = new BehaviorSubject<string>('');
+  CurrentCountrySelected = this.obsCountrySelected.asObservable();
 
   private obsLangChanged = new BehaviorSubject<string>(null);
   LangChanged = this.obsLangChanged.asObservable();
@@ -175,6 +178,8 @@ export class AppsettingService {
     }
   set Country(c:Country) {  
     this.mCountry = c;
+    this.obsCountrySelected.next(c.CountryName);
+
    }
 
    FillLanguage(lan:string)

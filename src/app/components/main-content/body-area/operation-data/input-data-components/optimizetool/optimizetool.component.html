@@ -67,14 +67,18 @@
         </div>       
     </div>
     <div *ngIf="msrv_StMng.SecApp=='77'" class="pl-0 row">
-        <div class="custom-control custom-checkbox col-6 pt-4">
+        <div class="custom-control custom-checkbox col-4 pt-4">
             <input type="checkbox" class="custom-control-input" id="chkbShank_C" name="Shank" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_Shank_C').value" [checked]="msrv_StMng.IPL.GetItem('TD_Shank_C').value">
             <label class="custom-control-label" for="chkbShank_C">{{'Cylindrical' | translate}}</label>
         </div>                              
-        <div class="custom-control custom-checkbox col-6 pt-4">
+        <div class="custom-control custom-checkbox col-4 pt-4">
             <input type="checkbox" class="custom-control-input" id="chkbShank_W" name="Shank" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_Shank_W').value"   [checked]="msrv_StMng.IPL.GetItem('TD_Shank_W').value">
             <label class="custom-control-label" for="chkbShank_W">{{'Weldon/WN' | translate}}</label>
-        </div>       
+        </div>  
+        <div class="custom-control custom-checkbox col-4 pt-4">
+            <input type="checkbox" class="custom-control-input" id="chkbShank_T" name="Shank" (change)="change('TD_Shank_T')"   [checked]="msrv_StMng.IPL.GetItem('TD_Shank_T').value=='True'">
+            <label class="custom-control-label" for="chkbShank_T">{{'Threaded' | translate}}</label>
+        </div>     
     </div>
  
     <div *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='780' || msrv_StMng.SecApp=='790'" class="pl-0 pt-4">

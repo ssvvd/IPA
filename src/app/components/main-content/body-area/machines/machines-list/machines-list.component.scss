@@ -5,6 +5,10 @@ table.dataTable{
     background: var(--bg-gray);
 }
 
+.table-stripe{
+    width: 100% !important;
+    table-layout: fixed;
+  }
 
 td {
     font-size: 14px;
@@ -33,40 +37,67 @@ th {
 
    table.dataTable thead th {
      background: transparent !important;
-    white-space: nowrap;
+     white-space: nowrap;
   }
 
 .table td:nth-child(2), .table th:nth-child(2){
-    width: 15%;  
+    width: 15% !important;  
+    min-width: 15%!important;
+    max-width: 15%!important;
+ 
 }
 
 .table td:nth-child(3), .table th:nth-child(3){
-    width: 10%;
+    width: 10%!important; 
+    min-width: 10%!important;   
+    max-width: 10%!important;
+     
 }
 
 .table td:nth-child(4), .table th:nth-child(4){
-    width: 15%;
+    width: 15%!important;  
+    min-width: 15%!important;   
+    max-width: 15%!important;
+    
 }
 
 .table td:nth-child(5), .table th:nth-child(5){
-    width: 10%;
+    width: 10%!important; 
+    min-width: 10%!important;   
+    max-width: 10%!important; 
+   
 }
 
 .table td:nth-child(6), .table th:nth-child(6){
-    width: 15%;
+    width: 15%!important;  
+    min-width: 15%!important;   
+    max-width: 15%!important;
+   
 }
 
 .table td:nth-child(7), .table th:nth-child(7){
-    width: 10%;
+    width: 10%!important; 
+    min-width: 10%!important;   
+    max-width: 10%!important; 
+    
 }
  .table td:nth-child(8), .table th:nth-child(8){
-    width:5%;
+    width: 5%!important; 
+    min-width: 5%!important;   
+    max-width: 5%!important; 
+   
 } 
 .table td:nth-child(9), .table th:nth-child(9){
-    width: 5%;
+    width: 5%!important; 
+    min-width: 5%!important;   
+    max-width: 5%!important; 
+    
 }
 .table td:nth-child(10), .table th:nth-child(10){
-    width: 15%;
+    width: 15%!important;  
+    min-width: 15%!important;   
+    max-width: 15%!important;
+    
 }
 
 .div-datatable{  
@@ -84,5 +115,16 @@ table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.
     overflow-y: auto;
     height: calc(100vh - 243px);
 }
- 
+
+::ng-deep .dataTables_scrollHeadInner{
+    width:100% !important;
+  }
+  .dataTables_scrollHeadInner table{
+    width:100% !important;
+  }
+  
+  .dataTables_scrollHead div:nth-child(1){
+    width:100% !important;
+  
+  } 
     

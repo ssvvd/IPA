@@ -154,12 +154,21 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-currency-eciw/'+brifname);
   }
 
-  
+  //mail-send-feedback/{country}/{answer1}/{answer2}/{message?}
+  public  mailsendfeedback(country:string,answer1:string,answer2:string,message:string)
+  {     
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send-feedback/'+
+                                country + '/' + answer1 + '/' + answer2 + '/'+ message);
+  }
+
   public  mailsend(name:string,email:string,country:string,company:string,message:string)
   {     
     let strpar:string='';
-    if (country!='')strpar=strpar + '/'+ country;
-    if (company!='')strpar=strpar + '/'+ company;
+    if(country=="") country='country';
+    if(company=="") company='company';   
+    strpar=strpar + '/'+ country ;
+    strpar=strpar + '/'+ company;
+    
     if (message!='')strpar=strpar + '/'+ message;
 
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email + strpar);

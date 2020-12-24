@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MachinesListComponent } from './components/main-content/body-area/machines/machines-list/machines-list.component';
 import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
+import { MachinesComponent } from './components/main-content/body-area/machines/machines/machines.component';
 
 const routes: Routes = [
 	/* {path:"materials",component:MaterialsComponent},
@@ -19,7 +20,8 @@ const routes: Routes = [
 	{path:"home",component:HomeComponent,
 	children:[
 		{path:"",component:MachinesListComponent},
-		{path:"machines",component:MachinesListComponent},	
+		/* {path:"machines",component:MachinesListComponent},	 */
+		{path:"machines",component:MachinesComponent},	
 		{path:"machine-item/:id/:name", component: MachineItemComponent},
 
 		/* {path:"materials",component:MaterialsComponent}, */

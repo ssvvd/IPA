@@ -68,43 +68,45 @@
             </div>  
                 
              <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-3 pl-0">
                         <label class="pl-0 pt-3">{{'Axial length (LA1)' | translate}}</label>                                               
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
                         <input  type="number"  class="form-control input-min-width"  
                         (change)="SetIPLMandatory()"         [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value"  (focus)="onfocusfield('CutLengthAxial')" (focusout)="onfocusoutfield()"> 
                     </div>    
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-2 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>             
             </div> 
             <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtDepthRadial1" class="pl-0 pt-3">{{'Axial length (LA2)' | translate}}</label> 
-                        <label class="pl-2 asterisk-red pt-3">*</label>                                              
+                <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <label for="txtDepthAxial1" class="pl-0 pt-3">{{'Radial length (LR1)' | translate}}</label>   
+                    <label class="pl-2 asterisk-red pt-3">*</label>                                            
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthAxial1" name="txtDepthAxial1" 
+                    (change)="SetIPLMandatory()"        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
+                </div>    
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
+                </div>             
+           </div>   
+            <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
+                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-3">
+                        <div class="pl-0 pt-3"><label for="txtDepthRadial1" class="pl-0 pt-3" >{{'Axial length (LA2)' | translate}}</label></div>
+                         
+                        <div class="pl-0 pt-3"><label class="pl-2 asterisk-red pt-3">*</label> </div>                                             
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-3 pl-0">
                         <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthRadial1" name="txtDepthRadial1" 
                         (change)="SetIPLMandatory()"    [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
                     </div>    
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-3 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>             
             </div>
-            <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
-                        <label for="txtDepthAxial1" class="pl-0 pt-3">{{'Radial length (LR1)' | translate}}</label>   
-                        <label class="pl-2 asterisk-red pt-3">*</label>                                            
-                    </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthAxial1" name="txtDepthAxial1" 
-                        (change)="SetIPLMandatory()"        [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthAxial').value"  (focus)="onfocusfield('DepthAxial')" (focusout)="onfocusoutfield()"> 
-                    </div>    
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
-                        <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
-                    </div>             
-            </div>          
+                   
             <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
                     <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
                         <label for="txtCutLengthRadial" class="pl-0 pt-3">{{'Radial Length (LR2)' | translate}}</label>
