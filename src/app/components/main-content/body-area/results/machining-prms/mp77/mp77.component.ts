@@ -337,9 +337,10 @@ if (pr.value.trim().length == 7){
     this.HI_I = 30;
     // this.TLL = 50;
     // this.TLT = '50:00';
-    this.H_HDH = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
-    this.S_HPS = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
-    this.I_HPC = Math.round(((this.TLL * 1000)/ this.DOC) * 100)/100 || 0
+    let multiplication:number = (this.srv_appsetting.Units == 'I') ? 1 : 1000
+    this.H_HDH = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
+    this.S_HPS = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
+    this.I_HPC = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
     this.S_NSB=Math.ceil(this.B * this.HPP / this.S_HPS) || 0
     this.H_HPB = Math.ceil(this.B * this.HPP / this.H_HDH) || 0

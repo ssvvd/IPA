@@ -32,7 +32,7 @@ export class Mp760Component implements OnInit {
  
   DC:string
   DPH:number
-  DH:number
+  DH:string
   D:number
   W:number
   L:number
@@ -129,11 +129,11 @@ if (this.srv_StMng.SecApp=='780' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
 if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole')
     this.PreHole = true
 
-    if (this.srv_StMng.SecApp=='780')
-    if (this.PreHole)
-      this.DH = +this.srv_StMng.IPL.GetItem('D2').value
-    else
-      this.DH = +this.srv_StMng.IPL.GetItem('D2Min').value
+    // if (this.srv_StMng.SecApp=='780')
+    // if (this.PreHole)
+    //   this.DH = +this.srv_StMng.IPL.GetItem('D2').value
+    // else
+    //   this.DH = +this.srv_StMng.IPL.GetItem('D2Min').value
 
     this.CR = +this.srv_StMng.IPL.GetItem('RToleranceMin').value
     if (this.srv_StMng.SecApp=='780')
@@ -284,6 +284,10 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
         }
         case 'MTB': {
           this.MTB = value
+          break;
+        }
+        case 'DMax':{
+          this.DH = value
           break;
         }
       }
@@ -583,7 +587,7 @@ this.TCB	=	0
 this.catalogNo=[]
 this.COOL =''
 this.PreHole = false
-this.DH = 0
+this.DH = ''
 this.CR = 0
 this.Dvf = 0
 this.RMPX = 0
