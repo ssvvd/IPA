@@ -127,4 +127,76 @@ table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.
     width:100% !important;
   
   } 
+
+  /* .visibleonlybigscreen
+    {
+        visibility: visible;
+        display:block;
+    } */   
+
+//ipad
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1366px)  
+  and (-webkit-min-device-pixel-ratio: 2)
+  , (max-width: 1010px) {
+
+    .scrollYFilter{
+        overflow-y: auto;
+        height: calc(100vh - 300px);
+    }
+    
+    .visibleonlybigscreen
+    {
+        visibility: hidden;
+        display:none;
+    }
+
+.table td:nth-child(1), .table th:nth-child(1){
+    width: 20% !important;  
+    min-width: 20% !important;  
+    max-width: 20% !important;  
+ 
+}
+
+.table td:nth-child(2), .table th:nth-child(2){
+    width: 15%!important; 
+    min-width: 15%!important; 
+    max-width: 15%!important; 
+     
+}
+
+.table td:nth-child(3), .table th:nth-child(3){
+    width: 15%!important;  
+    min-width:  15%!important;    
+    max-width:  15%!important; 
+    
+}
+
+.table td:nth-child(4), .table th:nth-child(4){
+    width: 15%!important; 
+    min-width: 15%!important;  
+    max-width: 15%!important;
+   
+}
+
+ .table td:nth-child(5), .table th:nth-child(5){
+    width: 10%!important; 
+    min-width:10%!important;    
+    max-width: 10%!important;  
+   
+} 
+.table td:nth-child(6), .table th:nth-child(6){
+    width: 10%!important;  
+    min-width: 10%!important;  
+    max-width: 10%!important;  
+    
+}
+.table td:nth-child(7), .table th:nth-child(7){
+    width: 20%!important;  
+    min-width: 20%!important;   
+    max-width: 20%!important;
+    
+}
+}
     

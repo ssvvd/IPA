@@ -219,7 +219,7 @@ environment=environment;
     
           this.selectedRes[i].forEach(function (value) {
             pr = value
-    if (pr.value.trim().length == 7){
+        if (pr.value.trim().length == 7){
             this.catalogNo.push(pr.value.trim());
 
             this.srv_Results.GetItemParameterValueSpecial(pr.value.trim(),'774',this.srv_appsetting.Units).subscribe((res: any) => {

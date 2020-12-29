@@ -25,12 +25,16 @@
                 <thead *ngIf="isLoaded">
                   <tr id="dtOptions">
                     <th class="d-none">ID</th>                                                                                           
-                    <th><label>{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                                                   
+                    <th><label class="visibleonlybigscreen">{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                                                   
                     <th (click)="SortSpindleType()" ><div class="text-center"><label>{{'Spindle' | translate}}</label><span class="sort-icon ml-1" ></span></div><div class="text-center"><label>{{'Main' | translate}} &nbsp;&nbsp; {{'Tool' | translate}}</label></div></th>
-                    <th><label>{{'Adaptation Type'| translate}}{{' '}}&{{' '}}{{'Size' | translate}}<span class="sort-icon ml-1"></span></label></th>
-                    <th><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
-                    <th><label>{{'Spindle Speed' | translate}}{{' (rpm)'}}<span class="sort-icon ml-1"></span></label></th>                
-                    <th><label>{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
+                    <!-- <th class="visibleonlybigscreen"><label>{{'Adaptation Type'| translate}}{{' '}}&{{' '}}{{'Size' | translate}}<span class="sort-icon ml-1"></span></label></th>  -->
+                    <th><div>{{'Adaptation Type'| translate}}{{' '}}<span class="sort-icon ml-1"></span>
+                        </div>
+                        <div>{{'Size' | translate}}</div>                        
+                    </th>
+                    <th ><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
+                    <th class="visibleonlybigscreen"><label>{{'Spindle Speed' | translate}}{{' (rpm)'}}<span class="sort-icon ml-1"></span></label></th>                
+                    <th class="visibleonlybigscreen"><label>{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th></th>                 
                     <th></th>
                     <th></th> 
@@ -58,8 +62,8 @@
                     </td>                                       
                     <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div></td>
                     <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2">{{mach.Power}}</div></td>
-                    <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
-                    <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2">{{mach.Torque}}</div></td>                                     
+                    <td (click)="onclickrow(mach)" class="cursor-pointer visibleonlybigscreen"><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
+                    <td (click)="onclickrow(mach)" class="cursor-pointer visibleonlybigscreen"><div class="pl-2">{{mach.Torque}}</div></td>                                     
                    <td data-sort="image1" class="cursor-pointer">
                       <a data-toggle="tooltip" title="{{ mach.isFavorite  ? 'Delete My Machine' : 'Add To My Machines' | translate}}" class="cursor-pointer">
                         <img   [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(mach)" >

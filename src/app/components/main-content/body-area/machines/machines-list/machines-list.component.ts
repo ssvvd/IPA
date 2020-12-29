@@ -55,14 +55,17 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {  
- 
+    let scrollYdiff:string='325px';
+    //alert(window.devicePixelRatio);
+    if(window.devicePixelRatio>1) scrollYdiff='375px';
+
     this.dtOptions = {
       pagingType: 'full_numbers',
       "searching": false,
       "lengthChange": false,
       "paging": false,       
        "autoWidth":false,
-       "scrollY": 'calc(100vh - 325px)',
+       "scrollY": 'calc(100vh - '+ scrollYdiff +')',
        "info": false,
        "scrollCollapse" : true,
         "language": {

@@ -317,16 +317,23 @@ if (pr.value.trim().length == 7){
               _Mc = +splitted[0]
               _Kc = +splitted[1]
               _k = +splitted[2]
-              insertBrandName = splitted[3]
-              this.I_CEDC = +splitted[4]
-              this.I_CICT = +splitted[5]
-
-
-
-
+              insertBrandName = splitted[3];
+              this.I_CEDC = +splitted[4];
+              this.I_CICT = +splitted[5];
               //this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,this.selectedHelp.Grade.toString().split(",").join(""),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,+this.DH).subscribe((res: any) => {
               /* this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => { */
-                this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",")[1].trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => {
+                //this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",")[1].trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => {
+                //let arr=Array.from(new Set(this.selectedHelp.Grade)).toString().split(",");
+                let grade:string;
+                if(this.selectedHelp.Grade.length ==1)  grade=this.selectedHelp.Grade[0];
+                if(this.selectedHelp.Grade.length ==2)  grade=this.selectedHelp.Grade[1];
+                if(this.selectedHelp.Grade.length >=3) 
+                {
+                  if(this.selectedHelp.Grade[1]!=undefined)  grade=this.selectedHelp.Grade[1];
+                  if(this.selectedHelp.Grade[2]!=undefined)  grade=this.selectedHelp.Grade[2];
+                  if(this.selectedHelp.Grade[3]!=undefined)  grade=this.selectedHelp.Grade[3];                   
+                }                               
+                this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,grade.trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => {
                 var result:object[] = JSON.parse(res);
                 this.TLL = result[0]['TLL'] || '0'
                 this.TLT = result[0]['TLT'] || '0'
