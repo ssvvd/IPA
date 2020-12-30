@@ -181,7 +181,7 @@
     <div class="col-3 row"><Label>{{'Mean power' | translate }}</Label></div>
     <div class="col-2">P</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P}}</div>
-    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'Kw' : 'HP' | translate}}</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'kW' : 'HP' | translate}}</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="this.srv_StMng.SecApp!='54' && this.srv_StMng.SecApp!='10' && this.srv_StMng.SecApp!='188'">
@@ -211,7 +211,7 @@
     <div class="col-3 row"><Label>{{'Mean power' | translate }}</Label></div>
     <div class="col-2">P</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P1}}</div>
-    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'Kw' : 'HP' | translate}}</div>
+    <div class="col-2">{{ srv_appsetting.Units =='M' ? 'kW' : 'HP' | translate}}</div>
   </div>
 
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='50'">
@@ -271,25 +271,25 @@
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
     <div class="col-3 row"><Label>{{'Grooving - Cutting Time per Feature' | translate }}</Label></div>
     <div class="col-2">CTF<sub>g</sub></div>
-    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFg}}</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFgFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
     <div class="col-3 row"><Label>{{'Turning - Cutting Time per Feature' | translate }}</Label></div>
     <div class="col-2">CTF<sub>t</sub></div>
-    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFt}}</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFtFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
     <div class="col-3 row"><Label>{{'Cutting Time per Part' | translate }}</Label></div>
     <div class="col-2">CTP</div>
-    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTP}}</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTPFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='1' && srv_StMng.SecApp!='10' && srv_StMng.SecApp!='50'">
     <div class="col-3 row"><Label>{{'Cutting Time per Feature' | translate }}</Label></div>
     <div class="col-2">CTF</div>
-    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTF}}</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFgFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100">

@@ -59,6 +59,7 @@ export class Mp760Component implements OnInit {
   MCH:number
   B:number
   CTF:number
+  CTFFormat:string;
   TLL:number
   TLT:number
   NOF:number
@@ -266,6 +267,11 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
             this.CTF = +value
           break;
         }
+        case 'TotalCuttingTimeFormat':{
+          //if (this.srv_StMng.SecApp=='780')
+            this.CTFFormat = value
+          //break;
+        }
         case 'TCB': {
           this.TCB = +value
           break;
@@ -305,7 +311,11 @@ this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
 this.He_Is = 100
 this.THeH_I = 110
 if (this.srv_StMng.SecApp!='780')
-this.CTF = Math.round((+this.NOPE * +this.NOPP * this.L / this.Vf) * 100)/100 //NOPE * NOPP * L / Vf
+  this.CTF = Math.round((+this.NOPE * +this.NOPP * this.L / this.Vf) * 100)/100 //NOPE * NOPP * L / Vf
+else
+ this.CTF = Math.round(this.casttimeformattonumber(this.CTFFormat))
+//this.CTFFormat = Math.floor(this.CTF).toString().padStart(2, '0') + ':' + Math.round((this.CTF  - Math.floor(this.CTF))*60).toString().padStart(2, '0');
+
 // this.TLL = 50
 // this.TLT = 50
 this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,0).subscribe((res: any) => {
@@ -594,6 +604,16 @@ this.RMPX = 0
 this.PITCH = 0
 this.VfDvf = 0
 this.CPU = 0
+  }
+
+  casttimeformattonumber(t:string):number
+  {
+    if(t=='0' || t==undefined) return 0;
+    let tn:number=0;
+    let arr;
+    arr=t.split(':');
+    tn= +arr[0]+ (arr[1]/60);    
+    return tn;
   }
 
 }

@@ -382,10 +382,7 @@ if (pr.value.trim().length == 7){
     // this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
     // this.CPU = Math.round((this.TCB / this.B) * 100)/100
     
-              })
-
-
-              
+              })              
               switch (insertBrandName.trim().toUpperCase()){
                   case 'SUMOCHAM FLAT HEAD': case 'SUMOCHAM CHAMDRILL LINE': case 'SUMOCHAMIQ':
                     insertType = 'Sumo'

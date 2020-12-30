@@ -64,8 +64,11 @@ export class MpTurnGrooveComponent implements OnInit {
   MCH:number
   B:number
   CTFg:number
+  CTFgFormat:string
   CTFt:number
-  CTP:number
+  CTFtFormat:string
+  CTP:number;
+  CTPFormat:string;
   CTF:number
   TLL:number
   TLT:number
@@ -161,6 +164,17 @@ export class MpTurnGrooveComponent implements OnInit {
                     this.CTFt = +value
                     break;
                   }
+                  case 'TotalCuttingTimeFormat': {
+                    this.CTFtFormat = value
+                    break;
+                  }
+                  case 'TotalCuttingTimeGFormat':{
+                    this.CTF = + value
+                    this.CTFgFormat =value
+                    //this.CTFtFormat = value
+                    break;
+                  }
+                  
                   case 'CuttingSpeed':{
                     this.Vc1 = value
                     break;
@@ -332,7 +346,13 @@ export class MpTurnGrooveComponent implements OnInit {
               this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
               this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
               this.I = 1000
-              this.CTP = Math.round((this.CTFg + this.CTFt) * 100)/100
+                            
+              //this.CTP = Math.round((this.CTFg + this.CTFt) * 100)/100;
+              this.CTP = Math.round((this.casttimeformattonumber(this.CTFgFormat) + this.casttimeformattonumber(this.CTFtFormat)) * 100)/100;
+              this.CTPFormat = Math.floor(this.CTP).toString().padStart(2, '0') + ':' + Math.round((this.CTP  - Math.floor(this.CTP))*60).toString().padStart(2, '0');
+
+              this.CTF = this.CTP;
+
               // this.TLL = 50
               // this.TLT = 50
 
@@ -360,17 +380,19 @@ export class MpTurnGrooveComponent implements OnInit {
                 // this.TCB = Math.round((this.TGC + this.MCB) * 100)/100
                 // this.CPU = Math.round((this.TCB / this.B) * 100)/100
 
-              })
-
-
-    
-    }      
-    
-    
-    
-    
+              })    
+    }          
           })
+  }
 
+  casttimeformattonumber(t:string):number
+  {
+    if(t=='0' || t==undefined) return 0;
+    let tn:number=0;
+    let arr;
+    arr=t.split(':');
+    tn= +arr[0]+ (arr[1]/60);    
+    return tn;
   }
 
   reset(){
