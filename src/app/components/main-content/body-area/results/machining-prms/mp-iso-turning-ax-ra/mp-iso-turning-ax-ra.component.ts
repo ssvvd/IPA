@@ -69,8 +69,10 @@ export class MpIsoTurningAxRaComponent implements OnInit {
   Ft2	:number
   MCH	:number
   B	:number
-  CTFa	:number
-  CTFr	:number
+  CTFa	:number;
+  CTFaFormat	:string;
+  CTFr	:number;
+  CTFrFormat	:string;
   TLL	:number
   TLT	:number
   CEDC	:number
@@ -214,8 +216,19 @@ environment=environment;
             this.CTFr = +value
             break;
           }
+          case 'TotalCuttingTimeFormat':{
+            this.CTFaFormat = value;
+            //this.CTFr = +value
+            break;
+          }
+
           case 'TotalCuttingTimeG':{
             this.CTFr = +value
+            break;
+          }
+          
+          case 'TotalCuttingTimeGFormat':{
+            this.CTFrFormat = value;
             break;
           }
           case 'TCB': {
@@ -324,12 +337,14 @@ if (pr.value.trim().length == 7){
       this.I = 1000
       // this.TLL = 50
       // this.TLT = 50
-
+      
+      this.CTFa=Math.round(this.casttimeformattonumber(this.CTFaFormat)* 100)/100;
+      this.CTFr=Math.round(this.casttimeformattonumber(this.CTFrFormat)* 100)/100;
 
       this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc.toString(),0).subscribe((res: any) => {
         var result:object[] = JSON.parse(res);
-        this.TLL = result[0]['TLL'] || '0'
-        this.TLT = result[0]['TLT'] || '0'
+        this.TLL = result[0]['TLL'] || '0';
+        this.TLT = result[0]['TLT'] || '0';
         this.CTP = Math.round((this.CTFa + this.CTFr)*100)/100
         var a:string[] = this.TLT.toString().split(':');
         //var TLTMin:number = +a[0] + (+a[1] / 60)
@@ -472,5 +487,15 @@ this.TCB 	=	0
 this.I	=	0
 this.CTP = 0
 this.CPU = 0
+  }
+
+  casttimeformattonumber(t:string):number
+  {
+    if(t=='0' || t==undefined) return 0;
+    let tn:number=0;
+    let arr;
+    arr=t.split(':');
+    tn= +arr[0]+ (arr[1]/60);    
+    return tn;
   }
 }

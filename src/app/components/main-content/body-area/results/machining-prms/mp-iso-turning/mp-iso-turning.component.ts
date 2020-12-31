@@ -55,7 +55,8 @@ export class MpIsoTurningComponent implements OnInit {
   MCH:number
   B:number
   I:number
-  CTF:number
+  CTF:number;
+  CTFFormat:string;
   TLL:number
   TLT:number
   CEDC:number 
@@ -193,6 +194,10 @@ environment=environment;
               this.CTF = +value
               break;
             }
+            case 'TotalCuttingTimeFormat': case 'TotalCuttingTimeGFormat':{
+              this.CTFFormat = value
+              break;
+            }
             case 'TCB': {
               this.TCB = +value
               break;
@@ -289,12 +294,13 @@ environment=environment;
             })
           
           }
-
+    
           this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
           this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
           this.I = 1000
-
-
+          
+          this.CTF =  Math.round(this.casttimeformattonumber(this.CTFFormat)* 100)/100;
+          
           this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,0).subscribe((res: any) => {
             var result:object[] = JSON.parse(res);
             this.TLL = result[0]['TLL'] || '0'
@@ -353,7 +359,8 @@ environment=environment;
     this.MCH = 0
     this.B =0
     this.I = 0
-    this.CTF	=	0
+    this.CTF	=	0;
+    this.CTFFormat	=	'';
     this.TLL	=	0
     this.TLT	=	0
     this.CEDC = 0
@@ -375,4 +382,13 @@ this.resType = ''
 this.CPU = 0
   }
 
+  casttimeformattonumber(t:string):number
+  {
+    if(t=='0' || t==undefined) return 0;
+    let tn:number=0;
+    let arr;
+    arr=t.split(':');
+    tn= +arr[0]+ (arr[1]/60);    
+    return tn;
+  }
 }

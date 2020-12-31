@@ -493,7 +493,11 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
   this.srv_Results.GetCuttingForcesMilling(subApp,insertType,+this.DC,+this.ae,this.NOF,+this.fz,+this.ap,_Kc,_Mc,0,cutForceFirts,cutForceSecond,cutForceThird).subscribe((res: any) => {
     var result = res as MPResult;
     this.Fb = Math.round(result.ResultRowList[0].Value * 100)/100
-    this.mb  = Math.round((((this.Fb  * this.O) / 1000)/12)* 100)/100
+    
+    if(this.srv_appsetting.Units=='M')
+      this.mb  = Math.round((((this.Fb  * this.O) / 1000))* 100)/100;
+    else
+      this.mb  = Math.round((((this.Fb  * this.O) / 1000)/12)* 100)/100;
   })
 
 

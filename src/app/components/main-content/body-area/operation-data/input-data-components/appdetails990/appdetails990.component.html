@@ -59,7 +59,8 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>                     
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number"  [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('CutLengthAxial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"   id="txtDepthRadial" name="txtDepthRadial" 
+                        <input  type="number"  
+                        [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"   id="txtDepthRadial" name="txtDepthRadial" 
                         (change)="SetIPLMandatory()"              [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthRadial').value"  (focus)="onfocusfield('DepthRadial')" (focusout)="onfocusoutfield()"> 
                     </div>  
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
