@@ -349,19 +349,20 @@ if (pr.value.trim().length == 7){
     this.S_HPS = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.I_HPC = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
-    this.S_NSB=Math.ceil(this.B * this.HPP / this.S_HPS) || 0
-    this.H_HPB = Math.ceil(this.B * this.HPP / this.H_HDH) || 0
-    this.I_NIB=Math.ceil(this.B * this.HPP / (this.I_HPC * this.I_CEDC)) * this.I_CICT || 0
+    this.S_NSB=Math.ceil(this.B / this.S_HPS) || 0
+    this.H_HPB = Math.ceil(this.B / this.H_HDH) || 0
+    //     NIB=ROUNDUP( B / (HPC * CEDC ))  * CICT
+    this.I_NIB=Math.ceil(this.B / (this.I_HPC * this.I_CEDC)) * this.I_CICT || 0
     this.H_DHC = Math.round(this.H_HPB * this.H_DHP * 100)/100
     this.I_TIC= Math.round(this.I_NIB * this.I_IP * 100)/100
 
 //change Tool cost	TTC	TP * HPB / I)	Solid Tools cost	TTC	TP * NSB	Tools cost	TTC	TP * (NIB / I)
     if (this.resType == "H")
-    this.TTC = Math.round((this.TP * this.H_HPB / this.HI_I) * 100)/100 || 0
+    this.TTC =(this.TP *  Math.ceil(this.H_HPB / this.HI_I) ) || 0
     if (this.resType == "S")
-    this.TTC = Math.round(this.TP * this.S_NSB * 100)/100
-    if (this.resType == "I")
-    this.TTC = Math.round((this.TP * this.I_NIB / this.HI_I) * 100)/100 || 0
+    this.TTC = Math.ceil(this.TP * this.S_NSB )
+    if (this.resType == "I") //TP * ROUNDUP(HPB / I)
+    this.TTC = (this.TP * Math.ceil(this.I_NIB / this.HI_I) ) || 0
 
     // this.H_CTB = Math.round(this.TTC+this.H_DHC * 100)/100
     // this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()

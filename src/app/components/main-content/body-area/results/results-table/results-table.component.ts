@@ -492,10 +492,13 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                 this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/batch)'
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
               break;
-              case 'CPU':
-                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/unit)'
+              case 'CPP':
+                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/parts)'
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
-              break;
+                break;
+              case 'CPH':
+                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/holes)';
+                break;
               case 'List':
                 this.dtPropertiesTable[j].FieldDescriptionSmall = 'List Price' + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + ')'
               break;

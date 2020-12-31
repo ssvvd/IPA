@@ -118,14 +118,14 @@
         <div class="col-3 row"><Label>{{'Batch Size ' | translate }}</Label></div>
         <div class="col-2">B</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{B}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{'Units' | translate}}</div>
+        <div class="col-2" style="margin-left: 6%;">{{'holes' | translate}}</div>
       </div>
-      <div class="row justify-content-start w-100">
+     <!--  <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'No. of Holes ' | translate }}</Label></div>
         <div class="col-2">HPP</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{HPP}}</div>
         <div class="col-2" style="margin-left: 6%;">{{'Holes/part' | translate}}</div>
-      </div>
+      </div> -->
       <!-- <div class="row justify-content-start w-100">
         <div class="col-3 row">{{'No. of Index per Tool' | translate }}</div>
         <div class="col-2">I</div>
@@ -276,9 +276,9 @@
         <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Cost per Unit' | translate }}</Label></div>
-        <div class="col-2">CPU</div>
+        <div class="col-3 row"><Label>{{'Cost per Hole' | translate }}</Label></div>
+        <div class="col-2">CPH</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{CPU}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/unit</div>
+        <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/part</div>
       </div>
     </ng-container>

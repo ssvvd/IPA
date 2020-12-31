@@ -33,6 +33,15 @@ export class AppComponent implements OnInit {
 
 ngOnInit()
 {  
+ /*  const agent = window.navigator.userAgent.toLowerCase();
+  if(agent.indexOf('trident') > -1)
+  {
+    alert('ie');
+  }
+  else
+    alert('no ie'); */
+
+  
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   let token:string=''; 
@@ -103,8 +112,7 @@ ngOnInit()
 
 GetUserData()
 {
-  //this.srv_login.GetUserData();
-  
+  //this.srv_login.GetUserData();  
 }
 
 }

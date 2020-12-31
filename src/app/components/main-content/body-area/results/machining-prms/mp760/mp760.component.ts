@@ -72,7 +72,7 @@ export class Mp760Component implements OnInit {
   H_SHP:number
   H_SKP:number
   He_HHP:number
-  FCE:number
+  PCE:number
   THe_IPB:number
   T_TPB:number
   He_TPB:number
@@ -325,9 +325,11 @@ this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.
   var a:string[] = this.TLT.toString().split(':');
   //var TLTMin:number = +a[0] + (+a[1] / 60)
   var TLTMin:number = +a[0] ;
-  this.FCE = Math.round((TLTMin / this.CTF) * 100)/100
-this.THe_IPB = Math.ceil((this.B / this.FCE / this.THe_CEDC) * this.THe_CICT)
-this.T_TPB = Math.ceil(this.B / this.FCE / this.THe_CEDC / this.THeH_I)
+  this.PCE = Math.round((TLTMin / this.CTF) * 100)/100
+ //ROUNDUP( B  / PCE / CEDC) * CICT
+this.THe_IPB = Math.ceil((this.B / this.PCE / this.THe_CEDC) )* this.THe_CICT
+
+this.T_TPB = Math.ceil(this.B / this.PCE / this.THe_CEDC / this.THeH_I)
 this.He_TPB = this.T_TPB
 this.He_THH = Math.ceil(this.He_TPB / this.He_Is)
 this.THe_TIC = Math.round((this.THe_IP * this.THe_IPB) * 100)/100
@@ -335,10 +337,10 @@ this.He_THSC = (this.He_HP * this.He_TPB) + (this.He_HHP * this.He_THH)
 this.T_TTC = Math.round(this.T_TP * this.T_TPB * 100)/100
 this.T_TGC =  this.TGC
 this.He_TGC =  this.TGC
-this.S_SPB = Math.ceil(this.B / this.FCE)
+this.S_SPB = Math.ceil(this.B / this.PCE)
 this.S_TSC = Math.round(this.S_SP * this.S_SPB * 100)/100
-this.H_SHB = Math.ceil(this.B / this.FCE)
-this.H_SKB = Math.ceil(this.B / this.FCE / this.THeH_I)
+this.H_SHB = Math.ceil(this.B / this.PCE)
+this.H_SKB = Math.ceil(this.B / this.PCE / this.THeH_I)
 this.H_TSHC = Math.round(this.H_SHP * this.H_SHB * 100)/100
 this.H_TSKC = this.H_SKP * this.H_SKB
 this.H_TGC =  this.TGC
@@ -577,7 +579,7 @@ this.S_SP	=	0
 this.H_SHP	=	0
 this.H_SKP	=	0
 this.He_HHP	=	0
-this.FCE	=	0
+this.PCE	=	0
 this.THe_IPB	=	0
 this.T_TPB	=	0
 this.He_TPB	=	0

@@ -265,7 +265,7 @@
     <div class="col-3 row"><Label>{{'Batch Size ' | translate }}</Label></div>
     <div class="col-2">B</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{B}}</div>
-    <div class="col-2">{{'Units' | translate}}</div>
+    <div class="col-2">{{'parts' | translate}}</div>
   </div>
   
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
@@ -275,8 +275,8 @@
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
-    <div class="col-3 row"><Label>{{'Turning - Cutting Time per Feature' | translate }}</Label></div>
-    <div class="col-2">CTF<sub>t</sub></div>
+    <div class="col-3 row"><Label>{{'Turning - Cutting Time per Part' | translate }}</Label></div>
+    <div class="col-2">CTP<sub>t</sub></div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFtFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
@@ -287,7 +287,7 @@
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='1' && srv_StMng.SecApp!='10' && srv_StMng.SecApp!='50'">
-    <div class="col-3 row"><Label>{{'Cutting Time per Feature' | translate }}</Label></div>
+    <div class="col-3 row"><Label>{{'Cutting Time per Part' | translate }}</Label></div>
     <div class="col-2">CTF</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFgFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
@@ -325,10 +325,10 @@
     </div>
   
     <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp!='1' && srv_StMng.SecApp!='10' && srv_StMng.SecApp!='50'">
-      <div class="col-3 row"><Label>{{'No. of Features per Cutting Edge' | translate }}</Label></div>
-      <div class="col-2">FCE</div>
+      <div class="col-3 row"><Label>{{'No. of Parts per Cutting Edge' | translate }}</Label></div>
+      <div class="col-2">PCE</div>
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{FCE}}</div>
-      <div class="col-2">{{'pcs' | translate}}</div>
+      <div class="col-2">{{'parts' | translate}}</div>
     </div>   
   
     <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
@@ -387,10 +387,10 @@
         <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Cost per Unit' | translate }}</Label></div>
-        <div class="col-2">CPU</div>
+        <div class="col-3 row"><Label>{{'Cost per Part' | translate }}</Label></div>
+        <div class="col-2">CPP</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CPU}}</div>
-        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/unit</div>
+        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/parts</div>
       </div>
 
 </ng-container>
