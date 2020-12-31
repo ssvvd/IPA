@@ -491,7 +491,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
               case 'TGC': case 'MCB': case 'TCB':
                 this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/batch)'
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
-              break;
+                break;
               case 'CPP':
                 this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/parts)'
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
