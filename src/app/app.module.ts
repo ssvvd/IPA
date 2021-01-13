@@ -102,6 +102,7 @@ import { PpSuccessfullyComponent } from './components/maintenance/pp-successfull
 import { ContactusComponent } from './components/maintenance/contactus/contactus.component';
 import { FeedbackComponent } from './components/maintenance/feedback/feedback.component';
 import { MachinesComponent } from './components/main-content/body-area/machines/machines/machines.component';
+import { BrowersComponent } from './components/maintenance/browers/browers.component';
 
 
 @NgModule({
@@ -189,6 +190,7 @@ import { MachinesComponent } from './components/main-content/body-area/machines/
     ContactusComponent,
     FeedbackComponent,
     MachinesComponent,
+    BrowersComponent,
     
   ],
   exports:[SharedModule],

@@ -138,6 +138,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
     this.selectedMaterial = mat.material;
     this.FavName = ""
     this.srv_statemanage.SelectMaterial(mat);
+    this.srv_statemanage.GoOperationTab =true;
 
   }
 

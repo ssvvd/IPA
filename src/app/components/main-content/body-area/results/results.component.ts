@@ -101,16 +101,32 @@ eventsSubject: Subject<void> = new Subject<void>();
   //   this._showDownload = $event;
   // }
 
+  CheckDownloadResults()
+  {
+    let sCatalogNo:string ='';
+    for (let c of this.viewParams.Res[0].CatalogNo)
+    {
+      c=c.replace(/\s/g, "");
+      sCatalogNo = sCatalogNo +c + ',';
+    } 
+    if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);
+      this.srv_DataLayer.checkexistsp21(sCatalogNo).subscribe( res=>
+        {
+          if(res=='')
+            this.DownLoadResults(false);
+          else
+            this.DownLoadResults(true);
+        });    
+  }
 
-  DownLoadResults()
+  DownLoadResults(isp21:boolean)
   {  
-    this.srv_appsetting.curDate= new Date().toString(); 
-    //todo:
+    this.srv_appsetting.curDate= new Date().toString();    
     this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { f=0; if(f==2) {this.SpinnerService.hide(); return;}});
-    //this.srv_down.PDFListLoaded.subscribe((res:any) => {alert(res);this.processdownload =false;});
+       
+    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });    
+    modalRef.componentInstance.isP21 = isp21;
 
-    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });
-      
     modalRef.result.then((result) => {
     if(result=='cancel') return;
     
@@ -129,7 +145,13 @@ eventsSubject: Subject<void> = new Subject<void>();
       this.IsExport=true; 
       
       this.SpinnerService.show();
-      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage);}, 6000 );               
+      let filename:string;
+      filename=this.srv_statemanage.MainAppSelected.MenuName.trim();
+      filename=filename + ' ' +this.srv_statemanage.SecAppSelected.MenuName.trim();
+      filename=filename + ' ' +this.viewParams.Res[0].Designation[this.viewParams.Res[0].Designation.length-1].trim();
+      filename=filename + ' '+ this.viewParams.Res[0].Grade[this.viewParams.Res[0].Grade.length-1].trim();
+      filename= filename + ' '+ this.viewParams.Res[0].CatalogNo[this.viewParams.Res[0].CatalogNo.length-1].trim();
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage,filename);}, 6000 );               
       setTimeout(() => {this.SpinnerService.hide();}, 12000);
     }
     
@@ -144,17 +166,20 @@ eventsSubject: Subject<void> = new Subject<void>();
       } 
 
       if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);
-      if(result=='P21')     
+      if(result=='P21')  
+      {       
         return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
-        {      
-          var downloadURL = window.URL.createObjectURL(response);
-          var link = document.createElement('a');
-          link.href = downloadURL;
-          link.download = "P21.zip";
-          link.click();
-          this.processdownload =false;          
-        }
-      );
+          {      
+            var downloadURL = window.URL.createObjectURL(response);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = "P21.zip";
+            link.click();
+            this.processdownload =false;          
+          }
+          );         
+      }   
+              
       if(result=='FP')     
       return this.srv_DataLayer.downloadfilepackage(sCatalogNo,'M').subscribe( response=>       
       {      

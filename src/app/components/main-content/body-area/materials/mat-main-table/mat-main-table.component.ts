@@ -238,6 +238,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     this.selectedMaterial = mat.group;
     this.FavMat = '';
     this.srv_statemanage.SelectMaterial(mat);
+    this.srv_statemanage.GoOperationTab =true;
 
   }
 

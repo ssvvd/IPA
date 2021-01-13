@@ -177,7 +177,7 @@ export class clsHelpProp {
 
     
 
-    InternalCoolantFilter(filed:string,value:string,checked:string){
+/*     InternalCoolantFilter(filed:string,value:string,checked:string){
         switch (checked){
             case 'T':
                if (this[filed] == value)
@@ -189,7 +189,19 @@ export class clsHelpProp {
               break;
         }
     }
+    */
+    InternalCoolantFilter(filed:string,value:string,checked:string){
+        switch (checked){
+            case 'T':
+                if(this[filed][0] == value) this.isHidden--;            
+                break;
+            case 'F':                
+                if(this[filed][0] == value) this.isHidden++;
+                break;
+        }
+    }
 
+   
 
 
 }

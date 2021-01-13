@@ -6,9 +6,11 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { LoginService } from 'src/app/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpParams } from '@angular/common/http';
-
+import { CookiesService } from 'src/app/services/cookies.service';
+import { BrowersComponent } from './components/maintenance/browers/browers.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import cssVars from 'css-vars-ponyfill';
-//import { User } from './models/users/user';
+
 
 @Component({
   selector: 'app-root',
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit {
 
   constructor(location: Location, router: Router, private srv_appsetting:AppsettingService,
               public translate:TranslateService,
-              private srv_login:LoginService) {
+              private srv_login:LoginService,private srv_cook:CookiesService,
+              private modalService:NgbModal) {
     if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
@@ -32,15 +35,12 @@ export class AppComponent implements OnInit {
   }
 
 ngOnInit()
-{  
- /*  const agent = window.navigator.userAgent.toLowerCase();
-  if(agent.indexOf('trident') > -1)
-  {
-    alert('ie');
-  }
-  else
-    alert('no ie'); */
-
+{
+  if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
+   { 
+    const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
+    this.srv_cook.set_cookie("is_browser_ie",'1');
+   }
   
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
@@ -110,9 +110,25 @@ ngOnInit()
   
 }
 
-GetUserData()
-{
-  //this.srv_login.GetUserData();  
+
+public getBrowserName() {
+  const agent = window.navigator.userAgent.toLowerCase()
+  switch (true) {
+    case agent.indexOf('edge') > -1:
+      return 'edge';
+    case agent.indexOf('opr') > -1 && !!(<any>window).opr:
+      return 'opera';
+    case agent.indexOf('chrome') > -1 && !!(<any>window).chrome:
+      return 'chrome';
+    case agent.indexOf('trident') > -1:
+      return 'ie';
+    case agent.indexOf('firefox') > -1:
+      return 'firefox';
+    case agent.indexOf('safari') > -1:
+      return 'safari';
+    default:
+      return 'other';
+  }
 }
 
 }

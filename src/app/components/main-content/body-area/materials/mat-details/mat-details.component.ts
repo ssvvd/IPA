@@ -95,6 +95,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
   {   
     this.selectedMaterialCls= new clsMaterial(this.selectedMaterial.group,this.selectedMaterial.desc,mat,this.selectedMaterial.Category,this.selectedMaterial.HardnessHBValue);
     this.srv_statemanage.SelectMaterial(this.selectedMaterialCls);
+    this.srv_statemanage.GoOperationTab =true;
 
   }
 

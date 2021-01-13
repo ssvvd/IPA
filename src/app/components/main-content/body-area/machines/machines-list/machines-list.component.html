@@ -26,11 +26,19 @@
                   <tr id="dtOptions">
                     <th class="d-none">ID</th>                                                                                           
                     <th><label class="visibleonlybigscreen">{{'Machine Name' | translate}}<span class="sort-icon ml-1" ></span></label></th>                                                   
-                    <th (click)="SortSpindleType()" ><div class="text-center"><label>{{'Spindle' | translate}}</label><span class="sort-icon ml-1" ></span></div><div class="text-center"><label>{{'Main' | translate}} &nbsp;&nbsp; {{'Tool' | translate}}</label></div></th>
-                    <!-- <th class="visibleonlybigscreen"><label>{{'Adaptation Type'| translate}}{{' '}}&{{' '}}{{'Size' | translate}}<span class="sort-icon ml-1"></span></label></th>  -->
-                    <th><div>{{'Adaptation Type'| translate}}{{' '}}<span class="sort-icon ml-1"></span>
+                    <th (click)="SortSpindleType()" class="text-center">
+                        <div class="text-center">
+                          <div>
+                            <label>{{'Spindle:' | translate}}</label><span class="sort-icon ml-1" ></span>
+                          </div>
                         </div>
-                        <div>{{'Size' | translate}}</div>                        
+                        <div class="text-center">
+                            <label>{{'Main' | translate}} &nbsp;{{'Tool' | translate}}</label>
+                        </div>
+                    </th>                 
+                    <th><div class="text-center">{{'Adaptation Type'| translate}}{{' '}}<span class="sort-icon ml-1"></span>
+                        </div>
+                        <div class="text-center">{{'Size' | translate}}</div>                        
                     </th>
                     <th ><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th class="visibleonlybigscreen"><label>{{'Spindle Speed' | translate}}{{' (rpm)'}}<span class="sort-icon ml-1"></span></label></th>                
@@ -46,15 +54,15 @@
                   <tr  *ngFor="let mach of listmachines"  [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
                     <th scope="row" class="d-none">{{mach.MachineID}} </th>                                                                                         
                     <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2" class="cursor-pointer" >{{mach.MachineName}}</div></td>                     
-                    <td class="cursor-pointer" data-sort ="mach.SpindleType" class="text-center">                     
-                      <div class="pl-2 cursor-pointer">
-                        <div class="ml-0">
-                          <div class="custom-control custom-radio custom-control-inline">
-                              <input type="radio" class="custom-control-input" [attr.id]="'optM'+ mach.MachineID" [attr.name]="'SpindleType'+ mach.MachineID"  [checked]="mach.SpindleType=='M'"  (click)="setspindletype(mach,'M')">
+                    <td class="cursor-pointer text-center" data-sort ="mach.SpindleType" >                     
+                      <div class="pl-2 cursor-pointer text-center">
+                        <div class="pl-2">
+                          <div class="custom-control custom-radio custom-control-inline text-center" >
+                              <input type="radio" class="custom-control-input " [attr.id]="'optM'+ mach.MachineID" [attr.name]="'SpindleType'+ mach.MachineID"  [checked]="mach.SpindleType=='M'"  (click)="setspindletype(mach,'M')">
                               <label class="custom-control-label" [attr.for]="'optM'+ mach.MachineID"></label>
                           </div>            
-                          <div class="custom-control custom-radio custom-control-inline">
-                              <input type="radio" class="custom-control-input " [attr.id]="'optT'+ mach.MachineID"  [disabled]="mach.MachineType=='Machining center' || mach.MachineType=='Lathe'"   [checked]="mach.SpindleType=='T'"  [attr.name]="'SpindleType'+ mach.MachineID" (click)="setspindletype(mach,'T')" >
+                          <div class="custom-control custom-radio custom-control-inline text-center" >
+                              <input type="radio" class="custom-control-input" [attr.id]="'optT'+ mach.MachineID"  [disabled]="mach.MachineType=='Machining center' || mach.MachineType=='Lathe'"   [checked]="mach.SpindleType=='T'"  [attr.name]="'SpindleType'+ mach.MachineID" (click)="setspindletype(mach,'T')" >
                               <label class="custom-control-label" [attr.for]="'optT'+ mach.MachineID"></label>
                           </div>                                        
                       </div> 
@@ -71,7 +79,7 @@
                     </td>
                     <td data-sort="image2">
                       <a data-toggle="tooltip" title="{{'Default Machine' | translate}}"> 
-                        <img  [src]="mach.IsMostRecommended || mach.isFavorite ?environment.ImgSetDefault: environment.ImgDefault"  class="icon-grid-no-pointer">                        
+                        <img *ngIf="mach.IsMostRecommended" [src]="environment.ImgDefault"  class="icon-grid-no-pointer">                        
                       </a>
                     </td>
                     <td data-sort="image3" class="cursor-pointer">

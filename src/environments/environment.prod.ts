@@ -20,7 +20,7 @@ export const environment = {
   ImgArrowRight:"assets/img/arrows_right.png",
   ImgThreeDots:"assets/img/threeDots.jpg",
   ImgAssembly:"assets/img/icon_Assembly.svg",
-  ECatalogLink:"https://www.iscar.com/eCatalog/Index.aspx",
+  ECatalogLink:"https://www.iscar.com/eCatalog/Default.aspx",
   IscarSite:"https://www.iscar.com",
   MachiningCalculatorSite:"https://www.iscar.com/mpwrapi/",
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",

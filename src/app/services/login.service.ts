@@ -258,12 +258,6 @@ export class LoginService {
       this.srv_appsetting.isLoggedIn=true;         
     });
          
-   
-  }
-  
-  GetUserData()
-  {
-    
   }
 
 /* LogOut()

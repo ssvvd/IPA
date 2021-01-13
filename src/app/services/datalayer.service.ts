@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch'
 /* import {HttpResponse} from '@angular/common/http';
 import {Http, ResponseContentType} from '@angular/http'; */
 import {Observable} from 'rxjs';
+import { StringValueToken } from 'html2canvas/dist/types/css/syntax/tokenizer';
   
 @Injectable({
   providedIn: 'root'
@@ -185,6 +186,11 @@ export class DatalayerService {
     let s:string;    
     s=environment.API_HOST +  'api/export/download-p21-files/'+scatalogno + '/' +units;   
     return  this.httpClient.get(s, {responseType: 'blob'});
+  }
+  
+  public  checkexistsp21(scatalogno:string):Observable<any>
+  {        
+    return  this.httpClient.get(environment.API_HOST + 'api/export/check-exists-p21/'+scatalogno);  
   }
 
   public  downloadfilepackage(scatalogno:string,units:string):Observable<any>

@@ -21,8 +21,6 @@ export class DownloadresultService {
   environment=environment;
   axial_y:number=0;
   
-/*   private obsPDFListLoaded = new BehaviorSubject<any>(null);
-  PDFListLoaded = this.obsPDFListLoaded.asObservable();  */  
 
   obsPDFListLoaded = new Subject();
   PDFListLoaded = this.obsPDFListLoaded.asObservable();
@@ -35,70 +33,18 @@ export class DownloadresultService {
     return this.downloadListPDF();     
   }
   
-/*   GetHTMLData(url:string) 
-  {
-     this.srv_DataLayer.gethtmlpage("ALL");
-  } */
-
-  DownLoadDataItem(format:string,data:string,srv:any) : any
+  DownLoadDataItem(format:string,data:string,srv:any, filename:string) : any
   {
     switch (format) {
       case 'PDF':
-        return this.downloadItemPDF(srv);
+        return this.downloadItemPDF(srv,filename);
       case 'P21':
         return this.srv_DataLayer.downloadp21file(data,this.srv_appsetting.Units);
       case "FP":
         return this.srv_DataLayer.downloadfilepackage(data,this.srv_appsetting.Units);
     }    
   }
-
-   public downloadListPDF_old():any {
   
-    var doc = new jsPDF('p');  
-         
-    let mat_desc;
-    let desc_machine;
-    let m:clsMaterial;  
-
-    doc.setDisplayMode(0.7);
-
-    m=this.srv_statemanage.GetMaterialSelected();
-    if (typeof ( m.material) !== 'undefined')
-      mat_desc=m.Category + m.group.toString() + " - " + m.material ;     
-    else
-      mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
-
-    let mach:Machineheader;
-    mach=this.srv_statemanage.SelectedMachine;
-    desc_machine= mach.MachineType + ' ' + mach.MachineName + ' ' +  mach.AdaptationType + ' ' + mach.AdaptationSize;
-    
-    doc.setFontSize(14);
-   
-    let img = new Image()
-    img.src = environment.ImagePath + 'ISCAR_Logo.png'
-    doc.addImage(img, 'png', 5, 5, 40, 15)
-    doc.setFontSize(16);
-    
-    doc.text(80, 20, this.translate.instant('ITA Recommendation Report'));
-    
-    this.axial_y=15;
-
-    doc.setFontSize(12);
-    this.addTextWithBackGround(doc,0,15,400,10,246,246,247,'Machining operation: ' + this.srv_statemanage.MainAppSelected.MenuName + ' ' + this.srv_statemanage.SecAppSelected.MenuName);         
-    this.addTextWithBackGround(doc,0,30,400,10,246,246,247,"Material: " + mat_desc);    
-    this.addTextWithBackGround(doc,0,45,400,10,246,246,247,'Machine: ' + desc_machine);    
-    this.addTextWithBackGround(doc,0,60,400,10,246,246,247,'Operation Data:' );
-       
-    this.axial_y =90;
-    this.BuildOperationData(doc);    
-    doc.addPage();
-    doc.setFontSize(12);
-    this.addTextWithBackGround(doc,0,0,400,10,246,246,247,'ITA Recommended:' );
-    this.axial_y=5;
-   
-    return this.BuildResult(doc,'tbresult');
-} 
-
 public downloadListPDF():any {
   
   var pdf = new jsPDF();
@@ -129,14 +75,8 @@ public downloadListPDF():any {
     desc_machine= mach.MachineType + ' ' + mach.MachineName + ' ' +  mach.AdaptationType + ' ' + mach.AdaptationSize;
     
     pdf.setFontSize(14);
-   
-    //let img = new Image()
-    //img.src = environment.ImagePath + 'ISCAR_Logo.png'
-    //pdf.addImage(img, 'png', 5, 5, 40, 15)
-    //pdf.addImage(img, 'png', 5, 85, 40, 15);
     pdf.setFontSize(16);
-    
-    //pdf.text(80, 20, this.translate.instant('ITA Recommendation Report'));
+  
     pdf.text(5, 20+10, this.translate.instant('ITA Recommendation Report'));
     
     this.axial_y=15+15;
@@ -164,10 +104,8 @@ public downloadListPDF():any {
 }
 
 ingDownloaded:any
-public downloadItemPDF(srv:any):any {  
+public downloadItemPDF(srv:any,filename:string):any {  
   var doc = new jsPDF('p');
-  
-   //document.getElementById('pdfdata').style.visibility = 'visible';
 
   var opt = {
     margin: [0, 0, 2, 0],
@@ -189,7 +127,7 @@ public downloadItemPDF(srv:any):any {
   { 
     this.AddPagingNumber(pdf);   
     
-    pdf.save('ITARecommendation.pdf');  
+    pdf.save(filename + '.pdf');  
     srv.flgPDFLoading=2; 
     
     this.obsPDFListLoaded.next();    
@@ -242,20 +180,7 @@ BuildResult(doc:jsPDF,controlname:string):any
                    
       return doc;
        }).then((doc) => {
-        this.AddPagingNumber(doc);
-        /* var totalPages = doc.internal.getNumberOfPages();       
-        for (let i = 1; i <= totalPages; i++) {
-          doc.setPage(i);
-          doc.setFontSize(10);
-          doc.setFillColor(221,221,221);                          
-          doc.rect(0, doc.internal.pageSize.getHeight() - 18, 400, 10, "F");
-          doc.setTextColor(32, 79, 150);    
-          doc.setFontSize(14);  
-          doc.text('Where Innovation Never Stops', 70, doc.internal.pageSize.getHeight()-10);
-          doc.setTextColor(33, 37, 41); 
-          doc.setFontSize(10);
-          doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
-        }  */
+        this.AddPagingNumber(doc);       
         
       doc.save('ITARecommendations.pdf');
       this.obsPDFListLoaded.next(null);
@@ -288,6 +213,7 @@ AddPagingNumber(doc:jsPDF)
     doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
   } 
 }
+
 BuildResultItem(doc:jsPDF,controlname:string):any
 {     
     html2canvas(document.getElementById(controlname),{scale:4, useCORS: true,allowTaint : true,
@@ -301,8 +227,7 @@ BuildResultItem(doc:jsPDF,controlname:string):any
       var img = canvas.toDataURL("image/PNG");     
       document.getElementById(controlname).style.visibility = 'hidden';  
       const bufferX = 5;   
-      //const imgProps = (<any>doc).getImageProperties(img);
-      //const pdfWidth = doc.internal.pageSize.getWidth() - 2 * bufferX;
+    
     
       var imgWidth = 295;     
       var imgHeight = canvas.height * imgWidth / canvas.width;       
@@ -317,28 +242,6 @@ BuildResultItem(doc:jsPDF,controlname:string):any
           doc.addImage(canvas, 'PNG', 0,(adjust)*r, imgWidth, imgHeight);     
         if(r<extraNo-1) doc.addPage();
       } 
-      
-/*       const contentDataURL = canvas.toDataURL('image/png') ;
-      document.getElementById(controlname).style.visibility = 'hidden';  
-      var margin = 1;
-      var imgWidth = 295 ; 
-      var pageHeight = 210 - 2*margin;  
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
-
-      //var doc = new jsPDF('p', 'mm');
-      var position = 0;
-
-      doc.addImage(contentDataURL, 'PNG', 0, margin, imgWidth, imgHeight);
-
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        doc.addPage();
-        doc.addImage(contentDataURL, 'PNG', margin, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      } */
 
       return doc;
        }).then((doc) => {

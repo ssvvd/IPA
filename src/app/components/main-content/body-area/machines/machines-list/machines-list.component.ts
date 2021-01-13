@@ -449,15 +449,17 @@ UpdateStateSelectedMachine(MachineID: number) {
   }
 
   OnSelectMachine(mach: Machineheader) 
-  {               
+  {        
+            
       this.srv_cook.set_cookie("def_mach",mach.MachineID.toString());          
-      this.UpdateStateSelectedMachine(mach.MachineID);
+      this.UpdateStateSelectedMachine(mach.MachineID);      
       if(this.srv_statemanage.SelectedMachine.MachineID != mach.MachineID)
-      {
+      {        
         this.srv_statemanage.SelectedMachine = mach;
         this.srv_statemanage.arrMachineSpindle =null;
       }      
-      this.srv_statemanage.SelectMachineFilter = this.MachineFilter;            
+      this.srv_statemanage.SelectMachineFilter = this.MachineFilter; 
+      this.srv_statemanage.GoMaterialTab=true;                    
   }
 
   setspindletype(mach:Machineheader,type:string)

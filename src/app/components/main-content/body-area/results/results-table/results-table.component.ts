@@ -572,6 +572,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
     index = 0
     dupColumns = []
     // groupsOrder = []
+    
   for(var col1: number = 0; col1 < visColumnsCount; col1++) {
     if(dupColumns.indexOf(col1) == -1){
       this.dtResultsObjects3d[i][index] = []
@@ -1258,8 +1259,9 @@ feedback()
 {
   const modalRef = this.modalService.open(FeedbackComponent,{ backdrop: 'static',centered: true, windowClass: 'feedback-modal' });
   modalRef.result.then((result) => {
-    if(result=='cancel') return;
-    if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');    
+    /* if(result=='cancel') return;
+    if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');  */ 
+    this.srv_cook.set_cookie("notshowfeedback",'1');   
   });    
 } 
 

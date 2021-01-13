@@ -11,6 +11,8 @@ export class ResultPpDownloadComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) { }
   environment = environment;  
+  public isP21:boolean;
+
   ngOnInit(): void {
   }
 

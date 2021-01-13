@@ -32,7 +32,10 @@ export class StateManagerService {
  
   private obsOperationDataEnable = new BehaviorSubject<boolean>(false);
   OperationDataEnable = this.obsOperationDataEnable.asObservable();   
-    
+  
+/*   private obsMachiningOperationEnable = new BehaviorSubject<boolean>(false);
+  MachiningOperationEnable = this.obsMachiningOperationEnable.asObservable();    */
+
   private obsInputParamSelected = new BehaviorSubject<string>('');
   InputParamSelected = this.obsInputParamSelected.asObservable();
 
@@ -83,15 +86,23 @@ export class StateManagerService {
     let desc:string; 
     if(typeof(m)!=='undefined' && m!==null) 
     {         
-      let u:string;
+     /*  let u:string;
       if(this.srv_appsetting.Units=='M') u=' kW';  
       if(this.srv_appsetting.Units=='I') u=' HP';
-      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + u;
+      desc=m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + u; */
       this.CheckTabOperationalDataEnable();   
-      this.obsMachineSelected.next([m.MachineName,desc]); 
+      this.obsMachineSelected.next([m.MachineName,this.SelectedMachineDescription(m)]); 
     }              
   }  
   
+  SelectedMachineDescription(m:Machineheader) :string
+  {
+    let u:string;
+    if(this.srv_appsetting.Units=='M') u=' kW';  
+    if(this.srv_appsetting.Units=='I') u=' HP';   
+    return m.AdaptationType.toString() + " - " + m.AdaptationSize.toString() +" / " + m.Power + u;;
+  }
+
   get SelectMachineFilter():MachineFilter {
     return this.mMachineFilter;
   }
@@ -191,7 +202,7 @@ export class StateManagerService {
     if(this.IPL.GetItem(name).value!=null && this.IPL.GetItem(name).value!='')
     this.IPLMMandatory=this.IPLMMandatory +desc + this.IPL.GetItem(name).value + units + ', ';    
   }
-
+  
   SelectMaterial(mat: clsMaterial) {
     
     mat.HardnessHBValue = mat.HardnessUnits?mat.HardnessHBValue:mat.Hardness;
@@ -210,6 +221,24 @@ export class StateManagerService {
       
     }       
     this.obsMaterialSelected.next([desc]);
+  }
+
+  GetMaterialSelectedDescription(mat: clsMaterial):string
+  {
+   let desc:string;
+    if (mat.material && mat.material != ''){
+      desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+    }
+    else{
+      if (mat.FavName && mat.FavName != ''){
+        desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
+      }
+      else{
+        desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+      }
+      
+    } 
+    return desc;      
   }
 
   GetMaterialSelected() :clsMaterial
@@ -368,6 +397,24 @@ export class StateManagerService {
     this.mflgPDFLoading = f;
     this.obsflgDownLoadPDF.next(f);
    }
-    
+  
+    mGoMaterialTab:boolean=false;
+    get GoMaterialTab():boolean {
+      return this.mGoMaterialTab;
+      }
+    set GoMaterialTab(c:boolean) {  
+      this.mGoMaterialTab = c;
+      if(c) this.obsMachineSelected.next([this.SelectedMachine.MachineName,this.SelectedMachineDescription(this.SelectedMachine)]);            
+     }
+     
+     mGoOperationTab:boolean=false;
+     get GoOperationTab():boolean {
+       return this.mGoOperationTab;
+      }
+     set GoOperationTab(c:boolean) {     
+       this.mGoOperationTab = c;    
+       //this.obsMachiningOperationEnable.next(true);
+       if(c) this.obsMaterialSelected.next([this.GetMaterialSelectedDescription(this.materialSelected)]);           
+      }
 }
  

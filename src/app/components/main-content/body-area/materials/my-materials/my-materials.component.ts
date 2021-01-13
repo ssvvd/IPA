@@ -117,7 +117,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
   {   
     this.selectedMaterial = mat.FavName;
     this.srv_statemanage.SelectMaterial(mat);
-
+    this.srv_statemanage.GoOperationTab =true;
   }
 
   openAddToFavM(mat:clsMaterial) {

@@ -106,6 +106,7 @@ export class MatStandardTableComponent implements OnInit,DoCheck {
     let matGroup:clsMaterial = this.servsm.getCategoryTable(this.srv_appsetting.Lang || "EN",this.selectedCateg).find(x => x.id === +this.mySplit(selCol,0))
     this.selectedMaterial= new clsMaterial(this.mySplit(selCol,0),this.mySplit(selCol,1),mat,this.selectedCateg,matGroup.HardnessHBValue || matGroup.Hardness);
     this.srv_statemanage.SelectMaterial(this.selectedMaterial);
+    this.srv_statemanage.GoOperationTab =true;
 
   }
 

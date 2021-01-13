@@ -1,0 +1,34 @@
+<div class="modal-header">
+  <div class="text-right" style="width: 100%;">
+    <button type="button" class="close" aria-label="Close" (click)="this.activeModal.close('cancel')">
+      <span aria-hidden="true" class="span_x">&times;</span>
+    </button>
+  </div>     
+</div>
+    <div class="modal-body pt-0" style="width: 100%;">
+      <div class="text-center" style="width: 100%;">
+        <h4 class="modal-title siteTitle">Brower not supported</h4>
+      </div>  
+      <div class="text-center pt-3">
+        <Label>You &#39; re using a web brower we don &#39; t support.</Label>
+      </div>
+      <div class="text-center">
+        <Label>Try one of these options to have a better experience on</Label>
+      </div>
+      <div class="text-center">
+        <Label>Iscar Tool Advisor </Label>
+      </div>           
+     <div class="row">
+        <div class="pt-3 col-4"><img [src]="environment.ImagePath + 'chrome.png'"  class="pl-2 pr-2" style="height:100px;"></div>
+        <div class="pt-3 col-4"><img [src]="environment.ImagePath + 'edge.png'"  class="pr-2"  style="height:100px;"></div>
+        <div class="pt-3 col-4"><img [src]="environment.ImagePath + 'firefox.png'"  class="pr-2"  style="height:100px;"></div>              
+     </div>
+     <div class="row">
+      <div class="pt-3 col-4 text-center">Chrome</div>
+      <div class="pt-3 col-4 text-center">Microsoft Edge</div>
+      <div class="pt-3 col-4 text-center">Firefox</div>              
+   </div>
+   </div>
+   <div class="modal-footer text-center "> 
+   </div>
+  

@@ -9,7 +9,7 @@
         <div class="col-4 pl-4 pr-4">
             <img  data-toggle="tooltip" title="{{'Export To PDF' | translate}}" class="cursor-pointer"  [src] = "environment.ImagePath+'icon_PDF.svg'" (click) ="Download('PDF')">
         </div>
-        <div class="col-4 pl-4 pr-4">
+        <div class="col-4 pl-4 pr-4" *ngIf="isP21">
             <img data-toggle="tooltip" title="{{'Export To P21' | translate}}" class="cursor-pointer" [src] = "environment.ImagePath+'icon_p21.svg'" (click) ="Download('P21')">
         </div>
         <div class="col-4 pl-4 pr-4">

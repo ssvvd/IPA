@@ -26,7 +26,7 @@
         <div [ngClass]="machFilter.IsMachiningCenter?'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12  pl-0 pt-2 pr-3 pb-2 pb-2 ':'col-xl-4 col-lg-4 col-md-12 col-sm- 12 col-12   pl-0 pt-2 pr-3 pb-2 pb-2 '">
             <div [ngClass]="machFilter.IsMachiningCenter && !MachineTypeAll?'div-not-opacity cursor-pointer':'div-opacity cursor-pointer'">
                 <img  [lazyLoad]="environment.ImagePath+'MachiningCenter.svg'" class="cursor-pointer" (click)="IsMachiningCenter=!IsMachiningCenter;SetViewAllMachines();FilterChange($event,false,false,false,'IsMachiningCenter')">
-            </div>
+            </div>crsa
             <div class="d-flex justify-content-center" >
                 <div class="custom-control custom-checkbox cursor-pointer">
                     <input type="checkbox" class="custom-control-input cursor-pointer" id="chkMachiningCenter" name="chkMachiningCenter" (change)= "SetViewAllMachines();FilterChange($event,false,false,false,'IsMachiningCenter')"  [(ngModel)]="IsMachiningCenter">
