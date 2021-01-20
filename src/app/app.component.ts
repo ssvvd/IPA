@@ -7,7 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpParams } from '@angular/common/http';
 import { CookiesService } from 'src/app/services/cookies.service';
-import { BrowersComponent } from './components/maintenance/browers/browers.component';
+
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import cssVars from 'css-vars-ponyfill';
 
@@ -36,13 +36,8 @@ export class AppComponent implements OnInit {
 
 ngOnInit()
 {
-  if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
-   { 
-    const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
-    this.srv_cook.set_cookie("is_browser_ie",'1');
-   }
-  
-  console.log('get token app component');
+
+    console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   let token:string=''; 
 
@@ -111,7 +106,7 @@ ngOnInit()
 }
 
 
-public getBrowserName() {
+/* public getBrowserName() {
   const agent = window.navigator.userAgent.toLowerCase()
   switch (true) {
     case agent.indexOf('edge') > -1:
@@ -129,7 +124,7 @@ public getBrowserName() {
     default:
       return 'other';
   }
-}
+} */
 
 }
 

@@ -96,7 +96,8 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   receiveMatDeials(material:clsMaterial) {
     this.selectedMatDeials = material;
     this.curComponent = "2";
-    this.breadCrumb = [material.group,'Standard Conversion Chart'];
+    
+    this.breadCrumb = [material.group,this.translate.instant('Standard Conversion Chart')];
   }
   
   receiveStandard(standard:string) {

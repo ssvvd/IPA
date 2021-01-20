@@ -84,13 +84,13 @@
                      </td>
                         <td  class="text-center">
                            <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">
-                           <img src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="Build Assembly" class="icon-grid">
+                           <img src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">
                         </td>
                          <td class="d-none">
                                 <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
                          </td>
                          <td class="d-none">                    
-                               <img src="{{environment.ImgAssembly}}" alt="Create Assembly" title="Build Assembly" class="icon-grid">
+                               <img src="{{environment.ImgAssembly}}" alt="Create Assembly" title="{{'Build Assembly' | translate}}" class="icon-grid">
                          </td>
                     </tr>
                  </tbody>

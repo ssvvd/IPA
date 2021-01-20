@@ -41,7 +41,7 @@
       </div>
 
       <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='52' || srv_StMng.SecApp=='1' || srv_StMng.SecApp=='53' || srv_StMng.SecApp=='50'">
-        <div class="col-3 row"><Label>{{'Final Workpiece Diameter ' | translate }}</Label></div>
+        <div class="col-3 row"><Label>{{'Final Workpiece Diameter' | translate }}</Label></div>
         <div class="col-2">D<sub>wf</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{DWF}}</div>
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -262,20 +262,20 @@
     <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/hour</div>
   </div>
   <div class="row justify-content-start w-100">
-    <div class="col-3 row"><Label>{{'Batch Size ' | translate }}</Label></div>
+    <div class="col-3 row"><Label>{{'Batch Size' | translate }}</Label></div>
     <div class="col-2">B</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{B}}</div>
     <div class="col-2">{{'parts' | translate}}</div>
   </div>
   
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
-    <div class="col-3 row"><Label>{{'Grooving - Cutting Time per Feature' | translate }}</Label></div>
+    <div class="col-3 row"><Label>{{'Grooving' |translate}} - {{'Cutting Time per Feature' | translate }}</Label></div>
     <div class="col-2">CTF<sub>g</sub></div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFgFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
   </div>
   <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
-    <div class="col-3 row"><Label>{{'Turning - Cutting Time per Part' | translate }}</Label></div>
+    <div class="col-3 row"><Label>{{'Turning' | translate}} - {{'Cutting Time per Part' | translate }}</Label></div>
     <div class="col-2">CTP<sub>t</sub></div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFtFormat}}</div>
     <div class="col-2">{{'mm:ss' | translate}}</div>
@@ -342,37 +342,37 @@
       <div class="col-3 row"><Label>{{'Total Number of Inserts' | translate }}</Label></div>
       <div class="col-2">IPB</div>
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IPB}}</div>
-      <div class="col-2">{{'Inserts/batch' | translate}}</div>
+      <div class="col-2">{{'Inserts' | translate }}/{{'batch' | translate}}</div>
     </div>
     <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Total Number of Tools' | translate }}</Label></div>
         <div class="col-2">TPB</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TPB}}</div>
-        <div class="col-2">{{'Tools/batch' | translate}}</div>
+        <div class="col-2">{{'Tools' | translate}}/{{'batch' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Total Inserts Cost' | translate }}</Label></div>
         <div class="col-2">TIC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TIC}}</div>
-        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Total Tools Cost' | translate }}</Label></div>
         <div class="col-2">TTC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TTC}}</div>
-        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row">{{'Total Tooling Cost' | translate }}</div>
         <div class="col-2">TGC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TGC}}</div>
-        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Machine Cost ' | translate }}</Label></div>
+        <div class="col-3 row"><Label>{{'Machine Cost' | translate }}</Label></div>
         <div class="col-2">MCB</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MCB}}</div>
-        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Machine Time per Batch' | translate }}</Label></div>
@@ -384,7 +384,7 @@
         <div class="col-3 row"><Label>{{'Total Cost' | translate }}</Label></div>
         <div class="col-2">TCB</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TCB}}</div>
-        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+        <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Cost per Part' | translate }}</Label></div>

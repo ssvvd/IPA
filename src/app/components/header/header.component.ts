@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit {
 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
-  userdes:string='Log In';
+  userdes:string=this.translate.instant('Log In');
   
   eventsSubject: Subject<void> = new Subject<void>();
 
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
     
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>
       { if(u=='') 
-          this.userdes='Log In'; 
+          this.userdes=this.translate.instant('Log In'); 
         else 
           this.userdes=u;
 
@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
   LogOut()
   {
     this.srv_login.LogOut();
-    this.userdes='Log In';     
+    this.userdes=this.translate.instant('Log In');;     
   }
   
   LogIn()
@@ -255,7 +255,7 @@ export class HeaderComponent implements OnInit {
   {
     const modalRef = this.modalService.open(FeedbackComponent,{backdrop: 'static', centered: true, windowClass: 'feedback-modal' });
     modalRef.result.then((result) => {
-      if(result=='cancel') return;
+      //if(result=='cancel') return;
       if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');    
     });    
   } 

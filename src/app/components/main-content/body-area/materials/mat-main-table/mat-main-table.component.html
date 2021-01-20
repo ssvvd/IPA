@@ -38,7 +38,7 @@
                   </td> -->
                   <td *ngIf="environment.internal">
                     <div>
-                    <button [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">Select</button>
+                    <button [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">{{'Select' | translate}}</button>
                     </div>
                   </td>     
                   <td class="d-none">{{material.Hardness}}</td>    

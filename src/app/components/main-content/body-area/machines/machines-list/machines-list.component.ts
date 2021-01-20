@@ -10,6 +10,8 @@ import {MachinePpAddFavoriteComponent} from '../machine-pp-add-favorite/machine-
 import {MachinesPpLoginComponent} from      '../machines-pp-login/machines-pp-login.component';
 import { environment } from '../../../../../../environments/environment';
 import { MaterialService } from '../../../../../services/material.service'
+import { BrowersComponent } from '../../../../maintenance/browers/browers.component';
+
 import { DataTableDirective } from 'angular-datatables';
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { Subject, Subscription } from 'rxjs';
@@ -55,6 +57,16 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {  
+
+   /*  if(this.srv_appsetting.AfterToken)
+    { */
+      if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
+     { 
+      const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
+      this.srv_cook.set_cookie("is_browser_ie",'1');
+     }
+ /*    } */
+
     let scrollYdiff:string='325px';
     //alert(window.devicePixelRatio);
     if(window.devicePixelRatio>1) scrollYdiff='375px';
@@ -88,6 +100,26 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 
   }
   
+  public getBrowserName() {
+    const agent = window.navigator.userAgent.toLowerCase()
+    switch (true) {
+      case agent.indexOf('edge') > -1:
+        return 'edge';
+      case agent.indexOf('opr') > -1 && !!(<any>window).opr:
+        return 'opera';
+      case agent.indexOf('chrome') > -1 && !!(<any>window).chrome:
+        return 'chrome';
+      case agent.indexOf('trident') > -1:
+        return 'ie';
+      case agent.indexOf('firefox') > -1:
+        return 'firefox';
+      case agent.indexOf('safari') > -1:
+        return 'safari';
+      default:
+        return 'other';
+    }
+  }
+
   Initializemachinelist(withdestroy:boolean)
   {  
     //let userid_enc:string="";

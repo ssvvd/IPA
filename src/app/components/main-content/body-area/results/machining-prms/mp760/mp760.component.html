@@ -7,7 +7,7 @@
     <div class="col-2" ></div>
   </div>
         <div class="row justify-content-start w-100">
-          <div class="col-3 row"><Label>{{'Cutting Diameter' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Cutting diameter' | translate }}</Label></div>
           <div class="col-2">DC</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{DC}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -43,7 +43,7 @@
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='790'">
-          <div class="col-3 row"><Label>{{'Corner Radius' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Corner radius' | translate }}</Label></div>
           <div class="col-2">CR</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CR}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -227,7 +227,7 @@
           <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/hour</div>
         </div>
         <div class="row justify-content-start w-100">
-          <div class="col-3 row"><Label>{{'Batch Size ' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Batch Size' | translate }}</Label></div>
           <div class="col-2">B</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{B}}</div>
           <div class="col-2">{{'parts' | translate}}</div>
@@ -322,106 +322,106 @@
           <div class="col-3 row"><Label>{{'Total Number of Inserts' | translate }}</Label></div>
           <div class="col-2">IPB</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{THe_IPB}}</div>
-          <div class="col-2">{{'Inserts/batch' | translate}}</div>
+          <div class="col-2">{{'Inserts' | translate }}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T'">
-            <div class="col-3 row"><Label>{{'Total number of Tools' | translate }}</Label></div>
+            <div class="col-3 row"><Label>{{'Total Number of Tools' | translate }}</Label></div>
             <div class="col-2">TPB</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T_TPB}}</div>
-            <div class="col-2">{{'Tools/batch' | translate}}</div>
+            <div class="col-2">{{'Tools' | translate}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='He'">
             <div class="col-3 row"><Label>{{'Total Number of Heads' | translate }}</Label></div>
             <div class="col-2">TPB</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_TPB}}</div>
-            <div class="col-2">{{'Heads/batch' | translate}}</div>
+            <div class="col-2">{{'Heads'}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='He'">
             <div class="col-3 row"><Label>{{'Total Number of Shanks' | translate }}</Label></div>
             <div class="col-2">THH</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_THH}}</div>
-            <div class="col-2">{{'Shanks/batch' | translate}}</div>
+            <div class="col-2">{{'Shanks' | translate}}/{{'batch' | translate}}</div>
           </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T' || resType=='He'">
           <div class="col-3 row"><Label>{{'Total Inserts Cost' | translate }}</Label></div>
           <div class="col-2">TIC</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{THe_TIC}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T'">
           <div class="col-3 row"><Label>{{'Total Tools Cost' | translate }}</Label></div>
           <div class="col-2">TTC</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T_TTC}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='He'">
             <div class="col-3 row"><Label>{{'Total Head+Shank Cost' | translate }}</Label></div>
             <div class="col-2">THSC</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_THSC}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
           </div>
 
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Total No. of Solid Heads' | translate }}</Label></div>
             <div class="col-2">SHB</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_SHB}}</div>
-            <div class="col-2">{{'Heads/batch' | translate}}</div>
+            <div class="col-2">{{'Heads' | translate}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Total No. of Shanks' | translate }}</Label></div>
             <div class="col-2">SKB</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_SKB}}</div>
-            <div class="col-2">{{'Shanks/batch' | translate}}</div>
+            <div class="col-2">{{'Shanks'}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Total Solid Heads Cost' | translate }}</Label></div>
             <div class="col-2">TSHC</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_TSHC}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Total Shanks Cost' | translate }}</Label></div>
             <div class="col-2">TSKC</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_TSKC}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='T'">
             <div class="col-3 row"><Label>{{'Total Tooling Cost' | translate }}</Label></div>
             <div class="col-2">TGC</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T_TGC}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='He'">
             <div class="col-3 row"><Label>{{'Total Tooling Cost' | translate }}</Label></div>
             <div class="col-2">TGC</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{He_TGC}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="resType=='H'">
             <div class="col-3 row"><Label>{{'Total Tooling Cost' | translate }}</Label></div>
             <div class="col-2">TGC</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{H_TGC}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
           </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='S'">
           <div class="col-3 row">{{'Total No. of Solids' | translate }}</div>
           <div class="col-2">SPB</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{S_SPB}}</div>
-          <div class="col-2">Tools/batch</div>
+          <div class="col-2">{{'Tools' | translate }}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='S'">
           <div class="col-3 row"><Label>{{'Total Solids Cost' | translate }}</Label></div>
           <div class="col-2">TSC</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{S_TSC}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
         </div>
 
 
         <div class="row justify-content-start w-100">
-          <div class="col-3 row"><Label>{{'Machine Cost ' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Machine Cost' | translate }}</Label></div>
           <div class="col-2">MCB</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MCB}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100">
           <div class="col-3 row"><Label>{{'Machine Time per Batch' | translate }}</Label></div>
@@ -433,7 +433,7 @@
           <div class="col-3 row"><Label>{{'Total Cost' | translate }}</Label></div>
           <div class="col-2">TCB</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TCB}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/batch</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100">
           <div class="col-3 row"><Label>{{'Cost per Part' | translate }}</Label></div>

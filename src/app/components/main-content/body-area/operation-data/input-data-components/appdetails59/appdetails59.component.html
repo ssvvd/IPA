@@ -82,7 +82,7 @@
                             </div>            
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" class="custom-control-input" id="optMedium" name="OperationType"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OperationType').value" value="Medium">
-                                <label class="custom-control-label" for="optMedium">{{'Semi Finish' | translate}}</label>
+                                <label class="custom-control-label" for="optMedium">{{'Semi finish' | translate}}</label>
                             </div>            
                             <div class="custom-control custom-radio custom-control-inline">
                                 <input type="radio" class="custom-control-input" id="optHeavy" name="OperationType" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OperationType').value" value="Heavy">
@@ -214,7 +214,7 @@
                     </div>                    
                     <div class="row pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.Currency}}</label>
-                        <label class="pl-0 pt-2">/Hr</label>
+                        <label class="pl-0 pt-2">/{{'hour' | translate}}</label>
                     </div>
                 </div> 
             </div>                        

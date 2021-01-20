@@ -489,15 +489,15 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
               break;
 
               case 'TGC': case 'MCB': case 'TCB':
-                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/batch)'
+                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/' + this.translate.instant('batch')+ ')';
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
                 break;
               case 'CPP':
-                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/parts)'
+                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/' + this.translate.instant('parts') + ')';
                 // this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].split(" ")[0].trim();
                 break;
               case 'CPH':
-                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + '/holes)';
+                this.dtPropertiesTable[j].FieldDescriptionSmall = fieldsmallSplit + ' (' + this.srv_StMng.IPL.GetItem('Currency').value +'/' + this.translate.instant('holes') + ')';
                 break;
               case 'List':
                 this.dtPropertiesTable[j].FieldDescriptionSmall = 'List Price' + ' (' + this.srv_StMng.IPL.GetItem('Currency').value + ')'
@@ -650,7 +650,8 @@ else{
 
   
   this.SpinnerService.hide();
-  
+  //alert(this.srv_cook.get_cookie("notshowfeedback"));
+ 
   if(this.srv_cook.get_cookie("notshowfeedback")=="")
   {    
     setTimeout(() => { this.feedback(); }, 40000);
@@ -700,41 +701,41 @@ switch(this.srv_StMng.SecApp.toString()){
     case '760':  case '770': case '780': case '790': case '57': case '119': case '120':
       switch(field){
         case 'HolderDesignation' :
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
           break;
         case 'HolderDesignationCollet':
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Collet'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Collet');
           break;
         case 'HeaderDesignation':
           switch(itemType){
             case 'T':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Tool');
               for (let entry of this.dtResultsObjectsHelp[index].CatalogNoT) {
               this.srv_Results.getfzminf(entry.trim(),this.dtResultsObjectsHelp[index].SecondaryAppOrig1).subscribe((res: any) => {
                 let _FzminF = JSON.parse(res)
                 if (_FzminF.trim().startsWith('02,307-01,') || _FzminF == '01,307-01,SAI'  && this.dtResultsObjectsHelp[index].itemType.indexOf('S') == -1){
-                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Head'
+                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Head');
                 }     
               })}
               
             break;
             case 'H':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Shank'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Shank');
             break;
           }
           break;
         case 'DetailsDesignation':
           switch(itemType){
             case 'I':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Insert');
             break;
             case 'S':
               switch(resultType){
                 case 'H':
-                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid Head'
+                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Solid Head');
                 break;
                 case 'S':
-                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
+                  this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Solid');
                 break;
               }
             break;
@@ -745,34 +746,34 @@ switch(this.srv_StMng.SecApp.toString()){
     case '960':  case '970': case '980': case '990':
       switch(field){
         case 'HeaderDesignation' :
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
           break;
         case 'HeaderDesignation1':
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square shank'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Square shank');
           break;
         case 'DetailsDesignation':
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Insert');
           break;
       }
     break
     case '850':  case '860': case '870': case '880': case '890': 
     switch(field){
       case 'HeaderDesignation' :
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
         break;
       case 'HeaderDesignation1':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Round shank holder'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Round shank holder');
         break;
       case 'HeaderDesignation2':
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Tool');
         break;
       case 'DetailsDesignation':
         switch(itemType){
           case 'S':
-            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
+            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Solid'); 
           break;
           case 'I':
-            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Insert'); 
           break;
         }
         break;
@@ -781,96 +782,96 @@ switch(this.srv_StMng.SecApp.toString()){
     case '52':  case '1': case '51': case '54': case '19': 
     switch(field){
       case 'HeaderDesignation' :
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
         break;
       case 'HeaderDesignation1':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Square shank'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Square shank');
         break;
       case 'HeaderDesignation2':
         this.srv_Results.GetFlatDataField('OperationType',catalogNo,this.srv_StMng.SecApp,this.srv_appsetting.Units).subscribe((res: any) => {
           let fieldValue:string = JSON.parse(res)
           switch(fieldValue){
             case 'BLADE':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Blade'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Blade'); 
               break;
             case 'ADAPTER':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
               break;
           }
         })
         break;
       case 'DetailsDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Insert');
         break;
     }
     break
     case '188':  case '53': case '50': 
     switch(field){
       case 'HeaderDesignation' :
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
         break;
       case 'HeaderDesignation1':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Round shank holder'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Round shank holder');
         break;
       case 'HeaderDesignation2':
         this.srv_Results.GetFlatDataField('OperationType',catalogNo,this.srv_StMng.SecApp,this.srv_appsetting.Units).subscribe((res: any) => {
           let fieldValue:string = JSON.parse(res)
           switch(fieldValue){
             case 'BLADE':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Blade'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Blade');
               break;
             case 'ADAPTER':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
               break;
             case 'BORING BAR':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Tool');
               break;
           }
         })
         break;
       case 'DetailsDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Insert'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Insert'); 
         break;
     }
     break
     case '77': 
     switch(field){
       case 'HolderDesignation' :
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Holder'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
         break;
       case 'HolderDesignationCollet':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Collet'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Collet'); 
         break;
       case 'HeaderDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Tool'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Tool');
         break;
       case 'DetailsDesignation':
         if (this.dtResultsObjectsHelp[index].itemType.indexOf('S') != -1){
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Solid'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Solid');
         }
         else{
           if (this.dtResultsObjectsHelp[index].ZEFF >= 2) 
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Head'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Head');
           else
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'External Insert'
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('External Insert');
         }
         
         
         break;
       case 'DetailsIntDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Internal insert'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Internal insert');
         break;
       case 'EccenterDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Eccenter'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Eccenter');
         break;
       case 'CartridgeIntDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Cartridge Int'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Cartridge Int');
         break;
       case 'CartridgeExtDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Cartridge Ext'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Cartridge Ext'); 
         break;
       case 'ShimPartDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = 'Shim Part'
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Shim Part'); 
         break;
     }
     break

@@ -265,7 +265,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       //alert('Only for registered user');
       const modalRef = this.modalService.open(MachinesPpLoginComponent, { centered: true });
       modalRef.componentInstance.title = "Add To My Materials";
-      modalRef.componentInstance.Msg = 'Please login to add the material to "My Materials"';
+      modalRef.componentInstance.Msg = 'Please login to add the material to My Materials';
       modalRef.result.then((result) => {
         if(result=='cancel') return;
         if(result=='login')

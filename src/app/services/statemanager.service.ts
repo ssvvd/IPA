@@ -308,6 +308,9 @@ export class StateManagerService {
 
        this.IPL.GetItem('MachineType').value = this.SelectedMachine.MachineType;
        this.IPL.GetItem('AdaptorType').value =this.SelectedMachineSpindle.AdaptationType;
+
+       if(this.IPL.GetItem('AdaptorType').value.indexOf('CAMFIX')>0)  this.IPL.GetItem('AdaptorType').value='CAMFIX'
+
        this.IPL.GetItem('AdaptorSize').value =this.SelectedMachineSpindle.AdaptationSize;
  
        this.IPL.GetItem('PW_AX').value = this.SelectedMachineSpindle.N1+""; 

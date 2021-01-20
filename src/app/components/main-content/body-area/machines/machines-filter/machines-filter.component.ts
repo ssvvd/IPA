@@ -7,7 +7,6 @@ import { CookiesService } from '../../../../../services/cookies.service';
 import { Machineheader } from '../../../../../models/machines/machineheader';
 import { AppsettingService} from '../../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
-
 import { Subscription ,Observable} from 'rxjs';
 
 export class AdaptationType
