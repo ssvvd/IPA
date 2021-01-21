@@ -36,6 +36,7 @@ export class HeaderComponent implements OnInit {
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public msrv_statemanage:StateManagerService =this.srv_statemanage;
   userdes:string=this.translate.instant('Log In');
+  msgwait:string='Please wait while ITA is processing your request.';
   
   eventsSubject: Subject<void> = new Subject<void>();
 
@@ -167,8 +168,9 @@ export class HeaderComponent implements OnInit {
   {
     this.srv_login.SelectCountryAndLang(c,LanguageID);
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
-    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
-    this.eventsSubject.next();    
+    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;    
+    this.eventsSubject.next();
+  
   }
   
   CheckAllowUnitsChange(event)

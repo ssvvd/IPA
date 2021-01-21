@@ -53,7 +53,7 @@ export class MachineItemSpindleComponent implements OnInit
     else
       this.IsSelectedSpindle=false;
 
-    this.eventsSubscription.add(this.serv.getmachineadaptationtype(this.MachineType).subscribe((res: any) => {
+    this.eventsSubscription.add(this.serv.getmachineadaptationtype(this.MachineType,this.spindle.SpindleType).subscribe((res: any) => {
         this.arrAdapType = JSON.parse(res); 
         this.curAdapType=this.arrAdapType.find(e=> e.AdaptationType == this.spindle.AdaptationType );                   
         this.eventsSubscription.add(this.serv.getmachineadaptationsize(this.srv_appsetting.Units).subscribe((res: any) => {

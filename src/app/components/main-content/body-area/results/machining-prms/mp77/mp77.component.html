@@ -112,7 +112,7 @@
         <div class="col-3 row"><Label>{{'Machine Cost (per Hour)' | translate }}</Label></div>
         <div class="col-2">MCH</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{MCH}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/hour</div>
+        <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'hour' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Batch Size' | translate }}</Label></div>
@@ -159,7 +159,7 @@
         <div class="col-3 row"><Label>{{'Holes per Drilling Head' | translate }}</Label></div>
         <div class="col-2">HDH</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{H_HDH}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{'Holes/head' | translate}}</div>
+        <div class="col-2" style="margin-left: 6%;">{{'Holes/Head' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100" *ngIf="resType=='S'">
         <div class="col-3 row"><Label>{{'Holes per Solid Tool' | translate }}</Label></div>
@@ -207,7 +207,7 @@
         <div class="col-3 row"><Label>{{'No. of Heads' | translate }}</Label></div>
         <div class="col-2">HPB</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{H_HPB}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{'Heads'}}/{{'batch' | translate}}</div>
+        <div class="col-2" style="margin-left: 6%;">{{'Heads' | translate}}/{{'batch' | translate}}</div>
       </div>
       <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='I'">
         <div class="col-3 row"><Label>{{'Insert Price' | translate }}</Label></div>

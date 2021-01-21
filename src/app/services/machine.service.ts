@@ -25,9 +25,9 @@ export class MachineService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-header/' + id);
   }
-  public  getmachineadaptationtype(machinetype:string)
+  public  getmachineadaptationtype(machinetype:string,spindletype:string)
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-type/' +machinetype);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machine-adaptatation-type/' +machinetype + '/'+spindletype);
   }
    public  getmachineadaptationsize(units:string)
   {        
