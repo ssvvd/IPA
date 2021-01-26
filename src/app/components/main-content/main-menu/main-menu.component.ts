@@ -147,10 +147,26 @@ export class MainMenuComponent implements OnInit {
     if(!tab.isDisabled)
     {
       this.srv_statemanage.TabOpen =tab.TabID ;
-      this.router.navigate([tab.RouteName]);
+      if(tab.TabID==5) 
+      { 
+        this.GoToResult();
+      }
+      else
+        this.router.navigate([tab.RouteName]);
+        
       if(tab.TabID==2) {this.srv_statemanage.GoMaterialTab=true;}
       if(tab.TabID==3) this.srv_statemanage.GoOperationTab=true;
       
+      
     }      
+  }
+
+  GoToResult()
+  {    
+    let r:any;
+    r=this.srv_statemanage.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required);
+    
+    if (this.srv_statemanage.IPL.items.filter(x=> (x.value==null || (x.value=='0' && x.name!='DiameterBoring' ) || x.value.toString()=='') && x.required).length==0)    
+      this.router.navigate(['/home/results']);
   }
 }

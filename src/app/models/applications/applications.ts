@@ -29,8 +29,8 @@ export class Country {
   CountryName: string ;
   CountryID_IscarCom: number ;   
   CountryGlobalId:number;
-  LanguageID: string [];
-  LanguageName: string [];
+  LanguageID: string []=[];
+  LanguageName: string []=[];
   BrifName:string;
   Currency:string; 
   CountryFlag:string;

@@ -3,7 +3,7 @@
                 <h3 class="siteTitle mb-0 pl-2">{{'Select Material' | translate}}</h3>
               </div>
       <div class="divst">
-        <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
+        <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >         
           <thead >
             <tr id="dtOptionsMat">
               <th class="d-none">{{'ID' | translate}}</th>
@@ -13,32 +13,30 @@
               <th><label>{{'Hardness' | translate}}<span class="sort-icon ml-1"></span></label></th>
               <th class="no-sort d-none"></th>
               <th class="no-sort" *ngIf="environment.internal"></th>
-              <!-- <th class="no-sort" *ngIf="environment.internal"></th> -->
+              <th class="no-sort" *ngIf="environment.internal"></th> 
               <th class="no-sort" *ngIf="environment.internal"></th>
               <th class="d-none"></th>
             </tr>
           </thead>
           <tbody>   
               <tr *ngFor="let material of materialsResultSorted " [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected cursor-pointer' : 'tr-not-selected cursor-pointer'" [hidden]="selectedCategory != material.Category">
-                <th scope="row" class="d-none">{{material.id}}</th>         
+                  <th scope="row" class="d-none">{{material.id}}</th>         
                   <td (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
-                  <td (click)="matDetailClick(material)"><div class="pl-2">{{material.description}}</div></td>
+                  <td (click)="matDetailClick(material)"><div class="pl-2">{{material.description}}</div></td> 
                   <td (click)="matDetailClick(material)"><div class="pl-2">{{material.Condition}}</div></td>
                   <td (click)="openEditParamsM(material)"><div class="pl-2"><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' | translate}}</div></td>
                   <td class="d-none">
-
                     <img src="{{environment.ImgView}}" (click)="matDetailClick(material)" title="View materials and standards"  class="icon-grid">
-
-              </td>
+                  </td>
                   <td *ngIf="environment.internal">
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to My Materials" class="icon-grid">
                   </td>
-                <!--   <td *ngIf="environment.internal">                    
-                        <img [src]="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid">
-                  </td> -->
+                  <td *ngIf="environment.internal">                    
+                       <!--  <img [src]="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid"> -->
+                  </td> 
                   <td *ngIf="environment.internal">
                     <div>
-                    <button [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">{{'Select' | translate}}</button>
+                      <button [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">{{'Select' | translate}}</button>
                     </div>
                   </td>     
                   <td class="d-none">{{material.Hardness}}</td>    

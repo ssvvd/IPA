@@ -79,11 +79,12 @@ export class LoginService {
         c.CountryGlobalId = 0;
         c.CountryID = data[0].CountryId;
         c.CountryName =data[0].CountryName;              
-        c.LanguageID =data[0].CATLAN;
+        c.LanguageID.push(data[0].CATLAN);
         c.CountryCode =data[0].CountryCode;
         this.srv_appsetting.Country=c;
         this.SetExchangeRate1(c.BrifName);
-                              
+        this.translate.use(c.LanguageID[0]); 
+        //this.translate.use('RU');                 
       }      
     });
   }
@@ -259,18 +260,6 @@ export class LoginService {
     });
          
   }
-
-/* LogOut()
-  {    
-    this.srv_DataLayer.get_token().subscribe((res: any)=>{      
-      let s= environment.LoginURLogOut + '?t=' +res;  
-      window.open(s,'_self');
-      this.srv_appsetting.isLoggedIn=true;
-      return 'ok'    
-    });
-    this.srv_appsetting.isLoggedIn=true;
-    return'ok';        
-  } */
 
   SelectCountryAndLang(c:Country,LanguageID:string) :any
   {

@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
 ngOnInit()
 {
 
-    console.log('get token app component');
+  console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   let token:string=''; 
 
@@ -53,7 +53,16 @@ ngOnInit()
     
     paramValue = httpParams.get('v');  
     if(paramValue!=null) isLogIn =paramValue; 
-                    
+    
+    let countrtyid:string;
+    paramValue = httpParams.get('countryid'); 
+    if(paramValue!=null) countrtyid =paramValue; 
+
+    let language:string;
+    paramValue = httpParams.get('lang'); 
+    if(paramValue!=null) language =paramValue; 
+
+    //todo: country, language
   }
   
   //first time enter
@@ -105,26 +114,6 @@ ngOnInit()
   
 }
 
-
-/* public getBrowserName() {
-  const agent = window.navigator.userAgent.toLowerCase()
-  switch (true) {
-    case agent.indexOf('edge') > -1:
-      return 'edge';
-    case agent.indexOf('opr') > -1 && !!(<any>window).opr:
-      return 'opera';
-    case agent.indexOf('chrome') > -1 && !!(<any>window).chrome:
-      return 'chrome';
-    case agent.indexOf('trident') > -1:
-      return 'ie';
-    case agent.indexOf('firefox') > -1:
-      return 'firefox';
-    case agent.indexOf('safari') > -1:
-      return 'safari';
-    default:
-      return 'other';
-  }
-} */
 
 }
 

@@ -80,7 +80,7 @@ export class Appdetails120Component implements OnInit {
   CostPerHourByRate:number;
   IsGetResult:boolean=false;
   IsSizeEmpty:boolean =false;
-
+  ThreadDiaEnable:boolean=true;
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() { 
@@ -244,6 +244,13 @@ ClearData()
         this.pitch_units ='mm';//this.srv_appsetting.UnitslengthDesc;
     else
         this.pitch_units ='TPI';
+
+        
+    if (this.threadform == "M60" || this.threadform == "UN60" || this.threadform == "MJ60" || this.threadform == "AC29" || this.threadform == "NJ60" || this.threadform == "NPSF" || this.threadform == "BUT" || this.threadform == "WH55")
+        this.ThreadDiaEnable=true;
+    else
+        this.ThreadDiaEnable=false;
+
   }
 
   changepitch()

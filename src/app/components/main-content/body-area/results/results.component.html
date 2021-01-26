@@ -6,12 +6,12 @@
 </li>
 <p>{{ErrMsg}}</p> -->
 
-<div class="border-left-gray border-right-gray ">
+<div class="border-left-gray border-right-gray" style="min-height: 1500px;height:1500px;">
     <div class="row" [hidden]="!MainPage">
       <div class="col col-20 mt-4 scrollYAutoFilter" [hidden]="_hideFilter">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
-      <div class="col col-80 pl-2 border-left-gray mt-4">
+      <div class="col col-80 pl-2 border-left-gray mt-4 ">
         <div class="row">
         </div>
         <app-results-table #resTable [filterChangedRec]="filterChanged" (hideFilter)="hideFilter($event)" (goToViewEvent)="goToView($event)"></app-results-table>

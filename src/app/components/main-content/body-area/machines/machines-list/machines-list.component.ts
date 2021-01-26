@@ -67,8 +67,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
      }
  /*    } */
 
-    let scrollYdiff:string='325px';
-    //alert(window.devicePixelRatio);
+    let scrollYdiff:string='325px';   
     if(window.devicePixelRatio>1) scrollYdiff='375px';
 
     this.dtOptions = {
@@ -122,10 +121,6 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   Initializemachinelist(withdestroy:boolean)
   {  
-    //let userid_enc:string="";
-    //if(this.srv_appsetting.UserID!='')userid_enc=this.srv_encrdecr.encryptData(this.srv_appsetting.UserID);              
-    //if(this.srv_appsetting.UserID!='') userid_enc=encodeURIComponent(this.srv_appsetting.UserID);
-    //userid_enc=userid_enc.replace('/\./g', '%2E'); 
     this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
       .subscribe((data: any) => {               
         this.listmachines = JSON.parse(data);          

@@ -8,13 +8,10 @@
                         <label for="txtD_Hole" class="pl-0 pt-3">{{'Hole Diameter (DH)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0" >
                         <select class="form-control input-min-width" [(ngModel)]="SelectedDia" (change)="onfocusfield('D_Hole');ChangeDiameter();SetIPLMandatory()" (focusout)="onfocusoutfield()" (focus)="onfocusfield('D_Hole')">
                             <option *ngFor="let d of arrdiameter"  [ngValue]="d" >{{d.Description}}</option>
-                        </select>                       
-                        <!-- <ng-select [(ngModel)]="SelectedDia">
-                            <ng-option *ngFor="let d of arrdiameter" [value]="d.Value">{{d.Description}}</ng-option>
-                         </ng-select>  -->                 
+                        </select>                                                           
                     </div>                                                       
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>

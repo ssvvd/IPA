@@ -240,7 +240,8 @@ if (pr.value.trim().length == 7){
         this.srv_Results.GetPivotParamValue(pr.value.trim(),308,this.srv_StMng.SecApp).subscribe((res: any) => {
           let prMax:string = JSON.parse(res); 
           if (prMax != '0'){
-            this.MaxTol = Math.round((this.MaxTol + +prMax) * 100)/100
+            //this.MaxTol = Math.round((this.MaxTol + +prMax) * 100)/100
+            this.MaxTol = this.MaxTol + +prMax ;
           }
         })       
       }

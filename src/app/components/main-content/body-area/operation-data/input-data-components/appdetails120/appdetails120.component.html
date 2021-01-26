@@ -39,7 +39,7 @@
                         </div> 
                         <div class="row"> 
                             <div>                  
-                                <input  type="number" required 
+                                <input  type="number" required [disabled]="!ThreadDiaEnable"
                                 class="form-control input-dia-min-width"
                                 [ngClass]="IsGetResult && (msrv_StMng.IPL.GetItem('Size').value==null || msrv_StMng.IPL.GetItem('Size').value=='0' || msrv_StMng.IPL.GetItem('Size').value=='') 
                                 && (msrv_StMng.IPL.GetItem('D_Hole').value==null || msrv_StMng.IPL.GetItem('D_Hole').value=='0' || msrv_StMng.IPL.GetItem('D_Hole').value=='')? 'input-empty':''"  id="txtSize" name="txtSize" 

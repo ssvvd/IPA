@@ -1,7 +1,6 @@
 
 
-<ng-container >
-  <!-- <div class="bold font-weight-bold row justify-content-start w-100">{{'Cutting Data' | translate}}</div> -->
+<ng-container >  
   <div class="row justify-content-start w-100">
     <div class="col-3 row justify-content-start"><Label class="font-weight-bold">{{'Cutting Data' | translate}}</Label></div>
     <div class="col-2" ></div>
@@ -52,11 +51,20 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{fr}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}/rev</div>
       </div>
-
+      <div class="row justify-content-start w-100">
+        <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
+        <div class="col-2">v<sub>f</sub></div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{Vf}}</div>
+        <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}/min</div>
+      </div>
+      <div class="row justify-content-start w-100">
+        <div class="col-3 row"><Label>{{'Spindle Speed' | translate }}</Label></div>
+        <div class="col-2">n</div>
+        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{n}}</div>
+        <div class="col-2" style="margin-left: 6%;">rpm</div>
+      </div>
 <br>
 <div class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Tool Assembly Data' | translate}}</Label></div>
-
-
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Overhang' | translate }}</Label></div>
         <div class="col-2">O</div>
@@ -87,18 +95,7 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{T}}</div>
         <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}</div>
       </div>
-      <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
-        <div class="col-2">v<sub>f</sub></div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{Vf}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}/min</div>
-      </div>
-      <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Spindle Speed' | translate }}</Label></div>
-        <div class="col-2">n</div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{n}}</div>
-        <div class="col-2" style="margin-left: 6%;">rpm</div>
-      </div>
+   
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Axial Feed Force' | translate }}</Label></div>
         <div class="col-2">F<sub>ax</sub></div>
@@ -120,18 +117,6 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{B}}</div>
         <div class="col-2" style="margin-left: 6%;">{{'holes' | translate}}</div>
       </div>
-     <!--  <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'No. of Holes ' | translate }}</Label></div>
-        <div class="col-2">HPP</div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{HPP}}</div>
-        <div class="col-2" style="margin-left: 6%;">{{'Holes/part' | translate}}</div>
-      </div> -->
-      <!-- <div class="row justify-content-start w-100">
-        <div class="col-3 row">{{'No. of Index per Tool' | translate }}</div>
-        <div class="col-2">I</div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{I}}</div>
-        <div class="col-2" style="margin-left: 6%;">Units</div>
-      </div> -->
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Tool Life Length' | translate }}</Label></div>
         <div class="col-2">TLL</div>
@@ -270,7 +255,7 @@
         <div class="col-2" style="margin-left: 6%;">{{'mm:ss' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
-        <div class="col-3 row">{{'Total Cost' | translate }}</div>
+        <div class="col-3 row"><Label>{{'Total Cost' | translate }}</Label></div>
         <div class="col-2">TCB</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{TCB}}</div>
         <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>

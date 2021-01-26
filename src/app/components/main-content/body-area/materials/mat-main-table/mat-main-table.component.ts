@@ -72,7 +72,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-       "scrollY": 'calc(100vh - 355px)',
+       "scrollY": 'calc(100vh - 355px)',           
        "info":false,
        "scrollCollapse" : true,
        "order": [[ 0, 'asc' ]],

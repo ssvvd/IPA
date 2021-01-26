@@ -80,7 +80,8 @@ export class StateManagerService {
         this.mSecondaryAppSelected = null; 
         this.MenuIDLevel1="";
         this.MenuIDLevel2 ="";  
-        this.obsOperationDataEnable.next(false);          
+        this.obsOperationDataEnable.next(false);  
+        this.obsInputParamSelected.next("");        
       }
     this.mSelectedMachine = Object.assign({}, m);
     let desc:string; 
