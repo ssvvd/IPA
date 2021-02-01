@@ -44,7 +44,7 @@ export class OperationDataComponent implements OnInit {
   }
 
   ngOnInit() {  
-    
+    if(this.srv_appsetting.issmallscreen) this.srv_StMng.IsTabToolDataOpen=false;
     //this.translate.use(this.srv_appsetting.Lang);
     this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
     if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)

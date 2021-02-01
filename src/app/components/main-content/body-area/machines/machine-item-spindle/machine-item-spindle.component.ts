@@ -42,7 +42,7 @@ export class MachineItemSpindleComponent implements OnInit
 
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
 
-  constructor(private serv: MachineService,private srv_appsetting:AppsettingService) {}
+  constructor(private serv: MachineService,public srv_appsetting:AppsettingService) {}
 
   ngOnInit() 
   {    

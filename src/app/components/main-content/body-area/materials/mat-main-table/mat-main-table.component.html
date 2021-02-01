@@ -7,39 +7,39 @@
           <thead >
             <tr id="dtOptionsMat">
               <th class="d-none">{{'ID' | translate}}</th>
-              <th><label>{{'Group' | translate}}<span class="sort-icon ml-1"></span></label></th>
-              <th><label>{{'Description' | translate}}<span class="sort-icon ml-1"></span></label></th>
-              <th><label>{{'Condition' | translate}}<span class="sort-icon ml-1"></span></label></th>
-              <th><label>{{'Hardness' | translate}}<span class="sort-icon ml-1"></span></label></th>
+              <th><div class="visibleonlybigscreen"><label>{{'Group' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
+              <th><div class="text-left" ><label>{{'Description' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
+              <th><div class="text-left" ><label>{{'Condition' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
+              <th><div class="text-left" ><label>{{'Hardness' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
               <th class="no-sort d-none"></th>
-              <th class="no-sort" *ngIf="environment.internal"></th>
-              <th class="no-sort" *ngIf="environment.internal"></th> 
-              <th class="no-sort" *ngIf="environment.internal"></th>
-              <th class="d-none"></th>
+              <th class="no-sort" *ngIf="environment.internal" ></th>
+              <th class="no-sort" *ngIf="environment.internal" ></th> 
+              <th class="no-sort" *ngIf="environment.internal" ></th>
+              <th class="d-none" ></th>
             </tr>
           </thead>
           <tbody>   
               <tr *ngFor="let material of materialsResultSorted " [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected cursor-pointer' : 'tr-not-selected cursor-pointer'" [hidden]="selectedCategory != material.Category">
                   <th scope="row" class="d-none">{{material.id}}</th>         
                   <td (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
-                  <td (click)="matDetailClick(material)"><div class="pl-2">{{material.description}}</div></td> 
-                  <td (click)="matDetailClick(material)"><div class="pl-2">{{material.Condition}}</div></td>
-                  <td (click)="openEditParamsM(material)"><div class="pl-2"><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' | translate}}</div></td>
+                  <td (click)="matDetailClick(material)"><div class="pl-2 ">{{material.description}}</div></td> 
+                  <td (click)="matDetailClick(material)"><div class="pl-2" >{{material.Condition}}</div></td>
+                  <td (click)="openEditParamsM(material)"><div class="pl-2" ><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' | translate}}</div></td>
                   <td class="d-none">
                     <img src="{{environment.ImgView}}" (click)="matDetailClick(material)" title="View materials and standards"  class="icon-grid">
                   </td>
-                  <td *ngIf="environment.internal">
+                  <td *ngIf="environment.internal" >
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to My Materials" class="icon-grid">
                   </td>
-                  <td *ngIf="environment.internal">                    
+                  <td *ngIf="environment.internal" >                    
                        <!--  <img [src]="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid"> -->
                   </td> 
-                  <td *ngIf="environment.internal">
-                    <div>
+                  <td *ngIf="environment.internal" >
+                    <div class="float-right" style="width:100%!important;">
                       <button [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">{{'Select' | translate}}</button>
                     </div>
                   </td>     
-                  <td class="d-none">{{material.Hardness}}</td>    
+                  <td class="d-none" >{{material.Hardness}}</td>    
               </tr>
           </tbody>
         </table>

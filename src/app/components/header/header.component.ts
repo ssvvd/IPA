@@ -12,6 +12,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ContactusComponent } from './../../components/maintenance/contactus/contactus.component';
 import { FeedbackComponent } from './../../components/maintenance/feedback/feedback.component';
 import { CookiesService } from './../../services/cookies.service';
+import { DatalayerService} from'./../../services/datalayer.service' ;
 import { Subject} from 'rxjs';
 
 @Component({
@@ -42,10 +43,11 @@ export class HeaderComponent implements OnInit {
 
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
               public srv_appsetting:AppsettingService, private router:Router,
-              private srv_login:LoginService,private modalService: NgbModal,private srv_cook:CookiesService) { }
+              private srv_login:LoginService,private modalService: NgbModal,private srv_cook:CookiesService,
+              private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() {   
-    
+    //alert('header');
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>
       { if(u=='') 
           this.userdes=this.translate.instant('Log In'); 
@@ -150,6 +152,8 @@ export class HeaderComponent implements OnInit {
             }            
           }
       }
+      
+      if(this.srv_appsetting.AfterToken) this.FillCountryLanguageByURLParameters();
 
       if(this.srv_appsetting.Country===undefined)      
       {       
@@ -168,9 +172,9 @@ export class HeaderComponent implements OnInit {
   {
     this.srv_login.SelectCountryAndLang(c,LanguageID);
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
-    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;    
+    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;       
     this.eventsSubject.next();
-  
+    //this.userdes=this.translate.instant('Log In');
   }
   
   CheckAllowUnitsChange(event)
@@ -262,4 +266,48 @@ export class HeaderComponent implements OnInit {
     });    
   } 
    
+  FillCountryLanguageByURLParameters()
+  {
+    if(localStorage.getItem("countryid")!=null && localStorage.getItem("countryid")!='')
+    {
+      this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
+      {
+        let data = JSON.parse(d);
+        if(data.length>0)
+        {
+          let c:Country =new Country;
+          c.BrifName =data[0].BrifName;
+          c.CountryFlag ='';
+          c.CountryGlobalId = 0;
+          c.CountryID = data[0].CountryId;
+          c.CountryName =data[0].CountryName;              
+          c.LanguageID.push(data[0].CATLAN);
+          c.CountryCode =data[0].CountryCode;
+
+      
+          this.srv_login.SelectCountryAndLang(c,c.LanguageID[0]);          
+          this.srv_login.SelectLanguage(c.LanguageID[0]);
+    
+          //this.srv_appsetting.Country=c;
+          this.srv_login.SetExchangeRate1(c.BrifName);
+          //this.translate.use(c.LanguageID[0]);
+          localStorage.setItem("countryid","");       
+        }
+        if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+        {
+          this.srv_login.SelectLanguage(localStorage.getItem("language"));
+          localStorage.setItem("language","");
+        }
+      }      
+      );    
+    }
+    else
+    {
+      if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+      {
+        this.srv_login.SelectLanguage(localStorage.getItem("language"));
+        localStorage.setItem("language","");
+      }
+    } 
+  }
 }

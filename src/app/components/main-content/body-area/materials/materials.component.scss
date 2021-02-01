@@ -1,6 +1,8 @@
 .square {
-    width: 35px;
-    height: 30px;
+    width: 35px!important;
+    height: 30px!important;
+    min-width: 35px!important;
+    min-height: 30px!important;
     float: left;
     margin-right:5px;
     justify-content: center;

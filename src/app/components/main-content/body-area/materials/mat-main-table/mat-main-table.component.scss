@@ -1,6 +1,6 @@
 
 .table td:nth-child(2), .table th:nth-child(2){
-    width: 10%;
+    width: 7%;
 }
 
 .table td:nth-child(3), .table th:nth-child(3){
@@ -8,7 +8,7 @@
 }
 
 .table td:nth-child(4), .table th:nth-child(4){
-    width: 21%;
+    width: 20%;
 }
 
 .table td:nth-child(5), .table th:nth-child(5){
@@ -16,19 +16,19 @@
 }
 
 .table td:nth-child(6), .table th:nth-child(6){
-    width: 6%;
+    width: 1%;
 }
  
 .table td:nth-child(7), .table th:nth-child(7){
-    width: 1%;
+    width: 5%;
 } 
 
 .table td:nth-child(8), .table th:nth-child(8){
-    width: 6%;
+    width: 1%;
 }
 
 .table td:nth-child(9), .table th:nth-child(9){
-    width: 15%;
+    width: 12%;
 }
 
 @mixin name {
@@ -71,3 +71,25 @@ a:visited img {
 /* .imgFavorites:visited{
     background: url("http://placekitten.com/100/100?image=1") center center no-repeat;
 } */
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1366px)  
+  and (-webkit-min-device-pixel-ratio: 2)
+  , (max-width: 1010px) {
+
+    .scrollYFilter{
+        overflow-y: auto;
+        height: calc(100vh - 300px);
+    }
+    
+    .visibleonlybigscreen
+    {
+        visibility: hidden;
+        display:none;
+    }
+
+    .table td:nth-child(3), .table th:nth-child(3){
+        width: 25%;
+    }
+}

@@ -1,10 +1,10 @@
 import { Component, OnInit,Input ,Output,EventEmitter} from '@angular/core';
-import { DatalayerService} from 'src/app/services/datalayer.service' ;
+//import { DatalayerService} from 'src/app/services/datalayer.service' ;
 //import { DatalayerOptimizeToolService} from 'src/app/services/datalayer-tooloptimize.service' ;
 import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { Observable ,Subscription} from 'rxjs';
-import { NgxSpinnerService } from "ngx-spinner"; 
+//import { NgxSpinnerService } from "ngx-spinner"; 
 
 interface ToolOptimizeItem
 {
@@ -57,9 +57,9 @@ export class ResFilterListComponent implements OnInit {
   Top:number =10;
   Filter:string='All';  
 
-  constructor(private srv_DataLayer:DatalayerService,
-              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
-              private SpinnerService: NgxSpinnerService) { }
+  constructor(
+              private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService
+              ) { }
   
   ngOnInit() { 
     this.eventsSubscription.add(this.events.subscribe(() => this.ClearData()));

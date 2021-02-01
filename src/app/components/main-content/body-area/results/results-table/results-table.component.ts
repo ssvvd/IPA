@@ -77,11 +77,8 @@ export class ResultsTableComponent implements OnInit {
     private srv_machine: MachineService,private srv_cook:CookiesService) { 
       
     }
-  
-
-    
+   
   ngOnInit() {
-    
     
      this.dtOptions = {
       pagingType: 'full_numbers',
@@ -520,17 +517,19 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
             this.dtResultsObjects[i][index].property.IsShow = false;
           }
           else{
-            this.dtResultsObjects[i][index].property.IsShow = true;
+            
+            if(this.srv_appsetting.issmallscreen)
+            {
+              if(this.dtPropertiesTable[j].IsDefault==1 || this.dtPropertiesTable[j].IsDefault==6 || this.dtPropertiesTable[j].IsDefault==7)
+                this.dtResultsObjects[i][index].property.IsShow = true;
+              else
+                this.dtPropertiesTable[j].IsDefault=0;
+            }
+            else
+              this.dtResultsObjects[i][index].property.IsShow = true;
           }
 
-          index++
-
-          
-        //   if (this.dtPropertiesTable[j].FieldDescriptionSmall == "Catalog No" && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
-        //     var url:string = environment.eCatItemPictures + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim() + ".gif ";
-        //     this.arrResultImgsItem.push(url);
-
-        // }
+          index++      
       }
 
 

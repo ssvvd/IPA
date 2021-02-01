@@ -19,12 +19,12 @@
   <hr>
   <div *ngIf="environment.internal" class="pl-2 pb-2 ">
     <div class="row">
-        <div class="custom-control custom-checkbox cursor-pointer">
+        <div class="custom-control custom-checkbox cursor-pointer col-2">
             <input [checked]="MyMatCheked" type="checkbox" class="custom-control-input cursor-pointer" id="ShowOnlyFavorites" name="ShowOnlyFavorites" (change)= "ShowMyMaterials($event)">
             <label class="custom-control-label cursor-pointer" for="ShowOnlyFavorites"></label>
         </div>
-        <div class="pr-4  pl-0 pb-2">
-            <label for="ShowOnlyFavorites" class="form-check-label text-nowrap">{{'Show Only My Materials' | translate}}</label>
+        <div class="pr-4  pl-0 pb-2 col-9">
+            <label for="ShowOnlyFavorites" class="form-check-label text-wrap">{{'Show Only My Materials' | translate}}</label>
         </div>
     </div>
 </div>

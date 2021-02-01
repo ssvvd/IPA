@@ -39,6 +39,7 @@
     color:#FFF;
     border-color:var(--btn-bg-select-color);   
     font-size: 14px;
+    width:100%!important;
 }
 
 @include media-breakpoint-up(xl){ 
@@ -57,23 +58,23 @@
   width: 91.66666667%!important;
   padding-right:0!important;   
  }
- .btn-select  
+   .btn-select  
  { 
-    min-width:150px;
+    //min-width:150px;
     max-width: 150px;  
 }
 .btn-select-selected 
   {    
-    min-width:150px;
+    //min-width:150px;
     max-width: 150px;   
-  }
+  } 
 
-  .btn-select-selected:hover
+   .btn-select-selected:hover
   {     
-    min-width:150px;
+    //min-width:150px;
     max-width: 150px; 
     background-color: var(--btn-bg-select-color)!important;  
-  }
+  } 
  }
 
 .btn-select-selected

@@ -217,5 +217,11 @@ export class AppsettingService {
   set AfterToken(u:boolean) {  
     this.mAfterToken = u;
    }
-
+     
+   get issmallscreen():boolean{      
+    if(window.devicePixelRatio>1 || window.innerWidth<1680) 
+      return true;
+    else
+      return false;
+  }   
 }

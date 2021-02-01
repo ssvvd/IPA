@@ -6,9 +6,9 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { LoginService } from 'src/app/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpParams } from '@angular/common/http';
-import { CookiesService } from 'src/app/services/cookies.service';
+//import { CookiesService } from 'src/app/services/cookies.service';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import cssVars from 'css-vars-ponyfill';
 
 
@@ -23,8 +23,7 @@ export class AppComponent implements OnInit {
 
   constructor(location: Location, router: Router, private srv_appsetting:AppsettingService,
               public translate:TranslateService,
-              private srv_login:LoginService,private srv_cook:CookiesService,
-              private modalService:NgbModal) {
+              private srv_login:LoginService) {
     if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
@@ -39,9 +38,7 @@ ngOnInit()
 
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
-  let token:string=''; 
-
-  //localStorage.setItem("isLogIn",null); //for test
+  let token:string='';  
 
   let isLogIn:string='-1'; //todo:!!!!!! -1!!!  
   const url = window.location.href;    
@@ -54,14 +51,19 @@ ngOnInit()
     paramValue = httpParams.get('v');  
     if(paramValue!=null) isLogIn =paramValue; 
     
-    let countrtyid:string;
+    let countryid:string;
     paramValue = httpParams.get('countryid'); 
-    if(paramValue!=null) countrtyid =paramValue; 
+    if(paramValue!=null) {
+      countryid =paramValue; 
+      localStorage.setItem("countryid",countryid);
+    }
 
     let language:string;
     paramValue = httpParams.get('lang'); 
-    if(paramValue!=null) language =paramValue; 
-
+    if(paramValue!=null) {
+      language =paramValue; 
+      localStorage.setItem("language",language);
+    }
     //todo: country, language
   }
   
@@ -69,28 +71,18 @@ ngOnInit()
   if(isLogIn!="-1")
   {
     if(isLogIn =='0')
-    {
-        //this.srv_appsetting.AfterToken=true;
+    {       
         this.srv_appsetting.isLoggedIn=true;
         this.srv_login.FillDefaultUser();
         localStorage.setItem("isLogIn",null);
-    }     
-   /*  if(isLogIn =='1')
-    {
-      this.srv_login.SignIn(token);
-        //this.srv_appsetting.isLoggedIn=true;
-        //this.srv_appsetting.AfterToken=true; 
-        localStorage.setItem("isLogIn",null);           
-            
-    }   */                                              
+    }                                               
   }
   else
   {
     if(token!='')
     {
         this.srv_login.LogIn(token).subscribe(res=>{
-          this.srv_appsetting.isLoggedIn=true;
-          //this.srv_appsetting.AfterToken=true;         
+          this.srv_appsetting.isLoggedIn=true;         
         }
       );   
     }

@@ -84,7 +84,7 @@
               <div class="pt-3">
                 <label class="pl-3 pb-0 mb-0 font-weight-bold">{{spindle.SpindleType=='M'?'Turret (Stationary Tools)':'Tool Holder' | translate }}</label>              
                 <div class="form-group row pt-3">
-                    <div  [ngClass]="exportPDF?'pt-1 col-7':'pt-1 col-8'">
+                    <div  [ngClass]="exportPDF || srv_appsetting.issmallscreen?'pt-1 col-12':'pt-1 col-8'">
                         <label for="txtAdaptationType"  >{{'Adaptation Type' | translate}}</label>
                     </div>
                     <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'"  *ngIf="isLoadingAdSize">            

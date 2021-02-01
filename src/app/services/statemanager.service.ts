@@ -252,10 +252,10 @@ export class StateManagerService {
     return this.mSecondaryAppSelected.ApplicationITAID;
   } 
    
-  get IsTabToolDataOpen():boolean {
+  get IsTabToolDataOpen():boolean {   
     return this.mIsTabToolDataOpen;
     }
-  set IsTabToolDataOpen(v:boolean) {  
+  set IsTabToolDataOpen(v:boolean) {      
     this.mIsTabToolDataOpen = v;
    }
   

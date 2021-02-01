@@ -23,14 +23,13 @@ export class LoginService {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
-      let s= environment.signinURL + '?t=' +res;  
-      window.open(s,'_self');
-      console.log('after token');
-      //this.srv_appsetting.AfterToken=true;
+      //alert(res);          
+      let s= environment.signinURL + '?t=' +res;
+      console.log(s);    
+      window.open(s,'_self');          
       return 'ok'    
     });
-    return'ok';
+    //return'ok';
   }
   
   SignIn(token):any
@@ -57,9 +56,13 @@ export class LoginService {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      let s=environment.LoginURLCheckCookies + '?t=' +res;  
+      //alert(res);
+      let s:string=environment.LoginURLCheckCookies + '?t=' +res;  
+      //alert(s);
+      console.log(s);
       window.open(s,'_self');   
       console.log('after token');
+      
       //this.srv_appsetting.AfterToken=true;
       return 'ok'    
     });
@@ -83,14 +86,14 @@ export class LoginService {
         c.CountryCode =data[0].CountryCode;
         this.srv_appsetting.Country=c;
         this.SetExchangeRate1(c.BrifName);
-        this.translate.use(c.LanguageID[0]); 
-        //this.translate.use('RU');                 
+        this.translate.use(c.LanguageID[0]);                    
       }      
     });
   }
   
   FillDefaultUser()
   {
+    //alert('login');
     let u=new User;  
     let displayName:string='';
     let surname:string='';
@@ -101,36 +104,72 @@ export class LoginService {
     let isImc:string='';
     let countrycode:string='';
     let countryname:string='';
-   /*  if(localStorage.getItem("displayName")!=null) displayName=localStorage.getItem("displayName");
-    if(localStorage.getItem("surname")!=null) surname=localStorage.getItem("surname");
-    if(localStorage.getItem("givenName")!=null) givenName=localStorage.getItem("givenName");
-    if(localStorage.getItem("email")!=null) email=localStorage.getItem("email");
-    if(localStorage.getItem("country")!=null) country=localStorage.getItem("country");
-    if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
-    if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
-    if(localStorage.getItem("countryCode")!=null) countrycode=localStorage.getItem("countryCode"); 
-    if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName"); */
-    u.displayName=displayName;
-    u.surname=surname;   
-    u.givenName=givenName;
-    u.email=email;
-    u.country=country;
-    u.companyName=companyName;
-    u.isImc=isImc;
-    u.CountryCode=countrycode;
-    u.CountryName=countryname;
-    if(u.CountryCode=='')
+    /* if(localStorage.getItem("countryid")!='')
+    {
+      this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
+      {
+        let data = JSON.parse(d);
+        if(data.length>0)
+        {
+          let c:Country =new Country;
+          c.BrifName =data[0].BrifName;
+          c.CountryFlag ='';
+          c.CountryGlobalId = 0;
+          c.CountryID = data[0].CountryId;
+          c.CountryName =data[0].CountryName;              
+          c.LanguageID.push(data[0].CATLAN);
+          c.CountryCode =data[0].CountryCode;
+
+          u.displayName=displayName;
+          u.surname=surname;   
+          u.givenName=givenName;
+          u.email=email;
+          u.country=country;
+          u.companyName=companyName;
+          u.isImc=isImc;
+          u.CountryCode=c.CountryCode;
+          u.CountryName=c.CountryName;
+
+          this.SelectCountryAndLang(c,c.LanguageID[0]);
+          this.SelectLanguage(c.LanguageID[0]);
+
+          //this.srv_appsetting.Country=c;
+          this.SetExchangeRate1(c.BrifName);
+          //this.translate.use(c.LanguageID[0]);
+          localStorage.setItem("countryid","");
+        }
+      });
+    }
+    else */
+    {
+      u.displayName=displayName;
+      u.surname=surname;   
+      u.givenName=givenName;
+      u.email=email;
+      u.country=country;
+      u.companyName=companyName;
+      u.isImc=isImc;
+      u.CountryCode=countrycode;
+      u.CountryName=countryname;
+      if(u.CountryCode=='')
       this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
       {                
         this.UpdateCurrentCountry(d.countryCode);                                     
       }
       );
     else      
-      this.UpdateCurrentCountry(u.CountryCode);      
-  
+      this.UpdateCurrentCountry(u.CountryCode); 
+    }
+    
     this.srv_appsetting.User=u;  
     this.srv_appsetting.isLoggedIn=true;
     this.srv_appsetting.AfterToken=true;  
+
+  /*    if(localStorage.getItem("language")!='')
+    {
+      this.SelectLanguage(localStorage.getItem("language"));
+      localStorage.setItem("language","");
+    }   */
   }
   
   LogIn(token:string):Observable<any>
@@ -175,7 +214,46 @@ export class LoginService {
               this.srv_appsetting.isLoggedIn=true;
               this.srv_appsetting.AfterToken=true;               
               });  
-                       
+             /*  if(localStorage.getItem("countryid")!='')
+              {
+                this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
+                {
+                  let data = JSON.parse(d);
+                  if(data.length>0)
+                  {
+                    let c:Country =new Country;
+                    c.BrifName =data[0].BrifName;
+                    c.CountryFlag ='';
+                    c.CountryGlobalId = 0;
+                    c.CountryID = data[0].CountryId;
+                    c.CountryName =data[0].CountryName;              
+                    c.LanguageID.push(data[0].CATLAN);
+                    c.CountryCode =data[0].CountryCode;
+          
+                    //u.displayName=displayName;
+                    //u.surname=surname;   
+                    //u.givenName=givenName;
+                    //u.email=email;
+                    //u.country=country;
+                    //u.companyName=companyName;
+                    //u.isImc=isImc;
+                    //u.CountryCode=c.CountryCode;
+                    //u.CountryName=c.CountryName;
+          
+                    this.srv_appsetting.Country=c;
+                    this.SetExchangeRate1(c.BrifName);
+                    this.translate.use(c.LanguageID[0]); 
+                    localStorage.setItem("countryid","");
+                  }
+                });
+              } 
+              
+              if(localStorage.getItem("language")!='')
+              {
+               
+                this.SelectLanguage(localStorage.getItem("language"));                                            
+                localStorage.setItem("language","");
+              }  */
               return of('ok');
           });                              
     }
@@ -260,6 +338,17 @@ export class LoginService {
     });
          
   }
+  SelectLanguage(LanguageID:string)
+  {
+    let lan:Language;
+    lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
+    this.srv_appsetting.SelectedLanguage =lan;       
+    if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
+      this.translate.use(lan.LanguageCode);
+    else
+      this.translate.use(this.translate.getDefaultLang()); 
+        
+  }
 
   SelectCountryAndLang(c:Country,LanguageID:string) :any
   {
@@ -283,8 +372,7 @@ export class LoginService {
       {
         let rate :any=JSON.parse(res)[0].Exchange; 
         this.srv_appsetting.CurrRate=rate;        
-      }            
-      //alert(rate);
+      }                  
     });
   }
 

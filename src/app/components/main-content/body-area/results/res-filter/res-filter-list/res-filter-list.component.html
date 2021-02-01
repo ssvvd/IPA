@@ -1,7 +1,7 @@
 <div class="container" class="p-0 m-0 pt-4 pr-2 border-bottom">
     
     <div class="form-group row col-12  d-flex justify-content-between" >   
-        <div class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
+        <div [ngClass]="srv_appsetting.issmallscreen?'col-5 pl-0 ml-0 mr-0 pr-0 text-wrap':'col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap'">       
             <label title="{{prmDesc  | translate}}">{{labeldescription  | translate}}</label>
         </div>                                   
         <div class="col-5 pl-0 ml-0 text-truncate selected-items">

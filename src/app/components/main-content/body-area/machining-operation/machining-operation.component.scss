@@ -206,6 +206,11 @@
     max-width:200px;       
     opacity: 50%;
   }
+
+  .scrollYFilter{
+    overflow-y: auto;
+    height: calc(100vh - 220px);
+}
  }
  
 

@@ -1,10 +1,9 @@
 export const environment = {
   production: true  ,
-  //API_HOST: 'http://localhost:17586/',
   API_HOST: 'http://www.iscar.com/ITA_API/',
-  internal: true ,
   //API_HOST: 'http://intranet.imc.co.il//ITA_API/',
-  IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
+  internal: true ,
+    IscarLogo: 'https://www.iscar.com/eCatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
   ImageInputPath:"assets/img/input_images/",
   ImageApplicationsPath:"assets/img/Applications/",
@@ -32,7 +31,16 @@ export const environment = {
   CalcReq_Host: 'https://mpwr.iscar.com//MachiningPwrWs/api/CalcReq/',
   eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat=",
   wsMaterials: "http://www.iscar.com/wsmaterials/service.asmx/",
-  signinURL:'https://sign.ssl.imc-companies.com/signin',
+ 
+  signinURL:'https://sign.ssl.imc-companies.com/signin',  
+  LoginURLTokenUrl:"authapi.ssl.imc-companies.com",  
+  LoginURLRes:"authapi.ssl.imc-companies.com",  
+  LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
+  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  
+ /*  signinURL:'https://sign.ssl.imc-companies.com/signin',
   LoginURLTokenUrl:"https://authapi.ssl.imc-companies.com/token/gettoken",
-  LoginURLRes:"https://sign.ssl.imc-companies.com/user/getuserdetails"
+  LoginURLRes:"https://sign.ssl.imc-companies.com/user/getuserdetails",
+  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout" ,
+  LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general"  */
+
 };

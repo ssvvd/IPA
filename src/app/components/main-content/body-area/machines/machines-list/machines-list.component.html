@@ -82,8 +82,8 @@
                         <img *ngIf="mach.IsMostRecommended" [src]="environment.ImgDefault"  class="icon-grid-no-pointer">                        
                       </a>
                     </td>
-                    <td data-sort="image3" class="cursor-pointer">
-                      <div class="float-right">
+                    <td data-sort="image3" class="cursor-pointer" >
+                      <div class="float-right text-right" style="width:100%!important" >
                         <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
                           (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect| translate}}</button>
                       </div>

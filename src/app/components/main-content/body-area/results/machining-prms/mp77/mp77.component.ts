@@ -334,7 +334,7 @@ if (pr.value.trim().length == 7){
                   if(this.selectedHelp.Grade[2]!=undefined)  grade=this.selectedHelp.Grade[2];
                   if(this.selectedHelp.Grade[3]!=undefined)  grade=this.selectedHelp.Grade[3];                   
                 }                               
-                this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,grade.trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,+this.DH).subscribe((res: any) => {
+                this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,grade.trim(),this.srv_StMng.IPL.GetItem('Material').value,this.resType,this.Vc,this.srv_StMng.SecAppSelected.MainApp,+this.DH).subscribe((res: any) => {
                 var result:object[] = JSON.parse(res);
                 this.TLL = result[0]['TLL'] || '0'
                 this.TLT = result[0]['TLT'] || '0'
@@ -346,10 +346,12 @@ if (pr.value.trim().length == 7){
     // this.TLL = 50;
     // this.TLT = '50:00';
     let multiplication:number = (this.srv_appsetting.Units == 'I') ? 1 : 1000
-    this.H_HDH = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
+    //this.H_HDH = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
+   
     this.S_HPS = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.I_HPC = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
+    this.H_HDH = Math.round((+this.TLT) /(+this.CTH) * 100)/100 || 0
     this.S_NSB=Math.ceil(this.B / this.S_HPS) || 0
     this.H_HPB = Math.ceil(this.B / this.H_HDH) || 0
     //     NIB=ROUNDUP( B / (HPC * CEDC ))  * CICT
@@ -359,11 +361,11 @@ if (pr.value.trim().length == 7){
 
 //change Tool cost	TTC	TP * HPB / I)	Solid Tools cost	TTC	TP * NSB	Tools cost	TTC	TP * (NIB / I)
     if (this.resType == "H")
-    this.TTC =(this.TP *  Math.ceil(this.H_HPB / this.HI_I) ) || 0
+      this.TTC =Math.ceil((this.TP *  Math.ceil(this.H_HPB / this.HI_I) )) || 0
     if (this.resType == "S")
-    this.TTC = Math.ceil(this.TP * this.S_NSB )
+      this.TTC = Math.ceil(this.TP * this.S_NSB )
     if (this.resType == "I") //TP * ROUNDUP(HPB / I)
-    this.TTC = (this.TP * Math.ceil(this.I_NIB / this.HI_I) ) || 0
+      this.TTC = Math.ceil((this.TP * Math.ceil(this.I_NIB / this.HI_I) )) || 0
 
     // this.H_CTB = Math.round(this.TTC+this.H_DHC * 100)/100
     // this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()

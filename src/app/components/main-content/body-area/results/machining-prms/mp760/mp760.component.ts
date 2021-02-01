@@ -318,7 +318,7 @@ else
 
 // this.TLL = 50
 // this.TLT = 50
-this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,0).subscribe((res: any) => {
+this.srv_Results.gettoolliferesults(this.srv_appsetting.Units,this.selectedHelp.SecondaryAppOrig1 || this.srv_StMng.SecApp,Array.from(new Set(this.selectedHelp.Grade)).toString().split(",").join("").trim(),this.srv_StMng.IPL.GetItem('Material').value,this.selectedHelp.itemType.includes('S')? 'S': 'T',this.Vc,this.srv_StMng.SecAppSelected.MainApp,0).subscribe((res: any) => {
   var result:object[] = JSON.parse(res);
   this.TLL = result[0]['TLL'] || '0'
   this.TLT = result[0]['TLT'] || '0'

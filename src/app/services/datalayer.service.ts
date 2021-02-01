@@ -39,6 +39,12 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country-lang-brif/' + countrycode);
   }
   
+  
+  public  getcountry(countryid:string)
+  {           
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-country/' +countryid);
+  }
+
   public  dictionarygetlinelanguage(lang:string)
   {           
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'dictionaty-get-lines/'+lang);
@@ -80,17 +86,20 @@ export class DatalayerService {
   public  get_token()
   {    
     //getToken/{LoginURLReq}/{LoginURLTokenUrl}/{LoginURLTokenID}/{LoginURLTokenSecret}/{siteType}  
-    let sitetype:string;
+    let sitetype:string='global';
     if(environment.production)    
       sitetype ='global';   
     else
       sitetype ='local';
     let u:string;  
-    u=encodeURIComponent(environment.LoginURLTokenUrl).replace('.','***').replace('.','***').replace('.','***');
+    //u=encodeURIComponent(environment.LoginURLTokenUrl).replace('.','***').replace('.','***').replace('.','***');
+    u='u'; //temp
     let s:string=environment.API_HOST +'api/login/getToken/' + u+ '/' +sitetype;
     console.log(s);
+    //alert(s);
     return  this.httpClient.get(environment.API_HOST +'api/login/getToken/' + u+ '/' +sitetype) 
     .catch((err: HttpErrorResponse) => {      
+      //(err.message);
         return "error";
       });  
   } 
@@ -104,7 +113,7 @@ export class DatalayerService {
     else
       sitetype ='local'; */
   
-    return  this.httpClient.get("https://sign-ariel.ssl.imc-companies.com/general/?t=" +token)
+    return  this.httpClient.get("https://sign.ssl.imc-companies.com/general/?t=" +token)
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  
