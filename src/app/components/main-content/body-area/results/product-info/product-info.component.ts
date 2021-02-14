@@ -69,7 +69,7 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
     }
 
     let url:string = environment.eCatItemPage + row.trim() + '&SRC=' + this.SRC  + '&fnum=' + this.selectedOption.Families[_index].trim()
-     + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang
+     + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang ;
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

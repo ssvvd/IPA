@@ -137,22 +137,62 @@ export class MpTurnGrooveComponent implements OnInit {
                    }
                    case 'WInsert':{
                     if (this.CW == 0)
-                    this.CW = +value
+                    {
+                      if(value.indexOf('-')>-1 )
+                        {
+                          this.CW=value.substring(0,value.indexOf('-')); 
+                          if(this.CW=='') this.CW =0;
+                        }
+                        else
+                          this.CW = +value;
+                    }
                     break;
                   }
                   case 'WInsert1':{
                     if (this.CW == 0)
-                    this.CW = +value
+                  {
+                    if(value.indexOf('-')>-1)
+                      {
+                        this.CW=value.substring(0,value.indexOf('-')); 
+                        if(this.CW=='') this.CW =0;
+                      }
+                      else
+                        this.CW = +value;
+                  }
+                    
                     break;
                   }
                   case 'WInsert2':{
                     if (this.CW == 0)
-                    this.CW = +value
+                    {
+                      if(value.indexOf('-')>-1)
+                      {
+                        this.CW=value.substring(0,value.indexOf('-')); 
+                        if(this.CW=='') this.CW =0;
+                      }
+                      else
+                        this.CW = +value;
+                    }
+                    
                     break;
                   }
                    case 'DetailsWInsert':{
-                    this.CW = +value
+                    if (this.CW == 0)
+                    {
+                      if(value.indexOf('-')>-1)
+                      {
+                        this.CW=value.substring(0,value.indexOf('-')); 
+                        if(this.CW=='') this.CW =0;
+                      }
+                      else
+                        this.CW = +value;
+                    }
                     break;
+                  }
+
+                  case 'D2ReducedDia':{
+                    if (this.CW == 0)
+                     this.CW = +value;
                   }
                   case 'TotalCuttingTime': {
                     this.CTFt = +value

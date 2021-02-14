@@ -61,7 +61,7 @@ eventsSubject: Subject<void> = new Subject<void>();
       }
     }
   ngAfterViewInit() {
-    console.log(this.resTable); 
+    //console.log(this.resTable); 
   }
 
   ngOnInit() {
@@ -198,7 +198,7 @@ eventsSubject: Subject<void> = new Subject<void>();
  OpenCNGenerator()
  {
    let strpar:string=this.srv_down.CreateURLparamCNCProgram(this.viewParams);
-   window.open(this.environment.IscarSite + '/ITA/GCodeCreator.aspx?' +strpar);   
+   window.open(this.environment.IscarSite + '/ITC/GCodeCreator.aspx?' +strpar,"_blank");   
  }
 
 }

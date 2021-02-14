@@ -60,6 +60,24 @@
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{fz}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/tooth</div>
         </div>
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
+          <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
+          <div class="col-2">v<sub>f</sub></div>
+          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+        </div>
+        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
+          <div class="col-3 row"><Label>{{'Tool Center Feed' | translate }}</Label></div>
+          <div class="col-2">V<sub>f</sub>(D<sub>vf</sub>)</div>
+          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{VfDvf}}</div>
+          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
+        </div>
+        <div class="row justify-content-start w-100">
+          <div class="col-3 row"><Label>{{'Spindle Speed' | translate }}</Label></div>
+          <div class="col-2">n</div>
+          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n}}</div>
+          <div class="col-2">rpm</div>
+        </div>
         <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='780'">
           <div class="col-3 row"><Label>{{'Tool Course Diameter' | translate }}</Label></div>
           <div class="col-2">D<sub>vf</sub></div>
@@ -174,24 +192,7 @@
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T}}</div>
           <div class="col-2">{{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}</div>
         </div>
-        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
-          <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
-          <div class="col-2">v<sub>f</sub></div>
-          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf}}</div>
-          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
-        </div>
-        <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
-          <div class="col-3 row"><Label>{{'Tool Center Feed' | translate }}</Label></div>
-          <div class="col-2">V<sub>f</sub>(D<sub>vf</sub>)</div>
-          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{VfDvf}}</div>
-          <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
-        </div>
-        <div class="row justify-content-start w-100">
-          <div class="col-3 row"><Label>{{'Spindle Speed' | translate }}</Label></div>
-          <div class="col-2">n</div>
-          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n}}</div>
-          <div class="col-2">rpm</div>
-        </div>
+
         <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='780'">
           <div class="col-3 row"><Label>{{'Bending Force' | translate }}</Label></div>
           <div class="col-2">F<sub>b</sub></div>
@@ -234,14 +235,14 @@
         </div>
         <div class="row justify-content-start w-100">
           <div class="col-3 row"><Label>{{'Cutting Time per Part' | translate }}</Label></div>
-          <div class="col-2">CTF</div>
+          <div class="col-2">CTP</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFFormat}}</div>
           <div class="col-2">{{'mm:ss' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100">
             <div class="col-3 row"><Label>{{'Tool Life Length' | translate }}</Label></div>
             <div class="col-2">TLL</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLL}}</div>
+            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TLL==0?'-': TLL}}</div>
             <div class="col-2">{{ srv_appsetting.Units =='M' ? 'm' : 'inch' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100">
@@ -412,7 +413,8 @@
         <div class="row justify-content-start w-100" *ngIf="resType=='S'">
           <div class="col-3 row"><Label>{{'Total Solids Cost' | translate }}</Label></div>
           <div class="col-2">TSC</div>
-          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{S_TSC}}</div>
+          <!-- <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{S_TSC}}</div> -->
+          <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T_TGC}}</div>
           <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
         </div>
 

@@ -36,7 +36,7 @@ export class InnerTabsTableComponent implements OnInit {
     }
   
     let url:string = environment.eCatItemPage + this.selectedOption.CatalogNo[itemIndex].trim()  + '&fnum=' + this.selectedOption.Families[itemIndex].trim()
-     + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang
+     + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang + '&cf=ITA'
   
      window.open(url, "_blank");
 

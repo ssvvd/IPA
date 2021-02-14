@@ -71,7 +71,7 @@ export class ResultsTableComponent implements OnInit {
   @Output() hideFilter = new EventEmitter<any>();
   processdownload:boolean=false;
 
-  constructor(public translate: TranslateService,private srv_Results:ResultsService,private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
+  constructor(public translate: TranslateService,private srv_Results:ResultsService,public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
     private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,
     private srv_machine: MachineService,private srv_cook:CookiesService) { 
@@ -649,10 +649,9 @@ else{
 
   
   this.SpinnerService.hide();
-  //alert(this.srv_cook.get_cookie("notshowfeedback"));
- 
   if(this.srv_cook.get_cookie("notshowfeedback")=="")
   {    
+    this.srv_cook.set_cookie("notshowfeedback",'1');
     setTimeout(() => { this.feedback(); }, 40000);
   }    
 }
@@ -665,7 +664,7 @@ openSelectColumns(){
   modalRef.componentInstance.modal_columns_Org = this.headersOrig
   modalRef.result.then((result) => {
     if (result) {
-    console.log(result);
+    //console.log(result);
       if(result != 'A'){
          this.headers = result
          let newDefaultFields = this.headers.reduce((a, o) => (o.IsShow && a.push(o.Field), a), [])
@@ -1067,7 +1066,7 @@ ngOnChanges(changes:SimpleChanges) {
                         this.dtResultsObjectsHelp[i].isHidden--
                   break;
               }
-              console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
+              //console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
               break;
 
               case 'scrolList':
@@ -1078,7 +1077,7 @@ ngOnChanges(changes:SimpleChanges) {
                         {this.dtResultsObjectsHelp[i].isHidden++}    
                 else
                         {this.dtResultsObjectsHelp[i].isHidden--}  
-                console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
+                //console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
                 break;
                 case 'ClearAll':
                   this.dtResultsObjectsHelp[i].isHidden = 0;
@@ -1179,7 +1178,7 @@ goToCatalog(rowIndex:number,itemIndex:number){
   }
 
   let url:string = environment.eCatItemPage + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim()  + '&fnum=' + this.dtResultsObjectsHelp[rowIndex].Families[itemIndex].trim()
-   + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang
+   + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang + '&cf=ITA';
 
    window.open(url, "_blank");
   // return this.sanitizer.bypassSecurityTrustResourceUrl(url);

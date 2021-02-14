@@ -60,15 +60,16 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
    /*  if(this.srv_appsetting.AfterToken)
     { */
-      if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
-     { 
+     // this.srv_cook.set_cookie("is_browser_ie",'');
+     if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
+     {       
       const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
       this.srv_cook.set_cookie("is_browser_ie",'1');
      }
  /*    } */
 
     let scrollYdiff:string='325px';   
-    if(window.devicePixelRatio>1) scrollYdiff='375px';
+    if(window.devicePixelRatio>1.3) scrollYdiff='375px';
 
     this.dtOptions = {
       pagingType: 'full_numbers',

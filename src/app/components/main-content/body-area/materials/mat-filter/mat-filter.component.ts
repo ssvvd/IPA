@@ -76,7 +76,7 @@ export class MatFilterComponent implements OnInit {
   }
 
   onStandardChange(standardValue:string) {
-    console.log(standardValue);
+    //console.log(standardValue);
     this.searchText = '';
     this.MyMatCheked = false;
     if (standardValue == ''){

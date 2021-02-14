@@ -127,7 +127,7 @@ export class MyMaterialsComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.edit = true;
     modalRef.result.then((result) => {
       if (result) {
-      console.log(result);
+      //log(result);
         if(result == 'refresh'){
           this.fillMainTable();
         }

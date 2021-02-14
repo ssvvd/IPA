@@ -79,6 +79,7 @@ export class Appdetails780Component implements OnInit {
 
         this.srv_StMng.IPL.GetItem('HoleTypePreHole').value='';       
         this.HoleType='Solid';
+        this.SetIPLMandatory('');
       }                   
     if(val=="Hole_Through" || val=="Hole_Blind") 
       {
@@ -90,6 +91,7 @@ export class Appdetails780Component implements OnInit {
        
         this.srv_StMng.IPL.GetItem('HoleTypeSolid').value='';        
         this.HoleType='PreHole';
+        this.SetIPLMandatory('');
       }    
       this.SetImageApp();               
  } 
@@ -200,8 +202,9 @@ export class Appdetails780Component implements OnInit {
     }
     if( this.HoleType=='PreHole') 
     {
-      this.AddTostrMandatoryParam('D2',"DPH:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('D3',"DH:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('D3',"DPH:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('D2',"DH:",this.srv_appsetting.UnitslengthDesc);
+      
     }
     this.AddTostrMandatoryParam('Depth',"D:",this.srv_appsetting.UnitslengthDesc);
 

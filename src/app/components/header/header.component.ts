@@ -262,7 +262,8 @@ export class HeaderComponent implements OnInit {
     const modalRef = this.modalService.open(FeedbackComponent,{backdrop: 'static', centered: true, windowClass: 'feedback-modal' });
     modalRef.result.then((result) => {
       //if(result=='cancel') return;
-      if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');    
+      //if(result=='send') 
+      this.srv_cook.set_cookie("notshowfeedback",'1');    
     });    
   } 
    

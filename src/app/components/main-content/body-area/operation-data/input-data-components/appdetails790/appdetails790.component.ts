@@ -53,13 +53,15 @@ export class Appdetails790Component implements OnInit {
       {     
         this.srv_StMng.IPL.GetItem('HoleTypeSolid').value='Solid';
         this.srv_StMng.IPL.GetItem('HoleTypePreHole').value='';     
-        this.srv_StMng.IPL.GetItem('D3').required=false;        
+        this.srv_StMng.IPL.GetItem('D3').required=false; 
+        this.SetIPLMandatory('');       
       }                   
     if(val=="PreHole") 
       {
         this.srv_StMng.IPL.GetItem('HoleTypeSolid').value='';
         this.srv_StMng.IPL.GetItem('HoleTypePreHole').value='PreHole';
         this.srv_StMng.IPL.GetItem('D3').required=true;
+        this.SetIPLMandatory('');
       } 
     if(val=="Solid") 
       this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";

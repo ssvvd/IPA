@@ -144,7 +144,10 @@ export class DatalayerService {
   }
 
   getGEOLocation() {    
-    return this.httpClient.get('http://ip-api.com/json');    
+    //return this.httpClient.get('http://ip-api.com/json') .catch((err: HttpErrorResponse) => {      
+     return this.httpClient.get('https://ipinfo.io?token=197278fe32ac90') .catch((err: HttpErrorResponse) => {
+      return 'e';
+  });       
   } 
 
   getcountryNamebycountryCode(code:string) {    

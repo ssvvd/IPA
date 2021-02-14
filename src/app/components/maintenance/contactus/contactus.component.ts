@@ -65,7 +65,7 @@ export class ContactusComponent implements OnInit {
       else
       {
         resmessage=res;
-        console.log(res);
+        //console.log(res);
       }
     }); 
     this.activeModal.close('cancel');    

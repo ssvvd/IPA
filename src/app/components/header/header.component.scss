@@ -203,16 +203,18 @@ input:checked + .slider:after
   left: 25%; 
 }
 
-.user-login {
+/* .user-login {
   position: relative;
   display: inline-block;
-  //width: 130px;
   height: 30px;
-}
+} */
 
 .user-login input {display:none;}
 
 .user-login {  
+  position: relative;
+  display: inline-block;
+  height: 30px;
   cursor: pointer;
   top: 0;
   left: 0;

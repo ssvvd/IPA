@@ -297,15 +297,12 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           break;
         }
       }
- 
-
-
     }
   }
 
 
   if (this.srv_StMng.SecApp=='790')
-  this.Vf = Math.round((+this.fz * this.n * this.NOF)*100)/100
+  this.Vf = Math.round(+this.fz * this.n * this.NOF);
 
 this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
 this.He_Is = 100

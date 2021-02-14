@@ -219,7 +219,7 @@ export class AppsettingService {
    }
      
    get issmallscreen():boolean{      
-    if(window.devicePixelRatio>1 || window.innerWidth<1680) 
+    if(window.devicePixelRatio>1.3 || window.innerWidth<1680) 
       return true;
     else
       return false;

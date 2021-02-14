@@ -200,7 +200,7 @@ export class MatSearchComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.unit_hardness = mat.HardnessUnits?mat.HardnessUnits:"HB";
     modalRef.result.then((result) => {
       if (result) {
-      console.log(result);
+      //console.log(result);
         if(result != 'A'){
           let spletter = result.split(",");
           mat.Hardness = spletter[0];

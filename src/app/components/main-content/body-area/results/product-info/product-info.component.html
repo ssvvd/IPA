@@ -5,7 +5,7 @@
     <div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
         <label class="siteTitle pt-2 pl-3">{{selectedOption.GroupText[PrtNum] | translate}}:</label>
         <div class="pl-3 pt-0">        
-            <result-item-info  [ItemDesignation]="selectedOption.Designation[PrtNum]" [Family]="selectedOption.Families[PrtNum]" [CatalogNo]="selectedOption.CatalogNo[PrtNum]"></result-item-info>
+            <result-item-info  [ItemDesignation]="selectedOption.Designation[PrtNum]" [Family]="selectedOption.Families[PrtNum]" [CatalogNo]="selectedOption.CatalogNo[PrtNum]"></result-item-info>            
         </div>
         <div class="border-bottom pb-4 pr-4"></div>
     </div>

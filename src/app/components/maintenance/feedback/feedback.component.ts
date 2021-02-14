@@ -61,7 +61,7 @@ export class FeedbackComponent implements OnInit {
     else
     {
       resmessage=res;
-      console.log(res);
+      //console.log(res);
     }
   });
   }

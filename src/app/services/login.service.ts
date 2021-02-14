@@ -153,8 +153,11 @@ export class LoginService {
       u.CountryName=countryname;
       if(u.CountryCode=='')
       this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
-      {                
-        this.UpdateCurrentCountry(d.countryCode);                                     
+      {    
+        if(d.country==undefined)  
+          this.UpdateCurrentCountry('US');   
+        else         
+          this.UpdateCurrentCountry(d.country);                                     
       }
       );
     else      
