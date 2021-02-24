@@ -176,7 +176,7 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{CTH}}</div>
         <div class="col-2" style="margin-left: 6%;">{{'mm:ss' | translate}}</div>
       </div>
-      <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='H'">
+      <div  title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='H' && srv_appsetting.Country.ShowPrice==1">
         <div class="col-3 row"><Label>{{'Drilling Head Price' | translate }}</Label></div>
         <div class="col-2">DHP</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{H_DHP}}</div>
@@ -194,7 +194,7 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{H_HPB}}</div>
         <div class="col-2" style="margin-left: 6%;">{{'Heads' | translate}}/{{'batch' | translate}}</div>
       </div>
-      <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='I'">
+      <div  title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='I' && srv_appsetting.Country.ShowPrice==1">
         <div class="col-3 row"><Label>{{'Insert Price' | translate }}</Label></div>
         <div class="col-2">IP</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{I_IP}}</div>
@@ -206,31 +206,31 @@
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{I_NIB}}</div>
         <div class="col-2" style="margin-left: 6%;">{{'Inserts' | translate }}/{{'batch' | translate}}</div>
       </div>
-      <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100">
+      <div *ngIf="srv_appsetting.Country.ShowPrice==1" title="{{'Market List Price' | translate}}" class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Tool Price' | translate }}</Label></div>
         <div class="col-2">TP</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{TP}}</div>
         <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
       </div>
-      <div class="row justify-content-start w-100" *ngIf="resType=='H'">
+      <div class="row justify-content-start w-100" *ngIf="resType=='H' && srv_appsetting.Country.ShowPrice==1">
         <div class="col-3 row"><Label>{{'Drilling Heads Cost' | translate }}</Label></div>
         <div class="col-2">DHC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{H_DHC}}</div>
         <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
-      <div class="row justify-content-start w-100" *ngIf="resType=='I'">
+      <div class="row justify-content-start w-100" *ngIf="resType=='I' && srv_appsetting.Country.ShowPrice==1">
         <div class="col-3 row"><Label>{{'Inserts Cost' | translate }}</Label></div>
         <div class="col-2">TIC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{I_TIC}}</div>
         <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
-      <div class="row justify-content-start w-100">
+      <div class="row justify-content-start w-100" *ngIf="srv_appsetting.Country.ShowPrice==1">
         <div class="col-3 row"><Label>{{'Tool Cost' | translate }}</Label></div>
         <div class="col-2">TTC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{TTC}}</div>
         <div class="col-2" style="margin-left: 6%;">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
-      <div class="row justify-content-start w-100" *ngIf="resType=='H'">
+      <div class="row justify-content-start w-100" *ngIf="resType=='H' && srv_appsetting.Country.ShowPrice==1">
         <div class="col-3 row"><Label>{{'Total Tooling Cost' | translate }}</Label></div>
         <div class="col-2">TGC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{H_CTB}}</div>

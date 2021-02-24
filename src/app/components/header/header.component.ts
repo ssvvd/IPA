@@ -131,7 +131,8 @@ export class HeaderComponent implements OnInit {
               BrifName:d.BrifName,
               Currency:d.Currency, 
               CountryFlag:'' ,
-              CountryCode:d.CountryCode                          
+              CountryCode:d.CountryCode ,                         
+              ShowPrice:d.ShowPrice 
             })  ;
             if(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN).length >0)
             {
@@ -297,18 +298,23 @@ export class HeaderComponent implements OnInit {
         if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
         {
           this.srv_login.SelectLanguage(localStorage.getItem("language"));
-          localStorage.setItem("language","");
+          //localStorage.setItem("language","");
         }
       }      
       );    
     }
-    else
+    if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+      {
+        this.srv_login.SelectLanguage(localStorage.getItem("language"));
+        //localStorage.setItem("language","");
+      }
+   /*  else
     {
       if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
       {
         this.srv_login.SelectLanguage(localStorage.getItem("language"));
         localStorage.setItem("language","");
       }
-    } 
+    }  */
   }
 }

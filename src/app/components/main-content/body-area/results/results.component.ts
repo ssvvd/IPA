@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductInfoComponent } from './product-info/product-info.component';
+import { PpSuccessfullyComponent } from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
 
 @Component({
   selector: 'app-results',
@@ -155,8 +156,13 @@ eventsSubject: Subject<void> = new Subject<void>();
       setTimeout(() => {this.SpinnerService.hide();}, 12000);
     }
     
-    if(result=="P21" || result=="FP") 
-    {      
+    if(result=="P21" || result=="GTC") 
+    { 
+      let   filename:string=result ;            
+      filename=filename + ' ' +this.viewParams.Res[0].Designation[this.viewParams.Res[0].Designation.length-1].trim();
+      filename=filename + ' '+ this.viewParams.Res[0].Grade[this.viewParams.Res[0].Grade.length-1].trim();
+      filename= filename + ' '+ this.viewParams.Res[0].CatalogNo[this.viewParams.Res[0].CatalogNo.length-1].trim();
+
       this.processdownload =true;
       let sCatalogNo:string ='';
       for (let c of this.viewParams.Res[0].CatalogNo)
@@ -167,36 +173,54 @@ eventsSubject: Subject<void> = new Subject<void>();
 
       if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);
       if(result=='P21')  
-      {       
+      {  
+        this.SpinnerService.show();     
         return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
           {      
             var downloadURL = window.URL.createObjectURL(response);
             var link = document.createElement('a');
             link.href = downloadURL;
-            link.download = "P21.zip";
+            link.download = filename + ".zip";
             link.click();
-            this.processdownload =false;          
+            this.processdownload =false;  
+            this.SpinnerService.hide();        
           }
           );         
       }   
               
-      if(result=='FP')     
-      return this.srv_DataLayer.downloadfilepackage(sCatalogNo,'M').subscribe( response=>       
-      {      
-        var downloadURL = window.URL.createObjectURL(response);
-        var link = document.createElement('a');
-        link.href = downloadURL;
-        link.download = "GTC.zip";
-        link.click();
-        this.processdownload =false;
-      }
-    );
+      if(result=='GTC')  
+      {
+        this.SpinnerService.show(); 
+        return this.srv_DataLayer.downloadfilepackage(sCatalogNo,'M').subscribe( response=>       
+          {      
+            var downloadURL = window.URL.createObjectURL(response);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download =  filename + ".zip";
+            link.click();
+            this.processdownload =false;
+            this.SpinnerService.hide();  
+          }
+        );
+      }   
+      
     }
    });
  }
  
  OpenCNGenerator()
  {
+   if(this.srv_statemanage.IPL.GetItem('ThreadForm').value=='BSPT55' 
+   || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPTF60' 
+   || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPT60' )
+   {
+    const modalRef = this.modalService.open(PpSuccessfullyComponent, { backdrop:'static',centered: true });
+    modalRef.componentInstance.HeaderDescription = "NC Generator";
+    modalRef.componentInstance.Text = "Generation of NC code for Conical threads is not yet available, please contact your technical support team.";
+
+    //  alert('Generation of NC code for Conical threads is not yet available, please contact your technical support team.');
+      return;
+   }
    let strpar:string=this.srv_down.CreateURLparamCNCProgram(this.viewParams);
    window.open(this.environment.IscarSite + '/ITC/GCodeCreator.aspx?' +strpar,"_blank");   
  }

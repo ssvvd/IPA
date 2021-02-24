@@ -133,8 +133,9 @@ export class AppsettingService {
    }
 
   private mLanguages:Language;
-  get Lang():string
+  get Lang():string 
   {    
+    if(this.mLanguages==undefined) return 'EN';
     return this.mLanguages.LanguageCode;
   }
 

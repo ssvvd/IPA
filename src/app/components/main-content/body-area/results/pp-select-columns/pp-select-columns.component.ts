@@ -1,7 +1,7 @@
 import { Component,Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { clsProperties } from 'src/app/models/results/properties';
-
+import { AppsettingService} from 'src/app/services/appsetting.service';
 @Component({
   selector: 'app-pp-select-columns',
   templateUrl: './pp-select-columns.component.html',
@@ -15,7 +15,7 @@ export class PpSelectColumnsComponent implements OnInit {
   dangMsg:string = '';
   modal_columns_cur:clsProperties[] = [];
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(public activeModal: NgbActiveModal,public srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     this.counter = this.modal_columns.filter((obj) => obj.IsShow === true).length;

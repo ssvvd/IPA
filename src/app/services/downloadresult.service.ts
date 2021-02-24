@@ -40,7 +40,7 @@ export class DownloadresultService {
         return this.downloadItemPDF(srv,filename);
       case 'P21':
         return this.srv_DataLayer.downloadp21file(data,this.srv_appsetting.Units);
-      case "FP":
+      case "GTC":
         return this.srv_DataLayer.downloadfilepackage(data,this.srv_appsetting.Units);
     }    
   }
@@ -474,7 +474,7 @@ CreateURLparamCNCProgram(viewParams:any) :string
     urlparam = urlparam + "&pitch=" +  this.srv_statemanage.IPL.GetItem('Pitch').value.toString();
     urlparam = urlparam + "&majordiameter=" + this.srv_statemanage.IPL.GetItem('MajorDiameter').value.toString();
 
-    if (!this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() ==null && this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "" &&
+    if (!this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() !=null && this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "" &&
     this.srv_statemanage.IPL.GetItem('D_Hole').value.toString() != "0")        
       urlparam = urlparam  + "&size=" + this.srv_statemanage.IPL.GetItem('D_Hole').value.toString();
     else

@@ -244,11 +244,11 @@
 </div>     
 <!-- <div class="break-page"></div> -->
 <div class="form-group row ml-0 pl-0 pt-2 ">
-    <div [ngClass]="exportPDF?'col-12 col-md-12 col-sm-12 col-lg-5 col-xl-5 border-right':'col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6 border-right'">
+    <div [ngClass]="exportPDF?'col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6 border-right':'col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6 border-right'">
         <app-item-machine-spindle-chart [exportPDF]="exportPDF" [events]="eventsSubject.asObservable()" [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Torque]=spindle.Torque  [typeChart]="'torque'" [spindle]=spindle (N3Changed)="onSpindleSpeedChanged($event)" 
          (P2T1Changed)="onPTChanged($event)" (SpindelChanged)="onSpindleChanged($event)">torque</app-item-machine-spindle-chart>
     </div>
-    <div  [ngClass]="exportPDF?'col-12 col-md-12 col-sm-12 col-lg-5 col-xl-5':'col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6'">
+    <div  [ngClass]="exportPDF?'col-12 col-md-12 col-sm-12 col-lg-6 col-xl-6':'col-12 col-md-12 col-sm-12 col-lg-12 col-xl-6'">
         <app-item-machine-spindle-chart  [exportPDF]="exportPDF" [events]="eventsSubject.asObservable()" [AdaptationType]="curAdapType" [AdaptationSize]="curAdapSize" [SpindleSpeed]=spindle.SpindleSpeed [Power]=spindle.Power  [typeChart]="'power'" [spindle]=spindle  (N3Changed)="onSpindleSpeedChanged($event)" 
          (P2T1Changed)="onPTChanged($event)" (SpindelChanged)="onSpindleChanged($event)">power</app-item-machine-spindle-chart>
     </div>

@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { User } from 'src/app/models/users/user';
 import { Observable,of} from 'rxjs';
 import { environment } from '../../environments/environment';
-
+import { NgxSpinnerService } from "ngx-spinner"; 
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class LoginService {
 
 
   constructor(private srv_DataLayer:DatalayerService,
-              public srv_appsetting:AppsettingService,public translate: TranslateService,) { }
+              public srv_appsetting:AppsettingService,public translate: TranslateService,private SpinnerService: NgxSpinnerService) { }
   
   GetToken():any
   {
@@ -69,7 +69,7 @@ export class LoginService {
     return'ok';
   }
 
-  UpdateCurrentCountry(countrycode:string)
+ /*  UpdateCurrentCountry(countrycode:string)
   {
     this.srv_DataLayer.GetCountryLangBrifData(countrycode).subscribe((d:any)=>
     {
@@ -87,10 +87,64 @@ export class LoginService {
         this.srv_appsetting.Country=c;
         this.SetExchangeRate1(c.BrifName);
         this.translate.use(c.LanguageID[0]);                    
-      }      
+      } 
+      else
+      {
+        this.srv_DataLayer.GetCountryLangBrifData('US').subscribe((d:any)=>
+        {
+          let data = JSON.parse(d);
+          if(data.length>0)
+          {   
+            let c:Country =new Country;
+            c.BrifName =data[0].BrifName;
+            c.CountryFlag ='';
+            c.CountryGlobalId = 0;
+            c.CountryID = data[0].CountryId;
+            c.CountryName =data[0].CountryName;              
+            c.LanguageID.push(data[0].CATLAN);
+            c.CountryCode =data[0].CountryCode;
+            this.srv_appsetting.Country=c;
+            this.SetExchangeRate1(c.BrifName);
+            this.translate.use(c.LanguageID[0]);                    
+          } 
+        });
+      }     
     });
-  }
+  } */
   
+  FillDataCountryByData(data:any)
+  {
+    let c:Country =new Country;
+    c.BrifName =data[0].BrifName;
+    c.CountryFlag ='';
+    c.CountryGlobalId = 0;
+    c.CountryID = data[0].CountryId;
+    c.CountryName =data[0].CountryName;              
+    c.LanguageID.push(data[0].CATLAN);
+    c.CountryCode =data[0].CountryCode;
+    c.ShowPrice =data[0].ShowPrice;
+    this.srv_appsetting.Country=c;
+    this.SetExchangeRate1(c.BrifName);
+    this.translate.use(c.LanguageID[0]);               
+  }
+
+  UpdateCurrentCountry(countrycode:string)
+  {
+    this.srv_DataLayer.GetCountryLangBrifData(countrycode).subscribe((d:any)=>
+    {
+      let data = JSON.parse(d);
+      if(data.length==0)
+        this.srv_DataLayer.GetCountryLangBrifData('US').subscribe((d:any)=>
+        {
+          data = JSON.parse(d);
+          this.FillDataCountryByData(data);
+        });
+      else
+      {
+        this.FillDataCountryByData(data);
+      }});     
+  }
+
   FillDefaultUser()
   {
     //alert('login');
@@ -104,43 +158,6 @@ export class LoginService {
     let isImc:string='';
     let countrycode:string='';
     let countryname:string='';
-    /* if(localStorage.getItem("countryid")!='')
-    {
-      this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
-      {
-        let data = JSON.parse(d);
-        if(data.length>0)
-        {
-          let c:Country =new Country;
-          c.BrifName =data[0].BrifName;
-          c.CountryFlag ='';
-          c.CountryGlobalId = 0;
-          c.CountryID = data[0].CountryId;
-          c.CountryName =data[0].CountryName;              
-          c.LanguageID.push(data[0].CATLAN);
-          c.CountryCode =data[0].CountryCode;
-
-          u.displayName=displayName;
-          u.surname=surname;   
-          u.givenName=givenName;
-          u.email=email;
-          u.country=country;
-          u.companyName=companyName;
-          u.isImc=isImc;
-          u.CountryCode=c.CountryCode;
-          u.CountryName=c.CountryName;
-
-          this.SelectCountryAndLang(c,c.LanguageID[0]);
-          this.SelectLanguage(c.LanguageID[0]);
-
-          //this.srv_appsetting.Country=c;
-          this.SetExchangeRate1(c.BrifName);
-          //this.translate.use(c.LanguageID[0]);
-          localStorage.setItem("countryid","");
-        }
-      });
-    }
-    else */
     {
       u.displayName=displayName;
       u.surname=surname;   
@@ -153,11 +170,11 @@ export class LoginService {
       u.CountryName=countryname;
       if(u.CountryCode=='')
       this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
-      {    
-        if(d.country==undefined)  
+      {                  
+       if(d.country==undefined)  
           this.UpdateCurrentCountry('US');   
         else         
-          this.UpdateCurrentCountry(d.country);                                     
+          this.UpdateCurrentCountry(d.country);                                      
       }
       );
     else      
@@ -167,12 +184,7 @@ export class LoginService {
     this.srv_appsetting.User=u;  
     this.srv_appsetting.isLoggedIn=true;
     this.srv_appsetting.AfterToken=true;  
-
-  /*    if(localStorage.getItem("language")!='')
-    {
-      this.SelectLanguage(localStorage.getItem("language"));
-      localStorage.setItem("language","");
-    }   */
+    this.SpinnerService.hide();
   }
   
   LogIn(token:string):Observable<any>
@@ -215,7 +227,8 @@ export class LoginService {
               if(d[0].usageLocation!='' && d[0].usageLocation!=null)
                 this.UpdateCurrentCountry(d[0].usageLocation);
               this.srv_appsetting.isLoggedIn=true;
-              this.srv_appsetting.AfterToken=true;               
+              this.srv_appsetting.AfterToken=true;  
+              this.SpinnerService.hide();             
               });  
              /*  if(localStorage.getItem("countryid")!='')
               {
@@ -345,11 +358,15 @@ export class LoginService {
   {
     let lan:Language;
     lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
-    this.srv_appsetting.SelectedLanguage =lan;       
-    if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
-      this.translate.use(lan.LanguageCode);
-    else
-      this.translate.use(this.translate.getDefaultLang()); 
+    if(lan!==undefined)
+    {
+      this.srv_appsetting.SelectedLanguage =lan;       
+      if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
+        this.translate.use(lan.LanguageCode);
+      else
+        this.translate.use(this.translate.getDefaultLang());
+    }
+     
         
   }
 
@@ -357,13 +374,18 @@ export class LoginService {
   {
     let lan:Language;
     lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
-    this.srv_appsetting.SelectedLanguage =lan;       
-    if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
-      this.translate.use(lan.LanguageCode);
-    else
-      this.translate.use(this.translate.getDefaultLang()); 
+    if(lan!==undefined)
+    {
+      this.srv_appsetting.SelectedLanguage =lan;       
+      if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
+        this.translate.use(lan.LanguageCode);
+      else
+        this.translate.use(this.translate.getDefaultLang()); 
+    }
+   
         
-    this.srv_appsetting.Country=c;          
+    this.srv_appsetting.Country=c;  
+    localStorage.setItem("countryid",c.CountryID.toString());        
     this.SetExchangeRate1 (c.BrifName); 
   }
 

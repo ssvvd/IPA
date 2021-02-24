@@ -6,9 +6,11 @@ import { AppsettingService} from 'src/app/services/appsetting.service';
 import { LoginService } from 'src/app/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpParams } from '@angular/common/http';
+import { NgxSpinnerService } from "ngx-spinner"; 
 //import { CookiesService } from 'src/app/services/cookies.service';
 
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import cssVars from 'css-vars-ponyfill';
 
 
@@ -21,9 +23,9 @@ export class AppComponent implements OnInit {
   title = 'IscarToolAdvisor';
   environment=environment;
 
-  constructor(location: Location, router: Router, private srv_appsetting:AppsettingService,
+  constructor(private location: Location,private router: Router, private srv_appsetting:AppsettingService,
               public translate:TranslateService,
-              private srv_login:LoginService) {
+              private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {
     if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
@@ -33,15 +35,39 @@ export class AppComponent implements OnInit {
     
   }
 
+SetLanguges()
+{
+  this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
+  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
+  //alert(this.srv_appsetting.LangName);
+  this.translate.setDefaultLang(this.srv_appsetting.LangName);
+}
+
 ngOnInit()
 {
-
+  
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
+  this.SpinnerService.show();
   let token:string='';  
-
+  
   let isLogIn:string='-1'; //todo:!!!!!! -1!!!  
-  const url = window.location.href;    
+  const url = window.location.href; 
+  
+  if(this.location.path().toLowerCase().startsWith('/materials')) 
+  {
+    let paramValue;
+    if(url.includes('?'))
+    {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      paramValue = httpParams.get('lang');  
+      if(paramValue==null) paramValue='EN';               
+    }   
+    this.SetLanguges();
+    this.translate.use(paramValue);
+    return;
+  }  
+
   if (url.includes('?')) {
     let paramValue:string='';
     const httpParams = new HttpParams({ fromString: url.split('?')[1] });
@@ -62,7 +88,7 @@ ngOnInit()
     paramValue = httpParams.get('lang'); 
     if(paramValue!=null) {
       language =paramValue; 
-      localStorage.setItem("language",language);
+      localStorage.setItem("language",language.toUpperCase());
     }
     //todo: country, language
   }
@@ -95,6 +121,7 @@ ngOnInit()
  
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
   'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
+  //alert(this.srv_appsetting.LangName);
   this.translate.setDefaultLang(this.srv_appsetting.LangName);
 
   cssVars({

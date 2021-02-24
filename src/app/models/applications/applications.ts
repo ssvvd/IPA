@@ -35,5 +35,6 @@ export class Country {
   Currency:string; 
   CountryFlag:string;
   CountryCode:string; 
+  ShowPrice:Number;
 }
 

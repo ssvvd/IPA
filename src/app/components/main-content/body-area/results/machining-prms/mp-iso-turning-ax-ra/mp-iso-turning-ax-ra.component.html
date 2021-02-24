@@ -312,7 +312,7 @@
   <div class="row justify-content-start w-100">
     <div class="col-3 row"><Label>{{'Cutting Time per Part' | translate }}</Label></div>
     <div class="col-2">CTP</div>
-    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTP}}</div>
+    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTPFormat}}</div>
     <div class="col-2">mm:ss</div>
   </div>
 <div class="row justify-content-start w-100">
@@ -333,13 +333,13 @@
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CEDC}}</div>
     <div class="col-2">Edges/Insert</div>
   </div> 
-  <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100">
+  <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="srv_appsetting.Country.ShowPrice==1">
     <div class="col-3 row"><Label>{{'Insert Price' | translate }}</Label></div>
     <div class="col-2">IP</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IP}}</div>
     <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
   </div>
-  <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100">
+  <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="srv_appsetting.Country.ShowPrice==1">
     <div class="col-3 row"><Label>{{'Tool Price' | translate }}</Label></div>
     <div class="col-2">TP</div>
     <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TP}}</div>
@@ -364,13 +364,13 @@
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TPB}}</div>
       <div class="col-2">{{'Tools' | translate}}/{{'batch' |translate}}</div>
     </div>
-    <div class="row justify-content-start w-100" >
+    <div class="row justify-content-start w-100" *ngIf="srv_appsetting.Country.ShowPrice==1">
       <div class="col-3 row"><Label>{{'Total Inserts Cost' | translate }}</Label></div>
       <div class="col-2">TIC</div>
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TIC}}</div>
       <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
     </div>
-    <div class="row justify-content-start w-100" >
+    <div class="row justify-content-start w-100" *ngIf="srv_appsetting.Country.ShowPrice==1">
       <div class="col-3 row"><Label>{{'Total Tools Cost' | translate }}</Label></div>
       <div class="col-2">TTC</div>
       <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TTC}}</div>

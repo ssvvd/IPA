@@ -90,7 +90,7 @@
       </div>
     
     <br>
-    <div class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Prices' | translate}}</Label></div>
+    <div *ngIf="srv_appsetting.Country.ShowPrice==1" class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Prices' | translate}}</Label></div>
     
     
           <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='I' || resType=='IH'">

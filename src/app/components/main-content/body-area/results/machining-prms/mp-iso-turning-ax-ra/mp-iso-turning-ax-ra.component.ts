@@ -90,7 +90,7 @@ export class MpIsoTurningAxRaComponent implements OnInit {
   I:number
 CTP:number
 CPU:number
-
+ CTPFormat:string;
 
 environment=environment;
 
@@ -345,7 +345,10 @@ if (pr.value.trim().length == 7){
         var result:object[] = JSON.parse(res);
         this.TLL = result[0]['TLL'] || '0';
         this.TLT = result[0]['TLT'] || '0';
-        this.CTP = Math.round((this.CTFa + this.CTFr)*100)/100
+        this.CTP = Math.round((this.CTFa + this.CTFr)*100)/100;
+        
+        this.CTPFormat = Math.floor(this.CTP).toString().padStart(2, '0') + ':' + Math.round((this.CTP  - Math.floor(this.CTP))*60).toString().padStart(2, '0');
+
         var a:string[] = this.TLT.toString().split(':');
         //var TLTMin:number = +a[0] + (+a[1] / 60)
         var TLTMin:number = +a[0] ;
