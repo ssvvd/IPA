@@ -118,13 +118,13 @@
                         <label for="txtBatchSize" class="pl-0 pt-3">{{'Machine Cost' | translate}}</label>                    
                     </div>                   
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">                    
-                        <input  type="number"  class="form-control input-min-width"  id="txtMachineCost" name="txtMachineCost" 
-                                           value={{CostPerHourByRate}} readonly>  
-                    </div>                    
-                    <div class="row pt-0 pl-0">
-                        <label class="pl-0 pt-2">{{msrv_appsetting.Currency}}</label>
-                        <label class="pl-0 pt-2">/{{'hour' | translate}}</label>
-                    </div>
+                        <!-- <input  type="number"  class="form-control input-min-width"  id="txtMachineCost" name="txtMachineCost" 
+                                           value={{CostPerHourByRate}} readonly>   -->
+                        <Label  class="pt-3 input-min-width"  id="txtMachineCost" name="txtMachineCost">{{CostPerHourByRate}}{{' '}}{{msrv_appsetting.Currency}}/{{'hour' | translate}}</Label></div>                    
+                    <!-- <div class="row pt-0 pl-0">
+                        <label class="pl-0 pt-3 ">{{msrv_appsetting.Currency}}</label>
+                        <label class="pl-0 pt-3">/{{'hour' | translate}}</label>
+                    </div> -->
                 </div> 
             </div>
             <div class="pt-4">

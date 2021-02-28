@@ -38,7 +38,7 @@
                 <label class="shape-ellipse">
                   <div class="row">
                       <div >
-                          <a href="#"><img [src] = "environment.ImagePath+'icon_NCGenerator.svg'" (click)="OpenCNGenerator()"  class="img-ellipse" title="{{'NC Generator' | translate}}"></a>                                               
+                          <a (click)="OpenCNGenerator()" target="_blank"><img [src] = "environment.ImagePath+'icon_NCGenerator.svg'"   class="img-ellipse" title="{{'NC Generator' | translate}}"></a>                                               
                       </div>
                       <div class="mt-1 ml-1 mr-2 ">
                           <label class="label-ellipse  cursor-pointer" (click)="OpenCNGenerator()">{{'NC Generator' | translate}}</label>           

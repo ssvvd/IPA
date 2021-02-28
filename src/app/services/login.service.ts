@@ -380,7 +380,9 @@ export class LoginService {
       if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
         this.translate.use(lan.LanguageCode);
       else
-        this.translate.use(this.translate.getDefaultLang()); 
+        this.translate.use(this.translate.getDefaultLang());
+         
+      localStorage.setItem("language",lan.LanguageName.toUpperCase());
     }
    
         

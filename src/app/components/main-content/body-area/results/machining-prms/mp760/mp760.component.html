@@ -139,13 +139,13 @@
             <div class="col-2">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
-            <div class="col-3 row"><Label>{{'Material removal rate' | translate }}{{' 1'}}</Label></div>
+            <div class="col-3 row"><Label>{{'Material removal rate at Linear Ramping' | translate }}</Label></div>
             <div class="col-2">MRR1</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR1}}</div>
             <div class="col-2">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
-            <div class="col-3 row"><Label>{{'Material removal rate' | translate }}{{' 2'}}</Label></div>
+            <div class="col-3 row"><Label>{{'Sholder Material removal rate' | translate }}</Label></div>
             <div class="col-2">MRR2</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR2}}</div>
             <div class="col-2">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
@@ -441,7 +441,7 @@
           <div class="col-3 row"><Label>{{'Cost per Part' | translate }}</Label></div>
           <div class="col-2">CPP</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CPU}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/part</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'parts' | translate}}</div>
         </div>
         <div class="pt-4">
 

@@ -119,7 +119,7 @@ export class HeaderComponent implements OnInit {
   {
     this.srv_appsetting.getcountries().subscribe((res: any) => {
       for (const d of JSON.parse(res)) {       
-          if(this.lstcountry.filter (c=> c.CountryID==d.CountryId).length ==0)     
+          if(this.lstcountry.filter (c=> c.CountryCode==d.CountryCode).length ==0)     
           {
             this.lstcountry.push({
               CountryID:d.CountryId,
@@ -144,7 +144,7 @@ export class HeaderComponent implements OnInit {
             let c:Country;              
             if(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN).length >0)
             {
-              c=this.lstcountry.filter (c=> c.CountryID==d.CountryId)[0];
+              c=this.lstcountry.filter (c=> c.CountryCode==d.CountryCode)[0];
               if(c.LanguageID.filter(l=> l==d.CATLAN).length ==0)
               {
                 c.LanguageID.push(d.CATLAN);

@@ -116,7 +116,7 @@ export class MainMenuComponent implements OnInit {
     this.Tabs[2].SelectedItemDesc='';
     this.Tabs[2].SelectedItemDesc1='';
     if(arr[0]!==undefined) this.Tabs[2].SelectedItemDesc = arr[0];
-    if(this.Tabs[2].SelectedItemDesc!='') this.Tabs[2].SelectedItemDesc=this.Tabs[2].SelectedItemDesc+ ', ';
+    //if(this.Tabs[2].SelectedItemDesc!='') this.Tabs[2].SelectedItemDesc=this.Tabs[2].SelectedItemDesc+ ', ';
     if(arr[1]!==undefined) this.Tabs[2].SelectedItemDesc1 = arr[1];    
   }
 
