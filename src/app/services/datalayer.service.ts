@@ -169,7 +169,8 @@ export class DatalayerService {
 
   //mail-send-feedback/{country}/{answer1}/{answer2}/{message?}
   public  mailsendfeedback(country:string,answer1:string,answer2:string,message:string)
-  {     
+  {  
+       
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send-feedback/'+
                                 country + '/' + answer1 + '/' + answer2 + '/'+ message);
   }
@@ -211,7 +212,13 @@ export class DatalayerService {
     s=environment.API_HOST +  'api/export/download-package-files/'+scatalogno + '/' +units;   
     return  this.httpClient.get(s, {responseType: 'blob'});
   }
-  
+  public  downloadfilezip(scatalogno:string,units:string):Observable<any>
+  {  
+    let s:string;    
+    s=environment.API_HOST +  'api/export/download-zip-files/'+scatalogno + '/' +units;   
+    return  this.httpClient.get(s, {responseType: 'blob'});
+  }
+
   public  addfeedback(q1:number,q2:number,msg:string)
   {     
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'add-feedback/'+q1 + '/' +q2 + '/' +msg);

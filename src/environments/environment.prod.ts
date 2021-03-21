@@ -30,14 +30,17 @@ export const environment = {
   
   //CalcReq_Host: 'https://mpwr.iscar.com/MachiningPwrWs/api/CalcReq/',
   CalcReq_Host: 'https://www.iscar.com/mpwrapi/api/CalcReq/',  
-  eCatItemPage:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat=",
+  eCatItemPage1:"https://www.iscar.com/ecatalog/item.aspx?type=1&cat=",
+  eCatItemPage:"https://www.iscar.com/ecatalog/Default.aspx?e=1",
+  //https://www.iscar.com/eCatalog/Default.aspx?e=1&qw=[item number]&lang=[Language Code]&GFSTYP=[M or I]
+
   wsMaterials: "https://www.iscar.com/wsmaterials/service.asmx/",
  
   signinURL:'https://sign.ssl.imc-companies.com/signin',  
   LoginURLTokenUrl:"authapi.ssl.imc-companies.com",  
   LoginURLRes:"authapi.ssl.imc-companies.com",  
   LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
-  LoginURLogOut:"https://sign-ariel.ssl.imc-companies.com/signout"  
+  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  
  /*  signinURL:'https://sign.ssl.imc-companies.com/signin',
   LoginURLTokenUrl:"https://authapi.ssl.imc-companies.com/token/gettoken",
   LoginURLRes:"https://sign.ssl.imc-companies.com/user/getuserdetails",

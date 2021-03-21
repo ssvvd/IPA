@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
 SetLanguges()
 {
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
-  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
+  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR','LT']);
   //alert(this.srv_appsetting.LangName);
   this.translate.setDefaultLang(this.srv_appsetting.LangName);
 }
@@ -129,7 +129,7 @@ ngOnInit()
   }
  
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
-  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR']);
+  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR','LT']);
   //alert(this.srv_appsetting.LangName);
   this.translate.setDefaultLang(this.srv_appsetting.LangName);
 

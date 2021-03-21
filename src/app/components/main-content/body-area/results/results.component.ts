@@ -13,6 +13,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductInfoComponent } from './product-info/product-info.component';
 import { PpSuccessfullyComponent } from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
+import { ResultsService} from 'src/app/services/results.service' ;
 
 @Component({
   selector: 'app-results',
@@ -37,7 +38,7 @@ _hideFilter:boolean;
 
 eventsSubject: Subject<void> = new Subject<void>();
 
-  constructor(private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
+  constructor(private srv_Results:ResultsService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
     private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
     public srv_appsetting:AppsettingService,private router: Router,
     public translate:TranslateService) { 
@@ -130,7 +131,7 @@ eventsSubject: Subject<void> = new Subject<void>();
 
     modalRef.result.then((result) => {
     if(result=='cancel') return;
-    
+
     if (result=='PDF')
     {
       this.processdownload=true;
@@ -156,7 +157,7 @@ eventsSubject: Subject<void> = new Subject<void>();
       setTimeout(() => {this.SpinnerService.hide();}, 12000);
     }
     
-    if(result=="P21" || result=="GTC") 
+    if(result=="P21" || result=="GTC" || result=="ZIP" ) 
     { 
       let   filename:string=result ;            
       filename=filename + ' ' +this.viewParams.Res[0].Designation[this.viewParams.Res[0].Designation.length-1].trim();
@@ -203,20 +204,48 @@ eventsSubject: Subject<void> = new Subject<void>();
           }
         );
       }   
-      
+      if(result=='zip')  
+      {  
+        this.SpinnerService.show();     
+        return this.srv_DataLayer.downloadfilezip(sCatalogNo,'M').subscribe( response=>       
+          {      
+            var downloadURL = window.URL.createObjectURL(response);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = filename + ".zip";
+            link.click();
+            this.processdownload =false;  
+            this.SpinnerService.hide();        
+          }
+          );         
+      }   
     }
    });
  }
  
  OpenCNGenerator()
  {
+   let NotCNGenerator:boolean =false;
+   let message:string;   
+   if(this.viewParams.Res[0].Families[1]==4089 || this.viewParams.Res[0].Families[1]==4090 || this.viewParams.Res[0].Families[1]==3524)
+   {
+    NotCNGenerator =true;
+    message="Currently, NC program is not available for this type of tool.";
+   }
+
    if(this.srv_statemanage.IPL.GetItem('ThreadForm').value=='BSPT55' 
    || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPTF60' 
    || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPT60' )
    {
+    NotCNGenerator =true;
+    message="Generation of NC code for Conical threads is not yet available, please contact your technical support team.";
+   }
+
+   if(NotCNGenerator)
+   {
     const modalRef = this.modalService.open(PpSuccessfullyComponent, { backdrop:'static',centered: true });
     modalRef.componentInstance.HeaderDescription = "NC Generator";
-    modalRef.componentInstance.Text = "Generation of NC code for Conical threads is not yet available, please contact your technical support team.";
+    modalRef.componentInstance.Text = message;
 
     //  alert('Generation of NC code for Conical threads is not yet available, please contact your technical support team.');
       return;
@@ -224,5 +253,15 @@ eventsSubject: Subject<void> = new Subject<void>();
    let strpar:string=this.srv_down.CreateURLparamCNCProgram(this.viewParams);
    window.open(this.environment.IscarSite + '/ITC/GCodeCreator.aspx?' +strpar,"_blank");   
  }
+
+ GoToAssembly(){
+
+   this.srv_Results.getAssemblyURL(this.viewParams.Res[0].CatalogNo.toString().replace(/\s/g, ""),this.srv_appsetting.Lang).subscribe(res => {
+    let url = (new DOMParser()).parseFromString(res, "text/xml").getElementsByTagName('string')[0].textContent
+    window.open(url, "_blank");
+    
+  }) 
+
+}
 
 }

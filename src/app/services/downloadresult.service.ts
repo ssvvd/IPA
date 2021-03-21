@@ -546,9 +546,9 @@ CreateURLparamCNCProgramForItem(viewParams:any) :string
       f=d[0].property.Field;
       if(f==cuttingspeedfieldname) {if(d[0].value!== 'undefined')  cuttingspeed=d[0].value;}     
       if(f=='RPM') {if(d[0].value!== 'undefined') rpm=d[0].value;}  
-      if(f==FeedGfieldname)  {if(d[0].value!== 'undefined') feedtable=d[0].value }
+      if(f==FeedGfieldname)  {if(d[0].value!== 'undefined') feed1=d[0].value }
       if(f==Feedfieldname)  {if(d[0].value!== 'undefined') feed=d[0].value;}
-      if(f==FeedTablefieldname)  {if(d[0].value!=='undefined') feed1=d[0].value;}
+      if(f==FeedTablefieldname)  {if(d[0].value!=='undefined') feedtable=d[0].value;}
       if(f=='RorL')  {if(d[0].value!== 'undefined') rorl=d[0].value;} 
     }    
   }

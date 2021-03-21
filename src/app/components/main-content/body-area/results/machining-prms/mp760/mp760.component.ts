@@ -273,7 +273,8 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           //break;
         }
         case 'TCB': {
-          this.TCB = +value
+          if(this.TCB==0)
+            this.TCB = +value
           break;
         }
         case 'TGC': {

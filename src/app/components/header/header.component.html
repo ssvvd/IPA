@@ -110,34 +110,29 @@
                 <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="MenuImg" title="{{'Calculators' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
-                        <div  class="row col-12 dropdown-item menuitem mt-2 mb-2">                                                                                                                                                               
-                            <a [href]="environment.MachiningCalculatorSite" target="_blank" class="pl-2 pb-2 pt-2">
-                                <!-- <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">  -->                                                                                                                                                                                             
+                        <div  class="row col-12 dropdown-item menuitem mt-2 mb-2" (click)="openmachiningcalculator()">                                                                                                                                                               
+                            <a  class="pl-2 pb-2 pt-2">                              
                                 <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Machining Calculators' | translate}}</label>                                                                                                                          
                             </a>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" >                                                        
-                                <!-- <a [href]="environment.IscarSite +'/ITC/Calculators.aspx?units=' + msrv_appsetting.Units"  target="_blank" class="pl-2 pb-2 pt-2">            -->
-                                    <a [href]="'https://www.iscar.com/ITC/Calculators.aspx?units=' + msrv_appsetting.Units +'&lang=' + msrv_appsetting.Lang"  target="_blank" class="pl-2 pb-2 pt-2">                                                                                       
-                            <!-- <img [src]="environment.ImagePath+'machining_power_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2"> -->                                                                 
-                                <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>                                             
+                        <div class ="row col-12 dropdown-item menuitem" (click)="opencalculator()">                                                                                   
+                            <!-- <a [href]="'https://www.iscar.com/ITC/Calculators.aspx?units=' + msrv_appsetting.Units +'&lang=' + msrv_appsetting.Lang"  target="_blank" class="pl-2 pb-2 pt-2">                                                                                                                                                                          -->
+                                <a class="pl-2 pb-2 pt-2">                                                                                                                                                                         
+                                    <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>                                             
                                 </a>                                                              
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" > 
-                            <a [href]="environment.IscarSite +'/GeometryAnalyzer/?lang=' + msrv_appsetting.Lang" target="_blank" class="pl-2 pb-2 pt-2">                                                                                   
-                                <!-- <img [src]="environment.ImagePath+'productive_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">   -->                                    
+                        <div class ="row col-12 dropdown-item menuitem" (click)="openGeometryAnalyzer()" > 
+                            <a  class="pl-2 pb-2 pt-2">                                                                                                                            
                                 <label class="siteTitle  mt-2" >{{'Productive Geometries' | translate}}</label>   
                             </a>                                                
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" >                              
-                            <a [href]="'https://www.iscar.com/insertconvertor/?lang=' + msrv_appsetting.Lang" target="_blank" class="pl-2 pb-2 pt-2">                                                                                
-                                <!-- <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">   -->                                    
+                        <div class ="row col-12 dropdown-item menuitem" (click)="openinsertconverter()">                              
+                            <a  class="pl-2 pb-2 pt-2">                                                                                                                                                    
                                 <label class="siteTitle  mt-2" >{{'Grade Optimizer' | translate}}</label>
                             </a>                                                
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" >                              
-                            <a [href]="'https://www.iscar.com/Products.aspx/CountryId/1/ProductId/12340'" target="_blank" class="pl-2 pb-2 pt-2">                                                                                
-                                <!-- <img [src]="environment.ImagePath+'grade_optimizer_b.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2">       -->                                
+                        <div class ="row col-12 dropdown-item menuitem" (click)="Insertwear()">                              
+                            <a class="pl-2 pb-2 pt-2">                                                                                                                                              
                                 <label class="siteTitle  mt-2" >{{'Insert wear' | translate}}</label>
                             </a>                                                
                         </div>

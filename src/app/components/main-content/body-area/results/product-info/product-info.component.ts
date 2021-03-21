@@ -68,7 +68,7 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
       mapp = this.srv_statemanage.SecAppSelected.MainApp
     }
 
-    let url:string = environment.eCatItemPage + row.trim() + '&SRC=' + this.SRC  + '&fnum=' + this.selectedOption.Families[_index].trim()
+    let url:string = environment.eCatItemPage1 + row.trim() + '&SRC=' + this.SRC  + '&fnum=' + this.selectedOption.Families[_index].trim()
      + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang ;
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

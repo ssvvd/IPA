@@ -132,7 +132,9 @@ export class HeaderComponent implements OnInit {
               Currency:d.Currency, 
               CountryFlag:'' ,
               CountryCode:d.CountryCode ,                         
-              ShowPrice:d.ShowPrice 
+              ShowPrice:d.ShowPrice ,
+              FCSToolshopSite:d.FCSToolshopSite,
+              LACNT:d.LACNT
             })  ;
             if(this.srv_appsetting.lstLanguages.filter(l=>l.LanguageCode == d.CATLAN).length >0)
             {
@@ -248,6 +250,31 @@ export class HeaderComponent implements OnInit {
     window.open(environment.ECatalogLink, "_blank");
   }
   
+  opencalculator()
+  {
+    window.open('https://www.iscar.com/ITC/Calculators.aspx?units=' + this.srv_appsetting.Units +'&lang=' + this.srv_appsetting.Lang,"_blank");
+  }
+  
+  openmachiningcalculator()
+  {
+    window.open(environment.MachiningCalculatorSite, "_blank");    
+  }
+
+  openGeometryAnalyzer()
+  {
+    window.open(environment.IscarSite +'/GeometryAnalyzer/?lang=' + this.srv_appsetting.Lang, "_blank");    
+  }
+  
+  openinsertconverter()
+  {
+    window.open('https://www.iscar.com/insertconvertor/?lang=' + this.srv_appsetting.Lang, "_blank");    
+  }
+
+  Insertwear()
+  {    
+    window.open('https://www.iscar.com/Products.aspx/CountryId/1/ProductId/12340', "_blank"); 
+  }
+  
   openhelp()
   {
     //this.srv_down.DownLoadResult('');
@@ -285,6 +312,7 @@ export class HeaderComponent implements OnInit {
           c.CountryName =data[0].CountryName;              
           c.LanguageID.push(data[0].CATLAN);
           c.CountryCode =data[0].CountryCode;
+          c.LACNT = data[0].LACNT;
 
       
           this.srv_login.SelectCountryAndLang(c,c.LanguageID[0]);          

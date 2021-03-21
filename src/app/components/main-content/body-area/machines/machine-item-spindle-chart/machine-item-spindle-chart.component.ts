@@ -75,20 +75,14 @@ export class MachineItemSpindleChartComponent implements OnInit {
     
     if(this.typeChart=='torque')
       {
-        /* this.chartdata.PoinY_1 =this.spindle.T1;
-        this.chartdata.PoinY_2 =this.spindle.T2;
-        this.chartdata.PoinY_3 =this.spindle.T3;
-        this.chartdata.PoinY_4 =this.spindle.T4; */
+        
         this.chartDesc= "Torque";
         this.srv_appsetting.Units=='M'?this.chartDescY="T[Nm]":this.chartDescY="T[Lbf X Ft]";
         //this.chartDescY ="T"
       }
     if(this.typeChart=='power')
       {
-       /*  this.chartdata.PoinY_1 =this.spindle.P1;
-        this.chartdata.PoinY_2 =this.spindle.P2;
-        this.chartdata.PoinY_3 =this.spindle.P3;
-        this.chartdata.PoinY_4 =this.spindle.P4; */
+       
         this.chartDesc= "Power";
         this.srv_appsetting.Units=='M'?this.chartDescY="P[kW]":this.chartDescY="P[HP]";
         //this.chartDescY ="P"
@@ -264,19 +258,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
         this.spindle.P1=this.chartdata.PoinY_1;                         
           else          
         this.spindle.T1=this.chartdata.PoinY_1;
-      this.CreateChart();  
-
-      /*  if(this.typeChart=="power")  
-        { 
-          this.spindle.P1=this.chartdata.PoinY_1;                  
-          this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.CalculateTByP(this.spindle.N1,this.spindle.P1)});              
-        }
-       else 
-        { 
-          this.spindle.T1=this.chartdata.PoinY_1;                        
-          this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T1});      
-        }
-        this.CreateChart();     */
+      this.CreateChart();       
      }
 
     OnChangePoinY_2()
@@ -306,13 +288,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
         this.spindle.T3=this.chartdata.PoinY_3;                        
         this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T3});      
       }
-      this.CreateChart();    
-
-     /*  if(this.typeChart=="power")          
-        this.spindle.P3=this.chartdata.PoinY_3;                         
-      else          
-        this.spindle.T3=this.chartdata.PoinY_3;
-        this.CreateChart();   */                                         
+      this.CreateChart();                                           
     }
 
      OnChangePoinY_4()
@@ -347,11 +323,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
                 this.spindle.T1 = changes[property].currentValue;
                 this.spindle.P1=this.CalculatePByT(this.spindle.N1,this.spindle.T1)
                 this.CreateChart();                
-              }
-             /*  if (property === 'Power' || property === 'Torque') {              
-                this.chartdata.PoinY_1 = changes[property].currentValue;
-                this.CreateChart();                
-              } */                             
+              }                                   
               if (property === 'AdaptationType' ) {              
                 //todo:get new graph             
                 //this.CreateChart();              

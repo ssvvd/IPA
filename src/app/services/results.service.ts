@@ -273,7 +273,14 @@ export class ResultsService {
       return "error";
     });
   }
-
+  
+  public getitemsdetailsfortoolshop(catalog:string,units:string,lang:string,LACNT:string){
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-items-details-for-toolshop/' +catalog + '/'
+    + units + '/' + lang + '/' + LACNT ).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  }
   }
 
 

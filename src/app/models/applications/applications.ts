@@ -36,5 +36,7 @@ export class Country {
   CountryFlag:string;
   CountryCode:string; 
   ShowPrice:Number;
+  FCSToolshopSite:string;
+  LACNT:string;
 }
 

@@ -1177,9 +1177,11 @@ goToCatalog(rowIndex:number,itemIndex:number){
     mapp = this.srv_StMng.SecAppSelected.MainApp
   }
 
-  let url:string = environment.eCatItemPage + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim()  + '&fnum=' + this.dtResultsObjectsHelp[rowIndex].Families[itemIndex].trim()
-   + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang + '&cf=ITA';
+  /* let url:string = environment.eCatItemPage + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim()  + '&fnum=' + this.dtResultsObjectsHelp[rowIndex].Families[itemIndex].trim()
+   + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang + '&cf=ITA'; */
 
+   let url:string = environment.eCatItemPage + '&qw=' + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim() + '&lang='
+   + this.srv_appsetting.Lang + '&GFSTYP=' + this.srv_appsetting.Units + '&cf=ITA';
    window.open(url, "_blank");
   // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }

@@ -44,7 +44,10 @@ export class CookiesService {
 
   public set_cookie(name:string,value:string)
   {
-    this.srv_cock.set(name,value);  
+    if(name=="notshowfeedback")
+      this.srv_cock.set(name,value,365);
+    else
+      this.srv_cock.set(name,value);  
   }
 
 /*   add_fav_machine(id:number)

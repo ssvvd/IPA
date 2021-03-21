@@ -46,6 +46,11 @@
                   </div> 
                 </label>
               </div>
+              <div *ngIf="srv_statemanage.SecApp!='119' && srv_statemanage.SecApp!='120'">
+                <h2 data-toggle="tooltip" title="{{'Create Assembly' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="GoToAssembly()">                  
+                  <img src = "{{environment.ImgAssembly}}"  class="icon-edit" >                                
+                </h2>  
+              </div>  
               <div [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="CheckDownloadResults()">
                   <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i> 

@@ -22,7 +22,7 @@
             </div>        
         </div>
     </div>
-     <div class="form-group"> 
+     <div class="form-group" *ngIf="msrv_StMng.SecApp!='54' && msrv_StMng.SecApp!='188'"> 
         <div class="pl-0 pt-3">
             <label>{{'Tool Hand' | translate}}</label>
         </div>
@@ -35,6 +35,21 @@
                 <input type="radio" class="custom-control-input" id="optLeft" name="Toolside" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="L">
                 <label class="custom-control-label" for="optLeft">{{'Left Hand' | translate}}</label>
             </div>                        
+        </div>
+    </div>
+    <div class="form-group" *ngIf="msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='188'"> 
+        <div class="pl-0 pt-3">
+            <label>{{'Tool Hand' | translate}}</label>
+        </div>
+        <div  class="pl-0 row">                  
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkToolHandRight" name="ToolHand"  (change)="changeToolSide('r')" [checked]="msrv_StMng.IPL.GetItem('GrooveToolSide').value=='R'">
+                <label class="custom-control-label" for="chkToolHandRight">{{'Right' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkToolHandLeft" name="ToolHand"   (change)="changeToolSide('l')"  [checked]="msrv_StMng.IPL.GetItem('Slope').value=='L'">
+                <label class="custom-control-label" for="chkToolHandLeft">{{'Left' | translate}}</label>
+            </div>                     
         </div>
     </div>
      <div class="form-group"> 

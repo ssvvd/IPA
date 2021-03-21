@@ -84,7 +84,7 @@ export class PpRequestMaterialComponent implements OnInit {
     cur_hb_hardness = cur_hb_hardness + " HB"
     // display form values on success
     // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-    this.srv_DataLayer.mailsendReqMat(this.registerForm.get('email').value,this.registerForm.get('desc').value, this.registerForm.get('grp').value || '-', this.registerForm.get('stndrd').value || '-',this.registerForm.get('cond').value || '-',cur_hb_hardness.replace(",", " "), this.registerForm.get('manf').value || '-').subscribe((res:any)=>
+    this.srv_DataLayer.mailsendReqMat(this.registerForm.get('email').value,'Add Material to the List :' + this.registerForm.get('desc').value, this.registerForm.get('grp').value || '-', this.registerForm.get('stndrd').value || '-',this.registerForm.get('cond').value || '-',cur_hb_hardness.replace(",", " "), this.registerForm.get('manf').value || '-').subscribe((res:any)=>
     {
       let resmessage:string;
       if(res=='ok')

@@ -90,11 +90,14 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         responsive: true
     };  
     
-    this.serv.getmaterialsbygrp('EN','P')
+    /* this.serv.getmaterialsbygrp('EN','P')
+    .subscribe((data: any) => {
+      this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
+    }); */
+    this.serv.getmaterialsbygrp(this.srv_appsetting.Lang,'P')
     .subscribe((data: any) => {
       this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
     });
-    
     this.isLoaded =false;
     this.Initializemachinelist(false);
     this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 
@@ -145,13 +148,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
           this.isDtInitialized = true
           this.dtTrigger.next();
         }  
-        
-
-       /* if(withdestroy)
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-            this.dtTrigger.next();
-          });   */                                      
+                                            
       }));  
        
   }

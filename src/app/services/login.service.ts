@@ -123,9 +123,13 @@ export class LoginService {
     c.LanguageID.push(data[0].CATLAN);
     c.CountryCode =data[0].CountryCode;
     c.ShowPrice =data[0].ShowPrice;
-    this.srv_appsetting.Country=c;
+    c.LACNT = data[0].LACNT;
+    c.FCSToolshopSite =data[0].FCSToolshopSite;
+    this.srv_appsetting.Country=c;    
     this.SetExchangeRate1(c.BrifName);
-    this.translate.use(c.LanguageID[0]);               
+    this.SelectLanguage(data[0].CATLAN);        
+    //this.translate.use(c.LanguageID[0]); 
+                  
   }
 
   UpdateCurrentCountry(countrycode:string)
@@ -172,9 +176,13 @@ export class LoginService {
       this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
       {                  
        if(d.country==undefined)  
-          this.UpdateCurrentCountry('US');   
-        else         
-          this.UpdateCurrentCountry(d.country);                                      
+          this.UpdateCurrentCountry('US');          
+        else 
+        {
+          this.UpdateCurrentCountry(d.country);
+          //this.UpdateCurrentCountry('DE');
+        }        
+                                                
       }
       );
     else      

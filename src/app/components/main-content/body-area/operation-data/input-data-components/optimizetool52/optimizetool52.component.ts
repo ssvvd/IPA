@@ -82,4 +82,22 @@ export class Optimizetool52Component implements OnInit {
   ngOnInit() {     
     this.isLoad =true;     
   }
+
+  changeToolSide(field:string)
+  {     
+    if(field=='r')  
+    {
+      if(this.srv_StMng.IPL.GetItem('GrooveToolSide').value=='R') 
+          this.srv_StMng.IPL.GetItem('GrooveToolSide').value='';
+      else
+        this.srv_StMng.IPL.GetItem('GrooveToolSide').value='R';
+    }
+    if(field=='l')  
+    {
+      if(this.srv_StMng.IPL.GetItem('Slope').value=='L') 
+          this.srv_StMng.IPL.GetItem('Slope').value='';
+      else
+        this.srv_StMng.IPL.GetItem('Slope').value='L';
+    }           
+  }
 }

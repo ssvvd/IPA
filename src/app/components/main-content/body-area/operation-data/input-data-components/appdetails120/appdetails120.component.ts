@@ -246,7 +246,7 @@ ClearData()
         this.pitch_units ='TPI';
 
         
-    if (this.threadform == "M60" || this.threadform == "UN60" || this.threadform == "MJ60" || this.threadform == "AC29" || this.threadform == "NJ60" || this.threadform == "NPSF" || this.threadform == "BUT" || this.threadform == "WH55")
+    if (this.threadform == "M60" || this.threadform == "UN60" || this.threadform == "MJ60" || this.threadform == "AC29" || this.threadform == "NJ60" || this.threadform == "NPSF" || this.threadform == "ABUT" || this.threadform == "WH55")
         this.ThreadDiaEnable=true;
     else
         this.ThreadDiaEnable=false;
