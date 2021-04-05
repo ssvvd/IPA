@@ -1132,7 +1132,7 @@ filterRecommended(prop:clsHelpProp){
 
 viewInfo(index:number)
 {
-  this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]]})
+  this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]],index:index})
 }
 
 getPropWithoutUnits(pr:string){

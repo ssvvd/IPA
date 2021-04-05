@@ -99,9 +99,9 @@ export class Appdetails77Component implements OnInit {
     
   ClearData()
   {
-    this.srv_StMng.IPL.GetItem('D_Hole').value ='';   
-    this.srv_StMng.IPL.GetItem('DiameterBoring').value =null;
-    this.srv_StMng.IPL.GetItem('Depth').value =null;  
+    this.srv_StMng.IPL.GetItem('D_Hole').value =this.srv_StMng.IPL.GetItem('D_Hole').valuedefault;  
+    this.srv_StMng.IPL.GetItem('DiameterBoring').value =this.srv_StMng.IPL.GetItem('DiameterBoring').valuedefault;  
+    this.srv_StMng.IPL.GetItem('Depth').value =this.srv_StMng.IPL.GetItem('Depth').valuedefault;    
     this.srv_StMng.IPL.GetItem('Clamping').value =this.srv_StMng.IPL.GetItem('Clamping').valuedefault;
     this.srv_StMng.IPL.GetItem('Slope').value =this.srv_StMng.IPL.GetItem('Slope').valuedefault;    
     this.srv_StMng.IPL.GetItem('TypeOfCut').value =this.srv_StMng.IPL.GetItem('TypeOfCut').valuedefault;        

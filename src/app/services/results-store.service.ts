@@ -13,7 +13,7 @@ export class ResultsStoreService {
   private inputParams:string='';
   private countryID:number=1;
 
-  private res1:any;
+  public res1:any;
   private res2:any;
   private res3:any;
   // private res4:any;

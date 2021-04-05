@@ -71,7 +71,8 @@
                                 <img [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >
                             </div>
                             <div class="mt-1 ml-1 mr-2">
-                                <Label class="label-ellipse cursor-pointer">{{userdes}}</Label>           
+                                <Label *ngIf="srv_appsetting.UserID!=''" class="label-ellipse cursor-pointer">{{srv_appsetting.User.displayName}}</Label>  
+                                <Label *ngIf="srv_appsetting.UserID==''" class="label-ellipse cursor-pointer">{{'Log In' | translate}}</Label>          
                             </div>
                         </div>              
                     </label>    
@@ -164,7 +165,7 @@ bdOpacity ="0.05"
 size="medium"
 color="#676767"
 type="ball-circus">    
-<p *ngIf="srv_appsetting.AfterToken" style="color:#676767">{{msgwait}}</p> 
+<p *ngIf="srv_appsetting.AfterToken" style="color:#676767">{{'Please wait while ITA is processing your request.' | translate}}</p> 
 </ngx-spinner>  
 
    

@@ -517,21 +517,22 @@ CreateURLparamCNCProgramForItem(viewParams:any) :string
   let FeedTablefieldname:string;
   let Feedfieldname:string;
   let FeedGfieldname:string;
-  if (this.srv_statemanage.IPL.GetItem('Units').value.toString() == "M")
-  {
+  //if (this.srv_statemanage.IPL.GetItem('Units').value.toString() == "M")
+  //{
     cuttingspeedfieldname = "CuttingSpeed";
     FeedTablefieldname = "FeedTable";
     Feedfieldname = "Feed";
     FeedGfieldname = "FeedG";
-  }
-  else
-  {
-    cuttingspeedfieldname = "CuttingSpeed_INCH";
-    FeedTablefieldname = "FeedTable_INCH";
-    Feedfieldname = "Feed_INCH";
-    FeedGfieldname = "FeedG_INCH";
-  }                  
+  //}
+  //else
+  //{
+    //cuttingspeedfieldname = "CuttingSpeed_INCH";
+    //FeedTablefieldname = "FeedTable_INCH";
+    //Feedfieldname = "Feed_INCH";
+    //FeedGfieldname = "FeedG_INCH";
+  //}                  
 
+  
   catsnumber ="";
   for (let c of viewParams.Res[0].CatalogNo)
   {

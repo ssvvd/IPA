@@ -167,9 +167,22 @@ export class OptimizetoolFilterComponent implements OnInit {
         break; 
     }
       case"TOOL":  { 
-          //"All/0/999/All/1/1/760/M/All/"          
-          param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
+          //"All/0/999/All/1/1/760/M/All/"   
+          /* if(this.srv_StMng.SecApp=='77')
+          {
+            let DMin:string='0';
+            let DMax:string='999';
+            if(this.srv_StMng.IPL.GetItem("TD_BrandName").value!='' && this.srv_StMng.IPL.GetItem("TD_BrandName").value!='0')
+            {
+              DMin=
+            }
+            param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
+          }
+          else */       
+            param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
+
           str_param=param + str_s + "/" + t;
+          
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-tool-designation-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }

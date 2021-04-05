@@ -269,8 +269,8 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
         }
         case 'TotalCuttingTimeFormat':{
           //if (this.srv_StMng.SecApp=='780')
-            this.CTFFormat = value
-          //break;
+          this.CTFFormat = value
+          break;
         }
         case 'TCB': {
           if(this.TCB==0)

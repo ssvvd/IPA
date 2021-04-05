@@ -44,15 +44,7 @@ SetLanguges()
 }
 
 ngOnInit()
-{
-  /* if(this.location.path().toLowerCase().indexOf('ajaxwebservice')>-1 )
-  {
-    let strURL:string;
-    //alert(window.location.href.toLowerCase());
-    strURL=window.location.href.toLowerCase().replace('/ita/','/ITC/');
-    //alert(strURL);
-    window.location.href = strURL ; //"http://www.iscar.com/ITC/AjaxWebService.asmx";
-  } */
+{  
 
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
@@ -74,8 +66,7 @@ ngOnInit()
     this.SetLanguges();
     this.translate.use(paramValue);
     return;
-  }  
-  
+  }    
 
   if (url.includes('?')) {
     let paramValue:string='';

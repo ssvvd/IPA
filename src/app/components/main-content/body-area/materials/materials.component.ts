@@ -87,7 +87,11 @@ export class MaterialsComponent implements OnInit,OnDestroy {
         var selMat = this.statemng.GetMaterialSelected();
         var selCateg = selMat.Category;
         if (selCateg.includes(category))
-          this.breadCrumb = ['Group No. ' + selMat.group];
+        {
+          
+          this.breadCrumb = [this.translate.instant('Group No') + '.' + selMat.group];
+        }
+          
       }
     }
   

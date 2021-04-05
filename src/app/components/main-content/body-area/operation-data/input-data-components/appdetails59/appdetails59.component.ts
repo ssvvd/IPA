@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input} from '@angular/core';
 import { StateManagerService} from '../../../../../../services/statemanager.service' ;
 import { AppsettingService} from '../../../../../../services/appsetting.service';
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,7 @@ export class Appdetails59Component implements OnInit {
   environment=environment;
   
    @Input() events: Observable<void>;
+ 
   private eventsSubscription: Subscription;
   CostPerHourByRate:number;
 

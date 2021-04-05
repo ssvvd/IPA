@@ -143,8 +143,7 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-exchange-rate/'+currency);
   }
 
-  getGEOLocation() {    
-    //return this.httpClient.get('http://ip-api.com/json') .catch((err: HttpErrorResponse) => {      
+  getGEOLocation() {          
      return this.httpClient.get('https://ipinfo.io?token=197278fe32ac90') .catch((err: HttpErrorResponse) => {
       return 'e';
   });       
@@ -156,6 +155,13 @@ export class DatalayerService {
         return "e";
     });   
   }
+
+  getcountryCodebycountryName(name:string) {    
+    return this.httpClient.get('https://restcountries.eu/rest/v2/name/' +name)
+    .catch((err: HttpErrorResponse) => {      
+         return "e";
+     });   
+   }
 
   public  countrybyglobalname(countryglobalname:string)
   {                 
@@ -212,11 +218,15 @@ export class DatalayerService {
     s=environment.API_HOST +  'api/export/download-package-files/'+scatalogno + '/' +units;   
     return  this.httpClient.get(s, {responseType: 'blob'});
   }
-  public  downloadfilezip(scatalogno:string,units:string):Observable<any>
+  public  downloadfilezip(scatalogno:string,units:string,secapp:string,secappdesc:string,mainapp:string, 
+    index:string , filename:string,
+    input_par:any,outputdata:any):Observable<any>
   {  
-    let s:string;    
-    s=environment.API_HOST +  'api/export/download-zip-files/'+scatalogno + '/' +units;   
-    return  this.httpClient.get(s, {responseType: 'blob'});
+    let s:string;     
+    let strpar:string=JSON.stringify({input_par, outputdata});  
+    //download-zip-files/{scatalogno}/{units}/{secapp}/{secappdesc}/{mainapp}/{index}  
+    s=environment.API_HOST+'api/export/download-zip-files/'+scatalogno + '/' +units + '/' +secapp + '/' +secappdesc + '/'+ mainapp + '/' +index + '/'+ filename;   
+    return  this.httpClient.post(s,strpar,{responseType: 'blob'});
   }
 
   public  addfeedback(q1:number,q2:number,msg:string)

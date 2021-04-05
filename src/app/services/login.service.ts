@@ -196,21 +196,58 @@ export class LoginService {
   }
   
   LogIn(token:string):Observable<any>
-  {         
+  { 
+     
     if(token!='')
-    {      
+    {     
+      if(token.indexOf('user name is not valid')>-1)  
+      {
+        console.log('token');
+        console.log(token);
+        
+        this.FillDefaultUser();
+        this.srv_appsetting.AfterToken=true; 
+        this.SpinnerService.hide();        
+        return;
+      } 
+
       this.srv_DataLayer.login(token).subscribe ((data:any)=>
       { 
           let d=JSON.parse(data); 
-          if(d[0].usageLocation==undefined || d[0].email==undefined)   
+          console.log(data);
+          
+          if( d[0].email==undefined)   
           {
+            console.log('login subscribe');
+            console.log(data);
             this.FillDefaultUser();
+            this.srv_appsetting.AfterToken=true; 
+            this.SpinnerService.hide();    
           }
-          else      
-            this.srv_DataLayer.getcountryNamebycountryCode(d[0].usageLocation).subscribe((rr:any)=>
+          else
+          {    
+            let countrycode:string=""; 
+            if(d[0].countryCode!=undefined || d[0].usageLocation !=undefined) 
             {
+             
+              if(d[0].countryCode!=undefined) countrycode=d[0].countryCode;
+              if(d[0].usageLocation!=undefined) countrycode=d[0].usageLocation;  
+              this.FillUserData(d,countrycode,d[0].country);
+            }
+            else
+            {
+              this.srv_DataLayer.getcountryCodebycountryName(d[0].country).subscribe((rr:any)=>
+              {
+                countrycode=rr.alpha2Code;
+                this.FillUserData(d,countrycode,d[0].country);
+              });
+            }
+          }
+                               
+         /*    //this.srv_DataLayer.getcountryNamebycountryCode(countrycode).subscribe((rr:any)=>
+            //{
               let cn:string='';
-              if(rr!='e') cn=rr.name;                                                     
+              //if(rr!='e') cn=rr.name;                                                     
               let u:User=
               {
               displayName:d[0].displayName,
@@ -220,7 +257,7 @@ export class LoginService {
               country:d[0].country,            
               companyName:d[0].companyName,            
               isImc:d[0].isImc,
-              CountryCode:d[0].usageLocation,
+              CountryCode:countrycode,
               CountryName:cn}
               localStorage.setItem("displayName",d[0].displayName);
               localStorage.setItem("surname",d[0].surname);
@@ -229,112 +266,65 @@ export class LoginService {
               localStorage.setItem("country",d[0].country);
               localStorage.setItem("companyName",d[0].companyName);
               localStorage.setItem("isImc",d[0].isImc); 
-              localStorage.setItem("countryCode",d[0].usageLocation);
+              localStorage.setItem("countryCode",countrycode);
               localStorage.setItem("countryName",cn);
               this.srv_appsetting.User=u;  
-              if(d[0].usageLocation!='' && d[0].usageLocation!=null)
-                this.UpdateCurrentCountry(d[0].usageLocation);
+              if(countrycode!='' && countrycode!=null)
+                this.UpdateCurrentCountry(countrycode);
               this.srv_appsetting.isLoggedIn=true;
               this.srv_appsetting.AfterToken=true;  
               this.SpinnerService.hide();             
-              });  
-             /*  if(localStorage.getItem("countryid")!='')
-              {
-                this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
-                {
-                  let data = JSON.parse(d);
-                  if(data.length>0)
-                  {
-                    let c:Country =new Country;
-                    c.BrifName =data[0].BrifName;
-                    c.CountryFlag ='';
-                    c.CountryGlobalId = 0;
-                    c.CountryID = data[0].CountryId;
-                    c.CountryName =data[0].CountryName;              
-                    c.LanguageID.push(data[0].CATLAN);
-                    c.CountryCode =data[0].CountryCode;
-          
-                    //u.displayName=displayName;
-                    //u.surname=surname;   
-                    //u.givenName=givenName;
-                    //u.email=email;
-                    //u.country=country;
-                    //u.companyName=companyName;
-                    //u.isImc=isImc;
-                    //u.CountryCode=c.CountryCode;
-                    //u.CountryName=c.CountryName;
-          
-                    this.srv_appsetting.Country=c;
-                    this.SetExchangeRate1(c.BrifName);
-                    this.translate.use(c.LanguageID[0]); 
-                    localStorage.setItem("countryid","");
-                  }
-                });
-              } 
-              
-              if(localStorage.getItem("language")!='')
-              {
-               
-                this.SelectLanguage(localStorage.getItem("language"));                                            
-                localStorage.setItem("language","");
-              }  */
-              return of('ok');
+              });       */
+          /*  */ 
+           
+         /*   {
+            this.FillDefaultUser();
+            this.srv_appsetting.AfterToken=true; 
+            this.SpinnerService.hide();
+           }   */                          
+           return of('ok');
           });                              
     }
     else
     {  
-      return;
-      //check global cookies user       
-        /* if(environment.API_HOST.indexOf('localhost')==-1 && localStorage.getItem("isLogIn") =="1")
-        this.srv_DataLayer.get_token().subscribe((res: any)=>{
-            let s=environment.LoginURLCheckCookies + '?t=' +res;  
-            window.open(s,'_self');           
-          });   
-        */
-      let u=new User;  
-      let displayName:string='';
-      let surname:string='';
-      let givenName:string='';
-      let email:string=''
-      let country:string='';
-      let companyName:string='';
-      let isImc:string='';
-      let countrycode:string='';
-      let countryname:string='';
-      if(localStorage.getItem("displayName")!=null) displayName=localStorage.getItem("displayName");
-      if(localStorage.getItem("surname")!=null) surname=localStorage.getItem("surname");
-      if(localStorage.getItem("givenName")!=null) givenName=localStorage.getItem("givenName");
-      if(localStorage.getItem("email")!=null) email=localStorage.getItem("email");
-      if(localStorage.getItem("country")!=null) country=localStorage.getItem("country");
-      if(localStorage.getItem("companyName")!=null) companyName=localStorage.getItem("companyName");
-      if(localStorage.getItem("isImc")!=null) isImc=localStorage.getItem("isImc"); 
-      if(localStorage.getItem("countryCode")!=null) countrycode=localStorage.getItem("countryCode"); 
-      if(localStorage.getItem("countryName")!=null) countryname=localStorage.getItem("countryName");
-      u.displayName=displayName;
-      u.surname=surname;
-      u.givenName=givenName;
-      u.email=email;
-      u.country=country;
-      u.companyName=companyName;
-      u.isImc=isImc;
-      u.CountryCode=countrycode;
-      u.CountryName=countryname;
-      if(u.CountryCode=='')
-        this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
-        {                
-          this.UpdateCurrentCountry(d.countryCode);                                     
-        }
-        );
-      else      
-        this.UpdateCurrentCountry(u.CountryCode);      
-    
-      this.srv_appsetting.User=u;  
-      this.srv_appsetting.isLoggedIn=true;              
+      this.SpinnerService.hide(); 
+      return;                
     } 
     this.srv_appsetting.isLoggedIn=true;       
     return of('ok'); 
   } 
-  
+
+  FillUserData(d:any,countrycode:string,countryname:string)
+  {
+    let cn:string='';                                                 
+    let u:User=
+    {
+    displayName:d[0].displayName,
+    surname: d[0].surname,
+    givenName: d[0].givenName,
+    email: d[0].email,
+    country:countryname,            
+    companyName:d[0].companyName,            
+    isImc:d[0].isImc,
+    CountryCode:countrycode,
+    CountryName:cn}
+    localStorage.setItem("displayName",d[0].displayName);
+    localStorage.setItem("surname",d[0].surname);
+    localStorage.setItem("givenName",d[0].givenName);
+    localStorage.setItem("email",d[0].email);
+    localStorage.setItem("country",d[0].country);
+    localStorage.setItem("companyName",d[0].companyName);
+    localStorage.setItem("isImc",d[0].isImc); 
+    localStorage.setItem("countryCode",countrycode);
+    localStorage.setItem("countryName",cn);
+    this.srv_appsetting.User=u;  
+    if(countrycode!='' && countrycode!=null)
+      this.UpdateCurrentCountry(countrycode);
+    this.srv_appsetting.isLoggedIn=true;
+    this.srv_appsetting.AfterToken=true;  
+    this.SpinnerService.hide(); 
+  }
+
    LogOut()
   {
      this.srv_DataLayer.get_token().subscribe((res: any)=>{      

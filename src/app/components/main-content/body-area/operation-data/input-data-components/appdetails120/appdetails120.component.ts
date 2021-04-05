@@ -385,10 +385,17 @@ ClearData()
                 this.srv_StMng.IPL.GetItem('MajorDiameter').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
             }
             if(this.threadtype=="Internal")
-                if(arrFormColName_f[i].ItemID=='Minordiameterext') this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
-            else
+            {
                 if(arrFormColName_f[i].ItemID=='Minordiameterint') this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
-
+            }                
+            else
+            {
+                if(arrFormColName_f[i].ItemID=='Minordiameterext') 
+                {
+                    this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
+                }                
+            }
+                
             if(arrFormColName_f[i].ItemID=='Helixangle') this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
 
             if(arrFormColName_f[i].ItemID=='Predrilldiameter') 

@@ -48,6 +48,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {   
     //alert('header');
+    this.userdes=this.translate.instant('Log In');
+    this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
+
     this.srv_appsetting.CurrentUserSelected.subscribe(u=>
       { if(u=='') 
           this.userdes=this.translate.instant('Log In'); 
@@ -58,10 +61,10 @@ export class HeaderComponent implements OnInit {
           this.CurrentCountryName = this.srv_appsetting.Country.CountryName; 
       });
 
-      this.srv_appsetting.CurrentCountrySelected.subscribe(c=>
-        { if(c!='')                       
-              this.CurrentCountryName = c; 
-        });
+      this.srv_appsetting.CurrentCountrySelected.subscribe(c=>this.ChangedCountry(c));
+   
+    this.srv_appsetting.LangChanged.subscribe(l=>this.ChangedLanguage(l));
+  
 
     if (this.srv_appsetting.Units=='M') 
       this.isMetric = true;
@@ -78,6 +81,35 @@ export class HeaderComponent implements OnInit {
       this.srv_appsetting.SelectedLanguage=this.SelectedLang;
     }      
   } 
+
+  ChangedCountry(c:any)
+ {
+  if(c!='')                       
+    this.CurrentCountryName = c; 
+  
+  this.userdes="Log In";
+  this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
+  
+  if(this.srv_appsetting.UserID=='') 
+    this.userdes=this.translate.instant('Log In'); 
+  else 
+    this.userdes=this.srv_appsetting.User.displayName;
+   
+ }
+
+ ChangedLanguage(l:any)
+ {
+  if(l!=null) this.translate.use(l);
+  this.userdes="Log In";
+  if(this.srv_appsetting.UserID=='') 
+      this.userdes=this.translate.instant('Log In'); 
+    else 
+      this.userdes=this.srv_appsetting.User.displayName;
+  this.msgwait =this.translate.instant('Please wait while ITA is processing your request.');
+ }
+
+ 
+
   LogOut()
   {
     this.srv_login.LogOut();
@@ -175,8 +207,13 @@ export class HeaderComponent implements OnInit {
   {
     this.srv_login.SelectCountryAndLang(c,LanguageID);
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
-    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;       
+    this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
+       
+
     this.eventsSubject.next();
+    this.translate.use(LanguageID);
+    this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
+    this.userdes=this.translate.instant('Log In'); 
     //this.userdes=this.translate.instant('Log In');
   }
   

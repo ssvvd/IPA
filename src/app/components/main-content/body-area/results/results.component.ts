@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ProductInfoComponent } from './product-info/product-info.component';
 import { PpSuccessfullyComponent } from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
 import { ResultsService} from 'src/app/services/results.service' ;
-
+import { ResultsStoreService} from 'src/app/services/results-store.service' ;
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
@@ -31,6 +31,7 @@ IsExport:boolean;
 environment = environment;  
 navigationSubscription;
 _hideFilter:boolean;
+indextool:number;
 // _showDownload:boolean;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
@@ -38,7 +39,7 @@ _hideFilter:boolean;
 
 eventsSubject: Subject<void> = new Subject<void>();
 
-  constructor(private srv_Results:ResultsService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
+  constructor(private srv_ResultsStore :ResultsStoreService,private srv_Results:ResultsService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
     private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
     public srv_appsetting:AppsettingService,private router: Router,
     public translate:TranslateService) { 
@@ -85,7 +86,8 @@ eventsSubject: Subject<void> = new Subject<void>();
   goToView(value){
     this.MainPage = false;
     this.viewParams = value;
-    this.active = 1;    
+    this.active = 1;  
+    this.indextool = value.index; 
   }
 
   switchPage(){
@@ -176,7 +178,7 @@ eventsSubject: Subject<void> = new Subject<void>();
       if(result=='P21')  
       {  
         this.SpinnerService.show();     
-        return this.srv_DataLayer.downloadp21file(sCatalogNo,'M').subscribe( response=>       
+        return this.srv_DataLayer.downloadp21file(sCatalogNo,this.srv_appsetting.Units).subscribe( response=>       
           {      
             var downloadURL = window.URL.createObjectURL(response);
             var link = document.createElement('a');
@@ -192,7 +194,7 @@ eventsSubject: Subject<void> = new Subject<void>();
       if(result=='GTC')  
       {
         this.SpinnerService.show(); 
-        return this.srv_DataLayer.downloadfilepackage(sCatalogNo,'M').subscribe( response=>       
+        return this.srv_DataLayer.downloadfilepackage(sCatalogNo,this.srv_appsetting.Units).subscribe( response=>       
           {      
             var downloadURL = window.URL.createObjectURL(response);
             var link = document.createElement('a');
@@ -204,11 +206,19 @@ eventsSubject: Subject<void> = new Subject<void>();
           }
         );
       }   
-      if(result=='zip')  
+      if(result=='ZIP')  
       {  
-        this.SpinnerService.show();     
-        return this.srv_DataLayer.downloadfilezip(sCatalogNo,'M').subscribe( response=>       
+        //this.SpinnerService.show();   
+       
+        let index= this.indextool+1;
+        let indexstr:string;
+        indexstr=index.toString();
+        return this.srv_DataLayer.downloadfilezip(sCatalogNo,this.srv_appsetting.Units,this.srv_statemanage.SecAppSelected.ApplicationITAID, 
+        this.srv_statemanage.SecAppSelected.MenuName.trim(),this.srv_statemanage.MainAppSelected.MenuName.trim(),
+        indexstr,filename,
+        this.srv_statemanage.IPLChanged,  this.srv_ResultsStore.res1 ).subscribe( response=>       
           {      
+            //alert(response);
             var downloadURL = window.URL.createObjectURL(response);
             var link = document.createElement('a');
             link.href = downloadURL;
@@ -217,7 +227,8 @@ eventsSubject: Subject<void> = new Subject<void>();
             this.processdownload =false;  
             this.SpinnerService.hide();        
           }
-          );         
+          );  
+          //this.SpinnerService.hide();          
       }   
     }
    });
