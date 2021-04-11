@@ -66,10 +66,11 @@ export class ResultsTableComponent implements OnInit {
   lastTypeMainFilter:string="";
   // spanSort:string = "<span class='sort-icon ml-1'></span>"
 
-  @Input() filterChangedRec: any ;
+  @Input() filterChangedRec: any ; 
   @Output() goToViewEvent = new EventEmitter<any>();
   @Output() hideFilter = new EventEmitter<any>();
   processdownload:boolean=false;
+
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 

@@ -12,9 +12,15 @@
        <label>{{'A new search will  start and your data will not be saved.' | translate}}</label>     
      </div>
    </div>
-   <div class="modal-footer">       
-     <button type="button" class="btn btn-select-cancel" (click)="this.activeModal.close('cancel')">{{'Cancel' | translate}}</button>        
-    <button type="button" class="btn btn-select" (click)="this.activeModal.close('change')">{{'Change' | translate}}</button>        
+   <div class="modal-footer"> 
+     <div class="row">      
+       <div class="col-6">
+        <button type="button" class="btn btn-select-cancel" (click)="this.activeModal.close('cancel')">{{'Cancel' | translate}}</button>        
+      </div>
+      <div class="col-6">
+        <button type="button" class="btn btn-select" (click)="this.activeModal.close('change')">{{'Change' | translate}}</button>        
+      </div>
+      </div>
    </div>
  
  

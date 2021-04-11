@@ -34,8 +34,20 @@ export class AppsettingService {
 
   private obsLangChanged = new BehaviorSubject<string>(null);
   LangChanged = this.obsLangChanged.asObservable();
+ 
+ 
+  private misMobileResolution:boolean;  
+  get isMobileResolution():boolean{   
+    if (window.innerWidth < 768) {
+      return true;
+    } else {
+      return false;
+    }
 
-  private misLoggedIn:boolean;
+    }
+  
+
+  private misLoggedIn:boolean;  
   get isLoggedIn():boolean{   
     return this.misLoggedIn;
     }

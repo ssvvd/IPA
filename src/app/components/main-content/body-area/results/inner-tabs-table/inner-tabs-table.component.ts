@@ -20,9 +20,7 @@ export class InnerTabsTableComponent implements OnInit {
   constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
               private srv_results:ResultsService) { }
 
-  ngOnInit(): void {
-
-   
+  ngOnInit(): void {   
   }
 
   ngOnChanges(changes:SimpleChanges) {

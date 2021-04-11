@@ -13,6 +13,7 @@ import { ContactusComponent } from './../../components/maintenance/contactus/con
 import { FeedbackComponent } from './../../components/maintenance/feedback/feedback.component';
 import { CookiesService } from './../../services/cookies.service';
 import { DatalayerService} from'./../../services/datalayer.service' ;
+import { HeaderPpMenuComponent} from './../../components/header-pp-menu/header-pp-menu.component';
 import { Subject} from 'rxjs';
 
 @Component({
@@ -47,7 +48,7 @@ export class HeaderComponent implements OnInit {
               private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() {   
-    //alert('header');
+
     this.userdes=this.translate.instant('Log In');
     this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
 
@@ -58,12 +59,11 @@ export class HeaderComponent implements OnInit {
           this.userdes=u;
 
           if(this.srv_appsetting.Country!==undefined)
-          this.CurrentCountryName = this.srv_appsetting.Country.CountryName; 
+            this.CurrentCountryName = this.srv_appsetting.Country.CountryName; 
       });
 
-      this.srv_appsetting.CurrentCountrySelected.subscribe(c=>this.ChangedCountry(c));
-   
-    this.srv_appsetting.LangChanged.subscribe(l=>this.ChangedLanguage(l));
+      this.srv_appsetting.CurrentCountrySelected.subscribe(c=>this.ChangedCountry(c));   
+      this.srv_appsetting.LangChanged.subscribe(l=>this.ChangedLanguage(l));
   
 
     if (this.srv_appsetting.Units=='M') 
@@ -108,14 +108,39 @@ export class HeaderComponent implements OnInit {
   this.msgwait =this.translate.instant('Please wait while ITA is processing your request.');
  }
 
- 
-
   LogOut()
   {
     this.srv_login.LogOut();
     this.userdes=this.translate.instant('Log In');;     
   }
-  
+
+  OpenMenu()
+  {
+    const modalRef = this.modalService.open(HeaderPpMenuComponent, {backdrop:'static', windowClass: 'header-menu-modal' });  
+    if(this.srv_appsetting.UserID=='')   
+      modalRef.componentInstance.UserDesc =  "";
+    else
+      modalRef.componentInstance.UserDesc = this.userdes;
+
+    modalRef.componentInstance.lstcountry = this.lstcountry;
+    modalRef.componentInstance.CurrentCountryName = this.CurrentCountryName;
+
+    modalRef.result.then((result) => {     
+      if(result=='opencatalog'){ this.opencatalog();} 
+      if(result=='openmachiningcalculator'){this.openmachiningcalculator();} 
+      if(result=='opencalculator'){this.opencalculator();}
+      if(result=='openGeometryAnalyzer'){this.openGeometryAnalyzer();}
+      if(result=='Insertwear'){this.Insertwear();}
+      if(result=='contactus'){this.contactus();}
+      if(result=='feedback'){this.feedback();}
+      if(result=='OpenUserGiude'){this.OpenUserGiude();}
+
+      if(result=='M'){this.CheckAllowUnitsChange(null);}
+      if(result=='I'){this.CheckAllowUnitsChange(null);}
+
+    });
+   
+  }
   LogIn()
   {   
     //return; //TODO:
@@ -208,18 +233,15 @@ export class HeaderComponent implements OnInit {
     this.srv_login.SelectCountryAndLang(c,LanguageID);
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
     this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
-       
-
     this.eventsSubject.next();
     this.translate.use(LanguageID);
     this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
     this.userdes=this.translate.instant('Log In'); 
-    //this.userdes=this.translate.instant('Log In');
   }
   
   CheckAllowUnitsChange(event)
   {  
-      event.preventDefault();      
+      if(event!=null) event.preventDefault();            
       const modalRef = this.modalService.open(HeaderPpUnitsComponent, {backdrop:'static', centered: true });
                     
       modalRef.result.then((result) => {
@@ -237,10 +259,8 @@ export class HeaderComponent implements OnInit {
             this.isMetric=true;
           }                   
              
-        if (window.location.href.indexOf('machines')>-1)
-          {
-            this.srv_statemanage.ChangeUnits();        
-          }        
+        if (window.location.href.indexOf('machines')>-1)          
+            this.srv_statemanage.ChangeUnits();                          
         else
           {
             this.router.navigate(['/home/machines']);
@@ -249,7 +269,7 @@ export class HeaderComponent implements OnInit {
         }});                
   }
 
-  UnitsChanged(event)
+ /*  UnitsChanged(event)
   {  
       const modalRef = this.modalService.open(HeaderPpUnitsComponent, {backdrop:'static', centered: true });
       //modalRef.componentInstance.MachineName = mach.MachineName;
@@ -276,7 +296,7 @@ export class HeaderComponent implements OnInit {
         
       
   }
-
+ */
   showmenu()
   {
     this.menuisshown =!this.menuisshown;
@@ -325,9 +345,7 @@ export class HeaderComponent implements OnInit {
   feedback()
   {
     const modalRef = this.modalService.open(FeedbackComponent,{backdrop: 'static', centered: true, windowClass: 'feedback-modal' });
-    modalRef.result.then((result) => {
-      //if(result=='cancel') return;
-      //if(result=='send') 
+    modalRef.result.then((result) => {     
       this.srv_cook.set_cookie("notshowfeedback",'1');    
     });    
   } 
@@ -381,5 +399,10 @@ export class HeaderComponent implements OnInit {
         localStorage.setItem("language","");
       }
     }  */
+  }
+
+  OpenUserGiude()
+  {
+    window.open('assets/UserGuide/ITAUserGuide.pdf');
   }
 }

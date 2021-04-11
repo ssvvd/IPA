@@ -56,17 +56,12 @@ export class MachinesListComponent implements OnInit, OnDestroy {
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
 
-  ngOnInit() {  
-
-   /*  if(this.srv_appsetting.AfterToken)
-    { */
-     // this.srv_cook.set_cookie("is_browser_ie",'');
+  ngOnInit() {    
      if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
      {       
       const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
       this.srv_cook.set_cookie("is_browser_ie",'1');
      }
- /*    } */
 
     let scrollYdiff:string='325px';   
     if(window.devicePixelRatio>1.3) scrollYdiff='375px';
@@ -90,14 +85,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         responsive: true
     };  
     
-    /* this.serv.getmaterialsbygrp('EN','P')
+     this.serv.getmaterialsbygrp(this.srv_appsetting.Lang,'P')
     .subscribe((data: any) => {
       this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
-    }); */
-    this.serv.getmaterialsbygrp(this.srv_appsetting.Lang,'P')
-    .subscribe((data: any) => {
-      this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
-    });
+    }); 
     this.isLoaded =false;
     this.Initializemachinelist(false);
     this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 

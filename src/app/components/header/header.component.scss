@@ -10,25 +10,35 @@ height: 50px;
 cursor:pointer;
 }
 
+.logoImg-mobile{
+  height:38px;
+  cursor:pointer;
+  }
+
 .MenuImg{
 height: 30px;
 cursor:pointer;
 }
 
-::ng-deep .myCustomModalClass .modal-dialog { 
-     max-width: 55px;
-     width: 55px;
+.div-header-mobile
+{
+ width: 100%!important;
+/*  padding:0!important; 
+ margin:0!important;  */ 
 }
 
-/* .div-image-menu
-{
- background-color: var(--background-color-menu);
-} */
-
-/* .div-image-menu :hover 
-{ 
- background-color: white;
-} */
+ ::ng-deep .header-menu-modal .modal-content { 
+  top: 0px;  
+  left:0px;
+  margin-top:0px!important;
+  margin-left:0px!important;
+  padding-top: 0px!important;
+  padding-left: 0px!important;
+  width: 80%!important;
+  min-width: 80%!important;
+  max-width: 80%!important;
+  min-height: 400px!important;
+} 
 
 .menu-not-visible
 {
@@ -127,6 +137,12 @@ cursor:pointer;
 {
     background-color:var(--background-color-header);
     height: 40px;
+}
+
+.banner-top-mobile
+{
+    background-color:var(--background-color-header);
+    height: 45px;
 }
 
 .border-right-gray

@@ -1,10 +1,7 @@
 
 <div class="row justify-content-center">
-<div class="col-12 banner-top d-flex justify-content-center" >
-    <div class="div-header">
-        <!-- <div class="row float-left div-banner-images pt-1 pr-4">
-            <img  class="pr-2 pt-2" [src]="environment.ImagePath+'ITA_New-logo.png'" style="height:40px;">
-        </div> -->
+<div class="col-12 banner-top d-flex justify-content-center pl-0 pr-0" *ngIf="!srv_appsetting.isMobileResolution">
+    <div class="div-header" >       
         <div class="row float-left div-banner-images pl-4">
             <Label class="siteTitle  pt-1" style="font-size: 24px!important">ISCAR TOOL ADVISOR</Label>
         </div>        
@@ -85,8 +82,35 @@
             </div>
         </div>
     </div>
+</div> 
+<div class="col-12 banner-top-mobile d-flex justify-content-center pl-0 pr-0" *ngIf="srv_appsetting.isMobileResolution">  
+    <div class="div-header-mobile"   > 
+        <div class="row">                      
+            <div class="col-2" >
+                <img (click)="OpenMenu()"   
+                [src]="environment.ImagePath + 'icon_hamburger.svg'" class="logoImg-mobile " >
+            </div>
+            <div class="col-8 text-center" >
+                <a href="https://www.iscar.com/index.aspx" target="_blank" >
+                    <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg-mobile">
+                </a>
+            </div>
+            <div class="col-2" >                                 
+                <div   ngbDropdown role="group" > 
+                    <div  class="pt-2"    ngbDropdownToggle id="login">                                                              
+                        <img (click)="LogIn()" [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >                                                                                                          
+                    </div>    
+                <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
+                        <div class="float-right mr-2">
+                            <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
+                        </div>
+                    </div>            
+                </div> 
+            </div>
+    </div>
+    </div>
 </div>
-<div class="col-11 pl-0 pr-0 pt-2">
+<div class="col-11 pl-0 pr-0 pt-2" *ngIf="!srv_appsetting.isMobileResolution">
     <div class="row ml-1">    
         <div class="float-left pb-0 mb-0 pl-3" id='container-iscar-svg'>
             <a href="https://www.iscar.com/index.aspx" target="_blank">
@@ -116,8 +140,7 @@
                                 <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Machining Calculators' | translate}}</label>                                                                                                                          
                             </a>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="opencalculator()">                                                                                   
-                            <!-- <a [href]="'https://www.iscar.com/ITC/Calculators.aspx?units=' + msrv_appsetting.Units +'&lang=' + msrv_appsetting.Lang"  target="_blank" class="pl-2 pb-2 pt-2">                                                                                                                                                                          -->
+                        <div class ="row col-12 dropdown-item menuitem" (click)="opencalculator()">                                                                                                              
                                 <a class="pl-2 pb-2 pt-2">                                                                                                                                                                         
                                     <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>                                             
                                 </a>                                                              
@@ -148,6 +171,9 @@
                         </div>
                         <div class ="row col-12 dropdown-item menuitem" (click)="feedback()" >                                                                                                  
                             <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>                                                                                                                                                      
+                        </div>
+                        <div class ="row col-12 dropdown-item menuitem" (click)="OpenUserGiude()">                                                                                                  
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide' | translate}}</label>                                                                                                                                                      
                         </div>
                     </div>                                                                     
                 </div>                   

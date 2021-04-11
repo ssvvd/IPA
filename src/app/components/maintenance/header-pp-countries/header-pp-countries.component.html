@@ -1,0 +1,19 @@
+<div *ngFor="let c of lstcountry" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{c.CountryName}} >  
+    <div (click)="SelectCountryAndLang(c,c.LanguageID[0])">                                                                                                                                                             
+        <img [src]="environment.ImagePath + 'flags/' + c.CountryName + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >                                                                                                                                                                                                 
+        <label class="mt-2" style="background-color:trasparent">{{c.CountryName}} </label>                                                                                                                          
+    </div>
+    <div *ngIf="c.LanguageName.length>1">                               
+        <div class="row">
+            <div class="pl-1 pr-1">
+                <button type="button" (click)="SelectCountryAndLang(c,c.LanguageID[0])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[0]}}</button>
+            </div>
+            <div  class="pr-1">
+                <button type="button" (click)="SelectCountryAndLang(c,c.LanguageID[1])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[1]}}</button>
+            </div>
+            <div *ngIf="c.LanguageName.length>2"  class="pr-2">
+                <button type="button" (click)="SelectCountryAndLang(c.CountryID,c.LanguageID[2])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[2]}}</button>
+            </div>
+        </div>
+    </div> 
+</div> 

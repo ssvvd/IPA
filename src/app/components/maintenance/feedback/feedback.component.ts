@@ -52,12 +52,13 @@ export class FeedbackComponent implements OnInit {
   {    
     let a1="Did you receive relevant result : " + (this.q1==1?'green': this.q1==2? 'blue' :'red') + "\n";
     let a2= "Are you satisfied with the new Iscar Tool Advisor : " + (this.q2==1?'green': this.q2==2? 'blue' :'red') + "\n";
-    if(this.Message!='')
+   /*  if(this.Message!='')
   {
     this.srv_DataLayer.mailsend("User","ITAsupport@iscar.co.il",this.srv_appsetting.Country.CountryName,"FeedBack",this.Message);
   }
-          
-   /*  this.srv_DataLayer.mailsendfeedback(this.srv_appsetting.Country.CountryName,a1,a2,this.Message).subscribe((res:any)=>
+      */   
+  if(this.Message!='')  
+     this.srv_DataLayer.mailsendfeedback(this.srv_appsetting.Country.CountryName,a1,a2,this.Message).subscribe((res:any)=>
     {
     let resmessage:string;
     if(res=='ok')
@@ -66,7 +67,7 @@ export class FeedbackComponent implements OnInit {
     {
       resmessage=res;      
     }
-  }); */
+  }); 
   }
     
 }

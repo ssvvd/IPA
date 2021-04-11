@@ -1,6 +1,5 @@
         <div>
-           <div [hidden]="ErrMsg">
-        <!-- <h4 class="siteTitle float-left">Results</h4> -->
+           <div [hidden]="ErrMsg">        
         <div class="pb-2 pt-0 mt-0 pt-0" >
          <div class="pt-0 pl-0 row">  
            <h3 class="siteTitle pl-0 pb-0 pt-0 mb-0">{{'Results' | translate}}</h3>
@@ -25,8 +24,7 @@
                     <tr id="dtOptions">
                      <th ><label></label></th>  
                      <th class="sorting" *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
-                         <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">
-                            <!-- {{hd.FieldDescriptionSmall | translate}}<span class="sort-icon ml-1"></span> -->
+                         <label title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">                            
                            </label><span class="sort-icon ml-1"></span>
                         </th>
                         <th class="no-sort d-none"></th>
@@ -39,34 +37,19 @@
                         </th>
                     </tr>
                  </thead>
-                 <tbody>
-                  <!-- <tr  *ngFor="let row of dtResultsObjects3d; let rowIndex = index" 
-                  [hidden]="dtResultsObjectsHelp[rowIndex].isHidden > 0">
-                          <td>
-                           <img src="{{arrResultImgsItem[rowIndex]}}"
-                           (error) ="changeSource($event, arrResultImgsFamily[rowIndex])" class="img-grid">
-                          </td>
-                          <td *ngFor="let col of row; let num = index" [hidden]="!headers[num].IsShow">                 
-                              <span class="d-block" *ngFor="let prty of col.slice().reverse()">
-                                 <label *ngIf="num == 0">{{prty.property.GroupText}}:&nbsp;</label>{{prty.value}}</span>
-                            </td>
-                       </tr> -->
-                       
-                       <!-- ((dtResultsObjectsHelp[row.index].CatalogNo[PrtNum] == '-') &&  col.length == dtResultsObjectsHelp[row.index].CatalogNo.length)|| -->
+                 <tbody>                                                             
                     <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
                        <td >
                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">
                         <img src="{{dtResultsObjectsHelp[row.index].img}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
                          (click)="viewInfo(row.index)" class="img-grid">
-                     </td>
-                       <!--  (click)="viewInfo(row.index) -->
+                     </td>                       
                        <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" (click)="viewInfo(row.index)">                 
                            <span  *ngFor="let prty of col; let PrtNum = index"
                            [ngClass]="(col.length > 1 && 
                               (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
                               ? 'd-none' : 'd-block'" 
-                           >
-                            <!-- [hidden]="col.length > 1 && dtResultsObjectsHelp[row.index].CatalogNo[dtResultsObjectsHelp[row.index].CatalogNo.length - PrtNum - 1] == '-'"> -->
+                           >                           
                               <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>
                               <div style="display: inline;" [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
                               (click)="prty.property && prty.property.Field.toLowerCase().includes('designation') && goToCatalog(row.index,dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)) ; $event.stopPropagation()">
@@ -76,13 +59,11 @@
                            </span>
                          </td>
                          <td class="d-none">
-<!--  -->
                            <img src="{{environment.ImgView}}" 
                            (click)="viewInfo(row.index)"
-                           title="View info" class="icon-grid">
-                            
+                           title="View info" class="icon-grid">                            
                      </td>
-                        <td  class="text-center" >                           
+                        <td  class="text-center" *ngIf= "!processdownload">                           
                               <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
                               <img *ngIf="srv_StMng.SecAppSelected.MainApp!='TG'" src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                        
                         </td>
@@ -109,7 +90,7 @@
          <div class="col-12 d-flex justify-content-center pb-2 pt-2" >  
             <p class="pr-2">{{'You Can Contact' | translate }}:</p>
             <a (click)="contactus()" style="text-decoration:underline;cursor: pointer;">{{'ITA Support' | translate }}</a> 
-            <p class="pr-2 pl-2">or</p>     
+            <p class="pr-2 pl-2">{{'Or' | translate}}</p>     
             <a href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">{{'Your Local ISCAR Support Team.' | translate }}</a>    
           </div>
       </div>

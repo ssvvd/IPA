@@ -136,6 +136,7 @@ eventsSubject: Subject<void> = new Subject<void>();
 
     if (result=='PDF')
     {
+      this.IsExport=true;
       this.processdownload=true;
       this.srv_statemanage.flgPDFLoading=1;
 
@@ -146,7 +147,7 @@ eventsSubject: Subject<void> = new Subject<void>();
       else
         this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
   
-      this.IsExport=true; 
+       
       
       this.SpinnerService.show();
       let filename:string;

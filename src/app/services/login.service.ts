@@ -385,6 +385,8 @@ export class LoginService {
    
         
     this.srv_appsetting.Country=c;  
+    console.log("c.CountryID.toString()");
+    console.log(c.CountryID.toString());
     localStorage.setItem("countryid",c.CountryID.toString());        
     this.SetExchangeRate1 (c.BrifName); 
   }

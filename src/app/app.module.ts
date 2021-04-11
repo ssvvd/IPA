@@ -103,6 +103,8 @@ import { ContactusComponent } from './components/maintenance/contactus/contactus
 import { FeedbackComponent } from './components/maintenance/feedback/feedback.component';
 import { MachinesComponent } from './components/main-content/body-area/machines/machines/machines.component';
 import { BrowersComponent } from './components/maintenance/browers/browers.component';
+import { HeaderPpMenuComponent } from './components/header-pp-menu/header-pp-menu.component';
+import { HeaderPpCountriesComponent } from './components/maintenance/header-pp-countries/header-pp-countries.component';
 
 
 @NgModule({
@@ -191,6 +193,8 @@ import { BrowersComponent } from './components/maintenance/browers/browers.compo
     FeedbackComponent,
     MachinesComponent,
     BrowersComponent,
+    HeaderPpMenuComponent,
+    HeaderPpCountriesComponent,
     
   ],
   exports:[SharedModule],

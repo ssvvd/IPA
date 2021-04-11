@@ -11,6 +11,8 @@ import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import html2pdf from 'html2pdf.js'
 import { Subject }    from 'rxjs/Subject';
+//import { EILSEQ } from 'constants';
+import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -117,8 +119,7 @@ public downloadItemPDF(srv:any,filename:string):any {
     //pdfCallback: this.pdfCallback 
   };
  
-  var element = document.getElementById('pdfdata');
-  //html2pdf().set(opt).from(element).save().then(this.obsPDFListLoaded.next(null)); 
+  var element = document.getElementById('pdfdata');  
   
   var pdf = new jsPDF();
   pdf.setDisplayMode(1);
@@ -371,11 +372,35 @@ BuildOperationData(doc:jsPDF)
     doc.addImage(img, 'png', 80, this.axial_y-15, 100, 80);
 
     doc.setFontSize(10);
-    this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails !='1').forEach(p=> {  
+    this.srv_statemanage.IPL.items.filter(x=> x.description!='' && x.istooldetails !='1').forEach(p=> {        
       if(p.value!='')
       {
-        doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
-        this.axial_y=this.axial_y+8;
+        if(this.srv_statemanage.SecApp=='780')
+        {           
+          if(this.srv_statemanage.IPL.GetItem('HoleTypeSolid').value!='')
+          {
+            if(p.name!='D3' && p.name!='D2')
+            {
+              doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
+              this.axial_y=this.axial_y+8;
+            }            
+          }    
+          if(this.srv_statemanage.IPL.GetItem('HoleTypePreHole').value!='')
+          {
+            if(p.name!='D2Min' && p.name!='D2Max')
+            {
+              doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
+              this.axial_y=this.axial_y+8;
+            }              
+          }
+          
+        }
+        else
+        {
+          doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
+          this.axial_y=this.axial_y+8;
+        }
+        
       }                                     
       
     });  
@@ -517,22 +542,12 @@ CreateURLparamCNCProgramForItem(viewParams:any) :string
   let FeedTablefieldname:string;
   let Feedfieldname:string;
   let FeedGfieldname:string;
-  //if (this.srv_statemanage.IPL.GetItem('Units').value.toString() == "M")
-  //{
-    cuttingspeedfieldname = "CuttingSpeed";
-    FeedTablefieldname = "FeedTable";
-    Feedfieldname = "Feed";
-    FeedGfieldname = "FeedG";
-  //}
-  //else
-  //{
-    //cuttingspeedfieldname = "CuttingSpeed_INCH";
-    //FeedTablefieldname = "FeedTable_INCH";
-    //Feedfieldname = "Feed_INCH";
-    //FeedGfieldname = "FeedG_INCH";
-  //}                  
-
-  
+ 
+  cuttingspeedfieldname = "CuttingSpeed";
+  FeedTablefieldname = "FeedTable";
+  Feedfieldname = "Feed";
+  FeedGfieldname = "FeedG";
+                
   catsnumber ="";
   for (let c of viewParams.Res[0].CatalogNo)
   {

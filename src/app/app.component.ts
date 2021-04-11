@@ -94,9 +94,12 @@ ngOnInit()
   }
   
   //first time enter
+  //temp -todo:
+  //isLogIn ='0';
+
   if(isLogIn!="-1")
   {
-    if(isLogIn =='0')
+    if(isLogIn ='0')
     {       
         this.srv_appsetting.isLoggedIn=true;
         this.srv_login.FillDefaultUser();
