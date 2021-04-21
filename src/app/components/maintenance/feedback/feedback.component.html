@@ -1,7 +1,7 @@
 <div>
    <div class="modal-body p-0 m-0">
      <div class="row col-12 p-0 m-0">
-          <div class="col-8 pt-2">
+          <div class="col-11 col-sm-11 .col-md-8	.col-lg-8	.col-xl-8 pt-2">
             <label class="pt-2 modal-title FeedbackTitle">{{'Help Us Improve!' | translate}}</label>
             <div class="pt-2">
               <label>{{'1. Did you receive relevant result?' | translate}} </label>
@@ -28,15 +28,20 @@
           </div> 
          
           </div>       
-          <div  class="div-feedback float-right col-4 p-0 m-0" style="margin-right: -5px;padding-right: -5px;" 
+          <div  *ngIf="!srv_appsetting.isMobileResolution" class="div-feedback float-right col-4 p-0 m-0" style="margin-right: -5px;padding-right: -5px;" 
             [ngStyle]="{'background-size': '210px 210px','background-image': 'url(' + environment.ImagePath+ 'CornerIMage.png)', 'background-repeat': 'no-repeat'}"> 
             <button type="button" style= "margin-right:10px;" class="close" aria-label="Close" (click)="this.activeModal.close('send')">              
                                   <span aria-hidden="true" class="span_x">&times;</span>
             </button>       
-          </div>    
-          <div class="col-8 pt-3 pb-4 pr-2">
+          </div>  
+          <div  *ngIf="srv_appsetting.isMobileResolution" class="div-feedback float-right col-1 p-0 m-0"> 
+            <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
+              <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
+          </button>      
+          </div>  
+          <div class="col-8 col-sm-12 pt-3 pb-4 pr-2">
             <div class="float-right">
-              <div class="row pr-4">                
+              <div class="row pr-1">                
                 <!-- <button type="button" class="btn btn-link  sileLinks pr-2" (click)="notshow()">{{"Don't show this again" | translate}}</button>     -->         
                 <button type="button" class="btn btn-select" autofocus (click)="send()">{{'Send' | translate}}</button>  
                 <div class="pr-4"></div>

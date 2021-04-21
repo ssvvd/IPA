@@ -12,7 +12,7 @@ import { AppsettingService} from './../../services/appsetting.service';
   }
 })
 export class HomeComponent implements OnInit {
-  
+
   constructor(private srv_appsetting:AppsettingService)
    { }
 

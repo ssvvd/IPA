@@ -8,6 +8,7 @@ import { AppsettingService} from '../../../../../services/appsetting.service';
 import { LoginService } from '../../../../../services/login.service';
 import {MachinePpAddFavoriteComponent} from '../machine-pp-add-favorite/machine-pp-add-favorite.component';
 import {MachinesPpLoginComponent} from      '../machines-pp-login/machines-pp-login.component';
+import {MachinesFilterMobileComponent} from '../machines-filter-mobile/machines-filter-mobile.component';
 import { environment } from '../../../../../../environments/environment';
 import { MaterialService } from '../../../../../services/material.service'
 import { BrowersComponent } from '../../../../maintenance/browers/browers.component';
@@ -33,11 +34,12 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   listmachines: Machineheader[] = [];
   listmachines_sorted: Machineheader[] = [];
   MachineFilter: MachineFilter;
+  MachineFilterTopMobile: MachineFilter;
   environment = environment;
   MachineIDSelected = 0;
   datatableElement: DataTableDirective;
   dtTrigger: Subject<any> = new Subject();
-
+  
   private eventsSubscription: Subscription=new Subscription();
   isLoaded:boolean =false;
   countrow:string='';
@@ -51,20 +53,28 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   eventsChangeMachineList: Subject<number[]> = new Subject<number[]>();
   
   SortDesBySpindleType:string='asc';
+
+  sortfield:string="";
+  sorttype:string="1";
+  
+  scrollYdiff:string;
+
   constructor(private serv: MaterialService,private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
 
   ngOnInit() {    
+    
+    this.scrollYdiff='325px';   
+    if(window.devicePixelRatio>1.3) this.scrollYdiff='375px';
+    if(this.srv_appsetting.isMobileResolution) this.scrollYdiff='250px';   
+
      if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
      {       
       const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
       this.srv_cook.set_cookie("is_browser_ie",'1');
      }
-
-    let scrollYdiff:string='325px';   
-    if(window.devicePixelRatio>1.3) scrollYdiff='375px';
 
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -72,7 +82,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       "lengthChange": false,
       "paging": false,       
        "autoWidth":false,
-       "scrollY": 'calc(100vh - '+ scrollYdiff +')',
+       "scrollY": 'calc(100vh - '+ this.scrollYdiff +')',
        "info": false,
        "scrollCollapse" : true,
         "language": {
@@ -81,16 +91,15 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         "infoEmpty": "",
         "info": "",
         },        
-        "order": [[ 11, 'desc' ],[ 10, 'asc' ]] ,
+        "order": this.srv_appsetting.isMobileResolution?[[ 3, 'desc' ],[ 2, 'asc' ]]:[[ 11, 'desc' ],[ 10, 'asc' ]] ,
         responsive: true
     };  
     
-     this.serv.getmaterialsbygrp(this.srv_appsetting.Lang,'P')
-    .subscribe((data: any) => {
-      this.srv_statemanage.SelectMaterial(JSON.parse(data)[6]);
-    }); 
+    if(this.srv_appsetting.isMobileResolution) this.InitFilterTopMobile ();
     this.isLoaded =false;
+    
     this.Initializemachinelist(false);
+    
     this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 
   }
   
@@ -143,6 +152,22 @@ export class MachinesListComponent implements OnInit, OnDestroy {
       }));  
        
   }
+
+  sort_field_mobile(a:Machineheader,b:Machineheader,field:string, type:string)
+  {         
+      if(a[field] > b[field])
+      {
+        if(type="1") return -1;
+        if(type="2") return 1;        
+      }
+      else
+      {
+        if(type="1") return 1;
+        if(type="2") return -1; 
+      }
+      return 0;
+  }
+
   sort_arr(a:Machineheader,b:Machineheader)
   {
           
@@ -159,14 +184,12 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   sort_arr_by_spidletype(a:Machineheader,b:Machineheader)
   {    
       if(this.SortDesBySpindleType=='asc')
-      {
-        //this.SortDesBySpindleType="DESC";
+      { 
         if(a.SpindleType > b.SpindleType) return -1;
         return 1;
       } 
       else
-      {
-        //this.SortDesBySpindleType="ASC";
+      {    
         if(a.SpindleType > b.SpindleType) return 1;
         return -1;
       }         
@@ -211,7 +234,17 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     else
     {
       this.ApplyMostRecommended();
+      if(this.srv_appsetting.isMobileResolution) 
+      {
+        let stfilter: MachineFilter;
+        stfilter = this.srv_statemanage.SelectMachineFilterTopMobile;
+        if (typeof (stfilter) !== 'undefined' && stfilter !== null) {
+          this.MachineFilterTopMobile = stfilter;
+          this.ApplyFilterTopMobile(stfilter);
+        } 
+      }
     } 
+
     if(this.srv_cook.get_cookie("def_mach")!='')
       this.defaultmachine =+this.srv_cook.get_cookie("def_mach");    
 
@@ -247,8 +280,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
           this.SpinnerService.show();
           this.eventsSubscription.add(this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();})); 
           return;
-        }});
-      
+        }});      
     }    
     else
     {
@@ -354,7 +386,149 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.isLoaded=true;
     this.listmachines =  this.listmachines_sorted;
     this.countrow =this.listmachines.length.toString();
-    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);    
+    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);        
+    this.srv_statemanage.SelectMachineFilter = this.MachineFilter;
+  }
+
+  ClearFilterMobile ()
+  {         
+    this.MachineFilter.IsMachiningCenter =true;
+    this.MachineFilter.IsLathe =true;
+    this.MachineFilter.IsMultiTask =true;
+    this.MachineFilter.IsMultiSpindle =true;
+    this.MachineFilter.IsSwissType =true; 
+    this.MachineFilter.IsMachineTypeStandard=true;
+    this.MachineFilter.IsMachineTypeHeavyDuty=true;
+    this.MachineFilter.IsMachineTypeHighSpeed=true;
+    this.MachineFilter.ShowOnlyFavorites=false;
+    this.MachineFilter.IsMostRecommended=true;
+
+   
+    this.MachineFilter.IsSliderPower=false;
+    this.MachineFilter.IsSliderSpeed=false;
+    this.MachineFilter.IsSliderTorque=false;
+
+    this.MachineFilter.AdaptationType ='';
+    this.MachineFilter.AdaptationSize='';
+
+    /* todo:
+    this.MachineFilter.PowerMin = this.minPower;
+    this.MachineFilter.PowerMax = this.maxPower;
+
+    this.MachineFilter.SpeedMin = this.minSpeed; 
+    this.MachineFilter.SpeedMax = this.maxSpeed;
+        
+    this.MachineFilter.TorqueMin = this.minTorque;
+    this.MachineFilter.TorqueMax = this.maxTorque;  */
+    
+  }
+
+  FilterTopMobileChange(property:string) {
+    if(property=='IsMachiningCenter')
+    {      
+      this.MachineFilterTopMobile.IsMachiningCenter =true;
+      this.MachineFilterTopMobile.IsLathe =false;
+      this.MachineFilterTopMobile.IsMultiTask =false;
+      this.MachineFilterTopMobile.IsMultiSpindle =false;
+      this.MachineFilterTopMobile.IsSwissType =false;
+      this.MachineFilterTopMobile.IsMostRecommended=false;
+    }
+    if(property=='IsLathe')
+    {      
+      this.MachineFilterTopMobile.IsMachiningCenter =false;
+      this.MachineFilterTopMobile.IsLathe =true;
+      this.MachineFilterTopMobile.IsMultiTask =false;
+      this.MachineFilterTopMobile.IsMultiSpindle =false;
+      this.MachineFilterTopMobile.IsSwissType =false;
+      this.MachineFilterTopMobile.IsMostRecommended=false;
+    }
+    if(property=='IsMultiTask')
+    {     
+      this.MachineFilterTopMobile.IsMachiningCenter =false;
+      this.MachineFilterTopMobile.IsLathe =false;
+      this.MachineFilterTopMobile.IsMultiTask =true;
+      this.MachineFilterTopMobile.IsMultiSpindle =false;
+      this.MachineFilterTopMobile.IsSwissType =false;
+      this.MachineFilterTopMobile.IsMostRecommended=false;
+    }
+    if(property=='IsMultiSpindle')
+    {     
+      this.MachineFilterTopMobile.IsMachiningCenter =false;
+      this.MachineFilterTopMobile.IsLathe =false;
+      this.MachineFilterTopMobile.IsMultiTask =false;
+      this.MachineFilterTopMobile.IsMultiSpindle =true;
+      this.MachineFilterTopMobile.IsSwissType =false;
+      this.MachineFilterTopMobile.IsMostRecommended=false;
+    }
+    if(property=='IsSwissType')
+    {     
+      this.MachineFilterTopMobile.IsMachiningCenter =false;
+      this.MachineFilterTopMobile.IsLathe =false;
+      this.MachineFilterTopMobile.IsMultiTask =false;
+      this.MachineFilterTopMobile.IsMultiSpindle =false;
+      this.MachineFilterTopMobile.IsSwissType =true;
+      this.MachineFilterTopMobile.IsMostRecommended=false;
+    }
+    if(property=='IsMostRecommended')
+    {      
+      this.MachineFilterTopMobile.IsMachiningCenter =true;
+      this.MachineFilterTopMobile.IsLathe =true;
+      this.MachineFilterTopMobile.IsMultiTask =true;
+      this.MachineFilterTopMobile.IsMultiSpindle =true;
+      this.MachineFilterTopMobile.IsSwissType =true;
+      this.MachineFilterTopMobile.IsMostRecommended=true;
+    }    
+    if(this.MachineFilter==undefined)
+      this.ApplyFilterTopMobile(this.MachineFilterTopMobile);
+    else
+      {
+        this.MachineFilter.IsMachiningCenter =this.MachineFilterTopMobile.IsMachiningCenter;
+        this.MachineFilter.IsLathe =this.MachineFilterTopMobile.IsLathe;
+        this.MachineFilter.IsMultiTask =this.MachineFilterTopMobile.IsMultiTask;
+        this.MachineFilter.IsMultiSpindle =this.MachineFilterTopMobile.IsMultiSpindle;
+        this.MachineFilter.IsSwissType =this.MachineFilterTopMobile.IsSwissType;
+        this.MachineFilter.IsMostRecommended =this.MachineFilterTopMobile.IsMostRecommended;        
+        this.MachineFilter.SearchText=this.MachineFilterTopMobile.SearchText;
+        this.ApplyFilter(this.MachineFilter);
+      }
+  }
+
+  ApplyFilterTopMobile(filter: MachineFilter) {            
+    this.listmachines = this.listmachines_sorted.filter(
+      m => ((!filter.IsMachiningCenter && m.MachineType != "Machining center") || filter.IsMachiningCenter) &&
+        ((!filter.IsLathe && m.MachineType != "Lathe") || filter.IsLathe) &&
+        ((!filter.IsMultiTask && m.MachineType != "Multi task") || filter.IsMultiTask) &&
+        ((!filter.IsMultiSpindle && m.MachineType != "Multi spindle") || filter.IsMultiSpindle) &&
+        ((!filter.IsSwissType && m.MachineType != "Swiss type") || filter.IsSwissType) && 
+        ((filter.IsMostRecommended && m.IsMostRecommended) || !filter.IsMostRecommended)
+        && 
+        (m.MachineName.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1 || m.AdaptationType.toUpperCase().indexOf(filter.SearchText.toUpperCase()) > -1 
+        || m.AdaptationSize.toString().indexOf(filter.SearchText.toUpperCase()) > -1
+        || m.Power.toString().indexOf(filter.SearchText.toUpperCase()) > -1
+        || m.Torque.toString().indexOf(filter.SearchText.toUpperCase()) > -1
+        || m.SpindleSpeed.toString().indexOf(filter.SearchText.toUpperCase()) > -1)) ;
+        this.srv_statemanage.SelectMachineFilterTopMobile = filter;
+    /* this.srv_statemanage.SelectMachineFilter = filter;
+    this.countrow =this.listmachines.length.toString(); 
+    
+    let minPower:number=0;
+    let maxPower:number=0;
+    let minSpeed:number=0;
+    let maxSpeed:number=0;
+    let minTorque:number=0;
+    let maxTorque:number=0;
+    if(this.listmachines.length>0)
+    {
+      minPower = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
+      maxPower = Math.max.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      minSpeed = Math.min.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      maxSpeed = Math.max.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      minTorque = Math.min.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+      maxTorque = Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))
+      let nn:number[]=[];
+      nn.push(minPower);nn.push(maxPower);nn.push(minSpeed);nn.push(maxSpeed);nn.push(minTorque);nn.push(maxTorque); */
+      //this.eventsChangeMachineList.next(nn);
+    //}    
   }
 
   ApplyFilter(filter: MachineFilter) {            
@@ -426,7 +600,7 @@ UpdateStateSelectedMachine(MachineID: number) {
     };   
     
      this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr_by_spidletype(a,b));  
-    //this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_arr_by_spidletype(a,b));
+   
     if(this.SortDesBySpindleType=='asc') 
       this.SortDesBySpindleType='desc';
     else
@@ -513,5 +687,142 @@ UpdateStateSelectedMachine(MachineID: number) {
     }  
   }
 
+  OpenFilterMobile()
+  {
+    const modalRef = this.modalService.open(MachinesFilterMobileComponent, {windowClass: 'filter-mobile-modal' });     
+    modalRef.componentInstance.sortfield = this.sortfield;
+    modalRef.componentInstance.sorttype = this.sorttype;
+    modalRef.result.then((result:any[]) => {
+      if(result[0]=='cancel')
+      {
+        return;
+      }
+      if(result[0]=='apply')
+      {
+       this.sortfield = result[1]; 
+       this.sorttype = result[2];
+       let filter:MachineFilter;
+       if(result[3]!=undefined) 
+       {
+         filter=result[3];
+         if(this.MachineFilterTopMobile!=undefined)
+         {        
+          filter.IsMachiningCenter =this.MachineFilterTopMobile.IsMachiningCenter;
+          filter.IsLathe =this.MachineFilterTopMobile.IsLathe;
+          filter.IsMultiTask =this.MachineFilterTopMobile.IsMultiTask;
+          filter.IsMultiSpindle =this.MachineFilterTopMobile.IsMultiSpindle;
+          filter.IsSwissType =this.MachineFilterTopMobile.IsSwissType;
+          filter.SearchText=this.MachineFilterTopMobile.SearchText;
+         }
+         this.MachineFilter=filter;
+         this.ApplyFilter(filter);
+       }
+     
+       if(this.sortfield!="")
+       {       
+          this.listmachines=this.listmachines.sort((a,b)=> this.sort_field_mobile(a,b,this.sortfield,this.sorttype));
+          this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_field_mobile(a,b,this.sortfield,this.sorttype));    
+      }
+      }
+      if(result[0]=='reset')
+      {
+        this.dtOptions = {
+          pagingType: 'full_numbers',
+          "searching": false,
+          "lengthChange": false,
+          "paging": false,       
+           "autoWidth":false,
+           "scrollY": 'calc(100vh - '+ this.scrollYdiff +')',
+           "info": false,
+           "scrollCollapse" : true,
+            "language": {
+            "emptyTable": "",
+            "zeroRecords": "",
+            "infoEmpty": "",
+            "info": "",
+            },        
+            "order": [[ 3, 'desc' ],[ 2, 'asc' ]],
+            responsive: true
+        };
+             
+        this.InitFilter(); this.ApplyFilter(this.MachineFilter);
+        this.InitFilterTopMobile();
+        this.srv_statemanage.SelectMachineFilterTopMobile = this.MachineFilterTopMobile;
+
+        if(this.sortfield!="")
+        {
+          this.sortfield="";
+          this.sorttype="1";
+          if (this.isDtInitialized) {
+            this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+              dtInstance.destroy();
+              this.dtTrigger.next();
+            });
+          } else {
+            this.isDtInitialized = true
+            this.dtTrigger.next();
+          }  
+        }
+       
+        //if(this.MachineFilterTopMobile!=undefined)  {this.InitFilterTopMobile(); this.ApplyFilterTopMobile(this.MachineFilterTopMobile)  }                               
+      }
+
+    });
+  }
+
+  InitFilterTopMobile()
+  {
+    this.MachineFilterTopMobile=new MachineFilter;
+    this.MachineFilterTopMobile.IsMachiningCenter =true;
+    this.MachineFilterTopMobile.IsLathe =true;
+    this.MachineFilterTopMobile.IsMultiTask =true;
+    this.MachineFilterTopMobile.IsMultiSpindle =true;
+    this.MachineFilterTopMobile.IsSwissType =true;
+    this.MachineFilterTopMobile.SearchText="";
+    this.MachineFilterTopMobile.IsMostRecommended=true;
+
+  }
+
+
+  InitFilter()
+  {
+    this.MachineFilter=new MachineFilter;
+    let minPower:number = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
+    let maxPower:number = Math.max.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let minSpeed:number = Math.min.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let maxSpeed:number = Math.max.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let minTorque:number = Math.min.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let maxTorque :number= Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))                                
+        
+    this.MachineFilter=new MachineFilter;
+    this.MachineFilter.IsMachiningCenter =true;
+    this.MachineFilter.IsLathe =true;
+    this.MachineFilter.IsMultiTask =true;
+    this.MachineFilter.IsMultiSpindle =true;
+    this.MachineFilter.IsSwissType =true;
+    this.MachineFilter.IsMachineTypeStandard=true;
+    this.MachineFilter.IsMachineTypeHeavyDuty=true;
+    this.MachineFilter.IsMachineTypeHighSpeed=true;
+    //todo:
+    
+    this.MachineFilter.PowerMin = minPower;
+    this.MachineFilter.PowerMax = maxPower;
+
+    this.MachineFilter.SpeedMin = minSpeed; 
+    this.MachineFilter.SpeedMax = maxSpeed;
+        
+    this.MachineFilter.TorqueMin = minTorque;
+    this.MachineFilter.TorqueMax = maxTorque; 
+
+    this.MachineFilter.AdaptationType ='';
+    this.MachineFilter.AdaptationSize ='';
+
+    this.MachineFilter.IsMostRecommended=true;
+
+    this.MachineFilter.ShowOnlyFavorites=false;    
+    this.MachineFilter.IsSliderPower=false;
+    this.MachineFilter.IsSliderSpeed=false;
+    this.MachineFilter.IsSliderTorque=false;
+  }
 }
 

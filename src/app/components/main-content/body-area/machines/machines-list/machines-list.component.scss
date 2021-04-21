@@ -1,8 +1,12 @@
 td:first-child { display:none; }
 th:first-child { display:none; }
 
-table.dataTable{  
+/* table.dataTable{  
     background: var(--bg-gray);
+}
+ */
+.datatable-mobile{  
+    background: white!important;
 }
 
 .table-stripe{
@@ -39,6 +43,7 @@ th {
      background: transparent !important;
      white-space: nowrap;
   }
+
 
 .table td:nth-child(2), .table th:nth-child(2){
     width: 15% !important;  
@@ -197,5 +202,52 @@ table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.
     max-width: 20%!important;
     
 }
+
+.div-filter-scroll
+{
+    display: flex;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+div.scrollmenu {    
+    overflow: auto;
+    white-space: nowrap;
+  }
+  
+  div.scrollmenu label {
+    display: inline-block;    
+    text-align: center;    
+    text-decoration: none;
+  }
+  
+  div.scrollmenu a:hover {
+    background-color: #777;
+  }
+
+  .form-rounded {
+    border-radius: 1rem!important;
+    }
+    
+    .my-icon {
+        padding-right: calc(1.5em + .75rem);
+        background-image: url(/assets/img/Icon_Search_gray.svg);
+        background-repeat: no-repeat;
+        background-position: center right calc(.375em + .1875rem);
+        background-size: calc(1.75em + .375rem) calc(1.75em + .375rem);
+
+        background-color: white!important;
+    }
+
+    .title-selected{
+        color:var(--btn-bg-select-color) !important;
+        font-weight: bold !important;
+        text-decoration: underline!important;
+        //font-size: 18px !important;
+       
+      }
+
+ 
+
 }
     

@@ -1,25 +1,43 @@
 
-<div class="border-left-gray border-right-gray" > 
+<div class="border-left-gray border-right-gray"> 
     <div class="row">          
-      <div class="col col-20 ml-0 pl-2 pr-0 pt-0"  > 
+      <div class="col col-20 ml-0 pl-2 pr-0 pt-0"  *ngIf="!msrv_appsetting.isMobileResolution"> 
          <div class="pt-4 pb-0">
-
+          
          </div>
-          <div class="pr-2 pt-0 border-right-gray scrollYFilter" >
+          <div class="pr-2 pt-0 border-right-gray scrollYFilter" *ngIf="!msrv_appsetting.isMobileResolution">            
             <app-machines-filter *ngIf="isLoaded" (MachineFilterChanged)="onMachineFilterChanged($event)"
             (MachineFilterClear)="onMachineFilterClear()" [onChangeMachineList]="eventsChangeMachineList.asObservable()" [onChangeFavorite]="eventsChangeFavorite.asObservable()"></app-machines-filter>
           </div>
       </div>
-      <div class="col col-80 mt-2 mr-0 pl-2 pr-2" >                                       
-          <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" >
+      <div class="col mt-2 mr-0 pl-2 pr-2" [ngClass]="msrv_appsetting.isMobileResolution?'col-12':'col-80 '">                                       
+          <div class="pb-1 pt-0 mt-0 pt-4 d-flex justify-content row" *ngIf="!msrv_appsetting.isMobileResolution">
             <div class="col-6 pt-4 pl-0">  
               <h3 class="siteTitle pl-0 pb-0">{{'Select Machine' | translate}}</h3>
             </div>
             <div class="float-right col-6 text-right pt-4">
               <label class="pl-2 pb-0">{{'Found Machines' | translate}} : {{countrow}} {{'out of '| translate}} {{countallrow}}</label>
             </div>
-          </div>           
-          <div class="div-datatable">              
+          </div> 
+          <div *ngIf="msrv_appsetting.isMobileResolution">           
+            <div class="row pt-4">                
+                <div class=" col-10 pt-2 pl-1">                  
+                  <input type="text" class="form-control my-icon form-rounded " [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  (click)="FilterTopMobileChange('')"  placeholder="{{'Search'| translate}}">
+                </div>  
+                <div class="float-right col-2">
+                    <img  [src]="environment.ImagePath + 'icon_SortFilter.svg'" (click)="OpenFilterMobile()" class="ImgMobile pt-2 pr-2 pl-2">
+                </div>
+              </div>
+              <div class="scrollmenu pb-2 pt-2 pl-1">
+                <label class="pr-2" [ngClass]="MachineFilterTopMobile.IsMostRecommended?'title-selected':''" (click)="FilterTopMobileChange('IsMostRecommended')">{{'Most Recommended' | translate}}</label>
+                <label class="pr-2" [ngClass]="MachineFilterTopMobile.IsMachiningCenter && !MachineFilterTopMobile.IsMostRecommended?'title-selected':''" (click)="FilterTopMobileChange('IsMachiningCenter')">{{'Machining Center' | translate}}</label>
+                <label class="pr-2"  [ngClass]="MachineFilterTopMobile.IsLathe && !MachineFilterTopMobile.IsMostRecommended?'title-selected':''" (click)="FilterTopMobileChange('IsLathe')">{{'Lathe' | translate}}</label>
+                <label class="pr-2"  [ngClass]="MachineFilterTopMobile.IsMultiTask && !MachineFilterTopMobile.IsMostRecommended?'title-selected':''" (click)="FilterTopMobileChange('IsMultiTask')">{{'Multi Task Machine' | translate}}</label>
+                <label class="pr-2"  [ngClass]="MachineFilterTopMobile.IsMultiSpindle && !MachineFilterTopMobile.IsMostRecommended?'title-selected':''" (click)="FilterTopMobileChange('IsMultiSpindle')">{{'Multi Spindle' | translate}}</label>
+                <label class="pr-2"  [ngClass]="MachineFilterTopMobile.IsSwissType && !MachineFilterTopMobile.IsMostRecommended?'title-selected':''" (click)="FilterTopMobileChange('IsSwissType')">{{'Swiss Type' | translate}}</label>              
+              </div>
+          </div>                    
+          <div class="div-datatable" *ngIf="!msrv_appsetting.isMobileResolution">              
               <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" style="width: 100%"
                 class="table table-stripe row-border hover ">
                 <thead *ngIf="isLoaded">
@@ -53,7 +71,7 @@
                 <tbody *ngIf="isLoaded">
                   <tr  *ngFor="let mach of listmachines"  [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected'">
                     <th scope="row" class="d-none">{{mach.MachineID}} </th>                                                                                         
-                    <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2" class="cursor-pointer" >{{mach.MachineName}}</div></td>                     
+                    <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2 " class="cursor-pointer" >{{mach.MachineName}}</div></td>                     
                     <td class="cursor-pointer text-center" data-sort ="mach.SpindleType" >                     
                       <div class="pl-2 cursor-pointer text-center">
                         <div class="pl-2">
@@ -93,7 +111,66 @@
                   </tr>                  
                 </tbody>
               </table>
-            </div>               
+            </div> 
+            
+            <div *ngIf="msrv_appsetting.isMobileResolution" class="pl-0 pr-0 ml-0 mr-0">              
+              <table  datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" style="width: 100%" class="datatable-mobile  row-border  pl-0 pr-0 ml-0 mr-0">
+                 <thead *ngIf="isLoaded">
+                  <tr id="dtOptions">
+                    <th class="d-none"></th> 
+                    <th class="d-none"></th>                                                                                                                                           
+                    <th class="d-none" ></th> 
+                    <th class="d-none" ></th>                  
+                  </tr>
+                </thead> 
+                <tbody *ngIf="isLoaded">
+                  <tr  *ngFor="let mach of listmachines"  [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected-mobile'">
+                    <th scope="row" class="d-none">{{mach.MachineID}} </th>      
+                    <td class=" pl-0 pr-0 ml-0 mr-0" (click)="onclickrow(mach)">
+                        <div class="row">
+                          <div class="col-4 pl-0 pr-0 ml-0 mr-0">                            
+                            <img class="ml-2 mr-2 mt-0 mb-2" *ngIf="mach.MachineType== 'Machining center'" [src]="environment.ImagePath + 'MachiningCenter.svg'" >
+                            <img class="ml-2 mr-2 mt-0 mb-2" *ngIf="mach.MachineType== 'Lathe'" [src]="environment.ImagePath + 'lathe.svg'" >
+                            <img class="ml-2 mr-2 mt-0 mb-2" *ngIf="mach.MachineType== 'Multi task'" [src]="environment.ImagePath + 'MultiTask.svg'" >
+                            <img class="ml-2 mr-2 mt-0 mb-2" *ngIf="mach.MachineType== 'Multi spindle'" [src]="environment.ImagePath + 'MultiSpindle.svg'" >
+                            <img class="ml-2 mr-2 mt-0 mb-2" *ngIf="mach.MachineType== 'Swiss type'" [src]="environment.ImagePath + 'SwissType.svg'" >
+                            <div class="float-right text-right" style="width:100%!important" >
+                              <button [className]="mach.IsSelected? 'col-12 btn btn-select-selected' : 'col-12 btn btn-select'"
+                                (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect| translate}}</button>
+                            </div>
+                          </div>
+                          <div class="col-8">
+                            <div class=" font-weight-bold">{{mach.MachineName}}</div>
+                            <div class="ml-0">
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" class="custom-control-input " [attr.id]="'optM'+ mach.MachineID" [attr.name]="'SpindleType'+ mach.MachineID"  [checked]="mach.SpindleType=='M'"  (click)="setspindletype(mach,'M')">
+                                  <label class="custom-control-label" [attr.for]="'optM'+ mach.MachineID">{{'Main Spindle' | translate}}</label>
+                                </div>            
+                                <div class="custom-control custom-radio custom-control-inline">
+                                  <input type="radio" class="custom-control-input" [attr.id]="'optT'+ mach.MachineID"  [disabled]="mach.MachineType=='Machining center' || mach.MachineType=='Lathe'"   [checked]="mach.SpindleType=='T'"  [attr.name]="'SpindleType'+ mach.MachineID" (click)="setspindletype(mach,'T')" >
+                                  <label class="custom-control-label" [attr.for]="'optT'+ mach.MachineID">{{'Tool Spindle' | translate}}</label>
+                                </div>                                        
+                            </div>  
+                            <div class="row">
+                              <div class="text-left">{{'Adaptation Type'| translate}}&{{'Size' | translate}}:</div>                              
+                              <div (click)="onclickrow(mach)">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div>
+                            </div>                           
+                            <div class="row">
+                              <div>
+                                <label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}:</label>
+                              </div>
+                              <div class="pl-2">{{mach.Power}}</div>
+                            </div>
+                          
+                        </div>
+                        </div>
+                    </td>                                                                          
+                    <th scope="row" class="d-none">{{mach.Sec}}</th> 
+                    <th scope="row" class="d-none">{{mach.isFavorite}}</th>                 
+                  </tr>                  
+                </tbody>
+              </table>
+            </div>   
         </div>
       </div>   
 </div>

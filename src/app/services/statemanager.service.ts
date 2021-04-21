@@ -111,6 +111,13 @@ export class StateManagerService {
     this.mMachineFilter = mf;
   }
   
+  private mSelectMachineFilterTopMobile:MachineFilter
+  get SelectMachineFilterTopMobile():MachineFilter {
+    return this.mSelectMachineFilterTopMobile;
+  }
+  set SelectMachineFilterTopMobile(mf:MachineFilter) {
+    this.mSelectMachineFilterTopMobile = mf;
+  }
   get arrMachineSpindle():Machinespindle[] {
     return this.marrMachineSpindle;
   }

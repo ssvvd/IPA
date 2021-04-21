@@ -10,13 +10,13 @@
                     <app-header></app-header>
                 </div> 
             </div>     
-            <div *ngIf="msrv_appsetting.isLoggedIn"  class="row justify-content-center" [style.height.px]="innerheightmaincontent" [style.max-height.px]="innerheightmaincontent"  [style.min-height.px]="innerheightmaincontent" >           
+            <div *ngIf="msrv_appsetting.isLoggedIn"  class="row justify-content-center" >           
                 <div class="div-main-content">
                     <app-main-content></app-main-content>
                 </div>                          
             </div>
             
-            <div class="fixed-bottom">
+            <div class="fixed-bottom" *ngIf="!msrv_appsetting.isMobileResolution">
                 <app-footer></app-footer>
             </div>                              
         </div>

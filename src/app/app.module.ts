@@ -105,6 +105,8 @@ import { MachinesComponent } from './components/main-content/body-area/machines/
 import { BrowersComponent } from './components/maintenance/browers/browers.component';
 import { HeaderPpMenuComponent } from './components/header-pp-menu/header-pp-menu.component';
 import { HeaderPpCountriesComponent } from './components/maintenance/header-pp-countries/header-pp-countries.component';
+import { MachinesFilterMobileComponent } from './components/main-content/body-area/machines/machines-filter-mobile/machines-filter-mobile.component';
+
 
 
 @NgModule({
@@ -194,7 +196,8 @@ import { HeaderPpCountriesComponent } from './components/maintenance/header-pp-c
     MachinesComponent,
     BrowersComponent,
     HeaderPpMenuComponent,
-    HeaderPpCountriesComponent,
+    HeaderPpCountriesComponent,    
+    MachinesFilterMobileComponent,
     
   ],
   exports:[SharedModule],

@@ -273,11 +273,10 @@ html {
   width: 91.66666667%!important;
  padding-right:0!important;   
 } 
+
+
+
 }
-
-
-
-
 .icon-grid{
 height: 35px;
 cursor: pointer;
@@ -316,10 +315,15 @@ input[type="number"]::-webkit-inner-spin-button {
 tr.tr-selected {
   background-color: var(--row-selected) !important;
 }
-/* .tr-selected
+  
+.tr-not-selected-mobile
 {
-    background-color: var(--row-selected);    
-} */
+    background-color:white !important;
+}
+
+tr.tr-selected {
+  background-color: var(--row-selected) !important;
+}
   
 .tr-not-selected
 {
@@ -470,14 +474,6 @@ html, body{
    font-size: 26px;
 }
 
-
-
-/* 
- .ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
- .ng-select-container.ng-has-value .ng-value-container 
- .ng-value{ visibility: visible; } */
- 
-
  .shape-ellipse {  
   cursor: pointer;
   top: 0;
@@ -506,7 +502,6 @@ html, body{
     margin-top:-2px
 }
 
-
 .noScrollY{
   overflow-y: hidden !important;
 }
@@ -526,7 +521,7 @@ html, body{
 }
 
 
-.feedback-modal .modal-dialog {
+ .feedback-modal .modal-dialog {
   
   top: 200px;    
   width: 620px!important;
@@ -535,8 +530,31 @@ html, body{
   min-height: 400px!important;
   max-width: 620px!important;
   max-height: 400px!important;
+} 
+
+
+  .feedback-modal-mobile .modal-dialog {  
+    top: 100px;    
+    width: 320px!important;
+    height: 400px!important;
+    min-width: 320px!important;
+    min-height: 400px!important;
+    max-width: 320px!important;
+    max-height: 400px!important;
+
 }
 
+.ImgMobile
+{
+  height: 45px;
+}
+
+button.close-mobile{
+  outline: none;
+  color: rgb(100, 97, 97) !important;
+  background-color: #fff !important;   
+  border:none;
+}
 
 
 

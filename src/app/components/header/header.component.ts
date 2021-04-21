@@ -114,7 +114,7 @@ export class HeaderComponent implements OnInit {
     this.userdes=this.translate.instant('Log In');;     
   }
 
-  OpenMenu()
+  OpenMenuMobile()
   {
     const modalRef = this.modalService.open(HeaderPpMenuComponent, {backdrop:'static', windowClass: 'header-menu-modal' });  
     if(this.srv_appsetting.UserID=='')   
@@ -223,7 +223,12 @@ export class HeaderComponent implements OnInit {
       {          
           this.CurrentCountryName = this.srv_appsetting.Country.CountryName;            
       } 
-
+      
+      if(this.srv_appsetting.Country.CountryCode=='US')
+      {
+        this.srv_appsetting.ChangeUnits('I');
+        this.isMetric=false;
+      }
       this.IsLoaded=true;     
       });   
   }
@@ -237,6 +242,11 @@ export class HeaderComponent implements OnInit {
     this.translate.use(LanguageID);
     this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
     this.userdes=this.translate.instant('Log In'); 
+    if(this.srv_appsetting.Country.CountryCode=='US')
+    {
+      this.srv_appsetting.ChangeUnits('I');
+      this.isMetric=false;
+    }
   }
   
   CheckAllowUnitsChange(event)
@@ -269,34 +279,7 @@ export class HeaderComponent implements OnInit {
         }});                
   }
 
- /*  UnitsChanged(event)
-  {  
-      const modalRef = this.modalService.open(HeaderPpUnitsComponent, {backdrop:'static', centered: true });
-      //modalRef.componentInstance.MachineName = mach.MachineName;
-                    
-      modalRef.result.then((result) => {
-        if(result=='cancel') {this.isMetric = !this.isMetric;return;}
-        if(result=='change')
-        {     
-          if(event.target.checked)        
-          this.srv_appsetting.ChangeUnits('M');                
-        else    
-          this.srv_appsetting.ChangeUnits('I');
-             
-        if (window.location.href.indexOf('machines')>-1)
-          {
-            this.srv_statemanage.ChangeUnits();        
-          }        
-        else
-          {
-            this.router.navigate(['/home/machines']);
-            this.srv_statemanage.ChangeUnits();        
-          }        
-        }});
-        
-      
-  }
- */
+ 
   showmenu()
   {
     this.menuisshown =!this.menuisshown;
@@ -344,7 +327,12 @@ export class HeaderComponent implements OnInit {
 
   feedback()
   {
-    const modalRef = this.modalService.open(FeedbackComponent,{backdrop: 'static', centered: true, windowClass: 'feedback-modal' });
+     let winclass:string;
+    if(this.srv_appsetting.isMobileResolution) 
+      winclass ='feedback-modal-mobile';
+    else
+      winclass ='feedback-modal'; 
+    const modalRef = this.modalService.open(FeedbackComponent,{backdrop: 'static', centered: true, windowClass: winclass });
     modalRef.result.then((result) => {     
       this.srv_cook.set_cookie("notshowfeedback",'1');    
     });    

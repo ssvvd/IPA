@@ -174,7 +174,7 @@ export class LoginService {
       u.CountryName=countryname;
       if(u.CountryCode=='')
       this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
-      {                  
+      {                    
        if(d.country==undefined)  
           this.UpdateCurrentCountry('US');          
         else 
@@ -182,13 +182,13 @@ export class LoginService {
           this.UpdateCurrentCountry(d.country);
           //this.UpdateCurrentCountry('DE');
         }        
-                                                
+                                               
       }
       );
     else      
       this.UpdateCurrentCountry(u.CountryCode); 
     }
-    
+       
     this.srv_appsetting.User=u;  
     this.srv_appsetting.isLoggedIn=true;
     this.srv_appsetting.AfterToken=true;  

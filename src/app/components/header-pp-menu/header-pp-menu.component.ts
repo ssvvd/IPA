@@ -42,9 +42,8 @@ export class HeaderPpMenuComponent implements OnInit {
        let LanguageID:string = result[1];
        this.srv_login.SelectCountryAndLang(c,LanguageID);
        //this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
-       this.CurrentCountryName = this.srv_appsetting.Country.CountryName; 
-
-       
+       this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
+       this.activeModal.close('send');      
       }
     });
    }

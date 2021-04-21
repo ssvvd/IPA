@@ -30,7 +30,7 @@ export class MachinesFilterComponent implements OnInit {
   
   @Input() onChangeFavorite: Observable<void>;
   @Input() onChangeMachineList: Observable<number[]>;
-
+  
   private eventsSubscription: Subscription=new Subscription();
 
   @Output() MachineFilterChanged = new EventEmitter<{filter: MachineFilter}>();
@@ -88,13 +88,16 @@ export class MachinesFilterComponent implements OnInit {
   IsMultiTask:boolean;
   IsMultiSpindle:boolean;
   IsSwissType:boolean;
+  
+  @Input() clearfiltermobile: Observable<void>;
 
   ngOnInit() {
+    //this.eventsSubscription = this.clearfiltermobile.subscribe(() => this.ClearFilter());  
     this.srv_statemanage.ReloadMachineTab.subscribe(arr => this.Initializedata());  // todo: 
     this.machFilter=new MachineFilter;
     this.Initializedata();
   }
- 
+
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }
@@ -122,8 +125,9 @@ export class MachinesFilterComponent implements OnInit {
       }    
   }
   Initializedata ()
-  {        
-        this.eventsSubscription.add( this.onChangeMachineList.subscribe((d) => this.ChangeMachineList(d)));                       
+  {      
+        if(this.onChangeMachineList!=undefined)
+          this.eventsSubscription.add( this.onChangeMachineList.subscribe((d) => this.ChangeMachineList(d)));                       
         this.eventsSubscription.add(this.serv.getmachineadaptationtype('','').subscribe((res: any) => {
           this.arrAdapType = JSON.parse(res); 
           this.arrAdapType.unshift( { AdaptationType:''});      
@@ -151,8 +155,7 @@ export class MachinesFilterComponent implements OnInit {
                 ceil: this.maxPower, 
                 step: 1,
                 showTicks: false
-              };
-              //alert(s);
+              };     
               this.options_speed = {
                 floor: this.minSpeed,
                 ceil: this.maxSpeed,
@@ -191,7 +194,6 @@ export class MachinesFilterComponent implements OnInit {
   ChangeMachineList(s:number[])
   {
     this.machFilter.PowerMin=s[0];
-    //alert(this.machFilter.PowerMin);
     this.machFilter.PowerMax=s[1];
     this.machFilter.SpeedMin=s[2];
     this.machFilter.SpeedMax=s[3];
@@ -333,6 +335,7 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsMostRecommended=false;
     this.isMostRecom ='0';
   }
+
   ClearFilter ()
   {    
     this.InitFilter();
@@ -361,8 +364,7 @@ export class MachinesFilterComponent implements OnInit {
     this.isMostRecom='1';
     this.curAdapType=this.arrAdapType[0]; 
     this.curAdapSize=this.arrAdapSize[0];
-    
-    //this.MachineFilterClear.emit();
+
     this.MachineFilterChanged.emit({ filter: this.machFilter});
     
      this.machFilter.PowerMin = this.minPower;

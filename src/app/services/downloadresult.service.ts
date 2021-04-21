@@ -517,7 +517,7 @@ CreateURLparamCNCProgram(viewParams:any) :string
 
   if (this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString() == 'M60' || this.srv_statemanage.IPL.GetItem('ThreadForm').value.toString() == 'MJ60' )
     this.srv_statemanage.IPL.GetItem('MachineType').value='M';           
- else
+  else
     this.srv_statemanage.IPL.GetItem('MachineType').value='I';
 
   urlparam = urlparam + "&pitchunits=" + this.srv_statemanage.IPL.GetItem('MachineType').value.toString(); 

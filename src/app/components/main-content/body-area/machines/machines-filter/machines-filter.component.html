@@ -1,5 +1,5 @@
 <div>
-<div class="container-fluid p-0 pl-2 pr-2 pt-0" >
+<div class="container-fluid p-0 pl-2 pr-2 pt-0" *ngIf="!srv_appsetting.isMobileResolution">
     <div class="form-group row">
         <input class="form-control" [(ngModel)]="machFilter.SearchText" (keyup)="FilterChange($event,false,false,false,'')" type="text" placeholder="{{'Search'| translate}}" aria-label="Search">    
     </div>
@@ -131,7 +131,7 @@
 </div>
 <div class="border-bottom pl-3 pt-2">
 </div>
-<div class="pl-2 pb-2 ">
+<div class="pl-2 pb-2 " *ngIf="!srv_appsetting.isMobileResolution">
     <div class="row">
         <div class="custom-control custom-checkbox cursor-pointer pt-2 col-2">
             <input type="checkbox" class="custom-control-input cursor-pointer" id="ShowOnlyFavorites" name="ShowOnlyFavorites" (change)= "FilterChange($event,false,false,false,'')"  [(ngModel)]="machFilter.ShowOnlyFavorites">
@@ -185,4 +185,5 @@
         </div>
     </div>   
 </div>
+
 </div>

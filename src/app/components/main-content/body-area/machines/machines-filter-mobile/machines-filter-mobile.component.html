@@ -1,0 +1,67 @@
+<div class="pt-0 pl-0 ml-0" style="min-height:50px!important;">    
+ <!--  <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('cancel')">              
+    <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
+</button>  -->
+<button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
+  <span  class="float-right span_x_mobile">&times;</span>
+</button>
+</div>
+<div>  
+<ul class="nav nav-fill" >                  
+  <li  class="nav-item"  (click)="OpenSort()">  
+      <div class="pl-2 text-center" [ngClass]="TabActive==1?'div-tab-menu-selected':'div-tab-menu'">
+            <label>{{'Sort' | translate}}</label>
+      </div>                                                                                                                              
+  </li> 
+  <li  class="nav-item"  (click)="OpenFilter()">  
+    <div class="pr-2 text-center"  [ngClass]="TabActive==2?'div-tab-menu-selected':'div-tab-menu'" >
+      <label>{{'Filter' | translate}}</label>          
+    </div>                                                                                                                              
+</li>          
+</ul>
+
+<div *ngIf="TabActive==1">
+  <div class="ml-2 mt-4">
+    <div class="custom-control custom-radio ">
+      <input type="radio" class="custom-control-input" id="sort_speed_1" name="Sort"  [checked]="sortfield=='SpindleSpeed' && sorttype=='1'"  (click)="setsort('SpindleSpeed','1')">
+      <label class="custom-control-label" for="sort_speed_1">{{'Spindle Speed' | translate}}{{' (rpm)'}}-{{'Fastest to Slowest'}}</label>
+    </div>            
+    <div class="custom-control custom-radio mt-2">
+      <input type="radio" class="custom-control-input" id="sort_speed_2" name="Sort"  [checked]="sortfield=='SpindleSpeed' && sorttype=='2'"  (click)="setsort('SpindleSpeed','2')">
+      <label class="custom-control-label" for="sort_speed_2">{{'Spindle Speed' | translate}}{{' (rpm)'}}-{{'Slowest to Fastest'}}</label>
+    </div>  
+    <div class="custom-control custom-radio mt-2">
+      <input type="radio" class="custom-control-input" id="sort_power_1" name="Sort"  [checked]="sortfield=='Power' && sorttype=='1'"  (click)="setsort('Power','1')">
+      <label class="custom-control-label" for="sort_power_1">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}-{{'Strongest to Fastest'}}</label>
+    </div>     
+    <div class="custom-control custom-radio mt-2">
+      <input type="radio" class="custom-control-input" id="sort_power_2" name="Sort"  [checked]="sortfield=='Power' && sorttype=='2'"  (click)="setsort('Power','2')">
+      <label class="custom-control-label" for="sort_power_2">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }} - {{'Weakest to Strongest'}}</label>
+    </div>  
+    <div class="custom-control custom-radio mt-2">
+      <input type="radio" class="custom-control-input" id="sort_torque_1" name="Sort"  [checked]="sortfield=='Torque' && sorttype=='2'"  (click)="setsort('Torque','1')">
+      <label class="custom-control-label" for="sort_torque_1">{{'Torque' | translate}}({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}) - {{'Biggest to Smallest'}}</label>
+    </div> 
+    <div class="custom-control custom-radio mt-2">
+      <input type="radio" class="custom-control-input" id="sort_torque_2" name="Sort"  [checked]="sortfield=='Torque' && sorttype=='2'"  (click)="setsort('Torque','2')">
+      <label class="custom-control-label" for="sort_torque_2">{{'Torque' | translate}}({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}) - {{'Smallest to Biggest'}}</label>
+    </div>                                 
+</div>  
+</div>
+<div *ngIf="TabActive==2" class="pl-2 pr-2 mt-2">          
+<app-machines-filter  (MachineFilterChanged)="onMachineFilterChanged($event)"  [clearfiltermobile]="eventsClearFilterMobile.asObservable()"
+(MachineFilterClear)="onMachineFilterClear()" [onChangeMachineList]="eventsChangeMachineList.asObservable()" ></app-machines-filter>  
+</div>
+</div>
+<div class="modal-footer"> 
+    <div class="row">            
+      <div  class="col-6 text-center">  
+        <button type="button" class="btn btn-select-cancel" (click)="Reset()">{{'Reset' | translate}}</button>        
+      </div>
+      <div  class="col-6">
+        <button  type="button" class="btn btn-select" autofocus (click)="Apply()">{{'Apply' | translate}}</button>           
+      </div>
+    </div>
+</div>
+
+

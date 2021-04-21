@@ -1,31 +1,31 @@
 <div class="container pl-0 pr-0">
     <div class="pt-0 pl-0 ml-0" style="background-color:#e7e8e9 ;">
-        <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"   class="MenuImg pt-1 pr-2 pl-2  pb-2">
+        <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"   class="ImgMobile pt-1 pr-2 pl-2  pb-2">
         <Label class="siteTitle  pt-2"  style="font-size: 20px!important">ISCAR TOOL ADVISOR</Label>
         <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
             <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
-</button>
+        </button>
     </div>
     <div class="row pt-2 pl-2" *ngIf="UserDesc!=''">
-        <img  [src]="environment.ImagePath + 'icon_LoginC.svg'"   class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'icon_LoginC.svg'"   class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3">{{'Hi' | translate}},{{UserDesc}}</Label>
     </div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'icon_NewSearch.svg'" (click)="NewSearch();" class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'icon_NewSearch.svg'" (click)="NewSearch();" class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" (click)="NewSearch();">{{'New Search' | translate}}</Label>
     </div>
     <div class="border-top mt-2"></div>        
     <div  class="row pl-2 pt-1" >                                               
         <div *ngIf ="srv_appsetting.Country===undefined"  id="calc" (click)="OpenCountries()">
-            <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'"  class="MenuImg pt-2 pr-2 pl-2">
+            <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'"  class="ImgMobile pt-2 pr-2 pl-2">
         </div>
         <div *ngIf ="srv_appsetting.Country!==undefined"  id="calc" (click)="OpenCountries()">
-            <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'"  class="MenuImg pt-2 pr-2 pl-2">
+            <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'"  class="ImgMobile pt-2 pr-2 pl-2">
         </div> 
         <Label class="siteTitle pt-3"  (click)="OpenCountries()">{{CurrentCountryName}}</Label>   
     </div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'icon_metrinch_1-01.svg'"   class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'icon_metrinch_1-01.svg'"   class="ImgMobile pt-2 pr-2 pl-2">
         <div class="custom-control custom-radio pt-3">
             <input type="radio" class="custom-control-input" id="optmost1" name="metric" [checked]="srv_appsetting.Units=='M'"  (click)="this.activeModal.close('M')"  >
             <label class="custom-control-label siteTitle" for="optmost1" (click)="this.activeModal.close('M')" >{{'Metric' | translate}}</label>
@@ -37,11 +37,11 @@
     </div>
     <div class="border-top mt-2"></div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'ecat_Icon.svg'"   (click)="this.activeModal.close('opencatalog')"  class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'ecat_Icon.svg'"   (click)="this.activeModal.close('opencatalog')"  class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" (click)="this.activeModal.close('opencatalog')" >{{'E-Catalog' | translate}}</Label>
     </div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'Calculators_Icon.svg'"  class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'Calculators_Icon.svg'"  class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" >{{'Calculators' | translate}}</Label>
     </div>
     <div class="row pt-2 pl-4">   
@@ -66,15 +66,15 @@
     </div>
     <div class="border-top mt-2"></div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('contactus')"  class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('contactus')"  class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" (click)="this.activeModal.close('contactus')" >{{'Contact Us' | translate}}</Label>
     </div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('feedback')"  class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('feedback')"  class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" (click)="this.activeModal.close('feedback')" >{{'Feedback' | translate}}</Label>
     </div>
     <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('OpenUserGiude')"  class="MenuImg pt-2 pr-2 pl-2">
+        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('OpenUserGiude')"  class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" (click)="this.activeModal.close('OpenUserGiude')" >{{'User Guide' | translate}}</Label>
     </div>
     <div class="mt-4"></div>
