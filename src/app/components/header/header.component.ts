@@ -223,18 +223,19 @@ export class HeaderComponent implements OnInit {
       {          
           this.CurrentCountryName = this.srv_appsetting.Country.CountryName;            
       } 
-      
-      if(this.srv_appsetting.Country.CountryCode=='US')
-      {
-        this.srv_appsetting.ChangeUnits('I');
-        this.isMetric=false;
-      }
-      this.IsLoaded=true;     
+      if(this.srv_appsetting.Country!==undefined)
+        if(this.srv_appsetting.Country.CountryCode=='US')
+        {
+          this.srv_appsetting.ChangeUnits('I');
+          this.isMetric=false;
+        }
+      this.IsLoaded=true;        
       });   
   }
 
   SelectCountryAndLang(c:Country,LanguageID:string)
   {
+    console.log('function SelectCountryAndLang');
     this.srv_login.SelectCountryAndLang(c,LanguageID);
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
     this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
@@ -242,6 +243,8 @@ export class HeaderComponent implements OnInit {
     this.translate.use(LanguageID);
     this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
     this.userdes=this.translate.instant('Log In'); 
+    console.log('this.srv_appsetting.Country.CountryCode');
+    console.log(this.srv_appsetting.Country.CountryCode);
     if(this.srv_appsetting.Country.CountryCode=='US')
     {
       this.srv_appsetting.ChangeUnits('I');

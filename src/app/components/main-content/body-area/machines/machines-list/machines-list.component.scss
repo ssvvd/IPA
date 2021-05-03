@@ -225,19 +225,7 @@ div.scrollmenu {
     background-color: #777;
   }
 
-  .form-rounded {
-    border-radius: 1rem!important;
-    }
-    
-    .my-icon {
-        padding-right: calc(1.5em + .75rem);
-        background-image: url(/assets/img/Icon_Search_gray.svg);
-        background-repeat: no-repeat;
-        background-position: center right calc(.375em + .1875rem);
-        background-size: calc(1.75em + .375rem) calc(1.75em + .375rem);
 
-        background-color: white!important;
-    }
 
     .title-selected{
         color:var(--btn-bg-select-color) !important;
@@ -246,8 +234,21 @@ div.scrollmenu {
         //font-size: 18px !important;
        
       }
-
- 
-
 }
+
+.icon-search {
+    padding-right: calc(1.5em + .75rem);
+    background-image: url(/ITA/assets/img/Icon_Search_gray.svg);
+    background-repeat: no-repeat;
+    background-position: center right calc(.375em + .1875rem);
+    background-size: calc(1.75em + .375rem) calc(1.75em + .375rem);
+  
+    background-color: white!important;
+  }
+  
+  
+  .text-rounded {
+    border-radius: 1rem!important;
+    }
+
     

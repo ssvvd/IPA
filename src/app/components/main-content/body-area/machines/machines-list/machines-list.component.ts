@@ -58,6 +58,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   sorttype:string="1";
   
   scrollYdiff:string;
+  IsViewAll:boolean=false;
 
   constructor(private serv: MaterialService,private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
@@ -432,6 +433,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       this.MachineFilterTopMobile.IsMultiSpindle =false;
       this.MachineFilterTopMobile.IsSwissType =false;
       this.MachineFilterTopMobile.IsMostRecommended=false;
+      this.IsViewAll=false;
     }
     if(property=='IsLathe')
     {      
@@ -441,6 +443,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       this.MachineFilterTopMobile.IsMultiSpindle =false;
       this.MachineFilterTopMobile.IsSwissType =false;
       this.MachineFilterTopMobile.IsMostRecommended=false;
+      this.IsViewAll=false;
     }
     if(property=='IsMultiTask')
     {     
@@ -450,6 +453,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       this.MachineFilterTopMobile.IsMultiSpindle =false;
       this.MachineFilterTopMobile.IsSwissType =false;
       this.MachineFilterTopMobile.IsMostRecommended=false;
+      this.IsViewAll=false;
     }
     if(property=='IsMultiSpindle')
     {     
@@ -459,6 +463,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       this.MachineFilterTopMobile.IsMultiSpindle =true;
       this.MachineFilterTopMobile.IsSwissType =false;
       this.MachineFilterTopMobile.IsMostRecommended=false;
+      this.IsViewAll=false;
     }
     if(property=='IsSwissType')
     {     
@@ -468,6 +473,7 @@ UpdateStateSelectedMachine(MachineID: number) {
       this.MachineFilterTopMobile.IsMultiSpindle =false;
       this.MachineFilterTopMobile.IsSwissType =true;
       this.MachineFilterTopMobile.IsMostRecommended=false;
+      this.IsViewAll=false;
     }
     if(property=='IsMostRecommended')
     {      
@@ -477,7 +483,18 @@ UpdateStateSelectedMachine(MachineID: number) {
       this.MachineFilterTopMobile.IsMultiSpindle =true;
       this.MachineFilterTopMobile.IsSwissType =true;
       this.MachineFilterTopMobile.IsMostRecommended=true;
-    }    
+      this.IsViewAll=false;
+    }   
+    if(property=='IsViewAll')
+    {      
+      this.MachineFilterTopMobile.IsMachiningCenter =true;
+      this.MachineFilterTopMobile.IsLathe =true;
+      this.MachineFilterTopMobile.IsMultiTask =true;
+      this.MachineFilterTopMobile.IsMultiSpindle =true;
+      this.MachineFilterTopMobile.IsSwissType =true;
+      this.MachineFilterTopMobile.IsMostRecommended=false;
+      this.IsViewAll=true;
+    }     
     if(this.MachineFilter==undefined)
       this.ApplyFilterTopMobile(this.MachineFilterTopMobile);
     else
@@ -715,6 +732,22 @@ UpdateStateSelectedMachine(MachineID: number) {
           filter.SearchText=this.MachineFilterTopMobile.SearchText;
          }
          this.MachineFilter=filter;
+         let minPower:number = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
+         let maxPower:number = Math.max.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+         let minSpeed:number = Math.min.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+         let maxSpeed:number = Math.max.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+         let minTorque:number = Math.min.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+         let maxTorque :number= Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))                                
+         
+         if(filter.AdaptationSize!='' || filter.AdaptationType!='' || !filter.IsMachineTypeHeavyDuty || !filter.IsMachineTypeHighSpeed || !filter.IsMachineTypeStandard || filter.SpeedMin
+            || minPower!=filter.PowerMin || maxPower!=filter.PowerMax || minTorque!=filter.TorqueMin || maxTorque!=filter.TorqueMax
+            || minSpeed!=filter.SpeedMin  || maxSpeed!=filter.SpeedMax )
+            {
+              this.MachineFilterTopMobile.IsMostRecommended=false;
+              this.IsViewAll =true;
+              filter.IsMostRecommended=false;
+            }
+            
          this.ApplyFilter(filter);
        }
      
@@ -780,19 +813,20 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.MachineFilterTopMobile.IsSwissType =true;
     this.MachineFilterTopMobile.SearchText="";
     this.MachineFilterTopMobile.IsMostRecommended=true;
-
+this.IsViewAll=false;
   }
 
 
   InitFilter()
   {
+    this.IsViewAll=false;
     this.MachineFilter=new MachineFilter;
-    let minPower:number = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
-    let maxPower:number = Math.max.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-    let minSpeed:number = Math.min.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-    let maxSpeed:number = Math.max.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-    let minTorque:number = Math.min.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-    let maxTorque :number= Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))                                
+    let minPower:number = Math.min.apply(Math,this.listmachines_sorted.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
+    let maxPower:number = Math.max.apply(Math,this.listmachines_sorted.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let minSpeed:number = Math.min.apply(Math,this.listmachines_sorted.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let maxSpeed:number = Math.max.apply(Math,this.listmachines_sorted.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let minTorque:number = Math.min.apply(Math,this.listmachines_sorted.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
+    let maxTorque :number= Math.max.apply(Math,this.listmachines_sorted.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))                                
         
     this.MachineFilter=new MachineFilter;
     this.MachineFilter.IsMachiningCenter =true;

@@ -1,49 +1,55 @@
-<div [ngClass]="exportPDF?'no-scroll-div border-right-gray': 'scroll-div border-right-gray'"> 
+<div [ngClass]="exportPDF || srv_appsetting.isMobileResolution?'no-scroll-div border-right-gray': 'scroll-div border-right-gray'"> 
 <div class="container-fluid m-0 p-0 border-left-gray" > 
-<div class="mt-0 ml-0 pl-0 mt-0 pt-2" *ngIf="!exportPDF">
-     <nav class="ml-0 pl-0 mt-0 pl-4 pt-0" aria-label="breadcrumb">
-        <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white" >
-            <li class="breadcrumb-item text-secondary" ><a routerLink="/home/machines">All</a></li>
-            <li class="breadcrumb-item active text-secondary"  aria-current="page">{{MachineName}}</li> 
+<div class="row mt-0 ml-0 pl-0 mt-0 pt-2 pb-0" *ngIf="!exportPDF"  >
+    <div class="col-7 float-left ml-0 pl-0" >
+     <nav class="ml-0 pl-0 mt-0 pt-0 pb-0 mb-0"  [ngClass]="srv_appsetting.isMobileResolution?'pl-1 ':'pl-4 '" aria-label="breadcrumb">
+        <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white pb-0 mb-0" >
+            <li class="breadcrumb-item text-secondary" *ngIf="!srv_appsetting.isMobileResolution"><a routerLink="/home/machines">All</a></li>
+            <li class=" text-secondary" *ngIf="srv_appsetting.isMobileResolution"><a routerLink="/home/machines"><img  class="arrow-mobile pr-2 pl-0" [src]="environment.ImagePath + 'icon_arrow-01.svg'"></a></li> 
+            <li [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary"  aria-current="page">{{MachineName}}</li> 
         </ol>
       </nav>
+    </div>
+    <div  class="pt-3 pl-0 pr-2 m-auto col-5 float-right" *ngIf="srv_appsetting.isMobileResolution" >                        
+        <button class="btn-select-mobile"  (click)="OnSelectMachine();" [routerLink]="['/home/materials']">{{'Select'| translate}}</button>         
+      </div>                                                              
+</div>   
 </div>  
 
-<div class="form-group row col-12 col-md-12 col-sm-12 col-xl-12 pt-0 mt-0">
-    <div class="pt-0 pr-3 pl-4">
+<div class=" row col-12 col-md-12 col-sm-12 col-xl-12 pt-0 mt-0 pt-2 border-left-gray" >
+    <div class="pt-0 mt-0 " [ngClass]="srv_appsetting.isMobileResolution?'pl-2 col-3 pr-0 pt-2':'pl-4 pr-3'">
         <img src="{{imgNameMachine}}" class="img-machine-type">
     </div>
-    <div class="pl-3 pt-0 pr-0 pl-0 col-6 col-md-12 col-sm-12 col-xl-8 col-lg-8">
-            <div class="p-0 m-0">           
+    <div class="pl-3 pt-1 pr-0 pl-0 col-9 col-md-12 col-sm-12 col-xl-8 col-lg-8" >
+            <div class="p-0 m-0" *ngIf="!srv_appsetting.isMobileResolution">           
                 <label class="siteTitle">{{MachineName}}</label>                      
             </div>
-             <div class="form-group">                 
-                <div class="col-3 p-0 m-0">    
+             <div class="form-group pl-0">                 
+                <div class="p-0 m-0"  [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-3'">    
                     <label class="desc-machine">{{machHeader?.MachineType}}</label>                                 
                 </div>
                 <div class="row pl-0 ml-0">
-                    <div class="col-3 pl-0 pt-1 m-0">    
+                    <div class="pl-0 pt-2 m-0" [ngClass]="srv_appsetting.isMobileResolution?'col-5':'col-3'">    
                         <label class="desc-machine" for="txtCostPerHour">{{'Cost Per Hour' | translate}}</label>           
                     </div>                    
-                    <div class="col-2 pl-0 m-0">                                                               
+                    <div class="pl-0 m-0" [ngClass]="srv_appsetting.isMobileResolution?'col-5':'col-2'">                                                               
                         <input type="number" class="form-control" *ngIf="isLoading" id="txtCostPerHour" name="CostPerHour" (change)="ChangeMachineCost()" [(ngModel)]="CostPerHour">                         
                     </div>
-                     <div class="pl-4"> 
-                      
-                        <div class="col-2 pl-0 pt-1 m-0">    
+                     <div  [ngClass]="srv_appsetting.isMobileResolution?'pl-0':'pl-4'">                       
+                        <div class="pl-0 pt-2 m-0" [ngClass]="srv_appsetting.isMobileResolution?'':'col-2'">    
                             <label class="desc-machine" >{{srv_appsetting.Currency}}</label>           
                         </div>                                         
                     </div>                    
                 </div>
                 <div class="row pl-0 ml-0 ">
-                    <div class="col-3 pt-1 m-0 pl-0">    
-                        <label class="desc-machine">{{'Machine Type' | translate}}</label>           
+                    <div class="pt-1 m-0 pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-5':'col-3 '">    
+                        <label class="desc-machine">{{'Machine Type' | translate}}:</label>           
                     </div>                    
-                    <div class="col-2 pl-0 pt-1 m-0">    
+                    <div class="pl-0 pt-1 m-0" [ngClass]="srv_appsetting.isMobileResolution?'col-7':'col-2 '">    
                         <label class="desc-machine" >{{machHeader.MachineType1}}</label>           
                     </div>                                 
                 </div>
-                <div class="form-group row" *ngIf="isLoading && !exportPDF">
+                <div class="form-group row" *ngIf="isLoading && !exportPDF && !srv_appsetting.isMobileResolution"> 
                     <div class="row col-2 pt-2">                     
                         <div class="pt-2 pr-4">                     
                             <a data-toggle="tooltip" 
@@ -70,14 +76,37 @@
     </div>                                              
 </div>  
 <div>
-    
-    <div  *ngFor="let spindle of arrMachineSpindle; let PrtNum = index" class="pt-4">
+
+<div *ngIf="srv_appsetting.isMobileResolution && isLoading" class="scroll-div-mobile" >
+    <ul class="nav nav-fill pt-3">                  
+        <li  class="nav-item"  (click)="SpindleViewMobile('1')">  
+            <div class="pl-2 text-center" [ngClass]="ViewSpindle=='1'?'div-tab-menu-selected':'div-tab-menu'">
+                <label>{{'Main Spindle' | translate}}</label>
+            </div>                                                                                                                              
+        </li> 
+        <li  class="nav-item"  (click)="SpindleViewMobile('2')" *ngIf="arrMachineSpindle&&arrMachineSpindle.length>1">
+            <div class="pr-2 text-center"  [ngClass]="ViewSpindle=='2'?'div-tab-menu-selected':'div-tab-menu'" >
+                <label>{{'Tool Spindle' | translate}}</label>          
+            </div>                                                                                                                              
+        </li>          
+    </ul>
+    <div *ngIf="ViewSpindle =='1' && (!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==arrMachineSpindle[0].SpindleType))">                                                                                                                  
+        <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=arrMachineSpindle&&arrMachineSpindle[0] [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
+    </div>    
+    <div *ngIf="ViewSpindle =='2' && (!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==arrMachineSpindle[0].SpindleType))">                                                                                                                  
+        <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=arrMachineSpindle&&arrMachineSpindle[1] [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
+    </div>     
+</div> 
+
+<div  *ngIf="!srv_appsetting.isMobileResolution" class="border-left-gray">
+    <div  *ngFor="let spindle of arrMachineSpindle; let PrtNum = index" class="pt-4" >
             <div *ngIf="!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==spindle.SpindleType)">                                                                                                                  
                 <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
             </div>                        
-    </div>  
+    </div> 
+</div> 
 </div>
-<div class="pt-4">
+<div class="pt-4" *ngIf="!srv_appsetting.isMobileResolution">
 
 </div>
 </div>

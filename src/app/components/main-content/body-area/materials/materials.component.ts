@@ -8,6 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatFilterComponent } from './mat-filter/mat-filter.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -30,7 +31,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
 
   constructor(private statemng:StateManagerService,private modalService: NgbModal,
               location: Location , private router: Router,public translate: TranslateService,
-              private srv_appsetting:AppsettingService) {
+              public srv_appsetting:AppsettingService) {
 
                 
               

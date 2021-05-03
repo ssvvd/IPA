@@ -1,15 +1,15 @@
 
 <div class="border-left-gray border-right-gray">
     <div class="row">
-      <div class="col col-20 ml-0 pl-2 pr-0 border-right-gray" style="margin-top:20px;" > 
-      <div class="pr-2 pt-0">
+      <div class="col col-20 ml-0 pl-2 pr-0 border-right-gray" style="margin-top:20px;" *ngIf="!srv_appsetting.isMobileResolution"> 
+      <div class="pr-2 pt-0" >
         <app-mat-filter #myChildFilter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)" (MyMaterials)="showMyMaterials($event)"></app-mat-filter>
       </div>
     </div>
-      <div [ngSwitch]="curComponent" class="col col-80 pl-2" >
+      <div [ngSwitch]="curComponent" class="col pl-2" [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-80'">
         <div class="row">
 
-          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pl-1">
+          <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pl-1" *ngIf="!srv_appsetting.isMobileResolution">
               <nav  aria-label="breadcrumb">
                  <ol class="breadcrumb mt-3 mb-0 ml-0 pl-0 bg-white" >
                      <li (click)="receiveCategory(this.selectedCateg)" class="breadcrumb-item" ><a href="javascript:void(0)">{{this.selectedCateg}}</a></li>
@@ -17,7 +17,7 @@
                  </ol>
                </nav>
          </div> 
-         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-4 pr-0 pt-2">
+         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 mt-4 pr-0 pt-2" *ngIf="!srv_appsetting.isMobileResolution">
           <button type="button" class="btn btn-link float-right sileLinks" (click)="openRequestMatM()">{{"Can't find the right material?" | translate}}</button>
          </div>
         </div>

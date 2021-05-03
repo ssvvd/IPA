@@ -4,11 +4,25 @@
     min-width: 40px;
     }
 
+ .img-machine-type-mobile{
+    width: 100%;    
+    max-width: 80px;
+    min-width: 40px;
+    }
+
+        
     .scroll-div
     {       
         overflow-y: auto; 
         height: calc(100vh - 220px);
     }
+
+    .scroll-div-mobile
+    {       
+        overflow-y: auto; 
+        height: calc(100vh - 260px);
+    }
+
     .no-scroll-div
     {
         overflow-y: auto;       

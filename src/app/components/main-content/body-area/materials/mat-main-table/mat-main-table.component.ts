@@ -43,10 +43,12 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   @Input() filterSearchTextInput: string;
   @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
   @Output() myMaterialClickEv = new EventEmitter<clsMaterial>();
-
+  Group:string='P';
+  SearchTextMobile:string="";
+  
   private eventsSubscription: Subscription=new Subscription();
 
-  constructor(public translate: TranslateService,private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private srv_appsetting:AppsettingService
+  constructor(public translate: TranslateService,private servsm: MaterialsmService,private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,public srv_appsetting:AppsettingService
     ,private router: ActivatedRoute ,private srv_login:LoginService,private SpinnerService: NgxSpinnerService,private srv_cook:CookiesService) { 
       this.eventsSubscription.add(this.router.params.subscribe(params => {
         this.lang = params["lang"];
@@ -60,10 +62,20 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     }
 
   ngOnInit() {
+    
+    let scrollYdiff :string;
+    if(!this.srv_appsetting.isMobileResolution) 
+      scrollYdiff='355px';  
+    else
+     scrollYdiff='250px'; 
+
     let myColumns1 = [5,6,7,8];
     let myColumns2 = [];
     let sortHardnessCol1 = 9;
     let sortHardnessCol2 = 5;
+    let aTargets:number=4;
+    if(this.srv_appsetting.isMobileResolution)  sortHardnessCol2=0;
+    if(this.srv_appsetting.isMobileResolution)  aTargets=0;
 
     this.dtOptionsMat = {
       destroy: true,
@@ -71,12 +83,12 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
        "searching": false,
        "lengthChange": false ,
        "paging":false,  
-       "autoWidth":false,
-       "scrollY": 'calc(100vh - 355px)',           
+       "autoWidth":false,      
+       "scrollY": 'calc(100vh - '+ scrollYdiff +')',      
        "info":false,
        "scrollCollapse" : true,
        "order": [[ 0, 'asc' ]],
-       "columnDefs":[{"targets": environment.internal ? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal ? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal ? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ 4 ] }],
+       "columnDefs":[{"targets": environment.internal && !this.srv_appsetting.isMobileResolution? myColumns1 : myColumns2,"orderable": false},{ targets: environment.internal && !this.srv_appsetting.isMobileResolution? sortHardnessCol1 : sortHardnessCol2, type: 'num' }, { "iDataSort": environment.internal && !this.srv_appsetting.isMobileResolution? sortHardnessCol1 : sortHardnessCol2, "aTargets": [ aTargets ] }],
        "language": {
         "emptyTable": "",
         "zeroRecords": "",
@@ -102,6 +114,18 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
 
   fillMainTable(){
+
+    
+    if(this.srv_appsetting.isMobileResolution)
+    {
+      if(this.selectedCategory==undefined && this.srv_statemanage.GetMaterialSelected()==null) 
+        this.selectedCategory ='P';
+      else 
+        if(this.selectedCategory==null) 
+          this.selectedCategory = this.srv_statemanage.GetMaterialSelected().Category;      
+    }
+    
+
     if (this.servsm.checkCategoryTableExists(this.lang,this.selectedCategory)){
       this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),false)
     }
@@ -111,6 +135,8 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
         this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
         this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
       });
+
+    
     }
 
 
@@ -130,6 +156,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     this.materialsResultSorted = [];
     this.materialsResultFilterd = [];
   }
+
   setResults(data:clsMaterial[],initTable:boolean){
     this.clearData();
     this.materialsResult = data.slice();
@@ -147,6 +174,8 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       }
       else
       this.OnSelectMaterial(this.materialsResult[6]);
+      
+     
     }
         
      else{
@@ -154,7 +183,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       this.FavMat = this.srv_statemanage.GetMaterialSelected().FavName || ''
      }
         
-        if(initTable)
+        if(initTable) 
             this.isDtInitializedFunc();
         else
         this.dtTriggerMat = null
@@ -170,8 +199,8 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       });
     }
     else{
-       this.isDtInitialized = true;
-      this.dtTriggerMat.next();
+        this.isDtInitialized = true;
+        if(this.dtTriggerMat!=null) this.dtTriggerMat.next();
     }
   }
 
@@ -179,21 +208,15 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     if (changes.selectedCategory){
       this.fillMainTable();
     }
-    // else{
-    //   if (changes.filterSearchTextInput){
-    //     this.filterTable();
-    //  }
-    // }
-        
-
   }
+  
 
   ngOnDestroy() {
     if (this.allSubsMat$)
     this.allSubsMat$.unsubscribe();
   }
 
-  filterTable(){
+  filterTable(){    
     var searchText = this.filterSearchTextInput;
     if (searchText == null || searchText == ''){
       this.materialsResultSorted = this.materialsResult;
@@ -317,4 +340,10 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       }, () => console.log('Rejected!'));
   }
 
+  ApplyFilterMobile(group:string)
+  {
+    this.selectedCategory=group;
+    this.fillMainTable();
+  }
+  
 }

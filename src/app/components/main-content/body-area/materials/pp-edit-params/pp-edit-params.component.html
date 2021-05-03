@@ -9,8 +9,10 @@
         <app-hardness-slider></app-hardness-slider>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-select-cancel" (click)="reset()">{{'Reset' | translate}}</button>
-    <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
-    <button type="button" class="btn btn-select" (click)="set()">{{'Set' | translate}}</button>
+
+      <button type="button" class="btn btn-select-cancel" (click)="reset()">{{'Reset' | translate}}</button>
+      <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
+      <button type="button" class="btn btn-select" style="max-width:80px!important;" (click)="set()">{{'Set' | translate}}</button>
+
   </div>
 </div>

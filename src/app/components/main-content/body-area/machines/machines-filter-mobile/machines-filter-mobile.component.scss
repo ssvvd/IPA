@@ -1,9 +1,9 @@
 ::ng-deep .filter-mobile-modal .modal-content { 
-  margin-top:250px!important;
+  margin-top:120px!important;
   margin-left:0px!important;
   padding-top: 0px!important;
   padding-left: 0px!important; 
-  min-height: 700px!important;  
+  //min-height: 700px!important;  
 } 
 
 .button ,.button :focus ,button:focus-visible,
@@ -19,25 +19,5 @@
    outline: none !important  
 }
 
-.div-tab-menu
-{
-    text-align: left;
-    padding-left:8px;
-    padding-top:8px;
-    padding-bottom:8px;
-    border-left:1px solid  var(--border-color-gray)  ;  
-    background-color:var(--background-color-menu);  
-    cursor: pointer;
-}
-.div-tab-menu-selected
-{
-    text-align: left;
-    padding-left:8px;
-    padding-top:8px;
-    padding-bottom:4px;
-    //border-right:1px solid   var(--border-color-gray)  ;  
-    border-left:1px solid   var(--border-color-gray)  ;   
-    border-top:5px solid #fede15 ;
-    background-color:white; 
-    cursor: pointer;      
-}
+
+

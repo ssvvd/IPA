@@ -36,7 +36,8 @@ export class MachineItemComponent implements OnInit {
   @Input() pr_MachineID:number=0;
   @Input() pr_MachineName:string='';
   @Input() exportPDF:boolean=false;
-  
+  ViewSpindle:string='1';
+
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_machine: MachineService, public srv_appsetting:AppsettingService,private SpinnerService: NgxSpinnerService,
@@ -287,5 +288,9 @@ export class MachineItemComponent implements OnInit {
     }));
   }
   
-  
+  SpindleViewMobile(spindle:string)
+  {
+    if(spindle=='2' && this.arrMachineSpindle.length<2) return;
+    this.ViewSpindle=spindle;
+  }
 }

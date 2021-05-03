@@ -61,7 +61,9 @@
                         <label class="pl-0 pt-3">{{'Message' | translate}}</label>                
                     </div>
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12  pt-1 pl-0">
-                        <textarea   formControlName="message" rows="8"  class="form-control input-min-width" 
+                        <textarea *ngIf="!srv_appsetting.isMobileResolution"  formControlName="message" rows="8"  class="form-control input-min-width" 
+                        [(ngModel)]="Message"></textarea>
+                        <textarea *ngIf="srv_appsetting.isMobileResolution"  formControlName="message" rows="3"  class="form-control input-min-width" 
                         [(ngModel)]="Message"></textarea>
                     </div>  
                 </div> 

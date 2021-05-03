@@ -28,11 +28,11 @@
         <div *ngIf="isshowdetail" class="form-group pl-0 ml-0">            
             <input   class="form-control" type="text" placeholder="Search" aria-label="Search"  (keyup)="ApplySearch($event.target.value)">    
             	<div class="list-group">
-                    <div   *ngFor="let itm of arrDataF" >                                                 
-                        <div *ngIf="show_all || (itm.RecordID<= max_row_show) || str_search!=''">                            
-                             <div class="custom-control custom-checkbox">
+                    <div   *ngFor="let itm of arrDataF" style="width:100%;">                                                 
+                        <div *ngIf="show_all || (itm.RecordID<= max_row_show) || str_search!=''" style="width:100%;">                            
+                             <div class="label-hover custom-control custom-checkbox" style="width:100%;">
                                 <input type="checkbox" class="cursor-pointer" [attr.id]="'chk' + funcname + itm.RecordID" [(ngModel)]="itm.Checked" (change)="checkItem()" [attr.name]="'chk' + funcname + itm.RecordID"  class="custom-control-input" >
-                                <label  class="custom-control-label cursor-pointer" [attr.for]="'chk' + funcname + itm.RecordID">{{itm.Designation | translate}}</label>
+                                <label  style="width:100%;" class="custom-control-label cursor-pointer" [attr.for]="'chk' + funcname + itm.RecordID">{{itm.Designation | translate}}</label>
                             </div>
                         </div>   
                         </div>                                                                           

@@ -56,7 +56,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   public chartColors: Array<any>;
   public chartOptions: any;
   
-  constructor(private srv_appsetting:AppsettingService) { }
+  constructor(public srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
     this.FilldataChart();  

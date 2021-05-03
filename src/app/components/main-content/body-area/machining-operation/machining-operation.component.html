@@ -1,10 +1,8 @@
 <div class="pt-5  ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray scrollYFilter" >
 <div class="pt-2 pb-2 border-top-gray border-bottom-gray">
- <ul class="nav nav-fill" >               
-    <li (click)="onSelectMainApp(mainapp);"  class="nav-item li-item" *ngFor="let mainapp of arrMainApps" >
-        <!-- <div   class="form-group cursor-pointer" [ngClass]="{'div-app-selected':mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='',
-                    'div-app':mainapp.MenuID!=SelectedMainAppID && SelectedMainAppID!='','div-app-open':SelectedMainAppID==''}">  -->                                                                        
-        <div   class="form-group" 
+ <ul class="nav nav-fill">               
+    <li (click)="onSelectMainApp(mainapp);"  style="border-color: fuchsia;" class="nav-item li-item" *ngFor="let mainapp of arrMainApps">    
+        <div   class="form-group" style="width:100%;"
               [ngClass]="(mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='')?'div-app-selected  cursor-pointer':
                           (mainapp.MenuID!=SelectedMainAppID && SelectedMainAppID!='')?mainapp.IsActive?'div-app  cursor-pointer':'div-app cursor-not-allowed' :
                           (SelectedMainAppID=='')?mainapp.IsActive?'div-app-open  cursor-pointer':'div-app-open cursor-not-allowed':''"> 

@@ -188,7 +188,9 @@ export class ResultsService {
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{D}/{ae}/{fz}/{ap}
 //GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter   /{D}/{ae}/{fz}/{ap}
   public  GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:string,k:string)
-  {        
+  {   
+    let str:string;
+    str=environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k;    
     return  this.httpClient.get(environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";

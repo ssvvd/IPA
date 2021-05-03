@@ -324,8 +324,8 @@ CheckInputFields(field) {
     {
       if(Number(radius)<Number(diameter)/2)
       {
-        alert("Corner radius should be bigger than half of pre hole diameter");
-        this.srv_StMng.IPL.GetItem(field).value=null;
+        //alert("Corner radius should be bigger than half of pre hole diameter");
+        //this.srv_StMng.IPL.GetItem(field).value=null;
       }
     }
     if(radius!=null && radius!='' && width!=null && width!='')

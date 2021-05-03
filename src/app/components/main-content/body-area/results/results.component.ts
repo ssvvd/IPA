@@ -269,7 +269,7 @@ eventsSubject: Subject<void> = new Subject<void>();
  GoToAssembly(){
 
    this.srv_Results.getAssemblyURL(this.viewParams.Res[0].CatalogNo.toString().replace(/\s/g, ""),this.srv_appsetting.Lang).subscribe(res => {
-    let url = (new DOMParser()).parseFromString(res, "text/xml").getElementsByTagName('string')[0].textContent
+    let url = (new DOMParser()).parseFromString(res, "text/xml").getElementsByTagName('string')[0].textContent;    
     window.open(url, "_blank");
     
   }) 

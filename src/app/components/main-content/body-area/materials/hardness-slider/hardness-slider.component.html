@@ -11,8 +11,6 @@
 <ng5-slider #paramSlider [(value)]="value" [options]="options" (valueChange)="onUserChangeEnd($event)" (userChangeEnd)="onUserChangeEnd($event)">
 </ng5-slider>
 
-<input type="number" [ngModel]="value" (ngModelChange)="onSearchChange($event)" [ngClass]="(dangMsg != '')? 'is-invalid' : ''" ng5sliderlabel class="form-control col-sm-2 ng5-slider-span ng5-slider-bubble ng5-slider-model-value sliderTextBox" [style.left.px]="leftPosition">
-
-
+<input style="max-width:100px;" type="number" [ngModel]="value" (ngModelChange)="onSearchChange($event)" [ngClass]="(dangMsg != '')? 'is-invalid' : ''" ng5sliderlabel class="form-control col-sm-2 ng5-slider-span ng5-slider-bubble ng5-slider-model-value sliderTextBox" [style.left.px]="leftPosition">
 </div>
 <h5 class="text-danger desc-label-big-bold">{{dangMsg}}</h5>
