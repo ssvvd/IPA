@@ -4,7 +4,7 @@
 </button>
 </div>
 <div>  
-<ul class="nav nav-fill" >                  
+<ul class="nav nav-fill" style="border:0px">                  
   <li  class="nav-item"  (click)="OpenSort()">  
       <div class="pl-2 text-center" [ngClass]="TabActive==1?'div-tab-menu-selected':'div-tab-menu'">
             <label>{{'Sort' | translate}}</label>
@@ -15,7 +15,7 @@
       <label>{{'Filter' | translate}}</label>          
     </div>                                                                                                                              
 </li>          
-</ul>
+</ul> 
 
 <div *ngIf="TabActive==1">
   <div class="ml-2 mt-4">

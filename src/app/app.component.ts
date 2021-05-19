@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd ,NavigationStart} from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { AppsettingService} from 'src/app/services/appsetting.service';
@@ -7,6 +7,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpParams } from '@angular/common/http';
 import { NgxSpinnerService } from "ngx-spinner"; 
+declare let gtag: Function;
 //import { CookiesService } from 'src/app/services/cookies.service';
 
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -33,13 +34,27 @@ export class AppComponent implements OnInit {
       environment.internal = false;
     }
     
+    this.router.events.subscribe(event => {
+       if(environment.production)
+          if(event instanceof NavigationEnd){
+            gtag('config', 'UA-155960-40', 
+                      {
+                        'page_path': event.urlAfterRedirects
+                      }
+                      );
+            //console.log(event.urlAfterRedirects);
+            /* gtag('set', 'page', event.urlAfterRedirects);
+            gtag('send', 'pageview'); */
+            
+          }
+        }
+ );
   }
 
 SetLanguges()
 {
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
-  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR','LT']);
-  //alert(this.srv_appsetting.LangName);
+  'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR','LT']); 
   this.translate.setDefaultLang(this.srv_appsetting.LangName);
 }
 
@@ -60,12 +75,14 @@ ngOnInit()
     if(url.includes('?'))
     {
       const httpParams = new HttpParams({ fromString: url.split('?')[1] });
-      paramValue = httpParams.get('lang');  
-      if(paramValue==null) paramValue='EN';               
+      paramValue = httpParams.get('lang');        
+      if(paramValue==null) paramValue='EN';   
+      localStorage.setItem("language",paramValue.toUpperCase());            
     }   
     this.SetLanguges();
-    this.translate.use(paramValue);
+    this.translate.use(paramValue);  
     return;
+   
   }    
 
   if (url.includes('?')) {
@@ -95,7 +112,7 @@ ngOnInit()
   
   //first time enter
   //temp -todo:
-  //isLogIn ='0';
+  isLogIn ='0';
 
   if(isLogIn!="-1")
   {

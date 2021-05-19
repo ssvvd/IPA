@@ -123,7 +123,11 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         return 'other';
     }
   }
-
+  onclickdiv()
+  {
+    alert('click div');
+  }
+  
   Initializemachinelist(withdestroy:boolean)
   {  
     this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
@@ -235,17 +239,45 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     else
     {
       this.ApplyMostRecommended();
-      if(this.srv_appsetting.isMobileResolution) 
+ /*      if(this.srv_appsetting.isMobileResolution) 
       {
         let stfilter: MachineFilter;
         stfilter = this.srv_statemanage.SelectMachineFilterTopMobile;
         if (typeof (stfilter) !== 'undefined' && stfilter !== null) {
+          this.InitFilter(); 
           this.MachineFilterTopMobile = stfilter;
-          this.ApplyFilterTopMobile(stfilter);
+          this.MachineFilter.IsMachiningCenter =this.MachineFilterTopMobile.IsMachiningCenter;
+          this.MachineFilter.IsLathe =this.MachineFilterTopMobile.IsLathe;
+          this.MachineFilter.IsMultiTask =this.MachineFilterTopMobile.IsMultiTask;
+          this.MachineFilter.IsMultiSpindle =this.MachineFilterTopMobile.IsMultiSpindle;
+          this.MachineFilter.IsSwissType =this.MachineFilterTopMobile.IsSwissType;
+          this.MachineFilter.IsMostRecommended =this.MachineFilterTopMobile.IsMostRecommended;        
+          this.MachineFilter.SearchText=this.MachineFilterTopMobile.SearchText;
+          this.ApplyFilter(this.MachineFilter);
+          
+          //this.ApplyFilterTopMobile(stfilter);
         } 
-      }
+      } */
     } 
-
+    if(this.srv_appsetting.isMobileResolution) 
+    {
+      let stfilter: MachineFilter;
+      stfilter = this.srv_statemanage.SelectMachineFilterTopMobile;
+      if (typeof (stfilter) !== 'undefined' && stfilter !== null) {
+        this.InitFilter(); 
+        this.MachineFilterTopMobile = stfilter;
+        this.MachineFilter.IsMachiningCenter =this.MachineFilterTopMobile.IsMachiningCenter;
+        this.MachineFilter.IsLathe =this.MachineFilterTopMobile.IsLathe;
+        this.MachineFilter.IsMultiTask =this.MachineFilterTopMobile.IsMultiTask;
+        this.MachineFilter.IsMultiSpindle =this.MachineFilterTopMobile.IsMultiSpindle;
+        this.MachineFilter.IsSwissType =this.MachineFilterTopMobile.IsSwissType;
+        this.MachineFilter.IsMostRecommended =this.MachineFilterTopMobile.IsMostRecommended;        
+        this.MachineFilter.SearchText=this.MachineFilterTopMobile.SearchText;
+        this.ApplyFilter(this.MachineFilter);
+        
+        //this.ApplyFilterTopMobile(stfilter);
+      } 
+    }
     if(this.srv_cook.get_cookie("def_mach")!='')
       this.defaultmachine =+this.srv_cook.get_cookie("def_mach");    
 
@@ -525,27 +557,18 @@ UpdateStateSelectedMachine(MachineID: number) {
         || m.Torque.toString().indexOf(filter.SearchText.toUpperCase()) > -1
         || m.SpindleSpeed.toString().indexOf(filter.SearchText.toUpperCase()) > -1)) ;
         this.srv_statemanage.SelectMachineFilterTopMobile = filter;
-    /* this.srv_statemanage.SelectMachineFilter = filter;
-    this.countrow =this.listmachines.length.toString(); 
-    
-    let minPower:number=0;
-    let maxPower:number=0;
-    let minSpeed:number=0;
-    let maxSpeed:number=0;
-    let minTorque:number=0;
-    let maxTorque:number=0;
-    if(this.listmachines.length>0)
-    {
-      minPower = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   
-      maxPower = Math.max.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-      minSpeed = Math.min.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-      maxSpeed = Math.max.apply(Math,this.listmachines.map(a => a['SpindleSpeed']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-      minTorque = Math.min.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))    
-      maxTorque = Math.max.apply(Math,this.listmachines.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))
-      let nn:number[]=[];
-      nn.push(minPower);nn.push(maxPower);nn.push(minSpeed);nn.push(maxSpeed);nn.push(minTorque);nn.push(maxTorque); */
-      //this.eventsChangeMachineList.next(nn);
-    //}    
+       
+
+         if (this.isDtInitialized) {
+          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();
+            this.dtTrigger.next();
+          });
+        } 
+        else {
+          this.isDtInitialized = true
+          this.dtTrigger.next();
+        }   
   }
 
   ApplyFilter(filter: MachineFilter) {            
@@ -643,7 +666,7 @@ UpdateStateSelectedMachine(MachineID: number) {
   }
 
   onclickrow(m:Machineheader)
-  {
+  {  
     if(this.statusclick ==0)
     {
     this.OnSelectMachine(m);
@@ -654,7 +677,7 @@ UpdateStateSelectedMachine(MachineID: number) {
     //this.router.navigate(['/home/machine-item/', { id: m.MachineIDBase ,name:m.MachineName}]); 
     //this.router.navigate(['/home/machine-item']); 
   }
-
+ 
   OnSelectMachine(mach: Machineheader) 
   {        
             
@@ -749,6 +772,7 @@ UpdateStateSelectedMachine(MachineID: number) {
             }
             
          this.ApplyFilter(filter);
+
        }
      
        if(this.sortfield!="")
@@ -786,7 +810,7 @@ UpdateStateSelectedMachine(MachineID: number) {
         {
           this.sortfield="";
           this.sorttype="1";
-          if (this.isDtInitialized) {
+           if (this.isDtInitialized) {
             this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
               dtInstance.destroy();
               this.dtTrigger.next();
@@ -794,7 +818,7 @@ UpdateStateSelectedMachine(MachineID: number) {
           } else {
             this.isDtInitialized = true
             this.dtTrigger.next();
-          }  
+          }   
         }
        
         //if(this.MachineFilterTopMobile!=undefined)  {this.InitFilterTopMobile(); this.ApplyFilterTopMobile(this.MachineFilterTopMobile)  }                               

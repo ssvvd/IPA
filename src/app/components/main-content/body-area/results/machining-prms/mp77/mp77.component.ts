@@ -349,8 +349,11 @@ if (pr.value.trim().length == 7){
     //this.H_HDH = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
    
     this.S_HPS = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
-    this.I_HPC = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
+    //this.I_HPC = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
+
+    this.I_HPC = Math.round(((+this.TLT )/ (Math.round(this.DOC/this.Vf*100)/100)) * 100)/100 || 0
+
     this.H_HDH = Math.round((+this.TLT) /(+this.CTH)*60 ) || 0
     this.S_NSB=Math.ceil(this.B / this.S_HPS) || 0
     this.H_HPB = Math.ceil(this.B / this.H_HDH) || 0

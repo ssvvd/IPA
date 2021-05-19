@@ -24,7 +24,7 @@ export class OperationDataComponent implements OnInit {
    eventsSubject: Subject<void> = new Subject<void>();
    evGetResult: Subject<void> = new Subject<void>();
   private eventsSubscription: Subscription=new Subscription();
-  
+  TabActive:number=1;
   public msrv_StMng:StateManagerService =this.srv_StMng;
   
   @HostListener('window:keyup', ['$event'])
@@ -33,7 +33,7 @@ export class OperationDataComponent implements OnInit {
   }
 
   constructor(router:Router,private srv_DataLayer:DatalayerService,
-              private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
+              private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
               public translate:TranslateService) 
   {
     this.router=router;
@@ -45,6 +45,7 @@ export class OperationDataComponent implements OnInit {
 
   ngOnInit() {  
     if(this.srv_appsetting.issmallscreen) this.srv_StMng.IsTabToolDataOpen=false;
+    if(this.srv_appsetting.isMobileResolution) this.srv_StMng.IsTabToolDataOpen=true;
     //this.translate.use(this.srv_appsetting.Lang);
     this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
     if(typeof(this.srv_StMng.SecAppSelected)!== 'undefined' && this.srv_StMng.SecAppSelected !== null)
@@ -139,4 +140,14 @@ FillParameters()
       this.router.navigate(['/home/results']);
   }
  
+  
+  OpenOperationData()
+  {
+    this.TabActive=1;
+  }
+
+  OpenToolData()
+  {
+    this.TabActive=2;
+  }
 }

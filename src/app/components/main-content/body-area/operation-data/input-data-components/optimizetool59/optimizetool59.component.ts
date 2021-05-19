@@ -149,4 +149,9 @@ export class Optimizetool59Component implements OnInit {
     this.setCoolant();
 
   }
+
+  ChangeDMinDMax()
+  {
+    
+  }
 }

@@ -51,7 +51,7 @@
                                         <button type="button" (click)="SelectCountryAndLang(c,c.LanguageID[1])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[1]}}</button>
                                     </div>
                                     <div *ngIf="c.LanguageName.length>2"  class="pr-2">
-                                        <button type="button" (click)="SelectCountryAndLang(c.CountryID,c.LanguageID[2])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[2]}}</button>
+                                        <button type="button" (click)="SelectCountryAndLang(c,c.LanguageID[2])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[2]}}</button>
                                     </div>
                                 </div>
                             </div> 

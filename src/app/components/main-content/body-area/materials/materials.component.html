@@ -6,7 +6,7 @@
         <app-mat-filter #myChildFilter (categEvent)="receiveCategory($event)" (standardEvent)="receiveStandard($event)" (MaterialSearchChanged)="receiveSearchText($event)" (MyMaterials)="showMyMaterials($event)"></app-mat-filter>
       </div>
     </div>
-      <div [ngSwitch]="curComponent" class="col pl-2" [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-80'">
+      <div [ngSwitch]="curComponent" class="col" [ngClass]="srv_appsetting.isMobileResolution?'col-12  pl-1 pr-1 pt-2':'col-80 pl-2'">
         <div class="row">
 
           <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pl-1" *ngIf="!srv_appsetting.isMobileResolution">

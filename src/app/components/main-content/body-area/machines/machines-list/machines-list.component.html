@@ -21,11 +21,11 @@
           </div> 
           <div *ngIf="msrv_appsetting.isMobileResolution">           
             <div class="row pt-4">                
-                <div class=" col-10 pt-2 pl-1">                  
+                <div class=" col-9 pt-2 pl-1">                  
                   <input type="text" class="form-control icon-search text-rounded" [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  (click)="FilterTopMobileChange('')"  placeholder="{{'Search'| translate}}">
                 </div>  
-                <div class="float-right col-2">
-                    <img  [src]="environment.ImagePath + 'icon_SortFilter.svg'" (click)="OpenFilterMobile()" class="ImgMobile pt-2 pr-2 pl-2">
+                <div class="float-right col-2 ">
+                    <img  [src]="environment.ImagePath + 'icon_SortFilter.svg'" (click)="OpenFilterMobile()" class="ImgMobile pt-2  pl-2">
                 </div>
               </div>
               <div class="scrollmenu pb-2 pt-2 pl-1">
@@ -65,9 +65,9 @@
                         </div>
                         <div class="text-left">{{'Size' | translate}}</div>                        
                     </th>
-                    <th ><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}<span class="sort-icon ml-1"></span></label></th>
-                    <th class="visibleonlybigscreen"><label>{{'Spindle Speed' | translate}} ( {{'rpm' | translate }} )<span class="sort-icon ml-1"></span></label></th>                
-                    <th class="visibleonlybigscreen"><label>{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
+                    <th ><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? '(kW)' : '(HP)' }}<span class="sort-icon ml-1"></span></label></th>
+                    <th class="visibleonlybigscreen"><label class="text-wrap">{{'Spindle Speed' | translate}} ( {{'rpm' | translate }} )<span class="sort-icon ml-1"></span></label></th>                
+                    <th class="visibleonlybigscreen"><label class="text-wrap">{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th></th>                 
                     <th></th>
                     <th></th> 
@@ -133,40 +133,39 @@
                 <tbody *ngIf="isLoaded">
                   <tr  *ngFor="let mach of listmachines"  [className]="mach?.IsSelected? 'tr-selected' : 'tr-not-selected-mobile'">
                     <th scope="row" class="d-none">{{mach.MachineID}} </th>      
-                    <td class=" pl-0 pr-0 ml-0 mr-0" (click)="onclickrow(mach)">
-                        <div class="row">
+                    <td class=" pl-0 pr-0 ml-0 mr-0">
+                        <div class="row" >
                           <div class="col-4 pl-0 pr-0 ml-0 mr-0">                            
-                            <img class="mt-0 mb-2"  *ngIf="mach.MachineType== 'Machining center'" [src]="environment.ImagePath + 'MachiningCenter.svg'" >
-                            <img class="mt-0 mb-2"  *ngIf="mach.MachineType== 'Lathe'" [src]="environment.ImagePath + 'lathe.svg'" >
-                            <img class="mt-0 mb-2"  *ngIf="mach.MachineType== 'Multi task'" [src]="environment.ImagePath + 'MultiTask.svg'" >
-                            <img class="mt-0 mb-2"  *ngIf="mach.MachineType== 'Multi spindle'" [src]="environment.ImagePath + 'MultiSpindle.svg'" >
-                            <img class="mt-0 mb-2"  *ngIf="mach.MachineType== 'Swiss type'" [src]="environment.ImagePath + 'SwissType.svg'" >                                                        
+                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Machining center'" [src]="environment.ImagePath + 'MachiningCenter.svg'" >
+                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Lathe'" [src]="environment.ImagePath + 'lathe.svg'" >
+                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Multi task'" [src]="environment.ImagePath + 'MultiTask.svg'" >
+                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Multi spindle'" [src]="environment.ImagePath + 'MultiSpindle.svg'" >
+                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Swiss type'" [src]="environment.ImagePath + 'SwissType.svg'" >                                                        
                             <button class="btn-select-mobile"
                                 (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect| translate}}</button>                                                                                   
                           </div>
-                          <div class="col-8">
-                            <div class=" font-weight-bold">{{mach.MachineName}}</div>
+                          <div class="col-8" >
+                            <div class=" font-weight-bold" (click)="onclickrow(mach)" style="width:100%;">{{mach.MachineName}}</div>
                             <div class="ml-0">
-                                <div class="custom-control custom-radio custom-control-inline">
+                                <div class="custom-control custom-radio custom-control-inline" >
                                   <input type="radio" class="custom-control-input " [attr.id]="'optM'+ mach.MachineID" [attr.name]="'SpindleType'+ mach.MachineID"  [checked]="mach.SpindleType=='M'"  (click)="setspindletype(mach,'M')">
                                   <label class="custom-control-label" [attr.for]="'optM'+ mach.MachineID">{{'Main Spindle' | translate}}</label>
                                 </div>            
-                                <div class="custom-control custom-radio custom-control-inline">
+                                <div class="custom-control custom-radio custom-control-inline" >
                                   <input type="radio" class="custom-control-input" [attr.id]="'optT'+ mach.MachineID"  [disabled]="mach.MachineType=='Machining center' || mach.MachineType=='Lathe'"   [checked]="mach.SpindleType=='T'"  [attr.name]="'SpindleType'+ mach.MachineID" (click)="setspindletype(mach,'T')" >
                                   <label class="custom-control-label" [attr.for]="'optT'+ mach.MachineID">{{'Tool Spindle' | translate}}</label>
                                 </div>                                        
                             </div>  
-                            <div class="row">
+                            <div class="row" style="width:100%;" (click)="onclickrow(mach)">
                               <div class="text-left">{{'Adaptation Type'| translate}}&{{'Size' | translate}}:</div>                              
                               <div (click)="onclickrow(mach)">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div>
                             </div>                           
-                            <div class="row">
+                            <div class="row" style="width:100%;" (click)="onclickrow(mach)">
                               <div>
                                 <label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}:</label>
                               </div>
                               <div class="pl-2">{{mach.Power}}</div>
-                            </div>
-                          
+                            </div>                           
                         </div>
                         </div>
                     </td>                                                                          

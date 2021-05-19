@@ -185,8 +185,16 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           this.fz = value
           break;
         }
-        case 'DMin': case 'Tool_D':{
+        case 'Tool_D':{
           this.DC = value
+          break;
+        }
+        case 'DMin':{
+          if(value!="") this.DC = value          
+          break;
+        }
+        case 'DMax':{
+          this.DH = value
           break;
         }
         case 'DepthOfCutPerPass':{
@@ -293,10 +301,7 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           this.MTB = value
           break;
         }
-        case 'DMax':{
-          this.DH = value
-          break;
-        }
+      
       }
     }
   }
@@ -513,6 +518,13 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/ExtFluteMillingCutter/{DC}/{ae}/{fz}	
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter/{DC}/{ae}/{fz}
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
+let diameter:number;
+
+if(subApp=='790') 
+  diameter =+this.DH;
+else
+  diameter =+this.DC;
+
       this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
         var roundDigits:number = this.srv_appsetting.Units == 'I' ? 10000 : 1000

@@ -56,13 +56,21 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
           this.lang = this.srv_appsetting.Lang
           if (!this.lang)
             this.lang = "EN"
-        }
+        } 
           
         }));
+        if(!environment.internal)
+        {
+          if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+            this.lang = localStorage.getItem("language");
+          else
+          this.lang ='EN';
+        }
     }
 
   ngOnInit() {
-    
+
+
     let scrollYdiff :string;
     if(!this.srv_appsetting.isMobileResolution) 
       scrollYdiff='355px';  
@@ -134,21 +142,19 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {
         this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
         this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
+      });    
+    } 
+
+   
+  /*     this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
+      .subscribe((data: any) => {
+        this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
+        this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
       });
-
+ */
     
-    }
+    
 
-
-    // this.serv.getmaterialsbygrp('EN',this.selectedCategory).subscribe((res:any)=>{
-    //   this.materialsResult=JSON.parse(res);
-    //   this.materialsResultFilterd = this.materialsResult;
-    //   this.filterTable();
-    //   if (this.srv_statemanage.GetMaterialSelected()== null)
-    //       this.selectedMaterial = "";
-    //    else
-    //       this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
-    // })
   }
 
   clearData(){
@@ -195,12 +201,13 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     if (this.isDtInitialized){
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
-        this.dtTriggerMat.next();
+        if(this.dtTriggerMat!=null)this.dtTriggerMat.next();
       });
     }
     else{
         this.isDtInitialized = true;
         if(this.dtTriggerMat!=null) this.dtTriggerMat.next();
+        //this.dtTriggerMat.next();
     }
   }
 
@@ -330,11 +337,15 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
           let spletter = result.split(",");
           mat.Hardness = spletter[0];
           mat.HardnessUnits = spletter[1];
-          mat.HardnessHBValue = spletter[2];
-          this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-            dtInstance.destroy();
-            this.dtTriggerMat.next();
-          });
+          if(mat.HardnessUnits=='HB')  
+            mat.HardnessHBValue = spletter[0];
+          else
+           mat.HardnessHBValue = spletter[2];
+          //this.isDtInitializedFunc();
+      /*     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            dtInstance.destroy();           
+             this.dtTriggerMat.next();
+          }); */
         }
       }
       }, () => console.log('Rejected!'));

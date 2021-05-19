@@ -1241,7 +1241,8 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
       //get CSP/CP value
       //CatalogNoT - Cool - EffZ
       if (this.dtResultsObjectsHelp[index].CatalogNoT && this.dtResultsObjectsHelp[index].CatalogNoT[0].trim().length == 7){
-      this.srv_Results.GetFlatDataField(filed == 'CSP' ? 'Cool' : 'EffZ' ,this.dtResultsObjectsHelp[index].CatalogNoT[0].trim(),this.srv_StMng.SecApp,units).subscribe((res: any) => {
+     /*  this.srv_Results.GetFlatDataField(filed == 'CSP' ? 'Cool' : 'EffZ' ,this.dtResultsObjectsHelp[index].CatalogNoT[0].trim(),this.srv_StMng.SecApp,units).subscribe((res: any) => { */
+      this.srv_Results.GetFlatDataField(filed == 'CSP' ? 'Cool' : 'EffZ' ,this.dtResultsObjectsHelp[index].CatalogNoT[0].trim(),this.dtResultsObjectsHelp[index].SecondaryAppOrig1.trim(),units).subscribe((res: any) => {
           let fieldValue:string = JSON.parse(res)
           this.dtResultsObjectsHelp[index][filed] = fieldValue
           this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)

@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MatFilterComponent } from './mat-filter/mat-filter.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AppsettingService} from 'src/app/services/appsetting.service';
-
+import { environment } from 'src/environments/environment';
 // import { environment } from 'src/environments/environment';
 
 @Component({
@@ -42,7 +42,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
-        this.initialiseInvites();
+        this.initialiseInvites();        
       }
     });
   }
@@ -150,7 +150,13 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   } */
 
   ngOnInit() {
-    this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
+    
+    this.srv_appsetting.LangChanged.subscribe(l=>{if(l!=null) this.translate.use(l)});
+    if(!environment.internal)
+    {
+      if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+        this.translate.use(localStorage.getItem("language"));        
+    }
     this.curComponent = "1";   
     //alert(this.statemng.GetMachineHeaderCur().CostPerHour);    
   }

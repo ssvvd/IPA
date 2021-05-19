@@ -69,49 +69,7 @@ export class LoginService {
     return'ok';
   }
 
- /*  UpdateCurrentCountry(countrycode:string)
-  {
-    this.srv_DataLayer.GetCountryLangBrifData(countrycode).subscribe((d:any)=>
-    {
-      let data = JSON.parse(d);
-      if(data.length>0)
-      {   
-        let c:Country =new Country;
-        c.BrifName =data[0].BrifName;
-        c.CountryFlag ='';
-        c.CountryGlobalId = 0;
-        c.CountryID = data[0].CountryId;
-        c.CountryName =data[0].CountryName;              
-        c.LanguageID.push(data[0].CATLAN);
-        c.CountryCode =data[0].CountryCode;
-        this.srv_appsetting.Country=c;
-        this.SetExchangeRate1(c.BrifName);
-        this.translate.use(c.LanguageID[0]);                    
-      } 
-      else
-      {
-        this.srv_DataLayer.GetCountryLangBrifData('US').subscribe((d:any)=>
-        {
-          let data = JSON.parse(d);
-          if(data.length>0)
-          {   
-            let c:Country =new Country;
-            c.BrifName =data[0].BrifName;
-            c.CountryFlag ='';
-            c.CountryGlobalId = 0;
-            c.CountryID = data[0].CountryId;
-            c.CountryName =data[0].CountryName;              
-            c.LanguageID.push(data[0].CATLAN);
-            c.CountryCode =data[0].CountryCode;
-            this.srv_appsetting.Country=c;
-            this.SetExchangeRate1(c.BrifName);
-            this.translate.use(c.LanguageID[0]);                    
-          } 
-        });
-      }     
-    });
-  } */
-  
+ 
   FillDataCountryByData(data:any)
   {
     let c:Country =new Country;

@@ -123,8 +123,9 @@ export class HardnessSliderComponent implements OnInit, DoCheck {
       if (this.curRadioChecked != 'HB'){
         curHBValue = this.findHardness(this.curRadioChecked,this.value,'HB')
       }
-
-      if (curHBValue >= this.hardnessLimit.min1 && curHBValue <= this.hardnessLimit.max1)
+      if(this.hardnessLimit!=null)
+      {
+        if (curHBValue >= this.hardnessLimit.min1 && curHBValue <= this.hardnessLimit.max1)
         this.dangMsg = msg + this.hardnessLimit.grp1
       else if (curHBValue >= this.hardnessLimit.min2 && curHBValue <= this.hardnessLimit.max2)
         this.dangMsg = msg + this.hardnessLimit.grp2
@@ -134,6 +135,17 @@ export class HardnessSliderComponent implements OnInit, DoCheck {
         this.dangMsg = msg + this.hardnessLimit.grp4
       else
         this.dangMsg = '';
+      }
+      /* if (curHBValue >= this.hardnessLimit.min1 && curHBValue <= this.hardnessLimit.max1)
+        this.dangMsg = msg + this.hardnessLimit.grp1
+      else if (curHBValue >= this.hardnessLimit.min2 && curHBValue <= this.hardnessLimit.max2)
+        this.dangMsg = msg + this.hardnessLimit.grp2
+      else if (curHBValue >= this.hardnessLimit.min3 && curHBValue <= this.hardnessLimit.max3)
+        this.dangMsg = msg + this.hardnessLimit.grp3
+      else if (curHBValue >= this.hardnessLimit.min4 && curHBValue <= this.hardnessLimit.max4)
+        this.dangMsg = msg + this.hardnessLimit.grp4
+      else
+        this.dangMsg = ''; */
 
 
   }

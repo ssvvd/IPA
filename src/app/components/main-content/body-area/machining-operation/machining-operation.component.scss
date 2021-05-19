@@ -96,6 +96,12 @@
 
 }
 
+.li-item-mobile { 
+    width: 100%;  
+    max-width: 100%;   
+ 
+ }
+
 .li-item :hover {  
    background-color:var(--bg-hover); 
 } 
@@ -182,6 +188,11 @@
 }
 
 @include media-breakpoint-up (xs){ 
+    .app-image
+    { 
+    max-width:65%;   
+    width: 65%;
+    }
  .btn-select  
  { 
     min-width:150px;
@@ -210,6 +221,12 @@
   .scrollYFilter{
     overflow-y: auto;
     height: calc(100vh - 220px);
+}
+
+
+.scrollYFilter-mobile{
+    overflow-y: auto;
+    height: calc(100vh - 120px);
 }
  }
  

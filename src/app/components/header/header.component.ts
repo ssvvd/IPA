@@ -394,6 +394,9 @@ export class HeaderComponent implements OnInit {
 
   OpenUserGiude()
   {
-    window.open('assets/UserGuide/ITAUserGuide.pdf');
+    if(this.srv_appsetting.Lang=='FR')
+      window.open('assets/UserGuide/ITAUserGuide_FR.pdf');
+    else
+      window.open('assets/UserGuide/ITAUserGuide.pdf');
   }
 }

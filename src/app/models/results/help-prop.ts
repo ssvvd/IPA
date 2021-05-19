@@ -191,14 +191,40 @@ export class clsHelpProp {
     }
     */
     InternalCoolantFilter(filed:string,value:string,checked:string){
-        switch (checked){
+         switch (checked){
             case 'T':
-                if(this[filed][0] == value) this.isHidden--;            
+                if(this[filed] == value) this.isHidden--;            
                 break;
             case 'F':                
-                if(this[filed][0] == value) this.isHidden++;
+                if(this[filed] == value) this.isHidden++;
                 break;
-        }
+        } 
+       /*   switch (checked){
+            case 'T':
+                if(value=='0')
+                {
+                    if(this[filed] == '1' || this[filed] == 'Yes' || this[filed] == 'HP') this.isHidden--;  
+                    if(this[filed] == '0' || this[filed] == '') this.isHidden++;    
+                }
+                if(value=='1')
+                {
+                    if(this[filed] == '1' || this[filed] == 'Yes' || this[filed] == 'HP') this.isHidden++;  
+                    if(this[filed] == '0' || this[filed] == '') this.isHidden--;         
+                }           
+                break;
+            case 'F':                
+                if(value=='1')
+                {
+                    if(this[filed] == '1' || this[filed] == 'Yes' || this[filed] == 'HP') this.isHidden--;  
+                    if(this[filed] == '0' || this[filed] == '') this.isHidden++;    
+                }
+                if(value=='0')
+                {
+                    if(this[filed] == '1' || this[filed] == 'Yes' || this[filed] == 'HP') this.isHidden++;  
+                    if(this[filed] == '0' || this[filed] == '') this.isHidden--;         
+                }      
+                break;
+        }  */
     }
 
    

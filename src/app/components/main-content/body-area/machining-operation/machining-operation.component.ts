@@ -29,11 +29,14 @@ export class MachiningOperationComponent implements OnInit {
   SelectedMenuID1:string="";
   SelectedMenuID2:string="";
   isToOperationData:boolean=false;
- 
+  ShowLevel:number=0;
+  DescAppMobile1:string="";
+  DescAppMobile2:string="";
+  DescAppMobile3:string="";
   private eventsSubscription: Subscription=new Subscription();
 
   constructor(private srv_app: ApplicationsService,private srv_statemanage:StateManagerService,
-              private srv_appsetting:AppsettingService,private router:Router) { }
+              public srv_appsetting:AppsettingService,private router:Router) { }
   
   ngOnInit() {
     this.isToOperationData =this.srv_statemanage.CheckToOperationData();  
@@ -157,21 +160,33 @@ export class MachiningOperationComponent implements OnInit {
            this.SelectedMainApp=ma;     
            this.SelectedMainAppID=ma.MenuID;
            this.ApplyFilter1(ma.MenuID);
+           
          }
        let sa:SecondaryApp=this.srv_statemanage.SecAppSelected;  
        if(sa!=null)
         {          
           if(this.arrSelectedSecApp1.filter(e=>e.MenuID==sa.MenuID).length==0)          
-              this.ApplyFilter2(sa.ParentMenuID);                  
+          {
+            this.ApplyFilter2(sa.ParentMenuID);                  
+            this.ShowLevel =2;
+            this.DescAppMobile1=ma.MenuName;
+            this.DescAppMobile2=sa.MenuName;
+          }              
           else
           {
             this.SelectedSecApp = sa;           
             this.SelectedSecAppID = sa.ApplicationITAID;
-          }
-        }        
+            this.ShowLevel =1;
+            this.DescAppMobile1=ma.MenuName;
+            this.DescAppMobile2=sa.MenuName;
+          }          
+        }              
         this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
-        this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;        
-    }));
+        this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;   
+        
+      
+    }
+    ));
      }));
   }
   
@@ -179,29 +194,40 @@ export class MachiningOperationComponent implements OnInit {
     this.eventsSubscription.unsubscribe();
   }
   
-  onSelectMainApp(obj:MainApp) {     
+  SetLevel(level:number)
+  {
+    this.ShowLevel =level;
+  }
+  onSelectMainApp(obj:MainApp) {
+    
     if (obj.IsActive)
       {
-      this.arrSelectedSecApp1=[];
-      this.arrSelectedSecApp2=[];
-      this.SelectedMainApp=obj;     
-      this.SelectedMainAppID=obj.MenuID; 
-      this.SelectedSecApp=null;
-      this.SelectedSecAppID=""; 
+        if(this.srv_appsetting.isMobileResolution && obj.MenuID=='110') return;
+        this.ShowLevel =1;
+        this.DescAppMobile1=obj.MenuName;
+        this.arrSelectedSecApp1=[];
+        this.arrSelectedSecApp2=[];
+        this.SelectedMainApp=obj;     
+        this.SelectedMainAppID=obj.MenuID; 
+        this.SelectedSecApp=null;
+        this.SelectedSecAppID=""; 
 
-      this.SelectedMenuID1='';
-      this.SelectedMenuID2='';
+        this.SelectedMenuID1='';
+        this.SelectedMenuID2='';
       
-      this.srv_statemanage.IPL =null;
-      this.ApplyFilter1(obj.MenuID);  
+        this.srv_statemanage.IPL =null;
+        this.ApplyFilter1(obj.MenuID);  
       }
    }  
   
    onFilterSecApp (obj:SecondaryApp)
    {
+    this.ShowLevel=2;
+    this.DescAppMobile2 =obj.MenuName;
      if(obj.ApplicationITAID!='0')
       {
-        this.OnSelectSecApp(obj,1)
+        this.OnSelectSecApp(obj,1);
+       
         return;
       }
      this.SelectedMenuID1 =obj.MenuID;
@@ -217,7 +243,9 @@ export class MachiningOperationComponent implements OnInit {
    onFilterSecApp1(obj:SecondaryApp)
    {
      if(obj.ApplicationITAID!='0')
-      {
+      {  
+        this.ShowLevel=2;    
+        this.DescAppMobile2 =obj.MenuName;
         this.OnSelectSecApp(obj,2);
         return;
       }
@@ -249,5 +277,11 @@ export class MachiningOperationComponent implements OnInit {
   { 
     if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive && secapp.ApplicationITAID!='810' && secapp.ApplicationITAID!='820')
       this.router.navigate(['/home/operation-data']);
+  }
+
+  BackMobile()
+  {
+    if(this.ShowLevel>0) this.ShowLevel =this.ShowLevel-1;
+    
   }
 }
