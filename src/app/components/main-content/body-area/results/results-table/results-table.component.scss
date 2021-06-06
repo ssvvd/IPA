@@ -36,19 +36,52 @@ table.dataTable thead th {
  
  table.dataTable thead .sorting_asc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
  table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
+
+ .table-mobile td:nth-child(0), .table-mobile th:nth-child(0){
+  width: 20% !important;
+  min-width: 20% !important;
+  max-width: 20% !important;
+  white-space: nowrap;
  
+}
+
+ .table-mobile td:nth-child(1), .table-mobile th:nth-child(1){
+  width: 50% !important;
+  min-width: 50% !important;
+  max-width: 50% !important;
+  white-space: nowrap;
+
+}
+ .table-mobile td:nth-child(2), .table-mobile th:nth-child(2){
+  width: 15% !important;
+  min-width: 15% !important;
+  max-width: 15% !important;
+  white-space: nowrap;
+}
+
+.table-mobile td:nth-child(3), .table-mobile th:nth-child(3){
+  width: 15% !important;
+  min-width: 15% !important;
+  max-width: 15% !important;
+  white-space: nowrap;
+}
+.table-mobile td:nth-last-child(3), .table th:nth-last-child(3){
+  // min-width: 24% !important;
+  // max-width: 24% !important;
+  width: 8% !important;
+  min-width: 8% !important;
+  max-width: 8% !important;
+  white-space: nowrap;
+}
+
 
  .table td:nth-child(1), .table th:nth-child(1){
-  // min-width: 15% !important;
-  // max-width: 15% !important;
   width: 10% !important;
   min-width: 10% !important;
   max-width: 10% !important;
   white-space: nowrap;
 }
  .table td:nth-child(2), .table th:nth-child(2){
-  // min-width: 24% !important;
-  // max-width: 24% !important;
   width: 22% !important;
   min-width: 22% !important;
   max-width: 22% !important;
@@ -72,24 +105,35 @@ table.dataTable thead th {
   white-space: nowrap;
 }
 
-//  .table td:nth-child(2), .table th:nth-child(2){
-//   min-width: 100px
-// }
-
-// .table td:nth-child(3), .table th:nth-child(3){
-//   min-width: 100px;
-// }
-
 .img-grid{
   height: 70px;
+  height: 70px!important;
+  max-height:70px!important; 
+  position: relative; 
+  top:-5px; 
+  left: -8px; z-index: 1;
+  cursor: pointer
 }
-
+.img-grid-mobile{
+  height: 50px;
+  height: 50px!important;
+  max-height:50px!important; 
+  position: relative; 
+  top:-5px; 
+  left: -8px; z-index: 1;
+  cursor: pointer
+}
+.label-desc-mobile
+{
+  min-width:50px!important;
+}
 .icon-edit{
   height:25px;
   cursor: pointer;
   // margin-left:-20px;
   }
 
+  
   span { min-height: 21px; }
 
   .img-pdf
@@ -128,10 +172,6 @@ table.dataTable thead th {
 
 }
 
-// .dataTables_scrollHeadInner{
-//   width: 100% !important;
-// }
-
 .table-stripe{
   width: 100% !important;
   table-layout: fixed;
@@ -148,16 +188,6 @@ table.dataTable thead th {
   width:100% !important;
 
 }
-// table.dataTable tbody th,
-// table.dataTable tbody td {
-//     white-space: nowrap;
-// }
-
-// table.dataTable td {
-//   -webkit-box-sizing: content-box;
-//   -moz-box-sizing: content-box;
-//   box-sizing: content-box;
-// }
 
 .logoImg{
   height: 50px;
@@ -179,3 +209,11 @@ table.dataTable thead th {
     color:white;
     margin-right: 25px;
   }
+  ::ng-deep .filter-mobile-modal .modal-content { 
+    margin-top:120px!important;
+    margin-left:0px!important;
+    padding-top: 0px!important;
+    padding-left: 0px!important; 
+    min-height: 700px!important;  
+  } 
+  

@@ -56,7 +56,11 @@
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div> 
-               
+                <div  *ngIf="msrv_appsetting.isMobileResolution">
+                    <div *ngIf="ImageName!=''">
+                        <img src="{{ImageName}}" class="input-image">   
+                    </div>
+                </div> 
                 <div class="form-group row">
                     <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
                         <label class="pl-0 pt-5">W - {{'Tolerance' | translate}}</label>                       
@@ -181,7 +185,7 @@
 
             </div> 
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
+        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image" *ngIf="!msrv_appsetting.isMobileResolution">
             <div *ngIf="ImageName!=''">
                 <img src="{{ImageName}}" class="input-image">   
             </div>

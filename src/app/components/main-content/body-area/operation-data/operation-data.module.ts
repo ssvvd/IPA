@@ -10,7 +10,6 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { NgxSpinnerModule } from "ngx-spinner"; 
 import { OperationDataRoutingModule } from './operation-data-routing.module';
 import { OperationDataComponent } from './operation-data.component';
-
 import { Shared1Module } from '../../../../shared/shared1.module'; 
 
 /* import { Appdetails59Component } from './input-data-components/appdetails59/appdetails59.component';
@@ -66,7 +65,7 @@ import { OptimizetoolFilterComponent } from './input-data-components/optimizetoo
     CommonModule,
     FormsModule,   
     HttpClientModule,
-    Ng5SliderModule , 
+    Ng5SliderModule ,   
     NgxSpinnerModule,
     TranslateModule
     //,

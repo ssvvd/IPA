@@ -22,7 +22,7 @@ import { ResultPpInventoryComponent } from 'src/app/components/main-content/body
 import { MachineService } from 'src/app/services/machine.service' ;
 import { CookiesService } from 'src/app/services/cookies.service';
 import { FeedbackComponent } from 'src/app/components/maintenance/feedback/feedback.component';
-
+import { ResFilterComponent} from 'src/app/components/main-content/body-area/results/res-filter/res-filter.component'
 @Component({
   selector: 'app-results-table',
   templateUrl: './results-table.component.html',
@@ -69,8 +69,11 @@ export class ResultsTableComponent implements OnInit {
   @Input() filterChangedRec: any ; 
   @Output() goToViewEvent = new EventEmitter<any>();
   @Output() hideFilter = new EventEmitter<any>();
+  @Output() filtermobiletop:string="FilterRec";
+  @Output() changefiltermobiletop=new EventEmitter<any>();
   processdownload:boolean=false;
-
+  
+  //filtermobiletop:string="FilterRec";
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
@@ -80,7 +83,12 @@ export class ResultsTableComponent implements OnInit {
     }
    
   ngOnInit() {
-    
+     let scrollY:string;
+     if(this,this.srv_appsetting.isMobileResolution)
+        scrollY="236px";
+    else
+        scrollY="336px";
+
      this.dtOptions = {
       pagingType: 'full_numbers',
       // "columnDefs":[{ "type": "numeric-comma" }],
@@ -91,7 +99,7 @@ export class ResultsTableComponent implements OnInit {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-      "scrollY": 'calc(100vh - 336px)',
+      "scrollY": 'calc(100vh - ' + scrollY + ')',
       "info":false,
        "scrollX": true,
        "scrollCollapse" : true,
@@ -518,7 +526,14 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
             this.dtResultsObjects[i][index].property.IsShow = false;
           }
           else{
-            
+            if(this.srv_appsetting.isMobileResolution)
+            {
+              if(this.dtPropertiesTable[j].IsDefault==1 || this.dtPropertiesTable[j].Field.toUpperCase()=='METALREMOVALRATE' || this.dtPropertiesTable[j].Field.toUpperCase()=='TCB')
+                this.dtResultsObjects[i][index].property.IsShow = true;
+              else
+                this.dtPropertiesTable[j].IsDefault=0;
+            }
+            else          
             if(this.srv_appsetting.issmallscreen)
             {
               if(this.dtPropertiesTable[j].IsDefault==1 || this.dtPropertiesTable[j].IsDefault==6 || this.dtPropertiesTable[j].IsDefault==7)
@@ -1031,33 +1046,18 @@ ngOnChanges(changes:SimpleChanges) {
                   }
                 break;
             }
-            break;   
-            // case 'optSort':
-            //   switch (this.filterChangedRec.Res){
-            //     case 'SortRec':
-            //       this.sortProp = 'index';
-            //       break;
-            //     case 'SortSeller':
-            //       this.sortProp = 'AverageUse';
-            //       break;
-            //   }
-            //   return;  
+            break;           
               
             case 'filterList':
               let field:string = this.filterChangedRec.Res[0];
               let value:string = this.filterChangedRec.Res[1];
-              // if (this.dtResultsObjectsHelp[i][field])
+        
               switch (this.filterChangedRec.Res[2]){
                 case 'T': case 'F':
                   this.InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units,i)
-                  // if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
-                  //       this.dtResultsObjectsHelp[i].isHidden--
+                 
                   break;
-                // case 'F':
-                //  this.dtResultsObjectsHelp[i].InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units)
-                //   // if (this.dtResultsObjectsHelp[i][field].filter(s => s == value).length > 0)
-                //   //     this.dtResultsObjectsHelp[i].isHidden++
-                //   break;
+                
                 case 'S':
                   if (this.dtResultsObjectsHelp[i][field].filter(s => !s.toUpperCase().includes(value)).length > 0)
                       this.dtResultsObjectsHelp[i].isHidden++
@@ -1268,5 +1268,76 @@ feedback()
   });    
 } 
 
+FilterTopMobileChange(filter:string)
+{
+  this.ApplyFilterChange("optFilter",filter);
+  this.changefiltermobiletop.emit(filter);
 }
 
+OpenFilterMobile()
+{
+  this.srv_StMng._hideFiltermobile =!this.srv_StMng._hideFiltermobile;
+
+  /* const modalRef = this.modalService.open(ResFilterComponent, { windowClass: 'filter-mobile-modal'  });
+  modalRef.componentInstance.helpArr = this.dtResultsObjectsHelp;
+  modalRef.componentInstance.parentComponent = this;
+  modalRef.result.then((result) => {
+    if(result=='cancel') return;
+    
+    }
+    );      */ 
+}
+
+public ChangeFilterMobile()
+{
+  //this.ApplyFilterChange('gg');
+}
+
+ApplyFilterChange(typefilter:string,fieldvalue:string)
+{
+  
+  //if (this.filterChangedRec ){
+    this.filtermobiletop=fieldvalue;
+    for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
+      //switch (this.filterChangedRec.control){
+        switch (typefilter){               
+          case 'optFilter':
+            switch (fieldvalue){
+              case 'FilterRec':
+                this.filterRecommended(this.dtResultsObjectsHelp[i]);
+                this.sortProp = 'index';
+                this.sortType = 'asc';                 
+                break;
+
+              case 'FilteAllRes':
+                  if (this.dtResultsObjectsHelp[i].IsExpand == "False")
+                  this.dtResultsObjectsHelp[i].isHidden--
+                  this.sortProp = 'index';
+                  this.sortType = 'asc';
+                break;
+
+              case 'FilterSeller':                
+                  this.sortProp = 'AverageUse';
+                  this.sortType = 'desc';
+                  if(this.lastTypeMainFilter == "FilterRec" && this.dtResultsObjectsHelp[i].IsExpand == "False"){
+                    this.dtResultsObjectsHelp[i].isHidden--
+                  }
+                break;
+            }
+            break;                                                       
+      }          
+    }
+  
+    this.countShowingRows();
+    this.lasTypeFeed =typefilter;
+  /*   if (this.filterChangedRec.control == 'TypeFeed')
+      this.lasTypeFeed =typefilter;
+    
+      if (this.filterChangedRec.control == 'optFilter')
+      this.lastTypeMainFilter = this.filterChangedRec.Res;
+
+      if (this.filterChangedRec.control == 'ClearAll')
+      this.lastTypeMainFilter = "FilterRec"  
+      } */
+}
+}

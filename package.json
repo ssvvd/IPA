@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "^9.1.2",
     "@angular/common": "^9.1.2",
     "@angular/compiler": "^9.1.2",
@@ -46,7 +47,7 @@
     "ng-bootstrap-dropdown": "^1.0.0",
     "ng-lazyload-image": "^9.1.0",
     "ng2-charts": "^2.3.0",
-    "ng5-slider": "^1.2.4",
+     "ng5-slider": "^1.2.4",
     "ngp-sort-pipe": "0.0.4",
     "ngx-cookie-service": "^3.0.4",
     "ngx-spinner": "^8.1.0",

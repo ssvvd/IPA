@@ -270,7 +270,11 @@
                         </div>
                     </div> 
             </div>
-           
+            <div  *ngIf="msrv_appsetting.isMobileResolution">
+                <div *ngIf="ImageName!=''" >
+                    <img src="{{ImageName}}" class="input-image">   
+                </div>
+            </div>    
             <div class="pt-3">
                 <label>{{'Surface Quality' | translate}}</label>                                                
             </div>
@@ -413,7 +417,7 @@
 
                 </div>      
         </div>    
-        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
+        <div *ngIf="!msrv_appsetting.isMobileResolution" class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
             <div *ngIf="ImageName!=''">
                 <img src="{{ImageName}}" class="input-image">   
             </div>

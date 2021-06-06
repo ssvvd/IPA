@@ -102,8 +102,9 @@
             </div>                
             <div class="row">
                 <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-2">
-                    <label class="pl-0 pt-4">{{'Depth (D)' | translate}}</label>
-                    <label class="pl-2 asterisk-red pt-4">*</label>
+                    <label class="pl-0 pt-2">{{'Depth (D)' | translate}}</label>
+
+                    <label class="pl-2 asterisk-red pt-2">*</label>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-2 pl-0">
                     <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" (change)="OnDepthChange()"
@@ -113,6 +114,11 @@
                     <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                 </div>
             </div>
+            <div  *ngIf="msrv_appsetting.isMobileResolution">
+                <div *ngIf="ImageName!=''" >
+                    <img src="{{ImageName}}" class="input-image">   
+                </div>
+            </div> 
             <div class="form-group"> 
                 <div class="pl-0 pt-3">
                     <label>{{'Machining Stability' | translate}}</label>
@@ -163,7 +169,7 @@
 
             </div> 
         </div>
-        <div class="col-xl-6 col-lg-6  col-md-5 pr-4 pt-1 div-input-image">
+        <div *ngIf="!msrv_appsetting.isMobileResolution" class="col-xl-6 col-lg-6  col-md-5 pr-4 pt-1 div-input-image">
             <div *ngIf="ImageName!=''">
                 <img src="{{ImageName}}" class="input-image">   
             </div>

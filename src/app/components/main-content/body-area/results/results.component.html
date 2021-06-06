@@ -1,20 +1,17 @@
-<!-- <li *ngFor="let obj of arrResult">
-    <div>
-        <h3> Tool </h3>
-        {{obj | json}}
-    </div>
-</li>
-<p>{{ErrMsg}}</p> -->
 
 <div class="border-left-gray border-right-gray" style="min-height: 1500px;height:1500px;">
     <div class="row" [hidden]="!MainPage">
-      <div class="col col-20 mt-4 scrollYAutoFilter" [hidden]="_hideFilter">
+      <div class="col col-20 mt-4 scrollYAutoFilter" [hidden]="_hideFilter" *ngIf="!srv_appsetting.isMobileResolution">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
-      <div class="col col-80 pl-2 border-left-gray mt-4 ">
+      <div class="col col-12 mt-2 scrollYAutoFilter-mobile" [hidden]="srv_statemanage._hideFiltermobile" *ngIf="srv_appsetting.isMobileResolution">
+        <app-res-filter [filtermobiletop]="filtermobiletop" (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
+      </div>
+      <div class="col pl-2 border-left-gray" [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-80' ">
         <div class="row">
         </div>
-        <app-results-table  #resTable [filterChangedRec]="filterChanged" (hideFilter)="hideFilter($event)" (goToViewEvent)="goToView($event)"></app-results-table>
+       <!--  @Input() filterChangedRec: any ; results-table -->
+        <app-results-table (changefiltermobiletop)="changefiltermobile($event)" [hidden]="!srv_statemanage._hideFiltermobile" #resTable [filterChangedRec]="filterChanged" (hideFilter)="hideFilter($event)" (goToViewEvent)="goToView($event)"></app-results-table>
       </div>
     </div>
 
@@ -24,11 +21,19 @@
           <div class="col-10 pl-0 ">
           <nav class="ml-0 pl-0 mt-0 pl-0 pt-0 " aria-label="breadcrumb">
              <ol class="breadcrumb mt-0 ml-0 pl-0 bg-white pb-0 mb-0 " >
-                 <li class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">{{'All' | translate}}</a></li>
-                 <li class="breadcrumb-item active text-secondary"  aria-current="page">{{'Result Information' | translate}}</li> 
+                 <li *ngIf="!srv_appsetting.isMobileResolution" class="breadcrumb-item text-secondary" (click)="switchPage()" ><a href="javascript:void(0)">{{'All' | translate}}</a></li>
+                 <li *ngIf="srv_appsetting.isMobileResolution" class=" text-secondary" (click)="switchPage()"><a ><img  class="arrow-mobile pr-2 pl-0" [src]="environment.ImagePath + 'icon_arrow-01.svg'"></a></li> 
+                 <li [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class="active text-secondary"  aria-current="page">{{'Result Information' | translate}}</li> 
              </ol>
-           </nav> 
-          </div>                
+           </nav>
+        
+          </div>  
+          <div *ngIf="srv_appsetting.isMobileResolution" [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
+            <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0 pt-2"  (click)="CheckDownloadResults()">
+              <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i>                         
+              <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >                                
+            </h2>  
+          </div>               
         </div>  
         <div class="row" >
           <div class="col-12 justify-content" >
@@ -46,15 +51,14 @@
                   </div> 
                 </label>
               </div>
-              <div *ngIf="srv_statemanage.SecApp!='119' && srv_statemanage.SecApp!='120'">
+              <div *ngIf="(srv_statemanage.SecApp!='119' && srv_statemanage.SecApp!='120') && !srv_appsetting.isMobileResolution">
                 <h2 data-toggle="tooltip" title="{{'Create Assembly' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="GoToAssembly()">                  
                   <img src = "{{environment.ImgAssembly}}"  class="icon-edit" >                                
                 </h2>  
               </div>  
-              <div [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
+              <div  *ngIf="!srv_appsetting.isMobileResolution" [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="CheckDownloadResults()">
-                  <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i> 
-                  <!-- <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>  -->                 
+                  <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i>                         
                   <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >                                
                 </h2>  
               </div>         
@@ -62,38 +66,51 @@
           </div>
         </div>       
       </div>
+      <inner-tabs-table *ngIf="srv_appsetting.isMobileResolution" [viewParamsChanged]="viewParams"></inner-tabs-table>
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
-          <li [ngbNavItem]="1" class="navli" id="dataitem1">
+          <li [ngbNavItem]="1" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'" id="dataitem1">
             <a ngbNavLink class="siteTitle" >{{'Machining Parameters' | translate}}</a>
             <ng-template ngbNavContent>
-              <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
+              <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
+              <!-- <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF && srv_appsetting.isMobileResolution"> -->
+                <div class="col-xs-6 col-sm-6 col-md-6 pt-0 pb-0" *ngIf="srv_appsetting.isMobileResolution">
+                <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
+              </div>
               <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>
             </ng-template>
           
           </li>
 
-          <li [ngbNavItem]="2" class="navli">
+          <li [ngbNavItem]="2" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
             <a ngbNavLink class="siteTitle">{{'Product Information' | translate}}</a>
             <ng-template ngbNavContent>
-              <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
+              <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
+              <!-- <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF && srv_appsetting.isMobileResolution"> -->
+                <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="srv_appsetting.isMobileResolution">
+                <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
+              </div>
               <product-info [viewParamsChanged]="viewParams" [SRC]="'ITA1'"></product-info>
             </ng-template>
           </li>
 
-          <li [ngbNavItem]="3" class="navli">
+          <li [ngbNavItem]="3" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
             <a ngbNavLink class="siteTitle">{{'2D+3D Representation' | translate}}</a>
             <ng-template ngbNavContent>
-              <inner-tabs-table [viewParamsChanged]="viewParams"></inner-tabs-table>
+              <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
+              <!-- <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF && srv_appsetting.isMobileResolution"> -->
+                <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="srv_appsetting.isMobileResolution">
+                <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
+              </div>
               <product-info #productInfo [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
             </ng-template>
           </li>
 
-          <li [ngbNavItem]="4" [disabled]="true" class="navli">
+          <li *ngIf="!srv_appsetting.isMobileResolution" [ngbNavItem]="4" [disabled]="true" class="navli">
             <a ngbNavLink class="siteTitle"></a>
             <ng-template ngbNavContent></ng-template>
           </li>
 
-          <li [ngbNavItem]="5" [disabled]="true" class="navli">
+          <li *ngIf="!srv_appsetting.isMobileResolution" [ngbNavItem]="5" [disabled]="true" class="navli">
             <a ngbNavLink class="siteTitle"></a>
             <ng-template ngbNavContent></ng-template>
           </li>
@@ -219,7 +236,7 @@
                 </div>
             </div>
           </div>
-          <div class="row pb-2  pr-0 mr-0 pt-2 border-bottom-gray">
+          <div class="row pb-2  pr-0 mr-0 pt-2 border-bottom-gray" >
             <label class="PDFTitle ml-2">{{'Results' | translate}}</label>
           </div>
            <inner-tabs-table  [exportPDF]="true"  [viewParamsChanged]="viewParams"></inner-tabs-table>
@@ -230,8 +247,7 @@
             <machining-prms [exportPDF]="true"  [viewParamsChangedMP]="viewParams"></machining-prms> 
           </div>
         </div>   
-       
-        <!-- <div class="pt-2 div_pdf" id='pdf_7' style="min-height:1220px;border:2px solid red"> -->
+
         <div class="break-page">
             <div class="header-pdf">    
               <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          

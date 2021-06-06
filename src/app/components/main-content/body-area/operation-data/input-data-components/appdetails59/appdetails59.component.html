@@ -43,6 +43,11 @@
                     </div>
                 </div>
             </div>  
+            <div  *ngIf="msrv_appsetting.isMobileResolution">
+                <div *ngIf="ImageName!=''" >
+                    <img src="{{ImageName}}" class="input-image">   
+                </div>
+            </div> 
             <div *ngIf = "msrv_StMng.SecApp=='770'" class="pt-4">               
                 <div class="form-group">                   
                         <div class="pl-0">
@@ -211,18 +216,14 @@
                     <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">                    
                         <!-- <input  type="number"  class="form-control input-min-width"  id="txtMachineCost" name="txtMachineCost" 
                                            value={{CostPerHourByRate}} readonly>   -->
-                        <Label  class="pt-3 input-min-width"  id="txtMachineCost" name="txtMachineCost">{{CostPerHourByRate}}{{' '}}{{msrv_appsetting.Currency}}/{{'hour' | translate}}</Label></div>                    
-                    <!-- <div class="row pt-0 pl-0">
-                        <label class="pl-0 pt-3 ">{{msrv_appsetting.Currency}}</label>
-                        <label class="pl-0 pt-3">/{{'hour' | translate}}</label>
-                    </div> -->
+                        <Label  class="pt-3 input-min-width"  id="txtMachineCost" name="txtMachineCost">{{CostPerHourByRate}}{{' '}}{{msrv_appsetting.Currency}}/{{'hour' | translate}}</Label></div>                                       
                 </div> 
             </div>
             <div class="pt-4">
 
             </div>                        
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image">
+        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image" *ngIf="!msrv_appsetting.isMobileResolution">
             <div *ngIf="ImageName!=''" >
                 <img src="{{ImageName}}" class="input-image">   
             </div>

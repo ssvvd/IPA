@@ -80,7 +80,7 @@ export class LoginService {
     c.CountryName =data[0].CountryName;              
     c.LanguageID.push(data[0].CATLAN);
     c.CountryCode =data[0].CountryCode;
-    c.ShowPrice =data[0].ShowPrice;
+    c.ShowPrice =data[0].ShowPrice==null?0:1;
     c.LACNT = data[0].LACNT;
     c.FCSToolshopSite =data[0].FCSToolshopSite;
     this.srv_appsetting.Country=c;    

@@ -32,6 +32,9 @@ environment = environment;
 navigationSubscription;
 _hideFilter:boolean;
 indextool:number;
+
+filtermobiletop:string='FilterRec';
+
 // _showDownload:boolean;
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
@@ -69,6 +72,7 @@ eventsSubject: Subject<void> = new Subject<void>();
 
   ngOnInit() {
     
+    this.srv_statemanage._hideFiltermobile= true;
     //this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { if(f==2) {console.log('f==2'); setTimeout( () => {this.SpinnerService.hide();}, 3000 ); return;}});
     this.srv_appsetting.LangChanged.subscribe(l=>this.translate.use(l));
     this.MainPage = true;     
@@ -239,7 +243,9 @@ eventsSubject: Subject<void> = new Subject<void>();
  {
    let NotCNGenerator:boolean =false;
    let message:string;   
-   if(this.viewParams.Res[0].Families[1]==4089 || this.viewParams.Res[0].Families[1]==4090 || this.viewParams.Res[0].Families[1]==3524)
+   let index_family:number;
+   index_family=this.viewParams.Res[0].Families.length-1;
+   if(this.viewParams.Res[0].Families[index_family]==4089 || this.viewParams.Res[0].Families[index_family]==4090 || this.viewParams.Res[0].Families[index_family]==3524)
    {
     NotCNGenerator =true;
     message="Currently, NC program is not available for this type of tool.";
@@ -276,4 +282,13 @@ eventsSubject: Subject<void> = new Subject<void>();
 
 }
 
+OpenFilter()
+  {
+  this.srv_statemanage._hideFiltermobile =!this.srv_statemanage._hideFiltermobile;
+  }
+ 
+  changefiltermobile(event)
+  {
+    this.filtermobiletop =event;
+  }
 }

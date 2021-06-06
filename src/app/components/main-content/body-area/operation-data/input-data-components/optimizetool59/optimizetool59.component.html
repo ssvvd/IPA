@@ -14,18 +14,15 @@
     </div> 
     <div class="pt-3 mt-2">                
       <span>DC - </span><span>{{'Cutting diameter' | translate}}</span>    
-       <div class="custom-slider pt-0 mt-4">
-         <!--  <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_DiameterFrom').value"  
-                       [(highValue)]="msrv_StMng.IPL.GetItem('TD_DiameterTo').value" 
-                       [options]="options_dc" class="form-control-sm  pt-0 mt-0" ></ng5-slider> -->
-            <ng5-slider   [(value)]="msrv_StMng.IPL.GetItem('TD_DiameterFrom').value"  
-                          [(highValue)]="msrv_StMng.IPL.GetItem('TD_DiameterTo').value" 
-                          [options]="options_dc" class="form-control-sm  pt-0 mt-0" ></ng5-slider>
+       <div class="custom-slider pt-0 mt-4">       
+            <ng5-slider   [(value)]="SL_TD_DiameterFrom"  
+                          [(highValue)]="SL_TD_DiameterTo" 
+                          [options]="options_dc" class="form-control-sm  pt-0 mt-0" (userChange)="sl_change_dia()"></ng5-slider>
         </div>   
       <div class="row pt-2">
           <div class="col-6 pl-0 row">
               <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
+                    <input type="number" class="form-control"   (change)="ChangeDMinDMax()"
                                 [(ngModel)]="msrv_StMng.IPL.GetItem('TD_DiameterFrom').value"> 
               </div>
               <div class="pl-0">
@@ -35,7 +32,7 @@
                     
           <div class="col-6 ml-auto row">
               <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
+                <input type="number" class="form-control"  (change)="ChangeDMinDMax()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('TD_DiameterTo').value">
               </div>
               <div class="pl-0">
@@ -48,13 +45,14 @@
       <div *ngIf="msrv_StMng.SecApp=='770'">
         <span>DCX - </span><span>{{'Cutting diameter Maximum' | translate}}</span>   
         <div class="custom-slider pt-0 mt-4" >
-            <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_DCXMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_DCXMax').value" [options]="options_dc"></ng5-slider>
+            <ng5-slider  [(value)]="SL_TD_DCXMin"  class="form-control-sm pt-0 mt-0"  (userChange)="sl_change_dcx()" 
+            [(highValue)]="SL_TD_DCXMax" [options]="options_dc"></ng5-slider>
         </div>  
      </div>
       <div class="row pt-4" *ngIf="msrv_StMng.SecApp=='770'">
           <div class="col-6 pl-0 row">
               <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
+                    <input type="number" class="form-control"  (change)="ChangeDCX()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('TD_DCXMin').value"> 
               </div>
               <div class="pl-0">
@@ -63,7 +61,7 @@
           </div>
           <div class="col-6 ml-auto row">
               <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
+                <input type="number" class="form-control"  (change)="ChangeDCX()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('TD_DCXMax').value">
                 </div>
                 <div class="pl-0">
@@ -75,18 +73,19 @@
     <div class="pt-3 mt-2">        
       <span>NOF - </span><span>{{'Number Of Effective Flutes' | translate}}</span>
       <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_NOFMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_NOFMax').value" [options]="options_nof"></ng5-slider>
+          <ng5-slider  [(value)]="SL_TD_NOFMin"  class="form-control-sm pt-0 mt-0"  (userChange)="sl_change_nof()" 
+             [(highValue)]="SL_TD_NOFMax" [options]="options_nof"></ng5-slider>
       </div>   
       <div class="row pt-4">
            <div class="col-6 pl-0 row">
               <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
+                <input type="number" class="form-control"   (change)="ChangeNOF()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('TD_NOFMin').value"> 
               </div>             
           </div>
           <div class="col-6 ml-auto row">
               <div class="col-8 pl-0">
-              <input type="number" class="form-control" 
+              <input type="number" class="form-control" (change)="ChangeNOF()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('TD_NOFMax').value">
                 </div>               
           </div>
@@ -95,12 +94,13 @@
     <div  *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='57'" class="pt-3 mt-2">
       <span>RE - </span><span>{{'Corner radius' | translate}}{{' (R)'}}</span>    
       <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinCornerRadius').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxCornerRadius').value" [options]="options_radius"></ng5-slider>
+          <ng5-slider  [(value)]="SL_MinCornerRadius"  (userChange)="sl_change_radius()"  class="form-control-sm pt-0 mt-0"  
+                       [(highValue)]="SL_MaxCornerRadius" [options]="options_radius"></ng5-slider>
       </div>   
       <div class="row pt-4">
             <div class="col-6 pl-0 row">
               <div class="col-8 pl-0">
-              <input type="number" class="form-control"  
+              <input type="number" class="form-control"   (change)="ChangeCornerRadius()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('MinCornerRadius').value">
                                </div>
               <div class="pl-0">
@@ -109,7 +109,7 @@
           </div>
           <div class="col-6 ml-auto row">
               <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
+                    <input type="number" class="form-control" (change)="ChangeCornerRadius()" 
                               [(ngModel)]="msrv_StMng.IPL.GetItem('MaxCornerRadius').value">
                 </div>
                 <div class="pl-0">
@@ -121,12 +121,13 @@
     <div *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='57'" class="pt-3 mt-2">    
       <span>CHW - </span><span>{{'Corner Chamfer Width' | translate}}</span>      
       <div class="custom-slider pt-0 mt-4" >
-          <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('MinChamferRange').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('MaxChamferRange').value" [options]="options_chamfer"></ng5-slider>
+          <ng5-slider  [(value)]="SL_MinChamferRange"  (userChange)="sl_change_chamfer()" 
+              class="form-control-sm pt-0 mt-0"  [(highValue)]="SL_MaxChamferRange" [options]="options_chamfer"></ng5-slider>
       </div>   
       <div class="row pt-4">
              <div class="col-6 pl-0 row">
                 <div class="col-8 pl-0">
-                    <input type="number" class="form-control"  
+                    <input type="number" class="form-control"  (change)="ChangeChamferRange()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('MinChamferRange').value">
                </div>
               <div class="pl-0">
@@ -135,7 +136,7 @@
           </div>
            <div class="col-6 ml-auto row">
               <div class="col-8 pl-0">
-                <input type="number" class="form-control"  
+                <input type="number" class="form-control"  (change)="ChangeChamferRange()"
                               [(ngModel)]="msrv_StMng.IPL.GetItem('MaxChamferRange').value">
                 </div>
                 <div class="pl-0">

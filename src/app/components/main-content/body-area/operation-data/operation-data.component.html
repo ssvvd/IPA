@@ -1,10 +1,10 @@
 
 <div class="container-fluid ml-0 pl-0 mt-0  pr-0" (keyup.enter)="GoToResult()"> 
-    <div  *ngIf="srv_appsetting.isMobileResolution"  class= "col-12">                     
-        <button class="col-12 btn" style="width:100%!important;" (click)="GoToResult()">{{'Get Results'| translate}}</button>                                                           
+    <div  *ngIf="srv_appsetting.isMobileResolution"  class= "col-12 float-center pt-2">                     
+        <button class="col-12 btn btn-select-mobile pl-2 pr-2 pt-2 pb-2"  (click)="GoToResult()">{{'Get Results'| translate}}</button>                                                           
     </div>
     
-    <ul *ngIf="srv_appsetting.isMobileResolution"  class="nav nav-fill" style="border:0px">                  
+    <ul *ngIf="srv_appsetting.isMobileResolution"  class="nav nav-fill pt-2" style="border:0px">                  
         <li  class="nav-item"  (click)="OpenOperationData()">  
             <div class="pl-2 text-center" [ngClass]="TabActive==1?'div-tab-menu-selected':'div-tab-menu'">
                   <label>{{'Operation Data' | translate}}</label>
@@ -17,8 +17,8 @@
       </li>          
       </ul> 
 
-     <div class="form-group row" >       
-        <div  [ngClass]="msrv_StMng.IsTabToolDataOpen? 'width-tooldata   border-left-gray  pt-2' : 'col-cust-5  border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'"> 
+     <div class="form-group row">       
+        <div *ngIf="!srv_appsetting.isMobileResolution" [ngClass]="msrv_StMng.IsTabToolDataOpen? 'width-tooldata   border-left-gray  pt-2' : 'col-cust-5  border-left-gray  ml-0 pl-0 pl-0 pr-0 pt-2'"> 
           
             <div class="pt-4 col-12" >
                 <div class="form-group border-right-gray" style="overflow-y: auto; height: calc(100vh - 252px);">                     
@@ -36,8 +36,15 @@
                 </div>           
             </div> 
         </div>
-        <div *ngIf="(TabActive==1 && srv_appsetting.isMobileResolution) || !srv_appsetting.isMobileResolution" [ngClass]="msrv_StMng.IsTabToolDataOpen ? 'border-right-gray width-appdetails pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'">
-            <div class="form-group" style="overflow-y: auto; height: calc(100vh - 244px);">
+        <div *ngIf="TabActive==2 && srv_appsetting.isMobileResolution" class="div-scroll-mobile pl-3 pt-2 pr-2">
+            <app-optimizetool  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp!='IS' && MainApp!='TG'" ></app-optimizetool>
+            <app-optimizetool990  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='IS'" ></app-optimizetool990>
+            <app-optimizetool52  *ngIf = "isLoaded&&msrv_StMng.IsTabToolDataOpen && MainApp=='TG'" ></app-optimizetool52>
+        </div>
+        <div  *ngIf="(TabActive==1 && srv_appsetting.isMobileResolution) || !srv_appsetting.isMobileResolution" 
+        [ngClass]="msrv_StMng.IsTabToolDataOpen ? srv_appsetting.isMobileResolution?'border-right-gray width-appdetails pl-0 pr-0  pt-0':'border-right-gray width-appdetails pl-2 pr-0  pt-4':'border-right-gray col-cust-95 pl-0 pr-0  pt-4'"> 
+            <div class="form-group"   
+            [ngClass]="srv_appsetting.isMobileResolution? 'div-scroll-mobile pl-0 pt-0':'div-scroll'">
                 <div class="form-group row col-12" *ngIf="!srv_appsetting.isMobileResolution"> 
                     <div  class= "float-left pl-3">                                       
                         <label  class="float-left siteTitle col-form-label">{{'Operation Data' | translate}}</label> 

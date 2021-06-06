@@ -162,13 +162,13 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   {         
       if(a[field] > b[field])
       {
-        if(type="1") return -1;
-        if(type="2") return 1;        
+        if(type=="1") return -1;
+        if(type=="2") return 1;        
       }
       else
       {
-        if(type="1") return 1;
-        if(type="2") return -1; 
+        if(type=="1") return 1;
+        if(type=="2") return -1; 
       }
       return 0;
   }

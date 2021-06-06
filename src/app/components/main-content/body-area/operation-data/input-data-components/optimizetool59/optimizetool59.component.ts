@@ -3,7 +3,8 @@ import { StateManagerService } from 'src/app/services/statemanager.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { PpSuccessfullyComponent} from 'src/app/components/maintenance/pp-successfully/pp-successfully.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Options } from 'ng5-slider';
+//import { Options } from 'ng5-slider';
+import { Options } from '@angular-slider/ngx-slider';
 import { Observable ,Subscription} from 'rxjs';
 
 @Component({
@@ -21,7 +22,22 @@ export class Optimizetool59Component implements OnInit {
   isDisabledState:boolean=false;
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,
               private modalService: NgbModal) { }
-  
+    
+              SL_TD_DiameterFrom:number;
+              SL_TD_DiameterTo:number;
+
+              SL_TD_DCXMin:number;
+              SL_TD_DCXMax:number;
+
+              SL_TD_NOFMin: number;
+              SL_TD_NOFMax:number;
+
+              SL_MinCornerRadius:number;
+              SL_MaxCornerRadius:number;
+
+              SL_MinChamferRange:number;
+              SL_MaxChamferRange:number;
+
    options_dc: Options = {
     floor: 0,
     ceil:  Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').valuedefault),
@@ -58,6 +74,22 @@ export class Optimizetool59Component implements OnInit {
   };
 
   ngOnInit() {
+
+    this.SL_TD_DiameterFrom = +this.srv_StMng.IPL.GetItem('TD_DiameterFrom').value;
+    this.SL_TD_DiameterTo = +this.srv_StMng.IPL.GetItem('TD_DiameterTo').value;
+
+    this.SL_TD_DCXMin = +this.srv_StMng.IPL.GetItem('TD_DCXMin').value;
+    this.SL_TD_DCXMax = +this.srv_StMng.IPL.GetItem('TD_DCXMax').value;
+
+    this.SL_TD_NOFMin = +this.srv_StMng.IPL.GetItem('TD_NOFMin').value;
+    this.SL_TD_NOFMax = +this.srv_StMng.IPL.GetItem('TD_NOFMax').value;
+
+    this.SL_MinCornerRadius = +this.srv_StMng.IPL.GetItem('MinCornerRadius').value;
+    this.SL_MaxCornerRadius = +this.srv_StMng.IPL.GetItem('MaxCornerRadius').value;
+
+    this.SL_MinChamferRange = +this.srv_StMng.IPL.GetItem('MinChamferRange').value;
+    this.SL_MaxChamferRange = +this.srv_StMng.IPL.GetItem('MaxChamferRange').value;
+    
      this.eventsSubscription = this.events.subscribe(() => this.ClearData());
      if(this.srv_StMng.GetMaterialSelected().id>20 && this.srv_StMng.GetMaterialSelected().id<38)               
         this.isDisabledState=true;
@@ -152,6 +184,92 @@ export class Optimizetool59Component implements OnInit {
 
   ChangeDMinDMax()
   {
+    this.SL_TD_DiameterFrom = +this.srv_StMng.IPL.GetItem('TD_DiameterFrom').value;
+    if(Number(this.srv_StMng.IPL.GetItem('TD_DiameterTo').value)> Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').valuedefault)) 
+    {
+      this.SL_TD_DiameterTo = Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').valuedefault);
+      this.srv_StMng.IPL.GetItem('TD_DiameterTo').value =this.SL_TD_DiameterTo.toString();
+    }      
+    else
+      this.SL_TD_DiameterTo = Number(this.srv_StMng.IPL.GetItem('TD_DiameterTo').value);
+  }
+
+  ChangeDCX()
+  {
+    this.SL_TD_DCXMin = +this.srv_StMng.IPL.GetItem('TD_DCXMin').value;
+    if(Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').value)> Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').valuedefault)) 
+    {
+      this.SL_TD_DCXMax = Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').valuedefault);
+      this.srv_StMng.IPL.GetItem('TD_DCXMax').value =this.srv_StMng.IPL.GetItem('TD_DCXMax').valuedefault;
+    }      
+    else
+      this.SL_TD_DCXMax = Number(this.srv_StMng.IPL.GetItem('TD_DCXMax').value);
     
+  }
+
+  ChangeNOF()
+  {
+    this.SL_TD_NOFMin = +this.srv_StMng.IPL.GetItem('TD_NOFMin').value;
+    if(Number(this.srv_StMng.IPL.GetItem('TD_NOFMax').value)> Number(this.srv_StMng.IPL.GetItem('TD_NOFMax').valuedefault)) 
+    {
+      this.SL_TD_NOFMax = Number(this.srv_StMng.IPL.GetItem('TD_NOFMax').valuedefault);
+      this.srv_StMng.IPL.GetItem('TD_NOFMax').value =this.srv_StMng.IPL.GetItem('TD_NOFMax').valuedefault;
+    }      
+    else
+      this.SL_TD_NOFMax = Number(this.srv_StMng.IPL.GetItem('TD_NOFMax').value);
+    
+  }
+
+  ChangeCornerRadius()
+  {
+    this.SL_MinCornerRadius = +this.srv_StMng.IPL.GetItem('MinCornerRadius').value;
+    if(Number(this.srv_StMng.IPL.GetItem('MaxCornerRadius').value)> Number(this.srv_StMng.IPL.GetItem('MaxCornerRadius').valuedefault)) 
+    {
+      this.SL_MaxCornerRadius = Number(this.srv_StMng.IPL.GetItem('MaxCornerRadius').valuedefault);
+      this.srv_StMng.IPL.GetItem('MaxCornerRadius').value =this.srv_StMng.IPL.GetItem('MaxCornerRadius').valuedefault;
+    }      
+    else
+      this.SL_MaxCornerRadius = Number(this.srv_StMng.IPL.GetItem('MaxCornerRadius').value);
+    
+  }
+
+  ChangeChamferRange()
+  {
+    this.SL_MinChamferRange = +this.srv_StMng.IPL.GetItem('MinChamferRange').value;
+    if(Number(this.srv_StMng.IPL.GetItem('MaxChamferRange').value)> Number(this.srv_StMng.IPL.GetItem('MaxChamferRange').valuedefault)) 
+    {
+      this.SL_MaxChamferRange = Number(this.srv_StMng.IPL.GetItem('MaxChamferRange').valuedefault);
+      this.srv_StMng.IPL.GetItem('MaxChamferRange').value =this.srv_StMng.IPL.GetItem('MaxChamferRange').valuedefault;
+    }      
+    else
+      this.SL_MaxChamferRange = Number(this.srv_StMng.IPL.GetItem('MaxChamferRange').value);
+    
+  }
+  
+  sl_change_dia()
+  {
+    this.srv_StMng.IPL.GetItem('TD_DiameterFrom').value= this.SL_TD_DiameterFrom.toString();
+    this.srv_StMng.IPL.GetItem('TD_DiameterTo').value= this.SL_TD_DiameterTo.toString();
+  }
+  sl_change_dcx()
+  {
+    this.srv_StMng.IPL.GetItem('TD_DCXMin').value= this.SL_TD_DCXMin.toString();
+    this.srv_StMng.IPL.GetItem('TD_DCXMax').value= this.SL_TD_DCXMax.toString();
+  }
+  sl_change_nof()
+  {
+    this.srv_StMng.IPL.GetItem('TD_NOFMin').value= this.SL_TD_NOFMin.toString();
+    this.srv_StMng.IPL.GetItem('TD_NOFMax').value= this.SL_TD_NOFMax.toString();
+  }
+
+  sl_change_radius()
+  {
+    this.srv_StMng.IPL.GetItem('MinCornerRadius').value= this.SL_MinCornerRadius.toString();
+    this.srv_StMng.IPL.GetItem('MaxCornerRadius').value= this.SL_MaxCornerRadius.toString();
+  }
+  sl_change_chamfer()
+  {
+    this.srv_StMng.IPL.GetItem('MinChamferRange').value= this.SL_MinChamferRange.toString();
+    this.srv_StMng.IPL.GetItem('MaxChamferRange').value= this.SL_MaxChamferRange.toString();
   }
 }

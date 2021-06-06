@@ -588,3 +588,26 @@ button.close-mobile{
 .datatable-mobile{  
   background: white!important;
 }
+
+.title-selected{
+  color:var(--btn-bg-select-color) !important;
+  font-weight: bold !important;
+  text-decoration: underline!important;
+  //font-size: 18px !important;
+ 
+}
+
+div.scrollmenu {    
+  overflow: auto;
+  white-space: nowrap;
+}
+
+div.scrollmenu label {
+  display: inline-block;    
+  text-align: center;    
+  text-decoration: none;
+}
+
+div.scrollmenu a:hover {
+  background-color: #777;
+}

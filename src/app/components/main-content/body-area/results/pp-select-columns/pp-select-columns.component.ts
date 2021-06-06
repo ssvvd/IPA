@@ -14,10 +14,15 @@ export class PpSelectColumnsComponent implements OnInit {
   counter:number=0;
   dangMsg:string = '';
   modal_columns_cur:clsProperties[] = [];
+  max_count_column:number;
 
   constructor(public activeModal: NgbActiveModal,public srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
+    if(this.srv_appsetting.isMobileResolution)
+      this.max_count_column=3;
+    else
+      this.max_count_column=6;
     this.counter = this.modal_columns.filter((obj) => obj.IsShow === true).length;
     //this.modal_columns_cur = this.modal_columns
      this.modal_columns_cur = JSON.parse(JSON.stringify(this.modal_columns));
@@ -26,7 +31,7 @@ export class PpSelectColumnsComponent implements OnInit {
 
 checkedState(event, prty) {
             if(event.target.checked === true){
-              if(this.counter < 7){
+              if(this.counter < this.max_count_column+1){
                 this.dangMsg = "";
                 prty.IsShow = true;
                 this.counter++
@@ -40,7 +45,7 @@ checkedState(event, prty) {
         }
 
         reset(){
-          this.counter = 7
+          this.counter = this.max_count_column+1;
           this.modal_columns = JSON.parse(JSON.stringify(this.modal_columns_Org));
            this.modal_columns_cur = JSON.parse(JSON.stringify(this.modal_columns));
           //this.modal_columns_cur = this.modal_columns

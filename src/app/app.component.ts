@@ -112,7 +112,7 @@ ngOnInit()
   
   //first time enter
   //temp -todo:
-  isLogIn ='0';
+  //isLogIn ='0';
 
   if(isLogIn!="-1")
   {

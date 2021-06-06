@@ -25,10 +25,10 @@
     </div>
 
      <div class="row pl-0">        
-            <div class="border col-7 pl-0 ml-0 mt-2 div-img-family" >
+            <div [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-7'" class="border pl-0 ml-0 mt-2 div-img-family" >
                 <img  [src] = "environment.eCatFamilyDrawing + srv_appsetting.Units + '/' + Family+ '.gif'"  class="img-family">              
             </div>                
-            <div  class="border col-4 ml-2 mt-2 div-img-drawing" >            
+            <div  [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-4'" class="border ml-2 mt-2 div-img-drawing" >            
                 <img   [src] = "environment.eCatFamilyPictures + Family + '.gif'"  class="img-drawing"> 
             </div>
         

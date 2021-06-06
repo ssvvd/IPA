@@ -25,25 +25,12 @@
                   <a href="{{srv_appsetting.Country.FCSToolshopSite}}/search.php/?pcode=ISC{{row}}" target="_blank" ><img [src] = "environment.ImagePath+'icon_AddToCart.svg'"  class="MenuImg"></a> 
                 </div>
             </div>
-
-          </div>
-              <!-- <div *ngIf="srv_appsetting.Country.FCSToolshopSite!='' && srv_appsetting.UserID!=''"> -->
-            <!-- <div *ngIf="srv_appsetting.Country.FCSToolshopSite!='' && srv_appsetting.UserID!=''" style="min-width:5%;max-width:5%;">                           
-              <div class="bold font-weight-bold  justify-content-start  mb-2 pl-1 pt-2"></div>
-              <div  class="pl-2 pt-1" *ngFor="let row of selectedOption.CatalogNo;let numb = index;" [hidden]="row.trim() == '-' || row.trim() == '' || IsExistIntoolShop[numb]=='0'">
-                <a href="{{srv_appsetting.Country.FCSToolshopSite}}/search.php/?pcode=ISC{{row}}" target="_blank" ><img [src] = "environment.ImagePath+'icon_AddToCart.svg'"  class="MenuImg"></a> 
-              </div>
-          </div>  --> 
-          <div [ngClass]="exportPDF?'div-comment-pdf':'div-comment'">
+          </div>            
+          <div [ngClass]="exportPDF?'div-comment-pdf':'div-comment'">  
+            <!-- selectedOption.info[0]!=null      -->     
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Comments' | translate}}</div>
-
             <div *ngFor="let row of selectedOption.info; ; ">{{row | translate}}</div>
-
-
-
           </div>
         </div>
-
-
 </ng-container>
 <hr>

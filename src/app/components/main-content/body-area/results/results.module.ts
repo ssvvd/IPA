@@ -12,7 +12,7 @@ import { Ng5SliderModule } from 'ng5-slider';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule,NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { NgpSortModule } from "ngp-sort-pipe";
 
 import { ResultsRoutingModule } from './results-routing.module';
@@ -40,6 +40,7 @@ import { PpPromotionComponent } from './pp-promotion/pp-promotion.component';
 import { MpThreadingComponent } from './machining-prms/mp-threading/mp-threading.component';
 
 import { DataTablesModule } from 'angular-datatables';
+import { ResFilterMobileComponent } from './res-filter-mobile/res-filter-mobile.component';
 
 //import { MachinePpAddFavoriteComponent } from '../machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 //import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
@@ -66,7 +67,8 @@ import { DataTablesModule } from 'angular-datatables';
     ResultItemInfoComponent,
     //ResultsPdfComponent,
     PpPromotionComponent,
-    MpThreadingComponent
+    MpThreadingComponent,
+    ResFilterMobileComponent
   ],
  
   imports: [
@@ -101,7 +103,8 @@ import { DataTablesModule } from 'angular-datatables';
     }) 
   ]
   ,
-  exports: [RouterModule,TranslateModule,SharedModule,Shared1Module]  
+  exports: [RouterModule,TranslateModule,SharedModule,Shared1Module] ,
+  providers: [ NgbActiveModal], 
 })
 export class ResultsModule { }
 

@@ -46,18 +46,29 @@ export class MachiningOperationComponent implements OnInit {
       .subscribe((res: any)=> {
           for (const d of JSON.parse(res)) {                     
           if(d.ParentMenuID==0)
-            {          
-              this.arrMainApps.push({
-                MenuID: d.MenuID,
-                MenuName: d.MenuName,
-                MainApp:d.MainApp,
-                MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png"  ,
-                IsActive:d.IsActive,
-                SpindleSelected:d.SpindleType                          
-            })
+            { 
+              let additem_mainapp:boolean;
+              if(!this.srv_appsetting.isMobileResolution)  additem_mainapp=true;   
+              if(this.srv_appsetting.isMobileResolution)  additem_mainapp=d.IsActive;   
+              if(additem_mainapp)     
+                  this.arrMainApps.push({
+                    MenuID: d.MenuID,
+                    MenuName: d.MenuName,
+                    MainApp:d.MainApp,
+                    MenuImage: environment.ImageApplicationsPath + d.MenuImage  + ".png"  ,
+                    IsActive:d.IsActive,
+                    SpindleSelected:d.SpindleType                          
+                });
+               
           }
         }
-    
+        if(this.srv_appsetting.isMobileResolution)  
+        {
+          if(this.arrMainApps.find(m=> m.MenuName=='Milling') ==undefined )
+          {
+            this.arrMainApps = this.arrMainApps.filter(ma=>ma.MenuID!='110');                    
+          }
+        }
     this.eventsSubscription.add(this.srv_app.getmenu(this.srv_appsetting.Lang,'user') //todo:user
     .subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                          
@@ -69,8 +80,7 @@ export class MachiningOperationComponent implements OnInit {
               {
                 if(d.MenuID==71)  isadditem =false;
                 if( MachineType=='Swiss type' || MachineType=='Multi spindle')
-                {
-                  //if(d.MenuID==111 || d.MenuID ==112)  isadditem =true; 
+                {         
                   if(this.srv_statemanage.SelectedMachine.SpindleType=='M' ) {
                     if(d.MenuID==111) isadditem =false;
                     if(d.MenuID==112) isadditem =true;
@@ -109,14 +119,17 @@ export class MachiningOperationComponent implements OnInit {
               if(d.ParentMenuID=='110') //threading
               {
                 if(MachineType=='Lathe' ) if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;               
-                if(MachineType=='Machining center' ) if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;  
-                //MachineType=='Multi task' || 
+                if(MachineType=='Machining center' ) if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;         
                 if(MachineType=='Swiss type' || MachineType=='Multi spindle')
                 {
                   if(this.srv_statemanage.SelectedMachine.SpindleType=='M')
                   {
                     if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;  
                     if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =false;
+                    if(this.srv_appsetting.isMobileResolution) 
+                    {
+                      if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isadditem =false;  
+                    }
                   }
                   if(this.srv_statemanage.SelectedMachine.SpindleType=='T')
                   {
@@ -135,11 +148,14 @@ export class MachiningOperationComponent implements OnInit {
                   {
                     if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isactive =false;  
                     if(d.ApplicationITAID==810 || d.ApplicationITAID==820 )  isactive =true;
+                    if(this.srv_appsetting.isMobileResolution) 
+                    {
+                      if(d.ApplicationITAID==119 || d.ApplicationITAID==120 )  isadditem =false;  
+                    }
                   }
                 }
               } 
-            
-
+              if(this.srv_appsetting.isMobileResolution)  isadditem=(isadditem && isactive);            
               if(isadditem)
                 {
                   this.arrSecApps.push({
@@ -202,7 +218,8 @@ export class MachiningOperationComponent implements OnInit {
     
     if (obj.IsActive)
       {
-        if(this.srv_appsetting.isMobileResolution && obj.MenuID=='110') return;
+        //if(this.srv_appsetting.isMobileResolution && obj.MenuID=='110') return;
+        
         this.ShowLevel =1;
         this.DescAppMobile1=obj.MenuName;
         this.arrSelectedSecApp1=[];
@@ -279,9 +296,11 @@ export class MachiningOperationComponent implements OnInit {
       this.router.navigate(['/home/operation-data']);
   }
 
-  BackMobile()
+  BackMobile(level)
   {
-    if(this.ShowLevel>0) this.ShowLevel =this.ShowLevel-1;
+    if(this.ShowLevel>0 && level<this.ShowLevel) this.ShowLevel =this.ShowLevel-1;
     
   }
+
+
 }

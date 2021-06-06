@@ -21,7 +21,8 @@
    
     <iframe 
     (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
-    [src]="!isLoaded(PrtNum) ? getUrl1(row,PrtNum) : getUrl1('1',PrtNum)" [style.height]="'550px'" style="width:71%;border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
+    [src]="!isLoaded(PrtNum) ? getUrl1(row,PrtNum) : getUrl1('1',PrtNum)" ng-style ="{ ' width' : srv_appsetting.isMobileResolution? '100%;' : '71%;' }"
+     [style.height]="'550px'" style="border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe>
     <hr>
 </div>

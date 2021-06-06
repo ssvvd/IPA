@@ -351,9 +351,11 @@ if (pr.value.trim().length == 7){
     this.S_HPS = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     //this.I_HPC = Math.round(((this.TLL * multiplication)/ this.DOC) * 100)/100 || 0
     this.CTH = (Math.round(((this.DOC/this.Vf) * 60)   * 100)/100 || 0).toString()
+    if(this.CTH=='0') this.CTH  = '0.016666' ;           
 
-    this.I_HPC = Math.round(((+this.TLT )/ (Math.round(this.DOC/this.Vf*100)/100)) * 100)/100 || 0
-
+    this.I_HPC = Math.floor(((+this.TLT )/ (Math.round(this.DOC/this.Vf*100)/100)) ) || 0
+    if(this.I_HPC==Infinity) this.I_HPC=(+this.TLT )/ (this.DOC/this.Vf)  || 0
+         
     this.H_HDH = Math.round((+this.TLT) /(+this.CTH)*60 ) || 0
     this.S_NSB=Math.ceil(this.B / this.S_HPS) || 0
     this.H_HPB = Math.ceil(this.B / this.H_HDH) || 0
@@ -369,6 +371,7 @@ if (pr.value.trim().length == 7){
       this.TTC = Math.ceil(this.TP * this.S_NSB )
     if (this.resType == "I") //TP * ROUNDUP(HPB / I)
       this.TTC = Math.ceil((this.TP * Math.ceil(this.I_NIB / this.HI_I) )) || 0
+        
 
     // this.H_CTB = Math.round(this.TTC+this.H_DHC * 100)/100
     // this.MTB = (Math.round((this.B * this.HPP * +this.CTH/ 3600)  * 100)/100 ).toString()
@@ -386,6 +389,8 @@ if (pr.value.trim().length == 7){
     // this.TCB = Math.round(this.TCB * 100)/100
     
     this.CTH = Math.floor(+this.CTH / 60).toString().padStart(2, '0') + ':' + Math.floor((+this.CTH  - Math.floor(+this.CTH / 60) * 60)).toString().padStart(2, '0');
+    if(this.CTH=='00:00') this.CTH='00:01';
+    
     // this.MTB = Math.floor(+this.MTB * 60).toString().padStart(2, '0') + ':' + Math.floor((+this.MTB  - Math.floor(+this.MTB * 60) / 60)).toString().padStart(2, '0');
     // this.CPU = Math.round((this.TCB / this.B) * 100)/100
     

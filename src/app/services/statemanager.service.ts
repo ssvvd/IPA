@@ -50,6 +50,7 @@ export class StateManagerService {
  
   //private mUnits:string='M'; //todo:
   private mIsTabToolDataOpen:boolean =true;
+  public _hideFiltermobile:boolean;
   
   constructor(private srv_appsetting:AppsettingService) { }
 

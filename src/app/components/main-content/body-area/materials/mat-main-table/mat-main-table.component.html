@@ -52,7 +52,7 @@
               <th><div class="visibleonlybigscreen"><label>{{'Group' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
               <th><div class="text-left" ><label>{{'Description' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
               <th><div class="text-left" ><label>{{'Condition' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
-              <th><div class="text-left" ><label>{{'Hardness' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
+              <th><div class="text-left" ><label>{{'Hardness & Strength' | translate}}<span class="sort-icon ml-1"></span></label></div></th>
               <th class="no-sort d-none"></th>
               <th class="no-sort" *ngIf="environment.internal" ></th>
               <th class="no-sort" *ngIf="environment.internal" ></th> 
@@ -114,7 +114,7 @@
                         <div class="pl-2">{{material.Condition}}</div>
                       </div>
                       <div class="row">
-                        <div class="pl-2 font-weight-bold pl-0 ml-0">{{'Hardness' | translate}}:</div>
+                        <div class="pl-2 font-weight-bold pl-0 ml-0">{{'Hardness & Strength' | translate}}:</div>
                         <div (click)="openEditParamsM(material)"><div class="pl-2" ><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' | translate}}</div></div>
                         <div class="d-none" >{{material.Hardness}}</div> 
                     </div>

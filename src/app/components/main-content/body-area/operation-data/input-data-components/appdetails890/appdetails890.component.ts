@@ -70,12 +70,14 @@ export class Appdetails890Component implements OnInit {
       this.ImageName= environment.ImageInputPath + "inpt_surface" + this.srv_StMng.SecApp+".png";
     else
       this.ImageName= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image;
+      console.log(this.ImageName);
   }
 
   onfocusoutfield()
   {  
     this.InFocus=false;
     this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+    console.log(this.ImageName);
   }
 
   onchangeN()

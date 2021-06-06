@@ -39,7 +39,7 @@ export class AppsettingService {
   private misMobileResolution:boolean;  
   get isMobileResolution():boolean{   
     if (window.innerWidth < 768) {
-      return true;
+      return false;
     } else {
       return false;
     }
