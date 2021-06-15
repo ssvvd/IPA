@@ -37,6 +37,7 @@ export class MachinesFilterMobileComponent implements OnInit {
     arr.push('reset');
     arr.push(this.machFilter);
     this.activeModal.close(arr);
+    
   }
 
   OpenSort()

@@ -22,7 +22,18 @@
           <div *ngIf="msrv_appsetting.isMobileResolution">           
             <div class="row pt-4">                
                 <div class=" col-9 pt-2 pl-1">                  
-                  <input type="text" class="form-control icon-search text-rounded" [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  (click)="FilterTopMobileChange('')"  placeholder="{{'Search'| translate}}">
+                 <!-- <input type="text" class="form-control icon-search text-rounded" 
+                  [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  
+                  (click)="FilterTopMobileChange('')"  placeholder="{{'Search'| translate}}" aria-describedby="search-addon" >
+ -->
+                  <div class="input-group rounded"> 
+                    <input type="search" style="background-color: white!important;" class="form-control text-rounded" [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  
+                    (click)="FilterTopMobileChange('')" (keyup)="FilterTopMobileChange('')" 
+                    (search)="FilterTopMobileChange('')"   
+                    placeholder="{{'Search'| translate}}" aria-label="Search"
+                      aria-describedby="search-addon" />                
+                  </div>
+                  
                 </div>  
                 <div class="float-right col-2 ">
                     <img  [src]="environment.ImagePath + 'icon_SortFilter.svg'" (click)="OpenFilterMobile()" class="ImgMobile pt-2  pl-2">
@@ -46,7 +57,7 @@
           </div>                    
           <div class="div-datatable" *ngIf="!msrv_appsetting.isMobileResolution">              
               <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" style="width: 100%"
-                class="table table-stripe row-border hover ">
+                class="table table-stripe row-border hover " id="table1">
                 <thead *ngIf="isLoaded">
                   <tr id="dtOptions">
                     <th class="d-none">ID</th>                                                                                           
@@ -136,11 +147,11 @@
                     <td class=" pl-0 pr-0 ml-0 mr-0">
                         <div class="row" >
                           <div class="col-4 pl-0 pr-0 ml-0 mr-0">                            
-                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Machining center'" [src]="environment.ImagePath + 'MachiningCenter.svg'" >
-                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Lathe'" [src]="environment.ImagePath + 'lathe.svg'" >
-                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Multi task'" [src]="environment.ImagePath + 'MultiTask.svg'" >
-                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Multi spindle'" [src]="environment.ImagePath + 'MultiSpindle.svg'" >
-                            <img class="mt-0 mb-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Swiss type'" [src]="environment.ImagePath + 'SwissType.svg'" >                                                        
+                            <img class="mt-0 mb-2 ml-2 mr-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Machining center'" [src]="environment.ImagePath + 'MachiningCenter.svg'" >
+                            <img class="mt-0 mb-2 ml-2 mr-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Lathe'" [src]="environment.ImagePath + 'lathe.svg'" >
+                            <img class="mt-0 mb-2 ml-2 mr-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Multi task'" [src]="environment.ImagePath + 'MultiTask.svg'" >
+                            <img class="mt-0 mb-2 ml-2 mr-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Multi spindle'" [src]="environment.ImagePath + 'MultiSpindle.svg'" >
+                            <img class="mt-0 mb-2 ml-2 mr-2" (click)="onclickrow(mach)" *ngIf="mach.MachineType== 'Swiss type'" [src]="environment.ImagePath + 'SwissType.svg'" >                                                        
                             <button class="btn-select-mobile"
                                 (click)="OnSelectMachine(mach)" [routerLink]="'/home/materials'">{{mach.DescSelect| translate}}</button>                                                                                   
                           </div>
@@ -157,7 +168,8 @@
                                 </div>                                        
                             </div>  
                             <div class="row" style="width:100%;" (click)="onclickrow(mach)">
-                              <div class="text-left">{{'Adaptation Type'| translate}}&{{'Size' | translate}}:</div>                              
+                              <!-- <div class="text-left">{{'Adaptation Type'| translate}}&{{'Size' | translate}}:</div>      --> 
+                              <div class="text-left">{{'Adaptation'| translate}}:</div>                             
                               <div (click)="onclickrow(mach)">{{mach.AdaptationType}} - {{mach.AdaptationSize}}</div>
                             </div>                           
                             <div class="row" style="width:100%;" (click)="onclickrow(mach)">

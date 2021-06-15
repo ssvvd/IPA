@@ -143,7 +143,7 @@
     </div>
     <div class="pt-3 mt-2" *ngIf="msrv_StMng.SecApp=='52' || msrv_StMng.SecApp=='51' || msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='10'">        
         <div *ngIf="msrv_StMng.SecApp!='51'"><span>R - </span><span>{{'Insert Radius' | translate}}</span></div>
-        <div *ngIf="msrv_StMng.SecApp=='51'"><span>R - </span><span>{{'Corner radius' | translate}}</span></div>    
+        <div *ngIf="msrv_StMng.SecApp=='51'"><span>R - </span><span>{{'Corner Radius' | translate}}</span></div>    
         <div class="custom-slider pt-0 mt-4" >
             <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
         </div>   

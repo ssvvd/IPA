@@ -6,7 +6,15 @@
        <div *ngIf="srv_appsetting.isMobileResolution" class="pl-0 ml-0">
         <div class="row pt-4">                
           <div class="pt-2 pl-0 col-10">                  
-            <input type="text" style="width:100%" (click)="filterTable()" class="form-control icon-search text-rounded" [(ngModel)]="filterSearchTextInput"    placeholder="{{'Search'| translate}}">
+            <!-- <input type="text" style="width:100%" (click)="filterTable()" class="form-control icon-search text-rounded" [(ngModel)]="filterSearchTextInput"    placeholder="{{'Search'| translate}}"> -->
+            <div class="input-group rounded"> 
+              <input type="search" style="background-color:white!important;width:100%" class="form-control text-rounded"
+               [(ngModel)]="filterSearchTextInput"  
+              (click)="filterTable()"  (keyup)="filterTable()" 
+              (search)="filterTable()"   
+              placeholder="{{'Search'| translate}}" aria-label="Search"
+                aria-describedby="search-addon" />                
+            </div>
           </div>      
         </div>
         <div class="pt-2 pl-0 ml-0 mp-auto" style="width:100%;" >
@@ -108,7 +116,7 @@
                         </div>
                       </div> 
                     </div>
-                    <div class="pl-2 ml-0">{{material.description}}</div>
+                    <div class="pl-2 ml-0 col-7">{{material.description}}</div>
                     <div class="row">
                         <div class="pl-2 font-weight-bold pl-0 ml-0">{{'Condition' | translate}}:</div>
                         <div class="pl-2">{{material.Condition}}</div>

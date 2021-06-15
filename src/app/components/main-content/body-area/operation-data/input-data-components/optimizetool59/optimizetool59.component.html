@@ -13,7 +13,7 @@
       </div> 
     </div> 
     <div class="pt-3 mt-2">                
-      <span>DC - </span><span>{{'Cutting diameter' | translate}}</span>    
+      <span>DC - </span><span>{{'Cutting Diameter' | translate}}</span>    
        <div class="custom-slider pt-0 mt-4">       
             <ng5-slider   [(value)]="SL_TD_DiameterFrom"  
                           [(highValue)]="SL_TD_DiameterTo" 
@@ -43,7 +43,7 @@
     </div>
     <div class="pt-3 mt-2">
       <div *ngIf="msrv_StMng.SecApp=='770'">
-        <span>DCX - </span><span>{{'Cutting diameter Maximum' | translate}}</span>   
+        <span>DCX - </span><span>{{'Cutting Diameter Maximum' | translate}}</span>   
         <div class="custom-slider pt-0 mt-4" >
             <ng5-slider  [(value)]="SL_TD_DCXMin"  class="form-control-sm pt-0 mt-0"  (userChange)="sl_change_dcx()" 
             [(highValue)]="SL_TD_DCXMax" [options]="options_dc"></ng5-slider>
@@ -92,7 +92,7 @@
       </div>   
     </div>
     <div  *ngIf="msrv_StMng.SecApp=='760' || msrv_StMng.SecApp=='770' || msrv_StMng.SecApp=='57'" class="pt-3 mt-2">
-      <span>RE - </span><span>{{'Corner radius' | translate}}{{' (R)'}}</span>    
+      <span>RE - </span><span>{{'Corner Radius' | translate}}{{' (R)'}}</span>    
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="SL_MinCornerRadius"  (userChange)="sl_change_radius()"  class="form-control-sm pt-0 mt-0"  
                        [(highValue)]="SL_MaxCornerRadius" [options]="options_radius"></ng5-slider>

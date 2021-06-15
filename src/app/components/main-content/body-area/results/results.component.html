@@ -95,13 +95,13 @@
 
           <li [ngbNavItem]="3" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
             <a ngbNavLink class="siteTitle">{{'2D+3D Representation' | translate}}</a>
-            <ng-template ngbNavContent>
+            <ng-template ngbNavContent >
               <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
               <!-- <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF && srv_appsetting.isMobileResolution"> -->
                 <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="srv_appsetting.isMobileResolution">
                 <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
               </div>
-              <product-info #productInfo [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
+              <product-info  #productInfo [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
             </ng-template>
           </li>
 

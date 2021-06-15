@@ -772,7 +772,8 @@ UpdateStateSelectedMachine(MachineID: number) {
             }
             
          this.ApplyFilter(filter);
-
+         let el = document.getElementById('table1');
+         el.scrollIntoView();
        }
      
        if(this.sortfield!="")

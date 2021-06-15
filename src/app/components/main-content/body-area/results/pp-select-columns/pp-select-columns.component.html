@@ -20,10 +20,11 @@
           </div>
       </div>
       <h3 class="text-danger desc-label-big-bold pl-2">{{dangMsg | translate}}</h3>
-      <div class="modal-footer">            
-        <button type="button" class="btn btn-select-cancel" (click)="reset()">{{'Reset' | translate}}</button>
-        <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
-        <button type="button" class="btn btn-select" (click)="set()">{{'Set' | translate}}</button>
+      <div class="row pb-2">                   
+        <button  type="button" class="btn btn-select-cancel ml-1 col-3 mb-2" (click)="reset()">{{'Reset' | translate}}</button>              
+        <button  type="button" class="btn btn-select-cancel ml-1 col-3 mb-2" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>      
+        <button  type="button" class="btn btn-select col-4 ml-1 mb-2" (click)="set()">{{'Set' | translate}}</button>
+        
       </div>
     </div>
     

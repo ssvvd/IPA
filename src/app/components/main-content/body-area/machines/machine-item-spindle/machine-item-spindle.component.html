@@ -82,7 +82,9 @@
 
             </div>
               <div class="pt-3">
-                <label [ngClass]="srv_appsetting.isMobileResolution?'pl-0':'pl-3'" class="pb-0 mb-0 font-weight-bold">{{spindle.SpindleType=='M' && MachineType!='Machining center'?'Turret (Stationary Tools)':'Tool Holder' | translate }}</label>              
+               <!--  <label *ngIf="!(spindle.SpindleType=='M' && MachineType!='Machining center')" [ngClass]="srv_appsetting.isMobileResolution?'pl-0':'pl-3'" class="pb-0 mb-0 font-weight-bold">{{spindle.SpindleType=='M' && MachineType!='Machining center'?'Turret (Stationary Tools)':'Tool Holder' | translate }}</label>      -->
+                <label *ngIf="!(spindle.SpindleType=='M' && MachineType!='Machining center')" [ngClass]="srv_appsetting.isMobileResolution?'pl-0':'pl-3'" class="pb-0 mb-0 font-weight-bold">{{'Tool Holder' | translate }}</label>               
+                <label *ngIf="spindle.SpindleType=='M' && MachineType!='Machining center'" [ngClass]="srv_appsetting.isMobileResolution?'pl-0':'pl-3'" class="pb-0 mb-0 font-weight-bold">{{'Turret (Stationary Tools)' | translate }}</label>              
                 <div class="form-group row pt-3">
                     <div  [ngClass]="exportPDF || srv_appsetting.isMobileResolution?'pt-1 col-12 pl-0':'pt-1 col-8'">
                         <label for="txtAdaptationType"  >{{'Adaptation Type' | translate}}</label>

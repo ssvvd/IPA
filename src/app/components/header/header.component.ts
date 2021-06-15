@@ -290,7 +290,9 @@ export class HeaderComponent implements OnInit {
 
   opencatalog()
   {   
-    window.open(environment.ECatalogLink, "_blank");
+    //window.open(environment.ECatalogLink, "_blank");
+    //window.open(environment.ECatalogLink);
+    window.location.href = environment.ECatalogLink;
   }
   
   opencalculator()

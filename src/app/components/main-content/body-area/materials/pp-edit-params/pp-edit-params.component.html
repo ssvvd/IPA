@@ -5,14 +5,22 @@
       <span aria-hidden="true" class="span_x">&times;</span>
     </button>
   </div>
-   <div class="modal-body"> 
+   <div> 
         <app-hardness-slider></app-hardness-slider>
   </div>
-  <div class="modal-footer">
-
-      <button type="button" class="btn btn-select-cancel" (click)="reset()">{{'Reset' | translate}}</button>
-      <button type="button" class="btn btn-select-cancel" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
-      <button type="button" class="btn btn-select" style="max-width:80px!important;" (click)="set()">{{'Set' | translate}}</button>
+  <div class="row pb-4" style="width: 100%;">        
+          <button type="button" class="btn btn-select-cancel  ml-1 col-3 mb-2 mt-3" (click)="reset()">{{'Reset' | translate}}</button>
+          <button type="button" class="btn btn-select-cancel ml-1 col-3 mb-2 mt-3" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>
+          <button type="button" class="btn btn-select  col-4 ml-1 mb-2 mt-3" style="max-width:80px!important;" (click)="set()">{{'Set' | translate}}</button>
+  </div>
+  <div class="pt-4">
 
   </div>
+
+  <!-- <div class="row pb-2">                   
+    <button  type="button" class="btn btn-select-cancel ml-1 col-3 mb-2" (click)="reset()">{{'Reset' | translate}}</button>              
+    <button  type="button" class="btn btn-select-cancel ml-1 col-3 mb-2" (click)="activeModal.close('A')">{{'Cancel' | translate}}</button>      
+    <button  type="button" class="btn btn-select col-4 ml-1 mb-2" (click)="set()">{{'Set' | translate}}</button>
+    
+  </div> -->
 </div>

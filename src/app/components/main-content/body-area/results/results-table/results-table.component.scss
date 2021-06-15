@@ -37,42 +37,6 @@ table.dataTable thead th {
  table.dataTable thead .sorting_asc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
  table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
 
- .table-mobile td:nth-child(0), .table-mobile th:nth-child(0){
-  width: 20% !important;
-  min-width: 20% !important;
-  max-width: 20% !important;
-  white-space: nowrap;
- 
-}
-
- .table-mobile td:nth-child(1), .table-mobile th:nth-child(1){
-  width: 50% !important;
-  min-width: 50% !important;
-  max-width: 50% !important;
-  white-space: nowrap;
-
-}
- .table-mobile td:nth-child(2), .table-mobile th:nth-child(2){
-  width: 15% !important;
-  min-width: 15% !important;
-  max-width: 15% !important;
-  white-space: nowrap;
-}
-
-.table-mobile td:nth-child(3), .table-mobile th:nth-child(3){
-  width: 15% !important;
-  min-width: 15% !important;
-  max-width: 15% !important;
-  white-space: nowrap;
-}
-.table-mobile td:nth-last-child(3), .table th:nth-last-child(3){
-  // min-width: 24% !important;
-  // max-width: 24% !important;
-  width: 8% !important;
-  min-width: 8% !important;
-  max-width: 8% !important;
-  white-space: nowrap;
-}
 
 
  .table td:nth-child(1), .table th:nth-child(1){
@@ -80,12 +44,14 @@ table.dataTable thead th {
   min-width: 10% !important;
   max-width: 10% !important;
   white-space: nowrap;
+  
 }
  .table td:nth-child(2), .table th:nth-child(2){
   width: 22% !important;
   min-width: 22% !important;
   max-width: 22% !important;
   white-space: nowrap;
+  
 }
 
 .table td:nth-child(n+3), .table th:nth-child(n+3){
@@ -103,6 +69,42 @@ table.dataTable thead th {
   min-width: 8% !important;
   max-width: 8% !important;
   white-space: nowrap;
+}
+
+@media only screen and (max-width:768px){  
+  
+/*    .table td:nth-child(1), .table th:nth-child(1){
+    width: 70px!important;
+    min-width: 70px !important;
+    max-width: 70px !important;   
+    background-color: gold;    
+  }
+   .table td:nth-child(2), .table  th:nth-child(2)  {
+    width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;    
+    background-color: fuchsia;
+    //width: 170px !important;
+  }
+
+  .table td:nth-last-child(3), .table th:nth-last-child(3){
+    // min-width: 24% !important;
+    // max-width: 24% !important;
+    width: 8% !important;
+    min-width: 8% !important;
+    max-width: 8% !important;
+    
+  }
+
+  .table td:nth-child(n+3), .table th:nth-child(n+3){
+    // min-width: 24% !important;
+    // max-width: 24% !important;
+    width: 10% !important;
+    min-width: 10% !important;
+    max-width: 10% !important;
+    white-space:normal;
+  }  */
+ 
 }
 
 .img-grid{
@@ -177,6 +179,12 @@ table.dataTable thead th {
   table-layout: fixed;
 }
 
+.table-stripe-mobile{
+  width: 160% !important;
+  table-layout:fixed;
+
+}
+ 
 ::ng-deep .dataTables_scrollHeadInner{
   width:100% !important;
 }
@@ -187,7 +195,7 @@ table.dataTable thead th {
 .dataTables_scrollHead div:nth-child(1){
   width:100% !important;
 
-}
+} 
 
 .logoImg{
   height: 50px;

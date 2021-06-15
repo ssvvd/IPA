@@ -187,10 +187,12 @@ ChangeField(field:string)
   }
 
   CheckInputValues(field) {
-         
+    
+    if(this.HoleType=="Solid") return true;
+
     var diameter = this.srv_StMng.IPL.GetItem('D3').value;
-    var length = this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value;
-    var width = this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value;
+    //var length = this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value;
+    //var width = this.srv_StMng.IPL.GetItem('WidthOfShoulder_ae').value;
 
     var msg1 = 'Pre hole should be smaller than ';
   
@@ -307,7 +309,7 @@ CheckInputFields(field) {
     }   
   }
 
-  if(field=='D3' || field=='LengthOfShoulder_L'  || field=='WidthOfShoulder_ae')
+  if((field=='D3' || field=='LengthOfShoulder_L'  || field=='WidthOfShoulder_ae') && this.HoleType=="PreHole" )
   {
     let prehole=this.GetMessageValidate();
     if(prehole!=0)

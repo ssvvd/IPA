@@ -89,7 +89,7 @@
         </div>
     </div>
     <div class="pl-0 pt-3" *ngIf="msrv_StMng.SecApp=='890' || msrv_StMng.SecApp=='880' || msrv_StMng.SecApp=='870' || msrv_StMng.SecApp=='860'  || msrv_StMng.SecApp=='850'">
-        <label>{{'Shank material' | translate}}</label>
+        <label>{{'Shank Material' | translate}}</label>
         <div  class="pl-0 row"> 
             <div class="custom-control custom-radio custom-control-inline">
                 <input type="radio" class="custom-control-input" id="opt1" name="TD_ISOShankM"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('TD_ISOShankM').value"   value="All">
@@ -158,7 +158,7 @@
       </div>   
     </div>
     <div class="pt-3 mt-2">    
-      <span>RE - </span><span>{{'Corner radius' | translate}}{{' (R)'}}</span>       
+      <span>RE - </span><span>{{'Corner Radius' | translate}}{{' (R)'}}</span>       
       <div class="custom-slider pt-0 mt-4" >
           <ng5-slider  [(value)]="msrv_StMng.IPL.GetItem('TD_RadiusMin').value"  class="form-control-sm pt-0 mt-0"  [(highValue)]="msrv_StMng.IPL.GetItem('TD_RadiusMax').value" [options]="options_R"></ng5-slider>
       </div>   

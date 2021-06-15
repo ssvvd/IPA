@@ -1,7 +1,10 @@
 <div class="pt-0 pl-0 ml-0" style="min-height:50px!important;">    
 <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
-  <span  class="float-right span_x_mobile">&times;</span>
+  <span aria-hidden="true" class="span_x_mobile">&times;</span>
 </button>
+<!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.close('A')">
+  <span aria-hidden="true" class="span_x">&times;</span>
+</button> -->
 </div>
 <div>  
 <ul class="nav nav-fill" style="border:0px">                  
@@ -36,7 +39,7 @@
       <label class="custom-control-label" for="sort_power_2">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }} - {{'Weakest to Strongest'}}</label>
     </div>  
     <div class="custom-control custom-radio mt-3">
-      <input type="radio" class="custom-control-input" id="sort_torque_1" name="Sort"  [checked]="sortfield=='Torque' && sorttype=='2'"  (click)="setsort('Torque','1')">
+      <input type="radio" class="custom-control-input" id="sort_torque_1" name="Sort"  [checked]="sortfield=='Torque' && sorttype=='1'"  (click)="setsort('Torque','1')">
       <label class="custom-control-label" for="sort_torque_1">{{'Torque' | translate}}({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}) - {{'Biggest to Smallest'}}</label>
     </div> 
     <div class="custom-control custom-radio mt-3">

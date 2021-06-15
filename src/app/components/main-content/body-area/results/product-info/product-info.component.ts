@@ -24,7 +24,7 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
   // @Output() showDownLoad = new EventEmitter<boolean>();
   _hideDownLoad5:boolean = false;
 
-  constructor(private sanitizer: DomSanitizer,private srv_appsetting:AppsettingService,private srv_statemanage:StateManagerService) { }
+  constructor(private sanitizer: DomSanitizer,public srv_appsetting:AppsettingService,private srv_statemanage:StateManagerService) { }
 
   ngOnInit(): void {
     this.loadedFrames = '';

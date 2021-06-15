@@ -7,7 +7,7 @@
     <div class="col-2" ></div>
   </div>
         <div class="row justify-content-start w-100" >
-          <div class="col-3 row"><Label>{{'Cutting diameter' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Cutting Diameter' | translate }}</Label></div>
           <div class="col-2" >DC</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{DC}}</div>                
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -43,7 +43,7 @@
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='790'">
-          <div class="col-3 row"><Label>{{'Corner radius' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Corner Radius' | translate }}</Label></div>
           <div class="col-2">CR</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CR}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -67,7 +67,7 @@
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='780'">
-          <div class="col-3 row"><Label>{{'Tool Center Feed' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Tool center feed' | translate }}</Label></div>
           <div class="col-2">V<sub>f</sub>(D<sub>vf</sub>)</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{VfDvf}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
@@ -79,7 +79,7 @@
           <div class="col-2">rpm</div>
         </div>
         <div class="row justify-content-start w-100"  *ngIf="srv_StMng.SecApp=='780'">
-          <div class="col-3 row"><Label>{{'Tool Course Diameter' | translate }}</Label></div>
+          <div class="col-3 row"><Label>{{'Tool course diameter' | translate }}</Label></div>
           <div class="col-2">D<sub>vf</sub></div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Dvf}}</div>
           <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
@@ -139,7 +139,7 @@
             <div class="col-2">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
           </div>
           <div class="row justify-content-start w-100" *ngIf="!PreHole && srv_StMng.SecApp=='790'">
-            <div class="col-3 row"><Label>{{'Material removal rate at Linear Ramping' | translate }}</Label></div>
+            <div class="col-3 row"><Label>{{'Material Removal Rate at Linear Ramping' | translate }}</Label></div>
             <div class="col-2">MRR1</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MRR1}}</div>
             <div class="col-2">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
@@ -225,7 +225,7 @@
           <div class="col-3 row"><Label>{{'Machine Cost (per Hour)' | translate }}</Label></div>
           <div class="col-2">MCH</div>
           <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{MCH}}</div>
-          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/hour</div>
+          <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'hour' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100">
           <div class="col-3 row"><Label>{{'Batch Size' | translate }}</Label></div>
@@ -326,7 +326,7 @@
           <div class="col-2">{{'Inserts' | translate }}/{{'batch' | translate}}</div>
         </div>
         <div class="row justify-content-start w-100" *ngIf="resType=='T'">
-            <div class="col-3 row"><Label>{{'Total Number of Tools' | translate }}</Label></div>
+            <div class="col-3 row"><Label>{{'Total number of Tools' | translate }}</Label></div>
             <div class="col-2">TPB</div>
             <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{T_TPB}}</div>
             <div class="col-2">{{'Tools' | translate}}/{{'batch' | translate}}</div>
