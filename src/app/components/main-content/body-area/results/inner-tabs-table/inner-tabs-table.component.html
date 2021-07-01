@@ -1,10 +1,11 @@
 <ng-container >
 
         <div *ngIf="selectedOption" class="row justify-content-start w-100 " >
-          <div [ngClass]="exportPDF?'div-image-pdf':'div-image'">
+          <div [ngClass]="exportPDF?'div-image-pdf':srv_appsetting.isMobileResolution?'col-4 pr-0 pl-0':'div-image'">
              <img  src="{{selectedOption.img}}"
-             class="img-grid mb-0"></div>
-          <div style="min-width:20%;">
+             [ngClass]="srv_appsetting.isMobileResolution?'img-grid-mobile mb-0 pl-0':'img-grid mb-0'">
+            </div>
+          <div style="min-width:20%;" [ngClass]="srv_appsetting.isMobileResolution?'col-8 pl-0 pr-0':''">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Designation' | translate}}</div>
 
             <div *ngFor="let row of selectedOption.Designation; ; let i = index;" 
@@ -15,7 +16,7 @@
               </div>
             </div>
           </div>
-          <div style="min-width:20%;">
+          <div *ngIf="!srv_appsetting.isMobileResolution" style="min-width:20%;">
             <div class="bold font-weight-bold  justify-content-start w-100 mb-2 pl-1">{{'Catalog No' | translate}}.</div>
 
             <div class="pl-2 row" *ngFor="let row of selectedOption.CatalogNo;let numb = index;" [hidden]="row.trim() == '-' || row.trim() == ''">
@@ -26,10 +27,11 @@
                 </div>
             </div>
           </div>            
-          <div [ngClass]="exportPDF?'div-comment-pdf':'div-comment'">  
-            <!-- selectedOption.info[0]!=null      -->     
-            <div class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Comments' | translate}}</div>
-            <div *ngFor="let row of selectedOption.info; ; ">{{row | translate}}</div>
+          <div  [ngClass]="exportPDF?'div-comment-pdf':srv_appsetting.isMobileResolution?'div-comment-mobile':'div-comment'">             
+            <div *ngIf="ShowComments" class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Comments' | translate}}</div>
+            <div *ngFor="let row of selectedOption.info;">
+                {{row | translate}}
+            </div>
           </div>
         </div>
 </ng-container>

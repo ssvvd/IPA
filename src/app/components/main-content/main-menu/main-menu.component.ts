@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { StateManagerService } from 'src/app/services/statemanager.service' ;
+import { AppsettingService} from 'src/app/services/appsetting.service';
 
 export class MainTab {
   TabID:number;
@@ -37,7 +38,7 @@ export class MainMenuComponent implements OnInit {
   
   Tabs:MainTab[]=[];
 
-  constructor(private router: Router,private srv_statemanage:StateManagerService) { 
+  constructor(private router: Router,private srv_statemanage:StateManagerService, public srv_appsetting:AppsettingService) { 
     
     this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationStart) {              

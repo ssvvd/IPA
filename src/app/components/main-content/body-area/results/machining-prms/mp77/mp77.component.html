@@ -3,7 +3,7 @@
 <ng-container >  
   <div class="row justify-content-start w-100">
     <div class="col-3 row justify-content-start"><Label class="font-weight-bold">{{'Cutting Data' | translate}}</Label></div>
-    <div class="col-2" ></div>
+    <div class="col-3" ></div>
     <div class="col-3 row text-center"><Label class="font-weight-bold">{{'ITA Recommendation' | translate}}</Label></div>
     <div class="col-2" ></div>
   </div>
@@ -11,55 +11,55 @@
       <div class="row justify-content-start w-100">
         <!-- <div class="col-3 row">{{'Hole Diameter' | translate }}</div> -->
         <div class="col-3 row"><Label>{{'Hole Diameter' | translate}}</Label></div>
-        <div class="col-2">DH</div>
+        <div class="col-3">DH</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{DH}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Hole Tollerance Max' | translate }}</Label></div>
-        <div class="col-2">MaxTol</div>
+        <div class="col-3">MaxTol</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;"><label [hidden]="MaxTol == 0">+</label>{{MaxTol}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100"> 
         <div class="col-3 row"><Label>{{'Hole Tollerance Min' | translate }}</Label></div>
-        <div class="col-2">MinTol</div>
+        <div class="col-3">MinTol</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;"><label [hidden]="MinTol <= 0">-</label>{{MinTol}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Depth of cut' | translate }}</Label></div>
-        <div class="col-2">DOC</div>
+        <div class="col-3">DOC</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{DOC}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Material removal rate' | translate }}</Label></div>
-        <div class="col-2">MRR</div>
+        <div class="col-3">MRR</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{MRR}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<sup>3</sup>/{{'min' | translate}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Cutting speed' | translate }}</Label></div>
-        <div class="col-2">v<sub>c</sub></div>
+        <div class="col-3">v<sub>c</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{Vc}}</div>
         <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Feed per Rev' | translate }}</Label></div>
-        <div class="col-2">f<sub>r</sub></div>
+        <div class="col-3">f<sub>r</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{fr}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}/rev</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
-        <div class="col-2">v<sub>f</sub></div>
+        <div class="col-3">v<sub>f</sub></div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{Vf}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}/min</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Spindle Speed' | translate }}</Label></div>
-        <div class="col-2">n</div>
+        <div class="col-3">n</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{n}}</div>
         <div class="col-2" style="margin-left: 6%;">rpm</div>
       </div>
@@ -67,13 +67,13 @@
 <div class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Tool Assembly Data' | translate}}</Label></div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Overhang' | translate }}</Label></div>
-        <div class="col-2">O</div>
+        <div class="col-3">O</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{O}}</div>
         <div class="col-2" style="margin-left: 6%;">{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <div class="row justify-content-start w-100">
         <div class="col-3 row"><Label>{{'Assembly Weight' | translate }}</Label></div>
-        <div class="col-2">AW</div>
+        <div class="col-3">AW</div>
         <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;">{{AW}}</div>
         <div class="col-2" style="margin-left: 6%;">{{ srv_appsetting.Units =='M' ? 'kg' : 'Lb' | translate}}</div>
       </div>

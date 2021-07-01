@@ -883,5 +883,7 @@ this.IsViewAll=false;
     this.MachineFilter.IsSliderSpeed=false;
     this.MachineFilter.IsSliderTorque=false;
   }
+
+
 }
 

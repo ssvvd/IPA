@@ -50,7 +50,7 @@ ul#nav li.active a {
         font-weight: normal !important;
         font-size: 18px !important;
         font-family: "Oswald",Calibri,Arial !important;
-        border-top:5px solid #fede15 ;
+        border-top:3px solid #fede15 ;
     }
 }
 
@@ -123,6 +123,7 @@ height: calc(100vh - 239px);
 .scrollYAutoMParams{
     overflow-y: auto !important;
     height: calc(100vh - 327px);
+    //height: calc(100vh - 450px);
         }      
 
 .header-pdf

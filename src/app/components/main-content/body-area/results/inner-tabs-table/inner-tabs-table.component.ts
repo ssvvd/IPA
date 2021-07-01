@@ -15,7 +15,7 @@ export class InnerTabsTableComponent implements OnInit {
   @Input() exportPDF: boolean;
   selectedOption:clsHelpProp;
   environment = environment;
-
+  ShowComments:boolean =false;
   IsExistIntoolShop:string[]=[];
   constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
               private srv_results:ResultsService) { }
@@ -26,6 +26,7 @@ export class InnerTabsTableComponent implements OnInit {
   ngOnChanges(changes:SimpleChanges) {
     if (this.viewParamsChanged && changes.viewParamsChanged){
       this.selectedOption = this.viewParamsChanged.Res[0];
+      if(this.selectedOption.info.filter(i=> i!=null && i!='').length >0) this.ShowComments=true;   
        //if(this.srv_appsetting.Country.FCSToolshopSite!='' && this.srv_appsetting.UserID!='')
     if(this.srv_appsetting.Country.FCSToolshopSite!='' )
     {

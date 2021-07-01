@@ -11,27 +11,59 @@
             <div class="col-6 pl-0" *ngIf="!srv_appsetting.isMobileResolution">
                <label class="pb-0">{{'Found Results' | translate}} : {{showingrows}} {{'out of' | translate}} {{countrow}}</label>
             </div>
-            <div class="float-right text-right" [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-6'">
+            <div class="float-right text-right" [ngClass]="srv_appsetting.isMobileResolution?'col-12 pl-0 pr-0':'col-6'">
                <div class="m-0 p-0 row float-right">
                   <h2 data-toggle="tooltip" title="{{'Download' | translate}}" [ngClass]="srv_appsetting.isMobileResolution?'':'ml-4'" class="siteTitle cursor-pointer mb-0"  (click)="DownLoadPDF()">
                      <i class="fa fa-spinner fa-spin" *ngIf="processdownload"></i>
                      <img [src] = "environment.ImagePath+'icon_Download.svg'"  [ngClass]="srv_appsetting.isMobileResolution?'ImgMobile  pt-2  pl-2':'icon-edit'">                  
                   </h2>
-                  <div class="float-right" *ngIf="srv_appsetting.isMobileResolution">
+                  <div class="text-right float-right pr-2" *ngIf="srv_appsetting.isMobileResolution">
                      <img  [src]="environment.ImagePath + 'icon_SortFilter.svg'" (click)="OpenFilterMobile()" class="ImgMobile  pt-2  pl-2">
                  </div>
                </div> 
             </div>
-            <div class="scrollmenu pb-2 pt-2 pl-1" *ngIf="srv_appsetting.isMobileResolution">
+         <!--    <div class="scrollmenu pb-2 pt-2 pl-1" *ngIf="srv_appsetting.isMobileResolution">
                <label class="pr-2" [ngClass]="filtermobiletop=='FilterRec'?'title-selected':''" (click)="FilterTopMobileChange('FilterRec')">{{'Most Recommended' | translate}}</label>
                <label>|</label>
                <label class="pr-2 pl-2" [ngClass]="filtermobiletop=='FilteAllRes'?'title-selected':''"  (click)="FilterTopMobileChange('FilteAllRes')">{{'View All' | translate}}</label>
                <label>|</label>
                <label class="pr-2 pl-2" [ngClass]="filtermobiletop=='FilterSeller'?'title-selected':''"  (click)="FilterTopMobileChange('FilterSeller')">{{'Best Seller' | translate}}</label>              
-             </div> 
+             </div> -->
+             <div class="scrollmenu pb-2 pt-2 pl-1" *ngIf="srv_appsetting.isMobileResolution">
+            <div class="p-0 m-0"> 
+               <div class="col p-0 m-0">                 
+                 <label class="pr-2"  (click)="FilterTopMobileChange('FilterRec')">{{'Most Recommended' | translate}}</label>
+                 <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (filtermobiletop=='FilterRec') ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>                  
+               </div>
+           </div>
+           <div  class="p-0 m-0">
+             <div class="col p-0 m-0">  
+               <label class="p-0 m-0">|</label>
+               <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+             </div>
+           </div>
+           <div class="p-0 m-0"> 
+            <div class="col p-0 m-0">                 
+              <label class="pr-2"  (click)="FilterTopMobileChange('FilteAllRes')">{{'View All' | translate}}</label>
+              <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (filtermobiletop=='FilteAllRes') ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>                  
+            </div>
+        </div>
+        <div  class="p-0 m-0">
+          <div class="col p-0 m-0">  
+            <label class="p-0 m-0">|</label>
+            <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+          </div>
+        </div>
+        <div class="p-0 m-0"> 
+         <div class="col p-0 m-0">                 
+           <label class="pr-2"  (click)="FilterTopMobileChange('FilterSeller')">{{'Best Seller' | translate}}</label>
+           <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (filtermobiletop=='FilterSeller') ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>                  
+         </div>
+     </div>   
+         </div> 
          </div>
        </div>    
-       <div class="div-datatable"  id='tbresult' title="{{'Show More Info' | translate}}">        
+       <div class="div-datatable pl-0"  id='tbresult' title="{{'Show More Info' | translate}}" >        
         <table  datatable  [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" [ngClass]="!srv_appsetting.isMobileResolution?'table table-stripe' :'table table-stripe-mobile'" class=" row-border hover " >  
          <thead >
                     <tr id="dtOptions">
@@ -43,7 +75,7 @@
                         </div>
                      </th> -->
                      <th  class="sorting" *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
-                         <label  class="p.b" title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">                            
+                         <label  style="white-space:pre-wrap" title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">                            
                            </label><span class="sort-icon ml-1"></span>
                      </th>
                         <th class="no-sort d-none"></th>
@@ -63,25 +95,50 @@
                            <img src="{{dtResultsObjectsHelp[row.index].img}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
                          (click)="viewInfo(row.index)" [ngClass]="srv_appsetting.isMobileResolution?'img-grid-mobile':'img-grid'">
                      </td>                       
-                       <td   style="width:200px;"  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" >                 
+                     <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" >                 
                            <span  (click)="viewInfo(row.index)" *ngFor="let prty of col; let PrtNum = index;"
                            [ngClass]="(col.length > 1 && 
                               (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
                               ? 'd-none' : 'd-block'" 
                            >                           
-                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>
-                              <div style="display: inline" [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
+                              
+                              <div *ngIf="!srv_appsetting.isMobileResolution"  style="display: inline" [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
                               (click)="prty.property && prty.property.Field.toLowerCase().includes('designation') && goToCatalog(row.index,dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)) ; $event.stopPropagation()">
-                              <label [style.white-space]="(prty.property && prty.property.Field.toLowerCase().includes('brandname')) ? 'pre-wrap' : 'nowrap'" [ngClass]="{'btn sileLinks pt-0 pl-0 pr-0 pb-0': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}">{{prty.value}}</label>
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>
+                              <label  [style.white-space]="(prty.property && prty.property.Field.toLowerCase().includes('brandname')) ? 'pre-wrap' : 'nowrap'" [ngClass]="{'btn sileLinks pt-0 pl-0 pr-0 pb-0': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}">{{prty.value}}</label>                              
                               <label class="btn sileLinks pt-0 pl-0 pr-0 pb-0" *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label>
                               
+                           </div>
+                         <div  *ngIf="srv_appsetting.isMobileResolution" class="row"   [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
+                              (click)="prty.property && prty.property.Field.toLowerCase().includes('designation') && goToCatalog(row.index,dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)) ; $event.stopPropagation()">
+                              <label  *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>                              
+                              <label class="text-left"    [style.white-space]="(prty.property && prty.property.Field.toLowerCase().includes('brandname')) ? 'normal' : 'normal'" [ngClass]="{'btn sileLinks pt-0 pl-0 pr-0 pb-0': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}">{{prty.value}}</label>
+                              <label class="text-left" style="white-space:pre-wrap;" class="btn sileLinks pt-0 pl-0 pr-0 pb-0" *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation') && dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] !='' && dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] !=null">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label>                              
+                           </div> 
+                          
+                           </span>
+                           <div *ngIf="num==0 && srv_appsetting.isMobileResolution" class="col-12" >
+                             <img  [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
+                           </div>
+                         </td> 
+                        <!--  <td *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" [hidden]="!headers[num].IsShow" class="cursor-pointer" >                 
+
+                           <span  (click)="viewInfo(row.index)" *ngFor="let prty of col; let PrtNum = index;"
+                           [ngClass]="(col.length > 1 && 
+                              (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
+                              ? 'd-none' : 'd-block'">                                                       
+                              <div  class="row"   [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
+                              (click)="prty.property && prty.property.Field.toLowerCase().includes('designation') && goToCatalog(row.index,dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)) ; $event.stopPropagation()">
+                              <label  *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>                              
+                              <label class="text-left"   *ngIf="srv_appsetting.isMobileResolution" [style.white-space]="(prty.property && prty.property.Field.toLowerCase().includes('brandname')) ? 'normal' : 'normal'" [ngClass]="{'btn sileLinks pt-0 pl-0 pr-0 pb-0': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}">{{prty.value}}</label>
+                              <label class="text-left" style="white-space:pre-wrap;" class="btn sileLinks pt-0 pl-0 pr-0 pb-0" *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation') && dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] !='' && dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] !=null">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label>                              
                            </div>
                           
                            </span>
                            <div *ngIf="num==0 && srv_appsetting.isMobileResolution" class="col-12" >
                              <img  [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
                            </div>
-                         </td>
+                         </td> -->
                          <td class="d-none">
                            <img src="{{environment.ImgView}}" 
                            (click)="viewInfo(row.index)"

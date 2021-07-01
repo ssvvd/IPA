@@ -63,9 +63,9 @@
                     </div>
                     <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'">
                         <select class="form-control-sm" [ngModel]="spindle.ClampingType" >
-                            <option value='unrigid'>unrigid</option>
-                            <option value='Fair'>Fair</option>                            
-                            <option value='Rigid'>Rigid</option>                            
+                            <option value='unrigid'>{{'unrigid'| translate}}</option>
+                            <option value='Fair'>{{'Fair'| translate}}</option>                            
+                            <option value='Rigid'>{{'Rigid' | translate}}</option>                            
                         </select>                                
                     </div>
                 </div>

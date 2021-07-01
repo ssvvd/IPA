@@ -96,7 +96,7 @@ export class Optimizetool59Component implements OnInit {
      else
         this.isDisabledState=false;
       
-       // this.setCoolant();
+        this.setCoolant();
      if(this.srv_StMng.IPL.GetItem('Coolant').value=='2' )
         if((this.srv_StMng.GetMaterialSelected().id>=1 && this.srv_StMng.GetMaterialSelected().id<=20) 
             || (this.srv_StMng.GetMaterialSelected().id>=38 && this.srv_StMng.GetMaterialSelected().id<=41) )

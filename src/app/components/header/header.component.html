@@ -85,20 +85,30 @@
 </div> 
 <div class="col-12 banner-top-mobile d-flex justify-content-center pl-0 pr-0" *ngIf="srv_appsetting.isMobileResolution">  
     <div class="div-header-mobile"   > 
-        <div class="row">                      
-            <div class="col-2" >
+        <div class="row" style="width: 100%;">                      
+            <div class="pl-1 pt-2" >
                 <img (click)="OpenMenuMobile()"   
-                [src]="environment.ImagePath + 'icon_hamburger.svg'" class="ImgMobile " >
+                [src]="environment.ImagePath + 'icon_hamburger.svg'" style="width:30px">
+                
             </div>
-            <div class="col-8 text-center" >
+          <!--   <div class="col-8 text-center  pt-1" >
                 <a href="https://www.iscar.com/index.aspx" target="_blank" >
                     <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="LogoInscarMobile">
                 </a>
+            </div> -->
+            <div class="text-center  pt-1" style="margin: 0 auto" >
+                <div class="pt-0 pl-0 ml-0">
+                    <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"   style="width:30px" class="ImgMobile pt-0 pr-0 pl-0  pb-2">
+                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important">ISCAR TOOL ADVISOR</Label>
+                    <!-- <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
+                        <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
+                    </button> -->
+                </div>
             </div>
-            <div class="col-2" >                                 
-                <div   ngbDropdown role="group" > 
+            <div class="float-right text-right pr-2" >                                 
+                <div   ngbDropdown role="group" class="float-right"> 
                     <div  class="pt-2"    ngbDropdownToggle id="login">                                                              
-                        <img (click)="LogIn()" [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >                                                                                                          
+                        <img (click)="LogIn()" style="width:30px"  [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >                                                                                                          
                     </div>    
                 <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
                         <div class="float-right mr-2">

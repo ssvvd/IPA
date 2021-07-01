@@ -1,16 +1,16 @@
 <div class="pt-4">
 <label class="pb-2">{{'Connection Type Workpiece Side Holder' | translate}}</label>
 <div class="row"> 
-    <div class="row pl-0 col-4">
-        <div>
+    <div class="row pl-0 col-4" >
+        <div class="col-3 pl-0">
             <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input"  id="chkAdapType_CH"  name="chkAdapType_CH" 
                 [checked]="msrv_StMng.IPL.GetItem('ADAPTOR_ColletChuck').value=='True'" (change)="changeAdaptorType('ADAPTOR_ColletChuck')">
                 <label class="custom-control-label" for="chkAdapType_CH"></label>
             </div>
         </div> 
-        <div class="pr-4  pl-0 ">
-            <label for="chkAdapType_CH" class="form-check-label text-nowrap">Collet Chuck</label>
+        <div class="pr-4  pl-0 col-9">
+            <label for="chkAdapType_CH" class="form-check-label" style="white-space: normal;">Collet Chuck</label>
         </div>
              
     </div>

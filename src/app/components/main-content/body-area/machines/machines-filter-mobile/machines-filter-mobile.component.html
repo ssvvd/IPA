@@ -9,7 +9,7 @@
 <div>  
 <ul class="nav nav-fill" style="border:0px">                  
   <li  class="nav-item"  (click)="OpenSort()">  
-      <div class="pl-2 text-center" [ngClass]="TabActive==1?'div-tab-menu-selected':'div-tab-menu'">
+      <div class="pl-2 text-center" style="padding-bottom:3px;" [ngClass]="TabActive==1?'div-tab-menu-selected':'div-tab-menu'">
             <label>{{'Sort' | translate}}</label>
       </div>                                                                                                                              
   </li> 
@@ -22,32 +22,45 @@
 
 <div *ngIf="TabActive==1">
   <div class="ml-2 mt-4">
-    <div class="custom-control custom-radio ">
-      <input type="radio" class="custom-control-input" id="sort_speed_1" name="Sort"  [checked]="sortfield=='SpindleSpeed' && sorttype=='1'"  (click)="setsort('SpindleSpeed','1')">
-      <label class="custom-control-label" for="sort_speed_1">{{'Spindle Speed' | translate}}{{' (rpm)'}}-{{'Fastest to Slowest'}}</label>
-    </div>            
-    <div class="custom-control custom-radio mt-3">
-      <input type="radio" class="custom-control-input" id="sort_speed_2" name="Sort"  [checked]="sortfield=='SpindleSpeed' && sorttype=='2'"  (click)="setsort('SpindleSpeed','2')">
-      <label class="custom-control-label" for="sort_speed_2">{{'Spindle Speed' | translate}}{{' (rpm)'}}-{{'Slowest to Fastest'}}</label>
+    <div class="row">     
+      <div class="col-6 pt-3">
+        <label>{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>
+      </div>  
+      <div class="col-3 pt-3">
+        <img  style="width:30px" [src]="sortfield=='SpindleSpeed' && sorttype=='1'?environment.ImagePath+ 'sort-2.svg':environment.ImagePath+ 'sort-1.svg'" (click)="setsort('SpindleSpeed','1')" class="MenuImg">
+      </div>
+      <div class="col-3 pt-3">
+        <img  style="width:30px" [src]="sortfield=='SpindleSpeed' && sorttype=='2'?environment.ImagePath+ 'sort-3.svg':environment.ImagePath+ 'sort-4.svg'" (click)="setsort('SpindleSpeed','2')" class="MenuImg">
+      </div>
     </div>  
-    <div class="custom-control custom-radio mt-3">
-      <input type="radio" class="custom-control-input" id="sort_power_1" name="Sort"  [checked]="sortfield=='Power' && sorttype=='1'"  (click)="setsort('Power','1')">
-      <label class="custom-control-label" for="sort_power_1">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}-{{'Strongest to Fastest'}}</label>
-    </div>     
-    <div class="custom-control custom-radio mt-3">
-      <input type="radio" class="custom-control-input" id="sort_power_2" name="Sort"  [checked]="sortfield=='Power' && sorttype=='2'"  (click)="setsort('Power','2')">
-      <label class="custom-control-label" for="sort_power_2">{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }} - {{'Weakest to Strongest'}}</label>
-    </div>  
-    <div class="custom-control custom-radio mt-3">
-      <input type="radio" class="custom-control-input" id="sort_torque_1" name="Sort"  [checked]="sortfield=='Torque' && sorttype=='1'"  (click)="setsort('Torque','1')">
-      <label class="custom-control-label" for="sort_torque_1">{{'Torque' | translate}}({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}) - {{'Biggest to Smallest'}}</label>
-    </div> 
-    <div class="custom-control custom-radio mt-3">
-      <input type="radio" class="custom-control-input" id="sort_torque_2" name="Sort"  [checked]="sortfield=='Torque' && sorttype=='2'"  (click)="setsort('Torque','2')">
-      <label class="custom-control-label" for="sort_torque_2">{{'Torque' | translate}}({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}}) - {{'Smallest to Biggest'}}</label>
-    </div>                                 
+    <div style="height:40px;"></div>          
+    <div class="row">     
+      <div class="col-6">
+        <label>{{'Power' | translate}}{{ srv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}</label>
+      </div>  
+      <div class="col-3">
+        <img  style="width:30px" [src]="sortfield=='Power' && sorttype=='1'?environment.ImagePath+ 'sort-2.svg':environment.ImagePath+ 'sort-1.svg'" (click)="setsort('Power','1')" class="MenuImg">
+      </div>
+      <div class="col-3">
+        <img  style="width:30px" [src]="sortfield=='Power' && sorttype=='2'?environment.ImagePath+ 'sort-3.svg':environment.ImagePath+ 'sort-4.svg'" (click)="setsort('Power','2')" class="MenuImg">
+      </div>
+    </div>
+    <div style="height:40px;"></div>     
+    <div class="row">     
+      <div class="col-6">
+        <label>{{'Torque' | translate}}({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}})</label>
+      </div>  
+      <div class="col-3">
+        <img style="width:30px" [src]="sortfield=='Torque' && sorttype=='1'?environment.ImagePath+ 'sort-2.svg':environment.ImagePath+ 'sort-1.svg'" (click)="setsort('Torque','1')" class="MenuImg">
+      </div>
+      <div class="col-3">
+        <img  style="width:30px" [src]="sortfield=='Torque' && sorttype=='2'?environment.ImagePath+ 'sort-3.svg':environment.ImagePath+ 'sort-4.svg'" (click)="setsort('Torque','2')" class="MenuImg">
+      </div>
+    </div>
+    <div style="height:80px;"></div>                                           
 </div>  
 </div>
+
 <div *ngIf="TabActive==2" class="pl-2 pr-2 mt-2">          
 <app-machines-filter  (MachineFilterChanged)="onMachineFilterChanged($event)"  [clearfiltermobile]="eventsClearFilterMobile.asObservable()"
 (MachineFilterClear)="onMachineFilterClear()" [onChangeMachineList]="eventsChangeMachineList.asObservable()" ></app-machines-filter>  

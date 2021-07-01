@@ -1,14 +1,14 @@
-<div class="mt-2">
+<div [ngClass]="srv_appsetting.isMobileResolution?'mt-1':'mt-2'">
     <ul class="nav nav-fill" >                  
            <li *ngFor="let tab of Tabs"  
                [className]="tab.IsSelected?  tab.TabID=='5'? 'nav-item div-tab-menu-selected-last': 'nav-item div-tab-menu-selected':tab.isDisabled? tab.TabID=='5'?'nav-item div-tab-menu-disabled-last' :'nav-item div-tab-menu-disabled':'nav-item div-tab-menu'" 
                         (click)="onClickTab(tab)">  
                <div class="row"> 
                    <div class="col-sm-12 col-md-4 col-lg-3 col-xl-2   pl-sm-0 pl-md-0 pl-lg-2 pl-xl-2">                                          
-                       <img [src]="tab.isDisabled ? tab.ImageDisableURL : tab.ImageURL" class="img-main-menu">                                                                                                  
+                       <img [src]="tab.isDisabled ? tab.ImageDisableURL : tab.ImageURL" [ngClass]="srv_appsetting.isMobileResolution?'img-main-menu-mobile':'img-main-menu'">                                                                                                  
                    </div>            
                    <div class="col-sm-12 col-md-8 col-lg-9 col-xl-10  pl-2 mb-0 pb-0 pl-1 ">                                                                                 
-                        <div>                       
+                        <div class="text-left">                       
                            <label [className]="tab.isDisabled?'siteTitle-disable text-truncate d-none d-lg-block  mb-0 pb-0 ':'siteTitle text-truncate d-none d-lg-block mb-0 pb-0 cursor-pointer'">{{tab.Description | translate}}</label> 
                        </div>
                        <div class="row" *ngIf="tab.TabID=='3'">

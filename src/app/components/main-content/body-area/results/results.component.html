@@ -1,5 +1,5 @@
 
-<div class="border-left-gray border-right-gray" style="min-height: 1500px;height:1500px;">
+<div class="border-left-gray border-right-gray" [ngClass]="srv_appsetting.isMobileResolution?'pl-0 pr-0 mp-0 ml-0':''" style="min-height: 1500px;">
     <div class="row" [hidden]="!MainPage">
       <div class="col col-20 mt-4 scrollYAutoFilter" [hidden]="_hideFilter" *ngIf="!srv_appsetting.isMobileResolution">
         <app-res-filter (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
@@ -7,7 +7,7 @@
       <div class="col col-12 mt-2 scrollYAutoFilter-mobile" [hidden]="srv_statemanage._hideFiltermobile" *ngIf="srv_appsetting.isMobileResolution">
         <app-res-filter [filtermobiletop]="filtermobiletop" (filterEvent)="receiveFilterChange($event)" [helpArr]="resTable.dtResultsObjectsHelp"></app-res-filter>
       </div>
-      <div class="col pl-2 border-left-gray" [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-80' ">
+      <div class="col border-left-gray" [ngClass]="srv_appsetting.isMobileResolution?'col-12 pl-0 pr-0':'pl-2 col-80' ">
         <div class="row">
         </div>
        <!--  @Input() filterChangedRec: any ; results-table -->
@@ -16,7 +16,7 @@
     </div>
 
     <div class="row" [hidden]="MainPage">
-      <div class="container-fluid">              
+      <div class="container-fluid" [ngClass]="srv_appsetting.isMobileResolution?'pl-0 pr-0 ml-0 mr-0':''">              
         <div class="mt-0 ml-0 pl-0 mt-0 pt-2 row">
           <div class="col-10 pl-0 ">
           <nav class="ml-0 pl-0 mt-0 pl-0 pt-0 " aria-label="breadcrumb">
@@ -28,8 +28,8 @@
            </nav>
         
           </div>  
-          <div *ngIf="srv_appsetting.isMobileResolution" [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
-            <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0 pt-2"  (click)="CheckDownloadResults()">
+          <div *ngIf="srv_appsetting.isMobileResolution"  [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
+            <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0 pt-3"  (click)="CheckDownloadResults()">
               <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i>                         
               <img [src] = "environment.ImagePath+'icon_Download.svg'"  class="icon-edit" >                                
             </h2>  
@@ -66,22 +66,25 @@
           </div>
         </div>       
       </div>
-      <inner-tabs-table *ngIf="srv_appsetting.isMobileResolution" [viewParamsChanged]="viewParams"></inner-tabs-table>
+      <inner-tabs-table class="pt-0" *ngIf="srv_appsetting.isMobileResolution" [viewParamsChanged]="viewParams"></inner-tabs-table>
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs navul">
-          <li [ngbNavItem]="1" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'" id="dataitem1">
+          <li  [ngbNavItem]="1" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'" id="dataitem1">
             <a ngbNavLink class="siteTitle" >{{'Machining Parameters' | translate}}</a>
             <ng-template ngbNavContent>
+              <div>
               <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
               <!-- <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF && srv_appsetting.isMobileResolution"> -->
                 <div class="col-xs-6 col-sm-6 col-md-6 pt-0 pb-0" *ngIf="srv_appsetting.isMobileResolution">
                 <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
               </div>
+              
               <machining-prms [viewParamsChangedMP]="viewParams"></machining-prms>
+              </div>
             </ng-template>
           
           </li>
 
-          <li [ngbNavItem]="2" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
+          <li  [ngbNavItem]="2" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
             <a ngbNavLink class="siteTitle">{{'Product Information' | translate}}</a>
             <ng-template ngbNavContent>
               <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
@@ -93,15 +96,16 @@
             </ng-template>
           </li>
 
-          <li [ngbNavItem]="3" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
-            <a ngbNavLink class="siteTitle">{{'2D+3D Representation' | translate}}</a>
+          <li  [ngbNavItem]="3" [ngClass]="srv_appsetting.isMobileResolution?'navli-mobile':'navli'">
+            <a ngbNavLink class="siteTitle text-truncate text-wrap">{{'2D+3D Representation' | translate}}</a>
             <ng-template ngbNavContent >
-              <inner-tabs-table [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>
-              <!-- <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="!exportPDF && srv_appsetting.isMobileResolution"> -->
+              <inner-tabs-table  [viewParamsChanged]="viewParams" *ngIf="!srv_appsetting.isMobileResolution"></inner-tabs-table>             
                 <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="srv_appsetting.isMobileResolution">
                 <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
               </div>
+              <div>
               <product-info  #productInfo [viewParamsChanged]="viewParams" [SRC]="'ITA2'"></product-info>
+            </div>
             </ng-template>
           </li>
 
@@ -117,7 +121,7 @@
 
         </ul>
 
-        <div [ngbNavOutlet]="nav" class="pt-3 scrollYAutoMParams"></div>
+        <div [ngbNavOutlet]="nav" class="pt-3 scrollYAutoMParams" ></div>
         <!-- <ngb-tabset [destroyOnHide]="false" type="pills" justify="fill">
           
           <ngb-tab title="Machining Parameters">

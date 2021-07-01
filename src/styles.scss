@@ -222,17 +222,21 @@ html {
   padding-right:0!important;   
 } 
 }
-@include media-breakpoint-up(sm) {
-  html {
-    //font-size: 0.8rem;
-    font-weight:normal;
-  }
-   .div-main-content {
-    width: 100%!important;
-    padding-bottom:0!important; 
-    margin-bottom: 0!important;
-}  
+
+.div-tab-menu-selected
+{
+    text-align: left;
+    padding-left:8px;
+    padding-top:8px;
+    padding-bottom:4px;
+    //border-right:1px solid   var(--border-color-gray)  ;  
+    border-left:1px solid   var(--border-color-gray)  ;   
+    border-top:5px solid #fede15 ;
+    background-color:white; 
+    cursor: pointer;      
 }
+
+
 
 @include media-breakpoint-up(md) {
   html {
@@ -551,21 +555,11 @@ button.close-mobile{
 
 .arrow-mobile
 {
-  width:35px;
+  width:40px;
 }
 
-.div-tab-menu-selected
-{
-    text-align: left;
-    padding-left:8px;
-    padding-top:8px;
-    padding-bottom:4px;
-    //border-right:1px solid   var(--border-color-gray)  ;  
-    border-left:1px solid   var(--border-color-gray)  ;   
-    border-top:5px solid #fede15 ;
-    background-color:white; 
-    cursor: pointer;      
-}
+
+
 .div-tab-menu
 {
     text-align: left;
@@ -576,6 +570,36 @@ button.close-mobile{
     background-color:var(--background-color-menu);  
     cursor: pointer;
 }
+
+.div-tab-menu-selected-last
+{
+    text-align: left;
+    padding-left:8px;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-left:1px solid  var(--border-color-gray)  ; 
+    border-right:1px solid  var(--border-color-gray) ;    
+    border-top:5px solid #fede15;
+    background-color:white; 
+    cursor: pointer;  
+}
+
+.div-tab-menu-selected:focus
+{
+   border-color:var(--border-color-gray) ;
+   outline: 0;
+   border-left:1px solid  var(--border-color-gray) ;
+   border-top:5px solid #fede15;
+}
+
+.div-tab-menu:focus
+{
+  border-color: var(--border-color-gray) ;
+  outline: 0;
+  border-left:1px solid  var(--border-color-gray)  ; 
+}
+
+
 .btn-select-mobile
 {
    background-color: var(--btn-bg-select-color);
@@ -591,7 +615,7 @@ button.close-mobile{
 
 .title-selected{
   color:var(--btn-bg-select-color) !important;
-  font-weight: bold !important;
+  //font-weight: bold !important;
   text-decoration: underline!important;
   //font-size: 18px !important;
  
@@ -608,6 +632,85 @@ div.scrollmenu label {
   text-decoration: none;
 }
 
+/* div.scrollmenu div label {
+  display: inline-block;    
+  text-align: center;    
+  text-decoration: none;
+} */
+
+div.scrollmenu div{
+  display: inline-block;    
+  text-align: center;    
+  text-decoration: none;
+}
+
+div.scrollmenu div div {
+  display: block;   
+  text-align: center;    
+  text-decoration: none;
+}
+
 div.scrollmenu a:hover {
   background-color: #777;
+}
+@media only screen and (max-width: 768px){
+  .div-tab-menu-selected
+  {
+      text-align: left;
+      padding-left:8px;
+      padding-top:8px;
+      padding-bottom:4px;
+      //border-right:1px solid   var(--border-color-gray)  ;  
+      border-left:1px solid   var(--border-color-gray)  ;   
+      border-top:3px solid #fede15 ;
+      background-color:white; 
+      cursor: pointer;      
+  } 
+
+  .div-tab-menu-selected-last
+{
+    text-align: left;
+    padding-left:8px;
+    padding-top:8px;
+    padding-bottom:8px;
+    border-left:1px solid  var(--border-color-gray)  ; 
+    border-right:1px solid  var(--border-color-gray) ;    
+    border-top:3px solid #fede15;
+    background-color:white; 
+    cursor: pointer;  
+}
+
+.div-tab-menu-selected:focus
+{
+   border-color:var(--border-color-gray) ;
+   outline: 0;
+   border-left:1px solid  var(--border-color-gray) ;
+   border-top:3px solid #fede15;
+}
+
+.div-tab-menu-selected-last:focus
+{
+   border-color:var(--border-color-gray) ;
+   outline: 0;
+   border-left:1px solid  var(--border-color-gray) ;
+   border-top:3px solid #fede15;
+}
+
+.div-main-content {
+  width: 100%!important;
+  padding-bottom:0!important; 
+  margin-bottom: 0!important;
+}  
+}
+
+@include media-breakpoint-up(sm) {
+  html {
+    //font-size: 0.8rem;
+    font-weight:normal;
+  }
+/*    .div-main-content {
+    width: 100%!important;
+    padding-bottom:0!important; 
+    margin-bottom: 0!important;
+}  */ 
 }

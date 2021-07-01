@@ -28,6 +28,7 @@ export class Machineheader {
     public SpindleType:string;
     public SpindleTypeDefault:string
     public IsSelected:boolean=false;
+    public NameNumber:string='';
     constructor( )
     {
         this.DescSelect="Select";

@@ -136,47 +136,49 @@ export class MpTurnGrooveComponent implements OnInit {
                      break;
                    }
                    case 'WInsert':{
-                    if (this.CW == 0)
-                    {
-                      if(value.indexOf('-')>-1 )
+                    if(this.srv_StMng.SecApp!='51')
+                      if (this.CW == 0)
+                      {
+                        if(value.indexOf('-')>-1 )
+                          {
+                            this.CW=value.substring(0,value.indexOf('-')); 
+                            if(this.CW=='') this.CW =0;
+                          }
+                          else
+                            this.CW = +value;
+                      }
+                    break;
+                  }
+                  case 'WInsert1':{
+                    if(this.srv_StMng.SecApp!='51')
+                      if (this.CW == 0)
+                      {
+                        if(value.indexOf('-')>-1)
+                          {
+                            this.CW=value.substring(0,value.indexOf('-')); 
+                            if(this.CW=='') this.CW =0;
+                          }
+                          else
+                            this.CW = +value;
+                      }                    
+                    break;
+                  }
+                  case 'WInsert2':{
+                    if(this.srv_StMng.SecApp!='51')
+                      if (this.CW == 0)
+                      {
+                        if(value.indexOf('-')>-1)
                         {
                           this.CW=value.substring(0,value.indexOf('-')); 
                           if(this.CW=='') this.CW =0;
                         }
                         else
                           this.CW = +value;
-                    }
-                    break;
-                  }
-                  case 'WInsert1':{
-                    if (this.CW == 0)
-                  {
-                    if(value.indexOf('-')>-1)
-                      {
-                        this.CW=value.substring(0,value.indexOf('-')); 
-                        if(this.CW=='') this.CW =0;
                       }
-                      else
-                        this.CW = +value;
-                  }
                     
                     break;
                   }
-                  case 'WInsert2':{
-                    if (this.CW == 0)
-                    {
-                      if(value.indexOf('-')>-1)
-                      {
-                        this.CW=value.substring(0,value.indexOf('-')); 
-                        if(this.CW=='') this.CW =0;
-                      }
-                      else
-                        this.CW = +value;
-                    }
-                    
-                    break;
-                  }
-                   case 'DetailsWInsert':{
+                   case 'DetailsWinsert':{
                     if (this.CW == 0)
                     {
                       if(value.indexOf('-')>-1)

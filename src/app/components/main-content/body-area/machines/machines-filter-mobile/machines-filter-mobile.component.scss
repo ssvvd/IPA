@@ -19,5 +19,16 @@
    outline: none !important  
 }
 
-
+.div-tab-menu-selected-mobile
+{
+    text-align: left;
+    padding-left:8px;
+    padding-top:8px;
+    padding-bottom:4px;
+    //border-right:1px solid   var(--border-color-gray)  ;  
+    border-left:1px solid   var(--border-color-gray)  ;   
+    border-top:3px solid #fede15 ;
+    background-color:white; 
+    cursor: pointer;      
+}
 

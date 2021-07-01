@@ -102,13 +102,13 @@
                         </div>                                   
                         <div *ngFor="let dd of arrDisplayData" class="row">                           
                                 <div class="col-6 border">
-                                    <label >{{dd.item}}</label>
+                                    <label >{{dd.item | translate}}</label>
                                 </div>
                                 <div class="col-3 border">
                                     <label >{{dd.value}}</label>
                                 </div>
                                 <div class="col-3 border">
-                                    <label >{{dd.units}}</label>
+                                    <label >{{dd.units | translate}}</label>
                                 </div>                                                    
                         </div>                                   
              </div>

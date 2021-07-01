@@ -73,37 +73,39 @@ table.dataTable thead th {
 
 @media only screen and (max-width:768px){  
   
-/*    .table td:nth-child(1), .table th:nth-child(1){
-    width: 70px!important;
-    min-width: 70px !important;
-    max-width: 70px !important;   
-    background-color: gold;    
-  }
-   .table td:nth-child(2), .table  th:nth-child(2)  {
-    width: 170px !important;
-    min-width: 170px !important;
-    max-width: 170px !important;    
-    background-color: fuchsia;
-    //width: 170px !important;
-  }
 
-  .table td:nth-last-child(3), .table th:nth-last-child(3){
-    // min-width: 24% !important;
-    // max-width: 24% !important;
-    width: 8% !important;
-    min-width: 8% !important;
-    max-width: 8% !important;
+
+  .table td:nth-child(1), .table th:nth-child(1){
+    width: 15% !important;
+    min-width: 15% !important;
+    max-width: 15% !important;
+    white-space: nowrap;
     
   }
-
+   .table td:nth-child(2), .table th:nth-child(2){
+    width: 40% !important;
+    min-width: 40% !important;
+    max-width: 40% !important;
+    white-space: nowrap;
+    
+  }
+  
   .table td:nth-child(n+3), .table th:nth-child(n+3){
     // min-width: 24% !important;
     // max-width: 24% !important;
     width: 10% !important;
     min-width: 10% !important;
     max-width: 10% !important;
-    white-space:normal;
-  }  */
+    white-space: nowrap;
+  }
+  .table td:nth-last-child(3), .table th:nth-last-child(3){
+    // min-width: 24% !important;
+    // max-width: 24% !important;
+    width: 8% !important;
+    min-width: 8% !important;
+    max-width: 8% !important;
+    white-space: nowrap;
+  }
  
 }
 

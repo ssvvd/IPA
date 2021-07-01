@@ -12,17 +12,16 @@
 </div>
 
 <ng-template #elseBlock>
-<div *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
+<div  *ngFor="let row of selectedOption?.CatalogNo; let PrtNum = index"  [hidden]="row.trim().length != 7">
 
     <label class="bold font-weight-bold">{{selectedOption.GroupText[PrtNum] | translate}}:</label>
     <i class="fa fa-spinner fa-spin pl-2" *ngIf="!isLoaded(PrtNum)"></i>
     <br>
     <br>
-   
     <iframe 
     (load)="!isLoaded(PrtNum) ? finishLoadingFrame(PrtNum) : false"
-    [src]="!isLoaded(PrtNum) ? getUrl1(row,PrtNum) : getUrl1('1',PrtNum)" ng-style ="{ ' width' : srv_appsetting.isMobileResolution? '100%' : '71%' }"
-     [style.height]="'550px'" style="border:none;" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
+    [src]="!isLoaded(PrtNum) ? getUrl1(row,PrtNum) : getUrl1('1',PrtNum)" 
+     [style.height]="'550px'" style="border:none;width:90%;"  sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts">
     </iframe>
     <hr>
 </div>
