@@ -28,8 +28,8 @@
             </div>
           </div>            
           <div  [ngClass]="exportPDF?'div-comment-pdf':srv_appsetting.isMobileResolution?'div-comment-mobile':'div-comment'">             
-            <div *ngIf="ShowComments" class="bold font-weight-bold  justify-content-start w-100 mb-2">{{'Comments' | translate}}</div>
-            <div *ngFor="let row of selectedOption.info;">
+            <div *ngIf="ShowComments" class="bold font-weight-bold  justify-content-start w-100 mb-2 pl-2">{{'Comments' | translate}}</div>
+            <div *ngFor="let row of selectedOption.info;" class="pl-2">
                 {{row | translate}}
             </div>
           </div>

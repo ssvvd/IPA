@@ -1,7 +1,7 @@
 
 <div class="container" class="p-0 m-0" >
     <div class="form-group row">
-        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 ">    
+        <div  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12'">    
             <div class="pt-0" >  
                 <div class="form-group">                     
                     <div>
@@ -25,7 +25,7 @@
                 </div>
          
                 <div class="form-group row">
-                    <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 '">
                         <div *ngIf="msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='188'">
                             <label class="pl-0 pt-3">{{'Outer diameter'| translate}}{{' (D)'}}</label>
                         </div>
@@ -34,131 +34,131 @@
                         </div>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  '">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                                 (change)="SetIPLMandatory()"     [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WorkpieceDiameter').value"  (focus)="onfocusfield('WorkpieceDiameter')" (focusout)="onfocusoutfield()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>   
                 <div *ngIf="msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='188'" class="form-group row">
-                    <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-5':' col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12'">
                         <label class="pl-0 pt-3">{{'Groove width (W)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10 '">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Width').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Width').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                                 (change)="SetIPLMandatory()"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Width').value"  (focus)="onfocusfield('Width')" (focusout)="onfocusoutfield()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0"  [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>       
                 <div *ngIf="msrv_StMng.SecApp=='10'" class="form-group row">
-                        <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <div class="row pt-0" [ngClass]="exportPDF?'col-5':' col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12'">
                             <label class="pl-0 pt-3">{{'Diameter Inner (ID)' | translate}}</label>
                             <label class="pl-2 asterisk-red pt-3">*</label>
                         </div>
-                        <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  '">
                             <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DiameterInner').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DiameterInner').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                             (change)="SetIPLMandatory()"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DiameterInner').value"  (focus)="onfocusfield('DiameterInner')" (focusout)="onfocusoutfield()"> 
                         </div>
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                             <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                         </div>
                     </div>
-                <div  *ngIf="msrv_appsetting.isMobileResolution">
+                    <div  *ngIf="msrv_appsetting.isMobileResolution && !exportPDF">
                         <div *ngIf="ImageName!=''" >
-                            <img src="{{ImageName}}" class="input-image">   
+                            <img src="{{ImageName}}" style="height: 200px;">   
                         </div>
                     </div>                             
                 <div class="form-group row" *ngIf="msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='188'">
-                    <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row  pt-0"  [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12'">
                         <label class="pl-0 pt-5">W -{{'Tolerance' | translate}}</label>                        
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  '">
                         <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                         <input  type="number" class="form-control input-min-sl-width" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMin').value" (focus)="onfocusfield('WToleranceMin')" (focusout)="onfocusoutfield()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1'">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
-                    <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  '">
                         <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                         <input  type="number"  class="form-control input-min-sl-width" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WToleranceMax').value" (focus)="onfocusfield('WToleranceMax')" (focusout)="onfocusoutfield()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">                        
                         <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>   
                 <div class="form-group row">
-                        <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                        <div class="row pt-0"  [ngClass]="exportPDF?'col-5':' col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12'">
                             <label class="pl-0 pt-3">{{'Depth Outer (DOD)' | translate}}</label>
                             <label class="pl-2 asterisk-red pt-3">*</label>
                         </div>
-                        <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                        <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10'">
                             <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                                     (change)="SetIPLMandatory()"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Depth').value"  (focus)="onfocusfield('Depth')" (focusout)="onfocusoutfield()"> 
                         </div>
-                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                        <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                             <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                         </div>
                     </div>   
                     <div class="form-group row">
-                            <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <div class="row pt-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12'">
                                 <label class="pl-0 pt-3">{{'Depth Inner (DID)' | translate}}</label>
                                 <label class="pl-2 asterisk-red pt-3">*</label>
                             </div>
-                            <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                            <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10'">
                                 <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthInner').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthInner').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'" 
                                 (change)="SetIPLMandatory()"     [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthInner').value"  (focus)="onfocusfield('DepthInner')" (focusout)="onfocusoutfield()"> 
                             </div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                            <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                                 <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                             </div>
                     </div>                                
                     <div class="form-group row">
-                            <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                            <div class="row pt-0"  [ngClass]="exportPDF?'col-5':' col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 '">
                                 <label class="pl-0 pt-5">{{'Corner Radius' | translate}}{{' (R)'}}</label>                                
                             </div>
-                            <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                            <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  '">
                                 <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                                 <input  type="number" class="form-control input-min-sl-width" 
                                                     [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('MinCornerRadius').value" (focus)="onfocusfield('MinCornerRadius')" (focusout)="onfocusoutfield()"> 
                             </div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
+                            <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">                        
                                 <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                             </div>
-                            <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                            <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10'">
                                 <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                                 <input  type="number"  class="form-control input-min-sl-width" 
                                                     [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('MaxCornerRadius').value" (focus)="onfocusfield('MaxCornerRadius')" (focusout)="onfocusoutfield()"> 
                             </div>
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
+                            <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1'">                        
                                 <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                             </div>
                         </div> 
                         <div class="form-group row" *ngIf="msrv_StMng.SecApp=='54' || msrv_StMng.SecApp=='188'">
-                                <div class="row col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                                <div class="row pt-0" [ngClass]="exportPDF?'col-5':' col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12'">
                                     <label class="pl-0 pt-5">R - {{'Tolerance' | translate}}</label>                                   
                                 </div>
-                                <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                                <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10'">
                                     <label class="pl-0 pt-3">{{'Min' | translate}}</label>
                                     <input  type="number" class="form-control input-min-sl-width" 
                                                         [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMin').value"  (focus)="onfocusfield('RToleranceMin')" (focusout)="onfocusoutfield()"> 
                                 </div>
-                                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
+                                <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1'">                        
                                     <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                                 </div>
-                                <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10  pt-0 pl-0">
+                                <div class="pt-0 pl-0"  [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10'">
                                     <label class="pl-0 pt-3">{{'Max' | translate}}</label>
                                     <input  type="number"  class="form-control input-min-sl-width" 
                                                         [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RToleranceMax').value" (focus)="onfocusfield('RToleranceMax')" (focusout)="onfocusoutfield()"> 
                                 </div>
-                                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">                        
+                                <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">                        
                                     <label class="pl-0 pt-5">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                                 </div>
                             </div> 
@@ -203,14 +203,14 @@
                     <label  class="siteTitle col-form-label">{{'Economic Data' | translate}}</label> 
                 </div>
                 <div class="form-group row pt-0">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-6':' col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12'">
                         <label for="txtBatchSize" class="pl-0 pt-3">{{'Batch Size For Cost Calculation' | translate}}</label>                    
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"   (change)="SetIPLMandatory()"> 
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (change)="SetIPLMandatory()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0"  [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{'Units' | translate}}</label>
                     </div>
                 </div>
@@ -226,11 +226,11 @@
 
             </div>    
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image" *ngIf="!msrv_appsetting.isMobileResolution">
+        <div *ngIf="!msrv_appsetting.isMobileResolution || exportPDF" class="pr-4 pt-1" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-4 '">
             <div *ngIf="ImageName!=''" >
                 <img src="{{ImageName}}" class="input-image">   
             </div>
-        </div>    
+        </div>     
     </div>
 </div>
 

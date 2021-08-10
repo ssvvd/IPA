@@ -59,7 +59,8 @@ export class MatSearchComponent implements OnInit, OnDestroy {
         "emptyTable": "No data available in table",
         "zeroRecords": "",
         "infoEmpty": "",
-        "info": ""
+        "info": "",
+        "order": [[ 2, 'asc' ]] 
       } 
             
       }; 

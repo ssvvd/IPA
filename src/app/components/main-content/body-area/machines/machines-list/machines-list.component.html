@@ -1,5 +1,17 @@
 
 <div class="border-left-gray border-right-gray" > 
+ <!--  <div  style="width:40%;" *ngIf="!msrv_appsetting.isMobileResolution && srv_cook.get_cookie('closebannermobile')!='1'" 
+     class="row centered border-left-gray border-right-gray border-bottom-gray  border-top-gray" >
+    <div>
+      <div style="width:100%" class="text-right"> 
+        <button type="button"  class="mt-2 mr-2 mb-2 close float-right" aria-label="Close"
+          (click)="closebanner()">              
+          <span aria-hidden="true" class="span_x">&times;</span>
+        </button>
+      </div>
+      <img style="width:100%;" [src]="environment.ImagePath+'Mobile-Popup.jpg'">           
+    </div>
+  </div>   -->
     <div class="row" >          
       <div class="col col-20 ml-0 pl-2 pr-0 pt-0"  *ngIf="!msrv_appsetting.isMobileResolution"> 
          <div class="pt-4 pb-0">
@@ -22,15 +34,12 @@
           <div *ngIf="msrv_appsetting.isMobileResolution" >           
             <div class="row pt-4" >                
                 <div class=" col-9 pt-2 pl-1">                  
-                 <!-- <input type="text" class="form-control icon-search text-rounded" 
-                  [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  
-                  (click)="FilterTopMobileChange('')"  placeholder="{{'Search'| translate}}" aria-describedby="search-addon" >
- -->
+                 
                   <div class="input-group rounded"> 
                     <input type="search" style="background-color: white!important;" class="form-control text-rounded" [(ngModel)]="MachineFilterTopMobile&&MachineFilterTopMobile.SearchText"  
                     (click)="FilterTopMobileChange('')" (keyup)="FilterTopMobileChange('')" 
                     (search)="FilterTopMobileChange('')"   
-                    placeholder="{{'Search'| translate}}" aria-label="Search"
+                    placeholder="{{'Machine Search'| translate}}" aria-label="Search"
                       aria-describedby="search-addon" />                
                   </div>
                   
@@ -42,50 +51,50 @@
               <div class="scrollmenu pb-2 pt-2 pl-2 mr-2">
                 <div class="p-0 m-0"> 
                     <div class="col p-0 m-0">                 
-                      <label class="pr-2"  (click)="FilterTopMobileChange('IsMostRecommended')">{{'Most Recommended' | translate}}</label>
-                      <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMostRecommended) ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>                  
+                      <label class="pr-2" style="font-size:15px;" (click)="FilterTopMobileChange('IsMostRecommended')">{{'Most Recommended' | translate}}</label>
+                      <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMostRecommended) ? '2px solid #204f96' : '1px solid #204f96'}"  style="width: 100%;"></div>                  
                     </div>
                 </div>
                 <div  class="p-0 m-0">
                   <div class="col p-0 m-0">  
                     <label class="p-0 m-0">|</label>
-                    <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+                    <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid #204f96;width: 100%;"></div>
                   </div>
                 </div>
                 <div>
                   <div  class="p-0 m-0">
                     <div class="col p-0 m-0">  
-                  <label class="pr-2 pl-2"  (click)="FilterTopMobileChange('IsViewAll')">{{'View All' | translate}}</label>
-                  <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (IsViewAll) ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>
+                  <label class="pr-2 pl-2" style="font-size:15px;" (click)="FilterTopMobileChange('IsViewAll')">{{'View All' | translate}}</label>
+                  <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (IsViewAll) ? '2px solid #204f96' : '1px solid #204f96'}"  style="width: 100%;"></div>
                 </div>
               </div>
                 </div>
              <div  class="p-0 m-0">
                   <div class="col p-0 m-0">  
                     <label class="p-0 m-0">|</label>
-                    <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+                    <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid #204f96;width: 100%;"></div>
                   </div>
             </div>
             <div>
               <div  class="p-0 m-0">
                 <div  class="col p-0 m-0"> 
-                <label class="pr-2 pl-2"  (click)="FilterTopMobileChange('IsMachiningCenter')">{{'Machining Center' | translate}}</label>
+                <label class="pr-2 pl-2" style="font-size:15px;" (click)="FilterTopMobileChange('IsMachiningCenter')">{{'Machining Center' | translate}}</label>
                 </div>
-                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMachiningCenter && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>
+                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMachiningCenter && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid #204f96' : '1px solid #204f96'}"  style="width: 100%;"></div>
               </div>
             </div>
            
             <div  class="p-0 m-0">
                 <div  class="col p-0 m-0"> 
                   <label class="p-0 m-0">|</label>
-                  <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+                  <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid #204f96;width: 100%;"></div>
                 </div>
             </div>
             <div>
               <div  class="p-0 m-0">
                 <div  class="col p-0 m-0"> 
-                  <label class="pr-2 pl-2"  (click)="FilterTopMobileChange('IsLathe')">{{'Lathe' | translate}}</label>
-                  <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsLathe && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>
+                  <label class="pr-2 pl-2" style="font-size:15px;"  (click)="FilterTopMobileChange('IsLathe')">{{'Lathe' | translate}}</label>
+                  <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsLathe && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid #204f96' : '1px solid #204f96'}"  style="width: 100%;"></div>
                 </div>
               </div>
             </div>
@@ -98,42 +107,54 @@
             <div>
               <div  class="p-0 m-0">
                 <div  class="col p-0 m-0"> 
-                <label class="pr-2 pl-2"  (click)="FilterTopMobileChange('IsMultiTask')">{{'Multi Task Machine' | translate}}</label>
-                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMultiTask && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>
+                <label class="pr-2 pl-2" style="font-size:15px;"  (click)="FilterTopMobileChange('IsMultiTask')">{{'Multi Task Machine' | translate}}</label>
+                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMultiTask && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid #204f96' : '1px solid #204f96'}"  style="width: 100%;"></div>
               </div>
             </div>
             </div>
                 <div  class="p-0 m-0">
                   <div  class="col p-0 m-0"> 
                   <label class="p-0 m-0">|</label>
-                  <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+                  <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid #204f96;width: 100%;"></div>
                 </div>
                 </div>
                 <div>
                   <div  class="p-0 m-0">
                     <div  class="col p-0 m-0"> 
-                <label class="pr-2 pl-2" (click)="FilterTopMobileChange('IsMultiSpindle')">{{'Multi Spindle' | translate}}</label>
-                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMultiSpindle && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid' : '1px solid'}" style="width: 100%;" ></div>
+                <label class="pr-2 pl-2" style="font-size:15px;" (click)="FilterTopMobileChange('IsMultiSpindle')">{{'Multi Spindle' | translate}}</label>
+                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsMultiSpindle && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid #204f96' : '1px solid #204f96'}" style="width: 100%;" ></div>
               </div>
             </div>
           </div>
                 <div  class="p-0 m-0">
                   <div  class="col p-0 m-0"> 
                   <label class="p-0 m-0">|</label>
-                  <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid;width: 100%;"></div>
+                  <div class="pt-0 pl-0 pr-0" style="border-bottom: 1px solid #204f96;width: 100%;"></div>
                 </div>
                 </div>
                 <div>
                   <div  class="p-0 m-0">
                     <div class="col p-0 m-0"> 
-                <label class="pl-2"  (click)="FilterTopMobileChange('IsSwissType')">{{'Swiss Type' | translate}}</label>              
-                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsSwissType && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid' : '1px solid'}"  style="width: 100%;"></div>
+                <label class="pl-2" style="font-size:15px;" (click)="FilterTopMobileChange('IsSwissType')">{{'Swiss Type' | translate}}</label>              
+                <div class="pt-0 pl-0 pr-0" [ngStyle]="{'border-bottom': (MachineFilterTopMobile.IsSwissType && !MachineFilterTopMobile.IsMostRecommended && !IsViewAll) ? '2px solid #204f96' : '1px solid #204f96'}"  style="width: 100%;"></div>
                 </div>
               </div>
             </div>
               </div> 
                    
-          </div>                    
+          </div> 
+         <!--  <div  style="width:40%; " *ngIf="!msrv_appsetting.isMobileResolution && srv_cook.get_cookie('closebannermobile')!='1'" class="row centered" >
+            <div>
+              <div style="width:100%" class="text-right"> 
+                <button type="button"  class="mt-2 mr-2 mb-2 close float-right" aria-label="Close"
+                  (click)="closebanner()">              
+                  <span aria-hidden="true" class="span_x">&times;</span>
+                </button>
+              </div>
+              <img style="width:100%;" [src]="environment.ImagePath+'Mobile-Popup.jpg'">
+                   
+            </div>
+          </div>   -->                   
           <div class="div-datatable"  *ngIf="!msrv_appsetting.isMobileResolution">              
               <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" style="width: 100%"
                 class="table table-stripe row-border hover " id="table1">

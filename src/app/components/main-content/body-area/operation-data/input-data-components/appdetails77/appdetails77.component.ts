@@ -23,7 +23,8 @@ export class Appdetails77Component implements OnInit {
   environment=environment;
   
   @Input() events: Observable<void>;
-
+  @Input() exportPDF: boolean=false;
+  
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;
   public arrdiameter:DiameterHole[]=[];

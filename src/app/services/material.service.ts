@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpErrorResponse} from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import 'rxjs/add/operator/catch'
 
 @Injectable({
   providedIn: 'root'
@@ -46,9 +47,11 @@ export class MaterialService {
   {        
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-hardness-limit/' + mat);
   }
-  public  searchmaterial(mat:string)
+  public  searchmaterial(mat:string):any
   {        
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-search/' + mat);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-search/' + mat).catch((err: HttpErrorResponse) => {      
+      return "error";
+    });  
   }
   //"material-get-fav/{userID}//{FavoritName}/
   public getMatFav(userID:string){

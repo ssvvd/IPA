@@ -126,16 +126,9 @@ eventsSubject: Subject<void> = new Subject<void>();
             this.DownLoadResults(true);
         });    
   }
-
-  DownLoadResults(isp21:boolean)
-  {  
-    this.srv_appsetting.curDate= new Date().toString();    
-    this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { f=0; if(f==2) {this.SpinnerService.hide(); return;}});
-       
-    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });    
-    modalRef.componentInstance.isP21 = isp21;
-
-    modalRef.result.then((result) => {
+  
+  DownLoadResults1(result:string)
+  {
     if(result=='cancel') return;
 
     if (result=='PDF')
@@ -236,6 +229,123 @@ eventsSubject: Subject<void> = new Subject<void>();
           //this.SpinnerService.hide();          
       }   
     }
+  }
+
+  DownLoadResults(isp21:boolean)
+  {  
+    this.srv_appsetting.curDate= new Date().toString();    
+    this.srv_statemanage.onflgDownLoadPDF.subscribe(f => { f=0; if(f==2) {this.SpinnerService.hide(); return;}});
+    
+    if(this.srv_appsetting.isMobileResolution)
+    {
+      this.DownLoadResults1("PDF");
+      return;
+    }
+    const modalRef = this.modalService.open(ResultPpDownloadComponent, { centered: true });    
+    modalRef.componentInstance.isP21 = isp21;
+
+    modalRef.result.then((result) => {
+      this.DownLoadResults1(result);
+   /*  if(result=='cancel') return;
+
+    if (result=='PDF')
+    {
+      this.IsExport=true;
+      this.processdownload=true;
+      this.srv_statemanage.flgPDFLoading=1;
+
+      let m:any;        
+      m=this.srv_statemanage.GetMaterialSelected();
+      if (typeof ( m.material) !== 'undefined')
+        this.mat_desc=m.Category + m.group.toString() + " - " + m.material ;     
+      else
+        this.mat_desc=m.Category + m.group.toString() + " - " + m.description.toString(); 
+  
+       
+      
+      this.SpinnerService.show();
+      let filename:string;
+      filename=this.srv_statemanage.MainAppSelected.MenuName.trim();
+      filename=filename + ' ' +this.srv_statemanage.SecAppSelected.MenuName.trim();
+      filename=filename + ' ' +this.viewParams.Res[0].Designation[this.viewParams.Res[0].Designation.length-1].trim();
+      filename=filename + ' '+ this.viewParams.Res[0].Grade[this.viewParams.Res[0].Grade.length-1].trim();
+      filename= filename + ' '+ this.viewParams.Res[0].CatalogNo[this.viewParams.Res[0].CatalogNo.length-1].trim();
+      setTimeout( () => {this.srv_down.DownLoadDataItem('PDF','',this.srv_statemanage,filename);}, 6000 );               
+      setTimeout(() => {this.SpinnerService.hide();}, 12000);
+    }
+    
+    if(result=="P21" || result=="GTC" || result=="ZIP" ) 
+    { 
+      let   filename:string=result ;            
+      filename=filename + ' ' +this.viewParams.Res[0].Designation[this.viewParams.Res[0].Designation.length-1].trim();
+      filename=filename + ' '+ this.viewParams.Res[0].Grade[this.viewParams.Res[0].Grade.length-1].trim();
+      filename= filename + ' '+ this.viewParams.Res[0].CatalogNo[this.viewParams.Res[0].CatalogNo.length-1].trim();
+
+      this.processdownload =true;
+      let sCatalogNo:string ='';
+      for (let c of this.viewParams.Res[0].CatalogNo)
+      {
+        c=c.replace(/\s/g, "");
+        sCatalogNo = sCatalogNo +c + ',';
+      } 
+
+      if(sCatalogNo!='') sCatalogNo=sCatalogNo.substring(0,sCatalogNo.length-1);
+      if(result=='P21')  
+      {  
+        this.SpinnerService.show();     
+        return this.srv_DataLayer.downloadp21file(sCatalogNo,this.srv_appsetting.Units).subscribe( response=>       
+          {      
+            var downloadURL = window.URL.createObjectURL(response);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = filename + ".zip";
+            link.click();
+            this.processdownload =false;  
+            this.SpinnerService.hide();        
+          }
+          );         
+      }   
+              
+      if(result=='GTC')  
+      {
+        this.SpinnerService.show(); 
+        return this.srv_DataLayer.downloadfilepackage(sCatalogNo,this.srv_appsetting.Units).subscribe( response=>       
+          {      
+            var downloadURL = window.URL.createObjectURL(response);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download =  filename + ".zip";
+            link.click();
+            this.processdownload =false;
+            this.SpinnerService.hide();  
+          }
+        );
+      }   
+      if(result=='ZIP')  
+      {  
+        //this.SpinnerService.show();   
+       
+        let index= this.indextool+1;
+        let indexstr:string;
+        indexstr=index.toString();
+        return this.srv_DataLayer.downloadfilezip(sCatalogNo,this.srv_appsetting.Units,this.srv_statemanage.SecAppSelected.ApplicationITAID, 
+        this.srv_statemanage.SecAppSelected.MenuName.trim(),this.srv_statemanage.MainAppSelected.MenuName.trim(),
+        indexstr,filename,
+        this.srv_statemanage.IPLChanged,  this.srv_ResultsStore.res1 ).subscribe( response=>       
+          {      
+            //alert(response);
+            var downloadURL = window.URL.createObjectURL(response);
+            var link = document.createElement('a');
+            link.href = downloadURL;
+            link.download = filename + ".zip";
+            link.click();
+            this.processdownload =false;  
+            this.SpinnerService.hide();        
+          }
+          );  
+          //this.SpinnerService.hide();          
+      }   
+    } */
    });
  }
  

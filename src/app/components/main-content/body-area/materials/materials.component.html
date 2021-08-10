@@ -21,10 +21,16 @@
           <button type="button" class="btn btn-link float-right sileLinks" (click)="openRequestMatM()">{{"Can't find the right material?" | translate}}</button>
          </div>
         </div>
-        <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-main-table>
+        <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)" (myMaterialClickEv)="GoToMyMaterials($event)" (MaterialSearchChangedMobile)="receiveSearchText($event)"></app-mat-main-table>
         <app-mat-details *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
         <app-mat-standard-table *ngSwitchCase="3" [selectedCateg]="selectedCateg" [selectedStandard]="selectedSatnd"></app-mat-standard-table>
-        <app-mat-search *ngSwitchCase="4"  [filterSearchTextInput]="searchText" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-search>
+        <!-- <app-mat-search    *ngSwitchCase="4"  [filterSearchTextInput]="searchText" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-search>        -->
+              
+        <div *ngSwitchCase="4"  >
+          <app-mat-search    *ngIf="!srv_appsetting.isMobileResolution"  [filterSearchTextInput]="searchText" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-search>      
+             
+          <app-mat-main-table  [selectedCategory]="selectedCateg" *ngIf="srv_appsetting.isMobileResolution"  (matDetailSelectedEv)="receiveMatDeials($event)" (myMaterialClickEv)="GoToMyMaterials($event)" (MaterialSearchChangedMobile)="receiveSearchText($event)"></app-mat-main-table>
+        </div> 
         <my-materials *ngSwitchCase="5"></my-materials>
       </div>
     </div>

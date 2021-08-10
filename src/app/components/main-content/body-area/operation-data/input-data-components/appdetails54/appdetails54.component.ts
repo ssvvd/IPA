@@ -17,6 +17,7 @@ export class Appdetails54Component implements OnInit {
   TypeApp:string ='1';
 
    @Input() events: Observable<void>;
+   @Input() exportPDF: boolean=false;
   private eventsSubscription: Subscription;
   
   public msrv_StMng:StateManagerService =this.srv_StMng;
@@ -117,7 +118,7 @@ export class Appdetails54Component implements OnInit {
     if( this.srv_StMng.SecApp=='188' )
     {
       this.AddTostrMandatoryParam('WorkpieceDiameter',"OD:",this.srv_appsetting.UnitslengthDesc);
-      this.AddTostrMandatoryParam('Width',"ID:",this.srv_appsetting.UnitslengthDesc);
+      this.AddTostrMandatoryParam('Width',"W:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('Depth',"DOD:",this.srv_appsetting.UnitslengthDesc);
       this.AddTostrMandatoryParam('DepthInner',"DID:",this.srv_appsetting.UnitslengthDesc);      
     }

@@ -1,4 +1,3 @@
-//@import "~@ng-select/ng-select/themes/default.theme.css";
 
 .input-image
 {
@@ -15,26 +14,6 @@ select  {
     font-size: 14px; 
  }
 
-/* .ng-select.custom {
-    border:0px;
-    min-height: 0px;
-    border-radius: 0;
-}
-.ng-select.custom .ng-select-container  {            
-    min-height: 0px;
-    border-radius: 0;  
-}
-
-.ng-select.custom ::ng-deep .ng-select-container  {            
-    min-height: 0px;
-    border-radius: 0;
-   
-}
-
-ng-select.ng-invalid.ng-touched .ng-select-container {
-    border-color: #dc3545;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 3px #fde6e8;
-} */
 
 .slope-select
 {
@@ -48,9 +27,7 @@ ng-select.ng-invalid.ng-touched .ng-select-container {
   border-color: var(--btn-bg-select-color);
 }
  
-/* .ng-select.ng-select.ng-select-single.ng-select-filtered:not(.ng-select-opened)
- .ng-select-container.ng-has-value .ng-value-container 
- .ng-value{ visibility: visible; } */
+
 
  
   

@@ -40,7 +40,7 @@ import { PpPromotionComponent } from './pp-promotion/pp-promotion.component';
 import { MpThreadingComponent } from './machining-prms/mp-threading/mp-threading.component';
 
 import { DataTablesModule } from 'angular-datatables';
-import { ResFilterMobileComponent } from './res-filter-mobile/res-filter-mobile.component';
+
 
 //import { MachinePpAddFavoriteComponent } from '../machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
 //import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
@@ -67,8 +67,7 @@ import { ResFilterMobileComponent } from './res-filter-mobile/res-filter-mobile.
     ResultItemInfoComponent,
     //ResultsPdfComponent,
     PpPromotionComponent,
-    MpThreadingComponent,
-    ResFilterMobileComponent
+    MpThreadingComponent
   ],
  
   imports: [

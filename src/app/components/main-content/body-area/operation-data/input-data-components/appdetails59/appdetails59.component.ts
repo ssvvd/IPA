@@ -16,7 +16,8 @@ export class Appdetails59Component implements OnInit {
   environment=environment;
   
    @Input() events: Observable<void>;
- 
+   @Input() exportPDF: boolean=false;
+   
   private eventsSubscription: Subscription;
   CostPerHourByRate:number;
 

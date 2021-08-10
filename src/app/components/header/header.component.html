@@ -98,7 +98,7 @@
             </div> -->
             <div class="text-center  pt-1" style="margin: 0 auto" >
                 <div class="pt-0 pl-0 ml-0">
-                    <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"   style="width:30px" class="ImgMobile pt-0 pr-0 pl-0  pb-2">
+                    <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"  (click)="reload()" style="width:30px" class="ImgMobile pt-0 pr-0 pl-0  pb-2">
                     <Label class="siteTitle  pt-1"  style="font-size: 20px!important">ISCAR TOOL ADVISOR</Label>
                     <!-- <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
                         <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
@@ -185,6 +185,9 @@
                         <div class ="row col-12 dropdown-item menuitem" (click)="OpenUserGiude()">                                                                                                  
                             <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide' | translate}}</label>                                                                                                                                                      
                         </div>
+                      <div *ngIf="srv_appsetting.Lang=='JP'" class ="row col-12 dropdown-item menuitem" (click)="openuserguidemillthread()">                                                                                                  
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide of Millthread Advisor' | translate}}</label>                                                                                                                                                      
+                        </div>  
                     </div>                                                                     
                 </div>                   
             </div>
@@ -201,7 +204,7 @@ bdOpacity ="0.05"
 size="medium"
 color="#676767"
 type="ball-circus">    
-<p *ngIf="srv_appsetting.AfterToken" style="color:#676767">{{'Please wait while ITA is processing your request.' | translate}}</p> 
+<p *ngIf="srv_appsetting.AfterToken && !srv_appsetting.IsSearchMaterial" style="color:#676767">{{'Please wait while ITA is processing your request.' | translate}}</p> 
 </ngx-spinner>  
 
    

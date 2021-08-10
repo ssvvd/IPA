@@ -77,7 +77,7 @@
 </div>  
 <div>
 
-<div *ngIf="srv_appsetting.isMobileResolution && isLoading" class="scroll-div-mobile" >
+<div *ngIf="srv_appsetting.isMobileResolution && isLoading && !exportPDF" class="scroll-div-mobile" >
     <ul class="nav nav-fill pt-3">                  
         <li  class="nav-item"  (click)="SpindleViewMobile('1')">  
             <div class="pl-2 text-center" [ngClass]="ViewSpindle=='1'?'div-tab-menu-selected':'div-tab-menu'">
@@ -98,7 +98,7 @@
     </div>     
 </div> 
 
-<div  *ngIf="!srv_appsetting.isMobileResolution" class="border-left-gray">
+<div  *ngIf="!srv_appsetting.isMobileResolution || exportPDF" class="border-left-gray">
     <div  *ngFor="let spindle of arrMachineSpindle; let PrtNum = index" class="pt-4" >
             <div *ngIf="!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==spindle.SpindleType)">                                                                                                                  
                 <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=spindle [MachineType]=machHeader.MachineType></app-machine-item-spindle>  

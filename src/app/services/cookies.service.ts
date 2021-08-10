@@ -44,7 +44,7 @@ export class CookiesService {
 
   public set_cookie(name:string,value:string)
   {
-    if(name=="notshowfeedback")
+    if(name=="notshowfeedback" || name=="closebannermobile")
       this.srv_cock.set(name,value,365);
     else
       this.srv_cock.set(name,value);  

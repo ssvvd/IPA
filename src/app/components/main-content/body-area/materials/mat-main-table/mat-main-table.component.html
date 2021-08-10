@@ -5,47 +5,43 @@
       
        <div *ngIf="srv_appsetting.isMobileResolution" class="pl-0 ml-0">
         <div class="row pt-4">                
-          <div class="pt-2 pl-0 col-10">                  
-            <!-- <input type="text" style="width:100%" (click)="filterTable()" class="form-control icon-search text-rounded" [(ngModel)]="filterSearchTextInput"    placeholder="{{'Search'| translate}}"> -->
+          <div class="pt-2 pl-0 col-10">                            
             <div class="input-group rounded"> 
-              <input type="search" style="background-color:white!important;width:100%" class="form-control text-rounded"
-               [(ngModel)]="filterSearchTextInput"  
-              (click)="filterTable()"  (keyup)="filterTable()" 
-              (search)="filterTable()"   
-              placeholder="{{'Search'| translate}}" aria-label="Search"
-                aria-describedby="search-addon" />                
+              <input type="search"  placeholder="{{'Material Search'| translate}}" style="background-color:white!important;width:100%" class="form-control text-rounded"
+               [(ngModel)]="filterSearchTextInput"                
+              (search)="FilterChangeMobile()"   aria-label="Search" aria-describedby="search-addon" />                
             </div>
           </div>      
         </div>
         <div class="pt-2 pl-0 ml-0 mp-auto" style="width:100%;" >
           <ul class="nav nav-fill pl-0 ml-0" >                  
             <li  class="nav-item  pl-0 ml-0"  (click)="ApplyFilterMobile('P')" >  
-                <div class="pl-0 text-center" style="border-top-color:#00C ;" [ngClass]="selectedCategory=='P'?'div-menu-selected-mobile':'div-menu-mobile'" (click)="ApplyFilterMobile('P')">
+                <div class="pl-0 text-center" style="border-top-color:#00C ;" [ngClass]="selectedCategory=='P' && (filterSearchTextInput=='' || filterSearchTextInput==null  || filterSearchTextInput==undefined)?'div-menu-selected-mobile':'div-menu-mobile'">
                       <label>P</label>
                 </div>                                                                                                                              
             </li> 
             <li  class="nav-item"  (click)="ApplyFilterMobile('M')" >  
-              <div class="pr-2 text-center" style="border-top-color:#ffff00 ;" [ngClass]="selectedCategory=='M'?'div-menu-selected-mobile':'div-menu-mobile'" (click)="ApplyFilterMobile('M')">
+              <div class="pr-2 text-center" style="border-top-color:#ffff00 ;" [ngClass]="selectedCategory=='M'  && (filterSearchTextInput=='' || filterSearchTextInput==null  || filterSearchTextInput==undefined)?'div-menu-selected-mobile':'div-menu-mobile'" >
                 <label>M</label>          
               </div>                                                                                                                              
           </li> 
           <li  class="nav-item"  (click)="ApplyFilterMobile('K')">  
-            <div class="pr-2 text-center" style="border-top-color:#C00 ;" [ngClass]="selectedCategory=='K'?'div-menu-selected-mobile':'div-menu-mobile'"(click)="ApplyFilterMobile('K')" >
+            <div class="pr-2 text-center" style="border-top-color:#C00 ;" [ngClass]="selectedCategory=='K'  && (filterSearchTextInput=='' || filterSearchTextInput==null  || filterSearchTextInput==undefined)?'div-menu-selected-mobile':'div-menu-mobile'" >
               <label>K</label>          
             </div>                                                                                                                              
         </li> 
         <li  class="nav-item"  (click)="ApplyFilterMobile('N')">  
-          <div class="pr-2 text-center" style="border-top-color:#009946 ;" [ngClass]="selectedCategory=='N'?'div-menu-selected-mobile':'div-menu-mobile'" (click)="ApplyFilterMobile('N')">
+          <div class="pr-2 text-center" style="border-top-color:#009946 ;" [ngClass]="selectedCategory=='N'  && (filterSearchTextInput=='' || filterSearchTextInput==null  || filterSearchTextInput==undefined)?'div-menu-selected-mobile':'div-menu-mobile'">
             <label>N</label>          
           </div>                                                                                                                              
       </li> 
       <li  class="nav-item"  (click)="ApplyFilterMobile('S')">  
-        <div class="pr-2 text-center" style="border-top-color:#ffa500 ;" [ngClass]="selectedCategory=='S'?'div-tab-menu-selected':'div-menu-mobile'" (click)="ApplyFilterMobile('S')">
+        <div class="pr-2 text-center" style="border-top-color:#ffa500 ;" [ngClass]="selectedCategory=='S'  && (filterSearchTextInput=='' || filterSearchTextInput==null  || filterSearchTextInput==undefined)?'div-tab-menu-selected':'div-menu-mobile'" >
           <label>S</label>          
         </div>                                                                                                                              
     </li> 
     <li  class="nav-item"  (click)="ApplyFilterMobile('H')">  
-      <div class="pr-2 text-center" style="border-top-color:#888 ;" [ngClass]="selectedCategory=='H'?'div-tab-menu-selected':'div-menu-mobile'" (click)="ApplyFilterMobile('H')">
+      <div class="pr-2 text-center" style="border-top-color:#888 ;" [ngClass]="selectedCategory=='H'  && (filterSearchTextInput=='' || filterSearchTextInput==null  || filterSearchTextInput==undefined)?'div-tab-menu-selected':'div-menu-mobile'">
         <label>H</label>          
       </div>                                                                                                                              
   </li>          
@@ -69,7 +65,8 @@
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResultSorted " [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected cursor-pointer' : 'tr-not-selected cursor-pointer'" [hidden]="selectedCategory != material.Category">
+              <tr *ngFor="let material of materialsResultSorted " [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected cursor-pointer' : 'tr-not-selected cursor-pointer'" 
+              [hidden]="selectedCategory != material.Category">
                   <th scope="row" class="d-none">{{material.id}}</th>         
                   <td (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.group}}</label></div></td>
                   <td (click)="matDetailClick(material)"><div class="pl-2 ">{{material.description}}</div></td> 
@@ -82,7 +79,7 @@
                          <img src="{{environment.ImgAddToFavorite}}" (click)="openAddToFavM(material)" title="Add to My Materials" class="icon-grid">
                   </td>
                   <td *ngIf="environment.internal" >                    
-                       <!--  <img [src]="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid"> -->
+                       <!--  <img []="material.id==DefaultMat ?environment.ImgSetDefault: environment.ImgDefault" (click)="openSetDefaultModal(material)" alt="Set as default" title="Set as default" class="icon-grid"> -->
                   </td> 
                   <td *ngIf="environment.internal" >
                     <div class="float-right" style="width:100%!important;">
@@ -92,24 +89,15 @@
                   <td class="d-none" >{{material.Hardness}}</td>    
               </tr>
           </tbody>
-        </table>
-     
+        </table>     
       </div>
-      <div class="pt-2" *ngIf="srv_appsetting.isMobileResolution" >
-      <div class="divst">
-        <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table-mobile  row-border hover" >         
-          <thead >           
-            <tr id="dtOptionsMat">              
-              <th class="d-none"></th>
-              <th class="d-none"></th>
-            </tr>
-          </thead>
-          <tbody>   
-              <tr  *ngFor="let material of materialsResultSorted " [className]="(material.group == selectedMaterial && FavMat == '')? 'tr-selected cursor-pointer' : 'tr-not-selected-mobile cursor-pointer'" [hidden]="selectedCategory != material.Category">
-                  <td scope="row" class="d-none">{{material.id}}</td>   
-                  <td class="pl-0 ml-0">
+    <div class="pt-2" *ngIf="srv_appsetting.isMobileResolution" style="overflow-y: auto;height: calc(100vh - 250px);">
+      <div class="divst">        
+          <div  *ngFor="let material of materialsResultSorted "  [className]="(material.group == selectedMaterial && FavMat == '')? 'div-selected border-bottom-gray pb-2 pt-2' : 'tr-not-selected-mobile border-bottom-gray  pb-2 pt-2'" >
+            <div  scope="row" class="d-none">{{material.id}}</div>   
+                  <div  class="pl-0 ml-0">
                     <div class="row">
-                      <div class="col-7 font-weight-bold pl-2 ml-0">{{selectedCategory}}{{material.id}}</div>
+                      <div class="col-7 font-weight-bold pl-2 ml-0 categLabel"  [title]="material.Category" >{{material.Category}}{{material.group}}</div>
                       <div *ngIf="environment.internal" class="col-5 pl-0 ml-0">
                         <div class="float-right pl-2 ml-auto" style="width:100%!important;">
                           <button style="width:100%!important;" [className]="(material.group == selectedMaterial  && FavMat == '')? 'col-12  btn-select-mobile' : 'col-12  btn-select-mobile'" (click)="OnSelectMaterial(material)" [routerLink]="'/home/machining-operation'">{{'Select' | translate}}</button>
@@ -119,17 +107,20 @@
                     <div class="pl-2 ml-0 col-7">{{material.description}}</div>
                     <div class="row">
                         <div class="pl-2 font-weight-bold pl-0 ml-0">{{'Condition' | translate}}:</div>
-                        <div class="pl-2">{{material.Condition}}</div>
+                        <div class="pl-2">{{material.Condition}}</div> 
                       </div>
+                      
+                      <div class="row" *ngIf="filterSearchTextInput!='' && filterSearchTextInput!=null  && filterSearchTextInput!=undefined">                        
+                        <div class="pl-2 font-weight-bold pl-0 ml-0">{{'Material Name' | translate}}:</div>
+                        <div class="pl-2 text-wrap">{{material.material}}</div>
+                      </div>
+                      
                       <div class="row">
                         <div class="pl-2 font-weight-bold pl-0 ml-0">{{'Hardness & Strength' | translate}}:</div>
                         <div (click)="openEditParamsM(material)"><div class="pl-2" ><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' | translate}}</div></div>
                         <div class="d-none" >{{material.Hardness}}</div> 
-                    </div>
-                  </td>                                           
-              </tr>
-          </tbody>
-        </table>
-     
+                    </div>                                                                       
       </div>
     </div>
+  </div>
+</div>

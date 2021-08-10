@@ -19,6 +19,7 @@ export class Appdetails780Component implements OnInit {
   environment=environment;
 
   @Input() events: Observable<void>;
+  @Input() exportPDF: boolean=false;
   private eventsSubscription: Subscription; 
   public msrv_StMng:StateManagerService =this.srv_StMng;
   public msrv_appsetting:AppsettingService =this.srv_appsetting;

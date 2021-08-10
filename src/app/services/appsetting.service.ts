@@ -4,6 +4,7 @@ import { User} from '../models/users/user';
 import { DatalayerService} from './datalayer.service' ;
 import { CookiesService } from './cookies.service';
 import { BehaviorSubject, Subject } from 'rxjs';
+
 import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({ 
@@ -237,4 +238,13 @@ export class AppsettingService {
     else
       return false;
   }   
+  mIsSearchMaterial:boolean =false;
+   get  IsSearchMaterial():boolean{      
+    //return  new Date().toString();
+    return this.mIsSearchMaterial;
+  }
+   set  IsSearchMaterial(u:boolean) {  
+    this.mIsSearchMaterial = u;
+   }
+
 }

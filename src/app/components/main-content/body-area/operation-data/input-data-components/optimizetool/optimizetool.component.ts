@@ -50,7 +50,11 @@ export class OptimizetoolComponent implements OnInit {
   changeTypeFeed()
   {
     if(this.TypeFeed=="BothFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='True'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='True'};
-    if(this.TypeFeed=="HightFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='True'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='False'};
+    if(this.TypeFeed=="HightFeed")  
+    {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='True'; 
+    this.srv_StMng.IPL.GetItem('TD_REGULAR').value='False';
+    this.srv_StMng.IPL.GetItem('OperationType').value='Heavy'
+    };
     if(this.TypeFeed=="NormalFeed")  {this.srv_StMng.IPL.GetItem('TD_FASTFEED').value='False'; this.srv_StMng.IPL.GetItem('TD_REGULAR').value='True'};
   } 
   

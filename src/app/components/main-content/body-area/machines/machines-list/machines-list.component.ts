@@ -61,12 +61,12 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   IsViewAll:boolean=false;
 
   constructor(private serv: MaterialService,private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
-          private srv_appsetting:AppsettingService,private srv_cook:CookiesService,
+          private srv_appsetting:AppsettingService,public srv_cook:CookiesService,
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
 
   ngOnInit() {    
-    
+    //this.srv_cook.set_cookie("closebannermobile",'0');
     this.scrollYdiff='325px';   
     if(window.devicePixelRatio>1.3) this.scrollYdiff='375px';
     if(this.srv_appsetting.isMobileResolution) this.scrollYdiff='250px';   
@@ -884,6 +884,9 @@ this.IsViewAll=false;
     this.MachineFilter.IsSliderTorque=false;
   }
 
-
+  closebanner()
+  {
+    this.srv_cook.set_cookie("closebannermobile",'1');
+  }
 }
 

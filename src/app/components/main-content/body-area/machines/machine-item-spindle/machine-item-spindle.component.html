@@ -23,7 +23,7 @@
                     <div class="pt-1" [ngClass]="exportPDF?'col-7':srv_appsetting.isMobileResolution?'col-8 pl-2':'col-8'">
                         <label for="txtSpindleSpeed" class="">{{'Spindle Speed' | translate}}{{' (rpm)'}}</label>
                     </div>
-                    <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'">
+                    <div [ngClass]="exportPDF?'col-4 pt-1':'col-4 pt-1'">
                         <input type="number" class="form-control" id="txtSpindleSpeed" name="txtSpindleSpeed" [(ngModel)]="spindle.SpindleSpeed" > 
                     </div>                    
                 </div> 
@@ -32,7 +32,7 @@
                     <div class="pt-1" [ngClass]="exportPDF?'col-7':srv_appsetting.isMobileResolution?'col-8 pl-2':'col-8'">
                         <label for="txtPower"><span>{{'Power' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (kW)' : ' (HP)' }}</span></label>
                     </div>  
-                    <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'">
+                    <div [ngClass]="exportPDF?'col-4 pt-1':'col-4 pt-1'">
                         <input type="number" class="form-control" id="txtPower" name="txtPower" [(ngModel)]="spindle.Power" >
                     </div>                    
                 </div>
@@ -40,7 +40,7 @@
                     <div class="pt-1" [ngClass]="exportPDF?'col-7':srv_appsetting.isMobileResolution?'col-8 pl-2':'col-8'">
                         <label for="txtTorque" ><span>{{'Torque' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf X Ft)' }}</span></label>
                     </div>
-                    <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'">
+                    <div [ngClass]="exportPDF?'col-4 pt-1':'col-4 pt-1'">
                         <input type="number" class="form-control" id="txtTorque" name="txtTorque" [(ngModel)]="spindle.Torque" >
                     </div>
                 </div>                  
@@ -75,9 +75,7 @@
              </div>                       
         </div>        
         <div class="col-12 col-lg-4 col-xl-4 col-sm-12 border-bottom p-2">                          
-             <!-- <div class="text-center">
-                <label  class="siteTitle pl-3 pt-2">{{DescSpindle | translate}}</label>
-             </div> -->
+         
              <div class="pt-4" *ngIf="!srv_appsetting.isMobileResolution">
 
             </div>

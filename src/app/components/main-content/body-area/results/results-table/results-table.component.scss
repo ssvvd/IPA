@@ -30,12 +30,12 @@ table.dataTable thead th {
    vertical-align: middle;
  }
  
- table.dataTable thead .sorting span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_both.png') no-repeat center right; }
- table.dataTable thead .sorting_asc span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc.png') no-repeat center right; }
- table.dataTable thead .sorting_desc span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc.png') no-repeat center right; }
+ table.dataTable thead .sorting span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_both.png') no-repeat center right; }
+ table.dataTable thead .sorting_asc span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc.png') no-repeat center right; }
+ table.dataTable thead .sorting_desc span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc.png') no-repeat center right; }
  
- table.dataTable thead .sorting_asc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
- table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
+ table.dataTable thead .sorting_asc_disabled span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
+ table.dataTable thead .sorting_desc_disabled span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
 
 
 
@@ -71,43 +71,7 @@ table.dataTable thead th {
   white-space: nowrap;
 }
 
-@media only screen and (max-width:768px){  
-  
 
-
-  .table td:nth-child(1), .table th:nth-child(1){
-    width: 15% !important;
-    min-width: 15% !important;
-    max-width: 15% !important;
-    white-space: nowrap;
-    
-  }
-   .table td:nth-child(2), .table th:nth-child(2){
-    width: 40% !important;
-    min-width: 40% !important;
-    max-width: 40% !important;
-    white-space: nowrap;
-    
-  }
-  
-  .table td:nth-child(n+3), .table th:nth-child(n+3){
-    // min-width: 24% !important;
-    // max-width: 24% !important;
-    width: 10% !important;
-    min-width: 10% !important;
-    max-width: 10% !important;
-    white-space: nowrap;
-  }
-  .table td:nth-last-child(3), .table th:nth-last-child(3){
-    // min-width: 24% !important;
-    // max-width: 24% !important;
-    width: 8% !important;
-    min-width: 8% !important;
-    max-width: 8% !important;
-    white-space: nowrap;
-  }
- 
-}
 
 .img-grid{
   height: 70px;
@@ -137,7 +101,6 @@ table.dataTable thead th {
   // margin-left:-20px;
   }
 
-  
   span { min-height: 21px; }
 
   .img-pdf
@@ -226,4 +189,55 @@ table.dataTable thead th {
     padding-left: 0px!important; 
     min-height: 700px!important;  
   } 
+
+  div.scrollmenu {    
+    overflow: auto;
+    white-space: nowrap;
+  }
   
+  div.scrollmenu label {
+    display: inline-block;    
+    text-align: center;    
+    text-decoration: none;
+  }
+  @media only screen and (max-width:768px){  
+  
+
+
+    .table td:nth-child(1), .table th:nth-child(1){
+      width: 15% !important;
+      min-width: 15% !important;
+      max-width: 15% !important;
+      white-space: nowrap;
+      
+    }
+     .table td:nth-child(2), .table th:nth-child(2){
+      width: 40% !important;
+      min-width: 40% !important;
+      max-width: 40% !important;
+      white-space: nowrap;
+      
+    }
+    
+    .table td:nth-child(n+3), .table th:nth-child(n+3){
+      // min-width: 24% !important;
+      // max-width: 24% !important;
+      width: 10% !important;
+      min-width: 10% !important;
+      max-width: 10% !important;
+      white-space: nowrap;
+    }
+    .table td:nth-last-child(3), .table th:nth-last-child(3){
+      // min-width: 24% !important;
+      // max-width: 24% !important;
+      width: 8% !important;
+      min-width: 8% !important;
+      max-width: 8% !important;
+      white-space: nowrap;
+    }
+    .icon-edit{
+      height:30px;
+      cursor: pointer;
+      // margin-left:-20px;
+      }
+  }

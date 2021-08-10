@@ -27,7 +27,8 @@ export class ResultItemInfoComponent implements OnInit {
   @Input() CatalogNo:string;
   @Input () Family:string;
   @Input () ItemDesignation:string;
-
+  @Input()  exportPDF:boolean;
+  
   //@Input() viewParamsChanged:any;
 
   FamilyName:string;
@@ -47,6 +48,7 @@ export class ResultItemInfoComponent implements OnInit {
   arrBrandName:string[]=[];
 
   ngOnInit(): void {
+
     this.CatalogNo=this.CatalogNo.replace(/\s/g, "");
     this.eventsSubscription.add(this.srv_Results.getiteminfoparamvalues(this.CatalogNo,this.srv_appsetting.Units,this.srv_appsetting.SelectedLanguage.LanguageCode).subscribe((parvalues:any) => 
     {

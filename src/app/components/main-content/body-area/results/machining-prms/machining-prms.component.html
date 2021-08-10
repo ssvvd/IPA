@@ -7,9 +7,9 @@
         <div class="col-2"></div>
       </div> -->
     
-      <div class="">
-            <div class="row">
-<div  [ngClass]="exportPDF?'col-xs-12 col-sm-12 col-md-12':'col-xs-6 col-sm-6 col-md-6'" >
+<div class="">
+<div class="row">
+<div  [ngClass]="exportPDF?'col-xs-11 col-sm-11 col-md-11':srv_appsetting.isMobileResolution?'col-xs-6 col-sm-6 col-md-6 pl-3 pr-3':'col-xs-6 col-sm-6 col-md-6'">
 <mp77 [exportPDF]="exportPDF"  *ngIf = "srv_StMng.SecApp=='77'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp77>
 <mp760  [exportPDF]="exportPDF"  *ngIf = "srv_StMng.MainAppSelected.MainApp=='ML'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp760>
 <mp-iso-turning [exportPDF]="exportPDF"  *ngIf = "srv_StMng.MainAppSelected.MainApp=='IS' && srv_StMng.SecApp!='970' && srv_StMng.SecApp!='870'" [selectedRes]="selectedOptionMP" [selectedHelp]="selectedOptionMPHelp"></mp-iso-turning>

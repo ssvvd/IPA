@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { HttpParams } from '@angular/common/http';
 import { NgxSpinnerService } from "ngx-spinner"; 
 declare let gtag: Function;
+import { Renderer2, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 //import { CookiesService } from 'src/app/services/cookies.service';
 
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -26,7 +28,8 @@ export class AppComponent implements OnInit {
 
   constructor(private location: Location,private router: Router, private srv_appsetting:AppsettingService,
               public translate:TranslateService,
-              private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {
+              private srv_login:LoginService,private SpinnerService: NgxSpinnerService,
+              private renderer2: Renderer2,@Inject(DOCUMENT) private _document) {
     if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
@@ -60,7 +63,7 @@ SetLanguges()
 
 ngOnInit()
 {  
-
+  screen.orientation.lock("landscape");
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   this.SpinnerService.show();
@@ -86,19 +89,17 @@ ngOnInit()
   }    
 
   if (url.includes('?')) {
+    
     let paramValue:string='';
     const httpParams = new HttpParams({ fromString: url.split('?')[1] });
-    paramValue = httpParams.get('T'); 
-    if(paramValue!=null) token =paramValue; 
-    
-    paramValue = httpParams.get('v');  
-    if(paramValue!=null) isLogIn =paramValue; 
-    
-    let countryid:string;
+
+  /*   let countryid:string;
     paramValue = httpParams.get('countryid'); 
     if(paramValue!=null) {
       countryid =paramValue; 
       localStorage.setItem("countryid",countryid);
+      if(countryid=='7')
+        this.CreateScriptGermanyChat();
     }
 
     let language:string;
@@ -106,13 +107,36 @@ ngOnInit()
     if(paramValue!=null) {
       language =paramValue; 
       localStorage.setItem("language",language.toUpperCase());
+    } */
+
+    paramValue = httpParams.get('T'); 
+    if(paramValue!=null) token =paramValue; 
+    
+    paramValue = httpParams.get('v');  
+    if(paramValue!=null) isLogIn =paramValue; 
+    
+     let countryid:string;
+    paramValue = httpParams.get('countryid'); 
+    if(paramValue!=null) {
+      countryid =paramValue; 
+      localStorage.setItem("countryid",countryid);
+      if(countryid=='7')
+        this.CreateScriptGermanyChat();
     }
+
+    let language:string;
+    paramValue = httpParams.get('lang'); 
+    if(paramValue!=null) {
+      language =paramValue; 
+      localStorage.setItem("language",language.toUpperCase());
+    } 
     //todo: country, language
   }
   
   //first time enter
   //temp -todo:
-  isLogIn ='0';
+  //isLogIn ='0';
+ 
 
   if(isLogIn!="-1")
   {
@@ -138,7 +162,8 @@ ngOnInit()
     }
     
   }
- 
+  
+
   this.translate.addLangs(['EN', 'RU','GM','JP','BS','WZ','DA','SP','WM','FR','WK','IT','WH','LH','WN','WP','PR','WR','WV','WS',
   'IN','SD','VT','WT','HK','WB','MK','WD','TH','WA','KR','LT']);
   //alert(this.srv_appsetting.LangName);
@@ -151,6 +176,15 @@ ngOnInit()
    
   }});
   
+}
+CreateScriptGermanyChat()
+{
+  const s = this.renderer2.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/e79cf993609f4b9fa9d4067183a806791ef00b4ae85c480a94f330e12c66684b.js";
+  s.text = "";
+  this.renderer2.appendChild(this._document.body, s);
 }
 
 

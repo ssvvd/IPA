@@ -17,6 +17,7 @@ import {MachinesPpLoginComponent} from      'src/app/components/main-content/bod
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { LoginService } from 'src/app/services/login.service';
 import { Subject, Subscription } from 'rxjs';
+import 'rxjs/add/operator/catch'
 
 @Component({
   selector: 'app-mat-main-table',
@@ -40,9 +41,12 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   lang:string;
   DefaultMat:number = 0;
   @Input() selectedCategory: string ;
-  @Input() filterSearchTextInput: string;
+  @Input() filterSearchTextInput: string="";
   @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
   @Output() myMaterialClickEv = new EventEmitter<clsMaterial>();
+
+  @Output() MaterialSearchChangedMobile = new EventEmitter<String>();
+
   Group:string='P';
   SearchTextMobile:string="";
   
@@ -145,15 +149,72 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       });    
     } 
 
-   
-  /*     this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
+  }
+
+
+  sort_arr(a:clsMaterial,b:clsMaterial)
+  {
+          
+      if(a.group == this.selectedMaterial && b.group != this.selectedMaterial) return -1;
+      if(b.group == this.selectedMaterial && a.group != this.selectedMaterial) return 1;
+      
+      return 0;
+  }
+
+  fillMainTableMobile(){    
+    
+
+    if(this.filterSearchTextInput!="" && this.filterSearchTextInput!=null  && this.filterSearchTextInput!=undefined)
+    {
+      this.srv_appsetting.IsSearchMaterial=true;
+      this.SpinnerService.show();
+      this.allSubsMat$ = this.serv.searchmaterial(this.filterSearchTextInput)
       .subscribe((data: any) => {
-        this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
-        this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
-      });
- */
+        if(data=='e')
+        {
+          this.clearData();
+          this.SpinnerService.hide();  
+        }                  
+        else
+        { 
+        this.materialsResult = JSON.parse(data);
+        //this.materialsResultSorted = this.materialsResult;
+
+        this.materialsResultSorted=this.materialsResult.sort((a,b)=> this.sort_arr(a,b));  
+        this.materialsResultFilterd = this.materialsResult;
+        if (this.srv_statemanage.GetMaterialSelected()== null || this.srv_statemanage.GetMaterialSelected()== undefined){
+          this.selectedMaterial = "";
+          //this.FavName = ""
+        }    
+        else{
+          this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
+          //this.FavName = this.srv_statemanage.GetMaterialSelected().FavName;
+        }
+            
+            
+        //this.isDtInitializedFunc();
+        this.srv_appsetting.IsSearchMaterial=false;
+        this.SpinnerService.hide();
+      }
+    }
+    ); 
+    }
+    else{
+
+      
+        if(this.selectedCategory==undefined && this.srv_statemanage.GetMaterialSelected()==null) 
+          this.selectedCategory ='P';
+        else 
+          if(this.selectedCategory==null) 
+            this.selectedCategory = this.srv_statemanage.GetMaterialSelected().Category;      
+        
+        this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
+        .subscribe((data: any) => {
+          this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
+          this.setResultsMobile(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
+        });    
     
-    
+    }
 
   }
 
@@ -167,6 +228,43 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     this.clearData();
     this.materialsResult = data.slice();
     this.materialsResultSorted = this.materialsResult.slice();
+    
+    this.materialsResultFilterd = this.materialsResult.slice();
+    // this.filterTable();
+    if (this.srv_statemanage.GetMaterialSelected()== null){
+      
+      if (this.DefaultMat != 0){
+        let defMat:clsMaterial = this.materialsResult.find(x => x.id === this.DefaultMat)
+        if(defMat)
+          this.OnSelectMaterial(defMat);
+          else
+          this.OnSelectMaterial(this.materialsResult[6]);
+      }
+      else
+      this.OnSelectMaterial(this.materialsResult[6]);
+      this.materialsResultSorted=this.materialsResultSorted.slice().sort((a,b)=> this.sort_arr(a,b));  
+     
+    }
+        
+     else{
+      this.selectedMaterial = this.srv_statemanage.GetMaterialSelected().group;
+      this.materialsResultSorted=this.materialsResultSorted.slice().sort((a,b)=> this.sort_arr(a,b));  
+     
+      this.FavMat = this.srv_statemanage.GetMaterialSelected().FavName || ''
+     }
+        
+        if(initTable) 
+            this.isDtInitializedFunc();
+        else
+        this.dtTriggerMat = null
+
+  }
+
+  setResultsMobile(data:clsMaterial[],initTable:boolean){
+    this.clearData();
+    this.materialsResult = data.slice();
+    this.materialsResultSorted = this.materialsResult.slice();
+    this.materialsResultSorted=this.materialsResultSorted.sort((a,b)=> this.sort_arr(a,b));  
     this.materialsResultFilterd = this.materialsResult.slice();
     // this.filterTable();
     if (this.srv_statemanage.GetMaterialSelected()== null){
@@ -189,15 +287,15 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       this.FavMat = this.srv_statemanage.GetMaterialSelected().FavName || ''
      }
         
-        if(initTable) 
+       /*  if(initTable) 
             this.isDtInitializedFunc();
         else
-        this.dtTriggerMat = null
+        this.dtTriggerMat = null */
 
   }
 
-
   isDtInitializedFunc(){
+    
     if (this.isDtInitialized){
       this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
         dtInstance.destroy();
@@ -222,6 +320,11 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     if (this.allSubsMat$)
     this.allSubsMat$.unsubscribe();
   }
+
+
+  FilterChangeMobile() {   
+      this.fillMainTableMobile();
+    }
 
   filterTable(){    
     var searchText = this.filterSearchTextInput;
@@ -254,6 +357,8 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
           // this.firstInt = true;
 
   }
+
+
   matDetailClick(material: clsMaterial) {
     this.OnSelectMaterial(material)
     this.matDetailSelectedEv.emit(material);
@@ -353,8 +458,9 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
 
   ApplyFilterMobile(group:string)
   {
-    this.selectedCategory=group;
-    this.fillMainTable();
+    this.filterSearchTextInput ="";
+    this.selectedCategory=group; 
+    this.fillMainTableMobile();    
   }
   
 }

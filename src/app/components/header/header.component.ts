@@ -15,6 +15,8 @@ import { CookiesService } from './../../services/cookies.service';
 import { DatalayerService} from'./../../services/datalayer.service' ;
 import { HeaderPpMenuComponent} from './../../components/header-pp-menu/header-pp-menu.component';
 import { Subject} from 'rxjs';
+import { Renderer2, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -45,7 +47,8 @@ export class HeaderComponent implements OnInit {
   constructor(public translate: TranslateService, private srv_statemanage:StateManagerService,private SpinnerService: NgxSpinnerService,
               public srv_appsetting:AppsettingService, private router:Router,
               private srv_login:LoginService,private modalService: NgbModal,private srv_cook:CookiesService,
-              private srv_DataLayer:DatalayerService) { }
+              private srv_DataLayer:DatalayerService,
+              private renderer2: Renderer2,@Inject(DOCUMENT) private _document) { }
 
   ngOnInit() {   
 
@@ -365,11 +368,16 @@ export class HeaderComponent implements OnInit {
       
           this.srv_login.SelectCountryAndLang(c,c.LanguageID[0]);          
           this.srv_login.SelectLanguage(c.LanguageID[0]);
-    
+          
+          if(c.CountryCode=='DE')
+            this.CreateScriptGermanyChat();
+
           //this.srv_appsetting.Country=c;
           this.srv_login.SetExchangeRate1(c.BrifName);
           //this.translate.use(c.LanguageID[0]);
-          localStorage.setItem("countryid","");       
+
+          localStorage.setItem("countryid","");  // todo:
+               
         }
         if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
         {
@@ -398,7 +406,30 @@ export class HeaderComponent implements OnInit {
   {
     if(this.srv_appsetting.Lang=='FR')
       window.open('assets/UserGuide/ITAUserGuide_FR.pdf');
+    else if (this.srv_appsetting.Lang=='JP')
+      window.open('https://imc.iscar.co.jp/IscarWorld/pdf/ITA%20(%E5%B7%A5%E5%85%B7%E9%81%B8%E5%AE%9A%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0).pdf');
     else
       window.open('assets/UserGuide/ITAUserGuide.pdf');
   }
+
+
+  CreateScriptGermanyChat()
+{
+  const s = this.renderer2.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/e79cf993609f4b9fa9d4067183a806791ef00b4ae85c480a94f330e12c66684b.js";
+  s.text = "";
+  this.renderer2.appendChild(this._document.body, s);
+}
+
+reload()
+{
+  window.location.reload();
+}
+
+openuserguidemillthread()
+{
+  window.open('https://imc.iscar.co.jp/IscarWorld/pdf/MillThread%20Advisor%20(%E3%81%AD%E3%81%98%E5%88%87%E3%82%8A%E5%B7%A5%E5%85%B7%E9%81%B8%E5%AE%9A%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0).pdf','_blank');
+}
 }

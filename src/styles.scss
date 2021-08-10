@@ -459,7 +459,7 @@ html, body{
   display: flex!important;
   flex-direction: column!important;
   margin:0!important;  
-
+  overscroll-behavior-y: contain;
 } 
 
 .grayDiv{

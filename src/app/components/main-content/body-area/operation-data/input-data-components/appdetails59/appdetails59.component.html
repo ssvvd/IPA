@@ -1,53 +1,53 @@
 
 <div class="container" class="p-0 m-0" >
     <div class="form-group row">
-        <div class="col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 ">    
+        <div  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-8 col-sm-12 col-12 '">    
             <div class="pt-0" >   
                 <div class="form-group row">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 '">
                         <label for="txtDepthOfShoulder_ap" class="pl-0 pt-3">{{'Depth (D)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
                         <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtDepthOfShoulder_ap" name="txtDepthOfShoulder_ap" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('DepthOfShoulder_ap').value"  (focus)="onfocusfield('DepthOfShoulder_ap')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>   
                 <div class="form-group row">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 '">
                         <label for="txtDepthOfShoulder_ap" class="pl-0 pt-3">{{'Width (W)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
                         <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value=='0'? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtWidthOfShoulder_ae" name="txtWidthOfShoulder_ae" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('WidthOfShoulder_ae').value" (focus)="onfocusfield('WidthOfShoulder_ae')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-6':' col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 '">
                         <label for="txtLengthOfShoulder_L" class="pl-0 pt-3">{{'Length (L)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':' col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
                         <input type="number"required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value==null ? 'form-control  input-empty':'form-control'" id="txtLengthOfShoulder_L" name="txtLengthOfShoulder_L" 
                                             [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value" (focus)="onfocusfield('LengthOfShoulder_L')" (focusout)="onfocusoutfield()" (change)="SetIPLMandatory()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-2':' col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>
             </div>  
-            <div  *ngIf="msrv_appsetting.isMobileResolution">
+            <div  *ngIf="msrv_appsetting.isMobileResolution && !exportPDF">
                 <div *ngIf="ImageName!=''" >
-                    <img src="{{ImageName}}" class="input-image">   
+                    <img src="{{ImageName}}" style="height: 200px;">   
                 </div>
-            </div> 
+            </div>    
             <div *ngIf = "msrv_StMng.SecApp=='770'" class="pt-4">               
                 <div class="form-group">                   
                         <div class="pl-0">
@@ -112,13 +112,13 @@
                             </div>                                        
                         </div>  
                     </div>                                
-            </div>                                           
-            <div class="pt-3">
-                <div class="form-group">  
-                    <div class="pl-0">
-                        <label>{{'Overhang' | translate}}</label>
-                    </div>
-                    <div class="ml-0 ">
+                </div>                                           
+                <div class="pt-3">                   
+                        <div class="form-group">  
+                            <div class="pl-0">
+                                <label>{{'Overhang' | translate}}</label>
+                            </div>
+                            <div class="ml-0 ">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optShort" name="Overhang" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="Short">
                             <label class="custom-control-label" for="optShort">{{'Short' | translate}}</label>
@@ -198,14 +198,14 @@
                     <label  class="siteTitle col-form-label">{{'Economic Data' | translate}}</label> 
                 </div>
                 <div class="form-group row pt-0">
-                    <div class="row col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0">
+                    <div class="row pt-0" [ngClass]="exportPDF?'col-6':' col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12'">
                         <label for="txtBatchSize" class="pl-0 pt-3">{{'Batch Size For Cost Calculation' | translate}}</label>                    
                     </div>
-                    <div class="col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  pt-1 pl-0">
-                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value=='0'? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
-                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"   (change)="SetIPLMandatory()"> 
+                    <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
+                        <input  type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value=='0' ? 'form-control input-empty input-min-width':'form-control input-min-width'"  id="txtBatchSize" name="txtBatchSize" 
+                                            [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('BatchSize').value"  (change)="SetIPLMandatory()"> 
                     </div>
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 pt-0 pl-0">
+                    <div class="pt-0 pl-0"  [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{'Units' | translate}}</label>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
 
             </div>                        
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-4 pr-4 pt-1 div-input-image" *ngIf="!msrv_appsetting.isMobileResolution">
+        <div *ngIf="!msrv_appsetting.isMobileResolution || exportPDF" class="pr-4 pt-1" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-4 '">
             <div *ngIf="ImageName!=''" >
                 <img src="{{ImageName}}" class="input-image">   
             </div>

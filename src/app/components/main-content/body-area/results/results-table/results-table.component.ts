@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,ViewChild, Input, SimpleChanges, Output, EventEmitter, ChangeDetectorRef} from '@angular/core';
 import { ResultsService} from 'src/app/services/results.service' ;
 import { ResultsStoreService} from 'src/app/services/results-store.service' ;
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
@@ -64,6 +64,7 @@ export class ResultsTableComponent implements OnInit {
   countrow:number=0;
   showingrows:number=0;
   lastTypeMainFilter:string="";
+  IsClickInventory:boolean=false;
   // spanSort:string = "<span class='sort-icon ml-1'></span>"
 
   @Input() filterChangedRec: any ; 
@@ -1133,6 +1134,7 @@ filterRecommended(prop:clsHelpProp){
 
 viewInfo(index:number)
 {
+  if(this.IsClickInventory) {this.IsClickInventory=false;return};
   this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]],index:index})
 }
 
@@ -1157,7 +1159,8 @@ DownLoadPDF()
 }
 
 viewInventory(index:number)
-{    
+{   
+  this.IsClickInventory=true; 
   const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
   modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
 }
@@ -1277,15 +1280,6 @@ FilterTopMobileChange(filter:string)
 OpenFilterMobile()
 {
   this.srv_StMng._hideFiltermobile =!this.srv_StMng._hideFiltermobile;
-
-  /* const modalRef = this.modalService.open(ResFilterComponent, { windowClass: 'filter-mobile-modal'  });
-  modalRef.componentInstance.helpArr = this.dtResultsObjectsHelp;
-  modalRef.componentInstance.parentComponent = this;
-  modalRef.result.then((result) => {
-    if(result=='cancel') return;
-    
-    }
-    );      */ 
 }
 
 public ChangeFilterMobile()
@@ -1298,11 +1292,13 @@ ApplyFilterChange(typefilter:string,fieldvalue:string)
   
   //if (this.filterChangedRec ){
     this.filtermobiletop=fieldvalue;
+    let issortbyfield:boolean=false;
     for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
       //switch (this.filterChangedRec.control){
         switch (typefilter){               
           case 'optFilter':
-            switch (fieldvalue){
+            switch (fieldvalue){ 
+                    
               case 'FilterRec':
                 this.filterRecommended(this.dtResultsObjectsHelp[i]);
                 this.sortProp = 'index';
@@ -1321,23 +1317,29 @@ ApplyFilterChange(typefilter:string,fieldvalue:string)
                   this.sortType = 'desc';
                   if(this.lastTypeMainFilter == "FilterRec" && this.dtResultsObjectsHelp[i].IsExpand == "False"){
                     this.dtResultsObjectsHelp[i].isHidden--
-                  }
+                  } 
                 break;
+              default:
+              {
+                //this.filterRecommended(this.dtResultsObjectsHelp[i]);
+                this.sortProp = fieldvalue; //fieldvalue;
+                this.sortType = 'asc';
+                issortbyfield=true;
+                break;
+              }
             }
             break;                                                       
       }          
     }
   
     this.countShowingRows();
-    this.lasTypeFeed =typefilter;
-  /*   if (this.filterChangedRec.control == 'TypeFeed')
-      this.lasTypeFeed =typefilter;
+    if(!issortbyfield) this.lasTypeFeed =typefilter;
     
-      if (this.filterChangedRec.control == 'optFilter')
-      this.lastTypeMainFilter = this.filterChangedRec.Res;
-
-      if (this.filterChangedRec.control == 'ClearAll')
-      this.lastTypeMainFilter = "FilterRec"  
-      } */
 }
+
+  applysort(field:any)
+  {    
+    if(field!='') this.FilterTopMobileChange(field);
+  }
+
 }

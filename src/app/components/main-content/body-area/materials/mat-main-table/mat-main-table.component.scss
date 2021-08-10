@@ -57,12 +57,12 @@ a:visited img {
     vertical-align: middle;
   }
   
-  table.dataTable thead .sorting span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_both.png') no-repeat center right; }
-  table.dataTable thead .sorting_asc span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc.png') no-repeat center right; }
-  table.dataTable thead .sorting_desc span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc.png') no-repeat center right; }
+  table.dataTable thead .sorting span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_both.png') no-repeat center right; }
+  table.dataTable thead .sorting_asc span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc.png') no-repeat center right; }
+  table.dataTable thead .sorting_desc span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc.png') no-repeat center right; }
   
-  table.dataTable thead .sorting_asc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
-  table.dataTable thead .sorting_desc_disabled span { background: url('http://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
+  table.dataTable thead .sorting_asc_disabled span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_asc_disabled.png') no-repeat center right; }
+  table.dataTable thead .sorting_desc_disabled span { background: url('https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/images/sort_desc_disabled.png') no-repeat center right; }
   
 /* .imgFavorites{
     background: url(environment.ImgAddToFavorite) center center no-repeat;
@@ -145,4 +145,32 @@ a:visited img {
   .text-rounded {
     border-radius: 1rem!important;
     }
-  
+
+    
+  .div-selected {
+    background-color: var(--row-selected) !important;
+  }
+
+  .categLabel[title*="P"]{
+    color: var(--bg-mat-P) !important;
+    }
+
+   .categLabel[title*="M"]{
+    color: #ffe01b !important;
+    }
+
+    .categLabel[title*="K"]{
+     color: var(--bg-mat-K) !important;
+    }
+
+    .categLabel[title*="N"]{
+     color: var(--bg-mat-N) !important;
+    }
+
+    .categLabel[title*="S"]{
+     color: var(--bg-mat-S) !important;
+     }
+
+   .categLabel[title*="H"]{
+     color: var(--bg-mat-H) !important;
+       }

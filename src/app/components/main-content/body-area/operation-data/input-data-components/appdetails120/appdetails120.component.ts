@@ -49,7 +49,7 @@ export class Appdetails120Component implements OnInit {
   
   @Input() events: Observable<void>;
   @Input () evGetResult: Observable<void>;
-
+  @Input() exportPDF: boolean=false;
   //private eventsSubscription: Subscription;
   private eventsSubscription: Subscription=new Subscription();
 
@@ -60,6 +60,7 @@ export class Appdetails120Component implements OnInit {
   arrThreadFormPitch:ThreadFormPitch[]=[];
   arrFormColName:FormColName []=[];
   arrformdata:any[]=[];
+  arrdatainfo:any[]=[];
 
   arrPitch:string[]=[];
   arrSize:string[]=[];
@@ -81,6 +82,9 @@ export class Appdetails120Component implements OnInit {
   IsGetResult:boolean=false;
   IsSizeEmpty:boolean =false;
   ThreadDiaEnable:boolean=true;
+
+  IsShowInfoThread:boolean=false;
+
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
 
   ngOnInit() { 
@@ -229,7 +233,7 @@ ClearData()
 
   changethreadform()
   {  
-    
+    this.arrDisplayData=[];
     this.srv_StMng.IPL.GetItem('Pitch').value=null;
     this.srv_StMng.IPL.GetItem('D_Hole').value=null;
     this.srv_StMng.IPL.GetItem('Size').value=null;
@@ -238,6 +242,19 @@ ClearData()
 
     this.threadform=this.objthreadform.ThreadFormISO;
     this.srv_StMng.IPL.GetItem('ThreadForm').value=this.objthreadform.ThreadFormISO;
+
+    //show info
+    if(this.threadform == 'BSPT55' || this.threadform == 'NPT60' || this.threadform == 'NPTF60')
+    {   
+        this.IsShowInfoThread=true;
+        this.eventsSubscription.add(this.srv_DataLayer.getthreadstandartinfo(this.objthreadform.ThreadFormISO).subscribe((data: any)=> {               
+            this.arrdatainfo = JSON.parse(data);                                          
+        }                 
+  ))  
+    }
+    else
+        this.IsShowInfoThread=false;
+
     this.fillarrpitch();   
     this.fillimagepath(this.objthreadform.ThreadFormISO);
     if (this.threadform == 'M60' || this.threadform == 'MJ60')
@@ -330,6 +347,13 @@ ClearData()
  
   ChangeDiameter()
   {
+    if(this.srv_StMng.IPL.GetItem('D_Hole').value.toString().indexOf('-')>-1)
+    {
+        alert("Thread Diameter should be bigger then 0")
+        this.srv_StMng.IPL.GetItem('D_Hole').value="";
+        return;
+    }
+
     if(this.srv_StMng.IPL.GetItem('D_Hole').value!=null && this.srv_StMng.IPL.GetItem('D_Hole').value!='' && this.srv_StMng.IPL.GetItem('D_Hole').value!='0')
     {       
         this.size='';
@@ -356,6 +380,8 @@ ClearData()
 
   FillDisplayDataBySize()
   {
+
+    this.IsShowInfoThread=false;
     if(this.threadform!=null && this.threadform!=''  && this.size!=null && this.size!='' && this.pitch!=null && this.pitch!='' )
     {
         let arrformatdata_f:any=[];
@@ -743,5 +769,30 @@ ClearData()
             break;
         }
         return pitch_calc;    
+  }
+
+  changelength()
+  {
+    if(Number(this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value)<0 || Number(this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value) >1000)
+    {
+        var min_l;
+        var max_l;              
+        if (this.srv_appsetting.Units  == 'M')
+        {
+            min_l = 1;
+            max_l = 1000;
+        }
+        else
+        {
+            min_l = 0.001;
+            max_l = 100;
+        }
+        alert("Thread length should be between " + min_l + " to " + max_l ) ;            
+        this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value="";
+        return;
+
+
+    }
+    
   }
 }
