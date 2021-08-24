@@ -56,13 +56,13 @@
         <div class="pl-0 pt-3">
             <label>{{'Tool position' | translate}}</label>
         </div>
-        <div>
+        <div class="row">
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="optToolPos1" name="ToolPos" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RadialPerpendicular').value" value="R">
+                <input type="radio" class="custom-control-input" id="optToolPos1" name="ToolPos11"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RadialPerpendicular').value" value="R">
                 <label class="custom-control-label" for="optToolPos1">{{'Radial' | translate}}</label>
             </div>            
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" class="custom-control-input" id="optToolPos2" name="ToolPos" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RadialPerpendicular').value" value="P">
+                <input type="radio" class="custom-control-input" id="optToolPos2" name="ToolPos11" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('RadialPerpendicular').value" value="P">
                 <label class="custom-control-label" for="optToolPos2">{{'Perpendicular' | translate}}</label>
             </div>                        
         </div>

@@ -212,6 +212,7 @@ if (pr.value.trim().length == 7){
           let prmRatioLD:string = JSON.parse(res); 
           if (prmRatioLD != '0'){
             var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100
+            if((this.AW + +prmRatioLD)<0.01) roundDigits = 1000;
             this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
           }
         })

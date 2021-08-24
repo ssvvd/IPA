@@ -62,8 +62,10 @@ SetLanguges()
 }
 
 ngOnInit()
-{  
-  screen.orientation.lock("landscape");
+{ 
+   
+  //window.screen.orientation.lock("landscape");
+
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   this.SpinnerService.show();
@@ -92,7 +94,9 @@ ngOnInit()
     
     let paramValue:string='';
     const httpParams = new HttpParams({ fromString: url.split('?')[1] });
-
+    
+    let fromapp:string='';
+    
   /*   let countryid:string;
     paramValue = httpParams.get('countryid'); 
     if(paramValue!=null) {

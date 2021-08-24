@@ -125,7 +125,7 @@ export class Appdetails780Component implements OnInit {
     }
  }
 
-   ClearData()
+  ClearData()
   {
     if( this.HoleType=='Solid') 
     {       

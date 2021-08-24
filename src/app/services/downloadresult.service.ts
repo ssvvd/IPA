@@ -51,14 +51,14 @@ public downloadListPDF():any {
   
   var pdf = new jsPDF();
   var opt = {
-    margin: [0, 0, 2, 0],
+     margin: [0, 0, 40, 0],    
     filename:     'ITAReport.pdf',
     image:        { type: 'jpeg', quality: 0.98 },
     html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
     jsPDF:        { unit: 'mm',orientation: 'p',format: 'letter'},
     pagebreak:    { before: '.break-page'} 
   };  
-  //document.getElementById('docheader').style.visibility = 'visible';
+
   var element = document.getElementById('docheader').innerHTML;
   pdf.setDisplayMode(1);
   html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then( (pdf)=> 
@@ -79,10 +79,10 @@ public downloadListPDF():any {
     pdf.setFontSize(14);
     pdf.setFontSize(16);
   
-    pdf.text(5, 20+10, this.translate.instant('ITA Recommendation Report'));
-    
+    pdf.text(5, 20+10, this.translate.instant('ITA Recommendation Report'));    
     this.axial_y=15+15;
-  
+    this.axial_y=15;
+
     pdf.setFontSize(12);
     this.addTextWithBackGround(pdf,0,15+15,400,10,246,246,247,'Machining operation: ' + this.srv_statemanage.MainAppSelected.MenuName + ' ' + this.srv_statemanage.SecAppSelected.MenuName);         
     this.addTextWithBackGround(pdf,0,30+15,400,10,246,246,247,"Material: " + mat_desc);    
@@ -93,12 +93,12 @@ public downloadListPDF():any {
     this.BuildOperationData(pdf);    
     pdf.addPage();
     pdf.setFontSize(12);
-    this.addTextWithBackGround(pdf,0,15,400,10,246,246,247,'ITA Recommended' );
+    //this.addTextWithBackGround(pdf,0,15,400,10,246,246,247,'ITA Recommended' );
     this.axial_y=5+35 +15;
     var element = document.getElementById('docheader').innerHTML;
     //pdf.setDisplayMode(1);
     html2pdf().from(element).set({ pdf: pdf }).set(opt).from(element).toPdf().get('pdf').then( (pdf)=> 
-    {return this.BuildResult(pdf,'tbresult');});
+    {return this.BuildResult1(pdf,'tbresult1');});
     
   } );
 
@@ -107,7 +107,7 @@ public downloadListPDF():any {
 
 ingDownloaded:any
 public downloadItemPDF(srv:any,filename:string):any {  
-  var doc = new jsPDF('p');
+  //var doc = new jsPDF('p');
 
   var opt = {
     margin: [0, 0, 2, 0],
@@ -165,12 +165,14 @@ BuildResult(doc:jsPDF,controlname:string):any
     html2canvas(div, options).then((canvas) => {
 
       var img = canvas.toDataURL("image/PNG");     
-      var imgWidth = 210;     
+      var imgWidth = 210;   
+      //var imgWidth = 180;  
       var imgHeight = canvas.height * imgWidth / canvas.width;
      
       var adjust = -295; //1050 is my assupmtion of how many pixels each page holds vertically
       var extraNo=Math.ceil((imgHeight+40)/295); //Lets me know how many page are needed to accommodate this image
       
+      //imgHeight =450;
       for(let r:number=0;r<extraNo;r++){
         if(r==0)
           doc.addImage(canvas, 'PNG', 0,40, imgWidth, imgHeight);
@@ -183,6 +185,86 @@ BuildResult(doc:jsPDF,controlname:string):any
        }).then((doc) => {
         this.AddPagingNumber(doc);       
         
+      doc.save('ITARecommendations.pdf');
+      this.obsPDFListLoaded.next(null);
+      return  'ok'; 
+    });   
+}
+
+BuildResult1(doc:jsPDF,controlname:string):any
+{
+  const div = document.getElementById(controlname);
+
+     const options = {
+      background: 'white',
+      scale: 1,
+      useCORS: true,allowTaint : true      
+    }; 
+
+    html2canvas(div, options).then((canvas) => {
+
+      var imgWidth = 210; 
+      var pageHeight=295 -45 ;      
+       
+      var innerPageWidth = imgWidth ;
+      //var innerPageHeight = pageHeight- 40;
+
+      // Calculate the number of pages.
+      var pxFullHeight = canvas.height;
+      var pxPageHeight = Math.floor(canvas.width * (pageHeight / imgWidth));
+      var nPages = Math.ceil(pxFullHeight / pxPageHeight);
+
+      // Define pageHeight separately so it can be trimmed on the final page.
+      //var pageHeight = innerPageHeight;
+
+      // Create a one-page canvas to split up the full image.
+      var pageCanvas = document.createElement('canvas');
+      var pageCtx = pageCanvas.getContext('2d');
+      pageCanvas.width = canvas.width;
+      pageCanvas.height = pxPageHeight;
+
+      // Initialize the PDF.
+      //var pdf = new jsPDF('p', 'in', [8.5, 11]);
+
+      for (var page = 0; page < nPages; page++) {
+        // Trim the final page to reduce file size.
+        if (page === nPages - 1 && pxFullHeight % pxPageHeight !== 0) {
+          pageCanvas.height = pxFullHeight % pxPageHeight;
+          pageHeight = (pageCanvas.height * innerPageWidth) / pageCanvas.width;
+        }
+
+        // Display the page.
+        var w = pageCanvas.width; 
+        var h = pageCanvas.height;
+        pageCtx.fillStyle = 'white';
+        pageCtx.fillRect(0, 0, w, h);
+        pageCtx.drawImage(canvas, 0, page * pxPageHeight, w, h, 0, 0, w, h);
+
+        // Add the page to the PDF.
+        if (page > 0) doc.addPage();
+        //debugger;
+
+       /*  var element = document.getElementById('docheader').innerHTML;
+        //pdf.setDisplayMode(1);
+        html2pdf().from(element).set({ pdf: doc }).set(options).from(element).toPdf().get('pdf').then( (doc)=> 
+        { 
+           var imgData = pageCanvas.toDataURL('image/' + "PNG");
+          doc.addImage(imgData, "PNG", 0, 5, innerPageWidth, pageHeight); 
+        });     */    
+
+         var imgData = pageCanvas.toDataURL('image/' + "PNG");
+         //if(page==0)
+         //   doc.addImage(imgData, "PNG", 0, 40, innerPageWidth, pageHeight);
+         // else
+          doc.addImage(imgData, "PNG", 0, 30, innerPageWidth, pageHeight);
+        }
+      
+
+      return doc;
+       }).then((doc) => {
+        this.AddPagingNumber(doc);       
+        this.AddHeaderPage(doc);
+
       doc.save('ITARecommendations.pdf');
       this.obsPDFListLoaded.next(null);
       return  'ok'; 
@@ -212,6 +294,42 @@ AddPagingNumber(doc:jsPDF)
     doc.setTextColor(33, 37, 41); 
     doc.setFontSize(10);
     doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
+  } 
+}
+
+AddHeaderPage(doc:jsPDF)
+{
+  var totalPages = doc.internal.getNumberOfPages();
+  for (let i = 3; i <= totalPages; i++) {
+    doc.setPage(i);
+  
+    doc.setFillColor(221,221,221);
+    doc.rect(0, 0, 400, 15, "F");
+
+    //#757677
+    doc.setFillColor(117,118,119);
+    doc.rect(0, 15, 400, 6, "F");
+
+    doc.setTextColor(255,255,255); 
+    doc.setFontSize(10);    
+    doc.text(this.srv_appsetting.User.displayName + ' ' +  new Date().toISOString().slice(0, 10),190,19)
+    // /{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}
+    var img = new Image();
+    img.src = environment.ImagePath + 'ITA_New-logo.png';   
+    doc.addImage(img, 'png', 2, 2, 46, 11);
+  
+    img.src = environment.ImagePath + 'ISCAR_Logo.png';   
+    doc.addImage(img, 'png', 180, 2, 28, 11);
+    
+    
+     
+   
+    
+
+    //doc.text('Where Innovation Never Stops', 70, doc.internal.pageSize.getHeight()-10);
+    //doc.setTextColor(33, 37, 41); 
+    //doc.setFontSize(10);
+    //doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
   } 
 }
 

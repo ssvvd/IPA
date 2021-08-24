@@ -79,7 +79,8 @@ export class Optimizetool52Component implements OnInit {
     this.eventsSubject.next();
   }
   
-  ngOnInit() {     
+  ngOnInit() { 
+    let a =this.srv_StMng.IPL.GetItem('RadialPerpendicular').value;    
     this.isLoad =true;     
   }
 

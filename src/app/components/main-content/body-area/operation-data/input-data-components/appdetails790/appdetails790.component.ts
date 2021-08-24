@@ -127,10 +127,10 @@ export class Appdetails790Component implements OnInit {
   {   
     this.CheckValuesFields(field);
     this.strMandatory=''; 
-    if(this.HoleType=='Solid')
+   /*  if(this.HoleType=='Solid' )
     {       
         this.AddTostrMandatoryParam('D3',"DPH:",this.srv_appsetting.UnitslengthDesc);
-    }   
+    }   */ 
     this.AddTostrMandatoryParam('LengthOfShoulder_L',"L:",this.srv_appsetting.UnitslengthDesc);
     this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc); 
     this.AddTostrMandatoryParam('DepthOfShoulder_ap',"D:",this.srv_appsetting.UnitslengthDesc);

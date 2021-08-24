@@ -6,7 +6,7 @@
     <div class="col-2" ></div>
   </div>
 
-  <div *ngIf="srv_StMng.SecApp=='10' || srv_StMng.SecApp=='51'"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+  <div *ngIf="srv_StMng.SecApp=='10' || srv_StMng.SecApp=='51' || srv_StMng.SecApp=='51'"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
     <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
       <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Outer diameter' | translate}}&nbsp;</Label>
       <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>
@@ -86,7 +86,7 @@
         <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
       </div> -->
 
-      <div Final Workpiece Diameter  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+      <div *ngIf="srv_StMng.SecApp!='188'"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
         <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Final Workpiece Diameter' | translate}}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>
@@ -107,7 +107,7 @@
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Outer diameter' | translate}}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>
         </div>
-        <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">D<sub>wf</sub></div>
+        <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">D</div>
         <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{DWF}}</div>
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
@@ -139,8 +139,8 @@
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Width of Groove' | translate}}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>
         </div>
-        <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">DOD</div>
-        <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{DOD}}</div>
+        <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">W</div>
+        <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{W}}</div>
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}</div>
       </div>
       <!-- <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp!='10' && srv_StMng.SecApp!='51'">

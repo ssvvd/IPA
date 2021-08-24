@@ -112,7 +112,7 @@ export class MpTurnGrooveComponent implements OnInit {
 
     if (this.srv_StMng.SecApp=='52' || this.srv_StMng.SecApp=='1')
       this.DWF = this.DWI - 2 * this.DPT
-    if (this.srv_StMng.SecApp=='53' || this.srv_StMng.SecApp=='50')
+    if (this.srv_StMng.SecApp=='53' || this.srv_StMng.SecApp=='50' )
       this.DWF = this.DWI + 2 * this.DPT
 
     this.W = +this.srv_StMng.IPL.GetItem('Width').value
