@@ -1,12 +1,6 @@
 /* Add to Homescreen v3.2.3 ~ (c) 2015 Matteo Spinelli ~ @license: http://cubiq.org/license */
 (function (window, document) {
-/*
-       _   _ _____     _____
- ___ _| |_| |_   _|___|  |  |___ _____ ___ ___ ___ ___ ___ ___ ___
-| .'| . | . | | | | . |     | . |     | -_|_ -|  _|  _| -_| -_|   |
-|__,|___|___| |_| |___|__|__|___|_|_|_|___|___|___|_| |___|___|_|_|
-                              by Matteo Spinelli ~ http://cubiq.org
-*/
+
 
 // Check for addEventListener browser support (prevent errors in IE<9)
 var _eventListener = 'addEventListener' in window;
@@ -539,7 +533,18 @@ ath.Class.prototype = {
 			this.img.addEventListener('load', this, false);
 			this.img.addEventListener('error', this, false);
 
+			
+			var a= this.applicationIcon.href.split("/");
+			var icon_name;
+			var n_elem=a.length-1;
+			icon_name = a[n_elem];
+			//alert(icon_name);
+			this.applicationIcon.href= this.applicationIcon.href.replace(icon_name,"***" + icon_name);
+			this.applicationIcon.href= this.applicationIcon.href.replace("***","assets/img/");
+			//alert(this.applicationIcon.href);
+
 			this.img.src = this.applicationIcon.href;
+			
 			this.element.appendChild(this.img);
 		}
 

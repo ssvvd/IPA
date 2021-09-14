@@ -121,19 +121,35 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         return 'safari';
       default:
         return 'other';
-    }
+    } 
   }
-  onclickdiv()
+/*   onclickdiv()
   {
     alert('click div');
+  } */
+  IsFilterEmptyForGermany()
+  {
+    if(!this.srv_appsetting.IsCountryGermany())  return false;
+
+    if(this.srv_statemanage.SelectMachineFilter==undefined) return true;
+    let stfilter: MachineFilter;
+    stfilter = this.srv_statemanage.SelectMachineFilter;
+    if(stfilter.AdaptationSize=='' ||  stfilter.AdaptationType=='' || (!stfilter.IsMachiningCenter && !stfilter.IsMultiSpindle && !stfilter.IsMultiTask && !stfilter.IsSwissType && !stfilter.IsLathe))
+      return true;
+    else
+      return false;
   }
-  
+
   Initializemachinelist(withdestroy:boolean)
   {  
     this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
-      .subscribe((data: any) => {               
+      .subscribe((data: any) => {
+        
         this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
+               
+                  
+
         this.countallrow=this.listmachines_sorted.length.toString();        
         this.myMachineSettings();
         if(this.srv_statemanage.SelectedMachine!=null)
@@ -239,26 +255,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     else
     {
       this.ApplyMostRecommended();
- /*      if(this.srv_appsetting.isMobileResolution) 
-      {
-        let stfilter: MachineFilter;
-        stfilter = this.srv_statemanage.SelectMachineFilterTopMobile;
-        if (typeof (stfilter) !== 'undefined' && stfilter !== null) {
-          this.InitFilter(); 
-          this.MachineFilterTopMobile = stfilter;
-          this.MachineFilter.IsMachiningCenter =this.MachineFilterTopMobile.IsMachiningCenter;
-          this.MachineFilter.IsLathe =this.MachineFilterTopMobile.IsLathe;
-          this.MachineFilter.IsMultiTask =this.MachineFilterTopMobile.IsMultiTask;
-          this.MachineFilter.IsMultiSpindle =this.MachineFilterTopMobile.IsMultiSpindle;
-          this.MachineFilter.IsSwissType =this.MachineFilterTopMobile.IsSwissType;
-          this.MachineFilter.IsMostRecommended =this.MachineFilterTopMobile.IsMostRecommended;        
-          this.MachineFilter.SearchText=this.MachineFilterTopMobile.SearchText;
-          this.ApplyFilter(this.MachineFilter);
-          
-          //this.ApplyFilterTopMobile(stfilter);
-        } 
-      } */
     } 
+
     if(this.srv_appsetting.isMobileResolution) 
     {
       let stfilter: MachineFilter;
@@ -274,8 +272,6 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         this.MachineFilter.IsMostRecommended =this.MachineFilterTopMobile.IsMostRecommended;        
         this.MachineFilter.SearchText=this.MachineFilterTopMobile.SearchText;
         this.ApplyFilter(this.MachineFilter);
-        
-        //this.ApplyFilterTopMobile(stfilter);
       } 
     }
     if(this.srv_cook.get_cookie("def_mach")!='')
@@ -293,7 +289,13 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         this.srv_statemanage.SelectedMachine= this.listmachines_sorted.find(m=> m.MachineID.toString() == '53'); 
       }          
     } 
-    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);       
+    this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);  
+    
+    if(this.IsFilterEmptyForGermany())  
+    {
+      this.listmachines = this.listmachines.filter(m =>{m.Torque==-222});                     
+    }    
+
     this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr(a,b));
     this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_arr(a,b));
   }
@@ -605,6 +607,12 @@ UpdateStateSelectedMachine(MachineID: number) {
     let maxSpeed:number=0;
     let minTorque:number=0;
     let maxTorque:number=0;
+
+    if(this.IsFilterEmptyForGermany() )  
+    {
+      this.listmachines = this.listmachines.filter(m =>{m.Torque==-222});                     
+    }    
+
     if(this.listmachines.length>0)
     {
       minPower = Math.min.apply(Math,this.listmachines.map(a => a['Power']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))   

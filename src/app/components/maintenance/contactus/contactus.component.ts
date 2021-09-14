@@ -56,8 +56,10 @@ export class ContactusComponent implements OnInit {
     if (this.registerForm.invalid) {
             return;
     }
-               
-    this.srv_DataLayer.mailsend(this.Name,this.Email,this.Country,this.CompanyName,this.Message).subscribe((res:any)=>
+    
+    let isjapanversion:string='0';
+    if(this.srv_appsetting.IsCountryJapane())  isjapanversion='1';
+    this.srv_DataLayer.mailsend(this.Name,this.Email,isjapanversion,this.Country,this.CompanyName,this.Message).subscribe((res:any)=>
     {
       let resmessage:string;
       if(res=='ok')

@@ -120,6 +120,12 @@ export class Appdetails120Component implements OnInit {
             this.objthreadform = this.arrThreadForm.find(e=> e.ThreadFormISO == this.srv_StMng.IPL.GetItem('ThreadForm').value);
             this.threadform= this.srv_StMng.IPL.GetItem('ThreadForm').value;
             this.fillarrpitch();
+
+            if (this.threadform == 'M60' || this.threadform == 'MJ60')
+                this.pitch_units ='mm';//this.srv_appsetting.UnitslengthDesc;
+            else
+                this.pitch_units ='TPI';
+
         }
 
         this.eventsSubscription.add(this.srv_DataLayer.thread_form_colname(this.threadtype).subscribe((data: any)=> {             

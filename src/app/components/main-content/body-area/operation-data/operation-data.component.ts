@@ -59,31 +59,7 @@ export class OperationDataComponent implements OnInit {
     if (this.srv_StMng.IPL== null)    
     {
       this.FillParameters();
-      return;
-      let Ipl:InputParameterlist =new InputParameterlist;
-      this.eventsSubscription.add(this.srv_DataLayer.getinputparameters(this.SecApp, this.srv_appsetting.Units,this.srv_StMng.SelectedMachine.MachineType).subscribe((data: any)=> {
-        for (const d of JSON.parse(data)) {                                       
-              Ipl.items.push({
-                name:d.name,
-                value:  d.valuedefault==null?'':d.valuedefault,
-                type:d.type,
-                valuedefault: d.valuedefault==null?'':d.valuedefault,              
-                valuemin:d.valuemin ,
-                valuemax: d.valuemax ,
-                image:d.image ,
-                image1:d.image1==null?'':d.image1,
-                description: d.description==null?'':d.description, 
-                required:d.required,
-                units:d.units==null?'':d.units,
-                istooldetails:d.istooldetails==null?'':d.istooldetails, 
-                valueall:d.valueall==null?'':d.valueall
-            })                                                                       
-        }
-        this.srv_StMng.IPL =Ipl;
-        this.isLoaded=true;  
-    }   
-      
-));
+      return;      
 }
 else
       this.isLoaded=true;

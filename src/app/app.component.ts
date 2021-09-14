@@ -10,6 +10,8 @@ import { NgxSpinnerService } from "ngx-spinner";
 declare let gtag: Function;
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
+
 //import { CookiesService } from 'src/app/services/cookies.service';
 
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +31,8 @@ export class AppComponent implements OnInit {
   constructor(private location: Location,private router: Router, private srv_appsetting:AppsettingService,
               public translate:TranslateService,
               private srv_login:LoginService,private SpinnerService: NgxSpinnerService,
-              private renderer2: Renderer2,@Inject(DOCUMENT) private _document) {
+              private renderer2: Renderer2,@Inject(DOCUMENT) private _document, 
+              private meta: Meta) {
     if(!location.path().toLowerCase().startsWith('/materials')){
       router.navigate(['/home/machines']); 
     }
@@ -66,6 +69,7 @@ ngOnInit()
    
   //window.screen.orientation.lock("landscape");
 
+  
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   this.SpinnerService.show();
@@ -137,14 +141,13 @@ ngOnInit()
     //todo: country, language
   }
   
-  //first time enter
-  //temp -todo:
-  //isLogIn ='0';
- 
+  //meta data index.html - disable login
+  const enablelogin = this.meta.getTag('name=enablelogin');
+  if(enablelogin.content=='0') isLogIn ='0';
 
   if(isLogIn!="-1")
   {
-    if(isLogIn ='0')
+    if(isLogIn =='0')
     {       
         this.srv_appsetting.isLoggedIn=true;
         this.srv_login.FillDefaultUser();

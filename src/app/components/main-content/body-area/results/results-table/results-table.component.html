@@ -114,7 +114,7 @@
                     <tr id="dtOptions">
                      <th><label></label></th> 
                      <!-- <th *ngIf="srv_appsetting.isMobileResolution"><img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit"></th>  -->                    
-                     <th  class="sorting" *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
+                     <th  class="sorting"  *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
                          <label  style="white-space:pre-wrap" title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">                            
                            </label><span class="sort-icon ml-1"></span>
                      </th>
@@ -126,10 +126,11 @@
                         <th class="no-sort d-none">
                            
                         </th>
+                        <th class="no-sort d-none" ></th>
                     </tr>
                  </thead>
                  <tbody>                                                             
-                    <tr *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
+                    <tr (click)="viewInfo(row.index)" *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
                        <td (click)="viewInfo(row.index)" >
                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">
                            <img src="{{dtResultsObjectsHelp[row.index].img}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
@@ -168,6 +169,9 @@
                          </td>
                          <td class="d-none">                    
                                <img src="{{environment.ImgAssembly}}" alt="Create Assembly" title="{{'Build Assembly' | translate}}" class="icon-grid">
+                         </td>
+                         <td>
+                           <i class="fa fa-chevron-right icon-open pl-1 pr-2"></i>
                          </td>
                     </tr>
                  </tbody>

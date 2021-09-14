@@ -96,11 +96,12 @@ export class DatalayerService {
     u='u'; //temp
     let s:string=environment.API_HOST +'api/login/getToken/' + u+ '/' +sitetype;
     console.log(s);
-    //alert(s);
-    return  this.httpClient.get(environment.API_HOST +'api/login/getToken/' + u+ '/' +sitetype) 
-    .catch((err: HttpErrorResponse) => {      
-      //(err.message);
-        return "error";
+    let url_current:string=window.location.href;
+    let API_HOST:string=environment.API_HOST;
+    if(sitetype=='local' && url_current.indexOf("https"))  API_HOST.replace ("http","https");
+    return  this.httpClient.get(API_HOST +'api/login/getToken/' + u+ '/' +sitetype) 
+    .catch((err: HttpErrorResponse) => {          
+        return "e";
       });  
   } 
   
@@ -181,7 +182,7 @@ export class DatalayerService {
                                 country + '/' + answer1 + '/' + answer2 + '/'+ message);
   }
 
-  public  mailsend(name:string,email:string,country:string,company:string,message:string)
+  public  mailsend(name:string,email:string,isjapaneversion:string,country:string,company:string,message:string)
   {     
     let strpar:string='';
     if(country=="") country='country';
@@ -191,7 +192,7 @@ export class DatalayerService {
     
     if (message!='')strpar=strpar + '/'+ message;
 
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email + strpar);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'mail-send/'+name + '/' +email +'/' +isjapaneversion + strpar);
   }
 
   public  mailsendReqMat(email:string,Description:string, Group:string, Standard:string,Condition:string,Hardness:string, Manufacture:string)

@@ -1,11 +1,6 @@
 td:first-child { display:none; }
 th:first-child { display:none; }
 
-/* table.dataTable{  
-    background: var(--bg-gray);
-}
- */
-
 
 .table-stripe{
     width: 100% !important;
@@ -96,6 +91,74 @@ th {
     
 }
 .table td:nth-child(10), .table th:nth-child(10){
+    width: 15%!important;  
+    min-width: 15%!important;   
+    max-width: 15%!important;
+    
+}
+
+
+
+.table_DE td:nth-child(2), .table th:nth-child(2){
+    width: 15% !important;  
+    min-width: 15%!important;
+    max-width: 15%!important;
+ 
+}
+
+.table_DE td:nth-child(3), .table th:nth-child(3){
+    width: 10%!important; 
+    min-width: 10%!important;   
+    max-width: 10%!important;
+     
+}
+
+.table_DE td:nth-child(4), .table th:nth-child(4){
+    width: 15%!important;  
+    min-width: 15%!important;   
+    max-width: 15%!important;    
+}
+
+.table_DE td:nth-child(5), .table th:nth-child(5){
+    width: 10%!important; 
+    min-width: 10%!important;   
+    max-width: 10%!important; 
+   
+}
+
+.table_DE td:nth-child(6), .table th:nth-child(6){
+    width: 12%!important;  
+    min-width: 12%!important;   
+    max-width: 12%!important;
+   
+}
+
+.table_DE td:nth-child(7), .table th:nth-child(7){
+    width: 8%!important; 
+    min-width: 8%!important;   
+    max-width: 8%!important; 
+    
+}
+ .table_DE td:nth-child(8), .table th:nth-child(8){
+    width: 5%!important; 
+    min-width: 5%!important;   
+    max-width: 5%!important; 
+   
+} 
+
+.table_DE td:nth-child(9), .table th:nth-child(9){
+    width: 5%!important; 
+    min-width: 5%!important;   
+    max-width: 5%!important; 
+   
+} 
+.table_DE td:nth-child(10), .table th:nth-child(10){
+    width: 5%!important; 
+    min-width: 5%!important;   
+    max-width: 5%!important; 
+    
+}
+.table_DE td:nth-child(11), .table th:nth-child(11){
     width: 15%!important;  
     min-width: 15%!important;   
     max-width: 15%!important;

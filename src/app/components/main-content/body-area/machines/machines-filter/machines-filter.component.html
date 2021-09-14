@@ -164,12 +164,12 @@
     </div>
     <div *ngIf="isLoadingAdSize" class="pt-1 width-col-12-col-5">
         <select  class="form-control-sm select1"   [(ngModel)]="curAdapSize" (change)="SetViewAllMachines();changeadapsize()">
-            <option *ngFor="let adapsize of arrAdapSizeFilter" [ngValue]="adapsize">{{adapsize.AdaptationSize}}</option>
+            <option *ngFor="let adapsize of arrAdapSizeFilter"  [ngValue]="adapsize">{{adapsize.AdaptationSize}}</option>
         </select>                                
     </div>
 </div>  
 
-<div class="pt-3"> 
+<div class="pt-3" *ngIf="!srv_appsetting.IsCountryGermany()"> 
     <div class="border-bottom pl-3">
     </div>
     <div class="pt-2 pr-2 mt-0 pl-2" *ngIf="isLoadingAdSize">    

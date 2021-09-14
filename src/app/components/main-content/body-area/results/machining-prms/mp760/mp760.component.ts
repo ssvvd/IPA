@@ -404,7 +404,8 @@ if (value.trim().length == 7){
       if (prmRatioLD != '0'){
         if (this.selectedHelp.itemType[this.selectedHelp.CatalogNo.indexOf(value,0)] == 'I' && this.THe_CICT != 0)
           prmRatioLD = (+prmRatioLD * this.THe_CICT).toString()
-          var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100
+          var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100;
+          if((this.AW + +prmRatioLD)<0.01) roundDigits = 1000;
         this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
       }
     })

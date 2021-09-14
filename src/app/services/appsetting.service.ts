@@ -56,6 +56,16 @@ export class AppsettingService {
     this.misLoggedIn = u;   
    }
 
+    
+
+  private merrorToken:boolean=false;  
+  get errorToken():boolean{   
+    return this.merrorToken;
+    }
+  set errorToken(u:boolean) {  
+    this.merrorToken = u;   
+   }
+
   get User():User{   
     return this.mUser;
     }
@@ -195,6 +205,25 @@ export class AppsettingService {
     this.obsCountrySelected.next(c.CountryName);
 
    }
+   IsCountryGermany()
+   {
+    if(localStorage.getItem("countryid")!='7' && (this.Country==undefined || (this.Country!=undefined && this.Country.CountryCode!='DE'))) 
+        return false;
+    else
+        return true;
+
+   }
+
+   IsCountryJapane()
+   {
+    if(localStorage.getItem("countryid")!='10' && (this.Country==undefined || (this.Country!=undefined && this.Country.CountryCode!='JP'))) 
+        return false;
+    else
+        return true;
+
+   }
+
+   
 
    FillLanguage(lan:string)
    {

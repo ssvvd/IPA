@@ -17,6 +17,7 @@ import { HeaderPpMenuComponent} from './../../components/header-pp-menu/header-p
 import { Subject} from 'rxjs';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-header',
@@ -48,7 +49,8 @@ export class HeaderComponent implements OnInit {
               public srv_appsetting:AppsettingService, private router:Router,
               private srv_login:LoginService,private modalService: NgbModal,private srv_cook:CookiesService,
               private srv_DataLayer:DatalayerService,
-              private renderer2: Renderer2,@Inject(DOCUMENT) private _document) { }
+              private renderer2: Renderer2,@Inject(DOCUMENT) private _document,
+              private meta: Meta) { }
 
   ngOnInit() {   
 
@@ -140,19 +142,21 @@ export class HeaderComponent implements OnInit {
 
       if(result=='M'){this.CheckAllowUnitsChange(null);}
       if(result=='I'){this.CheckAllowUnitsChange(null);}
-
     });
    
   }
   LogIn()
-  {   
+  { 
+
     //return; //TODO:
+    if(this.meta.getTag('name=enablelogin').content=='0') return;
       if(this.srv_appsetting.UserID=='')
       {
         this.SpinnerService.show();
         this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();});
       }        
   }
+
   FillListCountries()
   {
     this.isLoadingLang=true;
@@ -293,9 +297,9 @@ export class HeaderComponent implements OnInit {
 
   opencatalog()
   {   
-    //window.open(environment.ECatalogLink, "_blank");
+    window.open(environment.ECatalogLink, "_blank");
     //window.open(environment.ECatalogLink);
-    window.location.href = environment.ECatalogLink;
+    //window.location.href = environment.ECatalogLink;
   }
   
   opencalculator()

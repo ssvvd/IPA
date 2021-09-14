@@ -157,7 +157,7 @@
           </div>   -->                   
           <div class="div-datatable"  *ngIf="!msrv_appsetting.isMobileResolution">              
               <table datatable [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" style="width: 100%"
-                class="table table-stripe row-border hover " id="table1">
+                class="table table-stripe row-border hover "   [ngClass]="msrv_appsetting.IsCountryGermany()?'table_DE':''" id="table1">
                 <thead *ngIf="isLoaded">
                   <tr id="dtOptions">
                     <th class="d-none">ID</th>                                                                                           
@@ -179,8 +179,9 @@
                     <th ><label>{{'Power' | translate}}{{ msrv_appsetting.Units =='M' ? '(kW)' : '(HP)' }}<span class="sort-icon ml-1"></span></label></th>
                     <th class="visibleonlybigscreen"><label class="text-wrap">{{'Spindle Speed' | translate}} ( {{'rpm' | translate }} )<span class="sort-icon ml-1"></span></label></th>                
                     <th class="visibleonlybigscreen"><label class="text-wrap">{{'Torque' | translate}}{{ msrv_appsetting.Units =='M' ? ' (Nm)' : ' (Lbf)' }}<span class="sort-icon ml-1"></span></label></th>
-                    <th></th>                 
+                    <th *ngIf="msrv_appsetting.IsCountryGermany()" ></th>                 
                     <th></th>
+                    <th></th> 
                     <th></th> 
                     <th class="d-none" >Sec</th> 
                     <th class="d-none" >Fav</th>                  
@@ -208,11 +209,17 @@
                     <td (click)="onclickrow(mach)" class="cursor-pointer"><div class="pl-2">{{mach.Power}}</div></td>
                     <td (click)="onclickrow(mach)" class="cursor-pointer visibleonlybigscreen"><div class="pl-2">{{mach.SpindleSpeed}}</div></td>                
                     <td (click)="onclickrow(mach)" class="cursor-pointer visibleonlybigscreen"><div class="pl-2">{{mach.Torque}}</div></td>                                     
+                    
+                    <td *ngIf="msrv_appsetting.IsCountryGermany()" (click)="onclickrow(mach)" >
+                      <img src="{{environment.ImgView}}"  title="View materials and standards"  class="icon-grid">
+                    </td>
                    <td data-sort="image1" class="cursor-pointer">
                       <a data-toggle="tooltip" title="{{ mach.isFavorite  ? 'Delete My Machine' : 'Add To My Machines' | translate}}" class="cursor-pointer">
                         <img   [src]="mach.isFavorite ?environment.ImgFavorite: environment.ImgAddToFavorite" class="icon-grid" (click)="OnFavoriteMachine(mach)" >
                       </a>
                     </td>
+
+
                     <td data-sort="image2">
                       <a data-toggle="tooltip" title="{{'Default Machine' | translate}}"> 
                         <img *ngIf="mach.IsMostRecommended" [src]="environment.ImgDefault"  class="icon-grid-no-pointer">                        

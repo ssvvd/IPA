@@ -7,6 +7,7 @@ import { User } from 'src/app/models/users/user';
 import { Observable,of} from 'rxjs';
 import { environment } from '../../environments/environment';
 import { NgxSpinnerService } from "ngx-spinner"; 
+import { Meta } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,18 +17,21 @@ export class LoginService {
 
 
   constructor(private srv_DataLayer:DatalayerService,
-              public srv_appsetting:AppsettingService,public translate: TranslateService,private SpinnerService: NgxSpinnerService) { }
+              public srv_appsetting:AppsettingService,public translate: TranslateService,private SpinnerService: NgxSpinnerService,
+              private meta: Meta) { }
   
   GetToken():any
   {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      //alert(res);          
-      let s= environment.signinURL + '?t=' +res;
-      console.log(s);    
-      window.open(s,'_self');          
-      return 'ok'    
+      //alert(res);  
+       
+        let s= environment.signinURL + '?t=' +res;
+        console.log(s);    
+        window.open(s,'_self');          
+        return 'ok'    
+      
     });
     //return'ok';
   }
@@ -56,15 +60,32 @@ export class LoginService {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      //alert(res);
-      let s:string=environment.LoginURLCheckCookies + '?t=' +res;  
-      //alert(s);
-      console.log(s);
-      window.open(s,'_self');   
-      console.log('after token');
-      
-      //this.srv_appsetting.AfterToken=true;
-      return 'ok'    
+     if(res=='' || res=='e')
+      {
+        this.meta.updateTag(
+          { name: 'enablelogin', content: '0' },
+          "name='enablelogin'"
+        );
+        //alert(this.meta.getTag('name=enablelogin').content);
+        this.srv_appsetting.isLoggedIn=true;
+        this.FillDefaultUser();
+        localStorage.setItem("isLogIn",null);
+      }
+      else
+      {
+        this.meta.updateTag(
+          { name: 'enablelogin', content: '1' },
+          "name='enablelogin'"
+        );
+        //this.srv_appsetting.isLoggedIn=true;
+        //alert(this.meta.getTag('name=enablelogin').content);
+        let s:string=environment.LoginURLCheckCookies + '?t=' +res;    
+        console.log(s);
+        window.open(s,'_self');   
+        console.log('after token');
+        return 'ok'
+      }
+         
     });
     return'ok';
   }
@@ -86,7 +107,7 @@ export class LoginService {
     this.srv_appsetting.Country=c;    
     this.SetExchangeRate1(c.BrifName);
     this.SelectLanguage(data[0].CATLAN);        
-    //this.translate.use(c.LanguageID[0]); 
+ 
                   
   }
 

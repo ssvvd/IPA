@@ -37,9 +37,14 @@
 
     </div>
     <hr>
-
-
-
+ <div style="width:100%;">
+   <button *ngIf="!srv_appsetting.isMobileResolution" type="button" class="btn sileLinks mb-0 pl-0 ml-0 font-weight-bold" (click)="isCollapsed = !isCollapsed"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="moreFilters"><h5 class="siteTitle">{{(isCollapsed ?'More Filters': 'Less Filters') | translate}}</h5>    
+    </button>
+    <div class="float-right"> 
+        <i [ngClass]="isCollapsed ? 'fa fa-chevron-down icon-open' : 'fa fa-chevron-up icon-open'" (click)="isCollapsed = !isCollapsed"></i>
+    </div>
+</div>
     <div id="moreFilters" class="collapse" [ngbCollapse]="isCollapsed">
 <div class="pb-2" *ngIf="!srv_appsetting.isMobileResolution">
         <div class="row   pt-2" >               
@@ -222,7 +227,8 @@
 
     </div>
 </div>
-    <button *ngIf="!srv_appsetting.isMobileResolution" type="button" class="btn sileLinks mb-0 pl-0 ml-0 font-weight-bold" (click)="isCollapsed = !isCollapsed"
+    <!-- <button *ngIf="!srv_appsetting.isMobileResolution" type="button" class="btn sileLinks mb-0 pl-0 ml-0 font-weight-bold" (click)="isCollapsed = !isCollapsed"
         [attr.aria-expanded]="!isCollapsed" aria-controls="moreFilters"><h5 class="siteTitle">{{(isCollapsed ?'More Filters': 'Less Filters') | translate}}</h5>    
     </button>
+    <i [ngClass]="isCollapsed ? 'fa fa-chevron-down icon-open' : 'fa fa-chevron-up icon-open'"></i> -->
 </div>

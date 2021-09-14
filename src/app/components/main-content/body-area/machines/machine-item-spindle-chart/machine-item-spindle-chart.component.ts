@@ -45,6 +45,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
   @Output() N3Changed = new EventEmitter<{value: number}>();  
   @Output() P2T1Changed = new EventEmitter<{P2: number,T1: number}>();
   @Output() SpindelChanged = new EventEmitter<null>();
+  @Output() TorqueChanged = new EventEmitter<null>();
   @Input() exportPDF:boolean=false;
 
   chartdata:ChartData;
@@ -204,12 +205,31 @@ export class MachineItemSpindleChartComponent implements OnInit {
        }
        else
        {
-        if(n==1) {v= this.spindle.T1*this.spindle.N1/coeff; this.spindle.P1=Math.round(v);}
-        if(n==2) {v= this.spindle.T2*this.spindle.N2/coeff; this.spindle.P2=Math.round(v);}
+        if(n==1)
+        {
+          v= this.spindle.T1*this.spindle.N1/coeff;                     
+          this.spindle.P1=Math.round(v);
+
+          this.spindle.T2=this.spindle.T1;
+          v= this.spindle.T2*this.spindle.N2/coeff;          
+          this.spindle.P2=Math.round(v);
+        }
+        if(n==2) 
+        {
+          v= this.spindle.T2*this.spindle.N2/coeff; 
+          this.spindle.P2=Math.round(v);
+          
+          this.spindle.T1=this.spindle.T2;
+          v= this.spindle.T1*this.spindle.N1/coeff;          
+          this.spindle.P1=Math.round(v);
+
+        }
         if(n==3) {v= this.spindle.T3*this.spindle.N3/coeff; this.spindle.P3=Math.round(v);}
-        if(n==4) {v= this.spindle.T4*this.spindle.N4/coeff; this.spindle.P4=Math.round(v);}     
+        if(n==4) {v= this.spindle.T4*this.spindle.N4/coeff; this.spindle.P4=Math.round(v);}   
+        this.TorqueChanged.next();      
        }   
-       this.SpindelChanged.next();      
+       this.SpindelChanged.next();  
+       
      }
 
      CheckRPMMax(value:number,name:string)
@@ -306,6 +326,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
               if (property === 'SpindleSpeed') {                
                 //this.chartdata.PoinX_1 = changes[property].currentValue;
                 this.spindle.N3 = changes[property].currentValue;
+                this.spindle.N4 = changes[property].currentValue;
                 this.CreateChart();            
               } 
               if (property === 'Power') 
@@ -321,7 +342,11 @@ export class MachineItemSpindleChartComponent implements OnInit {
               if (property === 'Torque') 
               {              
                 this.spindle.T1 = changes[property].currentValue;
-                this.spindle.P1=this.CalculatePByT(this.spindle.N1,this.spindle.T1)
+                this.spindle.P1=this.CalculatePByT(this.spindle.N1,this.spindle.T1);
+
+                this.spindle.T2 = changes[property].currentValue;
+                this.spindle.P2=this.CalculatePByT(this.spindle.N2,this.spindle.T2);
+
                 this.CreateChart();                
               }                                   
               if (property === 'AdaptationType' ) {              

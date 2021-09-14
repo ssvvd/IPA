@@ -250,7 +250,7 @@
     <div class="col-2">{{ srv_appsetting.Units =='M' ? 'kW' : 'HP' | translate}}</div>
   </div> -->
 
-  <div  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+  <div  *ngIf="this.srv_StMng.SecApp!='960' && !(this.srv_StMng.SecApp=='860' && resType == 'T')" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
     <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
       <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Mean Torque' | translate}}&nbsp;</Label>
       <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lb*inch' | translate}})</Label>
@@ -298,7 +298,7 @@
     <div class="col-2">rpm</div>
   </div> -->
 
-   <div  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+   <div *ngIf="this.srv_StMng.SecApp!='960' && this.srv_StMng.SecApp!='860'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
     <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" class="row" >
       <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Tangential force' | translate}}&nbsp;</Label>
       <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{ srv_appsetting.Units =='M' ? 'N' : 'Lb' | translate}})</Label>
