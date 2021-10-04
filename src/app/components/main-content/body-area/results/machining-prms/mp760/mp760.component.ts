@@ -193,6 +193,12 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           if(value!="") this.DC = value          
           break;
         }
+
+        case 'Solid_Diameter':{
+          if(value!="") this.DC = value          
+          break;
+        }
+        
         case 'DMax':{
           this.DH = value
           break;

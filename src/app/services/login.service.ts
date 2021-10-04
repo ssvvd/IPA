@@ -206,11 +206,11 @@ export class LoginService {
           else
           {    
             let countrycode:string=""; 
-            if(d[0].countryCode!=undefined || d[0].usageLocation !=undefined) 
+            if((d[0].countryCode!=undefined && d[0].countryCode!=null) || (d[0].usageLocation !=undefined && d[0].usageLocation!=null))
             {
              
-              if(d[0].countryCode!=undefined) countrycode=d[0].countryCode;
-              if(d[0].usageLocation!=undefined) countrycode=d[0].usageLocation;  
+              if(d[0].countryCode!=undefined && d[0].countryCode!=null) countrycode=d[0].countryCode;
+              if(d[0].usageLocation!=undefined && d[0].usageLocation!=null)  countrycode=d[0].usageLocation;  
               this.FillUserData(d,countrycode,d[0].country);
             }
             else

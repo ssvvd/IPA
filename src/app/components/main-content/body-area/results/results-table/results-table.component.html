@@ -119,6 +119,7 @@
                            </label><span class="sort-icon ml-1"></span>
                      </th>
                         <th class="no-sort d-none"></th>
+                        <th class="no-sort" style="padding:0px!important;width:30px!important ;"></th> 
                         <th class="no-sort text-center">
                            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit pl-5">
                         </th>
@@ -126,7 +127,7 @@
                         <th class="no-sort d-none">
                            
                         </th>
-                        <th class="no-sort d-none" ></th>
+                        <!-- <th class="no-sort " style="padding:0px!important;background-color:aqua;width:30px!important ;"></th> -->
                     </tr>
                  </thead>
                  <tbody>                                                             
@@ -163,16 +164,21 @@
                         <td  class="text-center" *ngIf= "!processdownload">                           
                               <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
                               <img *ngIf="srv_StMng.SecAppSelected.ApplicationITAID!='119' && srv_StMng.SecAppSelected.ApplicationITAID!='120'" src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                        
+                             
+                        </td>
+                        <td style="padding:0px!important;width:30px!important ;">
+                           <i class="fa fa-chevron-right icon-open pl-3"></i>
                         </td>
                          <td class="d-none">
                                 <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
                          </td>
                          <td class="d-none">                    
                                <img src="{{environment.ImgAssembly}}" alt="Create Assembly" title="{{'Build Assembly' | translate}}" class="icon-grid">
+                               <i class="fa fa-chevron-right icon-open pl-1 pr-2"></i>
                          </td>
-                         <td>
+                          <!-- <td class="d-none" style="padding:0px!important;background-color:aqua;width:30px!important ;">
                            <i class="fa fa-chevron-right icon-open pl-1 pr-2"></i>
-                         </td>
+                         </td>  -->
                     </tr>
                  </tbody>
       </table></div>
