@@ -1139,6 +1139,9 @@ viewInfo(index:number)
 }
 
 getPropWithoutUnits(pr:string){
+
+  /* pr=pr.replace ("<sub>","");
+  pr=pr.replace ("</sub>",""); */
   let indexOfU:number = pr.lastIndexOf('(')
   if (indexOfU != -1){
     return pr.substring(0,indexOfU)

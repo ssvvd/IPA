@@ -53,8 +53,8 @@ public downloadListPDF():any {
   var opt = {
      margin: [0, 0, 40, 0],    
     filename:     'ITAReport.pdf',
-    image:        { type: 'jpeg', quality: 0.98 },
-    html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
+    image:        { type: 'jpeg', quality: 0.4 },
+    html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 300},
     jsPDF:        { unit: 'mm',orientation: 'p',format: 'letter'},
     pagebreak:    { before: '.break-page'} 
   };  
@@ -256,7 +256,8 @@ BuildResult1(doc:jsPDF,controlname:string):any
          //if(page==0)
          //   doc.addImage(imgData, "PNG", 0, 40, innerPageWidth, pageHeight);
          // else
-          doc.addImage(imgData, "PNG", 0, 30, innerPageWidth, pageHeight);
+          doc.addImage(imgData, "PNG", 0, 30, innerPageWidth, pageHeight,'someAlias', 'FAST');
+         
         }
       
 

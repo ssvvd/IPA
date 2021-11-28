@@ -42,6 +42,28 @@
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
                 </div>
+
+                <div class="pt-3">
+                    <div class="form-group"> 
+                        <div class="pl-0">
+                            <label>{{'Flat Bottom Surface' | translate}}</label>
+                        </div>
+                        <div class="ml-0">
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optFlatBottomSurfaceNo"  
+                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('FlatBottomSurface').value" value="No" name="FlatBottomSurface" checked>
+                                <label class="custom-control-label" for="optFlatBottomSurfaceNo">{{'No' | translate}}</label>
+                            </div>                                             
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input type="radio" class="custom-control-input" id="optFlatBottomSurfaceYes" name="FlatBottomSurface" 
+                                [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('FlatBottomSurface').value" value="Yes">
+                                <label class="custom-control-label" for="optFlatBottomSurfaceYes">{{'Yes'| translate}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+
+            
             </div>      
             <div  *ngIf="msrv_appsetting.isMobileResolution && !exportPDF">
                 <div *ngIf="ImageName!=''" >

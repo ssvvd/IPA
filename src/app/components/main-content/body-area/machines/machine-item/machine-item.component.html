@@ -28,7 +28,7 @@
                 <div class="p-0 m-0"  [ngClass]="srv_appsetting.isMobileResolution?'col-12':'col-3'">    
                     <label class="desc-machine">{{machHeader?.MachineType}}</label>                                 
                 </div>
-                <div class="row pl-0 ml-0">
+                <div class="row pl-0 ml-0" >
                     <div class="pl-0 pt-2 m-0" [ngClass]="srv_appsetting.isMobileResolution?'col-5':'col-3'">    
                         <label class="desc-machine" for="txtCostPerHour">{{'Cost Per Hour' | translate}}</label>           
                     </div>                    
@@ -49,8 +49,8 @@
                         <label class="desc-machine" >{{machHeader.MachineType1}}</label>           
                     </div>                                 
                 </div>
-                <div class="form-group row" *ngIf="isLoading && !exportPDF && !srv_appsetting.isMobileResolution"> 
-                    <div class="row col-2 pt-2">                     
+                <div class="form-group row"   *ngIf="isLoading && !exportPDF && !srv_appsetting.isMobileResolution"> 
+                    <div class="row col-3 pt-2 pr-2" >                     
                         <div class="pt-2 pr-4">                     
                             <a data-toggle="tooltip" 
                                  title="{{machHeader.isFavorite ? 'Edit My Machine' :'Add To My Machines' | translate}}"> 
@@ -61,13 +61,13 @@
                             <a data-toggle="tooltip" title="{{'Save Machine' | translate}}" >
                                 <img [src]="environment.ImagePath + 'Updat_Icon.svg'" (click)="OnSaveMachine();" class="icon-grid">
                             </a>                                              
+                        </div>                     
+                        <div  class="pt-2  ml-auto float-right pr-2" >                        
+                            <button class="btn btn-select-cancel"  (click)="Reset()" >{{'Reset'| translate}}</button>                                                              
                         </div> 
                     </div>
-                    <div  class="pt-2">                        
-                        <button class="btn btn-select-cancel"  (click)="Reset()" >{{'Reset'| translate}}</button>                                                              
-                    </div> 
-                    <div  class="pt-2 pl-2">                        
-                        <button class="btn btn-select"  (click)="OnSelectMachine();" [routerLink]="['/home/materials']">{{'Select'| translate}}</button>                                                              
+                    <div  class="pt-2 pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-5':'col-2'">                        
+                        <button class="btn btn-select" style="max-width:300px;"  (click)="OnSelectMachine();" [routerLink]="['/home/materials']">{{'Select'| translate}}</button>                                                              
                     </div>                                                         
                 </div>           
             <div class="form-group">

@@ -80,4 +80,6 @@ export class Appdetails59Component implements OnInit {
     this.strMandatory=this.strMandatory +desc + this.srv_StMng.IPL.GetItem(name).value + units + ', ';
     
   }
+
+
 }

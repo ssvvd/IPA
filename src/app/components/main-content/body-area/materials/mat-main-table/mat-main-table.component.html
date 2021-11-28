@@ -57,7 +57,7 @@
       </div>
       </div> 
       <div class="divst" *ngIf="!srv_appsetting.isMobileResolution">
-        <table  datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >         
+        <table  datatable [dtTrigger]="dtTriggerMat"  title="{{'Show More Info' | translate}}"  [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >         
           <thead >
             <tr id="dtOptionsMat">
               <th class="d-none">{{'ID' | translate}}</th>

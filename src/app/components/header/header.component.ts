@@ -242,16 +242,19 @@ export class HeaderComponent implements OnInit {
 
   SelectCountryAndLang(c:Country,LanguageID:string)
   {
-    console.log('function SelectCountryAndLang');
-    this.srv_login.SelectCountryAndLang(c,LanguageID);
+    //console.log('function SelectCountryAndLang');
+    let IsChangedGermany:boolean=false;
+    if(this.SelectedLang.LanguageCode!=LanguageID && (LanguageID=='GM' || this.SelectedLang.LanguageCode=='GM')) IsChangedGermany=true;
+    this.srv_login.SelectCountryAndLang(c,LanguageID) 
+    if(IsChangedGermany) this.srv_login.ChangedLanguageGermany();
     this.SelectedLang=this.srv_appsetting.SelectedLanguage; 
     this.CurrentCountryName = this.srv_appsetting.Country.CountryName;  
     this.eventsSubject.next();
     this.translate.use(LanguageID);
     this.msgwait =this.translate.instant('Please wait while ITA is processing your request.'); 
     this.userdes=this.translate.instant('Log In'); 
-    console.log('this.srv_appsetting.Country.CountryCode');
-    console.log(this.srv_appsetting.Country.CountryCode);
+    //console.log('this.srv_appsetting.Country.CountryCode');
+    //console.log(this.srv_appsetting.Country.CountryCode);
     if(this.srv_appsetting.Country.CountryCode=='US')
     {
       this.srv_appsetting.ChangeUnits('I');
@@ -323,8 +326,12 @@ export class HeaderComponent implements OnInit {
   }
 
   Insertwear()
-  {    
-    window.open('https://www.iscar.com/Products.aspx/CountryId/1/ProductId/12340', "_blank"); 
+  {  
+    if(this.srv_appsetting.Lang=='JP')    
+      window.open('https://www.iscar.com/Products.aspx/CountryId/10/ProductId/12340', "_blank"); 
+    else
+      window.open('https://www.iscar.com/Products.aspx/CountryId/1/ProductId/12340', "_blank"); 
+
   }
   
   openhelp()

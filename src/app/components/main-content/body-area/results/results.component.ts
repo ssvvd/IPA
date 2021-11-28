@@ -361,13 +361,13 @@ eventsSubject: Subject<void> = new Subject<void>();
     message="Currently, NC program is not available for this type of tool.";
    }
 
-   if(this.srv_statemanage.IPL.GetItem('ThreadForm').value=='BSPT55' 
+  /*  if(this.srv_statemanage.IPL.GetItem('ThreadForm').value=='BSPT55' 
    || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPTF60' 
    || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPT60' )
    {
     NotCNGenerator =true;
     message="Generation of NC code for Conical threads is not yet available, please contact your technical support team.";
-   }
+   } */
 
    if(NotCNGenerator)
    {

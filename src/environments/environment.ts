@@ -5,8 +5,8 @@
 export const environment = {
   internal: true ,
   production: false  ,
-  //API_HOST: 'http://localhost:17586/',
-  API_HOST: 'http://intranet.imc.co.il/ITA_API/', 
+  API_HOST: 'http://localhost:17586/',
+  //API_HOST: 'http://intranet.imc.co.il/ITA_API/', 
   //API_HOST: 'https://www.iscar.com/ITA_API/',
   CalcReq_Host: 'https://cts02.iscar.com/MachiningPwrWs/api/CalcReq/',
   IscarLogo: 'http://intranet.imc.co.il/eCatalog/media/images/ISCAR_Logo.svg',

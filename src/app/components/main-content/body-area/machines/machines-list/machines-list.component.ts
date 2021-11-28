@@ -60,20 +60,24 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   scrollYdiff:string;
   IsViewAll:boolean=false;
 
-  constructor(private serv: MaterialService,private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
+  constructor(private router: Router,private srv_machine: MachineService, private srv_statemanage: StateManagerService, 
           private srv_appsetting:AppsettingService,public srv_cook:CookiesService,
           private modalService: NgbModal,private srv_login:LoginService,private SpinnerService: NgxSpinnerService) {   
   }
 
+
+  isAfterInitialize:boolean=false;
+
   ngOnInit() {    
     //this.srv_cook.set_cookie("closebannermobile",'0');
+    
     this.scrollYdiff='325px';   
     if(window.devicePixelRatio>1.3) this.scrollYdiff='375px';
     if(this.srv_appsetting.isMobileResolution) this.scrollYdiff='250px';   
-
+    
      if(this.getBrowserName()=='ie' && this.srv_cook.get_cookie("is_browser_ie")=='') 
      {       
-      const modalRef = this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
+      this.modalService.open(BrowersComponent, { backdrop:'static',centered: true });
       this.srv_cook.set_cookie("is_browser_ie",'1');
      }
 
@@ -97,13 +101,29 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     };  
     
     if(this.srv_appsetting.isMobileResolution) this.InitFilterTopMobile ();
+   
+    
     this.isLoaded =false;
-    
-    this.Initializemachinelist(false);
-    
-    this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  // todo: 
+
+    this.Initializemachinelist(true);
+
+    //this.eventsSubscription.add(this.srv_login.CurrentLanguageChanged.subscribe( a=>{alert(1);this.Initializemachinelist(false);}));
+    this.eventsSubscription.add(this.srv_statemanage.ReloadMachineTab.subscribe(arr => {this.Initializemachinelist(false);}));  
+    this.srv_login.CurrentLanguageChanged.subscribe( a=>{this.changelanggermany();});     
+    this.isAfterInitialize=true;
   }
   
+  changelanggermany()
+  {
+    if(this.isAfterInitialize)
+    {
+      //alert(3);    
+      this.isDtInitialized = true;
+      this.Initializemachinelist(false);
+    }
+           
+  }
+
   public getBrowserName() {
     const agent = window.navigator.userAgent.toLowerCase()
     switch (true) {
@@ -123,10 +143,8 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         return 'other';
     } 
   }
-/*   onclickdiv()
-  {
-    alert('click div');
-  } */
+
+
   IsFilterEmptyForGermany()
   {
     if(!this.srv_appsetting.IsCountryGermany())  return false;
@@ -134,7 +152,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     if(this.srv_statemanage.SelectMachineFilter==undefined) return true;
     let stfilter: MachineFilter;
     stfilter = this.srv_statemanage.SelectMachineFilter;
-    if(stfilter.AdaptationSize=='' ||  stfilter.AdaptationType=='' || (!stfilter.IsMachiningCenter && !stfilter.IsMultiSpindle && !stfilter.IsMultiTask && !stfilter.IsSwissType && !stfilter.IsLathe))
+    if(stfilter.AdaptationSize=='' &&  stfilter.AdaptationType=='' && (!stfilter.IsMachiningCenter && !stfilter.IsMultiSpindle && !stfilter.IsMultiTask && !stfilter.IsSwissType && !stfilter.IsLathe))
       return true;
     else
       return false;
@@ -160,7 +178,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
         } 
         
         this.isLoaded =true;
-        if (this.isDtInitialized) {
+        if (this.isDtInitialized) {         
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
             dtInstance.destroy();
             this.dtTrigger.next();
@@ -350,13 +368,10 @@ export class MachinesListComponent implements OnInit, OnDestroy {
               this.Initializemachinelist(true);
               this.eventsChangeFavorite.next();                   
               })); 
-          }
-          
-          
+          }                    
         }         
     } );
     }   
-
 } 
 
 ngOnDestroy() {
@@ -400,18 +415,19 @@ UpdateStateSelectedMachine(MachineID: number) {
     this.ApplyFilter($event.filter);      
     if (this.srv_statemanage.SelectedMachine == null){
       this.UpdateStateSelectedMachine(-1);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();
-        this.dtTrigger.next();
-      });           
+      
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.dtTrigger.next();
+        });           
     }
     else
     {      
       this.UpdateStateSelectedMachine(this.srv_statemanage.SelectedMachine.MachineID);
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.destroy();
-        this.dtTrigger.next();
-      });    
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.destroy();
+          this.dtTrigger.next();
+        });    
       //this.isDtInitialized = true
       //this.dtTrigger.next();
     }

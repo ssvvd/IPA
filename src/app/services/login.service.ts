@@ -8,6 +8,7 @@ import { Observable,of} from 'rxjs';
 import { environment } from '../../environments/environment';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Meta } from '@angular/platform-browser';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,9 @@ import { Meta } from '@angular/platform-browser';
 
 export class LoginService {
 
-
+  private obsLanguageChanged = new BehaviorSubject<boolean>(true);
+  CurrentLanguageChanged = this.obsLanguageChanged.asObservable();   
+  
   constructor(private srv_DataLayer:DatalayerService,
               public srv_appsetting:AppsettingService,public translate: TranslateService,private SpinnerService: NgxSpinnerService,
               private meta: Meta) { }
@@ -275,7 +278,10 @@ export class LoginService {
 
   FillUserData(d:any,countrycode:string,countryname:string)
   {
-    let cn:string='';                                                 
+    let cn:string='';  
+    //d[0].displayName ='Heikki K\u00e4rs\u00e4m\u00e4';   
+    //d[0].surname ='K\u00e4rs\u00e4m\u00e4';
+
     let u:User=
     {
     displayName:d[0].displayName,
@@ -351,8 +357,10 @@ export class LoginService {
   {
     let lan:Language;
     lan=this.srv_appsetting.lstLanguages.find(l=>l.LanguageCode == LanguageID);
+    let flgChangeGerany:boolean =false;
     if(lan!==undefined)
     {
+      //if((lan.LanguageCode!=this.srv_appsetting.SelectedLanguage.LanguageCode) && lan.LanguageCode=='GM' || this.srv_appsetting.SelectedLanguage.LanguageCode =='GM') flgChangeGerany=true;
       this.srv_appsetting.SelectedLanguage =lan;       
       if (this.translate.getLangs().indexOf(lan.LanguageCode) !== -1)
         this.translate.use(lan.LanguageCode);
@@ -364,10 +372,15 @@ export class LoginService {
    
         
     this.srv_appsetting.Country=c;  
-    console.log("c.CountryID.toString()");
-    console.log(c.CountryID.toString());
+  
     localStorage.setItem("countryid",c.CountryID.toString());        
     this.SetExchangeRate1 (c.BrifName); 
+    //if(flgChangeGerany) this.obsLanguageChanged.next;
+  }
+
+  ChangedLanguageGermany()
+  {
+     this.obsLanguageChanged.next(true);
   }
 
   SetExchangeRate()

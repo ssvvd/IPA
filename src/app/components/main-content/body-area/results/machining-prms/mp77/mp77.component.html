@@ -375,7 +375,7 @@
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
       </div>
 
-      <div  *ngIf="resType=='I'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+      <div   [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
         <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Machine Cost' | translate}}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>

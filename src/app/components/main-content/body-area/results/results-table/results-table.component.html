@@ -109,7 +109,75 @@
             </div> 
          </div>         
       </div>    
-        <table *ngIf="!srv_appsetting.isMobileResolution || processdownload" id="tbresult1" datatable  [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >  
+<!--         <table *ngIf="!srv_appsetting.isMobileResolution || processdownload" id="tbresult1" datatable  [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >  
+         <thead >
+                    <tr id="dtOptions">
+                     <th><label></label></th> 
+                                        
+                     <th  class="sorting"  *ngFor="let hd of headers; let i = index; trackBy: customTB" [hidden]="!hd.IsShow">
+                         <label  style="white-space:pre-wrap" title="{{getPropWithoutUnits(hd.FieldDescription | translate)}}" [innerHTML]="hd.FieldDescriptionSmall | translate">                            
+                           </label><span class="sort-icon ml-1"></span>
+                     </th>
+                        <th class="no-sort d-none"></th>
+                        <th class="no-sort" style="padding:0px!important;width:30px!important ;"></th> 
+                        <th class="no-sort text-center">
+                           <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit pl-5">
+                        </th>
+                        <th class="no-sort d-none" ></th>
+                        <th class="no-sort d-none">
+                           
+                        </th>
+                        
+                    </tr>
+                 </thead>
+                 <tbody>                                                             
+                    <tr (click)="viewInfo(row.index)" *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
+                       <td (click)="viewInfo(row.index)" >
+                          <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">
+                           <img src="{{dtResultsObjectsHelp[row.index].img}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
+                         (click)="viewInfo(row.index)" class="img-grid">
+                     </td>                       
+                     <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" 
+                     [hidden]="!headers[num].IsShow" class="cursor-pointer" >                 
+                           <span  (click)="viewInfo(row.index)" *ngFor="let prty of col; let PrtNum = index;"
+                           [ngClass]="(col.length > 1 && 
+                              (prty.property && (prty.property.Field.toLowerCase().includes('designation') || prty.property.Field.toLowerCase().includes('catalogno')) && (prty.value == '' || prty.value == '-') ))
+                              ? 'd-none' : 'd-block'" 
+                           >                           
+                              
+                       <div *ngIf="!srv_appsetting.isMobileResolution"  style="display: inline" [ngClass]="{'ulHover': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}"
+                              (click)="prty.property && prty.property.Field.toLowerCase().includes('designation') && goToCatalog(row.index,dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)) ; $event.stopPropagation()">
+                              <label *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">{{dtResultsObjectsHelp[row.index].GroupText[dtResultsObjectsHelp[row.index].GroupID.indexOf(prty.property.GroupID)] | translate }}:&nbsp;</label>
+                              <label  [style.white-space]="(prty.property && prty.property.Field.toLowerCase().includes('brandname')) ? 'pre-wrap' : 'nowrap'" [ngClass]="{'btn sileLinks pt-0 pl-0 pr-0 pb-0': (prty.property && prty.property.Field.toLowerCase().includes('designation'))}">{{prty.value}}</label>                              
+                              <label class="btn sileLinks pt-0 pl-0 pr-0 pb-0" *ngIf="prty.property && prty.property.Field.toLowerCase().includes('designation')">&nbsp;{{dtResultsObjectsHelp[row.index].Grade[dtResultsObjectsHelp[row.index].Designation.indexOf(prty.value)] }}</label>                              
+                        </div>                     
+   
+                           </span>
+       
+                         </td> 
+        
+                         <td class="d-none">
+                           <img src="{{environment.ImgView}}" 
+                           (click)="viewInfo(row.index)"
+                           title="View info" class="icon-grid">                            
+                     </td>
+                        <td  class="text-center" *ngIf= "!processdownload">                           
+                              <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
+                              <img *ngIf="srv_StMng.SecAppSelected.ApplicationITAID!='119' && srv_StMng.SecAppSelected.ApplicationITAID!='120'" src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                        
+                              <i class="fa fa-chevron-right icon-open pl-3"></i>                             
+                        </td>
+                      
+                         <td class="d-none">
+                                <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
+                         </td>
+                         <td class="d-none">                    
+                               <img src="{{environment.ImgAssembly}}" alt="Create Assembly" title="{{'Build Assembly' | translate}}" class="icon-grid">
+                               <i class="fa fa-chevron-right icon-open pl-1 pr-2"></i>
+                         </td>                     
+                    </tr>
+                 </tbody>
+      </table> -->
+      <table *ngIf="!srv_appsetting.isMobileResolution || processdownload" id="tbresult1" datatable  [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >  
          <thead >
                     <tr id="dtOptions">
                      <th><label></label></th> 
@@ -163,12 +231,12 @@
                      </td>
                         <td  class="text-center" *ngIf= "!processdownload">                           
                               <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
-                              <img *ngIf="srv_StMng.SecAppSelected.ApplicationITAID!='119' && srv_StMng.SecAppSelected.ApplicationITAID!='120'" src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                        
-                             
+                              <img *ngIf="srv_StMng.SecAppSelected.ApplicationITAID!='119' && srv_StMng.SecAppSelected.ApplicationITAID!='120'" src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                                                     
+                              <i class="fa fa-chevron-right icon-open pl-3"></i>
                         </td>
-                        <td style="padding:0px!important;width:30px!important ;">
-                           <i class="fa fa-chevron-right icon-open pl-3"></i>
-                        </td>
+                        <td style="padding:0px!important;width:20px!important ;">
+                           
+                        </td> 
                          <td class="d-none">
                                 <img src="{{environment.ImgAddToFavorite}}"  title="Add to Favorites" class="icon-grid">
                          </td>
@@ -176,12 +244,14 @@
                                <img src="{{environment.ImgAssembly}}" alt="Create Assembly" title="{{'Build Assembly' | translate}}" class="icon-grid">
                                <i class="fa fa-chevron-right icon-open pl-1 pr-2"></i>
                          </td>
+                         
                           <!-- <td class="d-none" style="padding:0px!important;background-color:aqua;width:30px!important ;">
                            <i class="fa fa-chevron-right icon-open pl-1 pr-2"></i>
                          </td>  -->
                     </tr>
                  </tbody>
-      </table></div>
+      </table>
+   </div>
    </div>
       
       <div [hidden]="!ErrMsg" [ngStyle]="{'padding-left':srv_appsetting.isMobileResolution?'0px':'20%'}">

@@ -56,7 +56,11 @@ checkedState(event, prty) {
             this.dangMsg = "Select at least one column"
           }
           else{
-            this.modal_columns = this.modal_columns_cur;
+        /*     this.modal_columns = this.modal_columns_cur;
+            for(let v of this.modal_columns_cur) 
+            {
+
+            }    */        
             this.activeModal.close(this.modal_columns_cur);  
           }
           

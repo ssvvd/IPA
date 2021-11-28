@@ -463,7 +463,9 @@ ClearData()
             res=0;
             switch (i + 1) {
                 case 1:
-                    if (this.threadform == 'M60' || this.threadform == 'BSPT55' || this.threadform == 'MJ60' || this.threadform == 'NJ60' || this.threadform == 'AC29' || this.threadform == 'NPSF' || this.threadform == 'ABUT')
+                    if (this.threadform == 'M60' || this.threadform == 'BSPT55' || this.threadform == 'MJ60' 
+                       || this.threadform == 'NJ60' || this.threadform == 'AC29' || this.threadform == 'NPSF' || this.threadform == 'ABUT'
+                       || this.threadform == "WH55")
                         res = Number(this.pitch);
                     if (this.threadform == 'UN60')
                         res = Math.round(coeffpitch / Number(this.pitch) * 1000) / 1000;                   

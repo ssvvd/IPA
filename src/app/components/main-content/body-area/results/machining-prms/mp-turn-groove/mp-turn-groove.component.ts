@@ -110,7 +110,7 @@ export class MpTurnGrooveComponent implements OnInit {
     this.LP = +this.srv_StMng.IPL.GetItem('GroovePosition').value
     this.DPT = this.DOD = this.DPT1 = +this.srv_StMng.IPL.GetItem('Depth').value
 
-    if (this.srv_StMng.SecApp=='52' || this.srv_StMng.SecApp=='1')
+    if (this.srv_StMng.SecApp=='52' || this.srv_StMng.SecApp=='1'  || this.srv_StMng.SecApp=='54')
       this.DWF = this.DWI - 2 * this.DPT
     if (this.srv_StMng.SecApp=='53' || this.srv_StMng.SecApp=='50' )
       this.DWF = this.DWI + 2 * this.DPT

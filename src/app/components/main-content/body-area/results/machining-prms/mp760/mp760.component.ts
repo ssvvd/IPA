@@ -471,27 +471,28 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 
       if (this.selectedHelp.SecondaryAppOrig1 == '59' || this.selectedHelp.SecondaryAppOrig1 == '61' || ((this.srv_StMng.SecApp == '57' || this.selectedHelp.SecondaryAppOrig1 == '750') && GFSCOD == 0)){
         if (this.selectedHelp.itemType.includes('S')){
-          insertType = 'Solidcarbidecutter'
-          cutForceFirts = _FHA.toString()
+          insertType = 'Solidcarbidecutter';
+          cutForceFirts = _FHA.toString();
+          thickFirstParam = kappaLeadAngel.toString() ; 
         }          
         else
         {
-          insertType = 'StraightEdge'
-          thickFirstParam = kappaLeadAngel.toString()  
-          cutForceFirts = kappaLeadAngel.toString()
+          insertType = 'StraightEdge';
+          thickFirstParam = kappaLeadAngel.toString() ; 
+          cutForceFirts = kappaLeadAngel.toString();
         } 
       }
       else if (this.selectedHelp.SecondaryAppOrig1 == '700' || this.selectedHelp.SecondaryAppOrig1 == '710'  || this.selectedHelp.SecondaryAppOrig1 == '740'){
-        insertType = 'FastFeedInsertType'
-        thickSecondParam = kappaLeadAngel.toString()
-        cutForceFirts = kappaLeadAngel.toString()
-        thickFirstParam = this.ap
+        insertType = 'FastFeedInsertType';
+        thickSecondParam = kappaLeadAngel.toString();
+        cutForceFirts = kappaLeadAngel.toString();
+        thickFirstParam = this.ap;
       }
       else if (GFSCOD > 0){
-        insertType = 'Extflutemillingcutter'
-        cutForceFirts = this.L.toString()
-        cutForceSecond = '0.2'
-        cutForceThird = '35'
+        insertType = 'Extflutemillingcutter';
+        cutForceFirts = this.L.toString();
+        cutForceSecond = '0.2';
+        cutForceThird = '35';
       }
           
 

@@ -154,7 +154,14 @@ export class OptimizetoolFilterComponent implements OnInit {
           else
             param=param+ '0/';
 
-          str_param=param + str_s + "/" + t;
+          var d_hole:string="0"; 
+          if(this.srv_StMng.SecApp=='77')
+          {
+            if(this.srv_StMng.IPL.GetItem("D_Hole").value!="" && this.srv_StMng.IPL.GetItem("D_Hole").value!=null)
+              d_hole=this.srv_StMng.IPL.GetItem("D_Hole").value;
+          }
+
+          str_param=param + str_s + "/" + t + '/' + d_hole;
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-brandname-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res);}) );
           break; 
       } 
@@ -180,16 +187,32 @@ export class OptimizetoolFilterComponent implements OnInit {
           }
           else */       
             param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/";
-
-          str_param=param + str_s + "/" + t;
           
+          var d_hole:string="0"; 
+          if(this.srv_StMng.SecApp=='77')
+          {
+            if(this.srv_StMng.IPL.GetItem("D_Hole").value!="" && this.srv_StMng.IPL.GetItem("D_Hole").value!=null)
+              d_hole=this.srv_StMng.IPL.GetItem("D_Hole").value;
+          }
+
+          str_param=param + str_s + "/" + t + '/' +d_hole;
+
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-tool-designation-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }
       case "INSERT":  {         
           //(mBrand, mTool, mDiaFrom, mDiaTo, mInnerDiaFrom, mInnerDiaTo, mTA,mSolid, mSecondaryApp, mUnits            
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+  "/0/999/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/";
-          str_param=param + str_s + "/" + t;
+          
+          var d_hole:string="0"; 
+          if(this.srv_StMng.SecApp=='77')
+          {
+            if(this.srv_StMng.IPL.GetItem("D_Hole").value!="" && this.srv_StMng.IPL.GetItem("D_Hole").value!=null)
+              d_hole=this.srv_StMng.IPL.GetItem("D_Hole").value;
+          }
+
+          str_param=param + str_s + "/" + t + '/' +d_hole;
+          
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-insert-designation-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       } 
@@ -197,7 +220,18 @@ export class OptimizetoolFilterComponent implements OnInit {
           //"All/0/999/All/1/1/760/M/All/"
           //{BrandName}/{DiaFrom}/{DiaTo}/{Insert}/{bTA}/{bSolid}/{pSecondaryApp}/{pUnits}/{Family}/{ToolDesignation}/}{Filter}/{Top}
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/0/999/All/1/1/" + this.srv_StMng.SecApp +"/" + this.srv_appsetting.Units + "/All/"  + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+ "/";
-          str_param=param + str_s + "/" + t;
+
+          var d_hole:string="0"; 
+          if(this.srv_StMng.SecApp=='77')
+          {
+            if(this.srv_StMng.IPL.GetItem("D_Hole").value!="" && this.srv_StMng.IPL.GetItem("D_Hole").value!=null)
+              d_hole=this.srv_StMng.IPL.GetItem("D_Hole").value;
+          }
+
+          str_param=param + str_s + "/" + t + '/' +d_hole;
+
+
+
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-tool-catalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)}) );
           break; 
       }
@@ -206,7 +240,16 @@ export class OptimizetoolFilterComponent implements OnInit {
           // /{BrandName}/{Designation}/{Units}/{bTA}/{bSolid}/{CarbideGrade}/{SecondaryApp}/{Tool}/{ToolCatalogNo}/{DiaFrom}/{DiaTo}/{Filter}/{Top}
           param=this.srv_StMng.IPL.GetItem("TD_BrandName").value + "/" +this.srv_StMng.IPL.GetItem("TD_InsertDesignation").value + "/" 
           + this.srv_appsetting.Units + "/1/1/All/" + this.srv_StMng.SecApp +"/" + this.srv_StMng.IPL.GetItem("TD_ToolDesignation").value+"/" + this.srv_StMng.IPL.GetItem("TD_ToolCatalogNo").value+ "/0/999/";
-          str_param=param + str_s + "/" + t;
+          
+          var d_hole:string="0"; 
+          if(this.srv_StMng.SecApp=='77')
+          {
+            if(this.srv_StMng.IPL.GetItem("D_Hole").value!="" && this.srv_StMng.IPL.GetItem("D_Hole").value!=null)
+              d_hole=this.srv_StMng.IPL.GetItem("D_Hole").value;
+          }
+
+          str_param=param + str_s + "/" + t + '/' +d_hole;
+          
           this.eventsSubscription.add(this.srv_DataLayer.get_tdlist('td-get-insert-catalogno-list',str_param).subscribe((res: any)=>{this.filldatasubscribe(res)})) ;
           break; 
       }
@@ -821,7 +864,14 @@ case "GROOVEINTBLADE": {
   {
     this.selitems =this.arrDataF.filter(p => p.Checked);  
     this.fillselectedvalue(); 
-    this.srv_StMng.IPL.GetItem(this.fieldid).value = this.get_strselectedvalue( this.selitems);             
+    this.srv_StMng.IPL.GetItem(this.fieldid).value = this.get_strselectedvalue( this.selitems);      
+    if(this.srv_StMng.SecApp=='760' || this.srv_StMng.SecApp=='770' || this.srv_StMng.SecApp=='780' || this.srv_StMng.SecApp=='790' )       
+    {
+      //todo: check if tool is fast feed (parameter 357 ='FF')
+      ///
+      ///
+      
+    }
   }
   
   remove_select()

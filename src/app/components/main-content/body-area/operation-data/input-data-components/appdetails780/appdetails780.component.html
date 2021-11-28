@@ -80,20 +80,20 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="pt-3 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
-                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
+                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtD3" name="txtD3" 
                         (change)="SetIPLMandatory('D3')"  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D3').value" (focus)="onfocusfield('D3')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
             </div> 
-                 <div class="row" *ngIf="HoleType=='PreHole'">
+            <div class="row" *ngIf="HoleType=='PreHole'">
                     <div class="row pt-2" [ngClass]="exportPDF?'col-5':'col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12 '">
                         <label class="pl-0 pt-3">{{'Hole Diameter (DH)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
-                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtDepth" name="txtDepth" 
+                        <input type="number" required [className]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value=='0' ? 'form-control input-empty input-min-width': 'form-control input-min-width'" id="txtD2" name="txtD2" 
                         (change)="SetIPLMandatory('D2')"   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('D2').value" (focus)="onfocusfield('D2')" (focusout)="onfocusoutfield()"> 
                     </div>
                     <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">

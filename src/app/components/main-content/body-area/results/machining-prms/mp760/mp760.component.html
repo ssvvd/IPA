@@ -499,7 +499,7 @@
         <div   [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Bending Moment' | translate}}&nbsp;</Label>
-            <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{ srv_appsetting.Units =='M' ? 'N' : 'Lbf' | translate}})</Label>
+            <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{ srv_appsetting.Units =='M' ? 'Nm' : 'Lbf' | translate}})</Label>
           </div>
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">M<sub>b</sub></div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{mb}}</div>
