@@ -136,8 +136,9 @@ export class MachinesFilterComponent implements OnInit {
           this.arrAdapSize = JSON.parse(res); 
           this.arrAdapSize.unshift( { AdaptationType:'',AdaptationSize:''});      
                 
-          this.arrAdapSizeFilter=[];                
-          this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
+          this.arrAdapSizeFilter=[];  
+                      
+          this.eventsSubscription.add(this.serv.getmachines(this.srv_appsetting.Units,this.srv_appsetting.IsCountryGermany(), this.srv_appsetting.UserIDencode)
           .subscribe((data: any) => {        
             this.arrMachines = JSON.parse(data);                 
                        
@@ -238,14 +239,16 @@ export class MachinesFilterComponent implements OnInit {
   InitFilter()
   {
     this.machFilter=new MachineFilter;
-    this.machFilter.IsMachiningCenter =true;
-    this.machFilter.IsLathe =true;
-    this.machFilter.IsMultiTask =true;
-    this.machFilter.IsMultiSpindle =true;
-    this.machFilter.IsSwissType =true;
+    this.machFilter.IsMachiningCenter =false;//!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsLathe =false;//!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsMultiTask =false;//!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsMultiSpindle =false;//!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsSwissType =false;//!this.srv_appsetting.IsCountryGermany();
+
     this.machFilter.IsMachineTypeStandard=true;
-    this.machFilter.IsMachineTypeHeavyDuty=true;
-    this.machFilter.IsMachineTypeHighSpeed=true;
+    this.machFilter.IsMachineTypeHeavyDuty=!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsMachineTypeHighSpeed=!this.srv_appsetting.IsCountryGermany();
+
     //todo:
     
     this.machFilter.PowerMin = this.minPower;
@@ -349,14 +352,16 @@ export class MachinesFilterComponent implements OnInit {
     this.IsMultiSpindle =false;
     this.IsSwissType =false; 
 
-    this.machFilter.IsMachiningCenter =true;
-    this.machFilter.IsLathe =true;
-    this.machFilter.IsMultiTask =true;
-    this.machFilter.IsMultiSpindle =true;
-    this.machFilter.IsSwissType =true; 
+    this.machFilter.IsMachiningCenter =!this.srv_appsetting.IsCountryGermany();;
+    this.machFilter.IsLathe =!this.srv_appsetting.IsCountryGermany();;
+    this.machFilter.IsMultiTask =!this.srv_appsetting.IsCountryGermany();;
+    this.machFilter.IsMultiSpindle =!this.srv_appsetting.IsCountryGermany();;
+    this.machFilter.IsSwissType =!this.srv_appsetting.IsCountryGermany();; 
+
     this.machFilter.IsMachineTypeStandard=true;
-    this.machFilter.IsMachineTypeHeavyDuty=true;
-    this.machFilter.IsMachineTypeHighSpeed=true;
+    this.machFilter.IsMachineTypeHeavyDuty=!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsMachineTypeHighSpeed=!this.srv_appsetting.IsCountryGermany();
+    
     this.machFilter.ShowOnlyFavorites=false;
     this.machFilter.IsMostRecommended=true;
 

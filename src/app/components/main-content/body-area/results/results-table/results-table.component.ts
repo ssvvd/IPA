@@ -810,7 +810,7 @@ switch(this.srv_StMng.SecApp.toString()){
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Blade'); 
               break;
             case 'ADAPTER':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Adapter');
               break;
           }
         })
@@ -836,7 +836,7 @@ switch(this.srv_StMng.SecApp.toString()){
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Blade');
               break;
             case 'ADAPTER':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Adapter');
               break;
             case 'BORING BAR':
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Tool');

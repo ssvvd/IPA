@@ -39,11 +39,11 @@
                     <div class="pt-0 pl-0" [ngClass]="exportPDF?'col-1':'col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1 '">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
                     </div>
-            </div>
+            </div> 
                 
              <div class="form-group row" *ngIf="msrv_StMng.SecApp=='990'">
                     <div class="row pt-0" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 '">
-                        <label class="pl-0 pt-3">{{'Axial length' | translate}}{{' (LA)'}}</label>                                               
+                        <label class="pl-0 pt-3">{{'Axial Length' | translate}}{{' (LA)'}}</label>                                               
                     </div>
                     <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
                         <input  type="number"  class="form-control  input-min-width"   
@@ -55,7 +55,7 @@
             </div> 
             <div class="form-group row" *ngIf="msrv_StMng.SecApp=='980'">
                     <div class="row pt-0" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12'">
-                        <label for="txtDepthRadial" class="pl-0 pt-3">{{'Axial length (LA)' | translate}}</label>   
+                        <label for="txtDepthRadial" class="pl-0 pt-3">{{'Axial Length' | translate}}{{' (LA)'}}</label>   
                         <label class="pl-2 asterisk-red pt-3">*</label>                     
                     </div>
                     <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
@@ -70,7 +70,7 @@
                 
              <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
                     <div class="pt-3 pl-0"  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12'">
-                        <label class="pl-0 pt-3">{{'Axial length (LA1)' | translate}}</label>                                               
+                        <label class="pl-0 pt-3">{{'Axial Length' | translate}}{{' (LA1)'}}</label>                                               
                     </div>
                     <div class="pt-3 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10'">
                         <input  type="number"  class="form-control input-min-width"  
@@ -95,7 +95,7 @@
            </div>   
             <div class="form-group row" *ngIf="msrv_StMng.SecApp=='970'">
                     <div class="row pt-3" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 '">
-                        <div class="pl-0 pt-3"><label for="txtDepthRadial1" class="pl-0 pt-3" >{{'Axial length (LA2)' | translate}}</label></div>
+                        <div class="pl-0 pt-3"><label for="txtDepthRadial1" class="pl-0 pt-3" >{{'Axial Length' | translate}}{{' (LA2)'}}</label></div>
                          
                         <div class="pl-0 pt-3"><label class="pl-2 asterisk-red pt-3">*</label> </div>                                             
                     </div>

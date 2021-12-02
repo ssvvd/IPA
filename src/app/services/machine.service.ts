@@ -11,11 +11,12 @@ export class MachineService {
   constructor(private httpClient: HttpClient) 
   {}
 
-  public  getmachines(units:string,userid:string)
+  public  getmachines(units:string,isgermany:boolean,userid:string)
   {       
     if(userid!='')  userid='/' + userid;
-     
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units + userid);
+    let isgermanystr:string='0';
+    if(isgermany)  isgermanystr='1'; 
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'machines/' +units + '/'+ isgermanystr + userid);
   }
   public  getmachinedetailed(id:number,units:string)
   {        
@@ -49,6 +50,11 @@ export class MachineService {
   }
   public  machine_update(machineid:number,machinetype:string,machinename:string,units:string,machinetype1:string,costperhour :number,currency:string,inputparam:string) //todo:
   {      
+    let str:string;
+    str=environment.API_HOST + this.API_ROUTE +  'machines-update/' + machineid +
+    '/'+ machinetype +'/' +machinename +'/' +units +'/'+ machinetype1 + '/' + costperhour +'/' + currency;
+    console.log(str);
+    console.log(inputparam);
     return  this.httpClient.post(environment.API_HOST + this.API_ROUTE +  'machines-update/' + machineid +
       '/'+ machinetype +'/' +machinename +'/' +units +'/'+ machinetype1 + '/' + costperhour +'/' + currency, inputparam ).catch((err: HttpErrorResponse) => {   
       console.error('An error occurred:', err.error);   

@@ -3,6 +3,7 @@ import { Machinespindle } from '../../../../../models/machines/machinespindle';
 import { AppsettingService} from '../../../../../services/appsetting.service';
 import { Observable, Subscription} from 'rxjs';
 import 'chart.js';
+//import 'chartjs-plugin-zoom'; todo:
 
 export class ChartData
 {

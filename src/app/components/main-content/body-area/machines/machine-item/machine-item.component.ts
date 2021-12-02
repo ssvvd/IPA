@@ -102,7 +102,8 @@ export class MachineItemComponent implements OnInit {
         }
       else
           this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
-          this.arrMachineSpindle = JSON.parse(res);                   
+          this.arrMachineSpindle = JSON.parse(res); 
+          this.arrMachineSpindle=this.arrMachineSpindle.sort((one,two)=>( one.SpindleType ==this.machHeader.SpindleType ? -1 :1 )) ;                  
           this.machSpindleMain = this.arrMachineSpindle[0]; 
           this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
           this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
@@ -247,7 +248,9 @@ export class MachineItemComponent implements OnInit {
      this.eventsSubscription.add(this.srv_machine.getmachineheader(MachineID).subscribe((res: any) => {                   
         this.machHeader =JSON.parse(res)[0];                
         this.eventsSubscription.add(this.srv_machine.getmachinedetailed(MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
-        this.arrMachineSpindle = JSON.parse(res);      
+        this.arrMachineSpindle = JSON.parse(res);  
+        this.arrMachineSpindle=this.arrMachineSpindle.sort((one,two)=>( one.SpindleType ==this.machHeader.SpindleType ? -1 :1 )) ;
+        //  res = allValues.sort((one, two) => (one < two ? -1 : 1));   
         this.machSpindleMain = this.arrMachineSpindle[0]; 
         this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
         this.machHeader.Torque = this.arrMachineSpindle[0].Torque;
@@ -277,7 +280,8 @@ export class MachineItemComponent implements OnInit {
   Reset()
   {
     this.eventsSubscription.add(this.srv_machine.getmachinedetailed(this.MachineID,this.srv_appsetting.Units).subscribe((res: any) => {
-      this.arrMachineSpindle = JSON.parse(res);      
+      this.arrMachineSpindle = JSON.parse(res);
+      this.arrMachineSpindle=this.arrMachineSpindle.sort((one,two)=>( one.SpindleType ==this.machHeader.SpindleType ? -1 :1 )) ;      
       this.machSpindleMain = this.arrMachineSpindle[0]; 
       this.machHeader.SpindleSpeed = this.arrMachineSpindle[0].SpindleSpeed;
       this.machHeader.Torque = this.arrMachineSpindle[0].Torque;

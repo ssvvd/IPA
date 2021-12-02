@@ -34,8 +34,8 @@ export class Machinespindle {
     public ExtOil:boolean =true ; 
     public IntOil:boolean =true ;
 
-    public EmultionPressure:number;
-    public EmultionFlowRate:number;
+    public EmulsionPressure:number;
+    public EmulsionFlowRate:number;
     public FaceContact:boolean;
 
     constructor() { 

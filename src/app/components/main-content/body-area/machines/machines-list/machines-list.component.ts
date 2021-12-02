@@ -148,19 +148,27 @@ export class MachinesListComponent implements OnInit, OnDestroy {
   IsFilterEmptyForGermany()
   {
     if(!this.srv_appsetting.IsCountryGermany())  return false;
-
+    
     if(this.srv_statemanage.SelectMachineFilter==undefined) return true;
     let stfilter: MachineFilter;
     stfilter = this.srv_statemanage.SelectMachineFilter;
-    if(stfilter.AdaptationSize=='' &&  stfilter.AdaptationType=='' && (!stfilter.IsMachiningCenter && !stfilter.IsMultiSpindle && !stfilter.IsMultiTask && !stfilter.IsSwissType && !stfilter.IsLathe))
-      return true;
-    else
-      return false;
+    let countchecked:number=0;
+    if(stfilter.IsMachiningCenter) countchecked ++;
+    if(stfilter.IsMultiSpindle) countchecked ++;
+    if(stfilter.IsMultiTask) countchecked ++;
+    if(stfilter.IsSwissType) countchecked ++;
+    if(stfilter.IsLathe) countchecked ++;
+    if(stfilter.ShowOnlyFavorites) return false;
+    if((stfilter.AdaptationSize=='' &&  stfilter.AdaptationType=='' && (!stfilter.IsMachiningCenter && !stfilter.IsMultiSpindle && !stfilter.IsMultiTask 
+      && !stfilter.IsSwissType && !stfilter.IsLathe)) || countchecked>=2 )
+       return true;
+    else        
+        return false;
   }
 
   Initializemachinelist(withdestroy:boolean)
   {  
-    this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.UserIDencode)
+    this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.IsCountryGermany() ,this.srv_appsetting.UserIDencode)
       .subscribe((data: any) => {
         
         this.listmachines = JSON.parse(data);          
@@ -313,7 +321,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
     {
       this.listmachines = this.listmachines.filter(m =>{m.Torque==-222});                     
     }    
-
+    this.countrow =this.listmachines.length.toString();
     this.listmachines=this.listmachines.sort((a,b)=> this.sort_arr(a,b));
     this.listmachines_sorted=this.listmachines_sorted.sort((a,b)=> this.sort_arr(a,b));
   }
@@ -612,10 +620,22 @@ UpdateStateSelectedMachine(MachineID: number) {
         ) &&
         ((filter.ShowOnlyFavorites && m.isFavorite) || (!filter.ShowOnlyFavorites))  
         && 
-        ((filter.IsMostRecommended && (m.isFavorite || m.IsMostRecommended)) || (!filter.IsMostRecommended))) 
-        ;
+        ((filter.IsMostRecommended && (m.isFavorite || m.IsMostRecommended)) || (!filter.IsMostRecommended))) ;
+
+       
+        if(this.srv_appsetting.IsCountryGermany() && !filter.ShowOnlyFavorites) 
+        {
+          if(filter.AdaptationType =='' && filter.AdaptationSize =='')
+            this.listmachines = this.listmachines.filter(m=> (m.IsMostRecommended));
+        }    
     this.srv_statemanage.SelectMachineFilter = filter;
-    this.countrow =this.listmachines.length.toString(); 
+   
+    if(this.IsFilterEmptyForGermany() )  
+    {
+      this.listmachines = this.listmachines.filter(m =>{m.Torque==-222});                     
+    }    
+ 
+    this.countrow =this.listmachines.length.toString();
     
     let minPower:number=0;
     let maxPower:number=0;
@@ -623,11 +643,6 @@ UpdateStateSelectedMachine(MachineID: number) {
     let maxSpeed:number=0;
     let minTorque:number=0;
     let maxTorque:number=0;
-
-    if(this.IsFilterEmptyForGermany() )  
-    {
-      this.listmachines = this.listmachines.filter(m =>{m.Torque==-222});                     
-    }    
 
     if(this.listmachines.length>0)
     {
@@ -855,11 +870,11 @@ UpdateStateSelectedMachine(MachineID: number) {
   InitFilterTopMobile()
   {
     this.MachineFilterTopMobile=new MachineFilter;
-    this.MachineFilterTopMobile.IsMachiningCenter =true;
-    this.MachineFilterTopMobile.IsLathe =true;
-    this.MachineFilterTopMobile.IsMultiTask =true;
-    this.MachineFilterTopMobile.IsMultiSpindle =true;
-    this.MachineFilterTopMobile.IsSwissType =true;
+    this.MachineFilterTopMobile.IsMachiningCenter =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilterTopMobile.IsLathe =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilterTopMobile.IsMultiTask =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilterTopMobile.IsMultiSpindle =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilterTopMobile.IsSwissType =!this.srv_appsetting.IsCountryGermany();
     this.MachineFilterTopMobile.SearchText="";
     this.MachineFilterTopMobile.IsMostRecommended=true;
 this.IsViewAll=false;
@@ -878,14 +893,14 @@ this.IsViewAll=false;
     let maxTorque :number= Math.max.apply(Math,this.listmachines_sorted.map(a => a['Torque']).filter(function(val) { if(typeof val ==='number' || typeof val ==='string'){return val;} }))                                
         
     this.MachineFilter=new MachineFilter;
-    this.MachineFilter.IsMachiningCenter =true;
-    this.MachineFilter.IsLathe =true;
-    this.MachineFilter.IsMultiTask =true;
-    this.MachineFilter.IsMultiSpindle =true;
-    this.MachineFilter.IsSwissType =true;
+    this.MachineFilter.IsMachiningCenter =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilter.IsLathe =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilter.IsMultiTask =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilter.IsMultiSpindle =!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilter.IsSwissType =!this.srv_appsetting.IsCountryGermany();
     this.MachineFilter.IsMachineTypeStandard=true;
-    this.MachineFilter.IsMachineTypeHeavyDuty=true;
-    this.MachineFilter.IsMachineTypeHighSpeed=true;
+    this.MachineFilter.IsMachineTypeHeavyDuty=!this.srv_appsetting.IsCountryGermany();
+    this.MachineFilter.IsMachineTypeHighSpeed=!this.srv_appsetting.IsCountryGermany();
     //todo:
     
     this.MachineFilter.PowerMin = minPower;

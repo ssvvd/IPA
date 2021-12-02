@@ -146,7 +146,7 @@
                         <label for="txtEmultionPressure"><span>{{'Emulsion Pressure' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (bar)' : ' (Psi)' }}</span></label>
                     </div>
                     <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'">
-                        <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmultionPressure" > 
+                        <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionPressure" [(ngModel)]="spindle.EmulsionPressure" > 
                     </div>
                 </div>
                 <div class="form-group row pt-2">
@@ -154,7 +154,7 @@
                         <label for="txtEmultionFlowRate"><span>{{'Emulsion Flow Rate' | translate}}</span><span>{{ msrv_appsetting.Units =='M' ? ' (L/min)' : ' (Gpm)' }}</span></label>
                     </div>
                     <div [ngClass]="exportPDF?'col-5 pt-1':'col-4 pt-1'">
-                        <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmultionFlowRate" > 
+                        <input type="number" class="form-control" id="txtEmultionPressure" name="txtEmultionFlowRate" [(ngModel)]="spindle.EmulsionFlowRate" > 
                     </div>
                 </div>  
                 <div class="form-group row pt-2">

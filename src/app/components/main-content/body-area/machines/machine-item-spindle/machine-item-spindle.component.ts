@@ -81,13 +81,13 @@ export class MachineItemSpindleComponent implements OnInit
     
     if(this.srv_appsetting.Units=='I')
     {
-      this.spindle.EmultionPressure = 25 *14.5038;//TODO:
-      this.spindle.EmultionFlowRate = 40*0.2642;
+      //this.spindle.EmulsionPressure = 25 *14.5038;//TODO:
+      //this.spindle.EmulsionFlowRate = 40*0.2642;
     }
     else
     {
-      this.spindle.EmultionPressure = 25;//TODO:
-      this.spindle.EmultionFlowRate = 40;
+      //this.spindle.EmustionPressure = 25;//TODO:
+      //this.spindle.EmulsionFlowRate = 40;
     }
     
   }
@@ -117,8 +117,8 @@ export class MachineItemSpindleComponent implements OnInit
   {
      this.eventsSubscription.add(this.serv.getmachineadaptationdata(at,az,st,this.srv_appsetting.Units).subscribe((res: any) => {     
        this.spindle =JSON.parse(res)[0];   
-       this.spindle.EmultionPressure = 25;//TODO:
-       this.spindle.EmultionFlowRate = 40;            
+       //this.spindle.EmultionPressure = 25;//TODO:
+       //this.spindle.EmultionFlowRate = 40;             
       }));   
   }
   changeadapsize()
