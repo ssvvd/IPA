@@ -264,7 +264,7 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           this.Dvf = +value
           break;
         }
-        case 'RpDown1':{
+        case 'RampDownAlphaTool':{
           this.RMPX = +value
           break;
         }

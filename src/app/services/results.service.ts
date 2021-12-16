@@ -289,6 +289,16 @@ export class ResultsService {
       return "error";
     });
   }
+
+
+  public getitemsdetailsipack(catalogs:string){
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-items-details-ipack/' +catalogs).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  } 
+
+
   }
 
 

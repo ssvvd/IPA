@@ -791,7 +791,7 @@ case "GROOVEINTBLADE": {
     let n:number=0;
     this.arrData =[];     
     //add from post  
-    console.log(JSON.parse(data));    
+    //console.log(JSON.parse(data));    
     for (const d of JSON.parse(data)) {                                                     
             if(d[this.fieldname]!='All' && d[this.fieldname].replace(/\s/g, "")!='')                                     
               this.arrData.push({                

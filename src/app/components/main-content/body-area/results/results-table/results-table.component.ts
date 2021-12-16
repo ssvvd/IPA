@@ -718,6 +718,9 @@ switch(this.srv_StMng.SecApp.toString()){
         case 'HolderDesignation' :
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
           break;
+        case 'HolderDesignationMM':
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
+          break;
         case 'HolderDesignationCollet':
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Collet');
           break;
@@ -851,7 +854,10 @@ switch(this.srv_StMng.SecApp.toString()){
     break
     case '77': 
     switch(field){
-      case 'HolderDesignation' :
+      case 'HolderDesignation':
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
+        break;
+      case 'HolderDesignationMM' :
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
         break;
       case 'HolderDesignationCollet':

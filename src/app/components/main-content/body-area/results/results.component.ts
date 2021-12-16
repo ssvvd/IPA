@@ -23,6 +23,7 @@ import { ResultsStoreService} from 'src/app/services/results-store.service' ;
 
 export class ResultsComponent implements OnInit, AfterViewInit { 
 
+
 filterChanged:any;
 viewParams:any;
 MainPage:boolean = true;
@@ -39,6 +40,8 @@ filtermobiletop:string='FilterRec';
 
 @ViewChild('resTable', {static: false}) resTable: ResultsTableComponent;
 @ViewChild('productInfo', {static: false}) productInfo: ProductInfoComponent;
+
+EvOpenWebShop: Subject<void> = new Subject<void>();
 
 eventsSubject: Subject<void> = new Subject<void>();
 
@@ -68,6 +71,11 @@ eventsSubject: Subject<void> = new Subject<void>();
     }
   ngAfterViewInit() {
     //console.log(this.resTable); 
+  }
+
+  onOpenWebShop()
+  {
+    this.EvOpenWebShop.next();
   }
 
   ngOnInit() {

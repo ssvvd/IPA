@@ -4,11 +4,15 @@ import { environment } from 'src/environments/environment';
 import { StateManagerService} from 'src/app/services/statemanager.service' ;
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { ResultsService} from 'src/app/services/results.service' ;
+import {Subject} from 'rxjs/Subject';
+
 @Component({
   selector: 'inner-tabs-table',
   templateUrl: './inner-tabs-table.component.html',
   styleUrls: ['./inner-tabs-table.component.scss']
 })
+ 
+
 export class InnerTabsTableComponent implements OnInit {
 
   @Input() viewParamsChanged: any ;
@@ -17,10 +21,18 @@ export class InnerTabsTableComponent implements OnInit {
   environment = environment;
   ShowComments:boolean =false;
   IsExistIntoolShop:string[]=[];
+  catalogNoPack:string[]=[];
+  
+  @Input() OpenWebShop: Subject<boolean>;
+
   constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
               private srv_results:ResultsService) { }
-
-  ngOnInit(): void {   
+  
+  ngOnInit(): void { 
+    
+    this.OpenWebShop.subscribe(v => { 
+      this.GetstrForWebShop();
+    });
   }
 
   ngOnChanges(changes:SimpleChanges) {
@@ -28,13 +40,13 @@ export class InnerTabsTableComponent implements OnInit {
       this.selectedOption = this.viewParamsChanged.Res[0];
       if(this.selectedOption.info.filter(i=> i!=null && i!='').length >0) this.ShowComments=true;   
        //if(this.srv_appsetting.Country.FCSToolshopSite!='' && this.srv_appsetting.UserID!='')
-    if(this.srv_appsetting.Country.FCSToolshopSite!='' )
-    {
-      this.IsExistIntoolShop=[];
-      this.selectedOption.CatalogNo.forEach((cat) => {
+      if(this.srv_appsetting.Country.FCSToolshopSite!='' )
+      {
+        this.IsExistIntoolShop=[];
+        this.selectedOption.CatalogNo.forEach((cat) => {
         this.srv_results.getitemsdetailsfortoolshop (cat,this.srv_appsetting.Units,this.srv_appsetting.Lang,this.srv_appsetting.Country.LACNT).subscribe((res: any) => 
         { 
-          this.IsExistIntoolShop.push(res);
+          this.IsExistIntoolShop.push(res);                           
         });
       });
     }
@@ -62,13 +74,41 @@ export class InnerTabsTableComponent implements OnInit {
   checkexistsitemintoolshop(catalogno:string) 
   {
     this.srv_results.getitemsdetailsfortoolshop (catalogno,this.srv_appsetting.Units,this.srv_appsetting.Lang,this.srv_appsetting.Country.LACNT).subscribe((res: any) => 
-    { 
-      if(JSON.parse(res).length>0)     
-        return true;
-      else
-        return false;
+    {       
+      if(JSON.parse(res).length>0)           
+        return true;     
+      else      
+        return false;             
     });
-    //return false;     
+     
   } 
   
+  GetstrForWebShop()
+  {
+    let str:string='';
+    let strres:string='';
+    for(let i:number=0;i<this.selectedOption.CatalogNo.length;i++)
+    {       
+       if(str.indexOf(this.selectedOption.CatalogNo[i].trim())==-1)
+        str=str+this.selectedOption.CatalogNo[i].trim()  +',';
+    } 
+
+    if(str!='') str=str.substring(0,str.length-1);
+
+    this.srv_results.getitemsdetailsipack (str).subscribe((res: any) => 
+    { 
+      for (const d of JSON.parse(res)) 
+      {       
+        strres=strres+"qty[" + d.GICAT.trim() + "]=" + d.IPACK + "&";
+      }
+      if(strres!='') strres=strres.substring(0,strres.length-1);
+
+      let url:string=this.srv_appsetting.Country.FCSToolshopSite + "/orders.php?order=1&action=BasketAddByKey&" +strres;
+  
+      window.open(url, "_blank");
+    });
+    
+   
+  }
+
 }
