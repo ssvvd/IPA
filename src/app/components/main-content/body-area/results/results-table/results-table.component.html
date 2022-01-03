@@ -85,10 +85,10 @@
             class="row tr-not-selected cursor-pointer col-12 border-bottom-gray">            
             <div class="col-4 pl-2 pt-2">             
                 <div class="text-left float-left pl-0 pb-4">
-                  <img  *ngIf="!processdownload" class="pb-2" [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
+                  <img  *ngIf="!processdownload" class="pb-2" [lazyLoad]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
                 </div>                
                <!-- <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)"> -->
-               <img src="{{dtResultsObjectsHelp[row.index].img}}" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
+               <img [lazyLoad]="dtResultsObjectsHelp[row.index].img" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
              (click)="viewInfo(row.index)" class="img-grid-mobile"> 
             </div>
             <div class="col-8 pl-0 ml-0 pt-2">

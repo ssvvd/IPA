@@ -38,7 +38,7 @@
     <li  (click)="onFilterSecApp(secapp)" [ngClass]="srv_appsetting.isMobileResolution?'li-item-mobile ' :'li-item pt-1' " class="nav-item " (click)="ToOperationData(secapp)" *ngFor="let secapp of arrSelectedSecApp1">
         <div *ngIf="!srv_appsetting.isMobileResolution" [ngClass]="{'div-app-810':(secapp.ApplicationITAID=='810' || secapp.ApplicationITAID=='820'),'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
                                     'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">    
-            <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" >                                              
+            <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">                                              
                 <img  src="{{secapp.MenuImage}}" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
                 [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='810' && secapp.ApplicationITAID!='820'?'secapp-image cursor-pointer':'secapp-image img-not-allowed'">                                                                                                  
             </div>
@@ -63,7 +63,7 @@
                     <img src="{{secapp.MenuImage}}" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
                    class="pl-2" [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='810' && secapp.ApplicationITAID!='820'?'secapp-image-mobile cursor-pointer':'secapp-image-mobile img-not-allowed'">                                                                                                  
             </div>
-            <div>
+            <div  >
                 <div [ngClass]="secapp.IsActive?srv_appsetting.isMobileResolution?'cursor-pointer pt-2':'cursor-pointer':srv_appsetting.isMobileResolution?'cursor-not-allowed pt-2':'cursor-not-allowed'">
                     <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" class="text-left form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" 
                             title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    

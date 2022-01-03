@@ -686,7 +686,7 @@
 
 <div  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-top-gray':''" class="row justify-content-start w-100 ">      
   <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
-    <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Radial'}} - {{'Cutting Time per Part' | translate }}&nbsp;</Label>
+    <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Radial' | translate}} - {{'Cutting Time per Part' | translate }}&nbsp;</Label>
     <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">(mm:ss)</Label>
   </div>
   <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">CTP<sub>r</sub></div>

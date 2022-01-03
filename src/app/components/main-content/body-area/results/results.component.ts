@@ -361,21 +361,36 @@ eventsSubject: Subject<void> = new Subject<void>();
  {
    let NotCNGenerator:boolean =false;
    let message:string;   
-   let index_family:number;
-   index_family=this.viewParams.Res[0].Families.length-1;
-   if(this.viewParams.Res[0].Families[index_family]==4089 || this.viewParams.Res[0].Families[index_family]==4090 || this.viewParams.Res[0].Families[index_family]==3524)
+   let index_family:number=0;
+   for (let f of this.viewParams.Res[0].Families)
+   {  
+    if(f==4089 || f==4090 || f==3524) NotCNGenerator=true;
+   }
+
+   if(NotCNGenerator)
+   {    
+      message="Currently, NC program is not available for this type of tool.";
+   } 
+
+ /*   if(this.viewParams.Res[0].Families.length>1)  
+      index_family=this.viewParams.Res[0].Families.length-2;
+   else
+      index_family=this.viewParams.Res[0].Families.length-1; */
+
+   /* if(this.viewParams.Res[0].Families[index_family]==4089 || this.viewParams.Res[0].Families[index_family]==4090 || this.viewParams.Res[0].Families[index_family]==3524)
    {
     NotCNGenerator =true;
     message="Currently, NC program is not available for this type of tool.";
-   }
-
-  /*  if(this.srv_statemanage.IPL.GetItem('ThreadForm').value=='BSPT55' 
+   } */
+  
+   
+    if(this.srv_statemanage.IPL.GetItem('ThreadForm').value=='BSPT55' 
    || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPTF60' 
    || this.srv_statemanage.IPL.GetItem('ThreadForm').value=='NPT60' )
    {
     NotCNGenerator =true;
     message="Generation of NC code for Conical threads is not yet available, please contact your technical support team.";
-   } */
+   } 
 
    if(NotCNGenerator)
    {

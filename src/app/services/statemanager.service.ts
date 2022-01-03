@@ -336,7 +336,12 @@ export class StateManagerService {
        if(this.SelectedMachineSpindle.FaceContact + ""=='true')
          this.IPL.GetItem('ADAPTOR_FaceContact').value = "1";
        else
-         this.IPL.GetItem('ADAPTOR_FaceContact').value = "0";    
+         this.IPL.GetItem('ADAPTOR_FaceContact').value = "0";   
+        
+        this.IPL.GetItem('IntEmultion').value = this.SelectedMachineSpindle.IntEmultion + "";
+        this.IPL.GetItem('IntAirBlast').value = this.SelectedMachineSpindle.IntAirBlast + "";
+
+         
    }
    
 

@@ -716,10 +716,11 @@ switch(this.srv_StMng.SecApp.toString()){
     case '760':  case '770': case '780': case '790': case '57': case '119': case '120':
       switch(field){
         case 'HolderDesignation' :
+         
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
           break;
         case 'HolderDesignationMM':
-          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Shank');
           break;
         case 'HolderDesignationCollet':
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Collet');
