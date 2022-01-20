@@ -22,9 +22,9 @@
               <div class="pl-2 row" *ngFor="let row of selectedOption.CatalogNo;let numb = index;" [hidden]="row.trim() == '-' || row.trim() == ''">
                   <div class="pr-2">{{row}}</div> 
                   
-                  <!-- <div *ngIf="numb==0 && srv_appsetting.Country.FCSToolshopSite!=''  && srv_appsetting.UserID!='' && IsExistIntoolShop[numb]!='0'">
+                  <div *ngIf="numb==0 && srv_appsetting.Country.FCSToolshopSite!=''  && srv_appsetting.UserID!='' && IsExistIntoolShop[numb]!='0'">
                     <img   (click)="GetstrForWebShop()" [src] = "environment.ImagePath+'icon_AddToCart.svg'"  class="MenuImg pl-2">  
-                  </div> -->
+                  </div> 
               </div>            
           
           </div>     

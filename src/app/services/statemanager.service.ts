@@ -57,10 +57,11 @@ export class StateManagerService {
   CheckTabOperationalDataEnable()
   {   
     if(typeof(this.SelectedMachine) !== 'undefined' && typeof(this.SecAppSelected) !== 'undefined' && typeof(this.GetMaterialSelected()) !== 'undefined' && this.SelectedMachine!=null && this.SecAppSelected!=null && this.GetMaterialSelected()!=null)   
-        if(this.MainAppSelected.MainApp=='TH' && (this.SelectedMachine.MachineType=='Lathe' || this.SelectedMachine.MachineType=='Swiss type' || this.SelectedMachine.MachineType=='Multi spindle') || (this.SelectedMachine.MachineType=='Multi task' && this.SelectedMachine.SpindleType=='T')  )
+       /*  if(this.MainAppSelected.MainApp=='TH' && (this.SelectedMachine.MachineType=='Lathe' || this.SelectedMachine.MachineType=='Swiss type' || this.SelectedMachine.MachineType=='Multi spindle') || (this.SelectedMachine.MachineType=='Multi task' && this.SelectedMachine.SpindleType=='T')  )
           this.obsOperationDataEnable.next(false);
         else  
-          this.obsOperationDataEnable.next(true);    
+          this.obsOperationDataEnable.next(true);  */   
+          this.obsOperationDataEnable.next(true);  
     else     
         this.obsOperationDataEnable.next(false);  
   }

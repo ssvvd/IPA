@@ -115,7 +115,7 @@ export class HeaderComponent implements OnInit {
 
   LogOut()
   {
-    this.srv_login.LogOut();
+    this.srv_login.LogOutNew();
     this.userdes=this.translate.instant('Log In');;     
   }
 
@@ -149,12 +149,13 @@ export class HeaderComponent implements OnInit {
   { 
 
     //return; //TODO:
-    if(this.meta.getTag('name=enablelogin').content=='0') return;
-      if(this.srv_appsetting.UserID=='')
+    if(this.meta.getTag('name=enablelogin').content=='0' || this.msrv_appsetting.UserID!='') return;
+    this.srv_login.SignIn(1);
+     /*  if(this.srv_appsetting.UserID=='')
       {
         this.SpinnerService.show();
         this.srv_login.GetToken().subscribe(res=>{this.SpinnerService.hide();});
-      }        
+      }    */     
   }
 
   FillListCountries()

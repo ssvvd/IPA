@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Meta } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient,HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,11 @@ import { BehaviorSubject } from 'rxjs';
 
 export class LoginService {
 
+  private API_ROUTE = 'api/login/';
   private obsLanguageChanged = new BehaviorSubject<boolean>(true);
   CurrentLanguageChanged = this.obsLanguageChanged.asObservable();   
   
-  constructor(private srv_DataLayer:DatalayerService,
+  constructor(private srv_DataLayer:DatalayerService,private httpClient: HttpClient,
               public srv_appsetting:AppsettingService,public translate: TranslateService,private SpinnerService: NgxSpinnerService,
               private meta: Meta) { }
   
@@ -30,7 +32,8 @@ export class LoginService {
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
       //alert(res);  
        
-        let s= environment.signinURL + '?t=' +res;
+        //let s= environment.signinURL + '?t=' +res;    
+        let s="https://www.imc-companies.com/imcLogin/checkcookie.aspx?sId=iscita21&sitetype=local&lang=EN";    
         console.log(s);    
         window.open(s,'_self');          
         return 'ok'    
@@ -44,12 +47,18 @@ export class LoginService {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;    
     //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
-    let s= environment.signinURL + '?t=' +token;  
+    //let s= environment.signinURL + '?t=' +token; 
+    let sitetype:string ="local";
+    if(environment.production)  sitetype="global";
+    //sitetype ="debug";//todo: temp 
+    let s= environment.urlLogIn + "?sId=iscita21&sitetype=" +sitetype +"&lang=" +this.srv_appsetting.Lang;
+    
     window.open(s,'_self');
     console.log('after token');
-    //this.srv_appsetting.AfterToken=true;      
+ 
     return'ok';
   }
+
 
   GetTokenwithoutlogin():any
   {
@@ -309,8 +318,18 @@ export class LoginService {
     this.srv_appsetting.AfterToken=true;  
     this.SpinnerService.hide(); 
   }
-
-   LogOut()
+  LogOutNew()
+  {
+    let sitetype:string;
+      if(environment.production)    
+        sitetype ='global';   
+      else
+        sitetype ='local';
+      //sitetype ='debug';  //todo:
+    let strLogOut:string=environment.urlSignOut + '&sitetype=' + sitetype + "&lang=" + this.srv_appsetting.Lang;
+    window.open(strLogOut,'_self');
+  }
+  LogOut()
   {
      this.srv_DataLayer.get_token().subscribe((res: any)=>{      
       let s= environment.LoginURLogOut + '?t=' +res;  
@@ -420,4 +439,20 @@ export class LoginService {
         });
      });
     }
+
+    public  getlogindata()
+    {    
+      let sitetype:string;
+      if(environment.production)    
+        sitetype ='global';   
+      else
+        sitetype ='local';
+      //todo:
+      //sitetype='debug';  
+      //return  this.httpClient.get(environment.LogInURLLogInData + sitetype) ;
+      return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetUserData/'+sitetype);
+      /* .catch((err: HttpErrorResponse) => {      
+          return "error";
+        });   */
+    }   
 }

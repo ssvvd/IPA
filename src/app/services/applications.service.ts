@@ -11,13 +11,13 @@ export class ApplicationsService {
   constructor(private httpClient: HttpClient) 
   {} 
 
-  public  getmainapp(lang:string,machinetype:string,spindletype:string)
+  public  getmainapp(lang:string,machinetype:string,spindletype:string,adaptortype :string)
   {            
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmainapp/' + lang + '/' + machinetype+ '/' +spindletype);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmainapp/' + lang + '/' + machinetype+ '/' +spindletype + '/'+ adaptortype);
   }
 
-  public  getmenu(lang:string,usergroup:string)
+  public  getmenu(lang:string,usergroup:string, adaptortype:string, spindletype:string)
   {            
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmenu/' + lang + '/' + usergroup);
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'getmenu/' + lang + '/' + usergroup + '/' + adaptortype + '/' + spindletype);
   }
 }

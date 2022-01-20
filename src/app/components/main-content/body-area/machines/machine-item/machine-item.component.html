@@ -93,7 +93,7 @@
     <div *ngIf="ViewSpindle =='1' && (!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==arrMachineSpindle[0].SpindleType))">                                                                                                                  
         <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=arrMachineSpindle&&arrMachineSpindle[0] [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
     </div>    
-    <div *ngIf="ViewSpindle =='2' && (!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==arrMachineSpindle[0].SpindleType))">                                                                                                                  
+    <div *ngIf="ViewSpindle =='2' && (!exportPDF || (exportPDF && srv_statemanage.SelectedMachineSpindle.SpindleType==arrMachineSpindle[1].SpindleType))">                                                                                                                  
         <app-machine-item-spindle [machHeader]="machHeader" [exportPDF]="exportPDF" [spindle]=arrMachineSpindle&&arrMachineSpindle[1] [MachineType]=machHeader.MachineType></app-machine-item-spindle>  
     </div>     
 </div> 

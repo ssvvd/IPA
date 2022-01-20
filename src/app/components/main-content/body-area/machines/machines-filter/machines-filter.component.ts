@@ -1,4 +1,4 @@
-import { Component, OnInit ,Output,EventEmitter,Input, ANALYZE_FOR_ENTRY_COMPONENTS} from '@angular/core';
+import { Component, OnInit ,Output,EventEmitter,Input} from '@angular/core';
 import { Options,ChangeContext } from 'ng5-slider';
 import { MachineFilter } from '../../../../../models/machines/machinefilter';
 import { StateManagerService } from '../../../../../services/statemanager.service' ;

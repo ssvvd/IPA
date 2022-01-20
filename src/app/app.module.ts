@@ -15,17 +15,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MachiningOperationComponent } from './components/main-content/body-area/machining-operation/machining-operation.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
-//import { SafePipeModule } from 'safe-pipe';
-/* import * as $ from "jquery"; */
-//import { OperationDataComponent } from './components/main-content/body-area/operation-data/operation-data.component' //./components/main-content/body-area/operation-data/operation-data.component';
-/* import { MachinesListComponent } from './components/main-content/body-area/machines/machines-list/machines-list.component';
-import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';
-import { MachineItemSpindleComponent } from './components/main-content/body-area/machines/machine-item-spindle/machine-item-spindle.component';
-import { MachineItemSpindleChartComponent } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.component';
-import { MachineItemSpindleChartModule } from './components/main-content/body-area/machines/machine-item-spindle-chart/machine-item-spindle-chart.module';
-import { MachinesFilterComponent } from './components/main-content/body-area/machines/machines-filter/machines-filter.component';
- */
+
 
 import { MainMenuComponent } from './components/main-content/main-menu/main-menu.component';
 import { FormsModule } from '@angular/forms'; 
@@ -202,7 +194,7 @@ import { MachinesFilterMobileComponent } from './components/main-content/body-ar
   ],
   exports:[SharedModule],
   imports: [
-  
+    LazyLoadImageModule,
     SharedModule,
     FormsModule,
     BrowserModule,

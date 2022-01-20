@@ -5,8 +5,8 @@
 export const environment = {
   internal: true ,
   production: false  ,
-  //API_HOST: 'http://localhost:17586/',
-  API_HOST: 'https://intranet.imc.co.il/ITA_API/', 
+  API_HOST: 'http://localhost:17586/',
+  //API_HOST: 'https://intranet.imc.co.il/ITA_API/', 
   //API_HOST: 'https://www.iscar.com/ITA_API/',
   CalcReq_Host: 'https://cts02.iscar.com/MachiningPwrWs/api/CalcReq/',
   IscarLogo: 'https://intranet.imc.co.il/eCatalog/media/images/ISCAR_Logo.svg',
@@ -39,11 +39,17 @@ export const environment = {
   eCatLogo: "https://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/",
   wsMaterials: "http://iscarsites/wsmaterials/service.asmx/",
 
-  signinURL:'https://sign.ssl.imc-companies.com/signin',
+  signinURL:'https://sign.ssl.imc-companies.com/signin', 
   LoginURLTokenUrl:"authapi.ssl.imc-companies.com",  
   LoginURLRes:"authapi.ssl.imc-companies.com",  
   LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
-  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  
+  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  ,
+  LogInURLLogInData:"https://intranet.imc.co.il/imclogin/api/imclogin/checkcookie/iscita21/",
+  urlCheckCookies:"https://intranet.imc.co.il/imcLogin/checkcookie.aspx",
+  urlLogIn:"http://intranet.imc.co.il/imcLogin/Default.aspx",
+  urlSignOut:"https://intranet.imc.co.il/imcLogin/SignOut.aspx?sId=iscita21"
+
+  
 };
     
 /*

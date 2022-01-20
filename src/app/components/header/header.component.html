@@ -3,7 +3,7 @@
 <div class="col-12 banner-top d-flex justify-content-center pl-0 pr-0" *ngIf="!srv_appsetting.isMobileResolution">
     <div class="div-header" >       
         <div class="row float-left div-banner-images pl-4">
-            <Label class="siteTitle  pt-1" style="font-size: 24px!important">ISCAR TOOL ADVISOR</Label>
+            <Label class="siteTitle  pt-1" style="font-size: 24px!important" (click)="reload()">ISCAR TOOL ADVISOR</Label>
         </div>        
         <div class="row float-right div-banner-images">
             <div class="div-header-link pl-1 pt-1" >
@@ -100,7 +100,7 @@
             <div class="text-center  pt-1" style="margin: 0 auto" >
                 <div class="pt-0 pl-0 ml-0">
                     <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"  (click)="reload()" style="width:30px" class="ImgMobile pt-0 pr-0 pl-0  pb-2">
-                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important">ISCAR TOOL ADVISOR</Label>
+                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important" (click)="reload()">ISCAR TOOL ADVISOR</Label>
                     <!-- <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
                         <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
                     </button> -->

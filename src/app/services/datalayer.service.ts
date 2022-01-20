@@ -132,6 +132,7 @@ export class DatalayerService {
 
     let u:string;  
     u=encodeURIComponent(environment.LoginURLRes).replace('.','***').replace('.','***').replace('.','***');
+    console.log(u);
     return  this.httpClient.post(environment.API_HOST +'api/login/login/'+ u + '/' +sitetype,token) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
@@ -240,4 +241,6 @@ export class DatalayerService {
   {     
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-threadstandartinfo/'+threadform);
   }
+
+  
 }

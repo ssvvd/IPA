@@ -46,6 +46,7 @@ export class Appdetails120Component implements OnInit {
   ImageName1:string='';
   InFocus:boolean=false;
   environment=environment;
+  Lead:number;
   
   @Input() events: Observable<void>;
   @Input () evGetResult: Observable<void>;
