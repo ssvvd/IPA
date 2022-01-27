@@ -271,6 +271,7 @@ export class MachineItemComponent implements OnInit {
     this.machHeader.Torque =ms.Torque;   
     this.machHeader.ExtMQL =ms.ExtMQL;   
     this.machHeader.IntMQL =ms.IntMQL; 
+  
     this.machHeader.CostPerHour = Math.round(this.machHeader.CostPerHour *100)/100;  
     this.srv_statemanage.SelectedMachine = this.machHeader; 
     this.srv_statemanage.arrMachineSpindle =this.arrMachineSpindle;  

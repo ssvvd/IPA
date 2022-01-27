@@ -1203,7 +1203,7 @@ goToCatalog(rowIndex:number,itemIndex:number){
 
 GoToAssembly(index:number){
 
-  this.srv_Results.getAssemblyURL(this.dtResultsObjectsHelp[index].CatalogNo.toString().replace(/\s/g, ""),this.srv_appsetting.Lang).subscribe(res => {
+  this.srv_Results.getAssemblyURL(this.dtResultsObjectsHelp[index].CatalogNo.toString().replace(/\s/g, ""),this.srv_appsetting.Lang).subscribe(res => {    
     let url = (new DOMParser()).parseFromString(res, "text/xml").getElementsByTagName('string')[0].textContent    
     window.open(url, "_blank");
     

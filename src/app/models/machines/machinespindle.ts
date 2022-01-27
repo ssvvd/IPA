@@ -30,7 +30,7 @@ export class Machinespindle {
     public IntEmultion:boolean;
     public IntMQL:boolean;
     public ExtMQL:boolean ; 
-
+    
     public ExtOil:boolean =true ; 
     public IntOil:boolean =true ;
 

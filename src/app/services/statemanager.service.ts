@@ -341,8 +341,7 @@ export class StateManagerService {
         
         this.IPL.GetItem('IntEmultion').value = this.SelectedMachineSpindle.IntEmultion + "";
         this.IPL.GetItem('IntAirBlast').value = this.SelectedMachineSpindle.IntAirBlast + "";
-
-         
+        this.IPL.GetItem('IntOil').value = this.SelectedMachineSpindle.IntOil + "";         
    }
    
 

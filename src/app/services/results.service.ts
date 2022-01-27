@@ -276,6 +276,8 @@ export class ResultsService {
   } 
 
   public getAssemblyURL(itemsList:string,lang:string){
+    let s:string=environment.wsMaterials + 'GetAssemblyURL?itemsList=' + itemsList + '&src=ITA&lang=' + lang;
+    
     return  this.httpClient.get(environment.wsMaterials + 'GetAssemblyURL?itemsList=' + itemsList + '&src=ITA&lang=' + lang, {responseType: 'text'}).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";

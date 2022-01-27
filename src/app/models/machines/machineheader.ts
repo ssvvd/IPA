@@ -20,7 +20,7 @@ export class Machineheader {
     public AdaptationSize1:string;
     
     public ExtMQL:boolean;
-    public IntMQL:boolean;
+    public IntMQL:boolean;    
 
     public DescSelect:string="Select";    
     public isFavorite:boolean = false;
