@@ -40,11 +40,14 @@ export const environment = {
   LoginURLTokenUrl:"authapi.ssl.imc-companies.com",  
   LoginURLRes:"authapi.ssl.imc-companies.com",  
   LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
-  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  
+  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout" , 
  /*  signinURL:'https://sign.ssl.imc-companies.com/signin',
   LoginURLTokenUrl:"https://authapi.ssl.imc-companies.com/token/gettoken",
   LoginURLRes:"https://sign.ssl.imc-companies.com/user/getuserdetails",
   LoginURLogOut:"https://sign.ssl.imc-companies.com/signout" ,
   LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general"  */
-
+  urlLogIn:"https://www.iscar.com/imcLogin/Default.aspx",
+  urlCheckCookies:"https://www.iscar.com/imcLogin/checkcookie.aspx",
+  urlSignOut:"https://www.iscar.com/imcLogin/SignOut.aspx?sId=iscita21"
+  
 };

@@ -168,7 +168,7 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   Initializemachinelist(withdestroy:boolean)
   {  
-    this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.IsCountryGermany() ,this.srv_appsetting.UserIDencode)
+      this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.IsCountryGermany() ,this.srv_appsetting.UserIDencode)     
       .subscribe((data: any) => {
         
         this.listmachines = JSON.parse(data);          
@@ -629,7 +629,9 @@ UpdateStateSelectedMachine(MachineID: number) {
             this.listmachines = this.listmachines.filter(m=> (m.IsMostRecommended));
         }    
     this.srv_statemanage.SelectMachineFilter = filter;
-   
+    
+    this.setspindletypebyfilter(filter.AdaptationType);
+
     if(this.IsFilterEmptyForGermany() )  
     {
       this.listmachines = this.listmachines.filter(m =>{m.Torque==-222});                     
@@ -927,5 +929,37 @@ this.IsViewAll=false;
   {
     this.srv_cook.set_cookie("closebannermobile",'1');
   }
+
+  setspindletypebyfilter( AdaptorTypeFilter: string)
+  {
+    this.listmachines.forEach(m=>
+      {
+        if(AdaptorTypeFilter=='')
+        {
+          if(m.SpindleTypeDefault != m.SpindleType)
+          {
+            if(m.SpindleType=='M')
+              this.setspindletype(m,'T');
+            else
+              this.setspindletype(m,'M');
+          }
+        }
+        else
+        {
+          if(m.AdaptationType1 == AdaptorTypeFilter)
+          {
+            if(m.SpindleType=='M')
+              this.setspindletype(m,'T');
+            else
+            this.setspindletype(m,'M');
+          }
+        }
+      
+      }
+    );
+  
+  }
+
+  
 }
 

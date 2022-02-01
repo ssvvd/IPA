@@ -75,6 +75,9 @@ ngOnInit()
   let isLogIn:string='-1'; //todo:!!!!!! -1!!!  
   const url = window.location.href; 
  
+    //meta data index.html - disable login
+    const enablelogin = this.meta.getTag('name=enablelogin');
+    if(enablelogin.content=='0') isLogIn ='0';
   if(this.location.path().toLowerCase().startsWith('/materials')) 
   {
     let paramValue;
@@ -141,9 +144,7 @@ ngOnInit()
   //alert(XHR);
   
   
-  //meta data index.html - disable login
-  const enablelogin = this.meta.getTag('name=enablelogin');
-  if(enablelogin.content=='0') isLogIn ='0';
+
 
   /* if(isLogIn!="-1")
   { */

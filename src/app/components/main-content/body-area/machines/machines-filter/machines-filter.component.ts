@@ -176,10 +176,10 @@ export class MachinesFilterComponent implements OnInit {
             statefilter=this.srv_statemanage.SelectMachineFilter;
             if (typeof(statefilter) !== 'undefined' && statefilter !== null ) 
             {    
-                this.machFilter=statefilter;           
+                this.machFilter=statefilter;                      
+                this.MachineFilterChanged.emit({ filter: this.machFilter});
                 this.curAdapType = { AdaptationType:this.machFilter.AdaptationType} ;
                 this.curAdapSize = { AdaptationType:this.machFilter.AdaptationType,AdaptationSize:this.machFilter.AdaptationSize} ;
-                this.MachineFilterChanged.emit({ filter: this.machFilter});
             }
             this.InitialdataMachineTypeShowing(); 
             

@@ -38,7 +38,7 @@ export const environment = {
   eCatItemPage:"https://intranet.imc.co.il/ecatalog/Default.aspx?e=1",
   eCatFamilyDrawing:"https://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
   eCatLogo: "https://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/",
-  wsMaterials: "http://intranet.imc.co.il/wsmaterials/service.asmx/",
+  wsMaterials: "https://intranet.imc.co.il/wsmaterials/service.asmx/",
 
   signinURL:'https://sign.ssl.imc-companies.com/signin', 
   LoginURLTokenUrl:"authapi.ssl.imc-companies.com",  

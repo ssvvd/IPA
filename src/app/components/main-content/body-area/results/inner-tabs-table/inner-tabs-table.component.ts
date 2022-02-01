@@ -22,16 +22,18 @@ export class InnerTabsTableComponent implements OnInit {
   ShowComments:boolean =false;
   IsExistIntoolShop:string[]=[];
   catalogNoPack:string[]=[];
-  
+  comments:string[]=[];
+
   @Input() OpenWebShop: Subject<boolean>;
 
   constructor(private srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
               private srv_results:ResultsService) { }
   
   ngOnInit(): void { 
-    
+  
     this.OpenWebShop.subscribe(v => { 
       this.GetstrForWebShop();
+
     });
   }
 
@@ -39,6 +41,16 @@ export class InnerTabsTableComponent implements OnInit {
     if (this.viewParamsChanged && changes.viewParamsChanged){
       this.selectedOption = this.viewParamsChanged.Res[0];
       if(this.selectedOption.info.filter(i=> i!=null && i!='').length >0) this.ShowComments=true;   
+
+      this.selectedOption.info.forEach((c) =>
+      {
+        if(c!=='' && c!==null) 
+        {
+          if(this.comments.find(a=>(a==c))==undefined )
+            this.comments.push(c);
+        }
+      });
+      
        //if(this.srv_appsetting.Country.FCSToolshopSite!='' && this.srv_appsetting.UserID!='')
       if(this.srv_appsetting.Country.FCSToolshopSite!='' )
       {

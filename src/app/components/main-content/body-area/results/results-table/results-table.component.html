@@ -164,7 +164,7 @@
                      </td>
                         <td  class="text-center" *ngIf= "!processdownload">                           
                               <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
-                              <img *ngIf="srv_StMng.SecAppSelected.ApplicationITAID!='119' && srv_StMng.SecAppSelected.ApplicationITAID!='120'" src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                                                     
+                              <img  src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                                                     
                               <i class="fa fa-chevron-right icon-open pl-3"></i>
                         </td>
                         <td style="padding:0px!important;width:20px!important ;">

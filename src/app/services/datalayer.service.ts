@@ -90,7 +90,7 @@ export class DatalayerService {
     if(environment.production)    
       sitetype ='global';   
     else
-      sitetype ='local';
+      sitetype ='debug';
     let u:string;  
     //u=encodeURIComponent(environment.LoginURLTokenUrl).replace('.','***').replace('.','***').replace('.','***');
     u='u'; //temp
