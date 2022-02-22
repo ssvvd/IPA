@@ -269,11 +269,13 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           break;
         }
         case 'Pitch':{
-          this.PITCH = +value
+          if (this.PITCH==0)
+            this.PITCH = +value
           break;
         }
         case 'Vf1':{
-          this.VfDvf = +value
+          if (this.VfDvf==0)
+            this.VfDvf = +value
           break;
         }
         case 'TotalCuttingTime':{

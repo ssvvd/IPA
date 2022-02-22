@@ -48,7 +48,8 @@ export class LoginService {
     //this.srv_appsetting.AfterToken=false;    
     //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
     //let s= environment.signinURL + '?t=' +token; 
-    let sitetype:string ="local";
+    //let sitetype:string ="local";
+    let sitetype:string ="debug";
     if(environment.production)  sitetype="global";
     //sitetype ="debug";//todo: temp 
     let s= environment.urlLogIn + "?sId=iscita21&sitetype=" +sitetype +"&lang=" +this.srv_appsetting.Lang;
@@ -164,17 +165,17 @@ export class LoginService {
       u.CountryCode=countrycode;
       u.CountryName=countryname;
       if(u.CountryCode=='')
-      this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
-      {                    
-       if(d.country==undefined)  
-          this.UpdateCurrentCountry('US');          
-        else 
-        {
-          this.UpdateCurrentCountry(d.country);
-          //this.UpdateCurrentCountry('DE');
-        }        
-                                               
-      }
+        this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
+        {                    
+        if(d.country==undefined)  
+            this.UpdateCurrentCountry('US');          
+          else 
+          {
+            this.UpdateCurrentCountry(d.country);
+            //this.UpdateCurrentCountry('DE');
+          }        
+                                                
+        }
       );
     else      
       this.UpdateCurrentCountry(u.CountryCode); 

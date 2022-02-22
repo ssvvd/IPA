@@ -402,16 +402,8 @@ export class HeaderComponent implements OnInit {
     if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
       {
         this.srv_login.SelectLanguage(localStorage.getItem("language"));
-        //localStorage.setItem("language","");
+      
       }
-   /*  else
-    {
-      if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
-      {
-        this.srv_login.SelectLanguage(localStorage.getItem("language"));
-        localStorage.setItem("language","");
-      }
-    }  */
   }
 
   OpenUserGiude()
@@ -423,7 +415,6 @@ export class HeaderComponent implements OnInit {
     else
       window.open('assets/UserGuide/ITAUserGuide.pdf');
   }
-
 
   CreateScriptGermanyChat()
 {

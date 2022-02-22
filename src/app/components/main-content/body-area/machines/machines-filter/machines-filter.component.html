@@ -148,18 +148,18 @@
         </div>
     </div>
 </div>
-<div class="row pt-2 border-top">
- <!--    <div>curAdapType - {{curAdapType&&curAdapType.AdaptationType}}</div> -->
+<div class="row pt-2 border-top">    
     <div class="width-col-12-col-7 pt-2" >
         <label for="txtAdaptationType">{{'Adaptation Type' | translate}}</label>
     </div>
     <div *ngIf="isLoadingAdSize" class="pt-2 width-col-12-col-5">            
-        <select class="form-control-sm select1" name="slcApatType" [(ngModel)]="curAdapType" (change)="SetViewAllMachines();changeadaptype()" >
+        <select class="form-control-sm select1" name="slcApatType11" [(ngModel)]="curAdapType" (change)="SetViewAllMachines();changeadaptype()" >
             <option  *ngFor="let adaptype of arrAdapType"  [ngValue]="adaptype">{{adaptype.AdaptationType}}</option>
-        </select>    
-       <!--  <select  [(ngModel)]="objthreadform" (change)="changethreadform();">
-            <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">{{tf.Description}}</option>
-        </select>   -->               
+        </select>   
+      <!--   <select class="form-control-sm select1"  [(ngModel)]="curAdapType"  (change)="SetViewAllMachines();changeadaptype()" >
+            <option  *ngFor="let adaptype of arrAdapType"  [value]="adaptype.AdaptationType">{{adaptype.AdaptationType}}</option>
+        </select>   -->  
+               
     </div>
 </div>  
 <div class="row pt-2">

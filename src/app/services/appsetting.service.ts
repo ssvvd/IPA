@@ -83,9 +83,7 @@ export class AppsettingService {
       else
       {         
         return encodeURIComponent(this.User.email).replace('.','***').replace('.','***').replace('.','***');   
-        //return encodeURIComponent('svetlanad@iscar.co.il').replace('.','***').replace('.','***').replace('.','***');  
-        
-
+        //return encodeURIComponent('svetlanad@iscar.co.il').replace('.','***').replace('.','***').replace('.','***');          
       }        
     }
 
