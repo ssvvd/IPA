@@ -5,6 +5,8 @@ import { DatalayerService} from '../../../../../../services/datalayer.service';
 import { environment } from 'src/environments/environment';
 import { Observable ,Subscription} from 'rxjs';
 
+//import * as CryptoJS from 'crypto-js';
+
 export class ThreadForm
 {
   ThreadFormISO:string;
@@ -804,4 +806,28 @@ ClearData()
     }
     
   }
+  
+/*   OpenThreadCompass()
+  {
+    //var CryptoJS = require("crypto-js");
+
+    // Encrypt
+    let par :string;
+    const d = new Date();
+    let time = d.getTime();
+    par="svetlanad@iscar.co.il&" +time + "&ita";
+    var ciphertext = CryptoJS.AES.encrypt(par, 'gX3gmn7IhKoij51V').toString();
+    var url: string;
+    url="https://ocr-thread-dev.ssl.imc-grp.com/authentication/token?t" + ciphertext ;
+
+    window.open(url,"blank");
+
+    // Decrypt
+    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'gX3gmn7IhKoij51V');
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+    console.log(originalText); // 'my message'
+  } */
+  
+
 }

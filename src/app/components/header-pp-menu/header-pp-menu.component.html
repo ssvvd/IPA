@@ -53,21 +53,14 @@
         <img  [src]="environment.ImagePath + 'icon_arrow-02.svg'" style="width:25px;margin-left:45px!important" class="pt-3 pr-2 pl-2">     
         <Label class="siteTitle  pt-3"  (click)="this.activeModal.close('openmachiningcalculator')">{{'Machining Calculators' | translate}}</Label>
     </div>
-<!--     <div class="row pt-2 pl-4" >  
-        <img  [src]="environment.ImagePath + 'icon_arrow-02.svg'" style="width:25px;margin-left:45px!important" class="pt-3 pr-2 pl-2">     
-        <Label class="siteTitle pt-3"  (click)="this.activeModal.close('opencalculator')" >{{'Machining Support' | translate}}</Label>
-    </div>   
-    <div class="row pt-2 pl-4" >
-        <img  [src]="environment.ImagePath + 'icon_arrow-02.svg'" style="width:25px;margin-left:45px!important" class="pt-3 pr-2 pl-2">        
-        <Label class="siteTitle pt-3"  (click)="this.activeModal.close('openGeometryAnalyzer')">{{'Productive Geometries' | translate}}</Label>
-    </div>
-    <div class="row pt-2 pl-4" > 
-        <img  [src]="environment.ImagePath + 'icon_arrow-02.svg'" style="width:25px;margin-left:45px!important" class="pt-3 pr-2 pl-2">       
-        <Label class="siteTitle pt-3" (click)="this.activeModal.close('openinsertconverter')">{{'Grade Optimizer' | translate }}</Label>
-    </div> -->
+
     <div class="row pt-2 pl-4" >
         <img  [src]="environment.ImagePath + 'icon_arrow-02.svg'" style="width:25px;margin-left:45px!important" class="pt-3 pr-2 pl-2">        
         <Label class="siteTitle pt-3" (click)="this.activeModal.close('Insertwear')">{{'Insert wear' | translate}}</Label>
+    </div>
+    <div  *ngIf="srv_appsetting.UserID!=''" class="row pt-2 pl-4" >
+        <img  [src]="environment.ImagePath + 'icon_arrow-02.svg'" style="width:25px;margin-left:45px!important" class="pt-3 pr-2 pl-2">        
+        <Label class="siteTitle pt-3" (click)="this.activeModal.close('Threadcompass')">{{'Thread Compass' | translate}}</Label>
     </div>
     <div class="border-top mt-2"></div>
     <div class="row pt-2 pl-2" >
@@ -78,9 +71,6 @@
         <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('feedback')"  class="ImgMobile pt-2 pr-2 pl-2">
         <Label class="siteTitle pt-3" (click)="this.activeModal.close('feedback')" >{{'Feedback' | translate}}</Label>
     </div>
-   <!--  <div class="row pt-2 pl-2" >
-        <img  [src]="environment.ImagePath + 'Help_Icon.svg'"   (click)="this.activeModal.close('OpenUserGiude')"  class="ImgMobile pt-2 pr-2 pl-2">
-        <Label class="siteTitle pt-3" (click)="this.activeModal.close('OpenUserGiude')" >{{'User Guide' | translate}}</Label>
-    </div> -->
+  
     <div class="mt-4"></div>
 </div>

@@ -34,6 +34,7 @@
     "canvasjs": "^1.8.3",
     "chart.js": "^2.9.3",
     "chartjs-plugin-zoom": "^1.2.0",
+    "crypto-js": "^4.1.1",
     "css-vars-ponyfill": "^2.2.1",
     "datatables.net": "^1.10.20",
     "datatables.net-dt": "^1.10.20",

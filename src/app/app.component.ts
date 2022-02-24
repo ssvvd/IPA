@@ -67,6 +67,7 @@ SetLanguges()
 
 ngOnInit()
 {    
+  //alert(1);
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   this.SpinnerService.show();
@@ -120,12 +121,14 @@ ngOnInit()
 
     if(result=="") 
     {
-        //let sitetype:string ="local";
-        let sitetype:string ="debug";
+        let sitetype:string ="local";
+        //let sitetype:string ="debug";
         if(environment.production)  sitetype="global";
         //sitetype ="debug";//todo: temp
+        //alert(2);
         let s_checkcookies:string=environment.urlCheckCookies+ "?sId=iscita21&sitetype=" + sitetype + "&lang=" +this.srv_appsetting.Lang;
         window.open(s_checkcookies,'_self'); 
+        //window.location.href = s_checkcookies
     }
     if(result=='0')
     {
@@ -153,6 +156,7 @@ ngOnInit()
     {       
         this.srv_appsetting.isLoggedIn=true;
         this.srv_login.FillDefaultUser();
+        this.srv_login.FillCountryLanguageByURLParameters();
         localStorage.setItem("isLogIn",null);
     }                                               
   /* } */

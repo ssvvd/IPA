@@ -90,7 +90,8 @@ export class DatalayerService {
     if(environment.production)    
       sitetype ='global';   
     else
-      sitetype ='debug';
+      //sitetype ='debug';
+      sitetype ='local';
     let u:string;  
     //u=encodeURIComponent(environment.LoginURLTokenUrl).replace('.','***').replace('.','***').replace('.','***');
     u='u'; //temp
@@ -241,6 +242,6 @@ export class DatalayerService {
   {     
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-threadstandartinfo/'+threadform);
   }
-
   
+ 
 }

@@ -190,13 +190,14 @@ export class ResultsService {
   public  GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:string,k:string)
   {   
     let str:string;
-    //str=environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k;    
-    str=environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap ;
-    if(k!='') str= str + '/' + k;   
-    /* return  this.httpClient.get(environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k).catch((err: HttpErrorResponse) => {      
-      console.error('An error occurred:', err.error);
-      return "error";
-    }); */
+    //str=environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap + '/' + k;  
+    if(insertType=='Solidcarbidecutter')
+      str=environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz+ '/' ;
+    else  
+    {
+      str=environment.CalcReq_Host + 'H-ChipThickness/Milling/'  + subApp + '/' + insertType + '/' +  D + '/' + ae + '/' + fz + '/' + ap ;
+      if(k!='') str= str + '/' + k;      
+    }
     return  this.httpClient.get(str).catch((err: HttpErrorResponse) => {      
       console.error('An error occurred:', err.error);
       return "error";

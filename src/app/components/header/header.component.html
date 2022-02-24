@@ -171,6 +171,11 @@
                                 <label class="siteTitle  mt-2" >{{'Insert wear' | translate}}</label>
                             </a>                                                
                         </div>
+                        <div   *ngIf="srv_appsetting.UserID!=''" class ="row col-12 dropdown-item menuitem" (click)="openthreadcompass()">                              
+                            <a class="pl-2 pb-2 pt-2">                                                                                                                                              
+                                <label class="siteTitle  mt-2" >{{'Thread Compass' | translate}}</label>
+                            </a>                                                
+                        </div>
                     </div>
                 </div>
               

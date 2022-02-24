@@ -9,7 +9,9 @@ import { environment } from '../../environments/environment';
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { Meta } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
-import { HttpClient,HttpErrorResponse} from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
+
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +50,8 @@ export class LoginService {
     //this.srv_appsetting.AfterToken=false;    
     //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
     //let s= environment.signinURL + '?t=' +token; 
-    //let sitetype:string ="local";
-    let sitetype:string ="debug";
+    let sitetype:string ="local";
+    //let sitetype:string ="debug";
     if(environment.production)  sitetype="global";
     //sitetype ="debug";//todo: temp 
     let s= environment.urlLogIn + "?sId=iscita21&sitetype=" +sitetype +"&lang=" +this.srv_appsetting.Lang;
@@ -197,8 +199,9 @@ export class LoginService {
         console.log('token');
         console.log(token);
         
-        this.FillDefaultUser();
+        this.FillDefaultUser();        
         this.srv_appsetting.AfterToken=true; 
+        this.FillCountryLanguageByURLParameters();
         this.SpinnerService.hide();        
         return;
       } 
@@ -214,17 +217,18 @@ export class LoginService {
             console.log(data);
             this.FillDefaultUser();
             this.srv_appsetting.AfterToken=true; 
+            this.FillCountryLanguageByURLParameters();
             this.SpinnerService.hide();    
           }
           else
           {    
             let countrycode:string=""; 
             if((d[0].countryCode!=undefined && d[0].countryCode!=null) || (d[0].usageLocation !=undefined && d[0].usageLocation!=null))
-            {
-             
+            {             
               if(d[0].countryCode!=undefined && d[0].countryCode!=null) countrycode=d[0].countryCode;
               if(d[0].usageLocation!=undefined && d[0].usageLocation!=null)  countrycode=d[0].usageLocation;  
               this.FillUserData(d,countrycode,d[0].country);
+              this.FillCountryLanguageByURLParameters();
             }
             else
             {
@@ -232,48 +236,10 @@ export class LoginService {
               {
                 countrycode=rr.alpha2Code;
                 this.FillUserData(d,countrycode,d[0].country);
+                this.FillCountryLanguageByURLParameters();
               });
             }
-          }
-                               
-         /*    //this.srv_DataLayer.getcountryNamebycountryCode(countrycode).subscribe((rr:any)=>
-            //{
-              let cn:string='';
-              //if(rr!='e') cn=rr.name;                                                     
-              let u:User=
-              {
-              displayName:d[0].displayName,
-              surname: d[0].surname,
-              givenName: d[0].givenName,
-              email: d[0].email,
-              country:d[0].country,            
-              companyName:d[0].companyName,            
-              isImc:d[0].isImc,
-              CountryCode:countrycode,
-              CountryName:cn}
-              localStorage.setItem("displayName",d[0].displayName);
-              localStorage.setItem("surname",d[0].surname);
-              localStorage.setItem("givenName",d[0].givenName);
-              localStorage.setItem("email",d[0].email);
-              localStorage.setItem("country",d[0].country);
-              localStorage.setItem("companyName",d[0].companyName);
-              localStorage.setItem("isImc",d[0].isImc); 
-              localStorage.setItem("countryCode",countrycode);
-              localStorage.setItem("countryName",cn);
-              this.srv_appsetting.User=u;  
-              if(countrycode!='' && countrycode!=null)
-                this.UpdateCurrentCountry(countrycode);
-              this.srv_appsetting.isLoggedIn=true;
-              this.srv_appsetting.AfterToken=true;  
-              this.SpinnerService.hide();             
-              });       */
-          /*  */ 
-           
-         /*   {
-            this.FillDefaultUser();
-            this.srv_appsetting.AfterToken=true; 
-            this.SpinnerService.hide();
-           }   */                          
+          }                                                                       
            return of('ok');
           });                              
     }
@@ -288,10 +254,7 @@ export class LoginService {
 
   FillUserData(d:any,countrycode:string,countryname:string)
   {
-    let cn:string='';  
-    //d[0].displayName ='Heikki K\u00e4rs\u00e4m\u00e4';   
-    //d[0].surname ='K\u00e4rs\u00e4m\u00e4';
-
+    let cn:string='';      
     let u:User=
     {
     displayName:d[0].displayName,
@@ -353,6 +316,7 @@ export class LoginService {
       localStorage.setItem("countryCode",'');
       localStorage.setItem("countryName",'');   
       this.srv_appsetting.User=u;  
+      
       this.srv_appsetting.isLoggedIn=true;         
     });
          
@@ -368,9 +332,7 @@ export class LoginService {
         this.translate.use(lan.LanguageCode);
       else
         this.translate.use(this.translate.getDefaultLang());
-    }
-     
-        
+    }             
   }
 
   SelectCountryAndLang(c:Country,LanguageID:string) :any
@@ -388,14 +350,10 @@ export class LoginService {
         this.translate.use(this.translate.getDefaultLang());
          
       localStorage.setItem("language",lan.LanguageName.toUpperCase());
-    }
-   
-        
-    this.srv_appsetting.Country=c;  
-  
+    }         
+    this.srv_appsetting.Country=c;    
     localStorage.setItem("countryid",c.CountryID.toString());        
-    this.SetExchangeRate1 (c.BrifName); 
-    //if(flgChangeGerany) this.obsLanguageChanged.next;
+    this.SetExchangeRate1 (c.BrifName);     
   }
 
   ChangedLanguageGermany()
@@ -456,4 +414,55 @@ export class LoginService {
           return "error";
         });   */
     }   
+
+    FillCountryLanguageByURLParameters()
+    {
+      if(localStorage.getItem("countryid")!=null && localStorage.getItem("countryid")!='')
+      {
+        this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
+        {
+          this.FillDataCountry(d);     
+        }      
+        );    
+      }
+      if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+        {
+          this.SelectLanguage(localStorage.getItem("language"));
+        
+        }
+    }
+    
+    FillDataCountry(d:any)
+    {
+      let data = JSON.parse(d);
+      if(data.length>0)
+      {
+        let c:Country =new Country;
+        c.BrifName =data[0].BrifName;
+        c.CountryFlag ='';
+        c.CountryGlobalId = 0;
+        c.CountryID = data[0].CountryId;
+        c.CountryName =data[0].CountryName;              
+        c.LanguageID.push(data[0].CATLAN);
+        c.CountryCode =data[0].CountryCode;
+        c.LACNT = data[0].LACNT;
+  
+    
+        this.SelectCountryAndLang(c,c.LanguageID[0]);          
+        this.SelectLanguage(c.LanguageID[0]);
+              
+        this.SetExchangeRate1(c.BrifName);
+        localStorage.setItem("countryid","");  // todo:               
+      }
+      if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+      {
+        this.SelectLanguage(localStorage.getItem("language"));          
+      }
+    }  
+
+     //geturlthreadcompass  
+    public  geturlthreadcompass() : any
+    {     
+      return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-threadcompassurl');
+    }
 }

@@ -41,7 +41,7 @@
                      (ngModelChange)="chartdata.PoinY_1=$event ;OnChangePoint(1); OnChangePoinY_1();CreateChart()"> 
                 </div>
                 <div *ngIf="typeChart!='power'" class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4 pl-0 pr-0">
-                    <input type="number" class="form-control input-chart"  [attr.id]="'txtY1'+typeChart"  name="txtY1" [(ngModel)]="spindle.T1" 
+                    <input type="number" class="form-control input-chart"  [attr.id]="'txtY1'+typeChart"  name="txtY12" [(ngModel)]="spindle.T1" 
                      (ngModelChange)="chartdata.PoinY_1=$event ;OnChangePoint(1); OnChangePoinY_1();CreateChart()"> 
                 </div>
             </div>       
@@ -60,7 +60,7 @@
                     (ngModelChange)="chartdata.PoinY_2=$event ;OnChangePoint(2); OnChangePoinY_2();CreateChart()"> 
                 </div>
                 <div *ngIf="typeChart!='power'" class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-0">
-                    <input type="number" class="form-control input-chart" [attr.id]="'txtY2' + typeChart" name="txtY2" [ngModel]="spindle.T2" 
+                    <input type="number" class="form-control input-chart" [attr.id]="'txtY2' + typeChart" name="txtY22" [ngModel]="spindle.T2" 
                     (ngModelChange)="chartdata.PoinY_2=$event ;OnChangePoint(2);OnChangePoinY_2(); CreateChart()"
                     > 
                 </div>
@@ -79,7 +79,7 @@
                     (ngModelChange)="chartdata.PoinY_3=$event ;OnChangePoint(3); OnChangePoinY_3();CreateChart()">
                 </div>
                 <div *ngIf="typeChart!='power'" class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-0">
-                    <input type="number" class="form-control  pt-2" [attr.id]="'txtY3' + typeChart" name="txtY3" [(ngModel)]="spindle.T3" 
+                    <input type="number" class="form-control  pt-2" [attr.id]="'txtY3' + typeChart" name="txtY32" [(ngModel)]="spindle.T3" 
                      (ngModelChange)="chartdata.PoinY_3=$event ;OnChangePoint(3); OnChangePoinY_3();CreateChart()">
                 </div>
             </div>  
@@ -97,7 +97,7 @@
                     (ngModelChange)="chartdata.PoinY_4=$event ;OnChangePoint(4); OnChangePoinY_4();CreateChart()">
                 </div>
                 <div *ngIf="typeChart!='power'" class="col-12 col-md-4 col-sm-4 col-xl-4 col-lg-4  pt-2 pl-0 pr-0">
-                    <input type="number" class="form-control input-chart" [attr.id]="'txtY4' + typeChart" name="txtY4" [(ngModel)]="spindle.T4" 
+                    <input type="number" class="form-control input-chart" [attr.id]="'txtY4' + typeChart" name="txtY42" [(ngModel)]="spindle.T4" 
                     (ngModelChange)="chartdata.PoinY_4=$event ;OnChangePoint(4); OnChangePoinY_4();CreateChart()">
                 </div>
             </div> 

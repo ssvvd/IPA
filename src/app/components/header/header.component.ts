@@ -18,6 +18,7 @@ import { Subject} from 'rxjs';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Meta } from '@angular/platform-browser';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-header',
@@ -139,7 +140,7 @@ export class HeaderComponent implements OnInit {
       if(result=='contactus'){this.contactus();}
       if(result=='feedback'){this.feedback();}
       if(result=='OpenUserGiude'){this.OpenUserGiude();}
-
+      if(result=='Threadcompass'){this.openthreadcompass();}
       if(result=='M'){this.CheckAllowUnitsChange(null);}
       if(result=='I'){this.CheckAllowUnitsChange(null);}
     });
@@ -221,8 +222,13 @@ export class HeaderComponent implements OnInit {
           }
       }
       
-      if(this.srv_appsetting.AfterToken) this.FillCountryLanguageByURLParameters();
-
+      if(this.srv_appsetting.AfterToken) 
+    {
+      this.srv_login.FillCountryLanguageByURLParameters();     
+     /*  if(this.srv_appsetting.IsCountryGermany)
+          this.CreateScriptGermanyChat();   */
+    }
+      
       if(this.srv_appsetting.Country===undefined)      
       {       
         this.CurrentCountryName = 'headquarters';
@@ -364,38 +370,7 @@ export class HeaderComponent implements OnInit {
     {
       this.srv_DataLayer.getcountry(localStorage.getItem("countryid")).subscribe((d:any)=>
       {
-        let data = JSON.parse(d);
-        if(data.length>0)
-        {
-          let c:Country =new Country;
-          c.BrifName =data[0].BrifName;
-          c.CountryFlag ='';
-          c.CountryGlobalId = 0;
-          c.CountryID = data[0].CountryId;
-          c.CountryName =data[0].CountryName;              
-          c.LanguageID.push(data[0].CATLAN);
-          c.CountryCode =data[0].CountryCode;
-          c.LACNT = data[0].LACNT;
-
-      
-          this.srv_login.SelectCountryAndLang(c,c.LanguageID[0]);          
-          this.srv_login.SelectLanguage(c.LanguageID[0]);
-          
-          if(c.CountryCode=='DE')
-            this.CreateScriptGermanyChat();
-
-          //this.srv_appsetting.Country=c;
-          this.srv_login.SetExchangeRate1(c.BrifName);
-          //this.translate.use(c.LanguageID[0]);
-
-          localStorage.setItem("countryid","");  // todo:
-               
-        }
-        if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
-        {
-          this.srv_login.SelectLanguage(localStorage.getItem("language"));
-          //localStorage.setItem("language","");
-        }
+        this.FillDataCountry(d);     
       }      
       );    
     }
@@ -404,6 +379,36 @@ export class HeaderComponent implements OnInit {
         this.srv_login.SelectLanguage(localStorage.getItem("language"));
       
       }
+  }
+  
+  FillDataCountry(d:any)
+  {
+    let data = JSON.parse(d);
+    if(data.length>0)
+    {
+      let c:Country =new Country;
+      c.BrifName =data[0].BrifName;
+      c.CountryFlag ='';
+      c.CountryGlobalId = 0;
+      c.CountryID = data[0].CountryId;
+      c.CountryName =data[0].CountryName;              
+      c.LanguageID.push(data[0].CATLAN);
+      c.CountryCode =data[0].CountryCode;
+      c.LACNT = data[0].LACNT;
+
+  
+      this.srv_login.SelectCountryAndLang(c,c.LanguageID[0]);          
+      this.srv_login.SelectLanguage(c.LanguageID[0]);
+      
+      if(c.CountryCode=='DE')
+        this.CreateScriptGermanyChat();  
+      this.srv_login.SetExchangeRate1(c.BrifName);
+      localStorage.setItem("countryid","");  // todo:               
+    }
+    if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
+    {
+      this.srv_login.SelectLanguage(localStorage.getItem("language"));          
+    }
   }
 
   OpenUserGiude()
@@ -426,13 +431,22 @@ export class HeaderComponent implements OnInit {
   this.renderer2.appendChild(this._document.body, s);
 }
 
-reload()
-{
-  window.location.reload();
-}
+  reload()
+  {
+    window.location.reload();
+  }
 
-openuserguidemillthread()
-{
-  window.open('https://imc.iscar.co.jp/IscarWorld/pdf/MillThread%20Advisor%20(%E3%81%AD%E3%81%98%E5%88%87%E3%82%8A%E5%B7%A5%E5%85%B7%E9%81%B8%E5%AE%9A%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0).pdf','_blank');
-}
+  openuserguidemillthread()
+  {
+    window.open('https://imc.iscar.co.jp/IscarWorld/pdf/MillThread%20Advisor%20(%E3%81%AD%E3%81%98%E5%88%87%E3%82%8A%E5%B7%A5%E5%85%B7%E9%81%B8%E5%AE%9A%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0).pdf','_blank');
+  }
+
+  openthreadcompass()
+  {  
+    let url:string;
+    this.srv_login.geturlthreadcompass().subscribe(res=>{url=res;
+      window.open(url,"blank")});    
+    
+
+  }
 }
