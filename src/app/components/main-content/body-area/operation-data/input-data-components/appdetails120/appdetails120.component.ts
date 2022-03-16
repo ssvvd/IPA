@@ -5,8 +5,6 @@ import { DatalayerService} from '../../../../../../services/datalayer.service';
 import { environment } from 'src/environments/environment';
 import { Observable ,Subscription} from 'rxjs';
 
-//import * as CryptoJS from 'crypto-js';
-
 export class ThreadForm
 {
   ThreadFormISO:string;
@@ -48,7 +46,7 @@ export class Appdetails120Component implements OnInit {
   ImageName1:string='';
   InFocus:boolean=false;
   environment=environment;
-  Lead:number;
+
   
   @Input() events: Observable<void>;
   @Input () evGetResult: Observable<void>;
@@ -77,6 +75,8 @@ export class Appdetails120Component implements OnInit {
   pitch:string='';
   size:string='';
   lenght:number;
+  star:number;
+  lead:number;
 
   threadtype:string='';
   pitch_units:string =''; 
@@ -89,11 +89,15 @@ export class Appdetails120Component implements OnInit {
   IsShowInfoThread:boolean=false;
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
-
+  
+  aaa()
+  {
+      alert();
+  }
   ngOnInit() { 
        
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
-    if(this.srv_StMng.SecApp=='120')
+    if(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='810')
     {
       this.threadtype="Internal";
     }
@@ -101,6 +105,7 @@ export class Appdetails120Component implements OnInit {
     {
       this.threadtype="External";
     }
+    
     let dia:string;
     dia=this.srv_StMng.IPL.GetItem('D_Hole').value;
 
@@ -108,14 +113,14 @@ export class Appdetails120Component implements OnInit {
     if(this.evGetResult!=null)
         this.eventsSubscription.add(this.evGetResult.subscribe(() => this.CheckMandatoryFiled()));
 
-    this.eventsSubscription.add(this.srv_DataLayer.thread_form().subscribe((data: any)=> {
+    this.eventsSubscription.add(this.srv_DataLayer.thread_form(this.srv_StMng.SecApp).subscribe((data: any)=> {
         for (const d of JSON.parse(data)) {                                                
                 this.arrThreadForm.push({
                 ThreadFormISO:d.ThreadFormISO,
                 ThreadForm:  d.ThreadForm,
-                f1:d.f1,
+                f1:(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='119')?d.f1:'',
                 Sequence: d.Sequence  ,
-                Description:d.ThreadFormISO==''? '': d.ThreadFormISO + ' - ' + d.f1
+                Description:(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='119')?d.ThreadFormISO==''? '': d.ThreadFormISO + ' - ' + d.f1 : d.Description
             })                                        
         } 
         if(this.srv_StMng.IPL.GetItem('ThreadForm').value!=null && this.srv_StMng.IPL.GetItem('ThreadForm').value!='' )
@@ -156,7 +161,8 @@ export class Appdetails120Component implements OnInit {
         ));      
     }         
 )); 
-this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
+//this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
+this.CostPerHourByRate =Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
 }
 
 CheckMandatoryFiled()
@@ -170,6 +176,17 @@ onfocusfield(field:string)
 {
   this.InFocus=true;  
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
+}
+
+ChangeStar()
+{
+    if(this.pitch_units=='mm')
+        this.lead=Math.round(((+this.pitch)* this.star*10))/10;
+    else
+        if(this.srv_appsetting.Units=='M')
+            this.lead= Math.round((25.4/(+this.pitch)* this.star)*10)/10;
+        else
+            this.lead=Math.round((1/(+this.pitch)* this.star)*100)/100;
 }
 
 onfocusoutfield()
@@ -277,6 +294,8 @@ ClearData()
     else
         this.ThreadDiaEnable=false;
 
+    if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
+        this.star =null;
   }
 
   changepitch()
@@ -289,7 +308,10 @@ ClearData()
     this.arrSize.push('');
     for(let i=0; i<arr.length; i++)
         this.arrSize.push(arr[i].Size);   
-         
+
+    if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
+        this.ChangeStar();
+
   }
 
   ngOnDestroy() {
@@ -802,32 +824,7 @@ ClearData()
         this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value="";
         return;
 
-
-    }
-    
+    } 
   }
-  
-/*   OpenThreadCompass()
-  {
-    //var CryptoJS = require("crypto-js");
-
-    // Encrypt
-    let par :string;
-    const d = new Date();
-    let time = d.getTime();
-    par="svetlanad@iscar.co.il&" +time + "&ita";
-    var ciphertext = CryptoJS.AES.encrypt(par, 'gX3gmn7IhKoij51V').toString();
-    var url: string;
-    url="https://ocr-thread-dev.ssl.imc-grp.com/authentication/token?t" + ciphertext ;
-
-    window.open(url,"blank");
-
-    // Decrypt
-    var bytes  = CryptoJS.AES.decrypt(ciphertext, 'gX3gmn7IhKoij51V');
-    var originalText = bytes.toString(CryptoJS.enc.Utf8);
-
-    console.log(originalText); // 'my message'
-  } */
-  
 
 }

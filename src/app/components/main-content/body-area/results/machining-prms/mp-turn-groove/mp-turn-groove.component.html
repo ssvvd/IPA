@@ -590,17 +590,10 @@
       <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Turning' | translate}} - {{'Cutting Time per Feature' | translate }}&nbsp;</Label>
       <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{'mm:ss' | translate}})</Label>
     </div>
-    <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">CTF<sub>g</sub></div>
-    <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{CTFgFormat}}</div>
+    <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">CTF<sub>t</sub></div>
+    <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{CTFtFormat}}</div>
     <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{'mm:ss' | translate}}</div>
   </div>
- <!--  <div class="row justify-content-start w-100" *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'">
-    <div class="col-3 row"><Label>{{'Turning' | translate}} - {{'Cutting Time per Feature' | translate }}</Label></div>
-    <div class="col-2">CTF<sub>t</sub></div>
-    <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{CTFtFormat}}</div>
-    <div class="col-2">{{'mm:ss' | translate}}</div>
-  </div> -->
-
   <div *ngIf="srv_StMng.SecApp=='1' || srv_StMng.SecApp=='10' || srv_StMng.SecApp=='50'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
     <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
       <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Cutting Time per Feature' | translate }}&nbsp;</Label>

@@ -263,6 +263,10 @@ environment=environment;
       let _Kc:number = 0      
       let kappaLeadAngel:number = 90
 
+      this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
+      this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
+      this.I = 1000
+      
       // (material:number,  Units:number,  KappaLeadAngle:number,  Flutes:number,  Feed:number,  catalogNoList:String)
       this.srv_Results.GetMPowerParamsTurning(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,
       +this.fr,this.catalogNo.toString()).subscribe((res: any) => {
@@ -295,9 +299,7 @@ environment=environment;
           
           }
     
-          this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
-          this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
-          this.I = 1000
+        
           
           this.CTF =  Math.round(this.casttimeformattonumber(this.CTFFormat)* 100)/100;
           

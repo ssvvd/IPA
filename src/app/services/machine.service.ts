@@ -52,9 +52,7 @@ export class MachineService {
   {      
     let str:string;
     str=environment.API_HOST + this.API_ROUTE +  'machines-update/' + machineid +
-    '/'+ machinetype +'/' +machinename +'/' +units +'/'+ machinetype1 + '/' + costperhour +'/' + currency;
-    console.log(str);
-    console.log(inputparam);
+    '/'+ machinetype +'/' +machinename +'/' +units +'/'+ machinetype1 + '/' + costperhour +'/' + currency;   
     return  this.httpClient.post(environment.API_HOST + this.API_ROUTE +  'machines-update/' + machineid +
       '/'+ machinetype +'/' +machinename +'/' +units +'/'+ machinetype1 + '/' + costperhour +'/' + currency, inputparam ).catch((err: HttpErrorResponse) => {   
       console.error('An error occurred:', err.error);   

@@ -1,7 +1,5 @@
-//@import "bootstrap";
-//@import 'src/styles.scss';
 
-.input-image
+ .input-image
 {
    width:50% ;
    margin: 0 auto;
@@ -16,13 +14,13 @@
 .input-min-width
 {
     min-width: 100px;
-    /* max-width: 180px; */
+  
 }
 
 .input-dia-min-width
 {
     min-width: 70px;
-    //max-width: 120px;
+  
 }
 
 .header-data
@@ -42,4 +40,5 @@
 select  {
     background-color:  #F1F1F1!important;    
     font-size: 14px; 
- }
+ } 
+

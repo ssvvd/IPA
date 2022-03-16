@@ -32,26 +32,22 @@ export const environment = {
   IscarSite:"https://intranet.imc.co.il",
   MachiningCalculatorSite:"https://cts02.iscar.com/MachiningPwrWs/", 
   eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
-  eCatFamilyPictures:"https://intranet.imc.co.il/eCatalog/Ecat/datafile/PICTURE/",
-  //eCatFamilyPictures:"https://www.iscar.com/Ecat/datafile/PICTURE/",
-  eCatItemRedPage:"https://intranet.imc.co.il/ecat/eHiba.asp?cat=",
+  eCatFamilyPictures:"https://intranet.imc.co.il/eCatalog/Ecat/datafile/PICTURE/",  
   eCatItemPage1:"https://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat=",
   eCatItemPage:"https://intranet.imc.co.il/ecatalog/Default.aspx?e=1",
   eCatFamilyDrawing:"https://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
   eCatLogo: "https://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/",
   wsMaterials: "https://intranet.imc.co.il/wsmaterials/service.asmx/",
 
-  signinURL:'https://sign.ssl.imc-companies.com/signin', 
-  LoginURLTokenUrl:"authapi.ssl.imc-companies.com",  
-  LoginURLRes:"authapi.ssl.imc-companies.com",  
-  LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
-  LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  ,
-  LogInURLLogInData:"https://intranet.imc.co.il/imclogin/api/imclogin/checkcookie/iscita21/",
   urlCheckCookies:"https://intranet.imc.co.il/imcLogin/checkcookie.aspx",
   urlLogIn:"http://intranet.imc.co.il/imcLogin/Default.aspx",
   urlSignOut:"https://intranet.imc.co.il/imcLogin/SignOut.aspx?sId=iscita21"
 
-  
+    //LogInURLLogInData:"https://intranet.imc.co.il/imclogin/api/imclogin/checkcookie/iscita21/",
+    //LoginURLTokenUrl:"authapi.ssl.imc-companies.com",   
+  //LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
+  //LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  , 
+    //signinURL:'https://sign.ssl.imc-companies.com/signin',  
 };
     
 /*

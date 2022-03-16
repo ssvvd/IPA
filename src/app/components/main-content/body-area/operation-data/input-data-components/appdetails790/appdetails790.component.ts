@@ -39,7 +39,8 @@ export class Appdetails790Component implements OnInit {
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole') this.HoleType="PreHole";   
     this.changeinputimage(this.HoleType);
 
-    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
+    //this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
+    this.CostPerHourByRate =Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
   }
 
   ngOnDestroy() {
@@ -127,10 +128,10 @@ export class Appdetails790Component implements OnInit {
   {   
     this.CheckValuesFields(field);
     this.strMandatory=''; 
-   /*  if(this.HoleType=='Solid' )
+     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value=='PreHole' )
     {       
         this.AddTostrMandatoryParam('D3',"DPH:",this.srv_appsetting.UnitslengthDesc);
-    }   */ 
+    }   
     this.AddTostrMandatoryParam('LengthOfShoulder_L',"L:",this.srv_appsetting.UnitslengthDesc);
     this.AddTostrMandatoryParam('WidthOfShoulder_ae',"W:",this.srv_appsetting.UnitslengthDesc); 
     this.AddTostrMandatoryParam('DepthOfShoulder_ap',"D:",this.srv_appsetting.UnitslengthDesc);

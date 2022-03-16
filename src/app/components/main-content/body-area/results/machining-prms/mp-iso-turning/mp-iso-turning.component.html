@@ -187,7 +187,7 @@
         </div>
         <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray border-bottom-gray':''">MRR</div>
         <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{MRR}}</div>
-        <div *ngIf="!srv_appsetting.isMobileResolution"  [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':''" class="col-3 row  justify-content-center" >{{ srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}<div><sup>3</sup></div>/{{'min' | translate}}</div>
+        <div *ngIf="!srv_appsetting.isMobileResolution"  [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':''" class="col-3 row  justify-content-center" >{{ srv_appsetting.Units =='M' ? 'cm' : 'inch' | translate}}<div><sup>3</sup></div>/{{'min' | translate}}</div>
       </div>
 <br>
 <div class="bold font-weight-bold row justify-content-start w-100"><Label class="font-weight-bold">{{'Tool Assembly Data' | translate}}</Label></div>

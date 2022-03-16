@@ -40,7 +40,8 @@ export class Appdetails780Component implements OnInit {
     this.eventsSubscription = this.events.subscribe(() => this.ClearData());  
     if(this.srv_StMng.IPL.GetItem('HoleTypeSolid').value!='') this.HoleType="Solid";   
     if(this.srv_StMng.IPL.GetItem('HoleTypePreHole').value!='') this.HoleType="PreHole";  
-    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
+    //this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;     
+    this.CostPerHourByRate =Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
   }
   
   ngOnDestroy() {

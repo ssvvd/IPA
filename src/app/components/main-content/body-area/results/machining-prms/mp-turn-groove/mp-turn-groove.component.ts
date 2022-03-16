@@ -345,7 +345,11 @@ export class MpTurnGrooveComponent implements OnInit {
           let _Mc:number = 0 
           let _Kc:number = 0  
           let _KcG:number = 0  
-
+          
+          this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
+          this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
+          this.I = 1000
+          
           this.srv_Results.GetMPowerParamsGrooving(+this.srv_StMng.IPL.GetItem('Material').value,this.srv_appsetting.Units,
           +this.fr1,+this.fr,this.catalogNo.toString()).subscribe((res: any) => {
             let paramsValues:string = JSON.parse(res); 
@@ -386,9 +390,9 @@ export class MpTurnGrooveComponent implements OnInit {
                   this.Ft1 = Math.round(result.ResultRowList[0].Value * 100)/100
                 })
     
-              this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
+      /*         this.MCH = +this.srv_StMng.IPL.GetItem('MachCostPerHour').value
               this.B = +this.srv_StMng.IPL.GetItem('BatchSize').value
-              this.I = 1000
+              this.I = 1000 */
                             
               //this.CTP = Math.round((this.CTFg + this.CTFt) * 100)/100;
               this.CTP = Math.round((this.casttimeformattonumber(this.CTFgFormat) + this.casttimeformattonumber(this.CTFtFormat)) * 100)/100;

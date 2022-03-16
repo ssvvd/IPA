@@ -30,21 +30,18 @@ export class LoginService {
   GetToken():any
   {
     console.log('before token');
-    //this.srv_appsetting.AfterToken=false;
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
-      //alert(res);  
-       
-        //let s= environment.signinURL + '?t=' +res;    
-        let s="https://www.imc-companies.com/imcLogin/checkcookie.aspx?sId=iscita21&sitetype=local&lang=EN";    
+    
+        //https://www.iscar.com/imcLogin/checkcookie.aspx  
+        let s=environment.urlCheckCookies + "?sId=iscita21&sitetype=local&lang=EN";    
         console.log(s);    
         window.open(s,'_self');          
         return 'ok'    
       
     });
-    //return'ok';
   }
   
-  SignIn(token):any
+  SignIn():any
   {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;    
@@ -70,7 +67,7 @@ export class LoginService {
     return this.srv_DataLayer.get_token();
   }
 
-  GetGeneralToken():any
+ /*  GetGeneralToken():any
   {
     console.log('before token');
     //this.srv_appsetting.AfterToken=false;
@@ -103,7 +100,7 @@ export class LoginService {
          
     });
     return'ok';
-  }
+  } */
 
  
   FillDataCountryByData(data:any)
@@ -293,7 +290,8 @@ export class LoginService {
     let strLogOut:string=environment.urlSignOut + '&sitetype=' + sitetype + "&lang=" + this.srv_appsetting.Lang;
     window.open(strLogOut,'_self');
   }
-  LogOut()
+  
+  /* LogOut()
   {
      this.srv_DataLayer.get_token().subscribe((res: any)=>{      
       let s= environment.LoginURLogOut + '?t=' +res;  
@@ -320,7 +318,7 @@ export class LoginService {
       this.srv_appsetting.isLoggedIn=true;         
     });
          
-  }
+  } */
   SelectLanguage(LanguageID:string)
   {
     let lan:Language;
@@ -398,22 +396,6 @@ export class LoginService {
         });
      });
     }
-
-    public  getlogindata()
-    {    
-      let sitetype:string;
-      if(environment.production)    
-        sitetype ='global';   
-      else
-        sitetype ='local';
-      //todo:
-      //sitetype='debug';  
-      //return  this.httpClient.get(environment.LogInURLLogInData + sitetype) ;
-      return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'GetUserData/'+sitetype);
-      /* .catch((err: HttpErrorResponse) => {      
-          return "error";
-        });   */
-    }   
 
     FillCountryLanguageByURLParameters()
     {

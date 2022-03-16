@@ -516,6 +516,8 @@ BuildOperationData(doc:jsPDF)
         }
         else
         {
+          if(p.description.toString()=='Slope' && this.srv_statemanage.SecApp!='77' ) p.description = "Tool Hand"  ;        
+
           doc.text(10, this.axial_y, p.description + ': ' + p.value + ' ' + p.units);
           this.axial_y=this.axial_y+8;
         }

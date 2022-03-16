@@ -101,7 +101,8 @@ export class Mp760Component implements OnInit {
   RMPX:number
   PITCH:number
   VfDvf:number
-  CPU:number
+  CPU:number;
+  Tool_DOuter:number =0;
   // Flutes:number
   catalogNo:string[]=[]
   resType:string = ''
@@ -190,12 +191,14 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           break;
         }
         case 'DMin':{
-          if(value!="") this.DC = value          
-          break;
+          if(this.DC=='' && value!='') 
+            this.DC = value          
+            break;
         }
 
         case 'Solid_Diameter':{
-          if(value!="") this.DC = value          
+          if(value!="") 
+            this.DC = value          
           break;
         }
         
@@ -309,7 +312,11 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           this.MTB = value
           break;
         }
-      
+        case 'Tool_DOuter': {
+          this.Tool_DOuter = +value;
+          break;
+        }
+        
       }
     }
   }
@@ -529,21 +536,23 @@ this.srv_Results.GetMPowerParams760(+this.srv_StMng.IPL.GetItem('Material').valu
 // GET api/CalcReq/H-ChipThickness/Milling/Shouldering/SolidCarbidecutter/{DC}/{ae}/{fz}
 //GetChipThicknessMilling(subApp:string,insertType:string,D:number,ae:number,fz:number,ap:number,k:number)
 let diameter:number;
-
+/* 
 if(subApp=='790') 
   diameter =+this.DH;
 else
   diameter =+this.DC;
+ */
+  if (this.Tool_DOuter!=0) 
+    diameter=+this.Tool_DOuter;
+  else
+    diameter =+this.DC;
 
-      this.srv_Results.GetChipThicknessMilling(subApp,insertType,+this.DC,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
+      this.srv_Results.GetChipThicknessMilling(subApp,insertType,+diameter,+this.ae,+this.fz,thickFirstParam,thickSecondParam).subscribe((res: any) => {
         var result = res as MPResult;
         var roundDigits:number = this.srv_appsetting.Units == 'I' ? 10000 : 1000
         this.hm = Math.round(result.ResultRowList[0].Value * roundDigits)/roundDigits
         this.MCT = Math.round(result.ResultRowList[1].Value * roundDigits)/roundDigits
       })
-
-
-
     }
 
 })

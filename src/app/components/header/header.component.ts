@@ -18,7 +18,6 @@ import { Subject} from 'rxjs';
 import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Meta } from '@angular/platform-browser';
-import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-header',
@@ -151,7 +150,7 @@ export class HeaderComponent implements OnInit {
 
     //return; //TODO:
     if(this.meta.getTag('name=enablelogin').content=='0' || this.msrv_appsetting.UserID!='') return;
-    this.srv_login.SignIn(1);
+    this.srv_login.SignIn();
      /*  if(this.srv_appsetting.UserID=='')
       {
         this.SpinnerService.show();

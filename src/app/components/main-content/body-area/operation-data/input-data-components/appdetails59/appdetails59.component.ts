@@ -31,7 +31,8 @@ export class Appdetails59Component implements OnInit {
     this.SetIPLMandatory();    
     this.ImageName= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
 
-    this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;
+    //this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;
+    this.CostPerHourByRate =Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
   }
       
   ngOnDestroy() {

@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient,HttpErrorResponse} from '@angular/common/http';
 import 'rxjs/add/operator/catch'
-/* import {HttpResponse} from '@angular/common/http';
-import {Http, ResponseContentType} from '@angular/http'; */
 import {Observable} from 'rxjs';
-import { StringValueToken } from 'html2canvas/dist/types/css/syntax/tokenizer';
-  
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,9 +52,9 @@ export class DatalayerService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'holediameter-drilling/'+units);
   }
 
-  public  thread_form()
+  public  thread_form(secapp)
   {           
-    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form');
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'thread-form/' + secapp);
   }
   
   public  thread_data_c(units:string,threadform:string)
@@ -106,24 +103,24 @@ export class DatalayerService {
       });  
   } 
   
-  public  checkgeneraluser(token:string)
+  /* public  checkgeneraluser(token:string)
   {    
     //getToken/{LoginURLReq}/{LoginURLTokenUrl}/{LoginURLTokenID}/{LoginURLTokenSecret}/{siteType}  
-   /*  let sitetype:string;
+     let sitetype:string;
     if(environment.production)    
       sitetype ='global';   
     else
-      sitetype ='local'; */
+      sitetype ='local'; 
   
-    return  this.httpClient.get("https://sign.ssl.imc-companies.com/general/?t=" +token)
+    return  this.httpClient.get(token)
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  
-  }
+  } */
 
   public  login(token:any)
-  {    
-    //login/{LoginURLReq}/{LoginURLRes}/{token}/{siteType}    
+  {      
+    //login/{siteType}
     token='{ "token":"' + token + '"}';
     let sitetype:string;
     if(environment.production)    
@@ -131,10 +128,8 @@ export class DatalayerService {
     else
       sitetype ='local';
 
-    let u:string;  
-    u=encodeURIComponent(environment.LoginURLRes).replace('.','***').replace('.','***').replace('.','***');
-    console.log(u);
-    return  this.httpClient.post(environment.API_HOST +'api/login/login/'+ u + '/' +sitetype,token) 
+    var url=environment.API_HOST +"api/login/login/" +sitetype;
+    return  this.httpClient.post(url,token) 
     .catch((err: HttpErrorResponse) => {      
         return "error";
       });  

@@ -89,21 +89,12 @@
         <div class="row" style="width: 100%;">                      
             <div class="pl-1 pt-2" >
                 <img (click)="OpenMenuMobile()"   
-                [src]="environment.ImagePath + 'icon_hamburger.svg'" style="width:30px">
-                
-            </div>
-          <!--   <div class="col-8 text-center  pt-1" >
-                <a href="https://www.iscar.com/index.aspx" target="_blank" >
-                    <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="LogoInscarMobile">
-                </a>
-            </div> -->
+                [src]="environment.ImagePath + 'icon_hamburger.svg'" style="width:30px">                
+            </div>         
             <div class="text-center  pt-1" style="margin: 0 auto" >
                 <div class="pt-0 pl-0 ml-0">
                     <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"  (click)="reload()" style="width:30px" class="ImgMobile pt-0 pr-0 pl-0  pb-2">
-                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important" (click)="reload()">ISCAR TOOL ADVISOR</Label>
-                    <!-- <button type="button"  class="close pt-1 pr-2 mr-2" aria-label="Close" (click)="this.activeModal.close('send')">              
-                        <span aria-hidden="true" class="float-right span_x_mobile">&times;</span>
-                    </button> -->
+                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important" (click)="reload()">ISCAR TOOL ADVISOR</Label>                   
                 </div>
             </div>
             <div class="float-right text-right pr-2" >                                 
@@ -178,7 +169,6 @@
                         </div>
                     </div>
                 </div>
-              
                 <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Help_Icon.svg'"  class="MenuImg" title="{{'Help' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
@@ -201,9 +191,6 @@
     </div>
 </div>    
 </div>
-<!-- <div class="col-12 pt-2  border-bottom-gray" >
-</div>  -->
-   
 
 <ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
 bdOpacity ="0.05"
