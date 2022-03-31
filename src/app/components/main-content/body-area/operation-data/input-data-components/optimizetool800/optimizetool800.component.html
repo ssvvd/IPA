@@ -1,0 +1,67 @@
+
+<div class="container" class="p-0 m-0 pt-2">
+    <div class="row">
+        <div>
+            <button type="button" class="btn sileLinks mb-0 pl-0 ml-0" (click)="ClearDataChild()">{{'Reset' | translate}}</button>
+        </div>       
+    </div>
+    <div  class="pl-0 pt-2">
+        <label>{{'Internal Coolant' | translate}}</label>
+        <div  class="pl-0 row">                  
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantYes" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantYes').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantYes').value">
+                <label class="custom-control-label" for="chkCoolantYes">{{'Standard' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantNo" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantNo').value"   [checked]="msrv_StMng.IPL.GetItem('TD_CoolantNo').value">
+                <label class="custom-control-label" for="chkCoolantNo">{{'Without' | translate}}</label>
+            </div> 
+             <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chkCoolantHP" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TD_CoolantHP').value" [checked]="msrv_StMng.IPL.GetItem('TD_CoolantHP').value">
+                <label class="custom-control-label" for="chkCoolantHP">{{'High Pressure' | translate}}</label>
+            </div>        
+        </div>
+    </div>
+     <div class="form-group" > 
+        <div class="pl-0 pt-3">
+            <label>{{'Top Rake Geometry' | translate}}</label>
+        </div>
+        <div  class="pl-0 row">                  
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chk1" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TopRakeGeometry_Deflector').value" [checked]="msrv_StMng.IPL.GetItem('TopRakeGeometry_Deflector').value">
+                <label class="custom-control-label" for="chk1">{{'Deflector' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chk2" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TopRakeGeometry_Chipformer').value"   [checked]="msrv_StMng.IPL.GetItem('TopRakeGeometry_Chipformer').value">
+                <label class="custom-control-label" for="chk2">{{'Chipformer' | translate}}</label>
+            </div> 
+             <div class="custom-control custom-checkbox col-4 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chk3" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('TopRakeGeometry_Flat').value" [checked]="msrv_StMng.IPL.GetItem('TopRakeGeometry_Flat').value">
+                <label class="custom-control-label" for="chk3">{{'Flat' | translate}}</label>
+            </div>        
+        </div>
+    </div>
+
+    <div class="form-group" > 
+        <div class="pl-0 pt-3">
+            <label>{{'Thread Profile Type' | translate}}</label>
+        </div>
+        <div  class="pl-0 row">                  
+            <div class="custom-control custom-checkbox col-6 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chk7" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('ThreadProfilType_Full').value" [checked]="msrv_StMng.IPL.GetItem('TopRakeGeometry_Deflector').value">
+                <label class="custom-control-label" for="chk7">{{'Full' | translate}}</label>
+            </div>                              
+            <div class="custom-control custom-checkbox col-6 pt-0">
+                <input type="checkbox" class="custom-control-input" id="chk8" name="Coolant" [(ngModel)] ="msrv_StMng.IPL.GetItem('ThreadProfilType_Partial').value"   [checked]="msrv_StMng.IPL.GetItem('TopRakeGeometry_Chipformer').value">
+                <label class="custom-control-label" for="chk8">{{'Partial' | translate}}</label>
+            </div>                  
+        </div>
+    </div>    
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"     id="app_brandnamethread"   *ngIf="isLoad" [labeldescription]="'Brand Name'"                  [fieldname]="'BrandName'"     [funcname]="'BRANDNAMETHREAD'"    [fieldid]="'TD_BrandName'"></app-optimizetool-filter> 
+    <app-optimizetool-filter-ext [events]="eventsSubject.asObservable()" id="app_FamilyName"        *ngIf="isLoad" [labeldescription]="'Family'"                      [fieldname]="'FamilyName'"    [fieldvalue]="'Family'"           [funcname]="'FAMILYTHREAD'"    [fieldid]="'TD_Family'"></app-optimizetool-filter-ext>                
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"     id="app_tooldesignation"   *ngIf="isLoad" [labeldescription]="'Tool Designation'"            [fieldname]="'Designation'"   [funcname]="'TOOLTHREAD'"         [fieldid]="'TD_ToolDesignation'"></app-optimizetool-filter>  
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()"     id="app_insertdesignation" *ngIf="isLoad" [labeldescription]="'Insert / Solid Designation'"  [fieldname]="'Designation'"   [funcname]="'INSERTTHREAD'"       [fieldid]="'TD_InsertDesignation'"></app-optimizetool-filter>  
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_toolcatalog"    *ngIf="isLoad" [labeldescription]="'Tool Catalog No'"   [fieldname]="'CatalogNo'"   [funcname]="'TOOLCATALOGNOTHREAD'"   [fieldid]="'TD_ToolCatalogNo'"></app-optimizetool-filter> 
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_insertcatalog"    *ngIf="isLoad" [labeldescription]="'Insert / Solid Catalog No'" [fieldname]="'CatalogNo'"   [funcname]="'INSERTCATALOGNOTHREAD'"   [fieldid]="'TD_InsertCatalogNo'"></app-optimizetool-filter> 
+    <app-optimizetool-filter [events]="eventsSubject.asObservable()" id="app_grade"    *ngIf="isLoad" [labeldescription]="'Grade'"   [fieldname]="'CarbideGrade'"   [funcname]="'GRADETHREAD'"   [fieldid]="'TD_Grade'"></app-optimizetool-filter>      
+</div>

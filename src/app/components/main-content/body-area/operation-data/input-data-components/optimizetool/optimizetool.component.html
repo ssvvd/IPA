@@ -118,5 +118,8 @@
      <div class="pt-2">
         <app-optimizetool120  *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" [events]="eventsSubject.asObservable()" ></app-optimizetool120>
     </div>
+    <div class="pt-2">
+        <app-optimizetool800  *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" [events]="eventsSubject.asObservable()" ></app-optimizetool800>
+    </div>
     <app-optimizetool-adaptortype [events]="eventsSubject.asObservable()"></app-optimizetool-adaptortype>   
 </div>

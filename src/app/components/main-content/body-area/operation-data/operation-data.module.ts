@@ -32,6 +32,7 @@ import { OptimizetoolAdaptortypeComponent } from './input-data-components/optimi
 import { OptimizetoolComponent } from './input-data-components/optimizetool/optimizetool.component';
 import { Optimizetool59Component } from './input-data-components/optimizetool59/optimizetool59.component';
 import { OptimizetoolFilterComponent } from './input-data-components/optimizetool-filter/optimizetool-filter.component';
+import { Optimizetool800Component } from './input-data-components/optimizetool800/optimizetool800.component';
 
 //const routes: Routes = [{ path: '', component: OperationDataComponent }];
 
@@ -57,7 +58,8 @@ import { OptimizetoolFilterComponent } from './input-data-components/optimizetoo
      OptimizetoolFilterComponent,
   
      OptimizetoolFilterExtComponent,
-     Optimizetool120Component
+     Optimizetool120Component,
+     Optimizetool800Component
     ],
   imports: [
     Shared1Module,

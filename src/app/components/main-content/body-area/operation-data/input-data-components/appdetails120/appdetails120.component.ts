@@ -75,7 +75,7 @@ export class Appdetails120Component implements OnInit {
   pitch:string='';
   size:string='';
   lenght:number;
-  star:number;
+  //star:number;
   lead:number;
 
   threadtype:string='';
@@ -180,13 +180,15 @@ onfocusfield(field:string)
 
 ChangeStar()
 {
+    let start:number;
+    start=Number(this.srv_StMng.IPL.GetItem('NumberStarts').value);
     if(this.pitch_units=='mm')
-        this.lead=Math.round(((+this.pitch)* this.star*10))/10;
+        this.lead=Math.round(((+this.pitch)* start*10))/10;
     else
         if(this.srv_appsetting.Units=='M')
-            this.lead= Math.round((25.4/(+this.pitch)* this.star)*10)/10;
+            this.lead= Math.round((25.4/(+this.pitch)* start)*10)/10;
         else
-            this.lead=Math.round((1/(+this.pitch)* this.star)*100)/100;
+            this.lead=Math.round((1/(+this.pitch)* start)*100)/100;
 }
 
 onfocusoutfield()
@@ -294,8 +296,8 @@ ClearData()
     else
         this.ThreadDiaEnable=false;
 
-    if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
-        this.star =null;
+    //if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
+        //this.star =null;
   }
 
   changepitch()

@@ -34,7 +34,7 @@
             </div>           
             <div class="pt-0" >   
                 <div *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" class="form-group row">
-                    <div class="row pt-1" [ngClass]="exportPDF?'col-6':' col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 '">
+                    <div class="row pt-1" [ngClass]="exportPDF?'col-10':' col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 '">
                         <label class="pl-0 pt-3">{{'Thread Std. (TS)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
@@ -52,24 +52,7 @@
                         </select> 
                     </div>                 
                 </div>   
-                              
-                <div *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" >                                
-                    <div  class="btn-group div-header-link pl-2 pt-0"  ngbDropdown role="group" >                                
-                        <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Help_Icon.svg'"  class="MenuImg" title="{{'Help' | translate}}">
-                        <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
-                            <div  class ="row col-12 dropdown-item menuitem ml-4 mt-1 mb-1 mr-4 pl-4" >                                                                                                                                                                                                                                                                                                                       
-                                <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Contact Us' | translate}}</label>                                                                                                                                                      
-                            </div>
-                            <div class ="row col-12 dropdown-item menuitem" >                                                                                                  
-                                <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>                                                                                                                                                      
-                            </div>
-                            <div class ="row col-12 dropdown-item menuitem" >                                                                                                  
-                                <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide' | translate}}</label>                                                                                                                                                      
-                            </div>                        
-                        </div>                                                                     
-                    </div>  
-                    </div>                  
-                </div> 
+                                                       
                 <div class="form-group row">
                     <div class="row "  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0'">
                         <label class="pl-0 pt-3">{{'Pitch (P)' | translate}}</label>
@@ -87,23 +70,23 @@
                 </div>  
                 <div class="form-group row" *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'">
                     <div class="row "  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0'">
-                        <label class="pl-0 pt-3">{{'Number Of Stars (N)' | translate}}</label>
+                        <label class="pl-0 pt-3">{{'Number Of Starts (N)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div class="pt-1 pl-0" [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-4 col-md-10 col-sm-10 col-10  '">
-                         <select  [ngClass]="(msrv_StMng.IPL.GetItem('NumberStars').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  
-                                  [(ngModel)]="star" (change)="onfocusfield('star');SetIPLMandatory()" (change)="ChangeStar()"
-                         (focusout)="onfocusoutfield()" (focus)="onfocusfield('NumberStars')">
-                            <option  [selected]="1==star" [ngValue]="1">1</option>
-                            <option  [selected]="2==star" [ngValue]="2">2</option>
-                            <option  [selected]="3==star" [ngValue]="3">3</option>
-                            <option  [selected]="4==star" [ngValue]="4">4</option>
-                            <option  [selected]="5==star" [ngValue]="5">5</option>
-                            <option  [selected]="6==star" [ngValue]="6">6</option>
-                            <option  [selected]="7==star" [ngValue]="7">7</option>
-                            <option  [selected]="8==star" [ngValue]="8">8</option>
-                            <option  [selected]="9==star" [ngValue]="9">9</option>
-                            <option  [selected]="10==star" [ngValue]="10">10</option>                           
+                         <select  [ngClass]="(msrv_StMng.IPL.GetItem('NumberStarts').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  
+                                  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('NumberStarts').value" (change)="onfocusfield('star');SetIPLMandatory()" (change)="ChangeStar()"
+                         (focusout)="onfocusoutfield()" (focus)="onfocusfield('NumberStarts')">
+                            <option  [ngValue]="1">1</option>
+                            <option  [ngValue]="2">2</option>
+                            <option   [ngValue]="3">3</option>
+                            <option   [ngValue]="4">4</option>
+                            <option   [ngValue]="5">5</option>
+                            <option  [ngValue]="6">6</option>
+                            <option  [ngValue]="7">7</option>
+                            <option   [ngValue]="8">8</option>
+                            <option   [ngValue]="9">9</option>
+                            <option   [ngValue]="10">10</option>                           
                         </select> 
                     </div>                                   
                 </div>  
