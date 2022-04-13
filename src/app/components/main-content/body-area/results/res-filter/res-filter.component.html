@@ -60,9 +60,8 @@
             </div>      
         </div> 
     </div>
-
-    <div class="row pt-4 " [hidden]="(srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_SolidHead').value!='True')
-    || mainApp == 'IS' || mainApp == 'TG'">   
+    <div class="row pt-4 " [hidden]="(srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_SolidHead').value!='True' )
+    || mainApp == 'IS' || mainApp == 'TG' || mainApp=='TH'">   
        <div *ngIf="srv_StMng.SecApp!='770'" class="pr-4 ">   
            <label>{{'Solid' | translate}}</label> 
             <div class="row   pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_SolidTool').value!='True'">               
@@ -94,7 +93,7 @@
       
    </div>
     <div class="row" [hidden]="(srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True' && srv_StMng.IPL.GetItem('TD_IT_InsertHead').value!='True')
-    || (mainApp == 'IS') || (mainApp == 'TG')"> 
+    || (mainApp == 'IS') || (mainApp == 'TG') || mainApp=='TH'"> 
          <div class="pl-0">
             <label>{{mainApp=='DR'?'Indexable':'Indexable Insert' | translate}}</label>  
             <div class="row pt-2" [hidden]="srv_StMng.IPL.GetItem('TD_IT_InsertTool').value!='True'">           
@@ -169,10 +168,10 @@
         <res-filter-scroll *ngIf="mainApp == 'ML' &&  !srv_appsetting.isMobileResolution"  [controlName]="'CHW'" [prm]="'CHW'" [prmDesc]="'Corner chamfer width'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('CHW')" [maxValue]="getMax('CHW')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'IS'" [controlName]="'PSIR'" [prm]="'PSIR'" [prmDesc]="'Tool lead angle'" [units]="'°'" [minValue]="getMin('PSIR')" [maxValue]="getMax('PSIR')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         <res-filter-scroll *ngIf="mainApp == 'TG'" [controlName]="'CW'" [prm]="'CW'" [prmDesc]="'Cutting width'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('CW')" [maxValue]="getMax('CW')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
-        <res-filter-scroll *ngIf="mainApp == 'IS' || mainApp == 'TG'" [controlName]="'CEDC'" [prm]="'CEDC'" [prmDesc]="'Cutting edge count'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('CEDC')" [maxValue]="getMax('CEDC')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
+        <res-filter-scroll *ngIf="mainApp == 'IS' || mainApp == 'TG' || srv_StMng.SecApp=='800' || srv_StMng.SecApp=='810'" [controlName]="'CEDC'" [prm]="'CEDC'" [prmDesc]="'Cutting edge count'" [units]="srv_appsetting.UnitslengthDesc" [minValue]="getMin('CEDC')" [maxValue]="getMax('CEDC')" [step]="0.1" (change)="changeScroll($event)" [events]="eventsSubject.asObservable()" ></res-filter-scroll>
         
         
-        <div  *ngIf="(mainApp == 'ML' || mainApp == 'DR') &&  !srv_appsetting.isMobileResolution" class="p-0 m-0 pt-4 pr-2">    
+        <div  *ngIf="(mainApp == 'ML' || mainApp == 'DR' ) &&  !srv_appsetting.isMobileResolution" class="p-0 m-0 pt-4 pr-2">    
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
             <label title="{{'Coolant Supply Property'| translate}}">CSP</label>
         </div> 
@@ -188,7 +187,7 @@
         </div>
     </div>
 
-    <div  *ngIf="(mainApp == 'IS' || mainApp == 'TG') && !srv_appsetting.isMobileResolution" class="p-0 m-0 pt-4 pr-2">    
+    <div  *ngIf="(mainApp == 'IS' || mainApp == 'TG' || srv_StMng.SecApp=='800' || srv_StMng.SecApp=='810') && !srv_appsetting.isMobileResolution" class="p-0 m-0 pt-4 pr-2">    
         <div class="col-5 pl-0 ml-0 mr-0 pr-0 text-nowrap">       
             <label title="{{'Coolant Supply Property'| translate}}">{{'Internal Coolant' | translate}}</label>
         </div> 

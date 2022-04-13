@@ -78,43 +78,7 @@ export class MachiningOperationComponent implements OnInit {
               let isactive:boolean=true;
               if(d.ParentMenuID=='61') //drilling
               {
-                if(d.MenuID==71)  isadditem =false;
-                if( MachineType=='Swiss type' || MachineType=='Multi spindle')
-                {         
-                /*   if(this.srv_statemanage.SelectedMachine.SpindleType=='M' ) {
-                    if(d.MenuID==111) isadditem =false;
-                    if(d.MenuID==112) isadditem =true;
-                  }
-                  if(this.srv_statemanage.SelectedMachine.SpindleType=='T' ) {
-                    if(d.MenuID==111) isadditem =true;
-                    if(d.MenuID==112) isadditem =false;
-                  }  */                 
-                }                
-                { 
-                  /* if(MachineType=='Lathe')
-                  {
-                    if(d.MenuID==111)  isadditem =false;
-                    if(d.MenuID==112)  isadditem =true;                    
-                  }
-                  if(MachineType=='Machining center')
-                  {
-                    if(d.MenuID==111)  isadditem =true;
-                    if(d.MenuID==112)  isadditem =false;                    
-                  }         */          
-                }
-                if(MachineType=='Multi task' )
-                {
-                 /*  if(this.srv_statemanage.SelectedMachine.SpindleType=='T')
-                  {
-                    if(d.MenuID==111)  isadditem =true;
-                    if(d.MenuID==112)  isadditem =false; 
-                  }
-                  if(this.srv_statemanage.SelectedMachine.SpindleType=='M')
-                  {
-                    if(d.MenuID==111)  isadditem =false;
-                    if(d.MenuID==112)  isadditem =true;  
-                  } */
-                }
+                if(d.MenuID==71)  isadditem =false;                                                          
               } 
               if(d.ParentMenuID=='110') //threading
               {
@@ -158,7 +122,6 @@ export class MachiningOperationComponent implements OnInit {
 
               //ACTIVE BY ADAPTOR TYPE
               if(d.ActiveByAdaptor!=2) isactive=d.ActiveByAdaptor;
-
               if(this.srv_appsetting.isMobileResolution)  isadditem=(isadditem && isactive);            
               if(isadditem)
                 {
@@ -166,7 +129,7 @@ export class MachiningOperationComponent implements OnInit {
                   MainApp:d.MainApp,
                   MenuID: d.MenuID,
                   MenuName: d.MenuName,
-                  MenuImage: (d.ApplicationITAID ==800 || d.ApplicationITAID ==810) ? environment.ImageApplicationsPath + d.MenuImage  + "_inprogress.png": environment.ImageApplicationsPath + d.MenuImage  + ".png",
+                  MenuImage: ((d.ApplicationITAID ==800 || d.ApplicationITAID ==810) && (!environment.internal) )? environment.ImageApplicationsPath + d.MenuImage  + "_inprogress.png": environment.ImageApplicationsPath + d.MenuImage  + ".png",
                   ParentMenuID:d.ParentMenuID ,
                   ApplicationITAID: d.ApplicationITAID,
                   IsActive:isactive 
@@ -203,8 +166,6 @@ export class MachiningOperationComponent implements OnInit {
         }              
         this.SelectedMenuID1=this.srv_statemanage.MenuIDLevel1 ;
         this.SelectedMenuID2=this.srv_statemanage.MenuIDLevel2 ;   
-        
-      
     }
     ));
      }));
@@ -297,7 +258,6 @@ export class MachiningOperationComponent implements OnInit {
 
   ToOperationData(secapp:SecondaryApp)
   { 
-    //if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810')
     if (this.environment.production)
       {
         if(this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810')
@@ -305,20 +265,16 @@ export class MachiningOperationComponent implements OnInit {
       }
     else
       {
-       if((this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive) ||  (secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') )
+       if((this.isToOperationData && secapp.ApplicationITAID!='0' && secapp.IsActive) )
        {
         if(secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') this.OnSelectSecApp(secapp,1);
         this.router.navigate(['/home/operation-data']);
-       }
-          
+       }          
       }
   }
 
   BackMobile(level)
   {
     if(this.ShowLevel>0 && level<this.ShowLevel) this.ShowLevel =this.ShowLevel-1;
-    
   }
-
-
 }

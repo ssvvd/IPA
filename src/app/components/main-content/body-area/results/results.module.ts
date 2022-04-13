@@ -25,25 +25,18 @@ import { ResFilterScrollComponent } from './res-filter/res-filter-scroll/res-fil
 import { MachiningPrmsComponent } from './machining-prms/machining-prms.component';
 import { Mp77Component } from './machining-prms/mp77/mp77.component';
 import { ProductInfoComponent } from './product-info/product-info.component';
-
 import { InnerTabsTableComponent } from './inner-tabs-table/inner-tabs-table.component';
 import { ResultPpDownloadComponent } from './result-pp-download/result-pp-download.component';
 import { Mp760Component } from './machining-prms/mp760/mp760.component';
-
 import { ResultPpInventoryComponent } from './result-pp-inventory/result-pp-inventory.component';
 import { MpIsoTurningComponent } from './machining-prms/mp-iso-turning/mp-iso-turning.component';
 import { MpIsoTurningAxRaComponent } from './machining-prms/mp-iso-turning-ax-ra/mp-iso-turning-ax-ra.component';
 import { MpTurnGrooveComponent } from './machining-prms/mp-turn-groove/mp-turn-groove.component';
-/* import { ResultsPdfComponent } from './results-pdf/results-pdf.component'; */
 import { ResultItemInfoComponent } from './result-item-info/result-item-info.component';
 import { PpPromotionComponent } from './pp-promotion/pp-promotion.component';
 import { MpThreadingComponent } from './machining-prms/mp-threading/mp-threading.component';
-
 import { DataTablesModule } from 'angular-datatables';
 
-
-//import { MachinePpAddFavoriteComponent } from '../machines/machine-pp-add-favorite/machine-pp-add-favorite.component';
-//import { MachinesPpLoginComponent } from './components/main-content/body-area/machines/machines-pp-login/machines-pp-login.component';
 
 @NgModule({
   declarations: [       

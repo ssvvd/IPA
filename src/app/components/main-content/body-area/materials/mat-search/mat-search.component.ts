@@ -12,6 +12,7 @@ import {MachinesPpLoginComponent} from      'src/app/components/main-content/bod
 import { NgxSpinnerService } from "ngx-spinner"; 
 import { LoginService } from 'src/app/services/login.service';
 import { AppsettingService} from 'src/app/services/appsetting.service';
+import { StringDecoder } from 'string_decoder';
 
 @Component({
   selector: 'app-mat-search',
@@ -34,9 +35,10 @@ export class MatSearchComponent implements OnInit, OnDestroy {
   isDtInitialized:boolean = false;
   firstInt:boolean = false;
   _timeout: any = null;
+
   @Input() filterSearchTextInput: string;
   @Output() myMaterialClickEv = new EventEmitter<clsMaterial>();
-
+  @Output() OpenMaterialStandard = new EventEmitter<{material: clsMaterial,searchtext: string}>();
   constructor(private serv: MaterialService,private srv_statemanage:StateManagerService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,private srv_login:LoginService,private srv_appsetting:AppsettingService) { }
 
   ngOnInit() {
@@ -214,6 +216,18 @@ export class MatSearchComponent implements OnInit, OnDestroy {
         }
       }
       }, () => console.log('Rejected!'));
+  }
+
+  OpenMaterialStandarts(m:clsMaterial)
+  {
+    //alert();
+    this.OpenMaterialStandard.emit({material :m,searchtext:m.material})
+    //this.curSelectedCategory = "All";
+    //this.selectDisabled = true;
+  //}
+    //  this.standardSelected = '';
+      //this.MaterialSearchChanged.emit(this.searchText);   
+
   }
 
 

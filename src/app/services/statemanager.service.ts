@@ -32,9 +32,7 @@ export class StateManagerService {
  
   private obsOperationDataEnable = new BehaviorSubject<boolean>(false);
   OperationDataEnable = this.obsOperationDataEnable.asObservable();   
-  
-/*   private obsMachiningOperationEnable = new BehaviorSubject<boolean>(false);
-  MachiningOperationEnable = this.obsMachiningOperationEnable.asObservable();    */
+
 
   private obsInputParamSelected = new BehaviorSubject<string>('');
   InputParamSelected = this.obsInputParamSelected.asObservable();
@@ -168,6 +166,7 @@ export class StateManagerService {
     this.mMenuIDLevel1 = id;
   }
   
+
   private mMenuIDLevel2:string='';
   get MenuIDLevel2():string {
     return this.mMenuIDLevel2;
@@ -374,7 +373,7 @@ export class StateManagerService {
     let listparams: { name: string, value: string }[]=[];
     let str:string='';
 
-    if(this.SecApp=='119' || this.SecApp=='120')        
+    if(this.SecApp=='119' || this.SecApp=='120'  || this.SecApp=='800'  || this.SecApp=='810')        
     {
       this.IPL.GetItem('IsExternal').value='';
       this.IPL.GetItem('IsInternal').value='';
@@ -435,6 +434,23 @@ export class StateManagerService {
        this.mGoOperationTab = c;    
        //this.obsMachiningOperationEnable.next(true);
        if(c) this.obsMaterialSelected.next([this.GetMaterialSelectedDescription(this.materialSelected)]);           
+      }
+
+
+      private mSelectedMatStandard:string='';
+      get SelectedMatStandard():string {
+        return this.mSelectedMatStandard;
+      }
+      set SelectedMatStandard(s:string) {
+        this.mSelectedMatStandard = s;
+      }
+
+      private mSelectedMatText:string='';
+      get SelectedMatText():string {
+        return this.mSelectedMatText;
+      }
+      set SelectedMatText(t:string) {
+        this.mSelectedMatText = t;
       }
 }
  

@@ -18,7 +18,8 @@
             </tr>
           </thead>
           <tbody>   
-              <tr *ngFor="let material of materialsResultSorted" [className]="(material.material == selectedMaterial  && FavName == '')? 'tr-selected' : 'tr-not-selected'">      
+              <tr (click)="OpenMaterialStandarts(material)" *ngFor="let material of materialsResultSorted" 
+                  [className]="(material.material == selectedMaterial  && FavName == '')? 'tr-selected' : 'tr-not-selected'">      
                   <td><label class="bold font-weight-bold m-1 categLabel" [title]="material.Category">{{material.Category}}</label></td>
                   <td>{{material.group}}</td>
                   <td>{{material.material}}</td>

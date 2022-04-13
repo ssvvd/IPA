@@ -50,16 +50,20 @@ export class MpThreadingComponent implements OnInit {
   SKP:number
   catalogNo:string[]=[]
   resType:string = ''
-
+  lead:number=0;
+  TPT:string;
   constructor(public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,private srv_Results:ResultsService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   ngOnChanges(changes:SimpleChanges) {
 
     if (this.selectedRes && changes.selectedRes){
-      this.fillParams()
+      {
+      this.fillParams();
+      this.CalculateLead();
+      }
     }
   }
 
@@ -160,6 +164,11 @@ export class MpThreadingComponent implements OnInit {
         this.n = +value
         break;
       }
+      case 'OperationType':{
+        this.TPT = value;
+        break;
+      }
+      
     }
 
 
@@ -198,14 +207,6 @@ export class MpThreadingComponent implements OnInit {
     // itemIndex++
     }.bind(this));
 
-
-
-
-// this.n = Math.round((this.Vc * 1000)/(Math.PI * this.DC))
-
-
-
-
   }
 
   reset(){
@@ -232,4 +233,18 @@ export class MpThreadingComponent implements OnInit {
     this.resType = ''
     this.NSDoUnits = ''
   }
+
+  
+CalculateLead()
+{
+    let start:number;
+    start=Number(this.srv_StMng.IPL.GetItem('NumberStarts').value);
+    if (this.srv_StMng.IPL.GetItem('ThreadForm').value == 'M60' || this.srv_StMng.IPL.GetItem('ThreadForm').value == 'MJ60')
+      this.lead=Math.round(((+this.srv_StMng.IPL.GetItem('Pitch').value)* start*10))/10;
+    else
+    if(this.srv_appsetting.Units=='M')
+        this.lead= Math.round((25.4/(+this.srv_StMng.IPL.GetItem('Pitch').value)* start)*10)/10;
+    else
+        this.lead=Math.round((1/(+this.srv_StMng.IPL.GetItem('Pitch').value)* start)*100)/100;   
+}
 }

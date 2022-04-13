@@ -1,17 +1,3 @@
-<!-- 
-      <div class="divst">
-         <h4 class="tableTitle">{{this.selectedStandard}}</h4>
-         <table    datatable id="tblmaterialDetails" class="table table-stripe row-border hover" >
-               <thead>
-                       <tr><th *ngFor="let col of headers" title={{mySplit(col,0)}}  (click)="OnSelectMaterial(col)" [routerLink]="'/machining-operation'">{{mySplit(col,0)}}</th></tr>
-                    </thead>
-                    <tbody>
-                       <tr *ngFor="let obj of dtResult">
-                          <td *ngFor="let col of headers"  (click)="OnSelectMaterial(col)" [routerLink]="'/machining-operation'"> {{obj[col]}} </td>
-                       </tr>
-                    </tbody>
-         </table>        
-            </div>  -->
 
             <div class="">
                <h3 class="siteTitle float-left" >{{this.selectedStandard}}</h3>
@@ -28,8 +14,7 @@
                      </tr>
                   </thead>
                   <tbody>
-                     <tr *ngFor="let obj of dtResult">
-                        <!-- <div>{{obj}}</div> -->
+                     <tr *ngFor="let obj of dtResult">                      
                         <td *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)"  (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(col,obj[col]) : false"
                            [routerLink]="(environment.internal && obj[col].indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"  attr.data-value={{obj[col]}}
                            [ngClass]="{'td-selected' : this.selectedMaterial.FavName == '' && (mySplit(col,0) == this.selectedMatOrGrp || (obj[col] == this.selectedMatOrGrp && mySplit(col,0) == this.selectedMaterial.group))}">

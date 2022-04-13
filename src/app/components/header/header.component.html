@@ -1,5 +1,6 @@
 
 <div class="row justify-content-center">
+    
 <div class="col-12 banner-top d-flex justify-content-center pl-0 pr-0" *ngIf="!srv_appsetting.isMobileResolution">
     <div class="div-header" >       
         <div class="row float-left div-banner-images pl-4">
@@ -169,6 +170,8 @@
                         </div>
                     </div>
                 </div>
+
+              
                 <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Help_Icon.svg'"  class="MenuImg" title="{{'Help' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">

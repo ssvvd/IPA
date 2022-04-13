@@ -37,6 +37,7 @@ export class MaterialService {
   }
   public  getmaterialsdetailsStnd(grp:string , GWCCNT:string)
   {        
+    if(GWCCNT.trim()=='AISI/SAE')  GWCCNT='AISI*SAE';
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-details-stnd/' + grp + '/' + GWCCNT);
   }
   public  getmaterialhardness()

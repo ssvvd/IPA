@@ -33,25 +33,43 @@
                
             </div>           
             <div class="pt-0" >   
-                <div *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" class="form-group row">
+                <div  class="form-group row">
                     <div class="row pt-1" [ngClass]="exportPDF?'col-10':' col-xl-10 col-lg-10 col-md-12 col-sm-12 col-12 '">
                         <label class="pl-0 pt-3">{{'Thread Std. (TS)' | translate}}</label>
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
-                    <div class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
+                    <div *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
                         <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
                             <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">{{tf.Description}}</option>
                         </select> 
-                    </div>                   
+                    </div>    
+                    
+                    <div *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10  '">
+                        <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
+                            <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">
+                            <div>
+                                <div>{{tf.Description }}</div>
+                                <div>--{{tf.ThreadFormISO }}</div>
+                                <div>--{{tf.ThreadForm }}</div>                         
+                            </div>
+                        </option>
+                        </select> 
+                    </div>   
                 </div> 
                 
-                <div *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" >                                
+                <!-- <div *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" >                                
                     <div class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
                         <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
-                            <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf"><div class="row"><div>{{tf.Description}}</div><div>--{{tf.ThreadFormISO}}</div><div>--{{tf.ThreadForm}}</div><div>{{tf.Description}}</div></div></option>
+                            <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">
+                                <div class="row col-12" >
+                                    <div class="col-5" >{{tf.Description}}</div>
+                                    <div class="col-3" >--{{tf.ThreadFormISO}}</div>
+                                    <div class="col-3" >--{{tf.ThreadForm}}</div>                         
+                                </div>
+                            </option>
                         </select> 
                     </div>                 
-                </div>   
+                </div>    -->
                                                        
                 <div class="form-group row">
                     <div class="row "  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0'">
@@ -77,16 +95,16 @@
                          <select  [ngClass]="(msrv_StMng.IPL.GetItem('NumberStarts').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  
                                   [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('NumberStarts').value" (change)="onfocusfield('star');SetIPLMandatory()" (change)="ChangeStar()"
                          (focusout)="onfocusoutfield()" (focus)="onfocusfield('NumberStarts')">
-                            <option  [ngValue]="1">1</option>
-                            <option  [ngValue]="2">2</option>
-                            <option   [ngValue]="3">3</option>
-                            <option   [ngValue]="4">4</option>
-                            <option   [ngValue]="5">5</option>
-                            <option  [ngValue]="6">6</option>
-                            <option  [ngValue]="7">7</option>
-                            <option   [ngValue]="8">8</option>
-                            <option   [ngValue]="9">9</option>
-                            <option   [ngValue]="10">10</option>                           
+                            <option [selected]="'1'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='1'>1</option>
+                            <option [selected]="'2'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='2'>2</option>
+                            <option [selected]="'3'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='3'>3</option>
+                            <option [selected]="'4'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='4'>4</option>
+                            <option [selected]="'5'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='5'>5</option>
+                            <option [selected]="'6'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='6'>6</option>
+                            <option [selected]="'7'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='7'>7</option>
+                            <option [selected]="'8'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='8'>8</option>
+                            <option [selected]="'9'==msrv_StMng.IPL.GetItem('NumberStarts').value"  [ngValue]='9'>9</option>
+                            <option [selected]="'10'==msrv_StMng.IPL.GetItem('NumberStarts').value" [ngValue]='10'>10</option>                           
                         </select> 
                     </div>                                   
                 </div>  
@@ -99,7 +117,7 @@
                         <!-- <input  type="number" required [className]="IsGetResult &&(msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Lead').value==null || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Lead').value=='0' || msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('LengthOfShoulder_L').value=='')? 'form-control input-empty input-min-width pr-0':'pr-0 form-control input-min-width'"  id="txtLength" name="txtLength" 
                                                 [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('Lead').value" (change)="changelength();SetIPLMandatory()" (focus)="onfocusfield('Lead')" (focusout)="onfocusoutfield()" 
                                                 >     -->
-                        <label *ngIf="lead!=0" class="pl-0 pt-3">{{lead}}</label>                                                                   
+                        <label *ngIf="lead&&lead!=0" class="pl-0 pt-3">{{lead}}</label>                                                                   
                     </div>    
                     <div class="pt-1 pl-0">
                         <label class="pl-0 pt-2">{{msrv_appsetting.UnitslengthDesc | translate}}</label>
@@ -240,7 +258,7 @@
             </div> 
          </div>   
          <div  *ngIf="!msrv_appsetting.isMobileResolution || exportPDF" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-4 pr-4 pt-1'">            
-            <div *ngIf="ImageName1!=''" class="col-12 text-center" >
+            <div  *ngIf="ImageName1!='' && msrv_StMng.SecApp!='800' && msrv_StMng.SecApp!='810'" class="col-12 text-center" >
                 <img src="{{ImageName1}}" class="input-image1 img-responsive">   
             </div>
             <div *ngIf="ImageName!=''" class="col-12 text-center">

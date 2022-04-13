@@ -5,20 +5,19 @@
                <img src="{{environment.ImgArrowLeft}}" title="Previous" (click)="Previous()" class="icon-edit" [hidden]="curPage==0">
                <img src="{{environment.ImgArrowRight}}" title="Next" (click)="Next()" class="icon-edit" [hidden]="curPage==lastPage">
             </div>
-              <table    datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
+            <table   datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
                     <thead>
                             <tr id="dtOptionsMat"><th *ngFor="let col of headers; index as iHeader" [attr.data-color]=(selectedMaterial.Category) [hidden]="(curShownColumns.indexOf(iHeader) == -1)" [title]="col.split('_')[1]"><label>{{col.split("_")[0]}}</label></th></tr>
                          </thead>
-                         <tbody>
-                            <tr  *ngFor="let obj of detailsResult;" >
+                         <tbody id="dtDetails" >                                                       
+                            <tr  *ngFor="let obj of detailsResult;index as iLine">                                            
                                <td *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1)" attr.data-value={{obj[col]}} 
                                (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(obj[col]) : false" 
                                [routerLink]="(environment.internal && (obj[col] + '').indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"
-                               [ngClass]="{'td-selected' : obj[col] == this.selectedMatOrGrp && this.selectedMaterialCls.FavName == ''}"
+                               [ngClass]="{'td-selected' : (obj[col] == this.selectedMatOrGrp && this.selectedMaterialCls.FavName == '') || (obj.numberrow==0)}"
                                > {{obj[col].toString().replace('________','')}}
                                </td>
                             </tr>
                          </tbody>
-              </table>
-           
+              </table>           
             </div>

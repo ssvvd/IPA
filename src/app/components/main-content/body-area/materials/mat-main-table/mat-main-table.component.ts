@@ -337,33 +337,15 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
           (_.description.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
           (_.group.toUpperCase().indexOf(searchText.toUpperCase())>-1) ||
           (_.Condition.toUpperCase().indexOf(searchText.toUpperCase())>-1)
-          //  ||
-          // (_.Hardness.indexOf(searchText.toUpperCase())>-1)
-          ); 
-
-          // this.isDtInitializedFunc();
-          // if(this.dtElement.dtInstance){
-          //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-          //     dtInstance.destroy();
-          //     this.dtTriggerMat.next();
-          //   });
-          // }
-
-
-          // if(this.firstInt)
-          // this.isDtInitializedFunc();
-
-          // if (!this.firstInt)
-          // this.firstInt = true;
-
+          
+          );          
   }
-
 
   matDetailClick(material: clsMaterial) {
     this.OnSelectMaterial(material)
     this.matDetailSelectedEv.emit(material);
   }
-
+ 
   goToMyMaterial(){
     this.myMaterialClickEv.emit();
   }

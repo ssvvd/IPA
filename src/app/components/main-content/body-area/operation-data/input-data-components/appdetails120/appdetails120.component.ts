@@ -16,7 +16,7 @@ export class ThreadForm
 export class ThreadFormPitch
 {
    ThreadFormISO:string;
-   Pitch:string;
+   Pitch:number;
    Size:string;
 }
 
@@ -72,7 +72,7 @@ export class Appdetails120Component implements OnInit {
   objPitch:ThreadFormPitch;
 
   threadform:string='';
-  pitch:string='';
+  pitch:any='';
   size:string='';
   lenght:number;
   //star:number;
@@ -145,7 +145,7 @@ export class Appdetails120Component implements OnInit {
                 Units:this.srv_appsetting.Units=='M'?d.Units_M:d.Units_Inch
             }) ;                                                                                          
         }
-        this.pitch= this.srv_StMng.IPL.GetItem('Pitch').value;
+        this.pitch= Number(this.srv_StMng.IPL.GetItem('Pitch').value);
         this.changepitch();
         this.size= this.srv_StMng.IPL.GetItem('Size').value;
         this.lenght= Number(this.srv_StMng.IPL.GetItem('LengthOfShoulder_L').value);
@@ -461,6 +461,10 @@ ClearData()
             {
                 this.srv_StMng.IPL.GetItem('DiameterInner').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
             }
+            if(arrFormColName_f[i].ItemID=='Effectivediameter') 
+            {
+                this.srv_StMng.IPL.GetItem('RmaxRadial').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
+            }
         }  
     }      
   }
@@ -770,7 +774,11 @@ ClearData()
                 if(arrFormColName_f[i].ItemID=='Minordiameterint') this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =res.toString();
 
         if(arrFormColName_f[i].ItemID=='Helixangle') this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =res.toString();
+        
+        if(arrFormColName_f[i].ItemID=='Effectivediameter') this.srv_StMng.IPL.GetItem('RmaxRadial').value =res.toString();
+        
         }
+
   }
 
   getpitch_cal(threadform:string)

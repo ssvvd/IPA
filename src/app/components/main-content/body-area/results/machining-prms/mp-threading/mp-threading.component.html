@@ -6,7 +6,7 @@
       <div class="col-3 row text-center"><Label class="font-weight-bold"></Label></div>
       <div class="col-2" ></div>
     </div>
-        <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
+        <div *ngIf="srv_StMng.SecApp=='120' || srv_StMng.SecApp=='119'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Cutting Diameter' | translate }}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>
@@ -14,14 +14,7 @@
         <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">DC</div>
         <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{DC}}</div>
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}</div>
-      </div>
-          <!-- <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Cutting Diameter' | translate }}</Label></div>
-            <div class="col-2">DC</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{DC}}</div>
-            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
-          </div> -->
-
+      </div>        
           <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Thread Std.' | translate }}&nbsp;</Label>
@@ -30,14 +23,7 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TS</div>
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{TS}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" ></div>
-          </div>
-      <!--     <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Thread Std.' | translate }}</Label></div>
-            <div class="col-2">TS</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TS}}</div>
-            <div class="col-2"></div>
-          </div> -->
-
+          </div>      
           <div  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Pitch' | translate }}&nbsp;</Label>
@@ -49,15 +35,26 @@
               <div *ngIf="!srv_appsetting.isMobileResolution && (TS=='M60' || TS=='MJ60')" class="col-3 row  justify-content-center" >{{'mm' | translate}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution && TS!='M60' && TS!='MJ60'" class="col-3 row  justify-content-center" >TPI</div>
           </div>
-         <!--  <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Pitch' | translate }}</Label></div>
-            <div class="col-2">P</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{P}}</div>
-            <div class="col-2" *ngIf="TS=='M60' || TS=='MJ60'">{{'mm' | translate}}</div>
-            <div class="col-2" *ngIf="TS!='M60' && TS!='MJ60'">TPI</div>
-          </div> -->
-
           
+          <div *ngIf="srv_StMng.SecApp=='800' || srv_StMng.SecApp=='810'"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
+            <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
+              <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Number Of Starts' | translate }}&nbsp;</Label>
+        
+            </div>
+            <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">N</div>
+              <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{srv_StMng.IPL.GetItem('NumberStarts').value}}</div>             
+          </div>
+
+          <div *ngIf="srv_StMng.SecApp=='800' || srv_StMng.SecApp=='810'"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
+            <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
+              <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Lead' | translate }}&nbsp;</Label>      
+              <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>             
+            </div>
+            <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">L</div>
+              <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{lead}}</div>
+              <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}</div>          
+          </div>
+
           <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Thread Dia.' | translate }}&nbsp;</Label>
@@ -67,12 +64,6 @@
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{NSDo}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{NSDoUnits}}</div>
           </div>
-     <!--      <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Nominal Size' | translate}}/{{'Thread Dia.' | translate }}</Label></div>
-            <div class="col-2">NS/Do</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{NSDo}}</div>
-            <div class="col-2">{{NSDoUnits}}</div>
-          </div> -->
 
           <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -83,12 +74,15 @@
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{LTH}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}</div>
         </div>
-<!--           <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Thread Length' | translate }}</Label></div>
-            <div class="col-2">LTH</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{LTH}}</div>
-            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
-          </div> -->
+        
+        <div *ngIf="srv_StMng.SecApp=='800' || srv_StMng.SecApp=='810'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
+          <br>
+          <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
+            <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Thread Profile Type' | translate }}&nbsp;</Label>            
+          </div>
+          <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TPT</div>
+            <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{TPT}}</div>            
+        </div>
 
           <div  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -99,14 +93,18 @@
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{Vc}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }}</div>
         </div>
-          <!-- <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Cutting Speed' | translate }}</Label></div>
-            <div class="col-2">v<sub>c</sub></div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vc}}</div>
-            <div class="col-2">{{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }}</div>
-          </div> -->
+  
+        <div *ngIf="srv_StMng.SecApp=='800' || srv_StMng.SecApp=='810'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
+          <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
+            <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Spindle Speed' | translate }}&nbsp;</Label>
+            <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">(rpm)</Label>
+          </div>
+          <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">n</div>
+            <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{n}}</div>
+            <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >rpm</div>
+        </div>  
 
-          <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
+          <div *ngIf="srv_StMng.SecApp=='119' || srv_StMng.SecApp=='120'"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Feed per Tooth' | translate }}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}}/tooth)</Label>
@@ -114,32 +112,18 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">f<sub>z</sub></div>
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{fz}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}/tooth</div>
-          </div>
- <!--          <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Feed per Tooth' | translate }}</Label></div>
-            <div class="col-2">f<sub>z</sub></div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{fz}}</div>
-            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/tooth</div>
-          </div> -->
-  
+          </div> 
     <br>
-    <div class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Tool Assembly Data' | translate}}</Label></div>
-    
+    <div class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Tool Assembly Data' | translate}}</Label></div>    
         <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Overhang' | translate }}&nbsp;</Label>
-            <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}}/tooth)</Label>
+            <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}})</Label>
           </div>
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">O</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{O}}</div>
-            <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}/tooth</div>
-        </div>
-         <!--  <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Overhang' | translate }}</Label></div>
-            <div class="col-2">O</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{O}}</div>
-            <div class="col-2">{{srv_appsetting.UnitslengthDesc}}</div>
-          </div> -->
+            <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}</div>
+        </div>       
           <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Assembly Weight' | translate }}&nbsp;</Label>
@@ -148,19 +132,10 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">AW</div>
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{AW}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{ srv_appsetting.Units =='M' ? 'kg' : 'Lb' | translate}}</div>
-          </div>
-         <!--  <div class="row justify-content-start w-100">
-            <div class="col-3 row"><Label>{{'Assembly Weight' | translate }}</Label></div>
-            <div class="col-2">AW</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{AW}}</div>
-            <div class="col-2">{{ srv_appsetting.Units =='M' ? 'kg' : 'Lb' | translate}}</div>
-          </div> -->
-    
-    
+          </div>           
     <br>
-    <div class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Machine Data' | translate}}</Label></div>
-    
-    <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
+    <div *ngIf="srv_StMng.SecApp=='120' || srv_StMng.SecApp=='119'" class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Machine Data' | translate}}</Label></div>    
+    <div *ngIf="srv_StMng.SecApp=='120' || srv_StMng.SecApp=='119'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray ':''" class="row justify-content-start w-100 ">      
       <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
         <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Spindle Speed' | translate }}&nbsp;</Label>
         <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">(rpm)</Label>
@@ -168,15 +143,9 @@
       <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">n</div>
         <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{n}}</div>
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >rpm</div>
-    </div>
-   <!--  <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Spindle Speed' | translate }}</Label></div>
-        <div class="col-2">n</div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{n}}</div>
-        <div class="col-2">rpm</div>
-      </div> -->
+    </div>  
 
-      <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+      <div *ngIf="srv_StMng.SecApp=='120' || srv_StMng.SecApp=='119'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
         <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Circular Feed Rate' | translate }}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}}/min)</Label>
@@ -185,14 +154,8 @@
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{F}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}/min</div>
       </div>
-<!--       <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Circular Feed Rate' | translate }}</Label></div>
-        <div class="col-2">F</div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{F}}</div>
-        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
-      </div> -->
 
-      <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
+      <div *ngIf="srv_StMng.SecApp=='120' || srv_StMng.SecApp=='119'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
         <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
           <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Feed Speed' | translate }}&nbsp;</Label>
           <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{srv_appsetting.UnitslengthDesc}}/min)</Label>
@@ -201,14 +164,7 @@
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{Vf}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{srv_appsetting.UnitslengthDesc}}/min</div>
       </div>
-<!--       <div class="row justify-content-start w-100">
-        <div class="col-3 row"><Label>{{'Feed Speed' | translate }}</Label></div>
-        <div class="col-2">v<sub>f</sub></div>
-        <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{Vf}}</div>
-        <div class="col-2">{{srv_appsetting.UnitslengthDesc}}/min</div>
-      </div> -->
     
-    <br>
     <div *ngIf="srv_appsetting.Country.ShowPrice==1" class="row justify-content-start w-100"><Label class="font-weight-bold">{{'Prices' | translate}}</Label></div>
     
     <div *ngIf="resType=='I' || resType=='IH'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
@@ -219,13 +175,7 @@
       <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">IP</div>
         <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{IP}}</div>
         <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-    </div>
-     <!--      <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='I' || resType=='IH'">
-            <div class="col-3 row"><Label>{{'Insert Price' | translate }}</Label></div>
-            <div class="col-2">IP</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{IP}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div>  -->
+    </div>    
           
           <div *ngIf="resType=='I'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray  border-bottom-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -236,13 +186,7 @@
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{TP}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <!-- <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='I'">
-            <div class="col-3 row"><Label></Label>{{'Tool Price' | translate }}</div>
-            <div class="col-2">TP</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{TP}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> -->
-
+        
           <div *ngIf="resType=='IH'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Head Price' | translate }}&nbsp;</Label>
@@ -251,13 +195,7 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">HP</div>
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{HP}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div>
-          <!-- <div class="row justify-content-start w-100" *ngIf="resType=='IH'">
-            <div class="col-3 row"><Label>{{'Head Price' | translate }}</Label></div>
-            <div class="col-2">HP</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{HP}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> -->
+          </div>         
 
           <div *ngIf="resType=='IH'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray  border-bottom-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -268,13 +206,7 @@
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{HHP}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-        <!--   <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='IH'">
-            <div class="col-3 row"><Label>{{'Shank Price' | translate }}</Label></div>
-            <div class="col-2">HHP</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{HHP}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> -->
-
+      
           <div  *ngIf="resType=='S'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray  border-bottom-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Solid Price' | translate }}&nbsp;</Label>
@@ -284,12 +216,6 @@
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{SP}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-      <!--     <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='S'">
-            <div class="col-3 row"><Label>{{'Solid Price' | translate }}</Label></div>
-            <div class="col-2">SP</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{SP}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> -->
 
           <div *ngIf="resType=='SH'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -300,13 +226,7 @@
               <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{SHP}}</div>
               <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
           </div>
-          <!-- <div title="{{'Market List Price' | translate}}" class="row justify-content-start w-100" *ngIf="resType=='SH'">
-            <div class="col-3 row"><Label>{{'Solid Head Price' | translate }}</Label></div>
-            <div class="col-2">SHP</div>
-            <div class="col-3 row grayDiv justify-content-center" style="max-width: 20%;margin-right: 6% !important;">{{SHP}}</div>
-            <div class="col-2">{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> -->
-
+        
           <div *ngIf="resType=='SH'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Shank Price' | translate }}&nbsp;</Label>

@@ -6,6 +6,7 @@ import { PpRequestMaterialComponent } from './pp-request-material/pp-request-mat
 import { Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatFilterComponent } from './mat-filter/mat-filter.component';
+import { MatDetailsComponent } from './mat-details/mat-details.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { environment } from 'src/environments/environment';
@@ -18,7 +19,7 @@ import { environment } from 'src/environments/environment';
 })
 export class MaterialsComponent implements OnInit,OnDestroy {
   @ViewChild('myChildFilter') private myChildFilter: MatFilterComponent;
-  
+  @ViewChild('myDetailsComponent') private myDetailsComponent: MatDetailsComponent;
   internal:boolean;
   selectedCateg: string;
   selectedMatDeials:clsMaterial;
@@ -27,15 +28,12 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   breadCrumb:string[]=[];
   searchText:String
   navigationSubscription;
+  
   // environment = environment;
 
   constructor(private statemng:StateManagerService,private modalService: NgbModal,
               location: Location , private router: Router,public translate: TranslateService,
               public srv_appsetting:AppsettingService) {
-
-                
-              
-
     // if(location.path().toLowerCase() == '/materials'){
     //   environment.internal = false;
     // }
@@ -100,23 +98,27 @@ export class MaterialsComponent implements OnInit,OnDestroy {
 
   receiveMatDeials(material:clsMaterial) {
     this.selectedMatDeials = material;
-    this.curComponent = "2";
-    
+    this.curComponent = "2";    
     this.breadCrumb = [material.group,this.translate.instant('Standard Conversion Chart')];
+
+    this.statemng.SelectedMatStandard='';
+    this.statemng.SelectedMatText ='';
   }
   
   receiveStandard(standard:string) {
     this.selectedSatnd = standard;
     this.curComponent = "3";
-/*     if (this.statemng.GetMaterialSelected()!= null){
-      var selMat = this.statemng.GetMaterialSelected().group;
-      if (selMat.includes(this.selectedCateg))
-      this.breadCrumb = [selMat,standard];
-    }
-    else{ */
-      this.breadCrumb = [standard];
-    // }
-    
+      this.breadCrumb = [standard];  
+  }
+
+  OpenStandardsWithFilter($event) {
+    this.selectedMatDeials = $event.material;
+    this.curComponent = "2";    
+    this.breadCrumb = [$event.material.group,this.translate.instant('Standard Conversion Chart')];
+
+    //if(this.myDetailsComponent) this.myDetailsComponent.selectfoundmaterial( $event.material.Standard,$event.searchtext);
+    this.statemng.SelectedMatStandard=$event.material.Standard;
+    this.statemng.SelectedMatText =$event.searchtext;
   }
 
   receiveSearchText(srch:string) {
@@ -129,8 +131,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
       this.curComponent = "4";
       this.selectedCateg = "All";
       this.breadCrumb = [];
-    }
-    
+    }    
   }
 
   showMyMaterials(checked:boolean){
@@ -143,14 +144,12 @@ export class MaterialsComponent implements OnInit,OnDestroy {
       this.curComponent = "1";
       this.selectedCateg = "P";
     }
-
   }
 /*   reciveClearSearch() {
     this.searchText = "";
   } */
 
-  ngOnInit() {
-    
+  ngOnInit() {    
     this.srv_appsetting.LangChanged.subscribe(l=>{if(l!=null) this.translate.use(l)});
     if(!environment.internal)
     {

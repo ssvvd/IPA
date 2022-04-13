@@ -79,6 +79,7 @@ export class MatFilterComponent implements OnInit {
     //console.log(standardValue);
     this.searchText = '';
     this.MyMatCheked = false;
+    
     if (standardValue == ''){
       this.categClick(this.curSelectedCategory);
     }

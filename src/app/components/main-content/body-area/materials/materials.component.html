@@ -22,12 +22,12 @@
          </div>
         </div>
         <app-mat-main-table *ngSwitchDefault [selectedCategory]="selectedCateg" (matDetailSelectedEv)="receiveMatDeials($event)" (myMaterialClickEv)="GoToMyMaterials($event)" (MaterialSearchChangedMobile)="receiveSearchText($event)"></app-mat-main-table>
-        <app-mat-details *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
+        <app-mat-details #myDetailsComponent *ngSwitchCase="2" [selectedMaterial]="selectedMatDeials" ></app-mat-details>
         <app-mat-standard-table *ngSwitchCase="3" [selectedCateg]="selectedCateg" [selectedStandard]="selectedSatnd"></app-mat-standard-table>
         <!-- <app-mat-search    *ngSwitchCase="4"  [filterSearchTextInput]="searchText" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-search>        -->
               
         <div *ngSwitchCase="4"  >
-          <app-mat-search    *ngIf="!srv_appsetting.isMobileResolution"  [filterSearchTextInput]="searchText" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-search>      
+          <app-mat-search   (OpenMaterialStandard)="OpenStandardsWithFilter($event)" *ngIf="!srv_appsetting.isMobileResolution"  [filterSearchTextInput]="searchText" (myMaterialClickEv)="GoToMyMaterials($event)"></app-mat-search>      
              
           <app-mat-main-table  [selectedCategory]="selectedCateg" *ngIf="srv_appsetting.isMobileResolution"  (matDetailSelectedEv)="receiveMatDeials($event)" (myMaterialClickEv)="GoToMyMaterials($event)" (MaterialSearchChangedMobile)="receiveSearchText($event)"></app-mat-main-table>
         </div> 

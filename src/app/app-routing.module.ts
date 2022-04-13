@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MachiningOperationComponent } from './components/main-content/body-area/machining-operation/machining-operation.component';
-//import { MaterialsComponent } from './components/main-content/body-area/materials/materials.component';
-//import { OperationDataComponent } from './components/main-content/body-area/operation-data/operation-data.component';
-//import { ResultsComponent } from './components/main-content/body-area/results/results.component';
 import { HomeComponent } from './components/home/home.component';
 import { MachinesListComponent } from './components/main-content/body-area/machines/machines-list/machines-list.component';
 import { MachineItemComponent } from './components/main-content/body-area/machines/machine-item/machine-item.component';

@@ -36,7 +36,6 @@ export class ResultsTableComponent implements OnInit {
   allSubs$: Subscription;
   environment = environment;
   dtOptions: any = {};
-  // dtColumnDefs: any = {};
   dtRsults:object[];
   dtRsultsVisble:object[];
   dtFullTable:object[];
@@ -65,7 +64,6 @@ export class ResultsTableComponent implements OnInit {
   showingrows:number=0;
   lastTypeMainFilter:string="";
   IsClickInventory:boolean=false;
-  // spanSort:string = "<span class='sort-icon ml-1'></span>"
 
   @Input() filterChangedRec: any ; 
   @Output() goToViewEvent = new EventEmitter<any>();
@@ -73,8 +71,6 @@ export class ResultsTableComponent implements OnInit {
   @Output() filtermobiletop:string="FilterRec";
   @Output() changefiltermobiletop=new EventEmitter<any>();
   processdownload:boolean=false;
-  
-  //filtermobiletop:string="FilterRec";
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
     private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
@@ -91,11 +87,7 @@ export class ResultsTableComponent implements OnInit {
         scrollY="336px";
 
      this.dtOptions = {
-      pagingType: 'full_numbers',
-      // "columnDefs":[{ "type": "numeric-comma" }],
-    //   "columnDefs": [{ "width": "15%", "targets": 0 }
-    //   ,{ "width": "15%", "targets": 1 }
-    // ,{ "width": "15%", "targets": 2 }],
+      pagingType: 'full_numbers',     
        "searching": false,
        "lengthChange": false ,
        "paging":false,  
@@ -113,9 +105,6 @@ export class ResultsTableComponent implements OnInit {
       }           
   }; 
 
-//   this.dtColumnDefs = [
-//     { targets: 33, type: 'num' } //0 is the column index
-//  ];
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
   this.sortType = 'asc';
@@ -123,24 +112,7 @@ export class ResultsTableComponent implements OnInit {
   this.countrow = 0
   this.lastTypeMainFilter = "FilterRec"
   this.GetResult();
-
   }
-
-  // ngOnDestroy(): void {
-  //   // Do not forget to unsubscribe the event
-  //   this.dtTrigger.unsubscribe();
-  // // }
-  // ngAfterViewInit() {
-  //   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-  //     dtInstance.draw();
-  //   });
-  // }
-
-  // ngAfterViewChecked(){
-  //   // this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-  //   //   dtInstance.draw();
-  //   // });
-  // }
 
   GetResult() 
   {  
@@ -176,7 +148,6 @@ getShowTable(){
         .subscribe(([res1, res2, res3,res5, res6]:[any,any,any,any,any]) => {
           this.srv_ResultsStore.setResults(res1, res2, res3,res5, res6)
           this.renderTable(res1, res2, res3,res5, res6);          
-        // let a =0
         });
       }
       else{
@@ -198,21 +169,7 @@ getShowTable(){
         this.allSubs$ = combineLatest(_arr).subscribe(resList=>{
           //-- the response will be in array
           this.renderTable(resList[0], resList[1], resList[2], resList[3],resList[4])
-      });
-
-        // this.allSubs$ = forkJoin(
-        //   this.srv_ResultsStore.Currentres1,
-        //   this.srv_ResultsStore.Currentres2,
-        //   this.srv_ResultsStore.Currentres3,
-        //   this.srv_ResultsStore.Currentres4,
-        //   this.srv_ResultsStore.Currentres5,
-        //   this.srv_ResultsStore.Currentres6
-        // )
-        // .subscribe(([res1, res2, res3, res4,res5, res6]:[any,any,any,any,any,any]) => {
-        //   this.renderTable(res1, res2, res3, res4,res5, res6)
-        // // let a =0
-        // });
-        // this.renderTable(this.srv_ResultsStore.getRes1(), this.srv_ResultsStore.getRes2(), this.srv_ResultsStore.getRes3(), this.srv_ResultsStore.getRes4(),this.srv_ResultsStore.getRes5(), this.srv_ResultsStore.getRes6())
+      });    
       }
 }
 
@@ -227,17 +184,13 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
   this.dtRsults =JSON.parse(res1);
   this.dtPropertiesTable = JSON.parse(res2); 
   this.dtGroups = JSON.parse(res3);
-  // this.dtDefaultFields = JSON.parse(res4); 
   this.arrResultImgsAll = JSON.parse(res5);
-  // var obj = JSON.parse(res6);
-  // this.promotionFamilies = obj.map(ele=>ele.GFNUM);
   this.promotionFamilies = JSON.parse(res6);
 
   if (this.dtRsults.length < 1){
     this.SpinnerService.hide();
     return;
   }
-  // this.arrCurShownFields = this.dtDefaultFields 
   var columnsCount = this.dtPropertiesTable.length
   var rowsCount = this.dtRsults.length
 
@@ -261,8 +214,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
           this.dtResultsObjectsHelp[i].AverageUse = this.dtResultsObjectsHelp[i].AverageUse + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           else
           this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
-        }
-        
+        }        
 
         if (this.dtPropertiesTable[j].Field.toLowerCase() == 'kappaleadangle')
         this.dtResultsObjectsHelp[i].kappaLeadAngle = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
@@ -285,8 +237,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
           if (this.promotionFamilies.filter((obj) => obj.Family ==  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]).length > 0){
             this.dtResultsObjectsHelp[i].Promotion = true;
           }            
-        }
-        
+        }        
 
         if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
         this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i]['SecondaryAppOrig1'];
@@ -332,19 +283,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                   this.dtResultsObjectsHelp[index].img = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
 
                 }
-                // var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
-                // this.arrResultImgsItem.splice(index, 0,url);
-                // this.dtResultsObjectsHelp[index].itemImg = url
-
-                // let toolFamily = family.toString().trim()
-                // let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
-                // if (curFamilyPic)
-                // toolFamily = curFamilyPic['GFPIC'];
-
-                //   var url:string = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
-                //   this.arrResultImgsFamily.splice(index, 0,url);
-                //   this.dtResultsObjectsHelp[index].familyImg = url
-
+              
                 break;
                case 'I': 
                 this.dtResultsObjectsHelp[index].CatalogNoSI.push(catNo);
@@ -358,8 +297,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                   this.dtResultsObjectsHelp[index].DesgSI.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
                   this.dtResultsObjectsHelp[index].DesgS.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
                   
-                  // if (this.arrResultImgsItem.length < index + 1){
-
+                 
                     if (itemPicExists){
                       this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
                     }else{
@@ -371,48 +309,14 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                       this.dtResultsObjectsHelp[index].img = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
     
                     }
-
-
-                    // var url:string = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
-                    // this.arrResultImgsItem.splice(index, 0,url);
-                    // this.dtResultsObjectsHelp[index].itemImg = url
-
-                    // let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
-                    // if (curFamilyPic)
-                    //   family = curFamilyPic['GFPIC'];
-
-                    //   var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
-                    //   this.arrResultImgsFamily.splice(index, 0,url);
-                    //   this.dtResultsObjectsHelp[index].familyImg = url
-                  // }
                   
-                  // if (this.srv_StMng.SecApp == '57'){
-                  //   this.dtResultsObjectsHelp[index].GroupText[catNoLoc] = 'Solid Head'
-                  // }
                 break;
              } 
 
              this.updateGroupText(type,this.dtResultsObjectsHelp[index].itemTypeRes,this.dtResultsObjectsHelp[index].desgFieldName[catNoLoc],catNoLoc,index,catNo)
           })
         }
-          // if (i == 0){
-          //   groupsOrder.push(this.dtPropertiesTable[j].GroupID)
-          // }            
-        //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
-        //     // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //     this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //     // this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   }
-        //   else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
-        //     // this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //     this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   }
-        // }
-        
-
-
-        
-
+          
         if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
         this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
@@ -420,39 +324,6 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
           this.dtResultsObjectsHelp[i].Designation.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
           this.dtResultsObjectsHelp[i].desgFieldName.push(this.dtPropertiesTable[j].Field)
         }
-        //   if (this.dtResultsObjectsHelp[i].itemType == 'H'){
-        //     this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //     // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //     this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   }
-        //   else if (this.dtResultsObjectsHelp[i].itemType == 'T'){
-        //     this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //     // this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   }
-        // }
-        
-
-        // if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'ItemType'){
-        //   this.dtResultsObjectsHelp[i].itemType = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
-        //   if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'T'){
-        //   this.dtResultsObjectsHelp[i].DesgT.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   this.dtResultsObjectsHelp[i].CatalogNoT.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        // }
-        // else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
-        //   this.dtResultsObjectsHelp[i].DesgSI.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   this.dtResultsObjectsHelp[i].CatalogNoSI.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        //   this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        // }
-        // //   else if (this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] == 'S'){
-        // //   this.dtResultsObjectsHelp[i].DesgS.push(this.dtResultsObjectsHelp[i].Designation[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        // //   // this.dtResultsObjectsHelp[i].CatalogNoS.push(this.dtResultsObjectsHelp[i].CatalogNo[this.dtResultsObjectsHelp[i].Designation.length - 1]);
-        // // }
-        // }
-        
-
-        // if (((this.srv_StMng.SecApp == '760' && this.dtPropertiesTable[j].Field == 'DMin') || (this.srv_StMng.SecApp != '760' && this.dtPropertiesTable[j].Field == 'Tool_D')) && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]])
-        // this.dtResultsObjectsHelp[i].DC = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
-
 
         //End Build Helper
         if (this.dtPropertiesTable[j].IsVisible){
@@ -475,11 +346,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                 this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
               }
               break;
-            // case 'LH':
-            //   if (typeof this.dtResultsObjectsHelp[i].LU == 'undefined'){
-            //     this.dtResultsObjectsHelp[i].LU = value;
-            //   }
-            //   break;
+            
             case 'LF':
               break;
             case 'LB':
@@ -522,7 +389,6 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
           this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] = '';
           this.dtResultsObjects[i][index].value = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
 
-          // if (this.dtDefaultFields.indexOf(this.dtPropertiesTable[j].FieldDescriptionSmall) === -1){
           if (this.dtPropertiesTable[j].IsDefault == 0){
             this.dtResultsObjects[i][index].property.IsShow = false;
           }
@@ -556,22 +422,6 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
         if (gradeIndex != -1)
         this.dtResultsObjectsHelp[i].Grade[gradeIndex] =  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
       }
-
-
-        // if (this.dtPropertiesTable[j].FieldDescriptionSmall.includes('Family')  && '/Tool/Blade/Square shank'.indexOf(this.dtPropertiesTable[j].GroupText) !== -1){
-        //   let family:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]].toString().trim();
-          
-          
-        //   let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == family.toString().trim());
-        //   if (curFamilyPic)
-        //     family = curFamilyPic['GFPIC'];
-
-        //     var url:string = environment.eCatFamilyPictures + family.toString().trim() + ".gif ";
-        //     this.arrResultImgsFamily.push(url);
-
-        // }
-
-     
           
       }
 
@@ -712,11 +562,15 @@ customTB(index, song) { return `${index}-${song.id}`; }
 // }
 
 updateGroupText(itemType:string,resultType:string,field:string,catalogNoLoc:number,index:number,catalogNo:string){
+  //this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc]='';
 switch(this.srv_StMng.SecApp.toString()){
-    case '760':  case '770': case '780': case '790': case '57': case '119': case '120':
+  
+    case '760':  case '770': case '780': case '790': case '57': case '119': case '120': case '800' :case '810' :
       switch(field){
-        case 'HolderDesignation' :
-         
+        case 'AnvilDesignation' :         
+          this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Anvil');
+          break;
+        case 'HolderDesignation' :         
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
           break;
         case 'HolderDesignationMM':
@@ -1129,13 +983,7 @@ countShowingRows(){
 }
 filterRecommended(prop:clsHelpProp){
     if (prop.IsExpand == "False")
-        prop.isHidden++
-    // else
-    //     prop.isHidden--
-
-        // if(this.lastTypeMainFilter == "FilterSeller" && prop.AverageUse < 1){
-        //   prop.isHidden--
-        // }
+        prop.isHidden++;    
 }
 
 
@@ -1145,10 +993,7 @@ viewInfo(index:number)
   this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]],index:index})
 }
 
-getPropWithoutUnits(pr:string){
-
-  /* pr=pr.replace ("<sub>","");
-  pr=pr.replace ("</sub>",""); */
+getPropWithoutUnits(pr:string){ 
   let indexOfU:number = pr.lastIndexOf('(')
   if (indexOfU != -1){
     return pr.substring(0,indexOfU)
@@ -1182,22 +1027,14 @@ contactus()
 }
 
 goToCatalog(rowIndex:number,itemIndex:number){
-  // if (row.trim().length != 7){
-  //   return this.sanitizer.bypassSecurityTrustResourceUrl('')
-  // }
-  // let _index:number = this.selectedOption.CatalogNo.indexOf(row)
+ 
   let mapp:string = 'IT'
   if (this.dtResultsObjectsHelp[rowIndex].itemType[itemIndex].trim() != 'H'){
     mapp = this.srv_StMng.SecAppSelected.MainApp
   }
-
-  /* let url:string = environment.eCatItemPage + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim()  + '&fnum=' + this.dtResultsObjectsHelp[rowIndex].Families[itemIndex].trim()
-   + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang + '&cf=ITA'; */
-
    let url:string = environment.eCatItemPage + '&qw=' + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim() + '&lang='
    + this.srv_appsetting.Lang + '&GFSTYP=' + this.srv_appsetting.Units + '&cf=ITA';
    window.open(url, "_blank");
-  // return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
 
 
@@ -1227,9 +1064,7 @@ for (let x in families) {
 }
 
 columnName(colName:string){
-
   return colName + '<span class="sort-icon ml-1"></span>'
-
 }
 
 getValue(col:clsPropertyValue[]){
@@ -1274,9 +1109,7 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
 feedback()
 {
   const modalRef = this.modalService.open(FeedbackComponent,{ backdrop: 'static',centered: true, windowClass: 'feedback-modal' });
-  modalRef.result.then((result) => {
-    /* if(result=='cancel') return;
-    if(result=='send') this.srv_cook.set_cookie("notshowfeedback",'1');  */ 
+  modalRef.result.then((result) => {  
     this.srv_cook.set_cookie("notshowfeedback",'1');   
   });    
 } 
@@ -1299,8 +1132,6 @@ public ChangeFilterMobile()
 
 ApplyFilterChange(typefilter:string,fieldvalue:string)
 {
-  
-  //if (this.filterChangedRec ){
     this.filtermobiletop=fieldvalue;
     let issortbyfield:boolean=false;
     for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
@@ -1330,8 +1161,7 @@ ApplyFilterChange(typefilter:string,fieldvalue:string)
                   } 
                 break;
               default:
-              {
-                //this.filterRecommended(this.dtResultsObjectsHelp[i]);
+              {                
                 this.sortProp = fieldvalue; //fieldvalue;
                 this.sortType = 'asc';
                 issortbyfield=true;
