@@ -49,7 +49,9 @@ export class MaterialService {
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-hardness-limit/' + mat);
   }
   public  searchmaterial(mat:string):any
-  {        
+  {       
+    mat=mat.replace('/','*slash*');
+
     return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'material-search/' + mat).catch((err: HttpErrorResponse) => {      
       return "error";
     });  

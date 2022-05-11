@@ -301,7 +301,13 @@ export class ResultsService {
     });
   } 
 
-
+  public getpassesvalue(secapp:string, threadform:string, pitch :string, nooftooth:number){
+    return  this.httpClient.get(environment.API_HOST + this.API_ROUTE + 'get-passesvalue/' +secapp + 
+        '/' + threadform + '/' + pitch +'/' + nooftooth).catch((err: HttpErrorResponse) => {      
+      console.error('An error occurred:', err.error);
+      return "error";
+    });
+  } 
   }
 
 

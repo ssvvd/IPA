@@ -32,7 +32,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
   SelectedTxet:String='';
   SelectedIndexRow:number;
 
-  constructor(private serv: MaterialService,private srv_statemanage:StateManagerService) { }
+  constructor(private serv: MaterialService,public srv_statemanage:StateManagerService) { }
 
   ngOnInit() {
 
@@ -53,7 +53,9 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
         //,
         //"order": [ 3, 'asc' ]
       }             
-      };     
+      };  
+      
+      
      //this.fillDetailsTable();
   }
 
@@ -66,7 +68,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
       this.headers = Object.keys(detailsResult1[0]);
       if(this.srv_statemanage.SelectedMatText!='')
       {
-        let iii:number= (this.headers.findIndex (i => i.indexOf(this.srv_statemanage.SelectedMatStandard.trim())>-1));
+        let iii:number= (this.headers.findIndex (i => i.indexOf(this.srv_statemanage.SelectedMatStandard.trim()+ "_")>-1));
         let indexrow:number=1;
         let minGWCNUM:number;
         for(let o of detailsResult1)
@@ -74,7 +76,8 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
           if(indexrow==1) minGWCNUM = o.GWCNUM;
           let v:string=o[this.headers[iii]];   
               
-          if(v.trim().indexOf(this.srv_statemanage.SelectedMatText)>-1)
+          //if(v.trim().indexOf(this.srv_statemanage.SelectedMatText)>-1)
+          if(v.trim()==this.srv_statemanage.SelectedMatText)
           {
             this.SelectedIndexRow=indexrow;
             o.numberrow=0;
@@ -90,9 +93,6 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
       }
       else
         this.detailsResult =detailsResult1;
-      //this.detailsResult = Object.assign({}, this.detailsResult.sort((one, two) => (one.numberrow<two.numberrow? -1 : 1)));
-      //this.detailsResult=this.detailsResult.sort((one, two) => (one.numberrow==this.SelectedIndexRow && two.numberrow!=this.SelectedIndexRow? -1 : 1));       
-      //this.detailsResult=this.detailsResult.sort((one, two) => (one.numberrow<two.numberrow? -1 : 1));             
       
       console.log(this.detailsResult);
       this.lastPage = Math.ceil(this.headers.length / 8) - 1;
@@ -110,10 +110,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
 
   ngAfterViewInit()
   {
-    /* var element =document.getElementsByClassName("dataTables_scroll")[0];
-    element.scrollTop = 300;
-    element =document.getElementsByClassName("dataTables_scrollBody")[0];
-    element.scrollTop = 300; */
+   
   }
   
   isDtInitializedFunc(){
@@ -149,11 +146,6 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
   Next(){
     this.curPage = this.curPage + 1;
     this.setCurVisColumns();
-
-   /*  var element =document.getElementsByClassName("dataTables_scroll")[0];
-    element.scrollTop = 500;
-    element =document.getElementsByClassName("dataTables_scrollBody")[0];
-    element.scrollTop = 500; */
   }
 
   Previous(){
@@ -164,13 +156,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
   setCurVisColumns(){
     let nextPageStart:number = this.curPage * 8;
     this.curShownColumns = [nextPageStart + 1,nextPageStart + 2,nextPageStart + 3,nextPageStart + 4,nextPageStart + 5,nextPageStart + 6,nextPageStart + 7,nextPageStart + 8];
-  //   setTimeout(function(){
-  //     if(true){
-  //     this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-  //       dtInstance.columns.adjust();
-  //       this.dtTriggerMat.next();
-  //     });
-  // }}, 1000);
+  
   }
   
   ngDoCheck(){}

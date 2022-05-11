@@ -19,6 +19,7 @@
           </thead>
           <tbody>   
               <tr (click)="OpenMaterialStandarts(material)" *ngFor="let material of materialsResultSorted" 
+                  title="{{'Cross-reference material list' | translate }}" style="cursor: pointer"
                   [className]="(material.material == selectedMaterial  && FavName == '')? 'tr-selected' : 'tr-not-selected'">      
                   <td><label class="bold font-weight-bold m-1 categLabel" [title]="material.Category">{{material.Category}}</label></td>
                   <td>{{material.group}}</td>

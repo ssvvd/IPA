@@ -303,7 +303,9 @@ export class OptimizetoolFilterComponent implements OnInit {
          threadform =this.getvalueparambyname("ThreadForm");
          pitch =this.getvalueparambyname("Pitch");         
          size=this.getvalueparambyname("Size");
-         
+
+         size = size.replace("/", "***")
+
           //{SecondaryApp}/{Units}/{BrandName}/{DiaFrom}/{DiaTo}/{bTA}/{bSolid}/{Family}/{Pitch}/{Size}/{Diameter}/{Length}/{MajorDiameter}/{ThreadForm}/{mCoolantNo}/{mCoolantYes}/{Filter}/{Top}        
           param=this.srv_StMng.SecApp + "/" + this.srv_StMng.IPL.GetItem("Units").value + "/" + brandname +  "/" + this.srv_StMng.IPL.GetItem("TD_DiameterFrom").value + "/" +this.srv_StMng.IPL.GetItem("TD_DiameterTo").value +
                 "/1/1/" +family + "/" + pitch + "/" +size + "/" + dia + "/" + l + "/" + majordiameter + "/" +threadform + "/" +cool_no +"/" + cool_yes + "/";       
@@ -342,6 +344,7 @@ export class OptimizetoolFilterComponent implements OnInit {
          let threadform:string=this.getvalueparambyname("ThreadForm");
          let pitch:string =this.getvalueparambyname("Pitch");
          let size:string=this.getvalueparambyname("Size");
+         size = size.replace("/", "***")
          let family:string=this.getvalueparambyname("TD_Family");
          let tool:string =this.getvalueparambyname("TD_ToolDesignation");
          let dia:string;

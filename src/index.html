@@ -68,11 +68,13 @@
 
             gtag('create', 'UA-155960-40', 'auto');
             gtag('send', 'pageview'); */
+            
+  window.ga=window.ga || function() {(ga.g=ga.q||[]).push.arguments};
+  ga.l=+new Date;
+  gtag('create', 'UA-155960-40', 'auto');
+  gtag('send', 'pageview'); 
 
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'UA-155960-40');
+
 
   /*  Global site tag (gtag.js) - Google Analytics  */
   window.dataLayer = window.dataLayer || [];

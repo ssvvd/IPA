@@ -1,70 +1,59 @@
 <div class="pt-4">
 <label class="pb-2">CMCS - {{'Clamping Method Cylindrical Shank' | translate}}</label>
 <div class="row"> 
+   
     <div class="row pl-0 col-6" >
-        <div class="pl-0">
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input"  id="chkAdapType_CH"  name="chkAdapType_CH" 
+        <div class="col-2">
+            <div class="custom-control custom-checkbox text-center p-2 m-0">
+                <input type="checkbox" class="custom-control-input pl-2 m-0"  id="chkAdapType_CH"  name="chkAdapType_CH" 
                 [checked]="msrv_StMng.IPL.GetItem('ADAPTOR_ColletChuck').value=='True'" (change)="changeAdaptorType('ADAPTOR_ColletChuck')">
-                <label class="custom-control-label" for="chkAdapType_CH"></label>
+                <label class="p-0 m-0 custom-control-label" for="chkAdapType_CH"></label>
             </div>
         </div> 
-        <div class="pr-4  pl-0">
-            <label for="chkAdapType_CH" class="form-check-label" style="white-space: normal;">Spring Collet</label>
+        <div class="pl-0 pt-2 col-9">
+            <label for="chkAdapType_CH" class="form-check-label text-wrap" >{{'Spring Collet' | translate}}</label>
         </div>
              
-    </div>
+    </div> 
     <div class="row pl-0 col-6">       
-        <div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input"  id="chkAdapType_Hydro"  name="chkAdapType_Hydro" 
+        <div class="col-2">
+            <div class="custom-control custom-checkbox text-center p-2 m-0">
+                <input type="checkbox" class="custom-control-input pl-2 m-0"  id="chkAdapType_Hydro"  name="chkAdapType_Hydro" 
                 [checked]="msrv_StMng.IPL.GetItem('ADAPTOR_Hydro').value=='True'" (change)="changeAdaptorType('ADAPTOR_Hydro')">
-                <label class="custom-control-label" for="chkAdapType_Hydro"></label>
+                <label class="p-0 m-0 custom-control-label" for="chkAdapType_Hydro"></label>
             </div>
         </div>   
-         <div class="pr-4  pl-0 ">
-            <label for="chkAdapType_Hydro" class="form-check-label text-nowrap">Hydraulic</label>
+         <div class="pl-0 pt-2 col-9">
+            <label for="chkAdapType_Hydro" class="form-check-label text-wrap">{{'Hydraulic' | translate}}</label>
         </div>     
     </div>
      
 </div>
 <div class="row"> 
     <div class="row pl-0 col-6">       
-        <div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input"  id="chkAdapType_SRKIN"  name="chkAdapType_SRKIN" 
+        <div class="col-2">
+            <div class="custom-control custom-checkbox text-center p-2 m-0">
+                <input type="checkbox" class="custom-control-input pl-2 m-0"  id="chkAdapType_SRKIN"  name="chkAdapType_SRKIN" 
                 [checked]="msrv_StMng.IPL.GetItem('ADAPTOR_SRKIN').value=='True'" (change)="changeAdaptorType('ADAPTOR_SRKIN')">
-                <label class="custom-control-label" for="chkAdapType_SRKIN"></label>
+                <label class="p-0 m-0 custom-control-label" for="chkAdapType_SRKIN"></label>
             </div>
         </div>  
-         <div class="pr-4  pl-0 ">
-            <label for="chkAdapType_SRKIN" class="form-check-label text-nowrap">Thermal Shrink</label>
+         <div class="pl-0 pt-2 col-9">
+            <label class="form-check-label text-wrap">{{'Thermal Shrink' | translate}}</label>
         </div>      
     </div>
       <div class="row pl-0 col-6">       
-        <div >
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input"  id="chkAdapType_MAXIN"  name="chkAdapType_MAXIN" 
+        <div class="col-2">
+            <div class="custom-control custom-checkbox text-center p-2 m-0">
+                <input type="checkbox" class="custom-control-input pl-2 m-0"  id="chkAdapType_MAXIN"  name="chkAdapType_MAXIN" 
                 [checked]="msrv_StMng.IPL.GetItem('ADAPTOR_Maxin').value=='True'" (change)="changeAdaptorType('ADAPTOR_Maxin')">
-                <label class="custom-control-label" for="chkAdapType_MAXIN"></label>
+                <label class="p-0 m-0 custom-control-label" for="chkAdapType_MAXIN"></label>
             </div>
         </div>  
-         <div class="pr-4  pl-0 ">
-            <label for="chkAdapType_MAXIN" class="form-check-label text-nowrap">High Force Collet</label>
+         <div class="pl-0 pt-2 col-9">            
+            <label class="form-check-label text-wrap">{{'High Force Collet' | translate}}</label>
         </div>      
-    </div>
-   <!--   <div class="row pl-0 col-4">       
-        <div>
-            <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input"  id="chkAdapType_EM"  name="chkAdapType_EM" 
-                [checked]="msrv_StMng.IPL.GetItem('ADAPTOR_EM').value=='True'" (change)="changeAdaptorType('ADAPTOR_EM')">
-                <label class="custom-control-label" for="chkAdapType_EM"></label>
-            </div>
-        </div> 
-         <div class="pr-4  pl-0">
-            <label for="chkAdapType_EM" class="form-check-label text-nowrap">EM</label>
-        </div>       
-    </div> -->
+    </div>  
     <div class="pt-4">
 
     </div> 

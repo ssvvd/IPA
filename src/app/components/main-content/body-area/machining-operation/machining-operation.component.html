@@ -4,9 +4,9 @@
             <ol class="breadcrumb pt-0 mt-0 ml-0 pl-0 bg-white pb-0 mb-0"  style="height:25px">            
                 <li *ngIf="ShowLevel==0" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pl-2"  aria-current="page">{{'Choose Application' | translate}}</li>
                 <li class=" text-secondary" *ngIf="ShowLevel>0"><a (click)="BackMobile(0)"><img  class="arrow-mobile pr-1 pl-0" [src]="environment.ImagePath + 'icon_arrow-01.svg'"></a></li> 
-                <li *ngIf="ShowLevel>0" (click)="BackMobile(1)" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pt-1"  aria-current="page">{{DescAppMobile1}}</li>            
+                <li *ngIf="ShowLevel>0" (click)="BackMobile(1)" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pt-1"  aria-current="page">{{DescAppMobile1 | translate}}</li>            
                 <li class=" text-secondary pt-2 pr-1" *ngIf="ShowLevel>1">--</li>
-                <li *ngIf="ShowLevel>1" (click)="BackMobile(2)" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pt-1"  aria-current="page">{{DescAppMobile2}}</li>             
+                <li *ngIf="ShowLevel>1" (click)="BackMobile(2)" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pt-1"  aria-current="page">{{DescAppMobile2 | translate}}</li>             
             </ol>
      </nav>
      <div *ngIf="srv_appsetting.isMobileResolution" class="border-bottom-gray pt-0 pb-0"></div> 
@@ -16,9 +16,9 @@
                   [ngClass]="(mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='')?'div-app-selected  cursor-pointer':
                               (mainapp.MenuID!=SelectedMainAppID && SelectedMainAppID!='')?mainapp.IsActive?'div-app  cursor-pointer':'div-app cursor-not-allowed' :
                               (SelectedMainAppID=='')?mainapp.IsActive?'div-app-open  cursor-pointer':'div-app-open cursor-not-allowed':''"> 
-                <div [ngClass]="srv_appsetting.isMobileResolution?'col-5 text-left pt-2 pb-2':'col-12'" >                        
-                    <img [lazyLoad]="mainapp.MenuImage" data-toggle="tooltip" title="{{mainapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                       [ngClass]="mainapp.IsActive?'app-image cursor-pointer ':' app-image cursor-not-allowed img-not-allowed'">                                                                                                               
+                <div [ngClass]="srv_appsetting.isMobileResolution?'col-5 text-left pt-2 pb-2':'col-12'">                        
+                    <img  [lazyLoad]="mainapp.MenuImage" data-toggle="tooltip" title="{{mainapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
+                       class="app-image-mobile" [ngClass]="mainapp.IsActive?'cursor-pointer ':'  cursor-not-allowed img-not-allowed'" >                                                                                                               
                 </div>
                 <div  style="width:100%;" class="col-7" 
                       [ngClass]="mainapp.IsActive? (srv_appsetting.isMobileResolution?'cursor-pointer col-6 pt-4 float-left':'cursor-pointer col-12'):
@@ -36,14 +36,14 @@
     <div [ngClass]="srv_appsetting.isMobileResolution?'flex-column':'border-bottom-gray'" *ngIf="arrSelectedSecApp1?.length >0 && ((ShowLevel==1 && srv_appsetting.isMobileResolution) || !srv_appsetting.isMobileResolution) "> 
     <ul class="nav nav-fill  pb-2 "  [ngClass]="srv_appsetting.isMobileResolution?'flex-column':'pt-2 '">               
         <li  (click)="onFilterSecApp(secapp)" [ngClass]="srv_appsetting.isMobileResolution?'li-item-mobile ' :'li-item pt-1' " class="nav-item " (click)="ToOperationData(secapp)" *ngFor="let secapp of arrSelectedSecApp1">
-            <div *ngIf="!srv_appsetting.isMobileResolution" 
+            <div *ngIf="!srv_appsetting.isMobileResolution"  
                 [ngClass]="{'div-app-810':((secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') && environment.production),'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
                                         'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">    
-                <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">                                              
-                    <img  [lazyLoad]="secapp.MenuImage"  data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
+                <div  [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">                                              
+                    <img  [lazyLoad]="secapp.MenuImage"   data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
                     [ngClass]="secapp.IsActive ?'secapp-image cursor-pointer':'secapp-image img-not-allowed'">                                                                                                  
                 </div>
-                <div >
+                <div  >
                     <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">
                         <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" class="form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" 
                             title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
@@ -60,11 +60,11 @@
             <div class="row border-bottom-gray" *ngIf="srv_appsetting.isMobileResolution " 
                             [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
                                         'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">    
-                <div  [ngClass]="secapp.IsActive?'cursor-pointer  text-left pt-2 pb-2':'cursor-not-allowed  text-left pt-2 pb-2'" >                                              
+                <div class="col-5" [ngClass]="secapp.IsActive?'cursor-pointer   pt-1 pb-1':'cursor-not-allowed   pt-1 pb-1'" >                                              
                         <img [lazyLoad]="secapp.MenuImage" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                       class="pl-2" [ngClass]="secapp.IsActive?'secapp-image-mobile cursor-pointer':'secapp-image-mobile img-not-allowed'">                                                                                                  
+                       class="pl-1"  [ngClass]="secapp.IsActive?'secapp-image-mobile cursor-pointer':'secapp-image-mobile img-not-allowed'">                                                                                                  
                 </div>
-                <div  >
+                <div  class="col-7" >
                     <div [ngClass]="secapp.IsActive?srv_appsetting.isMobileResolution?'cursor-pointer pt-2':'cursor-pointer':srv_appsetting.isMobileResolution?'cursor-not-allowed pt-2':'cursor-not-allowed'">
                         <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" class="text-left form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" 
                                 title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
@@ -73,7 +73,7 @@
                     </div>
                     <div *ngIf="secapp.ApplicationITAID!='0'" 
                             data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                            [ngClass]="secapp.IsActive?'pt-2 mb-2 cursor-pointer':'pt-2 mb-2 cursor-not-allowed'">
+                            [ngClass]="secapp.IsActive?'pt-2 mb-2 cursor-pointer':'pt-2 mb-2 cursor-not-allowed'" class="text-left">
                             <button [ngClass]="secapp.IsActive?'btn btn-select cursor-pointer visible':'btn btn-select cursor-not-allowed div-app invisible'"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="isToOperationData && secapp.IsActive?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
                     </div>
                 </div>              
@@ -88,7 +88,7 @@
         <li    (click)="onFilterSecApp1(secapp)" [ngClass]="srv_appsetting.isMobileResolution?'li-item-mobile ' :'li-item' " class="nav-item "  (click)="ToOperationData(secapp)"  *ngFor="let secapp of arrSelectedSecApp2">
             <div *ngIf="!srv_appsetting.isMobileResolution" class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2 && SelectedMenuID2!='',
                         'div-app':secapp.MenuID!=SelectedMenuID2 && SelectedMenuID2!='','div-app-open':SelectedMenuID2==''}" > 
-                <img [lazyLoad]="secapp.MenuImage" class="secapp-image "  [ngClass]="secapp.IsActive ?'cursor-pointer':'img-not-allowed cursor-not-allowed'">                                                                                              
+                <img [lazyLoad]="secapp.MenuImage" class="secapp-image " [ngClass]="secapp.IsActive ?'cursor-pointer':'img-not-allowed cursor-not-allowed'">                                                                                              
                 <div>
                     <div class="form-group mb-0 pb-0 cursor-pointer">                    
                         <label  class="siteTitle" [ngClass]="secapp.IsActive ?'cursor-pointer':'div-app cursor-not-allowed '">{{secapp.MenuName |translate }}</label>                    
@@ -100,14 +100,14 @@
             </div>
             <div *ngIf="srv_appsetting.isMobileResolution" class="form-group row cursor-pointer pt-0 pb-0"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2 && SelectedMenuID2!='',
                   'div-app':secapp.MenuID!=SelectedMenuID2 && SelectedMenuID2!='','div-app-open':SelectedMenuID2==''}" > 
-                <div class="col-6 text-left pt-2 pb-2">
-                    <img [lazyLoad]="secapp.MenuImage" class="cursor-pointer pl-2" [ngClass]="secapp.IsActive?'secapp-image':'img-not-allowed'">                                                                                              
+                <div class="col-5 text-left pt-2 pb-2">
+                    <img [lazyLoad]="secapp.MenuImage" class="cursor-pointer pl-2" [ngClass]="secapp.IsActive?'secapp-image-mobile':'img-not-allowed'">                                                                                              
                 </div>
                 <div>
                     <div class="form-group mb-0 pb-0 cursor-pointer text-left">                    
                         <label  class="siteTitle cursor-pointer">{{secapp.MenuName |translate }}</label>                    
                     </div>  
-                    <div  *ngIf="secapp.ApplicationITAID!='0'" class="pt-2 pb-2">
+                    <div  *ngIf="secapp.ApplicationITAID!='0'" class="pt-2 pb-2 text-left">
                         <button class="btn btn-select"  (click)="OnSelectSecApp(secapp,2);" [routerLink]="isToOperationData?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
                     </div>                                                                              
                 </div>
@@ -118,125 +118,3 @@
     </ul> 
     </div>
     </div>
-<!-- <div class=" ml-0 pl-0 pr-0 mr-0 border-left-gray border-right-gray scrollYFilter" [ngClass]="srv_appsetting.isMobileResolution?'scrollYFilter-mobile pt-1 ':'pt-5 scrollYFilter'" >
-
-<div class="pt-2 pb-2" [ngClass]="srv_appsetting.isMobileResolution?'': 'border-bottom-gray'" >
-<nav class="ml-0 pl-0 mt-0 pt-0 pb-0 mb-1 pl-1"  *ngIf="srv_appsetting.isMobileResolution" aria-label="breadcrumb">
-        <ol class="breadcrumb pt-0 mt-0 ml-0 pl-0 bg-white pb-0 mb-0"  style="height:25px">            
-            <li *ngIf="ShowLevel==0" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pl-2"  aria-current="page">{{'Choose Application' | translate}}</li>
-            <li class=" text-secondary" *ngIf="ShowLevel>0"><a (click)="BackMobile(0)"><img  class="arrow-mobile pr-1 pl-0" [src]="environment.ImagePath + 'icon_arrow-01.svg'"></a></li> 
-            <li *ngIf="ShowLevel>0" (click)="BackMobile(1)" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pt-1"  aria-current="page">{{DescAppMobile1}}</li>            
-            <li class=" text-secondary pt-2 pr-1" *ngIf="ShowLevel>1">--</li>
-            <li *ngIf="ShowLevel>1" (click)="BackMobile(2)" [ngClass]="srv_appsetting.isMobileResolution?'siteTitle':'breadcrumb-item'" class=" active text-secondary pr-2 pt-1"  aria-current="page">{{DescAppMobile2}}</li>             
-        </ol>
- </nav>
- <div *ngIf="srv_appsetting.isMobileResolution" class="border-bottom-gray pt-0 pb-0"></div> 
- <ul class="nav nav-fill " [ngClass]="srv_appsetting.isMobileResolution?'flex-column':''" *ngIf="!srv_appsetting.isMobileResolution || ShowLevel==0">               
-    <li (click)="onSelectMainApp(mainapp);"  class="nav-item " [ngClass]="srv_appsetting.isMobileResolution?'li-item-mobile ':'li-item'" *ngFor="let mainapp of arrMainApps" >    
-        <div   class="form-group row" 
-              [ngClass]="(mainapp.MenuID==SelectedMainAppID && SelectedMainAppID!='')?'div-app-selected  cursor-pointer':
-                          (mainapp.MenuID!=SelectedMainAppID && SelectedMainAppID!='')?mainapp.IsActive?'div-app  cursor-pointer':'div-app cursor-not-allowed' :
-                          (SelectedMainAppID=='')?mainapp.IsActive?'div-app-open  cursor-pointer':'div-app-open cursor-not-allowed':''"> 
-            <div [ngClass]="srv_appsetting.isMobileResolution?'col-5 text-left pt-2 pb-2':'col-12'" >                        
-                <img [lazyLoad]="mainapp.MenuImage" data-toggle="tooltip" title="{{mainapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                   [ngClass]="mainapp.IsActive?'app-image cursor-pointer ':' app-image cursor-not-allowed img-not-allowed'">                                                                                                               
-            </div>
-            <div  style="width:100%;" class="col-7" 
-                  [ngClass]="mainapp.IsActive? (srv_appsetting.isMobileResolution?'cursor-pointer col-6 pt-4 float-left':'cursor-pointer col-12'):
-                  (srv_appsetting.isMobileResolution?'cursor-not-allowed col-6 pt-4':'cursor-not-allowed col-12')">
-                <div class="form-group mb-0 pb-0" [ngClass]="mainapp.IsActive?srv_appsetting.isMobileResolution?'cursor-pointer float-left ':'cursor-pointer':srv_appsetting.isMobileResolution?'cursor-not-allowed float-left':'cursor-not-allowed'"  data-toggle="tooltip"  
-                        title="{{mainapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
-                    <label  [ngClass]="mainapp.IsActive?'siteTitle cursor-pointer':'siteTitle cursor-not-allowed'">{{mainapp.MenuName |translate }}</label>                    
-                </div>
-            </div>                                                                          
-        </div> 
-        <div *ngIf="srv_appsetting.isMobileResolution" class="border-bottom-gray"></div>      
-    </li>          
-</ul>    
-</div>
-<div [ngClass]="srv_appsetting.isMobileResolution?'flex-column':'border-bottom-gray'" *ngIf="arrSelectedSecApp1?.length >0 && ((ShowLevel==1 && srv_appsetting.isMobileResolution) || !srv_appsetting.isMobileResolution) "> 
-<ul class="nav nav-fill  pb-2 "  [ngClass]="srv_appsetting.isMobileResolution?'flex-column':'pt-2 '">               
-    <li  (click)="onFilterSecApp(secapp)" [ngClass]="srv_appsetting.isMobileResolution?'li-item-mobile ' :'li-item pt-1' " class="nav-item " (click)="ToOperationData(secapp)" *ngFor="let secapp of arrSelectedSecApp1">
-        <div *ngIf="!srv_appsetting.isMobileResolution" 
-            [ngClass]="{'div-app-810':(secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810'),'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
-                                    'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">    
-            <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">                                              
-                <img  [lazyLoad]="secapp.MenuImage"  data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'secapp-image cursor-pointer':'secapp-image img-not-allowed'">                                                                                                  
-            </div>
-            <div >
-                <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">
-                    <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" class="form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" 
-                        title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
-                        <label  [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'siteTitle cursor-pointer':'siteTitle div-app cursor-not-allowed '">{{secapp.MenuName  |translate }}</label>                    
-                    </div>                                                              
-                </div>
-                <div *ngIf="secapp.ApplicationITAID!='0' && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'" 
-                    data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                    [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'pt-2 cursor-pointer':'pt-2 cursor-not-allowed'">
-                    <button [ngClass]="secapp.IsActive?'btn btn-select cursor-pointer visible':'btn btn-select cursor-not-allowed div-app invisible'"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="isToOperationData && secapp.IsActive?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
-                </div>
-            </div> 
-        </div>
-        <div class="row border-bottom-gray" *ngIf="srv_appsetting.isMobileResolution && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'" 
-                        [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
-                                    'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">    
-            <div  [ngClass]="secapp.IsActive?'cursor-pointer  text-left pt-2 pb-2':'cursor-not-allowed  text-left pt-2 pb-2'" >                                              
-                    <img [lazyLoad]="secapp.MenuImage" data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                   class="pl-2" [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'secapp-image-mobile cursor-pointer':'secapp-image-mobile img-not-allowed'">                                                                                                  
-            </div>
-            <div  >
-                <div [ngClass]="secapp.IsActive?srv_appsetting.isMobileResolution?'cursor-pointer pt-2':'cursor-pointer':srv_appsetting.isMobileResolution?'cursor-not-allowed pt-2':'cursor-not-allowed'">
-                    <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" class="text-left form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" 
-                            title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
-                            <label  [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'siteTitle cursor-pointer':'siteTitle div-app cursor-not-allowed '">{{secapp.MenuName  |translate }}</label>                    
-                    </div>                                                              
-                </div>
-                <div *ngIf="secapp.ApplicationITAID!='0' && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'" 
-                        data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
-                        [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'pt-2 mb-2 cursor-pointer':'pt-2 mb-2 cursor-not-allowed'">
-                        <button [ngClass]="secapp.IsActive?'btn btn-select cursor-pointer visible':'btn btn-select cursor-not-allowed div-app invisible'"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="isToOperationData && secapp.IsActive?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
-                </div>
-            </div>              
-        </div>
-        <div *ngIf="srv_appsetting.isMobileResolution" class="border-bottom-gray"></div> 
-    </li>          
-</ul>
-</div>
-
-<div  [ngClass]="srv_appsetting.isMobileResolution?'flex-column':''" *ngIf="arrSelectedSecApp2?.length >0 && (!srv_appsetting.isMobileResolution || (srv_appsetting.isMobileResolution && ShowLevel==2)) ">
-<ul class="nav nav-fill "  [ngClass]="srv_appsetting.isMobileResolution?'flex-column':'pt-2 pb-2'">               
-    <li    (click)="onFilterSecApp1(secapp)" [ngClass]="srv_appsetting.isMobileResolution?'li-item-mobile ' :'li-item' " class="nav-item "  (click)="ToOperationData(secapp)"  *ngFor="let secapp of arrSelectedSecApp2">
-        <div *ngIf="!srv_appsetting.isMobileResolution" class="form-group cursor-pointer"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2 && SelectedMenuID2!='',
-                    'div-app':secapp.MenuID!=SelectedMenuID2 && SelectedMenuID2!='','div-app-open':SelectedMenuID2==''}" > 
-            <img [lazyLoad]="secapp.MenuImage" class="secapp-image "  [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'cursor-pointer':'img-not-allowed cursor-not-allowed'">                                                                                              
-            <div>
-                <div class="form-group mb-0 pb-0 cursor-pointer">                    
-                    <label  class="siteTitle" [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'cursor-pointer':'div-app cursor-not-allowed '">{{secapp.MenuName |translate }}</label>                    
-                 </div>                                                                               
-            </div>
-            <div  *ngIf="secapp.ApplicationITAID!='0'" class="pt-2">
-               <button class="btn btn-select"  (click)="OnSelectSecApp(secapp,2);" [routerLink]="isToOperationData?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
-            </div> 
-        </div>
-        <div *ngIf="srv_appsetting.isMobileResolution" class="form-group row cursor-pointer pt-0 pb-0"  [ngClass]="{'div-app-selected':secapp.MenuID==SelectedMenuID2 && SelectedMenuID2!='',
-              'div-app':secapp.MenuID!=SelectedMenuID2 && SelectedMenuID2!='','div-app-open':SelectedMenuID2==''}" > 
-            <div class="col-6 text-left pt-2 pb-2">
-                <img [lazyLoad]="secapp.MenuImage" class="cursor-pointer pl-2" [ngClass]="secapp.IsActive && secapp.ApplicationITAID!='800' && secapp.ApplicationITAID!='810'?'secapp-image':'img-not-allowed'">                                                                                              
-            </div>
-            <div>
-                <div class="form-group mb-0 pb-0 cursor-pointer text-left">                    
-                    <label  class="siteTitle cursor-pointer">{{secapp.MenuName |translate }}</label>                    
-                </div>  
-                <div  *ngIf="secapp.ApplicationITAID!='0'" class="pt-2 pb-2">
-                    <button class="btn btn-select"  (click)="OnSelectSecApp(secapp,2);" [routerLink]="isToOperationData?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
-                </div>                                                                              
-            </div>
-            
-        </div>
-        <div *ngIf="srv_appsetting.isMobileResolution" class="border-bottom-gray"></div>
-    </li>          
-</ul> 
-</div>
-</div>
- -->

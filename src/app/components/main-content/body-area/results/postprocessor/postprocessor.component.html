@@ -1,0 +1,105 @@
+<div  class="justify-content-start w-100 row" >
+    <div class="col-7">
+        <div  class="siteTitle">{{'Infeed Methods' | translate}}</div>   
+        <div class="row pt-2 pl-0" style="background-color: aqua;">
+            <div class="col-3 text-center">
+                <div class="font-weight-bold" >{{'Flank' | translate}}</div>
+                <img style="width:100%" [ngClass]="InfeedMethod=='Flank'?'selected-image':''" (click)="SelectInfeedMethod('Flank')" [src] = "environment.ImagePath+'infeed_flank.png'">
+            </div>
+            <div class="col-3 text-center">
+                <div class="font-weight-bold">{{'Radial' | translate}}</div>
+            <img style="width:100%" [ngClass]="InfeedMethod=='Radial'?'selected-image':''"  (click)="SelectInfeedMethod('Radial')"  [src] = "environment.ImagePath+'infeed_radial.png'">
+            </div>
+            <div class="col-3 text-center">
+                <div class="font-weight-bold">{{'Alternate' | translate}}</div>
+                <img  style="width:100%" [ngClass]="InfeedMethod=='Alternate'?'selected-image':''"  (click)="SelectInfeedMethod('Alternate')" [src] = "environment.ImagePath+'infeed_alternate.png'">
+            </div>
+            <div class="col-3 text-center">
+                <div class="font-weight-bold">{{'Angled' | translate}}</div>
+                <img  style="width:100%" [ngClass]="InfeedMethod=='Angled'?'selected-image':''" (click)="SelectInfeedMethod('Angled')"  [src] = "environment.ImagePath+'infeed_angled.png'">
+            </div>
+        </div>
+    
+        <div class="row col-8 pt-2">
+            <div class="pr-2"><Label>{{'Cutting speed' | translate}}</Label></div>
+            <div class="pr-2"><input type="number" class="form-control" name="CuttingSpeed"  [(ngModel)]="CuttingSpeed"></div>                      
+            <div class="pr-2"><Label class="pl-1">({{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }})</Label></div>
+            
+        </div>
+        <div class="row col-8 pt-2">
+            <div class="pr-2"><Label>{{'Spindle speed' | translate}}</Label></div>
+            <div class="pr-2"><input type="number" class="form-control" name="SpindleSpeed"  [(ngModel)]="SpindleSpeed"></div>                    
+            <div><Label class="pl-1">rpm</Label></div>
+        </div>
+
+        <div  class="siteTitle" >{{'Radial Engagement' | translate}}</div>
+            <div class="row">
+                <div class="col-3 text-center">
+                    <div class="font-weight-bold" >{{'Constant Depth' | translate}}</div>
+                    <img style="width:100%" [ngClass]="RadialEn=='cuttingdepth'?'selected-image':''" (click)="SelectRadialEn('cuttingdepth')" [src] = "environment.ImagePath+'Equalcuttingdepth.png'">
+                </div>
+                <div class="col-3 text-center">
+                    <div class="font-weight-bold">{{'Constant Volume' | translate}}</div>
+                <img style="width:100%" [ngClass]="RadialEn=='chipvolume'?'selected-image':''"  (click)="SelectRadialEn('chipvolume')"  [src] = "environment.ImagePath+'Equalchipvolume.png'">
+                </div>            
+            </div>      
+            <div class="form-group row pt-3">
+                <div class="col-6">
+                    <div  [ngClass]="srv_appsetting.isMobileResolution?'pt-1 col-12 pl-0':'pt-1 col-5'">
+                        <label for="txtController" class="font-weight-bold" >{{'Controller' | translate}}</label>
+                    </div>
+                    <div class="pt-1" [ngClass]="srv_appsetting.isMobileResolution?'col-4 pl-0':'col-4'" >            
+                        <select class="form-control-sm" [ngModel]="controller" >
+                            <option value='Fanuc I&J'>Fanuc I&J</option>
+                            <option value='Fanuc R'>Fanuc R</option>                            
+                            <option value='Heidenhain'>Heidenhain</option>    
+                            <option value='Mazak R'>Mazak R</option> 
+                            <option value='Mazak I&J'>Mazak I&J</option> 
+                            <option value='Siemens I&J'>Siemens I&J</option> 
+                            <option value='Siemens R'>Siemens R</option>                                                 
+                        </select>                       
+                    </div>
+                </div>  
+                <div class="col-6">
+                    <div class="pr-2" ><Label class="font-weight-bold">{{'Cutting Time' | translate}}</Label></div>
+                    <div class="row">
+                            <div class="pr-2"><input type="number" class="form-control" name="TimeMin"  [(ngModel)]="TimeMin"></div>                      
+                            <div class="pr-2"><Label class="pl-1">{{ 'min' | translate}}</Label></div>
+                    </div>
+                    <div class="row">
+                        <div class="pr-2"><input type="number" class="form-control" name="TimeSecond"  [(ngModel)]="TimeSecond"></div>                      
+                        <div class="pr-2"><Label class="pl-1">{{ 'sec' | translate}}</Label></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    <div class="col-5">
+        <div class="row">
+            <div  [ngClass]="srv_appsetting.isMobileResolution?'pt-1 col-12 pl-0':'pt-1 col-5'">
+                <label for="txtController" class="font-weight-bold" >{{'No. Of Passes' | translate}}</label>
+            </div>
+            <div class="pt-1" [ngClass]="srv_appsetting.isMobileResolution?'col-4 pl-0':'col-4'" >            
+                <select class="form-control-sm" (change)="changepassnumber()" [(ngModel)]="NoOfPasses" >                
+                    <option *ngFor='let in of counter(24) ;let i = index'>{{i}}</option>
+                </select>                       
+            </div>
+        </div>
+        <div>
+            <div  class="siteTitle col-5" >{{'Pass Values' | translate}}</div>
+            <div>
+                <div class="row col-12">                           
+                    <div class="col-6 border header-data">
+                        <label class="header-data">{{'Pass No.' | translate}}</label>
+                    </div>
+                    <div class="col-6 border header-data">
+                        <label class="header-data">{{'Value' | translate}}</label>
+                    </div>                                                                   
+                </div>       
+                <div class="row col-12" *ngFor='let v of PassValues ;let i = index'>
+                    <div class="col-6 border">{{i+1}}</div>
+                    <div class="col-6 border">{{v}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

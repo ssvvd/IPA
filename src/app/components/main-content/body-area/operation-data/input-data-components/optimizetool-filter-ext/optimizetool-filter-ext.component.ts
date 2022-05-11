@@ -152,7 +152,9 @@ export class OptimizetoolFilterExtComponent implements OnInit {
          this.srv_StMng.IPL.GetItem("TD_BrandName").value==''?brandname='All':brandname= this.srv_StMng.IPL.GetItem("TD_BrandName").value;
          this.srv_StMng.IPL.GetItem("ThreadForm").value==null || this.srv_StMng.IPL.GetItem("ThreadForm").value==''? threadform = 'All':threadform = this.srv_StMng.IPL.GetItem("ThreadForm").value; 
          this.srv_StMng.IPL.GetItem("Pitch").value==null || this.srv_StMng.IPL.GetItem("Pitch").value==''? pitch = 'All':pitch = this.srv_StMng.IPL.GetItem("Pitch").value; 
+    
          this.srv_StMng.IPL.GetItem("Size").value==null || this.srv_StMng.IPL.GetItem("Size").value==''? size = 'All':size = this.srv_StMng.IPL.GetItem("Size").value; 
+         size=size.replace("/","***");
          param=this.srv_StMng.IPL.GetItem("Units").value + "/" + this.srv_StMng.SecApp+ "/" +brandname +"/1/1/" 
                                  + threadform + "/" + pitch + "/" + size + "/" +cool_no + "/" +cool_yes+"/";    
           str_param=param + str_s + "/" + t;
@@ -189,7 +191,7 @@ export class OptimizetoolFilterExtComponent implements OnInit {
 
   filldatasubscribe(data:any)
   {   
-    if(data=='error') { this.SpinnerService.hide();return;}   
+    if(data=='e') { this.SpinnerService.hide();return;}   
     this.show_more = false;   
     let n:number=0;
     this.arrData =[];     

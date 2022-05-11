@@ -187,17 +187,16 @@ if (this.srv_StMng.SecApp=='790' && this.srv_StMng.IPL.GetItem('HoleTypePreHole'
           break;
         }
         case 'Tool_D':{
-          this.DC = value
+          if(this.DC=='' && value!='') this.DC = value;            
           break;
         }
         case 'DMin':{
-          if(this.DC=='' && value!='') 
-            this.DC = value          
-            break;
+          if(this.DC=='' && value!='') this.DC = value                      
+          break;
         }
 
         case 'Solid_Diameter':{
-          if(value!="") 
+          if(this.DC=='' && value!="") 
             this.DC = value          
           break;
         }

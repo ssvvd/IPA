@@ -26,7 +26,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   curComponent:string;
   selectedSatnd:string;
   breadCrumb:string[]=[];
-  searchText:String
+  searchText:string
   navigationSubscription;
   
   // environment = environment;
@@ -34,9 +34,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   constructor(private statemng:StateManagerService,private modalService: NgbModal,
               location: Location , private router: Router,public translate: TranslateService,
               public srv_appsetting:AppsettingService) {
-    // if(location.path().toLowerCase() == '/materials'){
-    //   environment.internal = false;
-    // }
+  
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       // If it is a NavigationEnd event re-initalise the component
       if (e instanceof NavigationEnd) {
@@ -46,11 +44,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
   }
   
   initialiseInvites() {
-    // Set default values and re-fetch any data you need.
-
-
-    // this.ngOnInit()
-    // this.clrSearch = false;
+    // Set default values and re-fetch any data you need.   
     if(this.myChildFilter){
     var selCateg = "P"
     if (this.statemng.GetMaterialSelected()!= null){
@@ -58,9 +52,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
       selCateg = selMat.Category;
     }
     this.myChildFilter.categClick(selCateg)
-  }
-    // this.receiveCategory(selCateg)
-    // this.clrSearch = true;
+  }    
   }
 
   ngOnDestroy() {
@@ -93,7 +85,11 @@ export class MaterialsComponent implements OnInit,OnDestroy {
           
       }
     }
-  
+   else
+   {
+     if(this.searchText!='')
+      this.receiveSearchText(this.searchText)
+   }
   }
 
   receiveMatDeials(material:clsMaterial) {
@@ -145,9 +141,7 @@ export class MaterialsComponent implements OnInit,OnDestroy {
       this.selectedCateg = "P";
     }
   }
-/*   reciveClearSearch() {
-    this.searchText = "";
-  } */
+
 
   ngOnInit() {    
     this.srv_appsetting.LangChanged.subscribe(l=>{if(l!=null) this.translate.use(l)});

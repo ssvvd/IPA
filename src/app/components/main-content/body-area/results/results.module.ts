@@ -36,6 +36,7 @@ import { ResultItemInfoComponent } from './result-item-info/result-item-info.com
 import { PpPromotionComponent } from './pp-promotion/pp-promotion.component';
 import { MpThreadingComponent } from './machining-prms/mp-threading/mp-threading.component';
 import { DataTablesModule } from 'angular-datatables';
+import { PostprocessorComponent } from './postprocessor/postprocessor.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { DataTablesModule } from 'angular-datatables';
     ResultItemInfoComponent,
     //ResultsPdfComponent,
     PpPromotionComponent,
-    MpThreadingComponent
+    MpThreadingComponent,
+    PostprocessorComponent
   ],
  
   imports: [

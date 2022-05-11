@@ -129,9 +129,17 @@
             </ng-template>
           </li>
 
-          <li *ngIf="!srv_appsetting.isMobileResolution" [ngbNavItem]="4" [disabled]="true" class="navli">
-            <a ngbNavLink class="siteTitle"></a>
-            <ng-template ngbNavContent></ng-template>
+          <li *ngIf="!srv_appsetting.isMobileResolution" [disabled]="(srv_statemanage.SecApp =='800' || srv_statemanage.SecApp =='810')? false:true"  [ngbNavItem]="4" class="navli">
+            <a *ngIf="srv_statemanage.SecApp =='800' || srv_statemanage.SecApp =='810'" ngbNavLink class="siteTitle">{{'Post Processor' | translate}}</a>
+            <ng-template ngbNavContent>
+              <inner-tabs-table  [viewParamsChanged]="viewParams" ></inner-tabs-table>             
+              <div class="col-xs-6 col-sm-6 col-md-6" *ngIf="srv_appsetting.isMobileResolution">
+              <img style="width:90% ;" [src]="environment.ImageInputPath + srv_statemanage.SecApp + '.png'" class="input-image">   
+            </div>
+            <div>
+              <postprocessor [viewParamsChanged]="viewParams"></postprocessor>
+            </div>            
+            </ng-template>
           </li>
 
           <li *ngIf="!srv_appsetting.isMobileResolution" [ngbNavItem]="5" [disabled]="true" class="navli">

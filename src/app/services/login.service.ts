@@ -67,41 +67,6 @@ export class LoginService {
     return this.srv_DataLayer.get_token();
   }
 
- /*  GetGeneralToken():any
-  {
-    console.log('before token');
-    //this.srv_appsetting.AfterToken=false;
-    this.srv_DataLayer.get_token().subscribe((res: any)=>{
-     if(res=='' || res=='e')
-      {
-        this.meta.updateTag(
-          { name: 'enablelogin', content: '0' },
-          "name='enablelogin'"
-        );
-        //alert(this.meta.getTag('name=enablelogin').content);
-        this.srv_appsetting.isLoggedIn=true;
-        this.FillDefaultUser();
-        localStorage.setItem("isLogIn",null);
-      }
-      else
-      {
-        this.meta.updateTag(
-          { name: 'enablelogin', content: '1' },
-          "name='enablelogin'"
-        );
-        //this.srv_appsetting.isLoggedIn=true;
-        //alert(this.meta.getTag('name=enablelogin').content);
-        let s:string=environment.LoginURLCheckCookies + '?t=' +res;    
-        console.log(s);
-        window.open(s,'_self');   
-        console.log('after token');
-        return 'ok'
-      }
-         
-    });
-    return'ok';
-  } */
-
  
   FillDataCountryByData(data:any)
   {
@@ -118,9 +83,7 @@ export class LoginService {
     c.FCSToolshopSite =data[0].FCSToolshopSite;
     this.srv_appsetting.Country=c;    
     this.SetExchangeRate1(c.BrifName);
-    this.SelectLanguage(data[0].CATLAN);        
- 
-                  
+    this.SelectLanguage(data[0].CATLAN);                          
   }
 
   UpdateCurrentCountry(countrycode:string)
