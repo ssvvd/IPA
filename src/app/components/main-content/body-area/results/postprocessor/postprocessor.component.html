@@ -1,35 +1,35 @@
 <div  class="justify-content-start w-100 row" >
-    <div class="col-7">
-        <div  class="siteTitle">{{'Infeed Methods' | translate}}</div>   
-        <div class="row pt-2 pl-0" style="background-color: aqua;">
-            <div class="col-3 text-center">
-                <div class="font-weight-bold" >{{'Flank' | translate}}</div>
-                <img style="width:100%" [ngClass]="InfeedMethod=='Flank'?'selected-image':''" (click)="SelectInfeedMethod('Flank')" [src] = "environment.ImagePath+'infeed_flank.png'">
+    <div class="col-5">
+        <div  class="font-weight-bold">{{'Infeed Methods' | translate}}</div>   
+        <div class="row pt-2 pl-0">
+            <div class="col-3 text-left pl-0">
+                <div class="pl-0 ml-0 font-weight-bold" >{{'Flank' | translate}}</div>
+                <img class="pl-0 ml-0" style="height:100%;" [ngClass]="InfeedMethod=='Flank'?'selected-image':''" (click)="SelectInfeedMethod('Flank')" [src] = "environment.ImagePath+'infeed_flank.png'">
             </div>
-            <div class="col-3 text-center">
+            <div class="col-3 text-left">
                 <div class="font-weight-bold">{{'Radial' | translate}}</div>
-            <img style="width:100%" [ngClass]="InfeedMethod=='Radial'?'selected-image':''"  (click)="SelectInfeedMethod('Radial')"  [src] = "environment.ImagePath+'infeed_radial.png'">
+            <img style="height:100%" [ngClass]="InfeedMethod=='Radial'?'selected-image':''"  (click)="SelectInfeedMethod('Radial')"  [src] = "environment.ImagePath+'infeed_radial.png'">
             </div>
-            <div class="col-3 text-center">
+            <div class="col-3 text-left">
                 <div class="font-weight-bold">{{'Alternate' | translate}}</div>
-                <img  style="width:100%" [ngClass]="InfeedMethod=='Alternate'?'selected-image':''"  (click)="SelectInfeedMethod('Alternate')" [src] = "environment.ImagePath+'infeed_alternate.png'">
+                <img  style="height:100%" [ngClass]="InfeedMethod=='Alternate'?'selected-image':''"  (click)="SelectInfeedMethod('Alternate')" [src] = "environment.ImagePath+'infeed_alternate.png'">
             </div>
-            <div class="col-3 text-center">
+            <div class="col-3 text-left">
                 <div class="font-weight-bold">{{'Angled' | translate}}</div>
-                <img  style="width:100%" [ngClass]="InfeedMethod=='Angled'?'selected-image':''" (click)="SelectInfeedMethod('Angled')"  [src] = "environment.ImagePath+'infeed_angled.png'">
+                <img  style="height:100%" [ngClass]="InfeedMethod=='Angled'?'selected-image':''" (click)="SelectInfeedMethod('Angled')"  [src] = "environment.ImagePath+'infeed_angled.png'">
             </div>
         </div>
     
         <div class="row col-8 pt-2">
-            <div class="pr-2"><Label>{{'Cutting speed' | translate}}</Label></div>
+            <div class="pr-3"><Label>{{'Cutting speed' | translate}}</Label></div>
             <div class="pr-2"><input type="number" class="form-control" name="CuttingSpeed"  [(ngModel)]="CuttingSpeed"></div>                      
-            <div class="pr-2"><Label class="pl-1">({{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }})</Label></div>
+            <div class="pr-3"><Label class="pl-1">({{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }})</Label></div>
             
         </div>
         <div class="row col-8 pt-2">
-            <div class="pr-2"><Label>{{'Spindle speed' | translate}}</Label></div>
+            <div class="pr-3"><Label>{{'Spindle speed' | translate}}</Label></div>
             <div class="pr-2"><input type="number" class="form-control" name="SpindleSpeed"  [(ngModel)]="SpindleSpeed"></div>                    
-            <div><Label class="pl-1">rpm</Label></div>
+            <div><Label class="pl-1 pr-3">rpm</Label></div>
         </div>
 
         <div  class="siteTitle" >{{'Radial Engagement' | translate}}</div>
@@ -48,7 +48,7 @@
                     <div  [ngClass]="srv_appsetting.isMobileResolution?'pt-1 col-12 pl-0':'pt-1 col-5'">
                         <label for="txtController" class="font-weight-bold" >{{'Controller' | translate}}</label>
                     </div>
-                    <div class="pt-1" [ngClass]="srv_appsetting.isMobileResolution?'col-4 pl-0':'col-4'" >            
+                    <div class="pt-1">            
                         <select class="form-control-sm" [ngModel]="controller" >
                             <option value='Fanuc I&J'>Fanuc I&J</option>
                             <option value='Fanuc R'>Fanuc R</option>                            
@@ -63,17 +63,16 @@
                 <div class="col-6">
                     <div class="pr-2" ><Label class="font-weight-bold">{{'Cutting Time' | translate}}</Label></div>
                     <div class="row">
-                            <div class="pr-2"><input type="number" class="form-control" name="TimeMin"  [(ngModel)]="TimeMin"></div>                      
-                            <div class="pr-2"><Label class="pl-1">{{ 'min' | translate}}</Label></div>
-                    </div>
-                    <div class="row">
-                        <div class="pr-2"><input type="number" class="form-control" name="TimeSecond"  [(ngModel)]="TimeSecond"></div>                      
-                        <div class="pr-2"><Label class="pl-1">{{ 'sec' | translate}}</Label></div>
-                    </div>
+                          
+                            <div class="pr-2"> <Label>{{TimeMin}}</Label></div>
+                            <div class="pr-2"> <Label class="pl-1">{{ 'min' | translate}}</Label> </div>
+                            <div class="pr-2 pl-4"> <Label>{{TimeSecond}}</Label> </div>                      
+                            <div class="pr-2"> <Label class="pl-1">{{ 'sec' | translate}}</Label> </div> 
+                    </div>                 
                 </div>
             </div>
     </div>
-    <div class="col-5">
+    <div class="col-4">
         <div class="row">
             <div  [ngClass]="srv_appsetting.isMobileResolution?'pt-1 col-12 pl-0':'pt-1 col-5'">
                 <label for="txtController" class="font-weight-bold" >{{'No. Of Passes' | translate}}</label>
@@ -85,19 +84,19 @@
             </div>
         </div>
         <div>
-            <div  class="siteTitle col-5" >{{'Pass Values' | translate}}</div>
+            <div  class="font-weight-bold" >{{'Pass Values' | translate}}</div>
             <div>
-                <div class="row col-12">                           
-                    <div class="col-6 border header-data">
+                <div class="row col-5">                           
+                    <div class="col-4 border header-data">
                         <label class="header-data">{{'Pass No.' | translate}}</label>
                     </div>
-                    <div class="col-6 border header-data">
+                    <div class="col-8 border header-data">
                         <label class="header-data">{{'Value' | translate}}</label>
                     </div>                                                                   
                 </div>       
-                <div class="row col-12" *ngFor='let v of PassValues ;let i = index'>
-                    <div class="col-6 border">{{i+1}}</div>
-                    <div class="col-6 border">{{v}}</div>
+                <div class="row col-5" *ngFor='let v of PassValues ;let i = index'>
+                    <div class="col-4 border">{{i+1}}</div>
+                    <div class="col-8 border">{{v}}</div>
                 </div>
             </div>
         </div>

@@ -137,6 +137,7 @@ export class MachineItemSpindleComponent implements OnInit
   {       
     this.spindle.Power =$event.value; 
   }
+
   onSpindleChanged($event)
   {
     this.eventsSubject.next();
@@ -146,12 +147,12 @@ export class MachineItemSpindleComponent implements OnInit
     this.spindle.Torque =$event.value;
   }
   
-  onPTChanged($event)
-  {    
-    this.spindle.Torque =$event.T1;
-    this.spindle.Power =$event.P2;
-  }
-  
+   onPTChanged($event)
+   {    
+     this.spindle.Torque =$event.T1;
+     this.spindle.Power =$event.P2;
+   }
+
   ChangeMachineSpindleType()
   {
     if(this.IsSelectedSpindle)      

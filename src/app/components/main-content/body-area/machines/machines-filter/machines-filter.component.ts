@@ -69,8 +69,7 @@ export class MachinesFilterComponent implements OnInit {
   };
    
   
-  constructor(private serv: MachineService,private srv_statemanage:StateManagerService,private srv_cook:CookiesService,
-              public srv_appsetting:AppsettingService) { }
+  constructor(private serv: MachineService,private srv_statemanage:StateManagerService,public srv_appsetting:AppsettingService) { }
   
   arrAdapType:AdaptationType[]=[];
   arrAdapSize:AdaptationSize[]=[];

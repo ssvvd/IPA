@@ -84,7 +84,7 @@ export class ResultsTableComponent implements OnInit {
      if(this,this.srv_appsetting.isMobileResolution)
         scrollY="236px";
     else
-        scrollY="336px";
+        scrollY="360px";
 
      this.dtOptions = {
       pagingType: 'full_numbers',     
@@ -92,7 +92,7 @@ export class ResultsTableComponent implements OnInit {
        "lengthChange": false ,
        "paging":false,  
        "autoWidth":false,
-      "scrollY": 'calc(100vh - ' + scrollY + ')',
+       "scrollY": 'calc(100vh - ' + scrollY + ')',
       "info":false,
        "scrollX": true,
        "scrollCollapse" : true,

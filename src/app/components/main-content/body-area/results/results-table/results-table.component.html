@@ -110,8 +110,9 @@
          </div>         
       </div>    
 
-      <table *ngIf="!srv_appsetting.isMobileResolution || processdownload" id="tbresult1" datatable  [dtTrigger]="dtTrigger" [dtOptions]="dtOptions" class="table table-stripe row-border hover" >  
-         <thead >
+      <table *ngIf="!srv_appsetting.isMobileResolution || processdownload" id="tbresult1" datatable  [dtTrigger]="dtTrigger" 
+      [dtOptions]="dtOptions" class="table table-stripe row-border hover" >  
+                  <thead >
                     <tr id="dtOptions">
                      <th><label></label></th> 
                      <!-- <th *ngIf="srv_appsetting.isMobileResolution"><img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit"></th>  -->                    
@@ -123,19 +124,20 @@
                         <th class="no-sort" style="padding:0px!important;width:30px!important ;"></th> 
                         <th class="no-sort text-center">
                            <img [src]="environment.ImgThreeDots" title="Select Columns" (click)="openSelectColumns()" class="icon-edit pl-5">
-                        </th>
+                        </th>   
                         <th class="no-sort d-none" ></th>
                         <th class="no-sort d-none">
                            
                         </th>
                         <!-- <th class="no-sort " style="padding:0px!important;background-color:aqua;width:30px!important ;"></th> -->
-                    </tr>
+                    </tr>    
                  </thead>
                  <tbody>                                                             
                     <tr (click)="viewInfo(row.index)" *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
                        <td (click)="viewInfo(row.index)" >
-                          <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">
-                           <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
+                          <!-- <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)"> -->
+                           <!-- <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;" -->
+                           <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  style="left:0px" style="position: relative;"
                          (click)="viewInfo(row.index)" class="img-grid">
                      </td>                       
                      <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" 
@@ -180,10 +182,9 @@
                                                  
                     </tr>
                  </tbody>
-      </table>
+      </table>     
    </div>
-   </div>
-      
+   </div>      
       <div [hidden]="!ErrMsg" [ngStyle]="{'padding-left':srv_appsetting.isMobileResolution?'0px':'20%'}">
          <br><br><br><br>
          <div class="col-12 d-flex justify-content-center pb-2 pt-2" >

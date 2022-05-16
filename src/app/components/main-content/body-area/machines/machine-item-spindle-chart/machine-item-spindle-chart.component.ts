@@ -255,8 +255,9 @@ export class MachineItemSpindleChartComponent implements OnInit {
        {
         this.spindle.N4=this.chartdata.PoinX_3;
         this.chartdata.PoinX_4=this.chartdata.PoinX_3;
+        this.N3Changed.emit({ value: this.chartdata.PoinX_4});
        }
-       this.N3Changed.emit({ value: this.chartdata.PoinX_3});
+       //this.N3Changed.emit({ value: this.chartdata.PoinX_3});
 
      }
      
@@ -269,7 +270,7 @@ export class MachineItemSpindleChartComponent implements OnInit {
        this.chartdata.PoinX_3=this.chartdata.PoinX_4;
       }
 
-       this.N3Changed.emit({ value: this.chartdata.PoinX_3});
+       this.N3Changed.emit({ value: this.chartdata.PoinX_4});
 
      }
 
@@ -287,12 +288,12 @@ export class MachineItemSpindleChartComponent implements OnInit {
       if(this.typeChart=="power") 
       {         
         this.spindle.P2=this.chartdata.PoinY_2;  
-        this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T1});                       
+        this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T2});                       
       }
       else  
       {        
         this.spindle.T2=this.chartdata.PoinY_2;   
-        this.P2T1Changed.emit({ P2: this.CalculatePByT(this.spindle.N2,this.spindle.T2),T1:this.spindle.T1});   
+        this.P2T1Changed.emit({ P2: this.CalculatePByT(this.spindle.N2,this.spindle.T2),T1:this.spindle.T2});   
       }
       this.CreateChart();                                    
     }
@@ -302,12 +303,12 @@ export class MachineItemSpindleChartComponent implements OnInit {
       if(this.typeChart=="power")  
       { 
         this.spindle.P3=this.chartdata.PoinY_3;                  
-        this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.CalculateTByP(this.spindle.N3,this.spindle.P3)});              
+        this.P2T1Changed.emit({ P2: this.spindle.P3,T1:this.CalculateTByP(this.spindle.N3,this.spindle.P3)});              
       }
      else 
       { 
         this.spindle.T3=this.chartdata.PoinY_3;                        
-        this.P2T1Changed.emit({ P2: this.spindle.P2,T1:this.spindle.T3});      
+        this.P2T1Changed.emit({ P2: this.CalculatePByT(this.spindle.N3,this.spindle.T3),T1:this.spindle.T3});      
       }
       this.CreateChart();                                           
     }
@@ -315,19 +316,26 @@ export class MachineItemSpindleChartComponent implements OnInit {
      OnChangePoinY_4()
     {        
       if(this.typeChart=="power")          
-        this.spindle.P4=this.chartdata.PoinY_4;                         
-      else          
+      {
+        this.spindle.P4=this.chartdata.PoinY_4;   
+        this.P2T1Changed.emit({ P2: this.spindle.P4,T1:this.CalculateTByP(this.spindle.N4,this.spindle.P4)});                         
+      }
+      else
+      {          
         this.spindle.T4=this.chartdata.PoinY_4;        
+        this.P2T1Changed.emit({ P2: this.CalculatePByT(this.spindle.N4,this.spindle.T4),T1:this.spindle.T4});
+      }
         this.CreateChart();                                   
     }
 
      ngOnChanges(changes: SimpleChanges) {       
         if (typeof this.chartdata!== 'undefined') 
           for (let property in changes) {
-              if (property === 'SpindleSpeed') {                
-                //this.chartdata.PoinX_1 = changes[property].currentValue;
-                this.spindle.N3 = changes[property].currentValue;
+              if (property === 'SpindleSpeed') {                                               
                 this.spindle.N4 = changes[property].currentValue;
+                //if(this.spindle.N3>this.spindle.N4)  
+                  //this.spindle.N3 = changes[property].currentValue;
+
                 this.CreateChart();            
               } 
               if (property === 'Power') 
