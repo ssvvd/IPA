@@ -77,7 +77,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
           let v:string=o[this.headers[iii]];   
               
           //if(v.trim().indexOf(this.srv_statemanage.SelectedMatText)>-1)
-          if(v.trim()==this.srv_statemanage.SelectedMatText)
+          if(v.trim()==this.srv_statemanage.SelectedMatText.trim())
           {
             this.SelectedIndexRow=indexrow;
             o.numberrow=0;
@@ -133,7 +133,7 @@ export class MatDetailsComponent implements OnInit, OnDestroy,DoCheck {
 
   OnSelectMaterial(mat:string)
   {   
-    this.selectedMaterialCls= new clsMaterial(this.selectedMaterial.group,this.selectedMaterial.desc,mat,this.selectedMaterial.Category,this.selectedMaterial.HardnessHBValue);
+    this.selectedMaterialCls= new clsMaterial(this.selectedMaterial.group,this.selectedMaterial.desc,mat,this.selectedMaterial.Category,this.selectedMaterial.HardnessHBValue,this.selectedMaterial.GWFRA2);
     this.srv_statemanage.SelectMaterial(this.selectedMaterialCls);
     this.srv_statemanage.GoOperationTab =true;
 

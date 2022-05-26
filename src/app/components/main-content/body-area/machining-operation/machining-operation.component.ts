@@ -122,6 +122,8 @@ export class MachiningOperationComponent implements OnInit {
 
               //ACTIVE BY ADAPTOR TYPE
               if(d.ActiveByAdaptor!=2) isactive=d.ActiveByAdaptor;
+              if((d.ApplicationITAID ==800 || d.ApplicationITAID ==810) && (environment.production)) isactive=false;
+              
               if(this.srv_appsetting.isMobileResolution)  isadditem=(isadditem && isactive);            
               if(isadditem)
                 {
@@ -129,7 +131,7 @@ export class MachiningOperationComponent implements OnInit {
                   MainApp:d.MainApp,
                   MenuID: d.MenuID,
                   MenuName: d.MenuName,
-                  MenuImage: ((d.ApplicationITAID ==800 || d.ApplicationITAID ==810) && (!environment.internal) )? environment.ImageApplicationsPath + d.MenuImage  + "_inprogress.png": environment.ImageApplicationsPath + d.MenuImage  + ".png",
+                  MenuImage: ((d.ApplicationITAID ==800 || d.ApplicationITAID ==810) && (environment.production) )? environment.ImageApplicationsPath + d.MenuImage  + "_inprogress.png": environment.ImageApplicationsPath + d.MenuImage  + ".png",
                   ParentMenuID:d.ParentMenuID ,
                   ApplicationITAID: d.ApplicationITAID,
                   IsActive:isactive 

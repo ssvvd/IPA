@@ -75,8 +75,8 @@ export class Appdetails120Component implements OnInit {
   pitch:any='';
   size:string='';
   lenght:number;
-  //star:number;
   lead:number;
+  start:number=1;
 
   threadtype:string='';
   pitch_units:string =''; 
@@ -90,10 +90,6 @@ export class Appdetails120Component implements OnInit {
 
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
   
-  aaa()
-  {
-      alert();
-  }
   ngOnInit() { 
        
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
@@ -108,7 +104,6 @@ export class Appdetails120Component implements OnInit {
     
     let dia:string;
     dia=this.srv_StMng.IPL.GetItem('D_Hole').value;
-
     this.eventsSubscription.add(this.events.subscribe(() => this.ClearData()));  
     if(this.evGetResult!=null)
         this.eventsSubscription.add(this.evGetResult.subscribe(() => this.CheckMandatoryFiled()));
@@ -156,6 +151,19 @@ export class Appdetails120Component implements OnInit {
             this.srv_StMng.IPL.GetItem('D_Hole').value =dia;
             this.ChangeDiameter();              
         }
+
+        if(this.srv_StMng.IPL.GetItem('D_Hole').value!='' && this.srv_StMng.IPL.GetItem('D_Hole').value!='0') 
+        {
+            this.srv_StMng.IPL.GetItem('Size').required=false;
+            this.srv_StMng.IPL.GetItem('D_Hole').required=true;
+        }
+        if(this.srv_StMng.IPL.GetItem('Size').value!='' && this.srv_StMng.IPL.GetItem('Size').value!=null) 
+        {
+            this.srv_StMng.IPL.GetItem('Size').required=true;
+            this.srv_StMng.IPL.GetItem('D_Hole').required=false;
+        }       
+        //this.srv_StMng.IPL.GetItem('Size').required=true;
+
         this.SetIPLMandatory();
         }         
         ));      
@@ -178,17 +186,27 @@ onfocusfield(field:string)
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
 }
 
-ChangeStar()
+ChangeStart()
 {
-    let start:number;
-    start=Number(this.srv_StMng.IPL.GetItem('NumberStarts').value);
+    
+    //this.srv_StMng.IPL.GetItem('NumberStarts').value=ev;
+    this.start=Number(this.srv_StMng.IPL.GetItem('NumberStarts').value);
     if(this.pitch_units=='mm')
-        this.lead=Math.round(((+this.pitch)* start*10))/10;
+        this.lead=Math.round(((+this.pitch)* this.start*10))/10;
     else
         if(this.srv_appsetting.Units=='M')
-            this.lead= Math.round((25.4/(+this.pitch)* start)*10)/10;
+            this.lead= Math.round((25.4/(+this.pitch)* this.start)*10)/10;
         else
-            this.lead=Math.round((1/(+this.pitch)* start)*100)/100;
+            this.lead=Math.round((1/(+this.pitch)* this.start)*100)/100;
+
+    if(this.isLoaded && this.arrformdata.length>0)
+    {
+    if(this.srv_StMng.IPL.GetItem('Size').value!=null && this.srv_StMng.IPL.GetItem('Size').value!='')
+        this.FillDisplayDataBySize();
+
+    if(this.srv_StMng.IPL.GetItem('D_Hole').value!=null && this.srv_StMng.IPL.GetItem('D_Hole').value!='')
+        this.FillDisplayDataByDiameter();   
+    }
 }
 
 onfocusoutfield()
@@ -225,7 +243,20 @@ ClearData()
         }  
         
         //this.pitch= this.srv_StMng.IPL.GetItem('Pitch').value;
-        this.changepitch();               
+        //this.changepitch(); 
+        
+        //this.srv_StMng.IPL.GetItem('Pitch').value=this.pitch;   
+        this.arrSize=[];
+        let arr:ThreadFormPitch []=this.arrThreadFormPitch.filter(e=> e.Pitch == this.pitch);
+        this.size =this.srv_StMng.IPL.GetItem('Size').value;
+        this.srv_StMng.IPL.GetItem('D_Hole').value='';
+        this.arrSize.push('');
+        for(let i=0; i<arr.length; i++)
+            this.arrSize.push(arr[i].Size);   
+    
+        if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
+            this.ChangeStart();
+            
         this.get_threadformdata(); 
                                
     }         
@@ -312,7 +343,7 @@ ClearData()
         this.arrSize.push(arr[i].Size);   
 
     if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
-        this.ChangeStar();
+        this.ChangeStart();
 
   }
 
@@ -377,7 +408,8 @@ ClearData()
     this.srv_StMng.IPL.GetItem('Size').required=true;
     this.FillDisplayDataBySize();
   }
- 
+  
+
   ChangeDiameter()
   {
     if(this.srv_StMng.IPL.GetItem('D_Hole').value.toString().indexOf('-')>-1)
@@ -439,6 +471,7 @@ ClearData()
                 value:arrformatdata_f[0][arrFormColName_f[i].ItemID],
                 units:arrFormColName_f[i].Units
             });
+           
             if(arrFormColName_f[i].ItemID=='Majordiameter') 
             {
                 this.srv_StMng.IPL.GetItem('MajorDiameter').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
@@ -455,8 +488,25 @@ ClearData()
                 }                
             }
                 
-            if(arrFormColName_f[i].ItemID=='Helixangle') this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
+            if(arrFormColName_f[i].ItemID=='Helixangle') 
+            {
+                if(this.srv_StMng.SecApp=='800' || this.srv_StMng.SecApp=='810')
+                {
+                    let pitch_calc:number;
+                    let pitchdia:number;                     
+                    let r:string;    
 
+                    pitch_calc = this.getpitch_cal(this.objthreadform.ThreadFormISO);             
+                    pitchdia =this.getpitchdiameter(this.threadform,Number(this.srv_StMng.IPL.GetItem('MajorDiameter').value),pitch_calc)
+                    r= (Math.round(Math.atan(pitch_calc * this.start/Math.PI / pitchdia )*180/Math.PI* 100) / 100).toString();
+                    this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =  r;
+
+                        if(this.arrDisplayData.find(p=>p.item =='Helix Angle') !=null)
+                            this.arrDisplayData.find(p=>p.item =='Helix Angle').value =r;
+                }
+                else
+                    this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
+            }
             if(arrFormColName_f[i].ItemID=='Predrilldiameter') 
             {
                 this.srv_StMng.IPL.GetItem('DiameterInner').value =arrformatdata_f[0][arrFormColName_f[i].ItemID];
@@ -591,9 +641,9 @@ ClearData()
                                 
                             else
                                 res = Math.round((Math.atan(
-                                        pitch_calc /
+                                        pitch_calc *this.start/
                                         Math.PI / (dia - 0.64952 * pitch_calc
-                                        )) * 180 / Math.PI) * 100) / 100;
+                                        )) ) *180/Math.PI* 100) / 100;
                             break;
                         case 'NJ60':
                             if (this.threadtype == 'Internal') {
@@ -601,9 +651,9 @@ ClearData()
                             }
                             else
                                 res = Math.round((Math.atan(
-                                        pitch_calc /
+                                        pitch_calc * this.start/
                                         Math.PI / (dia - 0.64952 * pitch_calc
-                                        )) * 180 / Math.PI) * 100) / 100;
+                                        )) )*180/Math.PI * 100) / 100;
                             break;
                         case "AC29":
                             if (this.threadtype == 'Internal')
@@ -638,9 +688,9 @@ ClearData()
                         case "MJ60":                          
                             if (this.threadtype == 'Internal')
                                 res = Math.round((Math.atan(
-                                            pitch_calc /
+                                            pitch_calc * this.start/
                                             Math.PI / (dia - 0.64952 * pitch_calc
-                                            )) * 180 / Math.PI) * 100) / 100;
+                                            )) )*180/Math.PI * 100) / 100;
                             else
                                 res = 0;
                             break;
@@ -648,9 +698,9 @@ ClearData()
                         case 'NJ60':
                             if (this.threadtype == 'Internal')
                                 res = Math.round((Math.atan(
-                                            pitch_calc /
+                                            pitch_calc * this.start/
                                             Math.PI / (dia - 0.64952 * pitch_calc
-                                            )) * 180 / Math.PI) * 100) / 100;
+                                            )) ) *180/Math.PI* 100) / 100;
                             break;
                         case 'AC29':
                             {
@@ -660,9 +710,9 @@ ClearData()
                                 }
                                 if (this.threadtype == 'External')
                                     res = Math.round((Math.atan(
-                                           pitch_calc /
+                                           pitch_calc * this.start/
                                            Math.PI / (dia - 0.53598 * pitch_calc
-                                           )) * 180 / Math.PI) * 100) / 100;
+                                           )) ) *180/Math.PI* 100) / 100;
                             }
                             break;
                         case 'NPSF':
@@ -671,9 +721,9 @@ ClearData()
                             }
                             if (this.threadtype == 'External') { //helix angle
                                 res = Math.round((Math.atan(
-                                        pitch_calc /
+                                        pitch_calc * this.start/
                                         Math.PI / (dia - 0.696 * pitch_calc
-                                        )) * 180 / Math.PI) * 100) / 100;
+                                        )) ) *180/Math.PI* 100) / 100;
 
                                 break;
                             }
@@ -683,22 +733,22 @@ ClearData()
                                 res = Math.round((dia - 1.32543 * pitch_calc) * 1000) / 1000;
                             else
                                 res = Math.round((Math.atan(
-                                       pitch_calc /
+                                       pitch_calc * this.start/
                                        Math.PI / (dia - 0.6 * pitch_calc
-                                       )) * 180 / Math.PI) * 100) / 100;
+                                       )) ) *180/Math.PI* 100) / 100;
                             break;
                         case 'UN60':                           
                             res = Math.round((Math.atan(
-                                            pitch_calc /
+                                            pitch_calc * this.start/
                                             Math.PI / (dia - 0.64952 * pitch_calc
-                                            )) * 180 / Math.PI) * 100) / 100;
+                                            )) ) *180/Math.PI* 100) / 100;
                             break;                            
                         default:
                             {
                                 res = Math.round((Math.atan(
-                                            pitch_calc /
+                                            pitch_calc * this.start/
                                             Math.PI / (dia - 0.64952 * pitch_calc
-                                            )) * 180 / Math.PI) * 100) / 100;                                
+                                            ))) *180/Math.PI* 100) / 100;                                
                             }
                     }                  
                     break;
@@ -707,35 +757,35 @@ ClearData()
                     {
                         case "M60":                          
                             res = Math.round((Math.atan(
-                                          pitch_calc /
+                                          pitch_calc * this.start/
                                            Math.PI / (dia - 0.64952 * pitch_calc
-                                           )) * 180 / Math.PI) * 100) / 100;                           
+                                           )) ) *180/Math.PI* 100) / 100;                           
                             break;
                         case "MJ60":                           
                             res = Math.round((Math.atan(
-                                           pitch_calc /
+                                           pitch_calc * this.start/
                                            Math.PI / (dia - 0.64952 * pitch_calc
-                                           )) * 180 / Math.PI) * 100) / 100;
+                                           )))*180/Math.PI * 100) / 100;
                             break;
                         case 'AC29':
                             if (this.threadtype == 'Internal')
                                 res = Math.round((Math.atan(
-                                        pitch_calc /
+                                        pitch_calc * this.start/
                                          Math.PI / (dia - 0.56315 * pitch_calc
-                                         )) * 180 / Math.PI) * 100) / 100;
+                                         )) ) *180/Math.PI* 100) / 100;
                             break;
                         case 'ABUT':
                             if (this.threadtype == 'Internal')
                                 res = Math.round((Math.atan(
                                          pitch_calc /
                                          Math.PI / (dia - 0.6 * pitch_calc
-                                         )) * 180 / Math.PI) * 100) / 100;
+                                         )) ) *180/Math.PI* 100) / 100;
                             break;
                         case 'NPSF':
                             res = Math.round((Math.atan(
-                                    pitch_calc /
+                                    pitch_calc * this.start/
                                     Math.PI / (dia - 0.696 * pitch_calc
-                                    )) * 180 / Math.PI) * 100) / 100;
+                                    )) ) *180/Math.PI* 100) / 100;
 
                             break;
                         case "UN60":
@@ -773,14 +823,39 @@ ClearData()
             else
                 if(arrFormColName_f[i].ItemID=='Minordiameterint') this.srv_StMng.IPL.GetItem('WorkpieceDiameterRad').value =res.toString();
 
-        if(arrFormColName_f[i].ItemID=='Helixangle') this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =res.toString();
-        
+        if(arrFormColName_f[i].ItemID=='Helixangle') 
+        {
+          this.srv_StMng.IPL.GetItem('MinAxialEntAngle').value =res.toString();
+        }
+
         if(arrFormColName_f[i].ItemID=='Effectivediameter') this.srv_StMng.IPL.GetItem('RmaxRadial').value =res.toString();
         
         }
 
   }
 
+  getpitchdiameter(threadform:string,majordia:number,pitch_calc:number) :number
+  {
+    let pd:number;
+    pd = majordia-0.64952*pitch_calc;
+    switch (threadform) {
+       
+        case "NPSF":            
+            pd = majordia - 0.696 * pitch_calc;
+            break;        
+        case "AC29":  
+            if (this.threadtype == 'Internal')
+                pd = majordia - 1.06323 * pitch_calc;
+            if (this.threadtype == 'External')
+                pd = majordia - 1.06004 * pitch_calc;
+            break;           
+        case "ABUT":
+            pd =majordia - 0.6 * pitch_calc
+            break;
+        }
+        return pd;
+  }
+  
   getpitch_cal(threadform:string)
   {    
     let pitch_calc:number;

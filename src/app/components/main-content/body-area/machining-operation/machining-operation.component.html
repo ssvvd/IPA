@@ -40,18 +40,18 @@
                 [ngClass]="{'div-app-810':((secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') && environment.production),'div-app-selected':secapp.MenuID==SelectedMenuID1 && SelectedMenuID1!='',
                                         'div-app':secapp.MenuID!=SelectedMenuID1 && SelectedMenuID1!='','div-app-open':SelectedMenuID1==''}">    
                 <div  [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">                                              
-                    <img  [lazyLoad]="secapp.MenuImage"   data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
+                    <img  [lazyLoad]="secapp.MenuImage"   data-toggle="tooltip" title="{{secapp.IsActive?'':((secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') && environment.production)?'':'Operation doesn’t match the selected machine'}}" 
                     [ngClass]="secapp.IsActive ?'secapp-image cursor-pointer':'secapp-image img-not-allowed'">                                                                                                  
                 </div>
                 <div  >
                     <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'">
                         <div [ngClass]="secapp.IsActive?'cursor-pointer':'cursor-not-allowed'" class="form-group mb-0 pb-0 cursor-pointer" data-toggle="tooltip" 
-                            title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}">                    
+                            title="{{secapp.IsActive?'':((secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') && environment.production)?'':'Operation doesn’t match the selected machine'}}">                    
                             <label  [ngClass]="secapp.IsActive ?'siteTitle cursor-pointer':'siteTitle div-app cursor-not-allowed '">{{secapp.MenuName  |translate }}</label>                    
                         </div>                                                              
                     </div>
                     <div *ngIf="secapp.ApplicationITAID!='0'" 
-                        data-toggle="tooltip" title="{{secapp.IsActive?'':'Operation doesn’t match the selected machine'}}" 
+                        data-toggle="tooltip" title="{{secapp.IsActive?'':((secapp.ApplicationITAID=='800' || secapp.ApplicationITAID=='810') && environment.production)?'':'Operation doesn’t match the selected machine'}}" 
                         [ngClass]="secapp.IsActive?'pt-2 cursor-pointer':'pt-2 cursor-not-allowed'">
                         <button [ngClass]="secapp.IsActive?'btn btn-select cursor-pointer visible':'btn btn-select cursor-not-allowed div-app invisible'"  (click)="OnSelectSecApp(secapp,1)" [routerLink]="isToOperationData && secapp.IsActive?['/home/operation-data']:null">{{'Select'|translate }}</button>                                       
                     </div>

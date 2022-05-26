@@ -122,9 +122,8 @@ export class Mp760Component implements OnInit {
     }
   }
 
-
   fillParams(){
-    this.reset()
+  this.reset()
 
 if (this.srv_StMng.SecApp=='780' && this.srv_StMng.IPL.GetItem('HoleTypePreHole').value!='')
     this.PreHole = true

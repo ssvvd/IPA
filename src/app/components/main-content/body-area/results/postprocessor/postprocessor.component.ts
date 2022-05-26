@@ -30,7 +30,6 @@ export class PostprocessorComponent implements OnInit ,OnChanges {
   H:number=0;
   constructor(public srv_appsetting:AppsettingService,private srv_results:ResultsService,public srv_StMng:StateManagerService) 
   { 
-
   }
   
   ngOnInit(): void {
@@ -71,9 +70,7 @@ export class PostprocessorComponent implements OnInit ,OnChanges {
     let Ap:number;
     this.PassValues=[];
     if(this.RadialEn=='cuttingdepth')
-    {
-      
-      
+    {          
       Ap=(this.H-0.05)/(this.NoOfPasses-1)
       for (let i = 1; i < this.NoOfPasses; i++) {              
         this.PassValues.push((Math.round(Ap*1000)/1000).toFixed(3));        

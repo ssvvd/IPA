@@ -12,11 +12,12 @@ export class MaterialsmService {
 
 
   checkCategoryTableExists(lang:string,category:string){
-    return this.mainMaterialsTable.has(lang + category)
+    return this.mainMaterialsTable.has(lang + category);
   }
 
   setNewCategoryTable(lang:string,category:string,data:clsMaterial[]){
-    this.mainMaterialsTable.set(lang + category,data)
+    if(this.mainMaterialsTable.has(lang + category)) this.mainMaterialsTable.delete(lang + category);
+    this.mainMaterialsTable.set(lang + category,data);   
     //console.log(lang + category);
     //console.log(data);
     //console.log(this.mainMaterialsTable);
@@ -24,7 +25,7 @@ export class MaterialsmService {
 
   getCategoryTable(lang:string,category:string){
     //console.log(this.mainMaterialsTable.get(lang + category));
-    return this.mainMaterialsTable.get(lang + category)
+    return this.mainMaterialsTable.get(lang + category);
   }
 
 

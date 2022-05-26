@@ -8,6 +8,7 @@ import { InputParameterlist } from '../models/operational-data/inputparameterlis
 import { AppsettingService} from './appsetting.service';
 //import { MachineService } from './machine.service' ;
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -221,14 +222,23 @@ export class StateManagerService {
     this.materialSelected=mat;   
     let desc:string;
     if (mat.material && mat.material != ''){
-      desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+      if(environment.production)
+          desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+      else
+          desc=mat.GWFRA2 + " - " + mat.material ; 
     }
     else{
       if (mat.FavName && mat.FavName != ''){
-        desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
+        if(environment.production)
+            desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
+        else
+            desc=mat.GWFRA2 + " - " + mat.FavName ; 
       }
       else{
-        desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+        if(environment.production)
+            desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+        else
+            desc=mat.GWFRA2 + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ;
       }
       
     }       
@@ -239,14 +249,23 @@ export class StateManagerService {
   {
    let desc:string;
     if (mat.material && mat.material != ''){
-      desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+      if(environment.production)
+          desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+      else
+          desc=mat.GWFRA2 + " - " + mat.material ; 
     }
     else{
       if (mat.FavName && mat.FavName != ''){
-        desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
+        if(environment.production)
+          desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
+        else
+          desc=mat.GWFRA2 + " - " + mat.FavName ; 
       }
       else{
-        desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+        if(environment.production)
+            desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+        else
+            desc=mat.GWFRA2 + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
       }
       
     } 

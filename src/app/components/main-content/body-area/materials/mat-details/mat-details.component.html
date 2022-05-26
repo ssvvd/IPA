@@ -7,11 +7,13 @@
             </div>
             <table   datatable [dtTrigger]="dtTriggerMat" [dtOptions]="dtOptionsMat" class="table table-stripe row-border hover" >
                     <thead>
-                            <tr id="dtOptionsMat"><th *ngFor="let col of headers; index as iHeader" [attr.data-color]=(selectedMaterial.Category) [hidden]="(curShownColumns.indexOf(iHeader) == -1)" [title]="col.split('_')[1]"><label>{{col.split("_")[0]}}</label></th></tr>
+                            <tr id="dtOptionsMat"><th *ngFor="let col of headers;index as iHeader" [attr.data-color]=(selectedMaterial.Category) [hidden]="(curShownColumns.indexOf(iHeader) == -1)" [title]="col.split('_')[1]"><label>{{col.split("_")[0]}}</label></th></tr>
                          </thead>
                          <tbody id="dtDetails" >                                                       
                             <tr  *ngFor="let obj of detailsResult;index as iLine" >                                            
-                               <td  *ngFor="let col of headers; index as iHeader" [hidden]="(curShownColumns.indexOf(iHeader) == -1 || (obj.numberrow!=0 && srv_statemanage.SelectedMatText!=''))" attr.data-value={{obj[col]}} 
+                               <td  *ngFor="let col of headers; index as iHeader" 
+                               [hidden]="(curShownColumns.indexOf(iHeader) == -1 || (obj.numberrow!=0 && srv_statemanage.SelectedMatText!=''))" 
+                               attr.data-value={{obj[col]}} 
                                (click)="(environment.internal && obj[col].indexOf('________ ') == -1) ? OnSelectMaterial(obj[col]) : false" 
                                [routerLink]="(environment.internal && (obj[col] + '').indexOf('________ ') == -1) ? ['/home/machining-operation'] : []"
                                [ngClass]="{'td-selected' : (obj[col] == this.selectedMatOrGrp && this.selectedMaterialCls.FavName == '') || (obj.numberrow==0)}"

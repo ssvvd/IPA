@@ -138,16 +138,16 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
     }
     
 
-    if (this.servsm.checkCategoryTableExists(this.lang,this.selectedCategory)){
-      this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),false)
-    }
-    else{
+    //if (this.servsm.checkCategoryTableExists(this.lang,this.selectedCategory)){
+   //   this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),false)
+   // }
+   // else{
       this.allSubsMat$ = this.serv.getmaterialsbygrp(this.lang,this.selectedCategory)
-      .subscribe((data: any) => {
+      .subscribe((data: any) => {        
         this.servsm.setNewCategoryTable(this.lang,this.selectedCategory,JSON.parse(data))
         this.setResults(this.servsm.getCategoryTable(this.lang,this.selectedCategory),true) 
       });    
-    } 
+  //  } 
 
   }
 

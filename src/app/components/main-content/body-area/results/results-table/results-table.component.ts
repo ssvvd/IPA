@@ -508,19 +508,12 @@ else{
   this.dtTrigger = null
 }
 
-// if (this.dtElement.dtInstance) {
-//   this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-//   dtInstance.columns.adjust().draw();
-//   })
-// }
-
-  
   this.SpinnerService.hide();
-  if(this.srv_cook.get_cookie("notshowfeedback")=="")
+ /*  if(this.srv_cook.get_cookie("notshowfeedback")=="")
   {    
     this.srv_cook.set_cookie("notshowfeedback",'1');
     setTimeout(() => { this.feedback(); }, 40000);
-  }    
+  }    */ 
 }
 
 changeSource(event, name) { event.target.src = name; }

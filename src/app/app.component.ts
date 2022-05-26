@@ -44,14 +44,12 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(event => {
        if(environment.production)
           if(event instanceof NavigationEnd){
+            console.log (event.urlAfterRedirects);
             gtag('config', 'UA-155960-40', 
                       {
                         'page_path': event.urlAfterRedirects
                       }
-                      );
-            //console.log(event.urlAfterRedirects);
-            /* gtag('set', 'page', event.urlAfterRedirects);
-            gtag('send', 'pageview'); */
+                      );         
             
           }
         }
@@ -104,7 +102,6 @@ ngOnInit()
     let countryid:string;
     paramValue = httpParams.get('countryid'); 
     
-
     if(paramValue!=null) {
       countryid =paramValue; 
       localStorage.setItem("countryid",countryid);
