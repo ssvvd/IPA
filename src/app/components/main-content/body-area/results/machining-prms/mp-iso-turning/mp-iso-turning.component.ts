@@ -240,11 +240,10 @@ environment=environment;
               if (prmRatioLD != '0'){
                 var roundDigits:number = this.srv_appsetting.Units == 'I' ? 1000 : 100;
                 if((this.AW + +prmRatioLD)<0.01) roundDigits = 1000;
+                if((this.AW + +prmRatioLD)<0.001) roundDigits = 10000;
                 this.AW = Math.round((this.AW + +prmRatioLD) * roundDigits)/roundDigits
               }
             })
-
-
           }
           }.bind(this));
     

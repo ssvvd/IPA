@@ -9,11 +9,11 @@
                 </div>
                 <div>
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="optRight" name="Toolside" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="R">
+                        <input type="radio" (change)="SetImage()" class="custom-control-input" id="optRight" name="Toolside" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="R">
                         <label class="custom-control-label" for="optRight">{{'Right Hand' | translate}}</label>
                     </div>            
                     <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" class="custom-control-input" id="optLeft" name="Toolside" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="L">
+                        <input type="radio" (change)="SetImage()" class="custom-control-input" id="optLeft" name="Toolside" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('GrooveToolSide').value" value="L">
                         <label class="custom-control-label" for="optLeft">{{'Left Hand' | translate}}</label>
                     </div>                        
                 </div>
@@ -23,11 +23,11 @@
                     <label>{{'Cutting Direction' | translate}}</label>
                 </div>                
                 <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="optPush" name="PushOrPull" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('PushOrPull').value" value="Push">
+                    <input type="radio"  (change)="SetImage()"  class="custom-control-input" id="optPush" name="PushOrPull" checked [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('PushOrPull').value" value="Push">
                     <label class="custom-control-label" for="optPush">{{'Threading Towards the chuck (Push)' | translate}}</label>
                 </div>            
                 <div class="custom-control custom-radio ">
-                    <input type="radio" class="custom-control-input" id="optPull" name="PushOrPull" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('PushOrPull').value" value="Pull">
+                    <input type="radio"  (change)="SetImage()"  class="custom-control-input" id="optPull" name="PushOrPull" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('PushOrPull').value" value="Pull">
                     <label class="custom-control-label" for="optPull">{{'Threading Away from chuck (Pull)' | translate}}</label>
                 </div>                        
                
@@ -56,20 +56,6 @@
                         </select> 
                     </div>   
                 </div> 
-                
-                <!-- <div *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" >                                
-                    <div class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
-                        <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
-                            <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">
-                                <div class="row col-12" >
-                                    <div class="col-5" >{{tf.Description}}</div>
-                                    <div class="col-3" >--{{tf.ThreadFormISO}}</div>
-                                    <div class="col-3" >--{{tf.ThreadForm}}</div>                         
-                                </div>
-                            </option>
-                        </select> 
-                    </div>                 
-                </div>    -->
                                                        
                 <div class="form-group row">
                     <div class="row "  [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-5 col-md-12 col-sm-12 col-12 pt-0'">
@@ -82,11 +68,7 @@
                          (focusout)="onfocusoutfield()" (focus)="onfocusfield('Pitch')">
                             <!-- <option *ngFor="let p of arrPitch"   [selected]="p==pitch" [ngValue]="p">{{p}}</option> -->
                             <option *ngFor="let p of arrPitch"   [ngValue]="p">{{p}}</option>
-                        </select> 
-
-                       <!--  <select class="form-control-sm" name="slcApatType" [(ngModel)]="curAdapType" (change)="changeadaptype()" >
-                            <option  *ngFor="let adaptype of arrAdapType"  [ngValue]="adaptype">{{adaptype.AdaptationType}}</option>
-                        </select> -->  
+                        </select>                      
 
                     </div>
                     <div class="pt-1 pl-0"  [ngClass]="exportPDF?'col-2':'col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2  '">
@@ -238,28 +220,28 @@
                             <label >{{dd.TPI | translate}}</label>
                         </div>                                                    
                 </div>                                   
-         </div>
+         </div>    
              <div class="pt-3">
-                <div class="form-group" *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'">  
+                <div class="form-group" *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120' || msrv_StMng.SecApp=='810'">       
                     <div class="pl-0">
                         <label>{{'Stability' | translate}}</label>
                     </div>
                     <div class="ml-0 ">
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optLow" name="Stability" checked  [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="Low">
-                            <label class="custom-control-label" for="optLow">{{'Low' | translate}}</label>
+                            <label class="custom-control-label" for="optLow">{{msrv_StMng.SecApp=='810'?'Short':'Low' | translate}}</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optMedium" name="Stability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="Medium">
-                            <label class="custom-control-label" for="optMedium">{{'Medium' | translate}}</label>
+                            <label class="custom-control-label" for="optMedium">{{msrv_StMng.SecApp=='810'?'Long':'Medium' | translate}}</label>
                         </div>            
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="optHigh" name="Stability" [(ngModel)]="msrv_StMng.IPL&&msrv_StMng.IPL.GetItem('OverHang').value" value="High">
-                            <label class="custom-control-label" for="optHigh">{{'High' | translate}}</label>
+                            <label class="custom-control-label" for="optHigh">{{msrv_StMng.SecApp=='810'?'Very Long':'High' | translate}}</label>
                         </div>
                     </div>
                 </div>
-                <div class="pt-3" *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'">
+                <div class="pt-3" *ngIf="msrv_StMng.SecApp=='800'">
                     <div class="form-group"> 
                         <div class="pl-0">
                             <label>{{'System Stability' | translate}}</label>
@@ -283,7 +265,7 @@
             </div> 
          </div>   
          <div  *ngIf="!msrv_appsetting.isMobileResolution || exportPDF" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-4 pr-4 pt-1'">            
-            <div  *ngIf="ImageName1!='' && msrv_StMng.SecApp!='800' && msrv_StMng.SecApp!='810'" class="col-12 text-center" >
+            <div  *ngIf="ImageName1!=''" class="col-12 text-center" >
                 <img src="{{ImageName1}}" class="input-image1 img-responsive">   
             </div>
             <div *ngIf="ImageName!=''" class="col-12 text-center">

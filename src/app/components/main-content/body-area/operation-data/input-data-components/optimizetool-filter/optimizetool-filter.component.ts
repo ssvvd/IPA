@@ -30,9 +30,6 @@ export class OptimizetoolFilterComponent implements OnInit {
   @Input() events: Observable<void>;
   private eventsSubscription: Subscription=new Subscription();
 
-  //@Output() selectitems = new EventEmitter();
-  //@Output() selectitems = new EventEmitter<{items: ToolOptimizeItem[],funcname:string}>();
-
   selitems:ToolOptimizeItem[];
 
   arrData:ToolOptimizeItem[]=[];

@@ -139,14 +139,16 @@ export class StateManagerService {
   get SecAppSelected():SecondaryApp {
     return this.mSecondaryAppSelected;
   }
-  set SecAppSelected(sa:SecondaryApp) {
+  set SecAppSelected(sa:SecondaryApp) 
+  {
     this.mSecondaryAppSelected = sa;   
     this.CheckTabOperationalDataEnable();
     if(typeof(this.SelectedMachine)!=='undefined')
     
     { 
       if(sa.ApplicationITAID == '53' || sa.ApplicationITAID == '50' || sa.ApplicationITAID == '188' || sa.ApplicationITAID == '890' || sa.ApplicationITAID == '880' || sa.ApplicationITAID == '870' || sa.ApplicationITAID == '860' || sa.ApplicationITAID == '850')                
-        this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, "Int. " +sa.MenuName]);
+        //this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, "Int. " +sa.MenuName]);
+        this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, sa.MenuName]);
       else
         this.obsSecondaryAppSelected.next([this.MainAppSelected.MenuName, sa.MenuName]);
     }
@@ -359,7 +361,11 @@ export class StateManagerService {
         
         this.IPL.GetItem('IntEmultion').value = this.SelectedMachineSpindle.IntEmultion + "";
         this.IPL.GetItem('IntAirBlast').value = this.SelectedMachineSpindle.IntAirBlast + "";
-        this.IPL.GetItem('IntOil').value = this.SelectedMachineSpindle.IntOil + "";         
+        this.IPL.GetItem('IntOil').value = this.SelectedMachineSpindle.IntOil + "";   
+        
+        this.IPL.GetItem('Torque').value = this.SelectedMachineSpindle.Torque + "";   
+        
+   
    }
    
 

@@ -135,10 +135,9 @@
                  <tbody>                                                             
                     <tr (click)="viewInfo(row.index)" *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
                        <td (click)="viewInfo(row.index)" >
-                          <!-- <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)"> -->
-                           <!-- <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;" -->
-                           <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  style="left:0px" style="position: relative;"
-                         (click)="viewInfo(row.index)" class="img-grid">
+                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)"> 
+                           <!-- <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;" class="img-grid" (click)="viewInfo(row.index)"> -->
+                           <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"   style="left:0px;position: relative;background-color:transparent" (click)="viewInfo(row.index)" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-70px' : '0px'}" class="img-grid"> 
                      </td>                       
                      <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" 
                      [hidden]="!headers[num].IsShow" class="cursor-pointer" >                 

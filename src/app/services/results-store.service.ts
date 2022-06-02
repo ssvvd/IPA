@@ -19,6 +19,16 @@ export class ResultsStoreService {
   // private res4:any;
   private res5:any;
   private res6:any;
+ 
+  //thread turning 800,810
+  private mSpindleSpeed:string='';
+  private mCuttingSpeed:string='';
+  private mInfeedMethod:string ='';
+  private mRadialEn:string = '';
+  private mController:string='';
+  private mNoOfPasses:number=0;
+  private mH:number=0;
+
 
   private obsRes1 = new BehaviorSubject<any>(null);
   Currentres1 = this.obsRes1.asObservable(); 
@@ -101,7 +111,54 @@ else{
     return this.res6
   }
 
-  
+  get SpindleSpeed():string {
+    return this.mSpindleSpeed;
+  }
+  set SpindleSpeed(s:string) {
+    this.mSpindleSpeed = s;
+  }
+
+  get CuttingSpeed():string {
+    return this.mCuttingSpeed;
+  }
+  set CuttingSpeed(s:string) {
+    this.mCuttingSpeed = s;
+  }
+
+  get InfeedMethod():string {
+    return this.mInfeedMethod;
+  }
+  set InfeedMethod(s:string) {
+    this.mInfeedMethod = s;
+  }
+
+  get RadialEn():string {
+    return this.mRadialEn;
+  }
+  set RadialEn(s:string) {
+    this.mRadialEn = s;
+  }
+
+  get Controller():string {
+    return this.mController;
+  }
+  set Controller(s:string) {
+    this.mController = s;
+  }
+
+  get NoOfPasses():number {
+    return this.mNoOfPasses;
+  }
+  set NoOfPasses(s:number) {
+    this.mNoOfPasses = s;
+  }
+
+  get H():number {
+    return this.mH;
+  }
+  set H(s:number) {
+    this.mH = s;
+  }
 }
 
 

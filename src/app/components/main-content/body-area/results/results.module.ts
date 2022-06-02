@@ -37,6 +37,7 @@ import { PpPromotionComponent } from './pp-promotion/pp-promotion.component';
 import { MpThreadingComponent } from './machining-prms/mp-threading/mp-threading.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PostprocessorComponent } from './postprocessor/postprocessor.component';
+import { CncprogramComponent } from './cncprogram/cncprogram.component';
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { PostprocessorComponent } from './postprocessor/postprocessor.component'
     //ResultsPdfComponent,
     PpPromotionComponent,
     MpThreadingComponent,
-    PostprocessorComponent
+    PostprocessorComponent,
+    CncprogramComponent
   ],
  
   imports: [

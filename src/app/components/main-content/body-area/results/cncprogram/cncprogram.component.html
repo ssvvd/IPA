@@ -1,0 +1,144 @@
+<div  class="justify-content-start w-100 row" >
+        <div class="col-6">
+            <Label class="siteTitle">CNC Program</Label>  
+            <div>
+
+            </div>
+        </div>
+        <div class="col-6">
+            <div>
+                <Label class="siteTitle">Summary</Label>  
+            </div>
+            <div class="row">                
+                <div class="pt-3 pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Nominal Size' | translate}}</Label>                                
+                </div>               
+                <div class="pt-3 col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('Size').value}}</div>               
+            </div>
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Side' | translate}}</Label>                                
+                </div>               
+                <div  class="col-3 grayDiv"  [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.SecApp=='800'?'External':'Internal' | translate}}</div>               
+            </div>
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Cutting Hand' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('GrooveToolSide').value=='R'?'Right':'Left' | translate}}</div>               
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Thread Standard' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('ThreadForm').value | translate}}</div>               
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Profile Type' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{ProfileType}}</div>               
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Pitch' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{Pitch_mm}}</div> 
+                <div class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{'mm' | translate}}</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Pitch' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{Pitch_TPI}}</div> 
+                <div class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">TPI</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Major Diameter' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('MajorDiameter').value}}</div> 
+                <div class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_appsetting.UnitslengthDesc}}</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Minor Diameter' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{dia_minor}}</div> 
+                <div class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_appsetting.UnitslengthDesc}}</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Length' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('LengthOfShoulder_L').value}}</div> 
+                <div  class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_appsetting.UnitslengthDesc}}</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Cutting Direction' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('PushOrPull').value}}</div>               
+            </div>
+            <div class="pt-2"></div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Vc' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{CuttingSpeed}}</div> 
+                <div class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }}</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'n' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{SpindleSpeed}}</div> 
+                <div class="pl-3" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{'rpm' | translate }}</div>              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Infeed Method' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{InfeedMethod}}</div>                              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Controller' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{Controller}}</div>                              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Pass Type' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{RadialEn=='cuttingdepth'?'Constant Depth':'Constant Volume' | translate}}</div>                              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Number Of Starts' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{srv_StMng.IPL.GetItem('NumberStarts').value}}</div>                              
+            </div>
+
+            <div class="row">                
+                <div class="pl-0" [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray border-bottom-gray':'col-3'" >
+                    <Label  [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Passes' | translate}}</Label>                                
+                </div>               
+                <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'border-bottom-gray':'text-center'">{{NoOfPasses}}</div>                              
+            </div>
+        </div>
+</div>    

@@ -45,6 +45,9 @@ EvOpenWebShop: Subject<void> = new Subject<void>();
 
 eventsSubject: Subject<void> = new Subject<void>();
 
+porstproc_cuttingspeed:string;
+porstproc_spindlespeed:string;
+
   constructor(private srv_ResultsStore :ResultsStoreService,private srv_Results:ResultsService,private modalService: NgbModal,private SpinnerService: NgxSpinnerService,
     private srv_down:DownloadresultService, public srv_statemanage:StateManagerService,private srv_DataLayer:DatalayerService,
     public srv_appsetting:AppsettingService,private router: Router,
@@ -413,4 +416,16 @@ OpenFilter()
   {
     this.filtermobiletop =event;
   }
+
+  update_porstproc_cuttingspeed(s)
+  {
+    this.porstproc_cuttingspeed=s;
+  }
+
+  update_porstproc_spindlespeed(s)
+  {
+    this.porstproc_spindlespeed=s;
+  }
+
+
 }

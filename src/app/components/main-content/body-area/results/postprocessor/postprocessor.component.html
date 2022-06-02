@@ -26,8 +26,8 @@
                 <div class="pr-3 pt-4"><Label>{{'Spindle speed' | translate}}</Label></div>
             </div>
             <div>
-                <div class="pr-2"><input type="number" class="form-control" name="CuttingSpeed"  [(ngModel)]="CuttingSpeed"></div>
-                <div class="pr-2 pt-1"><input type="number" class="form-control" name="SpindleSpeed"  [(ngModel)]="SpindleSpeed"></div> 
+                <div class="pr-2"><input type="number" class="form-control" name="CuttingSpeed" (change)="changeSpeed()" [(ngModel)]="CuttingSpeed"></div>
+                <div class="pr-2 pt-1"><input type="number" class="form-control" name="SpindleSpeed" (change)="changeSpeed()" [(ngModel)]="SpindleSpeed"></div> 
             </div>
             <div>
                 <div class="pr-3"><Label class="pl-1 pt-1">({{ srv_appsetting.Units =='M' ? 'm/min' : 'SFM' }})</Label></div>
@@ -81,9 +81,9 @@
                 <div  class="pt-3 pl-3">
                     <label for="txtController" class="font-weight-bold" >{{'Controller' | translate}}</label>
                 </div>
-                <div class="pt-3  pl-4">            
-                    <select class="form-control-sm" [ngModel]="controller" >
-                        <option value='Fanuc I&J'>Fanuc I&J</option>
+                <div class="pt-3  pl-4" >            
+                    <select class="form-control-sm" (change)="changecontroller()" [(ngModel)]="controller" >
+                        <option value='Fanuc'>Fanuc</option>
                         <option value='Fanuc R'>Fanuc R</option>                            
                         <option value='Heidenhain'>Heidenhain</option>    
                         <option value='Mazak R'>Mazak R</option> 

@@ -169,8 +169,11 @@ export class Appdetails120Component implements OnInit {
         ));      
     }         
 )); 
+
 //this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
 this.CostPerHourByRate =Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
+
+this.SetImage();
 }
 
 CheckMandatoryFiled()
@@ -183,7 +186,26 @@ CheckMandatoryFiled()
 onfocusfield(field:string)
 {
   this.InFocus=true;  
+  if(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='119')
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
+  else
+    this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
+}
+
+SetImage()
+{
+    let s:string;
+    let ss:string;
+    if(this.srv_StMng.IPL.GetItem('GrooveToolSide').value=='R' && this.srv_StMng.IPL.GetItem('PushOrPull').value=='Push') ss='R';
+    if (this.srv_StMng.IPL.GetItem('GrooveToolSide').value =='R' && this.srv_StMng.IPL.GetItem('PushOrPull').value=='Pull' ) ss='L';
+
+    if (this.srv_StMng.IPL.GetItem('GrooveToolSide').value=='L' &&  this.srv_StMng.IPL.GetItem('PushOrPull').value=='Push') ss='L';
+    if (this.srv_StMng.IPL.GetItem('GrooveToolSide').value=='L' && this.srv_StMng.IPL.GetItem('PushOrPull').value=='Pull') ss='R';
+
+    s=this.srv_StMng.IPL.GetItem('GrooveToolSide').value+this.srv_StMng.IPL.GetItem('PushOrPull').value;
+    s='inpt_' + this.srv_StMng.SecApp + '_' +ss +'H_With_' + this.srv_StMng.IPL.GetItem('GrooveToolSide').value + 'H_Tool';
+    this.ImageName1= environment.ImageInputPath + s + ".png"; 
+    console.log(this.ImageName1);
 }
 
 ChangeStart()
