@@ -39,13 +39,13 @@
                         <label class="pl-2 asterisk-red pt-3">*</label>
                     </div>
                     <div *ngIf="msrv_StMng.SecApp=='119' || msrv_StMng.SecApp=='120'" class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-4 col-lg-6 col-md-10 col-sm-10 col-10  '">
-                        <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
+                        <select  [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
                             <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">{{tf.Description}}</option>
                         </select> 
                     </div>    
                     
                     <div *ngIf="msrv_StMng.SecApp=='800' || msrv_StMng.SecApp=='810'" class="pt-3 pl-0"  [ngClass]="exportPDF?'col-4':'col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10  '">
-                        <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="changethreadform();">
+                        <select [ngClass]="(msrv_StMng.IPL.GetItem('ThreadForm').value==''&&IsGetResult)?'input-empty':''" class="form-control input-min-width"  [(ngModel)]="objthreadform" (change)="onfocusfield('ThreadForm');changethreadform();">
                             <option *ngFor="let tf of arrThreadForm"  [ngValue]="tf">
                             <div>
                                 <div>{{tf.Description }}</div>
@@ -265,10 +265,10 @@
             </div> 
          </div>   
          <div  *ngIf="!msrv_appsetting.isMobileResolution || exportPDF" [ngClass]="exportPDF?'col-6':'col-xl-6 col-lg-6 col-md-4 pr-4 pt-1'">            
-            <div  *ngIf="ImageName1!=''" class="col-12 text-center" >
+            <div  *ngIf="ImageName1!=''" class="col-12 text-center">
                 <img src="{{ImageName1}}" class="input-image1 img-responsive">   
             </div>
-            <div *ngIf="ImageName!=''" class="col-12 text-center">
+            <div *ngIf="ImageName!=''" class="col-12 text-center pt-2">
                 <img src="{{ImageName}}" class="input-image img-responsive">   
             </div>
         </div>

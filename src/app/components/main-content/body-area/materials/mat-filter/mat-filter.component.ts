@@ -101,9 +101,14 @@ SelectedMaterial(arr:string[])
   //   this.MyMatCheked = true
   // }
   // else{
-  if (arr[0]){
+
+ /*  if (arr[0]){
     let cat = arr[0].substring(0,1);
     this.categClick(cat);
+  } */
+  if (arr[1]){
+    //let cat = arr[0].substring(0,1);
+    this.categClick(arr[1]);
   }
 // }
 }

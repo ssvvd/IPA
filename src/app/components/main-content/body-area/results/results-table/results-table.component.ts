@@ -9,7 +9,7 @@ import {ClsPromorionFamilies} from 'src/app/models/results/cls-promorion-familie
 import {clsHelpProp} from 'src/app/models/results/help-prop';
 import { AppsettingService} from 'src/app/services/appsetting.service';
 import { TranslateService } from '@ngx-translate/core';
-import { NgxSpinnerService } from "ngx-spinner"; 
+import { NgxSpinnerService } from "ngx-spinner";
 import { Subject, Subscription, forkJoin, combineLatest } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { environment } from 'src/environments/environment';
@@ -65,7 +65,7 @@ export class ResultsTableComponent implements OnInit {
   lastTypeMainFilter:string="";
   IsClickInventory:boolean=false;
 
-  @Input() filterChangedRec: any ; 
+  @Input() filterChangedRec: any ;
   @Output() goToViewEvent = new EventEmitter<any>();
   @Output() hideFilter = new EventEmitter<any>();
   @Output() filtermobiletop:string="FilterRec";
@@ -73,12 +73,12 @@ export class ResultsTableComponent implements OnInit {
   processdownload:boolean=false;
 
   constructor(public translate: TranslateService,private srv_Results:ResultsService,public srv_StMng:StateManagerService,public srv_appsetting:AppsettingService,
-    private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef, 
+    private SpinnerService: NgxSpinnerService,private modalService: NgbModal,private cdr: ChangeDetectorRef,
     private srv_ResultsStore :ResultsStoreService,private srv_down:DownloadresultService,
-    private srv_machine: MachineService,private srv_cook:CookiesService) { 
-      
+    private srv_machine: MachineService,private srv_cook:CookiesService) {
+
     }
-   
+
   ngOnInit() {
      let scrollY:string;
      if(this,this.srv_appsetting.isMobileResolution)
@@ -87,10 +87,10 @@ export class ResultsTableComponent implements OnInit {
         scrollY="360px";
 
      this.dtOptions = {
-      pagingType: 'full_numbers',     
+      pagingType: 'full_numbers',
        "searching": false,
        "lengthChange": false ,
-       "paging":false,  
+       "paging":false,
        "autoWidth":false,
        "scrollY": 'calc(100vh - ' + scrollY + ')',
       "info":false,
@@ -102,8 +102,8 @@ export class ResultsTableComponent implements OnInit {
         "infoEmpty": "",
         "info": "",
         responsive: true
-      }           
-  }; 
+      }
+  };
 
   this.lasTypeFeed == 'BothFeed';
   this.sortProp = 'index';
@@ -114,26 +114,26 @@ export class ResultsTableComponent implements OnInit {
   this.GetResult();
   }
 
-  GetResult() 
-  {  
-    if(this.srv_StMng.arrMachineSpindle == null || typeof(this.srv_StMng.arrMachineSpindle) == 'undefined') 
-    {   
-    this.allSubs$= this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) => 
-      { 
-        this.srv_StMng.arrMachineSpindle= JSON.parse(res);               
+  GetResult()
+  {
+    if(this.srv_StMng.arrMachineSpindle == null || typeof(this.srv_StMng.arrMachineSpindle) == 'undefined')
+    {
+    this.allSubs$= this.srv_machine.getmachinedetailed(this.srv_StMng.SelectedMachine.MachineID,this.srv_appsetting.Units).subscribe((res: any) =>
+      {
+        this.srv_StMng.arrMachineSpindle= JSON.parse(res);
         this.srv_StMng.FillInputParameters();
-        this.getShowTable();      
-      });     
-    } 
+        this.getShowTable();
+      });
+    }
     else
     {
       this.srv_StMng.FillInputParameters();
       this.getShowTable();
-    }          
+    }
   }
 
 getShowTable(){
-  this.SpinnerService.show();   
+  this.SpinnerService.show();
   if (this.srv_ResultsStore.checkChanged(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged,this.srv_appsetting.Country.CountryID_IscarCom || 1))
   {
     this.srv_ResultsStore.setParams(this.srv_StMng.SecApp,this.srv_appsetting.Units,this.srv_StMng.IPLChanged)
@@ -147,7 +147,7 @@ getShowTable(){
         )
         .subscribe(([res1, res2, res3,res5, res6]:[any,any,any,any,any]) => {
           this.srv_ResultsStore.setResults(res1, res2, res3,res5, res6)
-          this.renderTable(res1, res2, res3,res5, res6);          
+          this.renderTable(res1, res2, res3,res5, res6);
         });
       }
       else{
@@ -169,7 +169,7 @@ getShowTable(){
         this.allSubs$ = combineLatest(_arr).subscribe(resList=>{
           //-- the response will be in array
           this.renderTable(resList[0], resList[1], resList[2], resList[3],resList[4])
-      });    
+      });
       }
 }
 
@@ -182,7 +182,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
     return;
   }
   this.dtRsults =JSON.parse(res1);
-  this.dtPropertiesTable = JSON.parse(res2); 
+  this.dtPropertiesTable = JSON.parse(res2);
   this.dtGroups = JSON.parse(res3);
   this.arrResultImgsAll = JSON.parse(res5);
   this.promotionFamilies = JSON.parse(res6);
@@ -199,11 +199,11 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
   let index:number = 0;
   for(var i: number = 0; i < rowsCount; i++) {
       this.dtResultsObjects[i] = [];
-      this.dtResultsObjectsHelp[i] = new clsHelpProp(this.srv_Results,i,this.srv_StMng);           
+      this.dtResultsObjectsHelp[i] = new clsHelpProp(this.srv_Results,i,this.srv_StMng);
       index = 0
 
       for(var j: number = 0; j< columnsCount; j++) {
-        
+
         //Build Helper
 
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Grade')
@@ -214,7 +214,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
           this.dtResultsObjectsHelp[i].AverageUse = this.dtResultsObjectsHelp[i].AverageUse + this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           else
           this.dtResultsObjectsHelp[i].AverageUse = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
-        }        
+        }
 
         if (this.dtPropertiesTable[j].Field.toLowerCase() == 'kappaleadangle')
         this.dtResultsObjectsHelp[i].kappaLeadAngle = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
@@ -226,7 +226,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
           this.dtResultsObjectsHelp[i].IsExpand = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]];
           this.filterRecommended(this.dtResultsObjectsHelp[i]);
         }
-        
+
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Brand Name')
         this.dtResultsObjectsHelp[i].BrandName.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
@@ -236,8 +236,8 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
         if (this.dtPropertiesTable[j].FieldDescriptionSmall == 'Family' && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]){
           if (this.promotionFamilies.filter((obj) => obj.Family ==  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]).length > 0){
             this.dtResultsObjectsHelp[i].Promotion = true;
-          }            
-        }        
+          }
+        }
 
         if (this.dtPropertiesTable[j].Field == 'SecondaryAppOrig1')
         this.dtResultsObjectsHelp[i].SecondaryAppOrig1 = this.dtRsults[i]['SecondaryAppOrig1'];
@@ -250,18 +250,19 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
 
         if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]] != '-'){
           let catNo:string = this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
-          this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);  
-          this.dtResultsObjectsHelp[i].GroupText.push(this.dtPropertiesTable[j].GroupText); 
+          this.dtResultsObjectsHelp[i].CatalogNo.push(catNo);
+          this.dtResultsObjectsHelp[i].GroupText.push(this.dtPropertiesTable[j].GroupText);
 
           let index:number = i
           this.srv_Results.getitemtype(catNo).subscribe((res: any) => {
             let typeRes:object[] = JSON.parse(res)
-            let type:string = typeRes[0]['ItemType'] || ''
-            let family:string= typeRes[0]['Family'] || ''
+            let type:string = typeRes[0]['ItemType'] || '';
+            let family:string= typeRes[0]['Family'] || '';
+            let familypic:string=typeRes[0]['GFPIC'] || '';
             let itemPicExists:boolean = typeRes[0]['picExists'] || false
             let catNoLoc:number = this.dtResultsObjectsHelp[index].CatalogNo.indexOf(catNo)
-            this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type); 
-            this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family); 
+            this.dtResultsObjectsHelp[index].itemType.splice(catNoLoc, 0, type);
+            this.dtResultsObjectsHelp[index].Families.splice(catNoLoc, 0,family);
              switch (type){
               //  case 'H':
               //   if (this.srv_StMng.SecApp == '57' && this.dtResultsObjectsHelp[index].GroupText[catNoLoc] == 'Tool'){
@@ -273,19 +274,19 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                 this.dtResultsObjectsHelp[index].DesgT.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
 
                 if (itemPicExists){
-                  this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                  this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".jpg ";
                 }else{
                   let toolFamily = family.toString().trim()
                 let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
                   if (curFamilyPic)
-                  toolFamily = curFamilyPic['GFPIC'];
-  
-                  this.dtResultsObjectsHelp[index].img = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
+                  //toolFamily = curFamilyPic['GFPIC'];
+                  toolFamily = familypic;
+                  this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + toolFamily.toString().trim() + ".jpg ";
 
                 }
-              
+
                 break;
-               case 'I': 
+               case 'I':
                 this.dtResultsObjectsHelp[index].CatalogNoSI.push(catNo);
                 this.dtResultsObjectsHelp[index].DesgSI.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
                 // if (catNoLoc > 0 && this.dtResultsObjectsHelp[index].itemType[catNoLoc - 1] == 'T'){
@@ -296,27 +297,27 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                   this.dtResultsObjectsHelp[index].CatalogNoSI.push(catNo);
                   this.dtResultsObjectsHelp[index].DesgSI.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
                   this.dtResultsObjectsHelp[index].DesgS.push(this.dtResultsObjectsHelp[index].Designation[catNoLoc]);
-                  
-                 
+
+
                     if (itemPicExists){
-                      this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".gif ";
+                      this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + catNo.toString().trim() + ".jpg ";
                     }else{
                       let toolFamily = family.toString().trim()
                     let curFamilyPic = this.arrResultImgsAll.find(i => i['Family'] == toolFamily);
                       if (curFamilyPic)
-                      toolFamily = curFamilyPic['GFPIC'];
-      
-                      this.dtResultsObjectsHelp[index].img = environment.eCatFamilyPictures + toolFamily.toString().trim() + ".gif ";
-    
+                      //toolFamily = curFamilyPic['GFPIC'];
+                      toolFamily = familypic;
+                      this.dtResultsObjectsHelp[index].img = environment.eCatItemPictures + toolFamily.toString().trim() + ".jpg ";
+
                     }
-                  
+
                 break;
-             } 
+             }
 
              this.updateGroupText(type,this.dtResultsObjectsHelp[index].itemTypeRes,this.dtResultsObjectsHelp[index].desgFieldName[catNoLoc],catNoLoc,index,catNo)
           })
         }
-          
+
         if (this.dtPropertiesTable[j].Field == 'ShankDiameter')
         this.dtResultsObjectsHelp[i].Dconms.push(this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]);
 
@@ -330,7 +331,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
 
           if (this.dtPropertiesTable[j].Field.toLowerCase().includes('catalogno') && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]  && this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]!= '-' ){
             this.dtResultsObjectsHelp[i].GroupID.push(this.dtPropertiesTable[j].GroupID)
-            }  
+            }
 
 
           let fieldsmallSplit = this.dtPropertiesTable[j].FieldDescriptionSmall.split(" ")[0].trim();
@@ -346,7 +347,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
                 this.dtResultsObjectsHelp[i][fieldsmallSplit] = value;
               }
               break;
-            
+
             case 'LF':
               break;
             case 'LB':
@@ -400,7 +401,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
               else
                 this.dtPropertiesTable[j].IsDefault=0;
             }
-            else          
+            else
             if(this.srv_appsetting.issmallscreen)
             {
               if(this.dtPropertiesTable[j].IsDefault==1 || this.dtPropertiesTable[j].IsDefault==6 || this.dtPropertiesTable[j].IsDefault==7)
@@ -412,7 +413,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
               this.dtResultsObjects[i][index].property.IsShow = true;
           }
 
-          index++      
+          index++
       }
 
 
@@ -422,7 +423,7 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
         if (gradeIndex != -1)
         this.dtResultsObjectsHelp[i].Grade[gradeIndex] =  this.dtRsults[i][Object.keys(this.dtRsults[i])[j]]
       }
-          
+
       }
 
     }
@@ -432,37 +433,37 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
   this.dtResultsObjects3d = []
   let index3:number = 0;
   var dupColumns:number [] = []
-  
+
   for(var i: number = 0; i < rowsCount; i++) {
     this.dtResultsObjects3d[i] = []
     index = 0
     dupColumns = []
     // groupsOrder = []
-    
+
   for(var col1: number = 0; col1 < visColumnsCount; col1++) {
     if(dupColumns.indexOf(col1) == -1){
       this.dtResultsObjects3d[i][index] = []
       index3 = 0
-     
+
       if (this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('listprice') || this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('pricepercorner')){
         let grpID:number = this.dtResultsObjects[i][col1].property.GroupID
         let order:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(grpID, 0)
         index3 = order
         for(var brandNamePos: number = 0; brandNamePos < index3; brandNamePos++) {
-          this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+          this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue()
           this.dtResultsObjects3d[i][index][brandNamePos].value = ''
         }
         for(var brandNamePos: number = index3 + 1; brandNamePos < this.dtResultsObjectsHelp[i].GroupID.length; brandNamePos++) {
-          this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue() 
+          this.dtResultsObjects3d[i][index][brandNamePos] = new clsPropertyValue()
           this.dtResultsObjects3d[i][index][brandNamePos].value = ''
         }
       }
       this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col1]
       if (i==0)
         this.headers.push(this.dtResultsObjects[i][col1].property);
-      
+
   for(var col2: number = col1 +  1; col2 < visColumnsCount; col2++) {
-    if (dupColumns.indexOf(col2) == -1 
+    if (dupColumns.indexOf(col2) == -1
     && (this.dtResultsObjects[i][col1].property.FieldDescriptionSmall == this.dtResultsObjects[i][col2].property.FieldDescriptionSmall
       ||(this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('catalogno') && this.dtResultsObjects[i][col2].property.Field.toLowerCase().includes('catalogno'))
       ||(this.dtResultsObjects[i][col1].property.Field.toLowerCase().includes('designation') && this.dtResultsObjects[i][col2].property.Field.toLowerCase().includes('designation'))))
@@ -479,16 +480,16 @@ renderTable(res1:any, res2:any, res3:any,res5:any, res6:any){
       let order:number = this.dtResultsObjectsHelp[i].GroupID.indexOf(grpID, 0)
       index3 = order
     }
-    this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col2] 
-   }      
-      dupColumns.push(col2)     
+    this.dtResultsObjects3d[i][index][index3] = this.dtResultsObjects[i][col2]
+   }
+      dupColumns.push(col2)
     }
   }
   index++
     }
-    
+
   }
-  
+
 }
 this.countrow = this.dtResultsObjects3d.length
 this.headersOrig = JSON.parse(JSON.stringify(this.headers));
@@ -510,10 +511,10 @@ else{
 
   this.SpinnerService.hide();
  /*  if(this.srv_cook.get_cookie("notshowfeedback")=="")
-  {    
+  {
     this.srv_cook.set_cookie("notshowfeedback",'1');
     setTimeout(() => { this.feedback(); }, 40000);
-  }    */ 
+  }    */
 }
 
 changeSource(event, name) { event.target.src = name; }
@@ -557,13 +558,13 @@ customTB(index, song) { return `${index}-${song.id}`; }
 updateGroupText(itemType:string,resultType:string,field:string,catalogNoLoc:number,index:number,catalogNo:string){
   //this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc]='';
 switch(this.srv_StMng.SecApp.toString()){
-  
+
     case '760':  case '770': case '780': case '790': case '57': case '119': case '120': case '800' :case '810' :
       switch(field){
-        case 'AnvilDesignation' :         
+        case 'AnvilDesignation' :
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Anvil');
           break;
-        case 'HolderDesignation' :         
+        case 'HolderDesignation' :
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
           break;
         case 'HolderDesignationMM':
@@ -581,9 +582,9 @@ switch(this.srv_StMng.SecApp.toString()){
                 let _FzminF = JSON.parse(res)
                 if (_FzminF.trim().startsWith('02,307-01,') || _FzminF == '01,307-01,SAI'  && this.dtResultsObjectsHelp[index].itemType.indexOf('S') == -1){
                   this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Head');
-                }     
+                }
               })}
-              
+
             break;
             case 'H':
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Shank');
@@ -622,7 +623,7 @@ switch(this.srv_StMng.SecApp.toString()){
           break;
       }
     break
-    case '850':  case '860': case '870': case '880': case '890': 
+    case '850':  case '860': case '870': case '880': case '890':
     switch(field){
       case 'HeaderDesignation' :
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
@@ -636,16 +637,16 @@ switch(this.srv_StMng.SecApp.toString()){
       case 'DetailsDesignation':
         switch(itemType){
           case 'S':
-            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Solid'); 
+            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Solid');
           break;
           case 'I':
-            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Insert'); 
+            this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Insert');
           break;
         }
         break;
     }
     break
-    case '52':  case '1': case '51': case '54': case '19': 
+    case '52':  case '1': case '51': case '54': case '19':
     switch(field){
       case 'HeaderDesignation' :
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
@@ -658,7 +659,7 @@ switch(this.srv_StMng.SecApp.toString()){
           let fieldValue:string = JSON.parse(res)
           switch(fieldValue){
             case 'BLADE':
-              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Blade'); 
+              this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Blade');
               break;
             case 'ADAPTER':
               this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Adapter');
@@ -671,7 +672,7 @@ switch(this.srv_StMng.SecApp.toString()){
         break;
     }
     break
-    case '188':  case '53': case '50': 
+    case '188':  case '53': case '50':
     switch(field){
       case 'HeaderDesignation' :
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Holder');
@@ -696,11 +697,11 @@ switch(this.srv_StMng.SecApp.toString()){
         })
         break;
       case 'DetailsDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Insert'); 
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Insert');
         break;
     }
     break
-    case '77': 
+    case '77':
     switch(field){
       case 'HolderDesignation':
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
@@ -709,7 +710,7 @@ switch(this.srv_StMng.SecApp.toString()){
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Holder');
         break;
       case 'HolderDesignationCollet':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Collet'); 
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Collet');
         break;
       case 'HeaderDesignation':
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Tool');
@@ -719,13 +720,13 @@ switch(this.srv_StMng.SecApp.toString()){
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Solid');
         }
         else{
-          if (this.dtResultsObjectsHelp[index].ZEFF >= 2) 
+          if (this.dtResultsObjectsHelp[index].ZEFF >= 2)
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Head');
           else
           this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('External Insert');
         }
-        
-        
+
+
         break;
       case 'DetailsIntDesignation':
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Internal insert');
@@ -737,10 +738,10 @@ switch(this.srv_StMng.SecApp.toString()){
         this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Cartridge Int');
         break;
       case 'CartridgeExtDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Cartridge Ext'); 
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] =this.translate.instant('Cartridge Ext');
         break;
       case 'ShimPartDesignation':
-        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Shim Part'); 
+        this.dtResultsObjectsHelp[index].GroupText[catalogNoLoc] = this.translate.instant('Shim Part');
         break;
     }
     break
@@ -750,7 +751,7 @@ switch(this.srv_StMng.SecApp.toString()){
 ngOnChanges(changes:SimpleChanges) {
 
   if (this.filterChangedRec && changes.filterChangedRec){
-    
+
     for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
       switch (this.filterChangedRec.control){
         case 'ST':
@@ -770,8 +771,8 @@ ngOnChanges(changes:SimpleChanges) {
             //       this.dtResultsObjectsHelp[i].isHidden++
             //   else
             //       this.dtResultsObjectsHelp[i].isHidden--
-            //  }  
-          }    
+            //  }
+          }
           break;
        case 'SH':
         if (this.srv_StMng.SecApp == '77')
@@ -805,10 +806,10 @@ ngOnChanges(changes:SimpleChanges) {
           else{
             this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
           }
-          break;  
+          break;
         case 'IH':
           this.dtResultsObjectsHelp[i].checkFzminF(this.filterChangedRec.Res,this.filterChangedRec.control);
-          break;   
+          break;
         case 'TypeFeed':
           switch (this.filterChangedRec.Res){
             case 'BothFeed':
@@ -818,9 +819,9 @@ ngOnChanges(changes:SimpleChanges) {
                 if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '710')
                   {this.dtResultsObjectsHelp[i].isHidden--}
                 if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '730')
-                  {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                  {this.dtResultsObjectsHelp[i].isHidden--}
                 if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '740')
-                  {this.dtResultsObjectsHelp[i].isHidden--}    
+                  {this.dtResultsObjectsHelp[i].isHidden--}
               }
               if (this.lasTypeFeed == 'NormalFeed'){
                 if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '59')
@@ -828,54 +829,54 @@ ngOnChanges(changes:SimpleChanges) {
                 if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '61')
                   {this.dtResultsObjectsHelp[i].isHidden--}
                 if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '720')
-                  {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                  {this.dtResultsObjectsHelp[i].isHidden--}
                 if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '750')
-                  {this.dtResultsObjectsHelp[i].isHidden--}   
+                  {this.dtResultsObjectsHelp[i].isHidden--}
               }
               break;
             case 'HightFeed':
-              
+
                   if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '700')
                     {this.dtResultsObjectsHelp[i].isHidden++}
                   if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '710')
                     {this.dtResultsObjectsHelp[i].isHidden++}
                   if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '730')
-                    {this.dtResultsObjectsHelp[i].isHidden++}                                    
+                    {this.dtResultsObjectsHelp[i].isHidden++}
                   if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '740')
-                    {this.dtResultsObjectsHelp[i].isHidden++}    
+                    {this.dtResultsObjectsHelp[i].isHidden++}
                     if (this.lasTypeFeed == 'NormalFeed'){
                       if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '59')
                         {this.dtResultsObjectsHelp[i].isHidden--}
                       if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '61')
                         {this.dtResultsObjectsHelp[i].isHidden--}
                       if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '720')
-                        {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                        {this.dtResultsObjectsHelp[i].isHidden--}
                       if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '750')
-                        {this.dtResultsObjectsHelp[i].isHidden--}   
-                    }           
+                        {this.dtResultsObjectsHelp[i].isHidden--}
+                    }
               break;
-            case 'NormalFeed':          
+            case 'NormalFeed':
                   if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '59')
                     {this.dtResultsObjectsHelp[i].isHidden++}
                   if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '61')
                     {this.dtResultsObjectsHelp[i].isHidden++}
                   if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '720')
-                    {this.dtResultsObjectsHelp[i].isHidden++}                                    
+                    {this.dtResultsObjectsHelp[i].isHidden++}
                   if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '750')
-                    {this.dtResultsObjectsHelp[i].isHidden++}   
+                    {this.dtResultsObjectsHelp[i].isHidden++}
                     if (this.lasTypeFeed == 'HightFeed'){
                       if (this.srv_StMng.SecApp == '760' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '700')
                         {this.dtResultsObjectsHelp[i].isHidden--}
                       if (this.srv_StMng.SecApp == '770' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '710')
                         {this.dtResultsObjectsHelp[i].isHidden--}
                       if (this.srv_StMng.SecApp == '780' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '730')
-                        {this.dtResultsObjectsHelp[i].isHidden--}                                    
+                        {this.dtResultsObjectsHelp[i].isHidden--}
                       if (this.srv_StMng.SecApp == '790' && this.dtResultsObjectsHelp[i].SecondaryAppOrig1 != '740')
-                        {this.dtResultsObjectsHelp[i].isHidden--}    
+                        {this.dtResultsObjectsHelp[i].isHidden--}
                     }
               break;
-          }   
-          break;  
+          }
+          break;
           case 'optFilter':
             switch (this.filterChangedRec.Res){
               case 'FilterRec':
@@ -901,18 +902,18 @@ ngOnChanges(changes:SimpleChanges) {
                   }
                 break;
             }
-            break;           
-              
+            break;
+
             case 'filterList':
               let field:string = this.filterChangedRec.Res[0];
               let value:string = this.filterChangedRec.Res[1];
-        
+
               switch (this.filterChangedRec.Res[2]){
                 case 'T': case 'F':
                   this.InternalCoolant(field,value,this.filterChangedRec.Res[2],this.srv_appsetting.Units,i)
-                 
+
                   break;
-                
+
                 case 'S':
                   if (this.dtResultsObjectsHelp[i][field].filter(s => !s.toUpperCase().includes(value)).length > 0)
                       this.dtResultsObjectsHelp[i].isHidden++
@@ -930,9 +931,9 @@ ngOnChanges(changes:SimpleChanges) {
                 let minValue:string = this.filterChangedRec.Res[1];
                 let maxValue:string = this.filterChangedRec.Res[2];
                 if (this.dtResultsObjectsHelp[i][fieldS] < minValue || this.dtResultsObjectsHelp[i][fieldS] > maxValue)
-                        {this.dtResultsObjectsHelp[i].isHidden++}    
+                        {this.dtResultsObjectsHelp[i].isHidden++}
                 else
-                        {this.dtResultsObjectsHelp[i].isHidden--}  
+                        {this.dtResultsObjectsHelp[i].isHidden--}
                 //console.log(i + " " + this.dtResultsObjectsHelp[i].isHidden);
                 break;
                 case 'ClearAll':
@@ -954,21 +955,21 @@ ngOnChanges(changes:SimpleChanges) {
                     }
                     break;
       }
-    
-      
+
+
     }
 
     this.countShowingRows()
     if (this.filterChangedRec.control == 'TypeFeed')
       this.lasTypeFeed = this.filterChangedRec.Res;
-    
+
       if (this.filterChangedRec.control == 'optFilter')
       this.lastTypeMainFilter = this.filterChangedRec.Res;
 
       if (this.filterChangedRec.control == 'ClearAll')
       this.lastTypeMainFilter = "FilterRec"
   }
-  
+
 }
 
 countShowingRows(){
@@ -976,7 +977,7 @@ countShowingRows(){
 }
 filterRecommended(prop:clsHelpProp){
     if (prop.IsExpand == "False")
-        prop.isHidden++;    
+        prop.isHidden++;
 }
 
 
@@ -986,7 +987,7 @@ viewInfo(index:number)
   this.goToViewEvent.emit({control:'View',Res:[this.dtResultsObjectsHelp[index],this.dtResultsObjects3d[index]],index:index})
 }
 
-getPropWithoutUnits(pr:string){ 
+getPropWithoutUnits(pr:string){
   let indexOfU:number = pr.lastIndexOf('(')
   if (indexOfU != -1){
     return pr.substring(0,indexOfU)
@@ -997,46 +998,52 @@ getPropWithoutUnits(pr:string){
 }
 
 DownLoadPDF()
-{    
-    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;}); 
-    this.processdownload =true; 
-    this.SpinnerService.show(); 
-    this.srv_appsetting.curDate= new Date().toString();   
-    setTimeout( () => {this.srv_down.DownLoadData('PDF');}, 1000 ); 
-    setTimeout( () => {this.SpinnerService.hide();}, 4000 );      
+{
+    this.srv_down.PDFListLoaded.subscribe((res:any) => {this.processdownload =false;});
+    this.processdownload =true;
+    this.SpinnerService.show();
+    this.srv_appsetting.curDate= new Date().toString();
+    setTimeout( () => {this.srv_down.DownLoadData('PDF');}, 1000 );
+    setTimeout( () => {this.SpinnerService.hide();}, 4000 );
 }
 
 viewInventory(index:number)
-{   
-  this.IsClickInventory=true; 
+{
+  return;
+  this.IsClickInventory=true;
   const modalRef = this.modalService.open(ResultPpInventoryComponent, { centered: true });
-  modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];  
+  modalRef.componentInstance.objHelpProp = this.dtResultsObjectsHelp[index];
 }
 
 
 contactus()
 {
-  const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});                  
+  const modalRef = this.modalService.open(ContactusComponent,{ size: 'lg' ,centered: true});
 }
 
 goToCatalog(rowIndex:number,itemIndex:number){
- 
+
   let mapp:string = 'IT'
   if (this.dtResultsObjectsHelp[rowIndex].itemType[itemIndex].trim() != 'H'){
     mapp = this.srv_StMng.SecAppSelected.MainApp
   }
+
+  let l:string=this.srv_appsetting.Lang;
+    if(this.srv_appsetting.Lang=='GM') l='DE';
    let url:string = environment.eCatItemPage + '&qw=' + this.dtResultsObjectsHelp[rowIndex].CatalogNo[itemIndex].trim() + '&lang='
-   + this.srv_appsetting.Lang + '&GFSTYP=' + this.srv_appsetting.Units + '&cf=ITA';
+   + l + '&GFSTYP=' + this.srv_appsetting.Units + '&cf=ITA';
    window.open(url, "_blank");
 }
 
 
 GoToAssembly(index:number){
 
-  this.srv_Results.getAssemblyURL(this.dtResultsObjectsHelp[index].CatalogNo.toString().replace(/\s/g, ""),this.srv_appsetting.Lang).subscribe(res => {    
-    let url = (new DOMParser()).parseFromString(res, "text/xml").getElementsByTagName('string')[0].textContent    
+  return;
+
+  this.srv_Results.getAssemblyURL(this.dtResultsObjectsHelp[index].CatalogNo.toString().replace(/\s/g, ""),this.srv_appsetting.Lang).subscribe(res => {
+    let url = (new DOMParser()).parseFromString(res, "text/xml").getElementsByTagName('string')[0].textContent
     window.open(url, "_blank");
-    
+
   })
 
 }
@@ -1075,7 +1082,7 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
       this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)
        if(index == (this.dtResultsObjectsHelp.length - 1))
        setTimeout(() => {
-        this.countShowingRows() 
+        this.countShowingRows()
       }, 100)
   }
   else{
@@ -1089,9 +1096,9 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
           this.dtResultsObjectsHelp[index].InternalCoolantFilter(filed,value,checked)
           if(index == (this.dtResultsObjectsHelp.length - 1))
           setTimeout(() => {
-            this.countShowingRows() 
+            this.countShowingRows()
           }, 100)
-          
+
           // (index == (this.dtResultsObjectsHelp.length - 1)) ? this.countShowingRows() : ''
       })
   }
@@ -1102,10 +1109,10 @@ InternalCoolant(filed:string,value:string,checked:string,units:string,index:numb
 feedback()
 {
   const modalRef = this.modalService.open(FeedbackComponent,{ backdrop: 'static',centered: true, windowClass: 'feedback-modal' });
-  modalRef.result.then((result) => {  
-    this.srv_cook.set_cookie("notshowfeedback",'1');   
-  });    
-} 
+  modalRef.result.then((result) => {
+    this.srv_cook.set_cookie("notshowfeedback",'1');
+  });
+}
 
 FilterTopMobileChange(filter:string)
 {
@@ -1129,14 +1136,14 @@ ApplyFilterChange(typefilter:string,fieldvalue:string)
     let issortbyfield:boolean=false;
     for(var i: number = 0; i < this.dtResultsObjectsHelp.length; i++){
       //switch (this.filterChangedRec.control){
-        switch (typefilter){               
+        switch (typefilter){
           case 'optFilter':
-            switch (fieldvalue){ 
-                    
+            switch (fieldvalue){
+
               case 'FilterRec':
                 this.filterRecommended(this.dtResultsObjectsHelp[i]);
                 this.sortProp = 'index';
-                this.sortType = 'asc';                 
+                this.sortType = 'asc';
                 break;
 
               case 'FilteAllRes':
@@ -1146,32 +1153,32 @@ ApplyFilterChange(typefilter:string,fieldvalue:string)
                   this.sortType = 'asc';
                 break;
 
-              case 'FilterSeller':                
+              case 'FilterSeller':
                   this.sortProp = 'AverageUse';
                   this.sortType = 'desc';
                   if(this.lastTypeMainFilter == "FilterRec" && this.dtResultsObjectsHelp[i].IsExpand == "False"){
                     this.dtResultsObjectsHelp[i].isHidden--
-                  } 
+                  }
                 break;
               default:
-              {                
+              {
                 this.sortProp = fieldvalue; //fieldvalue;
                 this.sortType = 'asc';
                 issortbyfield=true;
                 break;
               }
             }
-            break;                                                       
-      }          
+            break;
+      }
     }
-  
+
     this.countShowingRows();
     if(!issortbyfield) this.lasTypeFeed =typefilter;
-    
+
 }
 
   applysort(field:any)
-  {    
+  {
     if(field!='') this.FilterTopMobileChange(field);
   }
 

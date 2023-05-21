@@ -88,7 +88,8 @@
                   <img  *ngIf="!processdownload" class="pb-2" [lazyLoad]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
                 </div>                
                <!-- <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)"> -->
-               <img [defaultImage] ="environment.ImgThreeDots" [lazyLoad]="dtResultsObjectsHelp[row.index].img" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;"
+               <!-- <img [defaultImage] ="environment.ImgThreeDots" [lazyLoad]="dtResultsObjectsHelp[row.index].img" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;" -->
+               <img [defaultImage] ="environment.ImgThreeDots" [lazyLoad]="dtResultsObjectsHelp[row.index].img"  style="left:0px;position: relative;"
              (click)="viewInfo(row.index)" class="img-grid-mobile"> 
             </div>
             <div class="col-8 pl-0 ml-0 pt-2">
@@ -135,9 +136,10 @@
                  <tbody>                                                             
                     <tr (click)="viewInfo(row.index)" *ngFor="let row of dtResultsObjectsHelp | sortBy: sortType:sortProp ;"  [hidden]="dtResultsObjectsHelp[row.index].isHidden > 0"  class="tr-not-selected cursor-pointer">
                        <td (click)="viewInfo(row.index)" >
-                           <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)"> 
-                           <!-- <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;" class="img-grid" (click)="viewInfo(row.index)"> -->
-                           <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"   style="left:0px;position: relative;background-color:transparent" (click)="viewInfo(row.index)" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-70px' : '0px'}" class="img-grid"> 
+                           <!-- <img [hidden]="!dtResultsObjectsHelp[row.index].Promotion" [src]="environment.ImagePath + 'Promotion.svg'" style="height: 70px!important;max-height:70px!important; position: relative; top:-5px; left: -8px; z-index: 1;cursor: pointer;" (click)="openPromotion(row.index)">  -->
+                           <!-- <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"  [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-80px' : '0px'}" style="position: relative;" class="img-grid" (click)="viewInfo(row.index)"> -->               
+                           <!-- <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"   style="left:0px;position: relative;background-color:transparent" (click)="viewInfo(row.index)" [ngStyle]="{'left': (dtResultsObjectsHelp[row.index].Promotion) ? '-70px' : '0px'}" class="img-grid">  -->
+                           <img  [lazyLoad]="dtResultsObjectsHelp[row.index].img"   style="left:0px;background-color:transparent" (click)="viewInfo(row.index)"  class="img-grid"> 
                      </td>                       
                      <td  *ngFor="let col of dtResultsObjects3d[row.index]; let num = index" [attr.data-order]="getValue(col)" 
                      [hidden]="!headers[num].IsShow" class="cursor-pointer" >                 
@@ -164,8 +166,8 @@
                            title="View info" class="icon-grid">                            
                      </td>
                         <td  class="text-center" *ngIf= "!processdownload">                           
-                              <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
-                              <img  src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">                                                                                     
+<!--                               <img [src]="environment.ImagePath + 'Inventorycheck_Icon.svg'" (click)="viewInventory(row.index)" title="{{'Stock Availability' |translate}}" class="icon-grid pr-2">                              
+                              <img  src="{{environment.ImgAssembly}}" alt="Create Assembly" (click)="GoToAssembly(row.index)" title="{{'Build Assembly' | translate}}" class="icon-grid">  -->                                                                                    
                               <i class="fa fa-chevron-right icon-open pl-3"></i>
                         </td>
                         <td style="padding:0px!important;width:20px!important ;">
@@ -194,26 +196,26 @@
          </div>
          <div *ngIf="!srv_appsetting.isMobileResolution" class="col-12 d-flex justify-content-center pb-2 pt-2" >  
             <p class="pr-2">{{'You Can Contact' | translate }}:</p>
-            <a (click)="contactus()" style="text-decoration:underline;cursor: pointer;">{{'ITA Support' | translate }}</a> 
+            <a (click)="contactus()" style="text-decoration:underline;cursor: pointer;">{{'IPA Support' | translate }}</a> 
             <p class="pr-2 pl-2">{{'Or' | translate}}</p>     
-            <a href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">{{'Your Local ISCAR Support Team.' | translate }}</a>    
+            <a href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">{{'Your Local INGERSOLL Support Team.' | translate }}</a>    
           </div>
           <div *ngIf="srv_appsetting.isMobileResolution"  class="col-12 justify-content-center pb-2 pt-2 text-center" >  
             <label class="pl-0 pr-2 col-12">{{'You Can Contact' | translate }}:</label>           
             <div class="float-center">
-               <a  (click)="contactus()" style="text-decoration:underline;cursor: pointer;">{{'ITA Support' | translate }}</a>                     
+               <a  (click)="contactus()" style="text-decoration:underline;cursor: pointer;">{{'IPA Support' | translate }}</a>                     
             </div> 
             <div class="float-center" >          
                <label class="pr-2 pl-2 float-center">{{'Or' | translate}}</label>                            
             </div>
-            <a class="col-12 pl-0 float-center" href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">{{'Your Local ISCAR Support Team.' | translate }}</a>    
+            <a class="col-12 pl-0 float-center" href="https://www.iscar.com/newarticles.aspx/countryid/1/newarticleid/202" target="_blank" style="text-decoration:underline">{{'Your Local INGERSOLL Support Team.' | translate }}</a>    
           </div>
       </div>
 
       <div  id="docheader" style="display:none">
          <div class="header-pdf">    
-             <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-             <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+             <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">          
+             <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right">     -->    
          </div>
          <div class="header-pdf1">
              <div class="float-right pr-4">

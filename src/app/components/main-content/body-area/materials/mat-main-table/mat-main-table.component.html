@@ -81,8 +81,8 @@
               [hidden]="selectedCategory != material.Category">
                   <th   scope="row" class="d-none">{{material.id}}</th>
                   <!-- <th  scope="row" class="d-none">{{material.GWFRA2}}</th>      -->
-                  <td *ngIf="!environment.production" (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.GWFRA2}}</label></div></td>
-                  <td *ngIf="environment.production" (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.id}}</label></div></td>
+                 <!--  <td *ngIf="!environment.production" (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.GWFRA2}}</label></div></td> -->
+                  <td  (click)="matDetailClick(material)"><div class="square" [title]="selectedCategory"><label class="bold font-weight-bold m-1">{{material.id}}</label></div></td>
                   <td (click)="matDetailClick(material)"><div class="pl-2 ">{{material.description}}</div></td> 
                   <td (click)="matDetailClick(material)"><div class="pl-2" >{{material.Condition}}</div></td>
                   <td (click)="openEditParamsM(material)"><div class="pl-2" ><img *ngIf="environment.internal" src="{{environment.ImgEditParams}}" title="Edit"  class="icon-edit">{{material.Hardness + " "}}  {{material.HardnessUnits?material.HardnessUnits:'HB' | translate}}</div></td>

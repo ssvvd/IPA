@@ -224,23 +224,23 @@ export class StateManagerService {
     this.materialSelected=mat;   
     let desc:string;
     if (mat.material && mat.material != ''){
-      if(environment.production)
-          desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
-      else
-          desc=mat.GWFRA2 + " - " + mat.material ; 
+      //if(environment.production)
+         desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
+      //else
+      //    desc=mat.GWFRA2 + " - " + mat.material ; 
     }
     else{
       if (mat.FavName && mat.FavName != ''){
-        if(environment.production)
+        //if(environment.production)
             desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
-        else
-            desc=mat.GWFRA2 + " - " + mat.FavName ; 
+        //else
+        //    desc=mat.GWFRA2 + " - " + mat.FavName ; 
       }
       else{
-        if(environment.production)
-            desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
-        else
-            desc=mat.GWFRA2 + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ;
+        //if(environment.production)
+           desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+        //else
+        //    desc=mat.GWFRA2 + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ;
       }
       
     }       
@@ -251,23 +251,23 @@ export class StateManagerService {
   {
    let desc:string;
     if (mat.material && mat.material != ''){
-      if(environment.production)
+      //if(environment.production)
           desc=mat.Category + mat.group.toString() + " - " + mat.material ; 
-      else
-          desc=mat.GWFRA2 + " - " + mat.material ; 
+      //else
+      //    desc=mat.GWFRA2 + " - " + mat.material ; 
     }
     else{
       if (mat.FavName && mat.FavName != ''){
-        if(environment.production)
+        //if(environment.production)
           desc=mat.Category + mat.group.toString() + " - " + mat.FavName ; 
-        else
-          desc=mat.GWFRA2 + " - " + mat.FavName ; 
+        //else
+        //  desc=mat.GWFRA2 + " - " + mat.FavName ; 
       }
       else{
-        if(environment.production)
+       // if(environment.production)
             desc=mat.Category + mat.group.toString() + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
-        else
-            desc=mat.GWFRA2 + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
+       // else
+       //     desc=mat.GWFRA2 + " - " + mat.description.toString().split(",")[0].split("(")[0].split(".")[0] ; 
       }
       
     } 

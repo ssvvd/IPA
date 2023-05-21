@@ -36,7 +36,7 @@ export class CncprogramComponent implements OnInit {
   NoOfPasses:number;
 
   ngOnInit(): void {
-   
+    
     this.SpindleSpeed=Number(this.srv_ResultsStoreService.SpindleSpeed) ;
     this.CuttingSpeed=Number(this.srv_ResultsStoreService.CuttingSpeed );
     this.NoOfPasses=this.srv_ResultsStoreService.NoOfPasses ;

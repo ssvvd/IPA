@@ -68,8 +68,11 @@ export class ProductInfoComponent implements OnInit,OnChanges  {
       mapp = this.srv_statemanage.SecAppSelected.MainApp
     }
 
-    let url:string = environment.eCatItemPage1 + row.trim() + '&SRC=' + this.SRC  + '&fnum=' + this.selectedOption.Families[_index].trim()
+    /* let url:string = environment.eCatItemPage1 + row.trim() + '&SRC=' + this.SRC  + '&fnum=' + this.selectedOption.Families[_index].trim()
      + '&mapp=' + mapp + '&GFSTYP=' + this.srv_appsetting.Units + '&lang=' + this.srv_appsetting.Lang ;
+ */
+     let url:string ='https://intranet.imc.co.il/ingersollDE/ningersollcatalog/item.aspx?type=1&cat=' + row.trim() + '&SRC=ITA2&fnum=' + this.selectedOption.Families[_index].trim() + '&mapp=' + mapp + 
+                     '&isoD=NON&GFSTYP=' + this.srv_appsetting.Units;
 
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }

@@ -20,7 +20,7 @@ export class AppsettingService {
   private mUnits:string =''; //todo:
   //private mUnitslengthDesc :string=''; //todo:  
   private marrLanguages:Language[];
-  private mLangName:string='EN';
+  private mLangName:string='GM';
   private mUser:User;
 
   
@@ -155,7 +155,7 @@ export class AppsettingService {
   private mLanguages:Language;
   get Lang():string 
   {    
-    if(this.mLanguages==undefined) return 'EN';
+    if(this.mLanguages==undefined) return 'GM';
     return this.mLanguages.LanguageCode;
   }
 
@@ -174,7 +174,7 @@ export class AppsettingService {
     return this.srv_DataLayer.exchangerate(currency);
   }
 
-  private mCurrency:string ='USD';
+  private mCurrency:string ='EUR';
   get Currency():string {
     return this.mCurrency;
     }
@@ -204,10 +204,11 @@ export class AppsettingService {
    }
    IsCountryGermany()
    {
-    if(localStorage.getItem("countryid")!='7' && (this.Country==undefined || (this.Country!=undefined && this.Country.CountryCode!='DE'))) 
+    return false;
+    /* if(localStorage.getItem("countryid")!='7' && (this.Country==undefined || (this.Country!=undefined && this.Country.CountryCode!='DE'))) 
         return false;
     else
-        return true;
+        return true; */
 
    }
 

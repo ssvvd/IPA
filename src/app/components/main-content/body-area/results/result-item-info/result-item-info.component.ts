@@ -28,11 +28,14 @@ export class ResultItemInfoComponent implements OnInit {
   @Input () Family:string;
   @Input () ItemDesignation:string;
   @Input()  exportPDF:boolean;
-  
+
   //@Input() viewParamsChanged:any;
 
   FamilyName:string;
   FamilyDesc:string;
+  FamilyPic:string;
+  FamilyDraw:string;
+
   ItemDesc:string;
   Img1:string;
   Img2:string;
@@ -62,14 +65,16 @@ export class ResultItemInfoComponent implements OnInit {
             { 
               for (const d of JSON.parse(branddata))
               {                 
-                this.arrBrandName.push(d.GFCLN.toString());
+                this.arrBrandName.push(d.GFLLNA.toString().trim());
               }
 
             let fd:any;
             fd=JSON.parse(familydata);
             this.FamilyName=fd[0].FamilyName;
             this.FamilyDesc=fd[0].FamilyDescription;
-
+            this.FamilyPic=fd[0].GFPIC.toString().trim();
+            this.FamilyDraw=fd[0].GFDRW.toString().trim();
+            
             this.ParamValues=JSON.parse(parvalues);
             this.ParamHeader=JSON.parse(parheader);
             //this.ParamHeader=this.ParamHeader.filter(ph=> {ph.showHide=='SHOW'});

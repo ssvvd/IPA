@@ -80,7 +80,6 @@ export class InnerTabsTableComponent implements OnInit {
                    + this.srv_appsetting.Lang + '&GFSTYP=' + this.srv_appsetting.Units + '&cf=ITA'
   
     window.open(url, "_blank");
-
   }
 
   checkexistsitemintoolshop(catalogno:string) 

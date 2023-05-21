@@ -12,12 +12,7 @@ import { Renderer2, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Meta } from '@angular/platform-browser';
 
-//import { CookiesService } from 'src/app/services/cookies.service';
-
-//import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import cssVars from 'css-vars-ponyfill';
-
 
 @Component({
   selector: 'app-root',
@@ -41,7 +36,7 @@ export class AppComponent implements OnInit {
       environment.internal = false;
     }
     
-    this.router.events.subscribe(event => {
+   /*  this.router.events.subscribe(event => {
        if(environment.production)
           if(event instanceof NavigationEnd){
             console.log (event.urlAfterRedirects);
@@ -53,7 +48,7 @@ export class AppComponent implements OnInit {
             
           }
         }
- );
+ ); */
   }
 
 SetLanguges()
@@ -65,7 +60,9 @@ SetLanguges()
 
 ngOnInit()
 {    
-  //alert(1);
+  var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log(time);
   console.log('get token app component');
   this.srv_appsetting.AfterToken=false;
   this.SpinnerService.show();
@@ -84,7 +81,7 @@ ngOnInit()
     {
       const httpParams = new HttpParams({ fromString: url.split('?')[1] });
       paramValue = httpParams.get('lang');        
-      if(paramValue==null) paramValue='EN';   
+      if(paramValue==null) paramValue='GM';   
       localStorage.setItem("language",paramValue.toUpperCase());            
     }   
     this.SetLanguges();
@@ -105,8 +102,8 @@ ngOnInit()
     if(paramValue!=null) {
       countryid =paramValue; 
       localStorage.setItem("countryid",countryid);
-      if(countryid=='7')
-        this.CreateScriptGermanyChat();
+      /* if(countryid=='7')
+        this.CreateScriptGermanyChat(); */
     }
 
     let language:string;
@@ -118,18 +115,18 @@ ngOnInit()
     if(httpParams.get('result')!=null) result = httpParams.get('result');     
   }
 
-    if(result=="") 
+    if(result=="" && this.meta.getTag('name=enablelogin').content =='1') 
     {
         let sitetype:string ="local";
         //let sitetype:string ="debug";
         if(environment.production)  sitetype="global";
         //sitetype ="debug";//todo: temp
         //alert(2);
-        let s_checkcookies:string=environment.urlCheckCookies+ "?sId=iscita21&sitetype=" + sitetype + "&lang=" +this.srv_appsetting.Lang;
+        let s_checkcookies:string=environment.urlCheckCookies+ "?sId=ingITA&sitetype=" + sitetype + "&lang=" +this.srv_appsetting.Lang;
         window.open(s_checkcookies,'_self'); 
         //window.location.href = s_checkcookies
     }
-    if(result=='0')
+    if(result=='0' || this.meta.getTag('name=enablelogin').content =='0')
     {
       this.srv_appsetting.isLoggedIn=true;          
       this.srv_login.FillDefaultUser();      

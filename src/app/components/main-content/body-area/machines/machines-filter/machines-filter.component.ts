@@ -245,8 +245,8 @@ export class MachinesFilterComponent implements OnInit {
     this.machFilter.IsSwissType =false;//!this.srv_appsetting.IsCountryGermany();
 
     this.machFilter.IsMachineTypeStandard=true;
-    this.machFilter.IsMachineTypeHeavyDuty=!this.srv_appsetting.IsCountryGermany();
-    this.machFilter.IsMachineTypeHighSpeed=!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsMachineTypeHeavyDuty=true;//!this.srv_appsetting.IsCountryGermany();
+    this.machFilter.IsMachineTypeHighSpeed=true;//!this.srv_appsetting.IsCountryGermany();
 
     //todo:
     

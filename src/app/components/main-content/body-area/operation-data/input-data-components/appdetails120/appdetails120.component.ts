@@ -91,10 +91,10 @@ export class Appdetails120Component implements OnInit {
   constructor(private srv_StMng:StateManagerService,private srv_appsetting:AppsettingService,private srv_DataLayer:DatalayerService) { }
   
   ngOnInit() { 
-       
-    this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";
+
+    
     if(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='810')
-    {
+    {      
       this.threadtype="Internal";
     }
     else
@@ -122,6 +122,9 @@ export class Appdetails120Component implements OnInit {
         {
             this.objthreadform = this.arrThreadForm.find(e=> e.ThreadFormISO == this.srv_StMng.IPL.GetItem('ThreadForm').value);
             this.threadform= this.srv_StMng.IPL.GetItem('ThreadForm').value;
+
+            this.fillimagepath(this.objthreadform.ThreadFormISO);     
+
             this.fillarrpitch();
 
             if (this.threadform == 'M60' || this.threadform == 'MJ60')
@@ -173,7 +176,8 @@ export class Appdetails120Component implements OnInit {
 //this.CostPerHourByRate = Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / this.srv_appsetting.CurrRate*100)/100;    
 this.CostPerHourByRate =Math.round(this.msrv_StMng.SelectedMachine.CostPerHour / ( Math.round(this.srv_appsetting.CurrRate*1000)/1000)*100)/100;
 
-this.SetImage();
+ this.SetImage();
+
 }
 
 CheckMandatoryFiled()
@@ -189,13 +193,21 @@ onfocusfield(field:string)
   if(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='119')
     this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
   else
-    this.ImageName1= environment.ImageInputPath + this.srv_StMng.IPL.GetItem(field).image1;
-}
+  {
+    let suffix:string='';
+    if(field=='ThreadForm') suffix='';    
+    if(field=='Pitch') suffix='-P';    
+    if(field=='D_Hole') suffix='-Do';    
+    if(field=='LengthOfShoulder_L') suffix='-LTH';   
+    this.ImageName1= this.GetImageName() + suffix + ".png";    
+  }
+    
 
-SetImage()
-{
-    let s:string;
-    let ss:string;
+}
+GetImageName():string
+{    
+    let s:string='';
+    let ss:string='';    
     if(this.srv_StMng.IPL.GetItem('GrooveToolSide').value=='R' && this.srv_StMng.IPL.GetItem('PushOrPull').value=='Push') ss='R';
     if (this.srv_StMng.IPL.GetItem('GrooveToolSide').value =='R' && this.srv_StMng.IPL.GetItem('PushOrPull').value=='Pull' ) ss='L';
 
@@ -203,8 +215,16 @@ SetImage()
     if (this.srv_StMng.IPL.GetItem('GrooveToolSide').value=='L' && this.srv_StMng.IPL.GetItem('PushOrPull').value=='Pull') ss='R';
 
     s=this.srv_StMng.IPL.GetItem('GrooveToolSide').value+this.srv_StMng.IPL.GetItem('PushOrPull').value;
-    s='inpt_' + this.srv_StMng.SecApp + '_' +ss +'H_With_' + this.srv_StMng.IPL.GetItem('GrooveToolSide').value + 'H_Tool';
-    this.ImageName1= environment.ImageInputPath + s + ".png"; 
+    s='inpt_' + this.srv_StMng.SecApp + '_' +ss +'H_With_' + this.srv_StMng.IPL.GetItem('GrooveToolSide').value + 'H_Tool';    
+    return environment.ImageInputPath +s;
+}
+
+SetImage()
+{   
+    if(this.srv_StMng.SecApp=='119' || this.srv_StMng.SecApp=='120')
+        this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";  
+    else
+        this.ImageName1= this.GetImageName() + ".png"; 
     console.log(this.ImageName1);
 }
 
@@ -233,8 +253,9 @@ ChangeStart()
 
 onfocusoutfield()
 {  
-  this.InFocus=false;       
-  this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";  
+  this.InFocus=false; 
+  if(this.srv_StMng.SecApp=='120' || this.srv_StMng.SecApp=='119')      
+    this.ImageName1= environment.ImageInputPath + this.srv_StMng.SecApp + ".png";  
 }
 
 ClearData()
@@ -375,6 +396,7 @@ ClearData()
   
   fillimagepath(threadform:string)
   {
+    this.ImageName='';
       switch (threadform) {
             case 'M60':
                 this.ImageName= "M60.jpg";
@@ -419,7 +441,8 @@ ClearData()
                 this.ImageName = "NPS.jpg";
                 break;
         }
-        this.ImageName = environment.ImagePath + this.ImageName;
+        if(this.ImageName!='')
+            this.ImageName = environment.ImagePath + this.ImageName;
   }
 
   changesize()

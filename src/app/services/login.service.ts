@@ -33,7 +33,7 @@ export class LoginService {
     this.srv_DataLayer.get_token().subscribe((res: any)=>{
     
         //https://www.iscar.com/imcLogin/checkcookie.aspx  
-        let s=environment.urlCheckCookies + "?sId=iscita21&sitetype=local&lang=EN";    
+        let s=environment.urlCheckCookies + "?sId=ingITA&sitetype=local&lang=EN";    
         console.log(s);    
         window.open(s,'_self');          
         return 'ok'    
@@ -48,10 +48,9 @@ export class LoginService {
     //let s='https://sign.ssl.imc-companies.com/signin?t=' +res;     
     //let s= environment.signinURL + '?t=' +token; 
     let sitetype:string ="local";
-    //let sitetype:string ="debug";
     if(environment.production)  sitetype="global";
     //sitetype ="debug";//todo: temp 
-    let s= environment.urlLogIn + "?sId=iscita21&sitetype=" +sitetype +"&lang=" +this.srv_appsetting.Lang;
+    let s= environment.urlLogIn + "?sId=ingITA&sitetype=" +sitetype +"&lang=" +this.srv_appsetting.Lang;
     
     window.open(s,'_self');
     console.log('after token');
@@ -92,7 +91,7 @@ export class LoginService {
     {
       let data = JSON.parse(d);
       if(data.length==0)
-        this.srv_DataLayer.GetCountryLangBrifData('US').subscribe((d:any)=>
+        this.srv_DataLayer.GetCountryLangBrifData('DE').subscribe((d:any)=>
         {
           data = JSON.parse(d);
           this.FillDataCountryByData(data);
@@ -130,7 +129,7 @@ export class LoginService {
         this.srv_DataLayer.getGEOLocation().subscribe((d:any)=>
         {                    
         if(d.country==undefined)  
-            this.UpdateCurrentCountry('US');          
+            this.UpdateCurrentCountry('GM');          
           else 
           {
             this.UpdateCurrentCountry(d.country);
@@ -336,16 +335,16 @@ export class LoginService {
 
   SetExchangeRate1(BrifName:string)
   {
-    this.srv_DataLayer.getcurrencyeciw(BrifName).subscribe((cur:any)=>
+    /* this.srv_DataLayer.getcurrencyeciw(BrifName).subscribe((cur:any)=>
     {
       let c:string;
       if(JSON.parse(cur).length>0)       
         if(JSON.parse(cur)[0].ECUR=='') 
-          c='USD';
+          c='EUR';
         else
           c= JSON.parse(cur)[0].ECUR;              
       else      
-        c='USD'; 
+        c='EUR'; 
         
       this.srv_appsetting.Country.Currency=c;
       this.srv_appsetting.Currency=c;
@@ -357,7 +356,7 @@ export class LoginService {
           this.srv_appsetting.CurrRate=rate;          
         }                    
         });
-     });
+     }); */
     }
 
     FillCountryLanguageByURLParameters()

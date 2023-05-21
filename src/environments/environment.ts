@@ -5,13 +5,13 @@
 export const environment = {
   internal: true ,
   production: false  ,
-  
-  //API_HOST: 'https://intranet.imc.co.il/ITA_API/', 
-  API_HOST: 'http://localhost:17586/',
+
+  //API_HOST: 'https://intranet.imc.co.il/IPA_API/',
+  API_HOST: 'http://localhost:17588/',
   //API_HOST: 'https://www.iscar.com/ITA_API/',
   //CalcReq_Host: 'https://cts02.iscar.com/MachiningPwrWs/api/CalcReq/',
   CalcReq_Host: 'https://www.iscar.com/mpwrapi/api/CalcReq/',
-  IscarLogo: 'https://intranet.imc.co.il/eCatalog/media/images/ISCAR_Logo.svg',
+  IscarLogo: 'https://intranet.imc.co.il/ingersollDE/ningersollcatalog/media/images/ISCAR_Logo.svg',
   ImagePath:"assets/img/",
   LanguagePath:"assets/i18n/",
   ImageInputPath:"assets/img/input_images/",
@@ -28,28 +28,24 @@ export const environment = {
   ImgArrowRight:"assets/img/arrows_right.png",
   ImgThreeDots:"assets/img/threeDots.jpg",
   ImgAssembly:"assets/img/icon_Assembly.svg",
-  ECatalogLink:"https://intranet.imc.co.il/ecatalog/Default.aspx",
+  ECatalogLink:"http://intranet.imc.co.il/ingersollDE/ningersollcatalog/default.aspx?cnt=NG&ecom=N",
   IscarSite:"https://intranet.imc.co.il",
-  MachiningCalculatorSite:"https://cts02.iscar.com/MachiningPwrWs/", 
-  eCatItemPictures:"https://www.iscar.com/ISCARCatalogConfirmPictures/",
-  eCatFamilyPictures:"https://intranet.imc.co.il/eCatalog/Ecat/datafile/PICTURE/",  
-  eCatItemPage1:"https://intranet.imc.co.il/ecatalog/item.aspx?type=1&cat=",
-  eCatItemPage:"https://intranet.imc.co.il/ecatalog/Default.aspx?e=1",
-  eCatFamilyDrawing:"https://intranet.imc.co.il/eCatalog/Ecat/illust_ISO",
-  eCatLogo: "https://intranet.imc.co.il/eCatalog/Ecat/datafile/Logo/",
+  MachiningCalculatorSite:"https://cts02.iscar.com/MachiningPwrWs/",
+  eCatItemPictures:"http://www.imc-companies.com/IngersollDE/IngersollDeCatalogFiles/datafile/PICTURE/",
+  eCatFamilyPictures:"https://intranet.imc.co.il/ingersollDE/ningersollcatalog/Ecat/datafile/PICTURE/",
+  eCatItemPage1:"https://intranet.imc.co.il/ingersollDE/ningersollcatalog/item.aspx?type=1&cat=",
+  eCatItemPage:"https://intranet.imc.co.il/ingersollDE/ningersollcatalog/Default.aspx?e=1",
+  eCatFamilyDrawing:"http://www.imc-companies.com/IngersollDE/IngersollDeCatalogFiles/illust_",
+  eCatLogo: "http://www.imc-companies.com/IngersollDE/IngersollDeCatalogFiles/datafile/Logos/",
   wsMaterials: "https://intranet.imc.co.il/wsmaterials/service.asmx/",
 
   urlCheckCookies:"https://intranet.imc.co.il/imcLogin/checkcookie.aspx",
   urlLogIn:"http://intranet.imc.co.il/imcLogin/Default.aspx",
-  urlSignOut:"https://intranet.imc.co.il/imcLogin/SignOut.aspx?sId=iscita21"
+  urlSignOut:"https://intranet.imc.co.il/imcLogin/SignOut.aspx?sId=ingITA"
 
-    //LogInURLLogInData:"https://intranet.imc.co.il/imclogin/api/imclogin/checkcookie/iscita21/",
-    //LoginURLTokenUrl:"authapi.ssl.imc-companies.com",   
-  //LoginURLCheckCookies:"https://sign.ssl.imc-companies.com/general" ,
-  //LoginURLogOut:"https://sign.ssl.imc-companies.com/signout"  , 
-    //signinURL:'https://sign.ssl.imc-companies.com/signin',  
+
 };
-    
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

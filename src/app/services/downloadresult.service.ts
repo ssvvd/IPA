@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable,Observer,of} from 'rxjs';
 import { StateManagerService } from './statemanager.service';
 import { AppsettingService} from './appsetting.service';
-import { clsMaterial } from '../models/materials/material';
 import { Machineheader } from '../models/machines/machineheader';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,8 +10,6 @@ import html2canvas from 'html2canvas';
 import { DatalayerService} from 'src/app/services/datalayer.service' ;
 import html2pdf from 'html2pdf.js'
 import { Subject }    from 'rxjs/Subject';
-//import { EILSEQ } from 'constants';
-import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -52,7 +49,7 @@ public downloadListPDF():any {
   var pdf = new jsPDF();
   var opt = {
      margin: [0, 0, 40, 0],    
-    filename:     'ITAReport.pdf',
+    filename:     'IPAReport.pdf',
     image:        { type: 'jpeg', quality: 0.4 },
     html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 300},
     jsPDF:        { unit: 'mm',orientation: 'p',format: 'letter'},
@@ -79,7 +76,7 @@ public downloadListPDF():any {
     pdf.setFontSize(14);
     pdf.setFontSize(16);
   
-    pdf.text(5, 20+10, this.translate.instant('ITA Recommendation Report'));    
+    pdf.text(5, 20+10, this.translate.instant('IPA Recommendation Report'));    
     this.axial_y=15+15;
     this.axial_y=15;
 
@@ -93,7 +90,6 @@ public downloadListPDF():any {
     this.BuildOperationData(pdf);    
     pdf.addPage();
     pdf.setFontSize(12);
-    //this.addTextWithBackGround(pdf,0,15,400,10,246,246,247,'ITA Recommended' );
     this.axial_y=5+35 +15;
     var element = document.getElementById('docheader').innerHTML;
     //pdf.setDisplayMode(1);
@@ -111,7 +107,7 @@ public downloadItemPDF(srv:any,filename:string):any {
 
   var opt = {
     margin: [0, 0, 2, 0],
-    filename:     'ITAReport.pdf',
+    filename:     'IPAReport.pdf',
     image:        { type: 'jpeg', quality: 0.98 },
     html2canvas:  { scale: 1, useCORS: true,allowTaint : true,  dpi: 192},
     jsPDF:        { unit: 'mm',orientation: 'p',format: 'letter'},
@@ -185,7 +181,7 @@ BuildResult(doc:jsPDF,controlname:string):any
        }).then((doc) => {
         this.AddPagingNumber(doc);       
         
-      doc.save('ITARecommendations.pdf');
+      doc.save('IPARecommendations.pdf');
       this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });   
@@ -266,7 +262,7 @@ BuildResult1(doc:jsPDF,controlname:string):any
         this.AddPagingNumber(doc);       
         this.AddHeaderPage(doc);
 
-      doc.save('ITARecommendations.pdf');
+      doc.save('IPARecommendations.pdf');
       this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });   
@@ -289,9 +285,9 @@ AddPagingNumber(doc:jsPDF)
     doc.setFont('Oswald') */
         
     doc.rect(0, doc.internal.pageSize.getHeight() - 18, 400, 10, "F");
-    doc.setTextColor(32, 79, 150);    
-    doc.setFontSize(14);  
-    doc.text('Where Innovation Never Stops', 70, doc.internal.pageSize.getHeight()-10);
+    /* doc.setTextColor(32, 79, 150);    
+    doc.setFontSize(14);   */
+    doc.text('', 70, doc.internal.pageSize.getHeight()-10);
     doc.setTextColor(33, 37, 41); 
     doc.setFontSize(10);
     doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
@@ -316,21 +312,12 @@ AddHeaderPage(doc:jsPDF)
     doc.text(this.srv_appsetting.User.displayName + ' ' +  new Date().toISOString().slice(0, 10),190,19)
     // /{{srv_appsetting.User.displayName}}&nbsp;&nbsp;{{srv_appsetting.curDate | date:'dd-MM-yyyy'}}
     var img = new Image();
-    img.src = environment.ImagePath + 'ITA_New-logo.png';   
+    //img.src = environment.ImagePath + 'INGITA_New-logo.png';   
     doc.addImage(img, 'png', 2, 2, 46, 11);
   
-    img.src = environment.ImagePath + 'ISCAR_Logo.png';   
+    //img.src = environment.ImagePath + 'INGITA_New-logo.png';   
     doc.addImage(img, 'png', 180, 2, 28, 11);
     
-    
-     
-   
-    
-
-    //doc.text('Where Innovation Never Stops', 70, doc.internal.pageSize.getHeight()-10);
-    //doc.setTextColor(33, 37, 41); 
-    //doc.setFontSize(10);
-    //doc.text('Page ' + i + ' / ' + totalPages, doc.internal.pageSize.getWidth() - 115, doc.internal.pageSize.getHeight() - 4);
   } 
 }
 
@@ -368,7 +355,7 @@ BuildResultItem(doc:jsPDF,controlname:string):any
         
       //var pageCount = doc.internal.getNumberOfPages();
       //doc.deletePage(pageCount);              
-      doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
+      doc.save('IPARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
       this.obsPDFListLoaded.next(null);
       return  'ok'; 
     });                        
@@ -412,7 +399,7 @@ BuildResultItemByTab(doc:jsPDF,div_style)
       count=count+1;
       if(count==forPDF.length)
       {        
-        doc.save('ITARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
+        doc.save('IPARecommendations' + new Date().toISOString().slice(0, 10) + '.pdf');
         this.obsPDFListLoaded.next(null);        
         return  'ok'; 
       }       
@@ -546,7 +533,7 @@ BuildOperationData(doc:jsPDF)
     top=10;
     doc.setFillColor(c1,c2,c3);
     doc.rect(x, top+y, w, h, "F"); 
-    if(txt=='ITA Report')
+    if(txt=='IPA Report')
       doc.text(60, top+y+7, txt);
     else
       doc.text(5, top+y+7, txt);      

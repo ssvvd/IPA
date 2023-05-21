@@ -40,7 +40,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
   firstInt:boolean = false;
   lang:string;
   DefaultMat:number = 0;
-  @Input() selectedCategory: string ;
+  @Input() selectedCategory: string;
   @Input() filterSearchTextInput: string="";
   @Output() matDetailSelectedEv = new EventEmitter<clsMaterial>();
   @Output() myMaterialClickEv = new EventEmitter<clsMaterial>();
@@ -68,7 +68,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
           if(localStorage.getItem("language")!=null && localStorage.getItem("language")!='')
             this.lang = localStorage.getItem("language");
           else
-          this.lang ='EN';
+            this.lang ='GM';
         }
     }
 
@@ -114,6 +114,7 @@ export class MatMainTableComponent implements OnInit, OnDestroy {
       if(this.srv_cook.get_cookie("def_mat")!='')
       this.DefaultMat =+this.srv_cook.get_cookie("def_mat"); 
 
+      this.fillMainTable();
   }
 
 

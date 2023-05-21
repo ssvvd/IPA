@@ -1,50 +1,52 @@
 
 <div class="row justify-content-center">
-    
+
 <div class="col-12 banner-top d-flex justify-content-center pl-0 pr-0" *ngIf="!srv_appsetting.isMobileResolution">
-    <div class="div-header" >       
+    <div class="div-header" >
         <div class="row float-left div-banner-images pl-4">
-            <Label class="siteTitle  pt-1" style="font-size: 24px!important" (click)="reload()">ISCAR TOOL ADVISOR</Label>
-        </div>        
+            <div (click)="reload()"><img [src] = "environment.ImagePath+'INGITA_New-logo.svg'"  style="height: 50px;" ></div>
+        </div>
         <div class="row float-right div-banner-images">
             <div class="div-header-link pl-1 pt-1" >
                 <label class="switch"><input type="checkbox" (click)="CheckAllowUnitsChange($event)"  [checked]="isMetric" id="togBtn">
                     <div class="slider round"></div>
-                </label>          
+                </label>
             </div>
             <div class="border-right-gray pl-2">
             </div>
-           
             <div class="div-header-link pl-2 pt-1">
-                <a href="https://twitter.com/ISCARltd" target="_blank" ><img [src] = "environment.ImagePath+'twitter.svg'"  class="MenuImg"></a>                                               
+                <a href="https://webshop.ingersoll-imc.de" target="_blank" ><img [src] = "environment.ImagePath+'onlineshop.png'" style="background-color:transparent" class="MenuImg"></a>
+            </div>
+            <div class="div-header-link pl-2 pt-1">
+                <a href="https://www.instagram.com/ingersollwerkzeuge/?hl=de" target="_blank" ><img [src] = "environment.ImagePath+'instagram.png'" style="background-color:transparent" class="MenuImg"></a>
             </div>
             <div class="div-header-link pl-1 pt-1">
-                <a href="https://www.linkedin.com/company/iscar" target="_blank" ><img [src] = "environment.ImagePath+'LinkdIn.svg'"  class="MenuImg"></a>                                               
+                <a href=" https://de.linkedin.com/company/ingersoll-werkzeuge" target="_blank" ><img [src] = "environment.ImagePath+'linkedin.png'"  class="MenuImg"></a>
             </div>
             <div class="div-header-link pl-1 pt-1">
-                <a href="https://www.facebook.com/IscarCuttingTools" target="_blank" ><img [src] = "environment.ImagePath+'facebook.svg'"  class="MenuImg"></a>                                               
+                <a href="https://www.facebook.com/IngersollWerkzeuge" target="_blank" ><img [src] = "environment.ImagePath+'facebook.png'"  class="MenuImg"></a>
             </div>
             <div class="div-header-link pl-1 pt-1">
-                <a href="https://www.youtube.com/user/iscarweb" target="_blank" ><img [src] = "environment.ImagePath+'you_tube.svg'"  class="MenuImg"></a>                                               
+                <a href="https://www.youtube.com/ingersollDE" target="_blank" ><img [src] = "environment.ImagePath+'youtube.png'"  class="MenuImg"></a>
             </div>
             <div class="border-right-gray pl-2">
-            </div>   
-                                                                       
-            <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">                                
-               
+            </div>
+
+            <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-1"  ngbDropdown role="group" placement="bottom-right">
+
                 <div *ngIf ="srv_appsetting.Country===undefined" ngbDropdownToggle id="calc" >
                     <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
                 </div>
                 <div *ngIf ="srv_appsetting.Country!==undefined" ngbDropdownToggle id="calc">
                     <img [src]="environment.ImagePath+'flags/' + CurrentCountryName + '.svg'" (click)="FillListCountries()" class="MenuImg" data-toggle="tooltip" title={{SelectedLang.LanguageName}}>
-                </div>    
-                    <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >                      
-                        <div *ngFor="let c of lstcountry" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{c.CountryName}} >  
-                            <div (click)="SelectCountryAndLang(c,c.LanguageID[0])">                                                                                                                                                             
-                                <img [src]="environment.ImagePath + 'flags/' + c.CountryName + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >                                                                                                                                                                                                 
-                                <label class="mt-2" style="background-color:trasparent">{{c.CountryName}} </label>                                                                                                                          
+                </div>
+                    <div *ngIf="isLoadingLang" class="dropdown-menu calc-table-top scrollable-menu scroll-menu"  ngbDropdownMenu aria-labelledby="calc" >
+                        <div *ngFor="let c of lstcountry" class="row col-12 dropdown-item menuitem mt-2 mb-2"  data-toggle="tooltip" title={{c.CountryName}} >
+                            <div (click)="SelectCountryAndLang(c,c.LanguageID[0])">
+                                <img [src]="environment.ImagePath + 'flags/' + c.CountryName + '.svg'"  class="MenuImg ml-3 mr-3 mt-1 mb-2" >
+                                <label class="mt-2" style="background-color:trasparent">{{c.CountryName}} </label>
                             </div>
-                            <div *ngIf="c.LanguageName.length>1">                               
+                            <div *ngIf="c.LanguageName.length>1">
                                 <div class="row">
                                     <div class="pl-1 pr-1">
                                         <button type="button" (click)="SelectCountryAndLang(c,c.LanguageID[0])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[0]}}</button>
@@ -56,13 +58,13 @@
                                         <button type="button" (click)="SelectCountryAndLang(c,c.LanguageID[2])" class="btn-sm btn-outline-secondary btn-lang">{{c.LanguageName[2]}}</button>
                                     </div>
                                 </div>
-                            </div> 
-                        </div> 
-                                                                                         
+                            </div>
+                        </div>
+
                     </div>
             </div>
 
-            <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-0"  ngbDropdown role="group" > 
+            <div *ngIf = "IsLoaded" class="btn-group div-header-link pl-2 pt-0"  ngbDropdown role="group" >
                 <div  class="div-header-link pl-2 pt-1"    ngbDropdownToggle id="login">
                     <label class="user-login" (click)="LogIn()">
                         <div class="row">
@@ -70,140 +72,150 @@
                                 <img [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >
                             </div>
                             <div class="mt-1 ml-1 mr-2">
-                                <Label *ngIf="srv_appsetting.UserID!=''" class="label-ellipse cursor-pointer">{{srv_appsetting.User.displayName}}</Label>  
-                                <Label *ngIf="srv_appsetting.UserID==''" class="label-ellipse cursor-pointer">{{'Log In' | translate}}</Label>          
+                                <Label *ngIf="srv_appsetting.UserID!=''" class="label-ellipse cursor-pointer">{{srv_appsetting.User.displayName}}</Label>
+                                <Label *ngIf="srv_appsetting.UserID==''" class="label-ellipse cursor-pointer">{{'Log In' | translate}}</Label>
                             </div>
-                        </div>              
-                    </label>    
-                </div>    
-                <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
+                        </div>
+                    </label>
+                </div>
+                <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" >
                     <div class="float-right mr-2">
                         <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
                     </div>
-                </div>              
+                </div>
             </div>
         </div>
     </div>
-</div> 
-<div class="col-12 banner-top-mobile d-flex justify-content-center pl-0 pr-0" *ngIf="srv_appsetting.isMobileResolution">  
-    <div class="div-header-mobile"   > 
-        <div class="row" style="width: 100%;">                      
+</div>
+<div class="col-12 banner-top-mobile d-flex justify-content-center pl-0 pr-0" *ngIf="srv_appsetting.isMobileResolution">
+    <div class="div-header-mobile"   >
+        <div class="row" style="width: 100%;">
             <div class="pl-1 pt-2" >
-                <img (click)="OpenMenuMobile()"   
-                [src]="environment.ImagePath + 'icon_hamburger.svg'" style="width:30px">                
-            </div>         
+                <img (click)="OpenMenuMobile()"
+                [src]="environment.ImagePath + 'icon_hamburger.svg'" style="width:30px">
+            </div>
             <div class="text-center  pt-1" style="margin: 0 auto" >
                 <div class="pt-0 pl-0 ml-0">
                     <img  [src]="environment.ImagePath + 'ITAFav-01.svg'"  (click)="reload()" style="width:30px" class="ImgMobile pt-0 pr-0 pl-0  pb-2">
-                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important" (click)="reload()">ISCAR TOOL ADVISOR</Label>                   
+                    <Label class="siteTitle  pt-1"  style="font-size: 20px!important" (click)="reload()">INGERSOLL PERFORMANCE ADVISOR</Label>
                 </div>
             </div>
-            <div class="float-right text-right pr-2" >                                 
-                <div   ngbDropdown role="group" class="float-right"> 
-                    <div  class="pt-2"    ngbDropdownToggle id="login">                                                              
-                        <img (click)="LogIn()" style="width:30px"  [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >                                                                                                          
-                    </div>    
-                <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" > 
+            <div class="float-right text-right pr-2" >
+                <div   ngbDropdown role="group" class="float-right">
+                    <div  class="pt-2"    ngbDropdownToggle id="login">
+                        <img (click)="LogIn()" style="width:30px"  [src]="environment.ImagePath + 'icon_LoginC.svg'"  class="img-ellipse" >
+                    </div>
+                <div *ngIf = "srv_appsetting.UserID!=''" class="dropdown-menu menu-logout" ngbDropdownMenu aria-labelledby="login" >
                         <div class="float-right mr-2">
                             <button type="button"  class="btn-sm btn-outline-secondary btn-lang" (click)="LogOut()">{{'Log Out' | translate}}</button>
                         </div>
-                    </div>            
-                </div> 
+                    </div>
+                </div>
             </div>
     </div>
     </div>
 </div>
 <div class="col-11 pl-0 pr-0 pt-2" *ngIf="!srv_appsetting.isMobileResolution">
-    <div class="row ml-1">    
-        <div class="float-left pb-0 mb-0 pl-3" id='container-iscar-svg'>
-            <a href="https://www.iscar.com/index.aspx" target="_blank">
+    <div class="row ml-1">
+        <div class="float-left pb-0 mb-0 pl-3" style="height:40px" id='container-iscar-svg'>
+            <!-- <a href="https://www.iscar.com/index.aspx" target="_blank">
                 <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg" id='imglogisvg'>
-            </a>
+            </a> -->
         </div>
-        <div class="ml-auto mr-0 bottom-align-text pr-3"> 
-            <div class="row ">               
+        <div class="ml-auto mr-0 bottom-align-text pr-3">
+            <div class="row ">
                 <label class="shape-ellipse">
                     <div class="row">
                         <div >
-                            <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="img-ellipse" title="{{'New Search' | translate}}"></a>                                               
+                            <a href="#"><img [src] = "environment.ImagePath+'icon_NewSearch.svg'"  class="img-ellipse" title="{{'New Search' | translate}}"></a>
                         </div>
                         <div class="mt-1 ml-1 mr-2 ">
-                            <label class="label-ellipse  cursor-pointer"><a href="#" class="label-ellipse">{{'New Search' | translate}}</a></label>           
+                            <label class="label-ellipse  cursor-pointer"><a href="#" class="label-ellipse">{{'New Search' | translate}}</a></label>
                         </div>
-                    </div> 
+                    </div>
                 </label>
                 <div class="div-header-link pl-1">
-                    <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="MenuImg" title="{{'E-Catalog' | translate}}"></a>                                               
+                    <a><img [src] = "environment.ImagePath+'ecat_Icon.svg'"  (click)="menuisshown=false;opencatalog()" class="MenuImg" title="{{'E-Catalog' | translate}}"></a>
                 </div>
-                <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
+                <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Calculators_Icon.svg'"  class="MenuImg" title="{{'Calculators' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
-                        <div  class="row col-12 dropdown-item menuitem mt-2 mb-2" (click)="openmachiningcalculator()">                                                                                                                                                               
-                            <a  class="pl-2 pb-2 pt-2">                              
-                                <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Machining Calculators' | translate}}</label>                                                                                                                          
+                        <!-- <div  class="row col-12 dropdown-item menuitem mt-2 mb-2" (click)="openmachiningcalculator()">
+                            <a  class="pl-2 pb-2 pt-2">
+                                <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Machining Calculators' | translate}}</label>
+                            </a>
+                        </div> -->
+                        <div  class="row col-12 dropdown-item menuitem mt-2 mb-2" (click)="openmachiningcalculator()">
+                            <a  class="pl-2 pb-2 pt-2">
+                                <label class="siteTitle  mt-2" style="background-color:trasparent">{{'Thread Milling Tools' | translate}}</label>
                             </a>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="opencalculator()">                                                                                                              
-                                <a class="pl-2 pb-2 pt-2">                                                                                                                                                                         
-                                    <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>                                             
-                                </a>                                                              
-                        </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="openGeometryAnalyzer()" > 
-                            <a  class="pl-2 pb-2 pt-2">                                                                                                                            
-                                <label class="siteTitle  mt-2" >{{'Productive Geometries' | translate}}</label>   
-                            </a>                                                
-                        </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="openinsertconverter()">                              
-                            <a  class="pl-2 pb-2 pt-2">                                                                                                                                                    
+                        <!-- <div class ="row col-12 dropdown-item menuitem" (click)="opencalculator()">
+                                <a class="pl-2 pb-2 pt-2">
+                                    <label class="siteTitle mt-2" >{{'Machining Support' | translate}}</label>
+                                </a>
+                        </div> -->
+                       <!--  <div class ="row col-12 dropdown-item menuitem" (click)="openGeometryAnalyzer()" >
+                            <a  class="pl-2 pb-2 pt-2">
+                                <label class="siteTitle  mt-2" >{{'Productive Geometries' | translate}}</label>
+                            </a>
+                        </div> -->
+                        <div class ="row col-12 dropdown-item menuitem" (click)="openinsertconverter()">
+                            <a  class="pl-2 pb-2 pt-2">
                                 <label class="siteTitle  mt-2" >{{'Grade Optimizer' | translate}}</label>
-                            </a>                                                
+                            </a>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="Insertwear()">                              
-                            <a class="pl-2 pb-2 pt-2">                                                                                                                                              
-                                <label class="siteTitle  mt-2" >{{'Insert wear' | translate}}</label>
-                            </a>                                                
+                        <div class ="row col-12 dropdown-item menuitem" (click)="Insertwear()">
+                            <a class="pl-2 pb-2 pt-2">
+                                <label class="siteTitle  mt-2" >{{'Ingersoll Cutting Tools' | translate}}</label>
+                            </a>
                         </div>
-                        <div   *ngIf="srv_appsetting.UserID!=''" class ="row col-12 dropdown-item menuitem" (click)="openthreadcompass()">                              
-                            <a class="pl-2 pb-2 pt-2">                                                                                                                                              
+                        <div class ="row col-12 dropdown-item menuitem" (click)="openHomepage()">
+                            <a class="pl-2 pb-2 pt-2">
+                                <label class="siteTitle  mt-2" >{{'Ingersoll Home Page' | translate}}</label>
+                            </a>
+                        </div>
+                      <!--   <div   *ngIf="srv_appsetting.UserID!=''" class ="row col-12 dropdown-item menuitem" (click)="openthreadcompass()">
+                            <a class="pl-2 pb-2 pt-2">
                                 <label class="siteTitle  mt-2" >{{'Thread Compass' | translate}}</label>
-                            </a>                                                
-                        </div>
+                            </a>
+                        </div> -->
                     </div>
                 </div>
 
-              
-                <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">                                
+
+                <div class="btn-group div-header-link pl-1"  ngbDropdown role="group" placement="bottom-right" id="test">
                     <div ngbDropdownToggle id="calc"><img [src]="environment.ImagePath+'Help_Icon.svg'"  class="MenuImg" title="{{'Help' | translate}}"></div>
                     <div class="dropdown-menu calc-table " ngbDropdownMenu aria-labelledby="calc">
-                        <div  class ="row col-12 dropdown-item menuitem ml-4 mt-1 mb-1 mr-4 pl-4" (click)="contactus()">                                                                                                                                                                                                                                                                                                                       
-                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Contact Us' | translate}}</label>                                                                                                                                                      
+                        <div  class ="row col-12 dropdown-item menuitem ml-4 mt-1 mb-1 mr-4 pl-4" (click)="contactus()">
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Contact Us' | translate}}</label>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="feedback()" >                                                                                                  
-                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>                                                                                                                                                      
+                        <div class ="row col-12 dropdown-item menuitem" (click)="feedback()" >
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'Feedback' | translate}}</label>
                         </div>
-                        <div class ="row col-12 dropdown-item menuitem" (click)="OpenUserGiude()">                                                                                                  
-                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide' | translate}}</label>                                                                                                                                                      
+                       <!--  <div class ="row col-12 dropdown-item menuitem" (click)="OpenUserGiude()">
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide' | translate}}</label>
+                        </div> -->
+                      <div *ngIf="srv_appsetting.Lang=='JP'" class ="row col-12 dropdown-item menuitem" (click)="openuserguidemillthread()">
+                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide of Millthread Advisor' | translate}}</label>
                         </div>
-                      <div *ngIf="srv_appsetting.Lang=='JP'" class ="row col-12 dropdown-item menuitem" (click)="openuserguidemillthread()">                                                                                                  
-                            <label class="siteTitle  pl-2 mt-2" style="background-color:trasparent">{{'User Guide of Millthread Advisor' | translate}}</label>                                                                                                                                                      
-                        </div>  
-                    </div>                                                                     
-                </div>                   
+                    </div>
+                </div>
             </div>
-        </div>                
+        </div>
     </div>
-</div>    
+</div>
 </div>
 
-<ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"  
+<ngx-spinner  bdColor="rgba(0, 0, 0, 0.08)"
 bdOpacity ="0.05"
 size="medium"
 color="#676767"
-type="ball-circus">    
-<p *ngIf="srv_appsetting.AfterToken && !srv_appsetting.IsSearchMaterial" style="color:#676767">{{'Please wait while ITA is processing your request.' | translate}}</p> 
-</ngx-spinner>  
-
-   
+type="ball-circus">
+<p *ngIf="srv_appsetting.AfterToken && !srv_appsetting.IsSearchMaterial" style="color:#676767">{{'Please wait while IPA is processing your request.' | translate}}</p>
+</ngx-spinner>
 
 
-   
+
+
+

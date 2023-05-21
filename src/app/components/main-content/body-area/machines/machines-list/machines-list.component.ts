@@ -70,7 +70,9 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   ngOnInit() {    
     //this.srv_cook.set_cookie("closebannermobile",'0');
-    
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log(time);
     this.scrollYdiff='325px';   
     if(window.devicePixelRatio>1.3) this.scrollYdiff='375px';
     if(this.srv_appsetting.isMobileResolution) this.scrollYdiff='250px';   
@@ -168,14 +170,16 @@ export class MachinesListComponent implements OnInit, OnDestroy {
 
   Initializemachinelist(withdestroy:boolean)
   {  
+    var today = new Date();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    console.log(time);
       this.eventsSubscription.add( this.srv_machine.getmachines(this.srv_appsetting.Units,this.srv_appsetting.IsCountryGermany() ,this.srv_appsetting.UserIDencode)     
       .subscribe((data: any) => {
-        
+        time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        console.log(time);
         this.listmachines = JSON.parse(data);          
         this.listmachines_sorted = JSON.parse(data);
-               
-                  
-
+                               
         this.countallrow=this.listmachines_sorted.length.toString();        
         this.myMachineSettings();
         if(this.srv_statemanage.SelectedMachine!=null)

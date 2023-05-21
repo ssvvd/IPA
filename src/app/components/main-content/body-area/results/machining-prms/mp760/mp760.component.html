@@ -464,8 +464,8 @@
   <!-- <div *ngIf="exportPDF" class="break-page"></div> -->
   <div  class="pt-0 pl-0 break-page" *ngIf="exportPDF" style="margin-left:-20px;">
     <div class="header-pdf">    
-        <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-        <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+        <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">          
+        <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right"> -->        
     </div>
     <div class="header-pdf1">
         <div class="float-right pr-4">
@@ -555,7 +555,7 @@
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{'Edges' | translate}}</div>
         </div> 
         
-        <div *ngIf="(resType=='T' || resType=='He') && srv_appsetting.Country.ShowPrice==1"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+       <!--  <div *ngIf="(resType=='T' || resType=='He') && srv_appsetting.Country.ShowPrice==1"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Insert Price' | translate}}&nbsp;</Label>
             <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -563,9 +563,9 @@
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">IP</div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{THe_IP}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-        </div> 
+        </div>  -->
        
-          <div *ngIf="resType=='T' && srv_appsetting.Country.ShowPrice==1"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+     <!--      <div *ngIf="resType=='T' && srv_appsetting.Country.ShowPrice==1"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Market List Price' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -573,9 +573,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TP</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{T_TP}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> 
+          </div>  -->
         
-          <div  *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+       <!--    <div  *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Head Price' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -583,9 +583,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TP</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{T_TP}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> 
+          </div>  -->
        
-          <div  *ngIf="resType=='S' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+      <!--     <div  *ngIf="resType=='S' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Solid Price' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -593,9 +593,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">SP</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{S_SP}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> 
+          </div> --> 
           
-          <div  *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+      <!--     <div  *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Solid Head Price' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -603,8 +603,8 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">SHP</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{H_SHP}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> 
-          <div  *ngIf="resType=='H' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+          </div>  -->
+         <!--  <div  *ngIf="resType=='H' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Shank Price' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -612,10 +612,10 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">SKP</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{H_SKP}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> 
+          </div>  -->
 
 
-          <div   *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+    <!--       <div   *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Shank Price' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}})</Label>
@@ -623,7 +623,7 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">HHP</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{He_HHP}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}</div>
-          </div> 
+          </div>  -->
 
           <div   *ngIf="resType=='He' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -675,7 +675,7 @@
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{'Shanks' | translate}}/{{'batch' | translate}}</div>
           </div> 
          
-          <div   *ngIf="(resType=='T' || resType=='He') && srv_appsetting.Country.ShowPrice==1"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+       <!--    <div   *ngIf="(resType=='T' || resType=='He') && srv_appsetting.Country.ShowPrice==1"  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Inserts Cost' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -683,9 +683,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TIC</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{THe_TIC}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-          </div> 
+          </div>  -->
       
-        <div   *ngIf="resType=='T' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+        <!-- <div   *ngIf="resType=='T' && srv_appsetting.Country.ShowPrice==1" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Tools Cost' | translate}}&nbsp;</Label>
             <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -693,9 +693,9 @@
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TTC</div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{T_TTC}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-        </div> 
+        </div>  -->
        
-        <div *ngIf="resType=='He'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+    <!--     <div *ngIf="resType=='He'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Head+Shank Cost' | translate}}&nbsp;</Label>
             <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -703,7 +703,7 @@
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">THSC</div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{He_THSC}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-        </div> 
+        </div>  -->
      
           <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -726,7 +726,7 @@
           </div> 
    
 
-          <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+         <!--  <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Solid Heads Cost' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -734,9 +734,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TSHC</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{H_TSHC}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-          </div> 
+          </div>  -->
         
-          <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+       <!--    <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Shanks Cost' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -744,9 +744,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TSKC</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{H_TSKC}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-          </div> 
+          </div>  -->
           
-          <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+         <!--  <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Tooling Cost' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -754,9 +754,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TSKC</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{H_TSKC}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-          </div> 
+          </div>  -->
         
-          <div *ngIf="resType=='He'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+        <!--   <div *ngIf="resType=='He'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Tooling Cost' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -764,9 +764,9 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TGC</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{He_TGC}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-          </div> 
+          </div>  -->
          
-          <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+        <!--   <div *ngIf="resType=='H'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
               <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Tooling Cost' | translate}}&nbsp;</Label>
               <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -774,7 +774,7 @@
             <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TGC</div>
             <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{H_TGC}}</div>
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-          </div> 
+          </div>  -->
   
           <div *ngIf="resType=='S'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
             <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -786,7 +786,7 @@
             <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{'Tools' | translate }}/{{'batch' | translate}}</div>
           </div> 
     
-        <div *ngIf="resType=='S'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+      <!--   <div *ngIf="resType=='S'" [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Solids Cost' | translate}}&nbsp;</Label>
             <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -794,7 +794,7 @@
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TSC</div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{T_TGC}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-        </div> 
+        </div>  -->
      
         <div  [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
@@ -816,7 +816,7 @@
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{'mm:ss' | translate}}</div>
         </div> 
      
-        <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
+     <!--    <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Total Cost' | translate}}&nbsp;</Label>
             <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}})</Label>
@@ -824,9 +824,9 @@
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">TCB</div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{TCB}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'batch' | translate}}</div>
-        </div> 
+        </div>  -->
 
-        <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
+     <!--    <div [ngClass]="srv_appsetting.isMobileResolution?'border-left-gray border-right-gray border-top-gray border-bottom-gray':''" class="row justify-content-start w-100 ">      
           <div [ngClass]="srv_appsetting.isMobileResolution?'col-6  border-right-gray':'col-3'" class="row" >
             <Label [ngClass]="srv_appsetting.isMobileResolution?'pl-1':''">{{'Cost per Part' | translate}}&nbsp;</Label>
             <Label *ngIf="srv_appsetting.isMobileResolution" class="pl-1">({{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'parts' | translate}})</Label>
@@ -834,7 +834,7 @@
           <div class="col-3" [ngClass]="srv_appsetting.isMobileResolution?'border-right-gray':''">CPP</div>
           <div class="col-3 grayDiv" [ngClass]="srv_appsetting.isMobileResolution?'':'text-center'">{{CPU}}</div>
           <div *ngIf="!srv_appsetting.isMobileResolution" class="col-3 row  justify-content-center" >{{this.srv_StMng.IPL.GetItem('Currency').value}}/{{'parts' | translate}}</div>
-        </div> 
+        </div>  -->
 
         <div class="pt-4">
 

@@ -66,16 +66,16 @@
                   </div> 
                 </label>
               </div>
-              <div *ngIf="!srv_appsetting.isMobileResolution">
+             <!--  <div *ngIf="!srv_appsetting.isMobileResolution">
                 <h2 data-toggle="tooltip" title="{{'Create Assembly' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="GoToAssembly()">                  
                   <img src = "{{environment.ImgAssembly}}"  class="icon-edit" >                                
                 </h2>  
-              </div> 
-              <div *ngIf="srv_appsetting.Country.FCSToolshopSite!=''  && srv_appsetting.UserID!=''  && !srv_appsetting.isMobileResolution">               
+              </div>  -->
+              <!-- <div *ngIf="srv_appsetting.Country.FCSToolshopSite!=''  && srv_appsetting.UserID!=''  && !srv_appsetting.isMobileResolution">               
                 <h2 data-toggle="tooltip" title="{{'Shop Items' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="onOpenWebShop()">                  
                   <img  [src] = "environment.ImagePath+'icon_shopping.svg'" class="icon-edit" >                                
                 </h2>                
-              </div>              
+              </div>  -->             
               <div  *ngIf="!srv_appsetting.isMobileResolution" [hidden]="productInfo ? productInfo._hideDownLoad5 : false">
                 <h2 data-toggle="tooltip" title="{{'Download Results' | translate}}" class="siteTitle cursor-pointer ml-2 mb-0"  (click)="CheckDownloadResults()">
                   <i class="fa fa-spinner fa-spin" *ngIf="srv_statemanage.flgPDFLoading==1"></i>                         
@@ -195,8 +195,8 @@
     <div *ngIf="IsExport"  id="pdfdata"> 
       <div  class="pt-4">
         <div class="header-pdf">    
-            <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-            <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+            <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">                  
+            <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right">  -->       
         </div>
         <div class="header-pdf1">
             <div class="float-right pr-4">
@@ -206,7 +206,7 @@
       </div>         
       <div> 
       <div class="border-bottom-gray">
-          <label class="pl-2 siteTitle PDFDescription">{{'ITA Recommendation' | translate}}</label>
+          <label class="pl-2 siteTitle PDFDescription">{{'IPA Recommendation' | translate}}</label>
       </div> 
           <div class="pt-3 pb-2 border-bottom-gray">   
             <div  class="row pb-2 ml-2 pr-0 mr-0 pt-4">
@@ -233,8 +233,8 @@
       <div class="break-page form-group">
         <div>
           <div class="header-pdf">    
-              <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-              <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+              <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">          
+              <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right">  -->       
           </div>
           <div class="header-pdf1">
               <div class="float-right pr-4">
@@ -270,8 +270,8 @@
        <div class="pt-0 pl-0" [ngClass]="srv_statemanage.SecApp=='760' || srv_statemanage.SecApp=='770' || srv_statemanage.SecApp=='780' || srv_statemanage.SecApp=='790' || srv_statemanage.SecApp=='57'?'div-machining-param2 break-page':  'div-machining-param1 break-page' "> 
           <div>
             <div class="header-pdf">    
-                <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-                <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+                <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">          
+                <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right">       -->  
             </div>
             <div class="header-pdf1">
                 <div class="float-right pr-4">
@@ -293,8 +293,8 @@
 
         <div class="break-page">
             <div class="header-pdf">    
-              <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-              <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+              <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">          
+              <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right">    -->     
           </div>
           <div class="header-pdf1">
               <div class="float-right pr-4">
@@ -309,8 +309,8 @@
             <div [ngClass]="PrtNum>0?'break-page':'pt-0'"></div> 
             <div *ngIf="PrtNum>0" class="pt-0">
               <div class="header-pdf">    
-                  <img [src]="environment.ImagePath+'ITA_New-logo.png'" class="logoImg pl-2 pt-1">          
-                  <img [src]="environment.ImagePath+'ISCAR_Logo.png'" class="logoImg pr-4 pt-1 float-right">        
+                  <img [src]="environment.ImagePath+'INGIPA_New-logo.png'" class="logoImg pl-2 pt-1">          
+                  <!-- <img [src]="environment.ImagePath+'INGITA_New-logo.svg'" class="logoImg pr-4 pt-1 float-right"> -->        
               </div>
               <div class="header-pdf1">
                   <div class="float-right pr-4">
