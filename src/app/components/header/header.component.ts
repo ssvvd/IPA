@@ -186,7 +186,7 @@ export class HeaderComponent implements OnInit {
             this.lstcountry.push({
               CountryID:d.CountryId,
               CountryName: d.CountryName.trim(),
-              CountryID_IscarCom: d.CountryID_IscarCom,
+              CountryID_IscarCom: 0,
               CountryGlobalId:d.CountryGlobalId,
               LanguageID: [d.CATLAN] ,
               LanguageName: [d.CATLAN],
